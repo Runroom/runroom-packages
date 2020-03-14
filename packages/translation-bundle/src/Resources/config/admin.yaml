@@ -1,0 +1,7 @@
+services:
+    runroom.translation.admin.translation:
+        class: Runroom\TranslationBundle\Admin\TranslationAdmin
+        public: true
+        arguments: [~, Runroom\TranslationBundle\Entity\Translation, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Translations' }

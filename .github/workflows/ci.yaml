@@ -1,0 +1,22 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3', '7.4']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ matrix.php }}-composer
+      - run: composer update --prefer-dist --no-progress --no-interaction
+      - run: vendor/bin/phpunit

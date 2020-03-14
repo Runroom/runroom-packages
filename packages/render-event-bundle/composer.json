@@ -1,0 +1,60 @@
+{
+    "name": "runroom/render-event-bundle",
+    "type": "symfony-bundle",
+    "description": "Add a render event before rendering templates",
+    "keywords": [
+        "render",
+        "event",
+        "twig",
+        "symfony"
+    ],
+    "homepage": "https://github.com/runroom/RenderEventBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Runroom",
+            "email": "runroom@runroom.com",
+            "homepage": "https://www.runroom.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.0",
+        "symfony/event-dispatcher-contracts": "^1.1 || ^2.0",
+        "symfony/http-foundation": "^4.4 || ^5.0",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/translation": "^4.4 || ^5.0",
+        "symfony/validator": "^4.4 || ^5.0",
+        "symfony/yaml": "^4.4 || ^5.0",
+        "twig/twig": "^2.12 || ^3.0"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "phpunit/phpunit": "^8.5",
+        "symfony/phpunit-bridge": "^5.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Runroom\\RenderEventBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Runroom\\RenderEventBundle\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs-fixer-diff": "php-cs-fixer fix --ansi --verbose --diff --dry-run",
+        "phpstan": "phpstan analyse --level=5 --no-progress src tests"
+    }
+}

@@ -1,0 +1,2 @@
+render_event:
+    page_view_model: Runroom\RenderEventBundle\ViewModel\FakePageViewModel

@@ -1,0 +1,29 @@
+name: qa
+
+on: [push, pull_request]
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ matrix.php }}-composer
+      - run: composer update --prefer-dist --no-progress --no-interaction --no-scripts
+      - run: composer validate --strict
+      - run: composer normalize --dry-run
+      - run: composer normalize packages/redirection-bundle/composer.json --dry-run
+      - run: composer normalize packages/render-event-bundle/composer.json --dry-run
+      - run: composer normalize packages/sortable-behavior-bundle/composer.json --dry-run
+      - run: composer normalize packages/translation-bundle/composer.json --dry-run
+      - run: composer cs-fixer-diff
+      - run: composer phpstan

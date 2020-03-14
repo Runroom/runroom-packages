@@ -1,0 +1,61 @@
+{
+    "name": "runroom/redirection-bundle",
+    "type": "symfony-bundle",
+    "description": "Manage redirections on the Sonata Admin interface",
+    "keywords": [
+        "redirection",
+        "symfony",
+        "doctrine",
+        "admin",
+        "sonata"
+    ],
+    "homepage": "https://github.com/runroom/RedirectionBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Runroom",
+            "email": "runroom@runroom.com",
+            "homepage": "https://www.runroom.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "doctrine/orm": "^2.7",
+        "sonata-project/admin-bundle": "^3.61",
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/doctrine-bridge": "^4.4 || ^5.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.0",
+        "symfony/form": "^4.4 || ^5.0",
+        "symfony/http-foundation": "^4.4 || ^5.0",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/validator": "^4.4 || ^5.0",
+        "symfony/yaml": "^4.4 || ^5.0"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "phpunit/phpunit": "^8.5",
+        "symfony/framework-bundle": "^4.4 || ^5.0",
+        "symfony/phpunit-bridge": "^5.0",
+        "theofidry/alice-data-fixtures": "^1.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Runroom\\RedirectionBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Runroom\\RedirectionBundle\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: false
+
+    Runroom\RenderEventBundle\Controller\TemplateController:
+        public: true
+        arguments:
+            $renderer: '@Runroom\RenderEventBundle\Renderer\PageRenderer'
+        tags: [controller.service_arguments]
+
+    Runroom\RenderEventBundle\Renderer\PageRenderer:
+        arguments:
+            $twig: '@twig'
+            $eventDispatcher: '@event_dispatcher'
+            $pageViewModel: '@runroom.render_event.page_view_model'
+
+    runroom.render_event.page_view_model: ~

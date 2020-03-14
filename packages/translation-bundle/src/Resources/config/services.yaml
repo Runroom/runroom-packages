@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        public: false
+
+    Runroom\TranslationBundle\Service\TranslationService:
+        arguments:
+            $repository: '@Runroom\TranslationBundle\Repository\TranslationRepository'
+            $translator: '@translator'
+
+    Runroom\TranslationBundle\Repository\TranslationRepository:
+        arguments:
+            $registry: '@doctrine'
+        tags: [doctrine.repository_service]
+
+    Runroom\TranslationBundle\Twig\TranslationExtension:
+        arguments:
+            $service: '@Runroom\TranslationBundle\Service\TranslationService'
+        tags: [twig.extension]

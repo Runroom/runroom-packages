@@ -1,0 +1,17 @@
+parameters:
+    data_to_append:
+        require-dev:
+            ergebnis/composer-normalize: ^2.2
+            friendsofphp/php-cs-fixer: ^2.16
+            jangregor/phpstan-prophecy: ^0.6
+            phpstan/phpstan: ^0.12
+            phpstan/phpstan-doctrine: ^0.12
+            phpstan/phpstan-phpunit: ^0.12
+            phpstan/phpstan-symfony: ^0.12
+            symplify/monorepo-builder: ^7.2
+
+    directories_to_repositories:
+        packages/redirection-bundle: 'git@github.com:your-monorepo/first-package.git'
+        packages/render-event-bundle: 'git@github.com:your-monorepo/first-package.git'
+        packages/sortable-behavior-bundle: 'git@github.com:your-monorepo/first-package.git'
+        packages/translation-bundle: 'git@github.com:your-monorepo/first-package.git'
