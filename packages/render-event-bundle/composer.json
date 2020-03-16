@@ -2,12 +2,7 @@
     "name": "runroom-packages/render-event-bundle",
     "type": "symfony-bundle",
     "description": "Add a render event before rendering templates",
-    "keywords": [
-        "render",
-        "event",
-        "twig",
-        "symfony"
-    ],
+    "keywords": ["render", "event", "twig", "symfony"],
     "homepage": "https://github.com/runroom/RunroomRenderEventBundle",
     "license": "MIT",
     "authors": [
