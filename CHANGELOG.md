@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-<!-- dumped content start -->
-
 ## Unreleased
 
 ### RunroomPackages
@@ -16,7 +14,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 
 - [#1] Add Initial configuration
-
-<!-- dumped content end -->
 
 [#1]: https://github.com/Runroom/runroom-packages/pull/1
