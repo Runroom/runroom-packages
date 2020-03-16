@@ -1,5 +1,5 @@
 {
-    "name": "runroom/runroom",
+    "name": "runroom/runroom-packages",
     "description": "Test",
     "license": "MIT",
     "require": {
@@ -47,6 +47,7 @@
         "phpunit/phpunit": "^8.5",
         "symfony/framework-bundle": "^4.4 || ^5.0",
         "symfony/phpunit-bridge": "^5.0",
+        "symplify/changelog-linker": "^7.2",
         "symplify/monorepo-builder": "^7.2",
         "theofidry/alice-data-fixtures": "^1.1"
     },
@@ -66,6 +67,11 @@
         }
     },
     "scripts": {
+        "changelog": [
+            "changelog-linker dump-merges --in-categories --in-packages --ansi",
+            "changelog-linker link --ansi",
+            "changelog-linker cleanup --ansi"
+        ],
         "cs-fixer-diff": "php-cs-fixer fix --ansi --verbose --diff --dry-run",
         "phpstan": "phpstan analyse --level=5 --no-progress packages"
     }

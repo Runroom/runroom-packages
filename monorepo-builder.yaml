@@ -8,6 +8,7 @@ parameters:
             phpstan/phpstan-doctrine: ^0.12
             phpstan/phpstan-phpunit: ^0.12
             phpstan/phpstan-symfony: ^0.12
+            symplify/changelog-linker: ^7.2
             symplify/monorepo-builder: ^7.2
 
     directories_to_repositories:
