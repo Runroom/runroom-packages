@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## 0.1.0 - 2020-03-16
+## 0.1.1 - 2020-03-16
+
+### RunroomPackages
+
+#### Fixed
+
+- [#4] Fix release process, normalize before release
+
+## [0.1.0] - 2020-03-16
 
 ### RunroomPackages
 
@@ -26,3 +34,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#1]: https://github.com/Runroom/runroom-packages/pull/1
 [#2]: https://github.com/Runroom/runroom-packages/pull/2
 [#3]: https://github.com/Runroom/runroom-packages/pull/3
+[#4]: https://github.com/Runroom/runroom-packages/pull/4
