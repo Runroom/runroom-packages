@@ -1,5 +1,5 @@
 {
-    "name": "runroom/translation-bundle",
+    "name": "runroom-packages/translation-bundle",
     "type": "symfony-bundle",
     "description": "Manage translations on the Sonata Admin interface",
     "keywords": [

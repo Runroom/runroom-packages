@@ -1,20 +1,20 @@
 RunroomRenderEventBundle
 ========================
 
-[![Latest Stable Version](https://poser.pugx.org/runroom/render-event-bundle/v/stable)](https://packagist.org/packages/runroom/render-event-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/runroom/render-event-bundle/v/unstable)](https://packagist.org/packages/runroom/render-event-bundle)
-[![License](https://poser.pugx.org/runroom/render-event-bundle/license)](https://packagist.org/packages/runroom/render-event-bundle)
+[![Latest Stable Version](https://poser.pugx.org/runroom-packages/render-event-bundle/v/stable)](https://packagist.org/packages/runroom-packages/render-event-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/runroom-packages/render-event-bundle/v/unstable)](https://packagist.org/packages/runroom-packages/render-event-bundle)
+[![License](https://poser.pugx.org/runroom-packages/render-event-bundle/license)](https://packagist.org/packages/runroom-packages/render-event-bundle)
 
-[![Total Downloads](https://poser.pugx.org/runroom/render-event-bundle/downloads)](https://packagist.org/packages/runroom/render-event-bundle)
-[![Monthly Downloads](https://poser.pugx.org/runroom/render-event-bundle/d/monthly)](https://packagist.org/packages/runroom/render-event-bundle)
-[![Daily Downloads](https://poser.pugx.org/runroom/render-event-bundle/d/daily)](https://packagist.org/packages/runroom/render-event-bundle)
+[![Total Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/downloads)](https://packagist.org/packages/runroom-packages/render-event-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/render-event-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/daily)](https://packagist.org/packages/runroom-packages/render-event-bundle)
 
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
 ```
-composer require runroom/render-event-bundle
+composer require runroom-packages/render-event-bundle
 ```
 
 ### Enable the Bundle
@@ -40,4 +40,4 @@ console doctrine:schema:update --force
 
 ## License
 
-This bundle is under the [MIT license](LICENSE.md).
+This bundle is under the [MIT license](LICENSE).

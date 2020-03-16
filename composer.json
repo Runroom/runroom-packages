@@ -1,5 +1,5 @@
 {
-    "name": "runroom/runroom-packages",
+    "name": "runroom-packages/runroom-packages",
     "description": "Test",
     "license": "MIT",
     "require": {
@@ -28,10 +28,10 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "replace": {
-        "runroom/redirection-bundle": "self.version",
-        "runroom/render-event-bundle": "self.version",
-        "runroom/sortable-behavior-bundle": "self.version",
-        "runroom/translation-bundle": "self.version"
+        "runroom-packages/redirection-bundle": "self.version",
+        "runroom-packages/render-event-bundle": "self.version",
+        "runroom-packages/sortable-behavior-bundle": "self.version",
+        "runroom-packages/translation-bundle": "self.version"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

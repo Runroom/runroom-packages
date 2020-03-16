@@ -1,20 +1,20 @@
 RunroomRedirectionBundle
 ========================
 
-[![Latest Stable Version](https://poser.pugx.org/runroom/redirection-bundle/v/stable)](https://packagist.org/packages/runroom/redirection-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/runroom/redirection-bundle/v/unstable)](https://packagist.org/packages/runroom/redirection-bundle)
-[![License](https://poser.pugx.org/runroom/redirection-bundle/license)](https://packagist.org/packages/runroom/redirection-bundle)
+[![Latest Stable Version](https://poser.pugx.org/runroom-packages/redirection-bundle/v/stable)](https://packagist.org/packages/runroom-packages/redirection-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/runroom-packages/redirection-bundle/v/unstable)](https://packagist.org/packages/runroom-packages/redirection-bundle)
+[![License](https://poser.pugx.org/runroom-packages/redirection-bundle/license)](https://packagist.org/packages/runroom-packages/redirection-bundle)
 
-[![Total Downloads](https://poser.pugx.org/runroom/redirection-bundle/downloads)](https://packagist.org/packages/runroom/redirection-bundle)
-[![Monthly Downloads](https://poser.pugx.org/runroom/redirection-bundle/d/monthly)](https://packagist.org/packages/runroom/redirection-bundle)
-[![Daily Downloads](https://poser.pugx.org/runroom/redirection-bundle/d/daily)](https://packagist.org/packages/runroom/redirection-bundle)
+[![Total Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/downloads)](https://packagist.org/packages/runroom-packages/redirection-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/redirection-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/daily)](https://packagist.org/packages/runroom-packages/redirection-bundle)
 
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
 ```
-composer require runroom/redirection-bundle
+composer require runroom-packages/redirection-bundle
 ```
 
 ### Enable the Bundle
@@ -40,4 +40,4 @@ console doctrine:schema:update --force
 
 ## License
 
-This bundle is under the [MIT license](LICENSE.md).
+This bundle is under the [MIT license](LICENSE).
