@@ -10,7 +10,7 @@
          stopOnFailure="false"
          bootstrap="vendor/autoload.php"
 >
-    <testsuite name="RedirectionBundle">
+    <testsuite name="RunroomRedirectionBundle">
         <directory>tests</directory>
     </testsuite>
 

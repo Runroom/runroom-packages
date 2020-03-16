@@ -10,7 +10,7 @@
          stopOnFailure="false"
          bootstrap="vendor/autoload.php"
 >
-    <testsuite name="TranslationBundle">
+    <testsuite name="RunroomTranslationBundle">
         <directory>tests</directory>
     </testsuite>
 

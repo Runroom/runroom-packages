@@ -1,5 +1,5 @@
 {
-    "name": "runroom/redirection-bundle",
+    "name": "runroom-packages/redirection-bundle",
     "type": "symfony-bundle",
     "description": "Manage redirections on the Sonata Admin interface",
     "keywords": [

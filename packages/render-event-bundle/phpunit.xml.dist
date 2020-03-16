@@ -10,7 +10,7 @@
          stopOnFailure="false"
          bootstrap="vendor/autoload.php"
 >
-    <testsuite name="RenderEventBundle">
+    <testsuite name="RunroomRenderEventBundle">
         <directory>tests</directory>
     </testsuite>
 

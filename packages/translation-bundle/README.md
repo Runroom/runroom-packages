@@ -1,20 +1,20 @@
 RunroomTranslationBundle
 ========================
 
-[![Latest Stable Version](https://poser.pugx.org/runroom/translation-bundle/v/stable)](https://packagist.org/packages/runroom/translation-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/runroom/translation-bundle/v/unstable)](https://packagist.org/packages/runroom/translation-bundle)
-[![License](https://poser.pugx.org/runroom/translation-bundle/license)](https://packagist.org/packages/runroom/translation-bundle)
+[![Latest Stable Version](https://poser.pugx.org/runroom-packages/translation-bundle/v/stable)](https://packagist.org/packages/runroom-packages/translation-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/runroom-packages/translation-bundle/v/unstable)](https://packagist.org/packages/runroom-packages/translation-bundle)
+[![License](https://poser.pugx.org/runroom-packages/translation-bundle/license)](https://packagist.org/packages/runroom-packages/translation-bundle)
 
-[![Total Downloads](https://poser.pugx.org/runroom/translation-bundle/downloads)](https://packagist.org/packages/runroom/translation-bundle)
-[![Monthly Downloads](https://poser.pugx.org/runroom/translation-bundle/d/monthly)](https://packagist.org/packages/runroom/translation-bundle)
-[![Daily Downloads](https://poser.pugx.org/runroom/translation-bundle/d/daily)](https://packagist.org/packages/runroom/translation-bundle)
+[![Total Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/downloads)](https://packagist.org/packages/runroom-packages/translation-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/translation-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/daily)](https://packagist.org/packages/runroom-packages/translation-bundle)
 
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
 ```
-composer require runroom/translation-bundle
+composer require runroom-packages/translation-bundle
 ```
 
 ### Enable the Bundle
@@ -40,4 +40,4 @@ console doctrine:schema:update --force
 
 ## License
 
-This bundle is under the [MIT license](LICENSE.md).
+This bundle is under the [MIT license](LICENSE).

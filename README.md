@@ -1,46 +1,45 @@
-TranslationBundle
-=================
+Runroom Packages
+================
 
-[![Latest Stable Version](https://poser.pugx.org/runroom/translation-bundle/v/stable)](https://packagist.org/packages/runroom/translation-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/runroom/translation-bundle/v/unstable)](https://packagist.org/packages/runroom/translation-bundle)
-[![License](https://poser.pugx.org/runroom/translation-bundle/license)](https://packagist.org/packages/runroom/translation-bundle)
+[![Latest Stable Version](https://poser.pugx.org/runroom-packages/runroom-packages/v/stable)](https://packagist.org/packages/runroom-packages/runroom-packages)
+[![Latest Unstable Version](https://poser.pugx.org/runroom-packages/runroom-packages/v/unstable)](https://packagist.org/packages/runroom-packages/runroom-packages)
+[![License](https://poser.pugx.org/runroom-packages/runroom-packages/license)](https://packagist.org/packages/runroom-packages/runroom-packages)
 
-[![Total Downloads](https://poser.pugx.org/runroom/translation-bundle/downloads)](https://packagist.org/packages/runroom/translation-bundle)
-[![Monthly Downloads](https://poser.pugx.org/runroom/translation-bundle/d/monthly)](https://packagist.org/packages/runroom/translation-bundle)
-[![Daily Downloads](https://poser.pugx.org/runroom/translation-bundle/d/daily)](https://packagist.org/packages/runroom/translation-bundle)
-
-![ci](https://github.com/Runroom/TranslationBundle/workflows/ci/badge.svg?branch=2.x)
-![qa](https://github.com/Runroom/TranslationBundle/workflows/qa/badge.svg?branch=2.x)
+![ci](https://github.com/Runroom/TranslationBundle/workflows/ci/badge.svg)
+![qa](https://github.com/Runroom/TranslationBundle/workflows/qa/badge.svg)
 
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
 ```
-composer require runroom/translation-bundle
+composer require runroom-packages/runroom-packages
 ```
 
-### Enable the Bundle
+## [RunroomRedirectionBundle](https://github.com/Runroom/RunroomRedirectionBundle)
 
-Then, enable the bundle by adding it to the list of registered bundles in `config/bundles.php` file of your project:
+[![Total Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/downloads)](https://packagist.org/packages/runroom-packages/redirection-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/monthly)](https://packagist.org/packages/runroom-pack3ages/redirection-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/daily)](https://packagist.org/packages/runroom-packages/redirection-bundle)
 
-```php
-// config/bundles.php
+## [RunroomRenderEventBundle](https://github.com/Runroom/RunroomRenderEventBundle)
 
-return [
-    // ...
-    Runroom\TranslationBundle\TranslationBundle::class => ['all' => true],
-];
-```
+[![Total Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/downloads)](https://packagist.org/packages/runroom-packages/render-event-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/render-event-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/daily)](https://packagist.org/packages/runroom-packages/render-event-bundle)
 
-### Update doctrine schema
+## [RunroomSortableBehaviorBundle](https://github.com/Runroom/RunroomSortableBehaviorBundle)
 
-Finally, execute doctrine schema update to create the new tables:
+[![Total Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/downloads)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/d/daily)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
 
-```
-console doctrine:schema:update --force
-```
+## [RunroomTranslationBundle](https://github.com/Runroom/RunroomTranslationBundle)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/downloads)](https://packagist.org/packages/runroom-packages/translation-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/translation-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/daily)](https://packagist.org/packages/runroom-packages/translation-bundle)
 
 ## License
 
-This bundle is under the [MIT license](LICENSE.md).
+This bundle is under the [MIT license](LICENSE).
