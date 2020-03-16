@@ -22,7 +22,7 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('render_event');
+        $treeBuilder = new TreeBuilder('runroom_render_event');
 
         $treeBuilder
             ->getRootNode()

@@ -15,10 +15,10 @@ namespace Runroom\RenderEventBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Runroom\RenderEventBundle\Controller\TemplateController;
-use Runroom\RenderEventBundle\DependencyInjection\RenderEventExtension;
+use Runroom\RenderEventBundle\DependencyInjection\RunroomRenderEventExtension;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 
-class RenderEventExtensionTest extends AbstractExtensionTestCase
+class RunroomRenderEventExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {
@@ -38,6 +38,6 @@ class RenderEventExtensionTest extends AbstractExtensionTestCase
 
     protected function getContainerExtensions(): array
     {
-        return [new RenderEventExtension()];
+        return [new RunroomRenderEventExtension()];
     }
 }
