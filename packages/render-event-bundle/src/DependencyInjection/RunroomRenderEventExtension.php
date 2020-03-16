@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class RenderEventExtension extends Extension
+final class RunroomRenderEventExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {

@@ -15,7 +15,7 @@ namespace Runroom\RenderEventBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Runroom\RenderEventBundle\DependencyInjection\Configuration;
-use Runroom\RenderEventBundle\DependencyInjection\RenderEventExtension;
+use Runroom\RenderEventBundle\DependencyInjection\RunroomRenderEventExtension;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -49,7 +49,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 
     protected function getContainerExtension(): ExtensionInterface
     {
-        return new RenderEventExtension();
+        return new RunroomRenderEventExtension();
     }
 
     protected function getConfiguration(): ConfigurationInterface
