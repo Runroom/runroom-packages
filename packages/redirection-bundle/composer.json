@@ -2,7 +2,13 @@
     "name": "runroom-packages/redirection-bundle",
     "type": "symfony-bundle",
     "description": "Manage redirections on the Sonata Admin interface",
-    "keywords": ["redirection", "symfony", "doctrine", "admin", "sonata"],
+    "keywords": [
+        "redirection",
+        "symfony",
+        "doctrine",
+        "admin",
+        "sonata"
+    ],
     "homepage": "https://github.com/runroom/RunroomRedirectionBundle",
     "license": "MIT",
     "authors": [
