@@ -69,6 +69,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "App\\": "src/",
             "Runroom\\RedirectionBundle\\Tests\\": "packages/redirection-bundle/tests/",
             "Runroom\\RenderEventBundle\\Tests\\": "packages/render-event-bundle/tests/",
             "Runroom\\TranslationBundle\\Tests\\": "packages/translation-bundle/tests/"
@@ -80,7 +81,14 @@
             "changelog-linker link --ansi",
             "changelog-linker cleanup --ansi"
         ],
-        "cs-fixer-diff": "php-cs-fixer fix --ansi --verbose --diff --dry-run",
-        "phpstan": "phpstan analyse --level=5 --no-progress packages"
+        "cs-fixer-run": "php-cs-fixer fix --ansi --verbose",
+        "normalize-run": [
+            "composer normalize",
+            "composer normalize packages/redirection-bundle/composer.json",
+            "composer normalize packages/render-event-bundle/composer.json",
+            "composer normalize packages/sortable-behavior-bundle/composer.json",
+            "composer normalize packages/translation-bundle/composer.json"
+        ],
+        "phpstan": "phpstan analyse --level=5 --no-progress packages src"
     }
 }

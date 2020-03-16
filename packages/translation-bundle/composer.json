@@ -2,7 +2,13 @@
     "name": "runroom-packages/translation-bundle",
     "type": "symfony-bundle",
     "description": "Manage translations on the Sonata Admin interface",
-    "keywords": ["translation", "symfony", "doctrine", "admin", "sonata"],
+    "keywords": [
+        "translation",
+        "symfony",
+        "doctrine",
+        "admin",
+        "sonata"
+    ],
     "homepage": "https://github.com/runroom/RunroomTranslationBundle",
     "license": "MIT",
     "authors": [

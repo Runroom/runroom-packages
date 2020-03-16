@@ -16,3 +16,7 @@ parameters:
         packages/render-event-bundle: 'git@github.com:Runroom/RunroomRenderEventBundle.git'
         packages/sortable-behavior-bundle: 'git@github.com:Runroom/RunroomSortableBehaviorBundle.git'
         packages/translation-bundle: 'git@github.com:Runroom/RunroomTranslationBundle.git'
+
+services:
+    App\Release\ComposerNormalizePreReleaseWorker: ~
+    App\Release\ComposerNormalizePostReleaseWorker: ~
