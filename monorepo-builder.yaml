@@ -11,7 +11,7 @@ parameters:
             symplify/monorepo-builder: ^7.2
 
     directories_to_repositories:
-        packages/redirection-bundle: 'git@github.com:your-monorepo/first-package.git'
-        packages/render-event-bundle: 'git@github.com:your-monorepo/first-package.git'
-        packages/sortable-behavior-bundle: 'git@github.com:your-monorepo/first-package.git'
-        packages/translation-bundle: 'git@github.com:your-monorepo/first-package.git'
+        packages/redirection-bundle: 'git@github.com:Runroom/RunroomRedirectionBundle.git'
+        packages/render-event-bundle: 'git@github.com:Runroom/RunroomRenderEventBundle.git'
+        packages/sortable-behavior-bundle: 'git@github.com:Runroom/RunroomSortableBehaviorBundle.git'
+        packages/translation-bundle: 'git@github.com:Runroom/RunroomTranslationBundle.git'
