@@ -1,6 +1,6 @@
 {
     "name": "runroom-packages/runroom-packages",
-    "description": "Test",
+    "description": "Runroom packages for Symfony development",
     "license": "MIT",
     "require": {
         "php": "^7.3",
@@ -50,6 +50,14 @@
         "symplify/changelog-linker": "^7.2",
         "symplify/monorepo-builder": "^7.2",
         "theofidry/alice-data-fixtures": "^1.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
     },
     "autoload": {
         "psr-4": {

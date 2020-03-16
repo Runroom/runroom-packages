@@ -8,12 +8,12 @@
         "twig",
         "symfony"
     ],
-    "homepage": "https://github.com/runroom/RenderEventBundle",
+    "homepage": "https://github.com/runroom/RunroomRenderEventBundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Runroom",
-            "email": "runroom@runroom.com",
+            "email": "software@runroom.com",
             "homepage": "https://www.runroom.com"
         }
     ],
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev"
+            "dev-master": "0.x-dev"
         }
     },
     "autoload": {
@@ -52,9 +52,5 @@
         "psr-4": {
             "Runroom\\RenderEventBundle\\Tests\\": "tests/"
         }
-    },
-    "scripts": {
-        "cs-fixer-diff": "php-cs-fixer fix --ansi --verbose --diff --dry-run",
-        "phpstan": "phpstan analyse --level=5 --no-progress src tests"
     }
 }
