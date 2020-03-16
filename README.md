@@ -16,6 +16,8 @@ Open a command console, enter your project directory and execute the following c
 composer require runroom-packages/runroom-packages
 ```
 
+However you should not install this package but install the following ones depending on your needs.
+
 ## [RunroomRedirectionBundle](https://github.com/Runroom/RunroomRedirectionBundle)
 
 [![Total Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/downloads)](https://packagist.org/packages/runroom-packages/redirection-bundle)
