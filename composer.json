@@ -81,7 +81,6 @@
             "changelog-linker link --ansi",
             "changelog-linker cleanup --ansi"
         ],
-        "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
         "normalize-run": [
             "composer normalize",
             "composer normalize packages/redirection-bundle/composer.json",
@@ -89,6 +88,7 @@
             "composer normalize packages/sortable-behavior-bundle/composer.json",
             "composer normalize packages/translation-bundle/composer.json"
         ],
+        "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
         "phpstan": "phpstan analyse --level=5 --no-progress packages src"
     }
 }
