@@ -21,5 +21,5 @@ jobs:
       - run: composer update --prefer-dist --no-progress --no-interaction --no-scripts
       - run: composer validate --strict
       - run: composer normalize-run -- --dry-run --diff
-      - run: composer cs-fixer-run -- --dry-run --diff
+      - run: composer php-cs-fixer -- --dry-run --diff
       - run: composer phpstan

@@ -81,7 +81,7 @@
             "changelog-linker link --ansi",
             "changelog-linker cleanup --ansi"
         ],
-        "cs-fixer-run": "php-cs-fixer fix --ansi --verbose",
+        "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
         "normalize-run": [
             "composer normalize",
             "composer normalize packages/redirection-bundle/composer.json",
