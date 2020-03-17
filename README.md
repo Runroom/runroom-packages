@@ -5,8 +5,8 @@ Runroom Packages
 [![Latest Unstable Version](https://poser.pugx.org/runroom-packages/runroom-packages/v/unstable)](https://packagist.org/packages/runroom-packages/runroom-packages)
 [![License](https://poser.pugx.org/runroom-packages/runroom-packages/license)](https://packagist.org/packages/runroom-packages/runroom-packages)
 
-![ci](https://github.com/Runroom/TranslationBundle/workflows/ci/badge.svg)
-![qa](https://github.com/Runroom/TranslationBundle/workflows/qa/badge.svg)
+![ci](https://github.com/Runroom/runroom-packages/workflows/ci/badge.svg)
+![qa](https://github.com/Runroom/runroom-packages/workflows/qa/badge.svg)
 
 ## Installation
 
