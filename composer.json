@@ -72,6 +72,7 @@
             "App\\": "src/",
             "Runroom\\RedirectionBundle\\Tests\\": "packages/redirection-bundle/tests/",
             "Runroom\\RenderEventBundle\\Tests\\": "packages/render-event-bundle/tests/",
+            "Runroom\\SortableBehaviorBundle\\Tests\\": "packages/sortable-behavior-bundle/tests/",
             "Runroom\\TranslationBundle\\Tests\\": "packages/translation-bundle/tests/"
         }
     },
