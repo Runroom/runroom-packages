@@ -1,0 +1,28 @@
+name: monorepo_split
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3']
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 10000
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ matrix.php }}-composer
+      - run: composer update --prefer-dist --no-progress --no-interaction
+      - run: vendor/bin/monorepo-builder split --max-processes 7
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
