@@ -1,17 +1,19 @@
-name: monorepo_split
+name: monorepo
 
 on:
   push:
     branches: [master]
 
 jobs:
-  tests:
+  split:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php: ['7.3']
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - uses: shivammathur/setup-php@v2
         with:
