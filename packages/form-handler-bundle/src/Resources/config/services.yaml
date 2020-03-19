@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: false
+
+    Runroom\FormHandlerBundle\FormHandler:
+        public: true
+        arguments:
+            $formFactory: '@form.factory'
+            $eventDispatcher: '@event_dispatcher'
+            $requestStack: '@request_stack'
+            $session: '@session'

@@ -28,6 +28,7 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "replace": {
+        "runroom-packages/form-handler-bundle": "self.version",
         "runroom-packages/redirection-bundle": "self.version",
         "runroom-packages/render-event-bundle": "self.version",
         "runroom-packages/sortable-behavior-bundle": "self.version",
@@ -61,6 +62,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Runroom\\FormHandlerBundle\\": "packages/form-handler-bundle/src/",
             "Runroom\\RedirectionBundle\\": "packages/redirection-bundle/src/",
             "Runroom\\RenderEventBundle\\": "packages/render-event-bundle/src/",
             "Runroom\\SortableBehaviorBundle\\": "packages/sortable-behavior-bundle/src/",
@@ -70,6 +72,7 @@
     "autoload-dev": {
         "psr-4": {
             "App\\": "src/",
+            "Runroom\\FormHandlerBundle\\Tests\\": "packages/form-handler-bundle/tests/",
             "Runroom\\RedirectionBundle\\Tests\\": "packages/redirection-bundle/tests/",
             "Runroom\\RenderEventBundle\\Tests\\": "packages/render-event-bundle/tests/",
             "Runroom\\SortableBehaviorBundle\\Tests\\": "packages/sortable-behavior-bundle/tests/",
@@ -84,6 +87,7 @@
         ],
         "normalize-run": [
             "composer normalize",
+            "composer normalize packages/form-handler-bundle/composer.json",
             "composer normalize packages/redirection-bundle/composer.json",
             "composer normalize packages/render-event-bundle/composer.json",
             "composer normalize packages/sortable-behavior-bundle/composer.json",
