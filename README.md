@@ -18,10 +18,16 @@ composer require runroom-packages/runroom-packages
 
 However you should not install this package but install the following ones depending on your needs.
 
+## [RunroomFormHandlerBundle](https://github.com/Runroom/RunroomFormHandlerBundle)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/form-handler-bundle/downloads)](https://packagist.org/packages/runroom-packages/form-handler-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/form-handler-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/form-handler-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/form-handler-bundle/d/daily)](https://packagist.org/packages/runroom-packages/form-handler-bundle)
+
 ## [RunroomRedirectionBundle](https://github.com/Runroom/RunroomRedirectionBundle)
 
 [![Total Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/downloads)](https://packagist.org/packages/runroom-packages/redirection-bundle)
-[![Monthly Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/monthly)](https://packagist.org/packages/runroom-pack3ages/redirection-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/redirection-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/daily)](https://packagist.org/packages/runroom-packages/redirection-bundle)
 
 ## [RunroomRenderEventBundle](https://github.com/Runroom/RunroomRenderEventBundle)

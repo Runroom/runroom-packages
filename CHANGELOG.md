@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## 0.2.1 - 2020-03-18
+## [0.3.0] - 2020-03-19
+
+### FormHandlerBundle
+
+#### Added
+
+- [#8] Add Initial commit for FormHandlerBundle
+
+## [0.2.1] - 2020-03-18
 
 ### SortableBehaviorBundle
 
@@ -55,3 +63,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [0.1.1]: https://github.com/Runroom/runroom-packages/compare/0.1.0...0.1.1
 [0.2.0]: https://github.com/Runroom/runroom-packages/compare/0.1.1...0.2.0
 [#6]: https://github.com/Runroom/runroom-packages/pull/6
+[#8]: https://github.com/Runroom/runroom-packages/pull/8
+[0.2.1]: https://github.com/Runroom/runroom-packages/compare/0.2.0...0.2.1
+[0.3.0]: https://github.com/Runroom/runroom-packages/compare/0.2.1...0.3.0
