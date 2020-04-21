@@ -1,5 +1,6 @@
 includes:
     - vendor/jangregor/phpstan-prophecy/src/extension.neon
+    - vendor/knplabs/doctrine-behaviors/phpstan-extension.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-symfony/extension.neon
@@ -7,7 +8,6 @@ includes:
 
 parameters:
     ignoreErrors:
-        - '#Call to an undefined method Knp\\DoctrineBehaviors\\Contract\\Entity\\TranslationInterface(.|\n)+#'
         - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition(.|\n)+#'
         - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'
     inferPrivatePropertyTypeFromConstructor: true
