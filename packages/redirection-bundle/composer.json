@@ -27,15 +27,19 @@
         "symfony/doctrine-bridge": "^4.4 || ^5.0",
         "symfony/event-dispatcher": "^4.4 || ^5.0",
         "symfony/form": "^4.4 || ^5.0",
-        "symfony/http-foundation": "^4.4 || ^5.0.7",
+        "symfony/http-foundation": "^4.4.7 || ^5.0.7",
         "symfony/http-kernel": "^4.4 || ^5.0",
         "symfony/validator": "^4.4 || ^5.0",
         "symfony/yaml": "^4.4 || ^5.0"
     },
+    "conflict": {
+        "phpunit/phpunit": "9.1.2"
+    },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
-        "phpunit/phpunit": "^8.5",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.1",
         "symfony/framework-bundle": "^4.4 || ^5.0",
         "symfony/phpunit-bridge": "^5.0",
         "theofidry/alice-data-fixtures": "^1.1"

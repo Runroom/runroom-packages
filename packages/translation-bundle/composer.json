@@ -35,9 +35,13 @@
         "symfony/yaml": "^4.4 || ^5.0",
         "twig/twig": "^2.12 || ^3.0"
     },
+    "conflict": {
+        "phpunit/phpunit": "9.1.2"
+    },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "phpunit/phpunit": "^8.5",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.1",
         "symfony/phpunit-bridge": "^5.0"
     },
     "config": {

@@ -12,6 +12,7 @@
 namespace Runroom\FormHandlerBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\FormHandlerBundle\ViewModel\BasicFormViewModel;
@@ -29,6 +30,8 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class FormHandlerTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected $formFactory;
     protected $eventDispatcher;
     protected $requestStack;

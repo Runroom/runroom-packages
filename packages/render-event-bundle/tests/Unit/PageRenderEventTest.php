@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace Runroom\RenderEventBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Symfony\Component\HttpFoundation\Response;
 
 class PageRenderEventTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected $pageViewModel;
     protected $response;
     protected $pageRenderEvent;
