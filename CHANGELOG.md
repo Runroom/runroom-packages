@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
+## v0.3.1 - 2020-04-22
+
+### RenderEventBundle
+
+#### Added
+
+- [#10] Add context parameter
+
 ## [0.3.0] - 2020-03-19
 
 ### FormHandlerBundle
@@ -66,3 +74,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#8]: https://github.com/Runroom/runroom-packages/pull/8
 [0.2.1]: https://github.com/Runroom/runroom-packages/compare/0.2.0...0.2.1
 [0.3.0]: https://github.com/Runroom/runroom-packages/compare/0.2.1...0.3.0
+[#10]: https://github.com/Runroom/runroom-packages/pull/10
