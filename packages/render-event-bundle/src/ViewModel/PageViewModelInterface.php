@@ -18,4 +18,8 @@ interface PageViewModelInterface
     public function setContent($content): void;
 
     public function getContent();
+
+    public function addContext(string $key, $value): void;
+
+    public function getContext(string $key);
 }
