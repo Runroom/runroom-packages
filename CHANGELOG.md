@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.3.1 - 2020-04-22
+## v0.4.0 - 2020-05-07
+
+### FormHandlerBundle
+
+#### Added
+
+- [#11] Refactor on Form Handler: Add options and remove set initial data
+
+## [v0.3.1] - 2020-04-22
 
 ### RenderEventBundle
 
@@ -75,3 +83,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [0.2.1]: https://github.com/Runroom/runroom-packages/compare/0.2.0...0.2.1
 [0.3.0]: https://github.com/Runroom/runroom-packages/compare/0.2.1...0.3.0
 [#10]: https://github.com/Runroom/runroom-packages/pull/10
+[#11]: https://github.com/Runroom/runroom-packages/pull/11
+[v0.3.1]: https://github.com/Runroom/runroom-packages/compare/0.3.0...v0.3.1
