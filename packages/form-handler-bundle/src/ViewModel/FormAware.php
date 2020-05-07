@@ -18,7 +18,6 @@ trait FormAware
 {
     protected $form;
     protected $formView;
-    protected $isSuccess;
 
     public function setForm(FormInterface $form): void
     {
@@ -30,23 +29,9 @@ trait FormAware
         return $this->form;
     }
 
-    public function setIsSuccess(bool $isSuccess): void
+    public function getFormView(): ?FormView
     {
-        $this->isSuccess = $isSuccess;
-    }
-
-    public function getIsSuccess(): bool
-    {
-        if (null === $this->isSuccess) {
-            $this->isSuccess = $this->formIsValid();
-        }
-
-        return $this->isSuccess;
-    }
-
-    public function getFormView(): FormView
-    {
-        if (null === $this->formView) {
+        if (null === $this->formView && null !== $this->form) {
             $this->formView = $this->form->createView();
         }
 
@@ -55,6 +40,6 @@ trait FormAware
 
     public function formIsValid(): bool
     {
-        return $this->form->isSubmitted() && $this->form->isValid();
+        return null !== $this->form && $this->form->isSubmitted() && $this->form->isValid();
     }
 }
