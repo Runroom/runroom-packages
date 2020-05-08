@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace Runroom\RenderEventBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\RenderEventBundle\Controller\TemplateController;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\HttpFoundation\Response;
 
 class TemplateControllerTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected $renderer;
     protected $controller;
 

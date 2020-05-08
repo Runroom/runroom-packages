@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
 
 class TranslationExtensionTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $service;
     private $extension;
 

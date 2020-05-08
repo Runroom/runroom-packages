@@ -15,6 +15,7 @@ namespace Runroom\RenderEventBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
@@ -24,6 +25,8 @@ use Twig\Environment;
 
 class PageRendererTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected $twig;
     protected $eventDispatcher;
     protected $pageViewModel;

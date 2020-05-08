@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
@@ -21,6 +22,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationServiceTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $repository;
     private $translator;
     private $service;
