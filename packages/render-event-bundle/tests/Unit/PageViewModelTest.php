@@ -34,4 +34,15 @@ class PageViewModelTest extends TestCase
 
         $this->assertSame('content', $this->viewModel->getContent());
     }
+
+    /**
+     * @test
+     */
+    public function itAddsContext()
+    {
+        $this->viewModel->addContext('test', 'content');
+
+        $this->assertSame('content', $this->viewModel->getContext('test'));
+        $this->assertNull($this->viewModel->getContext('no_context'));
+    }
 }

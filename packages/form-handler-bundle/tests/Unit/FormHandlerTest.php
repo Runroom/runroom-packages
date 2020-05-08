@@ -19,7 +19,6 @@ use Runroom\FormHandlerBundle\ViewModel\BasicFormViewModel;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -75,28 +74,12 @@ class FormHandlerTest extends TestCase
     /**
      * @test
      */
-    public function itHandlesSubmittedFormsAndDoesNotFireFlashMessagesIfNotSuccess()
-    {
-        $form = $this->configureForm();
-
-        $this->eventDispatcher->addListener('form.form_types.event.success', function (GenericEvent $event) {
-            $event->getSubject()->setIsSuccess(false);
-        });
-
-        $model = $this->formHandler->handleForm(FormType::class);
-
-        $this->assertEmpty($this->session->getFlashBag()->get('form_types'));
-    }
-
-    /**
-     * @test
-     */
     public function itHandlesSubmittedForms()
     {
         $form = $this->configureForm();
 
         $this->eventDispatcher->addListener('form.form_types.event.success', function (GenericEvent $event) {
-            $this->assertTrue($event->getSubject()->getIsSuccess());
+            $this->assertTrue($event->getSubject()->formIsValid());
         });
 
         $model = $this->formHandler->handleForm(FormType::class);
@@ -110,20 +93,15 @@ class FormHandlerTest extends TestCase
     private function configureForm(bool $submitted = true, bool $valid = true): ObjectProphecy
     {
         $form = $this->prophesize(FormInterface::class);
-        $formView = $this->prophesize(FormView::class);
-        $formConfig = $this->prophesize(FormConfigInterface::class);
+        $formView = new FormView();
 
-        $formConfig->getDataClass()->shouldBeCalled();
-        $this->formFactory->create(FormType::class)->willReturn($form->reveal());
+        $this->formFactory->create(FormType::class, null, [])->willReturn($form->reveal());
 
         $form->handleRequest($this->request)->shouldBeCalled();
-        $form->getConfig()->willReturn($formConfig->reveal());
-        $form->getData()->shouldBeCalled();
-        $form->setData(null)->shouldBeCalled();
         $form->getName()->willReturn('form_types');
         $form->isSubmitted()->willReturn($submitted);
         $form->isValid()->willReturn($valid);
-        $form->createView()->willReturn($formView->reveal());
+        $form->createView()->willReturn($formView);
 
         return $form;
     }

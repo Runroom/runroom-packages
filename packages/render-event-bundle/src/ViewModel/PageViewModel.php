@@ -16,6 +16,7 @@ namespace Runroom\RenderEventBundle\ViewModel;
 class PageViewModel implements PageViewModelInterface
 {
     private $content;
+    private $context = [];
 
     public function setContent($content): void
     {
@@ -25,5 +26,15 @@ class PageViewModel implements PageViewModelInterface
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function addContext(string $key, $value): void
+    {
+        $this->context[$key] = $value;
+    }
+
+    public function getContext(string $key)
+    {
+        return $this->context[$key] ?? null;
     }
 }

@@ -29,13 +29,13 @@ class PageRenderEventTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->pageViewModel = $this->prophesize(PageViewModel::class);
-        $this->response = $this->prophesize(Response::class);
+        $this->pageViewModel = new PageViewModel();
+        $this->response = new Response();
 
         $this->pageRenderEvent = new PageRenderEvent(
             'view',
-            $this->pageViewModel->reveal(),
-            $this->response->reveal()
+            $this->pageViewModel,
+            $this->response
         );
     }
 
@@ -58,7 +58,7 @@ class PageRenderEventTest extends TestCase
      */
     public function itGetsPageViewModel()
     {
-        $this->pageViewModel->getContent()->willReturn('model');
+        $this->pageViewModel->setContent('model');
 
         $viewModel = $this->pageRenderEvent->getPageViewModel();
 

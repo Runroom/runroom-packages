@@ -50,17 +50,15 @@ class PageRendererTest extends TestCase
      */
     public function itDispatchEventsOnRenderResponse()
     {
-        $response = $this->prophesize(Response::class);
+        $response = new Response();
 
         $this->pageViewModel->setContent([])->shouldBeCalled();
         $this->twig->render('test.html.twig', Argument::type('array'), null)
             ->willReturn('Rendered test');
         $this->eventDispatcher->dispatch(Argument::type(PageRenderEvent::class), PageRenderEvent::EVENT_NAME)->willReturnArgument(0);
-        $response->getContent()->willReturn('');
-        $response->setContent('Rendered test')->willReturn($response->reveal());
 
-        $resultResponse = $this->service->renderResponse('test.html.twig', [], $response->reveal());
+        $resultResponse = $this->service->renderResponse('test.html.twig', [], $response);
 
-        $this->assertSame($response->reveal(), $resultResponse);
+        $this->assertSame($response, $resultResponse);
     }
 }

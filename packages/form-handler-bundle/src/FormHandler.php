@@ -16,7 +16,6 @@ use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -39,10 +38,9 @@ class FormHandler
         $this->session = $session;
     }
 
-    public function handleForm(string $type, FormAwareInterface $model = null): FormAwareInterface
+    public function handleForm(string $type, array $options = [], FormAwareInterface $model = null): FormAwareInterface
     {
-        $form = $this->formFactory->create($type);
-        $form->setData($this->getDataObject($form));
+        $form = $this->formFactory->create($type, null, $options);
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
         $model = $model ?? new BasicFormViewModel();
@@ -54,18 +52,9 @@ class FormHandler
                 'form.' . $form->getName() . '.event.success'
             );
 
-            if ($model->getIsSuccess()) {
-                $this->session->getFlashBag()->add($form->getName(), 'success');
-            }
+            $this->session->getFlashBag()->add($form->getName(), 'success');
         }
 
         return $model;
-    }
-
-    private function getDataObject(FormInterface $form)
-    {
-        $dataClass = $form->getConfig()->getDataClass();
-
-        return $dataClass && null === $form->getData() ? new $dataClass() : $form->getData();
     }
 }
