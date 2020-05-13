@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.4.0 - 2020-05-07
+## v0.4.1 - 2020-05-13
+
+### RunroomTranslationBundle
+
+#### Added
+
+- [#12] Add compatibility with a2lix 3.0
+
+### All packages
+
+#### Changed
+
+- [#9] Update to phpunit 9
+
+## [v0.4.0] - 2020-05-07
 
 ### FormHandlerBundle
 
@@ -85,3 +99,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#10]: https://github.com/Runroom/runroom-packages/pull/10
 [#11]: https://github.com/Runroom/runroom-packages/pull/11
 [v0.3.1]: https://github.com/Runroom/runroom-packages/compare/0.3.0...v0.3.1
+[#12]: https://github.com/Runroom/runroom-packages/pull/12
+[#9]: https://github.com/Runroom/runroom-packages/pull/9
+[v0.4.0]: https://github.com/Runroom/runroom-packages/compare/v0.3.1...v0.4.0
