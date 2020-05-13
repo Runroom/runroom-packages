@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.4.1 - 2020-05-13
+## v0.5.0 - 2020-05-13
+
+### RunroomCkeditorSonataMediaBundle
+
+#### Added
+
+- [#13] Add package
+
+## [v0.4.1] - 2020-05-13
 
 ### RunroomTranslationBundle
 
@@ -102,3 +110,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#12]: https://github.com/Runroom/runroom-packages/pull/12
 [#9]: https://github.com/Runroom/runroom-packages/pull/9
 [v0.4.0]: https://github.com/Runroom/runroom-packages/compare/v0.3.1...v0.4.0
+[#13]: https://github.com/Runroom/runroom-packages/pull/13
+[v0.4.1]: https://github.com/Runroom/runroom-packages/compare/v0.4.0...v0.4.1
