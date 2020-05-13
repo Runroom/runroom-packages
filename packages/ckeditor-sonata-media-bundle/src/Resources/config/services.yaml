@@ -10,5 +10,5 @@ services:
             $twig: '@twig'
 
     Runroom\CkeditorSonataMediaBundle\Admin\MediaAdminExtension:
-        tag:
+        tags:
             - { name: sonata.admin.extension, target: sonata.media.admin.media }
