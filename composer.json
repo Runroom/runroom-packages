@@ -4,7 +4,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "a2lix/translation-form-bundle": "^2.4",
+        "a2lix/translation-form-bundle": "^2.4 || ^3.0",
         "doctrine/common": "^2.12",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.7",
@@ -52,8 +52,8 @@
         "phpunit/phpunit": "^9.1",
         "symfony/framework-bundle": "^4.4 || ^5.0",
         "symfony/phpunit-bridge": "^5.0",
-        "symplify/changelog-linker": "^7.2",
-        "symplify/monorepo-builder": "^7.2",
+        "symplify/changelog-linker": "^7.3",
+        "symplify/monorepo-builder": "^7.3",
         "theofidry/alice-data-fixtures": "^1.1"
     },
     "config": {
