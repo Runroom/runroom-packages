@@ -8,10 +8,11 @@ parameters:
             phpstan/phpstan-doctrine: ^0.12
             phpstan/phpstan-phpunit: ^0.12
             phpstan/phpstan-symfony: ^0.12
-            symplify/changelog-linker: ^7.2
-            symplify/monorepo-builder: ^7.2
+            symplify/changelog-linker: ^7.3
+            symplify/monorepo-builder: ^7.3
 
     directories_to_repositories:
+        packages/ckeditor-sonata-media-bundle: 'git@github.com:Runroom/RunroomCkeditorSonataMediaBundle.git'
         packages/form-handler-bundle: 'git@github.com:Runroom/RunroomFormHandlerBundle.git'
         packages/redirection-bundle: 'git@github.com:Runroom/RunroomRedirectionBundle.git'
         packages/render-event-bundle: 'git@github.com:Runroom/RunroomRenderEventBundle.git'

@@ -1,0 +1,56 @@
+{
+    "name": "runroom-packages/ckeditor-sonata-media-bundle",
+    "type": "symfony-bundle",
+    "description": "Handle Sonata Media on Ckeditor",
+    "keywords": [
+        "ckeditor",
+        "sonata",
+        "media"
+    ],
+    "homepage": "https://github.com/runroom/RunroomCkeditorSonataMediaBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Runroom",
+            "email": "software@runroom.com",
+            "homepage": "https://www.runroom.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "sonata-project/admin-bundle": "^3.61",
+        "sonata-project/media-bundle": "^3.24",
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/form": "^4.4 || ^5.0",
+        "symfony/http-foundation": "^4.4.7 || ^5.0.7",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "twig/twig": "^2.12 || ^3.0"
+    },
+    "conflict": {
+        "phpunit/phpunit": "9.1.2"
+    },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.1",
+        "symfony/phpunit-bridge": "^5.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.5-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Runroom\\CkeditorSonataMediaBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Runroom\\CkeditorSonataMediaBundle\\Tests\\": "tests/"
+        }
+    }
+}
