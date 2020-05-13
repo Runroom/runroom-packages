@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\CkeditorSonataMediaBundle\Controller;
 
-use Sonata\MediaBundle\Controller\MediaAdminController as BaseMediaAdminController;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-final class MediaAdminController extends BaseMediaAdminController
+final class MediaAdminController extends CRUDController
 {
     private $mediaManager;
     private $mediaPool;
