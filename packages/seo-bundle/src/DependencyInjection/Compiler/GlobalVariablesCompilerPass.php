@@ -16,7 +16,6 @@ namespace Runroom\SeoBundle\DependencyInjection\Compiler;
 use Runroom\SeoBundle\DependencyInjection\RunroomSeoExtension;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 final class GlobalVariablesCompilerPass implements CompilerPassInterface
 {
@@ -24,7 +23,7 @@ final class GlobalVariablesCompilerPass implements CompilerPassInterface
     {
         $container->getDefinition('twig')
             ->addMethodCall('addGlobal', [
-                'xDefaultLocale', $container->getParameter(RunroomSeoExtension::XDEFAULT_LOCALE)
+                'xDefaultLocale', $container->getParameter(RunroomSeoExtension::XDEFAULT_LOCALE),
             ]);
     }
 }
