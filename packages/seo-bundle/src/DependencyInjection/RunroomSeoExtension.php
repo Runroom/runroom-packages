@@ -23,6 +23,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class RunroomSeoExtension extends Extension
 {
+    public const XDEFAULT_LOCALE = 'runroom_seo.xdefault_locale';
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -41,7 +43,6 @@ final class RunroomSeoExtension extends Extension
         $container->getDefinition(AlternateLinksBuilder::class)
             ->setArgument(1, $config['locales']);
 
-        $container->getDefinition('twig')
-            ->addMethodCall('addGlobal', ['xDefaultLocale', $configs['xdefault_locale']]);
+        $container->setParameter(self::XDEFAULT_LOCALE, $config['xdefault_locale']);
     }
 }

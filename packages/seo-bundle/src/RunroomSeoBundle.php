@@ -13,8 +13,16 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle;
 
+use Runroom\SeoBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class RunroomSeoBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new GlobalVariablesCompilerPass());
+    }
 }

@@ -6,14 +6,14 @@
     {% endfor %}
 {% endblock %}
 
-{% block xDefault %}
+{% block xDefaultAlternateLink %}
     {% if xDefaultLocale in alternateLinks|keys %}
         <link rel="alternate" hreflang="x-default" href="{{ alternateLinks[xDefaultLocale] }}" />
     {% endif %}
 {% endblock %}
 
 {% block canonical %}
-    {% if app.request.local in alternateLinks|keys %}
-        <link rel="canonical" href="{{ alternateLinks[locale] }}" />
+    {% if app.request.locale in alternateLinks|keys %}
+        <link rel="canonical" href="{{ alternateLinks[app.request.locale] }}" />
     {% endif %}
 {% endblock %}
