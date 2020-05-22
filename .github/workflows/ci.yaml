@@ -14,6 +14,8 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - uses: actions/cache@v1
         with:
           path: vendor
