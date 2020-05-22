@@ -3,7 +3,7 @@ services:
         public: false
         arguments:
             $urlGenerator: '@router'
-            $locales: '%locales%'
+            $locales: null
 
     Runroom\SeoBundle\AlternateLinks\AlternateLinksService:
         public: false
@@ -12,6 +12,8 @@ services:
             $providers: !tagged runroom.seo.alternate_links
             $defaultProvider: '@Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider'
             $builder: '@Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder'
+        tags:
+            - { name: kernel.event_subscriber }
 
     Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider:
         public: false
@@ -28,6 +30,8 @@ services:
             $providers: !tagged runroom.seo.meta_information
             $defaultProvider: '@Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider'
             $builder: '@Runroom\SeoBundle\MetaInformation\MetaInformationBuilder'
+        tags:
+            - { name: kernel.event_subscriber }
 
     Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider:
         public: false
@@ -35,4 +39,4 @@ services:
     Runroom\SeoBundle\Repository\MetaInformationRepository:
         public: false
         arguments:
-            $registry: '@doctrine.orm.entity_manager'
+            $registry: '@doctrine'

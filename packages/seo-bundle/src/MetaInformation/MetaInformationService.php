@@ -15,7 +15,7 @@ use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class MetaInformationService implements EventSubscriberInterface
+final class MetaInformationService implements EventSubscriberInterface
 {
     protected $requestStack;
     protected $providers;

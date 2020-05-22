@@ -16,6 +16,8 @@ use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
+ * @final
+ *
  * @ORM\Entity
  */
 class EntityMetaInformation implements TranslatableInterface

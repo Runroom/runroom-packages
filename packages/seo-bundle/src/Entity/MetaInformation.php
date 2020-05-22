@@ -19,6 +19,8 @@ use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @final
+ *
  * @ORM\Entity(repositoryClass=MetaInformationRepository::class)
  */
 class MetaInformation implements TranslatableInterface

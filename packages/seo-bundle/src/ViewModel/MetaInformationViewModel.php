@@ -13,7 +13,7 @@ namespace Runroom\SeoBundle\ViewModel;
 
 use Sonata\MediaBundle\Model\MediaInterface;
 
-class MetaInformationViewModel
+final class MetaInformationViewModel
 {
     protected $title;
     protected $description;
