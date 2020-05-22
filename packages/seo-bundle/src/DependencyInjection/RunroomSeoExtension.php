@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\DependencyInjection;
 
+use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksProviderInterface;
 use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
 use Symfony\Component\Config\FileLocator;
@@ -24,6 +25,9 @@ final class RunroomSeoExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
         $loader->load('admin.yaml');
@@ -33,5 +37,11 @@ final class RunroomSeoExtension extends Extension
 
         $container->registerForAutoconfiguration(MetaInformationProviderInterface::class)
             ->addTag('runroom.seo.meta_information');
+
+        $container->getDefinition(AlternateLinksBuilder::class)
+            ->setArgument(1, $config['locales']);
+
+        $container->getDefinition('twig')
+            ->addMethodCall('addGlobal', ['xDefaultLocale', $configs['xdefault_locale']]);
     }
 }

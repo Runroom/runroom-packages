@@ -17,6 +17,8 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @final
+ *
  * @ORM\Entity
  */
 class MetaInformationTranslation implements TranslationInterface

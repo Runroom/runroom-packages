@@ -15,7 +15,7 @@ use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class AlternateLinksService implements EventSubscriberInterface
+final class AlternateLinksService implements EventSubscriberInterface
 {
     protected const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
     protected $requestStack;

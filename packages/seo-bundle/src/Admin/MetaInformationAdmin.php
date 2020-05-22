@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class MetaInformationAdmin extends AbstractAdmin
+final class MetaInformationAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_page' => 1,

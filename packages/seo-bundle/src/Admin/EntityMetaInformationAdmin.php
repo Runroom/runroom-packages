@@ -16,7 +16,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EntityMetaInformationAdmin extends AbstractAdmin
+final class EntityMetaInformationAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper): void
     {

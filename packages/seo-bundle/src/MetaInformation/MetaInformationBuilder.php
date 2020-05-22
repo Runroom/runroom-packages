@@ -16,6 +16,9 @@ use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 
+/**
+ * @final
+ */
 class MetaInformationBuilder
 {
     protected const DEFAULT_ROUTE = 'default';

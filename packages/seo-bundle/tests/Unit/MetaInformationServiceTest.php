@@ -16,9 +16,9 @@ use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
-use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
+use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,18 +41,17 @@ class MetaInformationServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->requestStack = $this->prophesize(RequestStack::class);
-        $this->provider = $this->prophesize(AbstractMetaInformationProvider::class);
-        $this->defaultProvider = $this->prophesize(DefaultMetaInformationProvider::class);
+        $this->requestStack = new RequestStack();
+        $this->provider = $this->prophesize(MetaInformationProviderInterface::class);
+        $this->defaultProvider = new DefaultMetaInformationProvider();
         $this->builder = $this->prophesize(MetaInformationBuilder::class);
 
         $this->provider->providesMetas(Argument::any())->willReturn(false);
-        $this->defaultProvider->providesMetas(Argument::any())->willReturn(true);
 
         $this->service = new MetaInformationService(
-            $this->requestStack->reveal(),
+            $this->requestStack,
             [$this->provider->reveal()],
-            $this->defaultProvider->reveal(),
+            $this->defaultProvider,
             $this->builder->reveal()
         );
 
@@ -82,7 +81,7 @@ class MetaInformationServiceTest extends TestCase
     public function itFindsMetasForRouteWithTheDefaultProvider()
     {
         $this->configureCurrentRequest();
-        $this->builder->build($this->defaultProvider->reveal(), self::ROUTE, $this->model)
+        $this->builder->build($this->defaultProvider, self::ROUTE, $this->model)
             ->willReturn($this->expectedMetas);
 
         $event = $this->configurePageRenderEvent();
@@ -111,8 +110,10 @@ class MetaInformationServiceTest extends TestCase
 
     protected function configureCurrentRequest(): void
     {
-        $request = $this->prophesize(Request::class);
-        $this->requestStack->getCurrentRequest()->willReturn($request->reveal());
-        $request->get('_route', '')->willReturn(self::ROUTE);
+        $request = new Request();
+
+        $this->requestStack->push($request);
+
+        $request->attributes->set('_route', self::ROUTE);
     }
 }

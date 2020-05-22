@@ -39,13 +39,13 @@ class AlternateLinksServiceTest extends TestCase
     {
         $this->requestStack = new RequestStack();
         $this->provider = $this->prophesize(AbstractAlternateLinksProvider::class);
-        $this->defaultProvider = $this->prophesize(DefaultAlternateLinksProvider::class);
+        $this->defaultProvider = new DefaultAlternateLinksProvider();
         $this->builder = $this->prophesize(AlternateLinksBuilder::class);
 
         $this->service = new AlternateLinksService(
             $this->requestStack,
             [$this->provider->reveal()],
-            $this->defaultProvider->reveal(),
+            $this->defaultProvider,
             $this->builder->reveal()
         );
     }
@@ -74,7 +74,7 @@ class AlternateLinksServiceTest extends TestCase
         $this->configureCurrentRequest();
 
         $this->provider->providesAlternateLinks(self::ROUTE)->willReturn(false);
-        $this->builder->build($this->defaultProvider->reveal(), 'model', self::ROUTE, [])->willReturn(['alternate_links']);
+        $this->builder->build($this->defaultProvider, 'model', self::ROUTE, [])->willReturn(['alternate_links']);
 
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);

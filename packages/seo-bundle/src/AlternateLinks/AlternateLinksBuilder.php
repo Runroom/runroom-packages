@@ -14,6 +14,9 @@ namespace Runroom\SeoBundle\AlternateLinks;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+/**
+ * @final
+ */
 class AlternateLinksBuilder
 {
     protected $urlGenerator;
