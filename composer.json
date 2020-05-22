@@ -33,6 +33,7 @@
         "runroom-packages/form-handler-bundle": "self.version",
         "runroom-packages/redirection-bundle": "self.version",
         "runroom-packages/render-event-bundle": "self.version",
+        "runroom-packages/seo-bundle": "self.version",
         "runroom-packages/sortable-behavior-bundle": "self.version",
         "runroom-packages/translation-bundle": "self.version"
     },
@@ -72,6 +73,7 @@
             "Runroom\\FormHandlerBundle\\": "packages/form-handler-bundle/src/",
             "Runroom\\RedirectionBundle\\": "packages/redirection-bundle/src/",
             "Runroom\\RenderEventBundle\\": "packages/render-event-bundle/src/",
+            "Runroom\\SeoBundle\\": "packages/seo-bundle/src/",
             "Runroom\\SortableBehaviorBundle\\": "packages/sortable-behavior-bundle/src/",
             "Runroom\\TranslationBundle\\": "packages/translation-bundle/src/"
         }
@@ -83,6 +85,7 @@
             "Runroom\\FormHandlerBundle\\Tests\\": "packages/form-handler-bundle/tests/",
             "Runroom\\RedirectionBundle\\Tests\\": "packages/redirection-bundle/tests/",
             "Runroom\\RenderEventBundle\\Tests\\": "packages/render-event-bundle/tests/",
+            "Runroom\\SeoBundle\\Tests\\": "packages/seo-bundle/tests/",
             "Runroom\\SortableBehaviorBundle\\Tests\\": "packages/sortable-behavior-bundle/tests/",
             "Runroom\\TranslationBundle\\Tests\\": "packages/translation-bundle/tests/"
         }
@@ -99,6 +102,7 @@
             "composer normalize packages/form-handler-bundle/composer.json",
             "composer normalize packages/redirection-bundle/composer.json",
             "composer normalize packages/render-event-bundle/composer.json",
+            "composer normalize packages/seo-bundle/composer.json",
             "composer normalize packages/sortable-behavior-bundle/composer.json",
             "composer normalize packages/translation-bundle/composer.json"
         ],

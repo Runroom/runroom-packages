@@ -42,6 +42,12 @@ However you should not install this package but install the following ones depen
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/render-event-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/daily)](https://packagist.org/packages/runroom-packages/render-event-bundle)
 
+## [RunroomSeoBundle](https://github.com/Runroom/RunroomSeoBundle)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/seo-bundle/downloads)](https://packagist.org/packages/runroom-packages/seo-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/seo-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/seo-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/seo-bundle/d/daily)](https://packagist.org/packages/runroom-packages/seo-bundle)
+
 ## [RunroomSortableBehaviorBundle](https://github.com/Runroom/RunroomSortableBehaviorBundle)
 
 [![Total Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/downloads)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
