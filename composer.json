@@ -22,10 +22,12 @@
         "symfony/http-foundation": "^4.4.7 || ^5.0.7",
         "symfony/http-kernel": "^4.4 || ^5.0",
         "symfony/property-access": "^4.4 || ^5.0",
+        "symfony/routing": "^4.4 || ^5.0",
         "symfony/translation": "^4.4 || ^5.0",
         "symfony/twig-bundle": "^4.4 || ^5.0",
         "symfony/validator": "^4.4 || ^5.0",
         "symfony/yaml": "^4.4 || ^5.0",
+        "twig/string-extra": "^3.0",
         "twig/twig": "^2.12 || ^3.0"
     },
     "replace": {
