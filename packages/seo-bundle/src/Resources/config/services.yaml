@@ -1,0 +1,38 @@
+services:
+    Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder:
+        public: false
+        arguments:
+            $urlGenerator: '@router'
+            $locales: '%locales%'
+
+    Runroom\SeoBundle\AlternateLinks\AlternateLinksService:
+        public: false
+        arguments:
+            $requestStack: '@request_stack'
+            $providers: !tagged runroom.seo.alternate_links
+            $defaultProvider: '@Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider'
+            $builder: '@Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder'
+
+    Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider:
+        public: false
+
+    Runroom\SeoBundle\MetaInformation\MetaInformationBuilder:
+        public: false
+        arguments:
+            $repository: '@Runroom\SeoBundle\Repository\MetaInformationRepository'
+
+    Runroom\SeoBundle\MetaInformation\MetaInformationService:
+        public: false
+        arguments:
+            $requestStack: '@request_stack'
+            $providers: !tagged runroom.seo.meta_information
+            $defaultProvider: '@Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider'
+            $builder: '@Runroom\SeoBundle\MetaInformation\MetaInformationBuilder'
+
+    Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider:
+        public: false
+
+    Runroom\SeoBundle\Repository\MetaInformationRepository:
+        public: false
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'

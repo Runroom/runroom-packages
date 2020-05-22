@@ -1,0 +1,19 @@
+{% set alternateLinks = page.context('alternate_links') %}
+
+{% block alternateLinks %}
+    {% for lang, href in alternateLinks %}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ href }}" />
+    {% endfor %}
+{% endblock %}
+
+{% block xDefault %}
+    {% if xDefaultLocale in alternateLinks|keys %}
+        <link rel="alternate" hreflang="x-default" href="{{ alternateLinks[xDefaultLocale] }}" />
+    {% endif %}
+{% endblock %}
+
+{% block canonical %}
+    {% if app.request.local in alternateLinks|keys %}
+        <link rel="canonical" href="{{ alternateLinks[locale] }}" />
+    {% endif %}
+{% endblock %}
