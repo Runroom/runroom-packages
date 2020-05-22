@@ -35,4 +35,4 @@ services:
     Runroom\SeoBundle\Repository\MetaInformationRepository:
         public: false
         arguments:
-            $entityManager: '@doctrine.orm.entity_manager'
+            $registry: '@doctrine.orm.entity_manager'
