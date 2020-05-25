@@ -9,6 +9,8 @@ RunroomSeoBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/seo-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/seo-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/seo-bundle/d/daily)](https://packagist.org/packages/runroom-packages/seo-bundle)
 
+This bundle allows you to manage some basic SEO meta tags directly on the Sonata Backoffice. It also gives some utilities to integrate with the [RunroomRenderEventBundle](https://github.com/Runroom/RunroomRenderEventBundle).
+
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:

@@ -9,6 +9,8 @@ RunroomRedirectionBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/redirection-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/redirection-bundle/d/daily)](https://packagist.org/packages/runroom-packages/redirection-bundle)
 
+This bundle gives the ability to manage redirections on a Sonata Backoffice.
+
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:

@@ -9,6 +9,8 @@ RunroomFormHandlerBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/form-handler-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/form-handler-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/form-handler-bundle/d/daily)](https://packagist.org/packages/runroom-packages/form-handler-bundle)
 
+This bundle gives a tool to handle with Forms on Symfony without having to rewrite a lot of logic that it is always the same.
+
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
