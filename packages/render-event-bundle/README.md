@@ -9,6 +9,8 @@ RunroomRenderEventBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/render-event-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/render-event-bundle/d/daily)](https://packagist.org/packages/runroom-packages/render-event-bundle)
 
+This bundle wraps the twig render to allow modifications of the parameters passed to it using the event dispatcher.
+
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:

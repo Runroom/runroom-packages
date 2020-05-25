@@ -9,6 +9,8 @@ RunroomTranslationBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/translation-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/daily)](https://packagist.org/packages/runroom-packages/translation-bundle)
 
+This bundle gives the ability to define and use translations directly on the Sonata Backoffice as a replacement for `yaml` translations of Symfony.
+
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:

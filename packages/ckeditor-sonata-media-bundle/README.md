@@ -9,6 +9,8 @@ RunroomCkeditorSonataMediaBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/ckeditor-sonata-media-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/ckeditor-sonata-media-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/ckeditor-sonata-media-bundle/d/daily)](https://packagist.org/packages/runroom-packages/ckeditor-sonata-media-bundle)
 
+This bundle allows you to configure [SonataMediaBundle](https://github.com/sonata-project/SonataMediaBundle) to work with the Ckeditor image and file uploader. It is inspired on: [SonataFormatterBundle](https://github.com/sonata-project/SonataFormatterBundle) and [CoopTilleulsCKEditorSonataMediaBundle](https://github.com/coopTilleuls/CoopTilleulsCKEditorSonataMediaBundle).
+
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
