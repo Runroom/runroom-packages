@@ -39,6 +39,18 @@ class PageRenderer
         $this->pageViewModel = $pageViewModel;
     }
 
+    public function render(string $view, $model = null): string
+    {
+        $this->pageViewModel->setContent($model);
+
+        $event = $this->eventDispatcher->dispatch(
+            new PageRenderEvent($view, $this->pageViewModel),
+            PageRenderEvent::EVENT_NAME
+        );
+
+        return $this->twig->render($event->getView(), ['page' => $event->getPageViewModel()]);
+    }
+
     public function renderResponse(string $view, $model = null, Response $response = null): Response
     {
         $this->pageViewModel->setContent($model);

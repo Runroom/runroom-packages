@@ -15,3 +15,12 @@ services:
             $pageViewModel: '@runroom.render_event.page_view_model'
 
     runroom.render_event.page_view_model: ~
+
+    twig.error_renderer.html:
+        class: App\ErrorRenderer\TwigErrorRenderer
+        decorates: error_renderer.html
+        arguments:
+            $twig: '@twig'
+            $fallbackErrorRenderer: '@twig.error_renderer.html.inner'
+            $debug: !service { factory: ['@App\ErrorRenderer\TwigErrorRenderer', isDebug], arguments: ['@request_stack', '%kernel.debug%']  }
+            $renderer: '@Runroom\RenderEventBundle\Renderer\PageRenderer'
