@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.6.1 - 2020-05-25
+## v0.6.2 - 2020-05-25
+
+### RunroomRenderEventBundle
+
+#### Added
+
+- [#18] Add Render Error
+
+## [v0.6.1] - 2020-05-25
 
 ### RunroomSeoBundle
 
@@ -141,3 +149,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#17]: https://github.com/Runroom/runroom-packages/pull/17
 [#16]: https://github.com/Runroom/runroom-packages/pull/16
 [v0.6.0]: https://github.com/Runroom/runroom-packages/compare/v0.5.0...v0.6.0
+[#18]: https://github.com/Runroom/runroom-packages/pull/18
+[v0.6.1]: https://github.com/Runroom/runroom-packages/compare/v0.6.0...v0.6.1
