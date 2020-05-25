@@ -8,6 +8,8 @@ Runroom Packages
 ![ci](https://github.com/Runroom/runroom-packages/workflows/ci/badge.svg)
 ![qa](https://github.com/Runroom/runroom-packages/workflows/qa/badge.svg)
 
+This is the [Runroom](https://www.runroom.com/) monorepo repository for the Symfony projects, and this work gives the ability to reuse several features that we currently need on most of the projects.
+
 ## Installation
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
