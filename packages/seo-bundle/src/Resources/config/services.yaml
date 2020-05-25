@@ -1,42 +1,37 @@
 services:
-    Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder:
+    _defaults:
         public: false
+
+    Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder:
         arguments:
             $urlGenerator: '@router'
             $locales: null
 
     Runroom\SeoBundle\AlternateLinks\AlternateLinksService:
-        public: false
         arguments:
             $requestStack: '@request_stack'
             $providers: !tagged runroom.seo.alternate_links
             $defaultProvider: '@Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider'
             $builder: '@Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder'
-        tags:
-            - { name: kernel.event_subscriber }
+        tags: [kernel.event_subscriber]
 
     Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider:
-        public: false
 
     Runroom\SeoBundle\MetaInformation\MetaInformationBuilder:
-        public: false
         arguments:
             $repository: '@Runroom\SeoBundle\Repository\MetaInformationRepository'
 
     Runroom\SeoBundle\MetaInformation\MetaInformationService:
-        public: false
         arguments:
             $requestStack: '@request_stack'
             $providers: !tagged runroom.seo.meta_information
             $defaultProvider: '@Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider'
             $builder: '@Runroom\SeoBundle\MetaInformation\MetaInformationBuilder'
-        tags:
-            - { name: kernel.event_subscriber }
+        tags: [kernel.event_subscriber]
 
     Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider:
-        public: false
 
     Runroom\SeoBundle\Repository\MetaInformationRepository:
-        public: false
         arguments:
             $registry: '@doctrine'
+        tags: [doctrine.repository_service]
