@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.6.0 - 2020-05-22
+## v0.6.1 - 2020-05-25
+
+### RunroomSeoBundle
+
+#### Fixed
+
+- [#17] Fix Doctrine repository tag
+
+### All packages
+
+#### Added
+
+- [#16] Add purpose and credits on READMEs
+
+## [v0.6.0] - 2020-05-22
 
 ### RunroomSeoBundle
 
@@ -124,3 +138,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#15]: https://github.com/Runroom/runroom-packages/pull/15
 [#14]: https://github.com/Runroom/runroom-packages/pull/14
 [v0.5.0]: https://github.com/Runroom/runroom-packages/compare/v0.4.1...v0.5.0
+[#17]: https://github.com/Runroom/runroom-packages/pull/17
+[#16]: https://github.com/Runroom/runroom-packages/pull/16
+[v0.6.0]: https://github.com/Runroom/runroom-packages/compare/v0.5.0...v0.6.0
