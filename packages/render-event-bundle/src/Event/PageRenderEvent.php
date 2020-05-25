@@ -31,7 +31,7 @@ class PageRenderEvent extends Event
     public function __construct(
         string $view,
         PageViewModelInterface $pageViewModel,
-        Response $response
+        ?Response $response = null
     ) {
         $this->view = $view;
         $this->pageViewModel = $pageViewModel;
@@ -69,7 +69,7 @@ class PageRenderEvent extends Event
         return $this;
     }
 
-    public function getResponse(): Response
+    public function getResponse(): ?Response
     {
         return $this->response;
     }
