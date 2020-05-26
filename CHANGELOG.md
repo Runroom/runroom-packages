@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.6.4 - 2020-05-26
+## v0.6.5 - 2020-05-26
+
+### RunroomBasicPageBundle
+
+#### Fixed
+
+- [#23] Fix template vars
+
+## [v0.6.4] - 2020-05-26
 
 ### RunroomBasicPageBundle
 
@@ -183,3 +191,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.6.2]: https://github.com/Runroom/runroom-packages/compare/v0.6.1...v0.6.2
 [#22]: https://github.com/Runroom/runroom-packages/pull/22
 [v0.6.3]: https://github.com/Runroom/runroom-packages/compare/v0.6.2...v0.6.3
+[#23]: https://github.com/Runroom/runroom-packages/pull/23
+[v0.6.4]: https://github.com/Runroom/runroom-packages/compare/v0.6.3...v0.6.4
