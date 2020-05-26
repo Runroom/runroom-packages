@@ -12,6 +12,7 @@ parameters:
             symplify/monorepo-builder: ^7.3
 
     directories_to_repositories:
+        packages/basic-page-bundle: 'git@github.com:Runroom/RunroomBasicPageBundle.git'
         packages/ckeditor-sonata-media-bundle: 'git@github.com:Runroom/RunroomCkeditorSonataMediaBundle.git'
         packages/form-handler-bundle: 'git@github.com:Runroom/RunroomFormHandlerBundle.git'
         packages/redirection-bundle: 'git@github.com:Runroom/RunroomRedirectionBundle.git'

@@ -20,6 +20,7 @@
     ],
     "require": {
         "php": "^7.3",
+        "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.7",
         "sonata-project/admin-bundle": "^3.61",
         "symfony/config": "^4.4 || ^5.0",
@@ -32,16 +33,13 @@
         "symfony/validator": "^4.4 || ^5.0",
         "symfony/yaml": "^4.4 || ^5.0"
     },
-    "conflict": {
-        "phpunit/phpunit": "9.1.2"
-    },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.1",
+        "phpunit/phpunit": "^9.1.3",
         "symfony/framework-bundle": "^4.4 || ^5.0",
         "symfony/phpunit-bridge": "^5.0",
+        "symfony/routing": "^4.4 || ^5.0",
         "theofidry/alice-data-fixtures": "^1.1"
     },
     "config": {

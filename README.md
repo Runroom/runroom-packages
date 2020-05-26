@@ -20,6 +20,12 @@ composer require runroom-packages/runroom-packages
 
 However you should not install this package but install the following ones depending on your needs.
 
+## [RunroomBasicPageBundle](https://github.com/Runroom/RunroomBasicPageBundle)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/basic-page-bundle/downloads)](https://packagist.org/packages/runroom-packages/basic-page-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/basic-page-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/basic-page-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/basic-page-bundle/d/daily)](https://packagist.org/packages/runroom-packages/basic-page-bundle)
+
 ## [RunroomCkeditorSonataMediaBundle](https://github.com/Runroom/RunroomCkeditorSonataMediaBundle)
 
 [![Total Downloads](https://poser.pugx.org/runroom-packages/ckeditor-sonata-media-bundle/downloads)](https://packagist.org/packages/runroom-packages/ckeditor-sonata-media-bundle)
