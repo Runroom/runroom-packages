@@ -25,7 +25,7 @@ class BasicPageControllerTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const STATICS = 'pages/static.html.twig';
+    protected const STATICS = '@RunroomBasicPage/show.html.twig';
     protected const SLUG = 'slug';
 
     protected $renderer;

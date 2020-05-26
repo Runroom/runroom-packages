@@ -34,6 +34,6 @@ final class BasicPageController
     {
         $model = $this->service->getBasicPageViewModel($slug);
 
-        return $this->renderer->renderResponse('pages/static.html.twig', $model);
+        return $this->renderer->renderResponse('@RunroomBasicPage/show.html.twig', $model);
     }
 }
