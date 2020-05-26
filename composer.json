@@ -102,6 +102,7 @@
         ],
         "normalize-run": [
             "composer normalize",
+            "composer normalize packages/basic-page-bundle/composer.json",
             "composer normalize packages/ckeditor-sonata-media-bundle/composer.json",
             "composer normalize packages/form-handler-bundle/composer.json",
             "composer normalize packages/redirection-bundle/composer.json",
