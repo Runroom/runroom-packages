@@ -1,0 +1,26 @@
+framework:
+    test: true
+    secret: secret
+
+security:
+    firewalls:
+        main:
+            anonymous: true
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: ':memory:'
+        memory: true
+    orm:
+        auto_mapping: true
+
+twig:
+    exception_controller: null
+    strict_variables: '%kernel.debug%'
+
+runroom_seo:
+    xdefault_locale: es
+    class:
+        media: Runroom\BasicPageBundle\Tests\Fixtures\App\Media
+

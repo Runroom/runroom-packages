@@ -1,0 +1,65 @@
+{
+    "name": "runroom-packages/basic-page-bundle",
+    "type": "symfony-bundle",
+    "description": "Basic pages with only a wysiwyg and a title using Sonata",
+    "keywords": [
+        "basic",
+        "page",
+        "sonata",
+        "wysiwyg"
+    ],
+    "homepage": "https://github.com/runroom/RunroomBasicPageBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Runroom",
+            "email": "software@runroom.com",
+            "homepage": "https://www.runroom.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "a2lix/translation-form-bundle": "^2.4 || ^3.0",
+        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/persistence": "^1.3",
+        "doctrine/orm": "^2.7",
+        "knplabs/doctrine-behaviors": "^2.0",
+        "runroom-packages/render-event-bundle": "^0.7",
+        "runroom-packages/seo-bundle": "^0.7",
+        "sonata-project/admin-bundle": "^3.61",
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.0",
+        "symfony/form": "^4.4 || ^5.0",
+        "symfony/http-foundation": "^4.4.7 || ^5.0.7",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/validator": "^4.4 || ^5.0"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.1.3",
+        "symfony/framework-bundle": "^4.4 || ^5.0",
+        "symfony/phpunit-bridge": "^5.0",
+        "symfony/routing": "^4.4 || ^5.0",
+        "theofidry/alice-data-fixtures": "^1.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.7-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Runroom\\BasicPageBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Runroom\\BasicPageBundle\\Tests\\": "tests/"
+        }
+    }
+}

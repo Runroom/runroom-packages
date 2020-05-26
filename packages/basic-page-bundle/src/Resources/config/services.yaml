@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        public: false
+
+    Runroom\BasicPageBundle\Controller\BasicPageController:
+        arguments:
+            $service: '@Runroom\BasicPageBundle\Service\BasicPageService'
+            $renderer: '@Runroom\RenderEventBundle\Renderer\PageRenderer'
+
+    Runroom\BasicPageBundle\Service\BasicPageService:
+        arguments:
+            $repository: '@Runroom\BasicPageBundle\Repository\BasicPageRepository'
+
+    Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider:
+        tags: [runroom.seo.alternate_links]
+
+    Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider:
+        tags: [runroom.seo.meta_information]
+
+    Runroom\BasicPageBundle\Repository\BasicPageRepository:
+        arguments:
+            $registry: '@doctrine'
+            $requestStack: '@request_stack'
+        tags: [doctrine.repository_service]
