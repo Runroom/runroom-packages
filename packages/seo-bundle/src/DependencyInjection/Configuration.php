@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\DependencyInjection;
 
+use Sonata\MediaBundle\Model\Media;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -31,6 +32,19 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                     ->scalarNode('xdefault_locale')
                         ->cannotBeEmpty()
+                    ->end()
+                    ->arrayNode('class')
+                        ->children()
+                            ->scalarNode('media')
+                                ->cannotBeEmpty()
+                                ->validate()
+                                    ->ifTrue(function ($config) {
+                                        return !is_a($config, Media::class, true);
+                                    })
+                                    ->thenInvalid('%s must extend ' . Media::class)
+                                ->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end();
 
