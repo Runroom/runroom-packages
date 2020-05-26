@@ -7,7 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.6.2 - 2020-05-25
+## v0.6.3 - 2020-05-26
+
+### RunroomBasicPageBundle
+
+#### Added
+
+- [#21] Add basic page bundle
+
+### RunroomRedirectionBundle
+
+#### Changed
+
+- [#19] Update test case
+
+### RunroomSeoBundle
+
+- [#20] Allow configure media entity
+
+## [v0.6.2] - 2020-05-25
 
 ### RunroomRenderEventBundle
 
@@ -151,3 +169,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.6.0]: https://github.com/Runroom/runroom-packages/compare/v0.5.0...v0.6.0
 [#18]: https://github.com/Runroom/runroom-packages/pull/18
 [v0.6.1]: https://github.com/Runroom/runroom-packages/compare/v0.6.0...v0.6.1
+[#21]: https://github.com/Runroom/runroom-packages/pull/21
+[#20]: https://github.com/Runroom/runroom-packages/pull/20
+[#19]: https://github.com/Runroom/runroom-packages/pull/19
+[v0.6.2]: https://github.com/Runroom/runroom-packages/compare/v0.6.1...v0.6.2
