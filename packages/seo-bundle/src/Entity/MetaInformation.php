@@ -46,8 +46,6 @@ class MetaInformation implements TranslatableInterface
 
     /**
      * @Assert\Valid
-     * @ORM\ManyToOne(targetEntity="App\Entity\Media", cascade={"all"})
-     * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $image;
 
