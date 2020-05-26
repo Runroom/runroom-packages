@@ -49,7 +49,7 @@
         "ergebnis/composer-normalize": "^2.2",
         "friendsofphp/php-cs-fixer": "^2.16",
         "gedmo/doctrine-extensions": "^2.4",
-        "jangregor/phpstan-prophecy": "^0.6",
+        "jangregor/phpstan-prophecy": "^0.8",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12",

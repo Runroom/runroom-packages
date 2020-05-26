@@ -23,7 +23,7 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->repository = new RedirectRepository(static::$entityManager);
+        $this->repository = static::$container->get(RedirectRepository::class);
     }
 
     /**

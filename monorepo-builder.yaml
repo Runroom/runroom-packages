@@ -3,7 +3,7 @@ parameters:
         require-dev:
             ergebnis/composer-normalize: ^2.2
             friendsofphp/php-cs-fixer: ^2.16
-            jangregor/phpstan-prophecy: ^0.6
+            jangregor/phpstan-prophecy: ^0.8
             phpstan/phpstan: ^0.12
             phpstan/phpstan-doctrine: ^0.12
             phpstan/phpstan-phpunit: ^0.12
