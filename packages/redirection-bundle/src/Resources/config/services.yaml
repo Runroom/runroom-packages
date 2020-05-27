@@ -9,4 +9,5 @@ services:
 
     Runroom\RedirectionBundle\Repository\RedirectRepository:
         arguments:
-            $entityManager: '@doctrine.orm.entity_manager'
+            $registry: '@doctrine'
+        tags: [doctrine.repository_service]

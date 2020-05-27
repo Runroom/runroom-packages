@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @final
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=RedirectRepository::class)
  * @DoctrineAssert\UniqueEntity("source")
  */
 class Redirect
