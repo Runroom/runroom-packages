@@ -13,7 +13,8 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          coverage: none
+          ini-values: pcov.directory=packages
+          coverage: pcov
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - uses: actions/cache@v1
@@ -21,4 +22,5 @@ jobs:
           path: vendor
           key: ${{ runner.os }}-${{ matrix.php }}-composer
       - run: composer update --prefer-dist --no-progress --no-interaction
-      - run: vendor/bin/phpunit
+      - run: vendor/bin/phpunit --coverage-clover=clover.xml
+      - uses: codecov/codecov-action@v1
