@@ -21,9 +21,10 @@ final class GlobalVariablesCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $container->getDefinition('twig')
-            ->addMethodCall('addGlobal', [
+        if ($container->hasDefinition('twig')) {
+            $container->getDefinition('twig')->addMethodCall('addGlobal', [
                 'xDefaultLocale', $container->getParameter(RunroomSeoExtension::XDEFAULT_LOCALE),
             ]);
+        }
     }
 }
