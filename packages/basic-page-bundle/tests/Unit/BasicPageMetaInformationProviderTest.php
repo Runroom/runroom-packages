@@ -24,7 +24,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const META_ROUTE = 'runroom.static_page.route.static';
+    protected const META_ROUTE = 'runroom.basic_page.route.show';
 
     protected $model;
     protected $basicPage;

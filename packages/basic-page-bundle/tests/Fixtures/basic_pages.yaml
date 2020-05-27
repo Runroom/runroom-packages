@@ -12,21 +12,21 @@ Runroom\BasicPageBundle\Entity\BasicPage:
         publish: false
 
 Runroom\BasicPageBundle\Entity\BasicPageTranslation:
-    static_page_translations_{@basic_pages_publish}:
+    basic_page_translations_{@basic_pages_publish}:
         translatable: '<current()>'
         content: <randomHtml()>
         title: <name()>
         slug: slug
         locale: en
 
-    static_page_translations_{@basic_pages_footer}:
+    basic_page_translations_{@basic_pages_footer}:
         translatable: '<current()>'
         content: <randomHtml()>
         title: <name()>
         slug: another-slug
         locale: en
 
-    static_page_translations_{@basic_pages_unpublish}:
+    basic_page_translations_{@basic_pages_unpublish}:
         translatable: '<current()>'
         content: <randomHtml()>
         title: <name()>

@@ -31,6 +31,6 @@ final class BasicPageAlternateLinksProvider extends AbstractAlternateLinksProvid
 
     protected function getRoutes(): array
     {
-        return ['runroom.static_page.route.static'];
+        return ['runroom.basic_page.route.show'];
     }
 }

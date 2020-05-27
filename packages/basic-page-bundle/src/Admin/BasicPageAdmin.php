@@ -70,7 +70,7 @@ final class BasicPageAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
-            ->with('Static', [
+            ->with('Basic', [
                 'box_class' => 'box box-solid box-primary',
             ])
                 ->add('translations', TranslationsType::class, [

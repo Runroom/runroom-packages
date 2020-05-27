@@ -10,6 +10,7 @@ services:
     Runroom\BasicPageBundle\Service\BasicPageService:
         arguments:
             $repository: '@Runroom\BasicPageBundle\Repository\BasicPageRepository'
+        tags: [kernel.event_subscriber]
 
     Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider:
         tags: [runroom.seo.alternate_links]

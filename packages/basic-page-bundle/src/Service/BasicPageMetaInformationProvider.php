@@ -33,6 +33,6 @@ final class BasicPageMetaInformationProvider extends AbstractMetaInformationProv
 
     protected function getRoutes(): array
     {
-        return ['runroom.static_page.route.static'];
+        return ['runroom.basic_page.route.show'];
     }
 }
