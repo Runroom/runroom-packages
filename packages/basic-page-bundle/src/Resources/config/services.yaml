@@ -3,9 +3,11 @@ services:
         public: false
 
     Runroom\BasicPageBundle\Controller\BasicPageController:
+        public: true
         arguments:
             $service: '@Runroom\BasicPageBundle\Service\BasicPageService'
             $renderer: '@Runroom\RenderEventBundle\Renderer\PageRenderer'
+        tags: [controller.service_arguments]
 
     Runroom\BasicPageBundle\Service\BasicPageService:
         arguments:
