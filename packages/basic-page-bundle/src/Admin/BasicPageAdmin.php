@@ -60,7 +60,7 @@ final class BasicPageAdmin extends AbstractAdmin
             ->add('_action', null, [
                 'actions' => [
                     'open' => [
-                        'template' => 'sonata/action/view_BasicPage.html.twig',
+                        'template' => '@RunroomBasicPage/open.html.twig',
                     ],
                     'delete' => [],
                 ],
