@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 return [
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
+    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['test' => true],
+    Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['test' => true],
     Knp\DoctrineBehaviors\DoctrineBehaviorsBundle::class => ['all' => true],
+    Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['test' => true],
+    Runroom\RenderEventBundle\RunroomRenderEventBundle::class => ['all' => true],
+    Runroom\SeoBundle\RunroomSeoBundle::class => ['all' => true],
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
-    Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['test' => true],
-    Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['test' => true],
-    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['test' => true],
 
     Runroom\BasicPageBundle\RunroomBasicPageBundle::class => ['all' => true],
-    Runroom\SeoBundle\RunroomSeoBundle::class => ['all' => true],
 ];
