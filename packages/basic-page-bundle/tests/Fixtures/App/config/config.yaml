@@ -20,6 +20,7 @@ twig:
     strict_variables: '%kernel.debug%'
 
 runroom_seo:
+    locales: [es]
     xdefault_locale: es
     class:
         media: Runroom\BasicPageBundle\Tests\Fixtures\App\Media
