@@ -1,4 +1,4 @@
-runroom.basic_page.route.static:
+runroom.basic_page.route.show:
     path: /{slug}
     controller: Runroom\BasicPageBundle\Controller\BasicPageController::show
     requirements:
