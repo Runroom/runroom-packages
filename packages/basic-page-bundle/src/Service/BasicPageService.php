@@ -44,7 +44,7 @@ class BasicPageService implements EventSubscriberInterface
     {
         $page = $event->getPageViewModel();
 
-        $page->addContext('static_pages', $this->repository->findBy(['publish' => true]));
+        $page->addContext('basic_pages', $this->repository->findBy(['publish' => true]));
 
         $event->setPageViewModel($page);
     }
