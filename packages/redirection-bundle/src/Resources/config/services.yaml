@@ -1,11 +1,12 @@
 services:
-    Runroom\RedirectionBundle\Listener\RedirectListener:
+    _defaults:
         public: false
+
+    Runroom\RedirectionBundle\Listener\RedirectListener:
         arguments:
             $repository: '@Runroom\RedirectionBundle\Repository\RedirectRepository'
         tags: [kernel.event_subscriber]
 
     Runroom\RedirectionBundle\Repository\RedirectRepository:
-        public: false
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'

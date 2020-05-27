@@ -34,7 +34,7 @@ final class Configuration implements ConfigurationInterface
                             ->ifTrue(function ($config) {
                                 return !is_a($config, PageViewModelInterface::class, true);
                             })
-                            ->thenInvalid('%s must extend ' . PageViewModelInterface::class)
+                            ->thenInvalid('%s must implement ' . PageViewModelInterface::class)
                         ->end()
                     ->end()
                 ->end();
