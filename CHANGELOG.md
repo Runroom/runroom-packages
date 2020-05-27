@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.6.7 - 2020-05-27
+## v0.6.8 - 2020-05-27
+
+### RunroomBasicPageBundle
+
+#### Added
+
+- [#26] Make controll public and add missing tag
+
+## [v0.6.7] - 2020-05-27
 
 ### RunroomBasicPageBundle
 
@@ -213,3 +221,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.6.5]: https://github.com/Runroom/runroom-packages/compare/v0.6.4...v0.6.5
 [#25]: https://github.com/Runroom/runroom-packages/pull/25
 [v0.6.6]: https://github.com/Runroom/runroom-packages/compare/v0.6.5...v0.6.6
+[#26]: https://github.com/Runroom/runroom-packages/pull/26
+[v0.6.7]: https://github.com/Runroom/runroom-packages/compare/v0.6.6...v0.6.7
