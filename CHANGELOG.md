@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.6.8 - 2020-05-27
+## v0.6.9 - 2020-05-27
+
+### RunroomBasicPageBundle
+
+#### Fixed
+
+- [#27] Fix Sonata open button
+
+## [v0.6.8] - 2020-05-27
 
 ### RunroomBasicPageBundle
 
@@ -223,3 +231,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.6.6]: https://github.com/Runroom/runroom-packages/compare/v0.6.5...v0.6.6
 [#26]: https://github.com/Runroom/runroom-packages/pull/26
 [v0.6.7]: https://github.com/Runroom/runroom-packages/compare/v0.6.6...v0.6.7
+[#27]: https://github.com/Runroom/runroom-packages/pull/27
+[v0.6.8]: https://github.com/Runroom/runroom-packages/compare/v0.6.7...v0.6.8
