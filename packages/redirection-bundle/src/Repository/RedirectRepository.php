@@ -13,27 +13,25 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\Persistence\ManagerRegistry;
+use Runroom\RedirectionBundle\Entity\Redirect;
 
 /**
  * @final
  */
-class RedirectRepository
+class RedirectRepository extends ServiceEntityRepository
 {
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->entityManager = $entityManager;
+        parent::__construct($registry, Redirect::class);
     }
 
     public function findRedirect(string $source): ?array
     {
-        $builder = $this->entityManager->createQueryBuilder();
-        $query = $builder
+        $query = $this->createQueryBuilder('redirect')
             ->select('redirect.destination, redirect.httpCode')
-            ->from('RunroomRedirectionBundle:Redirect', 'redirect')
             ->where('redirect.source = :source')
             ->andWhere('redirect.publish = :publish')
             ->setParameter('source', $source)
