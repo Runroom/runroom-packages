@@ -32,6 +32,8 @@ class Redirect
     public const TEMPORAL = 302;
 
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -39,6 +41,8 @@ class Redirect
     private $id;
 
     /**
+     * @var string
+     *
      * @Assert\NotNull
      * @Assert\Length(max=500)
      * @Assert\Regex("/^\/.*$/")
@@ -47,6 +51,8 @@ class Redirect
     private $source;
 
     /**
+     * @var string
+     *
      * @Assert\NotNull
      * @Assert\Length(max=500)
      * @Assert\Regex("/^(\/|https?:\/\/).*$/")
@@ -56,6 +62,8 @@ class Redirect
     private $destination;
 
     /**
+     * @var int
+     *
      * @Assert\Choice(choices = {
      *     Redirect::PERMANENT,
      *     Redirect::TEMPORAL,

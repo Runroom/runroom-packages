@@ -60,7 +60,8 @@
         "symplify/changelog-linker": "^7.3",
         "symplify/monorepo-builder": "^7.3",
         "theofidry/alice-data-fixtures": "^1.1",
-        "vimeo/psalm": "^3.11"
+        "vimeo/psalm": "^3.11",
+        "weirdan/doctrine-psalm-plugin": "^0.11"
     },
     "config": {
         "sort-packages": true
@@ -113,7 +114,7 @@
             "composer normalize packages/translation-bundle/composer.json"
         ],
         "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
-        "phpstan": "phpstan analyse --level=5 --no-progress packages src",
+        "phpstan": "phpstan analyse --no-progress",
         "psalm": "psalm --stats"
     }
 }

@@ -15,6 +15,7 @@ namespace Runroom\TranslationBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
@@ -24,8 +25,13 @@ class TranslationServiceTest extends TestCase
 {
     use ProphecyTrait;
 
+    /** @var ObjectProphecy<TranslationRepository> */
     private $repository;
+
+    /** @var ObjectProphecy<TranslatorInterface> */
     private $translator;
+
+    /** @var TranslationService */
     private $service;
 
     protected function setUp(): void
@@ -42,7 +48,7 @@ class TranslationServiceTest extends TestCase
     /**
      * @test
      */
-    public function itReturnsAStringTranslatedByTheRepository()
+    public function itReturnsAStringTranslatedByTheRepository(): void
     {
         $translation = TranslationFixtures::create();
 
@@ -57,7 +63,7 @@ class TranslationServiceTest extends TestCase
     /**
      * @test
      */
-    public function itReturnsAStringTranslatedByTheTranslatorComponent()
+    public function itReturnsAStringTranslatedByTheTranslatorComponent(): void
     {
         $this->repository->findOneBy(['key' => TranslationFixtures::KEY])->willReturn(null);
         $this->translator->trans(TranslationFixtures::KEY, [], null, 'en')

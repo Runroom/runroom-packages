@@ -16,6 +16,7 @@ namespace Runroom\RenderEventBundle\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
@@ -27,10 +28,17 @@ class PageRendererTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected $twig;
-    protected $eventDispatcher;
-    protected $pageViewModel;
-    protected $service;
+    /** @var ObjectProphecy<Environment> */
+    private $twig;
+
+    /** @var ObjectProphecy<EventDispatcherInterface> */
+    private $eventDispatcher;
+
+    /** @var ObjectProphecy<PageViewModel> */
+    private $pageViewModel;
+
+    /** @var PageRenderer */
+    private $service;
 
     protected function setUp(): void
     {
@@ -48,7 +56,7 @@ class PageRendererTest extends TestCase
     /**
      * @test
      */
-    public function itDispatchEventsOnRenderResponse()
+    public function itDispatchEventsOnRenderResponse(): void
     {
         $response = new Response();
 

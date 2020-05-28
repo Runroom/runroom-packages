@@ -16,6 +16,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
@@ -26,8 +27,11 @@ class MetaInformationBuilderTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected $repository;
-    protected $builder;
+    /** @var ObjectProphecy<MetaInformationRepository> */
+    private $repository;
+
+    /** @var MetaInformationBuilder */
+    private $builder;
 
     protected function setUp(): void
     {
@@ -40,7 +44,7 @@ class MetaInformationBuilderTest extends TestCase
     /**
      * @test
      */
-    public function itBuildsMetaInformationViewModel()
+    public function itBuildsMetaInformationViewModel(): void
     {
         $metas = $this->builder->build(
             new TestMetaInformationProvider(),

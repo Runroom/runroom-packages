@@ -18,7 +18,8 @@ use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 
 class PageViewModelTest extends TestCase
 {
-    protected $viewModel;
+    /** @var PageViewModel */
+    private $viewModel;
 
     protected function setUp(): void
     {
@@ -28,7 +29,7 @@ class PageViewModelTest extends TestCase
     /**
      * @test
      */
-    public function itSetContent()
+    public function itSetContent(): void
     {
         $this->viewModel->setContent('content');
 
@@ -38,7 +39,7 @@ class PageViewModelTest extends TestCase
     /**
      * @test
      */
-    public function itAddsContext()
+    public function itAddsContext(): void
     {
         $this->viewModel->addContext('test', 'content');
 

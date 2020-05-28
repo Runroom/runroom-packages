@@ -24,7 +24,7 @@ class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function itAddsGlobalXDefaultLocaleToTwig()
+    public function itAddsGlobalXDefaultLocaleToTwig(): void
     {
         $this->setDefinition('twig', new Definition());
         $this->setParameter(RunroomSeoExtension::XDEFAULT_LOCALE, 'es');

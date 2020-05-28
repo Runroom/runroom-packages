@@ -21,7 +21,7 @@ class MetaInformationTest extends TestCase
     /**
      * @test
      */
-    public function itGetsProperties()
+    public function itGetsProperties(): void
     {
         $metaInformation = MetaInformationFixture::create();
 

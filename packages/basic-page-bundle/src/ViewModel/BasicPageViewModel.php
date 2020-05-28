@@ -17,7 +17,8 @@ use Runroom\BasicPageBundle\Entity\BasicPage;
 
 final class BasicPageViewModel
 {
-    protected $basicPage;
+    /** @var BasicPage */
+    private $basicPage;
 
     public function setBasicPage(BasicPage $basicPage): void
     {

@@ -14,16 +14,19 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Service;
 
 use Doctrine\ORM\EntityRepository;
+use Runroom\TranslationBundle\Entity\Translation;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @final
- */
+/** @final */
 class TranslationService
 {
+    /** @var EntityRepository<Translation> */
     private $repository;
+
+    /** @var TranslatorInterface */
     private $translator;
 
+    /** @param EntityRepository<Translation> $repository */
     public function __construct(EntityRepository $repository, TranslatorInterface $translator)
     {
         $this->repository = $repository;

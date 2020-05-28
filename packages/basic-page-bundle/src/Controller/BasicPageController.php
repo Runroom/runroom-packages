@@ -19,8 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class BasicPageController
 {
-    protected $service;
-    protected $renderer;
+    /** @var PageRenderer */
+    private $renderer;
+
+    /** @var BasicPageService */
+    private $service;
 
     public function __construct(
         PageRenderer $renderer,

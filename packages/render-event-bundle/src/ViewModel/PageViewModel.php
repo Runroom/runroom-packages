@@ -15,7 +15,10 @@ namespace Runroom\RenderEventBundle\ViewModel;
 
 class PageViewModel implements PageViewModelInterface
 {
+    /** @var mixed */
     private $content;
+
+    /** @var array */
     private $context = [];
 
     public function setContent($content): void

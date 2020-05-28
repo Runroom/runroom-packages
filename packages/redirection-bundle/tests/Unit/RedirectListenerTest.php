@@ -15,6 +15,7 @@ namespace Runroom\RedirectionBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RedirectionBundle\Listener\RedirectListener;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,7 +29,10 @@ final class RedirectListenerTest extends TestCase
 {
     use ProphecyTrait;
 
+    /** @var ObjectProphecy<RedirectRepository> */
     private $repository;
+
+    /** @var RedirectListener */
     private $listener;
 
     protected function setUp(): void

@@ -33,12 +33,23 @@ class FormHandlerTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected $formFactory;
-    protected $eventDispatcher;
-    protected $requestStack;
-    protected $request;
-    protected $session;
-    protected $formHandler;
+    /** @var ObjectProphecy<FormFactoryInterface> */
+    private $formFactory;
+
+    /** @var EventDispatcher */
+    private $eventDispatcher;
+
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var Request */
+    private $request;
+
+    /** @var Session */
+    private $session;
+
+    /** @var FormHandler */
+    private $formHandler;
 
     protected function setUp(): void
     {
@@ -60,7 +71,7 @@ class FormHandlerTest extends TestCase
     /**
      * @test
      */
-    public function itHandlesFormsWithoutBeingSubmitted()
+    public function itHandlesFormsWithoutBeingSubmitted(): void
     {
         $form = $this->configureForm(false);
 
@@ -76,7 +87,7 @@ class FormHandlerTest extends TestCase
     /**
      * @test
      */
-    public function itHandlesSubmittedForms()
+    public function itHandlesSubmittedForms(): void
     {
         $form = $this->configureForm();
 
@@ -92,6 +103,7 @@ class FormHandlerTest extends TestCase
         $this->assertSame(['success'], $this->session->getFlashBag()->get('form_types'));
     }
 
+    /** @return ObjectProphecy<FormInterface> */
     private function configureForm(bool $submitted = true, bool $valid = true): ObjectProphecy
     {
         $form = $this->prophesize(FormInterface::class);

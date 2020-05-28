@@ -22,7 +22,7 @@ class BasicPageTest extends TestCase
     /**
      * @test
      */
-    public function itGetsProperties()
+    public function itGetsProperties(): void
     {
         $BasicPage = BasicPageFixture::create();
 

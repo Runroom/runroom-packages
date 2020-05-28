@@ -18,7 +18,8 @@ use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 
 class DefaultMetaInformationProviderTest extends TestCase
 {
-    protected $provider;
+    /** @var DefaultMetaInformationProvider */
+    private $provider;
 
     protected function setUp(): void
     {
@@ -28,7 +29,7 @@ class DefaultMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itProvidesMetasForAnyRoute()
+    public function itProvidesMetasForAnyRoute(): void
     {
         foreach (['default', 'home'] as $route) {
             $this->assertTrue($this->provider->providesMetas($route));
@@ -38,7 +39,7 @@ class DefaultMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefineAnyAlias()
+    public function itDoesNotDefineAnyAlias(): void
     {
         $this->assertSame('default', $this->provider->getRouteAlias('default'));
     }
@@ -46,7 +47,7 @@ class DefaultMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefinePlaceholders()
+    public function itDoesNotDefinePlaceholders(): void
     {
         $this->assertEmpty($this->provider->getPlaceholders(new \stdClass()));
     }
@@ -54,7 +55,7 @@ class DefaultMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefineEntityMetaInformation()
+    public function itDoesNotDefineEntityMetaInformation(): void
     {
         $this->assertNull($this->provider->getEntityMetaInformation(new \stdClass()));
     }
@@ -62,7 +63,7 @@ class DefaultMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefineEntityMetaImage()
+    public function itDoesNotDefineEntityMetaImage(): void
     {
         $this->assertNull($this->provider->getEntityMetaImage(new \stdClass()));
     }
@@ -70,7 +71,7 @@ class DefaultMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefineAssociatedRoutes()
+    public function itDoesNotDefineAssociatedRoutes(): void
     {
         $method = new \ReflectionMethod($this->provider, 'getRoutes');
         $method->setAccessible(true);

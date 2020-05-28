@@ -18,6 +18,7 @@ use Runroom\RedirectionBundle\Tests\TestCase\DoctrineIntegrationTestBase;
 
 final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
 {
+    /** @var RedirectRepository */
     private $repository;
 
     protected function setUp(): void

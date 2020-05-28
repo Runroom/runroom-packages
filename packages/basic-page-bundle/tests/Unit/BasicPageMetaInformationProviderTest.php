@@ -15,6 +15,7 @@ namespace Runroom\BasicPageBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
 use Runroom\BasicPageBundle\Tests\Fixtures\BasicPageFixture;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
@@ -24,11 +25,16 @@ class BasicPageMetaInformationProviderTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const META_ROUTE = 'runroom.basic_page.route.show';
+    private const META_ROUTE = 'runroom.basic_page.route.show';
 
-    protected $model;
-    protected $basicPage;
-    protected $provider;
+    /** @var BasicPage */
+    private $basicPage;
+
+    /** @var BasicPageMetaInformationProvider */
+    private $provider;
+
+    /** @var BasicPageViewModel */
+    private $model;
 
     protected function setUp(): void
     {
@@ -42,7 +48,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itProvidesMetasForBasicPageRoutes()
+    public function itProvidesMetasForBasicPageRoutes(): void
     {
         $routes = [self::META_ROUTE];
 
@@ -54,7 +60,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itHasPlaceholders()
+    public function itHasPlaceholders(): void
     {
         $expectedPlaceholders = [
             '{title}' => BasicPageFixture::TITLE,
@@ -69,7 +75,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
     /**
      * @test
      */
-    public function itHasAnEntityMetaInformation()
+    public function itHasAnEntityMetaInformation(): void
     {
         $entityMetas = $this->provider->getEntityMetaInformation($this->model);
 

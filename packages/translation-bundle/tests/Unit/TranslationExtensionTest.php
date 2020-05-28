@@ -15,6 +15,7 @@ namespace Runroom\TranslationBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
@@ -23,7 +24,10 @@ class TranslationExtensionTest extends TestCase
 {
     use ProphecyTrait;
 
+    /** @var ObjectProphecy<TranslationService> */
     private $service;
+
+    /** @var TranslationExtension */
     private $extension;
 
     protected function setUp(): void
@@ -36,7 +40,7 @@ class TranslationExtensionTest extends TestCase
     /**
      * @test
      */
-    public function itTranslates()
+    public function itTranslates(): void
     {
         $this->service->translate(TranslationFixtures::KEY, [], null)->willReturn(TranslationFixtures::VALUE);
 
@@ -48,7 +52,7 @@ class TranslationExtensionTest extends TestCase
     /**
      * @test
      */
-    public function itDefinesAFilter()
+    public function itDefinesAFilter(): void
     {
         $filters = $this->extension->getFilters();
 

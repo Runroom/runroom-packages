@@ -23,9 +23,14 @@ class PageRenderEventTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected $pageViewModel;
-    protected $response;
-    protected $pageRenderEvent;
+    /** @var PageViewModel */
+    private $pageViewModel;
+
+    /** @var Response */
+    private $response;
+
+    /** @var PageRenderEvent */
+    private $pageRenderEvent;
 
     protected function setUp(): void
     {
@@ -42,7 +47,7 @@ class PageRenderEventTest extends TestCase
     /**
      * @test
      */
-    public function itSetsPageViewModel()
+    public function itSetsPageViewModel(): void
     {
         $expectedViewModel = new PageViewModel();
 
@@ -56,7 +61,7 @@ class PageRenderEventTest extends TestCase
     /**
      * @test
      */
-    public function itGetsPageViewModel()
+    public function itGetsPageViewModel(): void
     {
         $this->pageViewModel->setContent('model');
 

@@ -19,20 +19,27 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class FormHandler
 {
-    protected $formFactory;
-    protected $eventDispatcher;
-    protected $requestStack;
-    protected $session;
+    /** @var FormFactoryInterface */
+    private $formFactory;
+
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var Session */
+    private $session;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
         RequestStack $requestStack,
-        SessionInterface $session
+        Session $session
     ) {
         $this->formFactory = $formFactory;
         $this->eventDispatcher = $eventDispatcher;

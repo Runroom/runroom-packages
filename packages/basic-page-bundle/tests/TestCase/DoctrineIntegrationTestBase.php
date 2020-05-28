@@ -13,21 +13,36 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Tests\TestCase;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Persistence\ManagerRegistry;
+use Fidry\AliceDataFixtures\LoaderInterface;
 use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Tests\Fixtures\App\Kernel;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class DoctrineIntegrationTestBase extends TestCase
 {
+    /** @var Kernel */
     protected static $kernel;
+
+    /** @var LoaderInterface */
     protected static $loader;
+
+    /** @var ContainerInterface */
     protected static $container;
+
+    /** @var EntityManagerInterface */
     protected static $entityManager;
+
+    /** @var Connection */
     protected static $connection;
+
+    /** @var ParameterBagInterface */
     protected static $parameterBag;
 
     public static function setUpBeforeClass(): void
