@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\CkeditorSonataMediaBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool;
@@ -89,6 +90,7 @@ final class MediaAdminController extends CRUDController
 
         $context = $request->get('context', $this->mediaPool->getDefaultContext());
 
+        /** @var MediaInterface */
         $media = $this->mediaManager->create();
         $media->setBinaryContent($file);
         $media->setContext($context);
