@@ -19,7 +19,7 @@ jobs:
           coverage: none
       - uses: actions/cache@v1
         with:
-          path: vendor
+          path: ~/.composer/cache
           key: ${{ runner.os }}-${{ matrix.php }}-composer
       - run: composer update --prefer-dist --no-progress --no-interaction
       - run: vendor/bin/monorepo-builder split --max-processes 7

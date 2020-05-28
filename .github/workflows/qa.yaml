@@ -1,6 +1,9 @@
 name: qa
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [master]
+  pull_request:
 
 jobs:
   php:
@@ -17,7 +20,7 @@ jobs:
           tools: cs2pr
       - uses: actions/cache@v1
         with:
-          path: vendor
+          path: ~/.composer/cache
           key: ${{ runner.os }}-${{ matrix.php }}-composer
       - run: composer update --prefer-dist --no-progress --no-interaction --no-scripts
       - run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
