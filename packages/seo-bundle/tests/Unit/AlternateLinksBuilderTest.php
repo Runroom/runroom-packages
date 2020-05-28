@@ -92,7 +92,6 @@ class AlternateLinksBuilderTest extends TestCase
 
 class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
-    /** @param string $model */
     public function getParameters($model, string $route): ?array
     {
         return [

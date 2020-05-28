@@ -47,6 +47,7 @@ class PageRenderer
     {
         $this->pageViewModel->setContent($model);
 
+        /** @var PageRenderEvent */
         $event = $this->eventDispatcher->dispatch(
             new PageRenderEvent($view, $this->pageViewModel),
             PageRenderEvent::EVENT_NAME
@@ -60,6 +61,7 @@ class PageRenderer
     {
         $this->pageViewModel->setContent($model);
 
+        /** @var PageRenderEvent */
         $event = $this->eventDispatcher->dispatch(
             new PageRenderEvent($view, $this->pageViewModel, $response ?? new Response()),
             PageRenderEvent::EVENT_NAME
