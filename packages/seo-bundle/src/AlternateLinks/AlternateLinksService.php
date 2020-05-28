@@ -19,11 +19,19 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class AlternateLinksService implements EventSubscriberInterface
 {
-    protected const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
-    protected $requestStack;
-    protected $defaultProvider;
-    protected $providers;
-    protected $builder;
+    private const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
+
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var iterable */
+    private $providers;
+
+    /** @var DefaultAlternateLinksProvider */
+    private $defaultProvider;
+
+    /** @var AlternateLinksBuilder */
+    private $builder;
 
     public function __construct(
         RequestStack $requestStack,

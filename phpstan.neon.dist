@@ -7,10 +7,14 @@ includes:
     - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
+    level: 6
+    paths:
+        - src
+        - packages
     ignoreErrors:
         - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition(.|\n)+#'
         - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'
-    inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false
     excludes_analyse:
         - */tests/Fixtures/App/var/*
         - */vendor/*

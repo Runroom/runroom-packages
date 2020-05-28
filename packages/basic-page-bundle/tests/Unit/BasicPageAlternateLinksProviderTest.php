@@ -23,10 +23,13 @@ class BasicPageAlternateLinksProviderTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const META_ROUTE = 'runroom.basic_page.route.show';
+    private const META_ROUTE = 'runroom.basic_page.route.show';
 
-    protected $locales;
-    protected $provider;
+    /** @var array */
+    private $locales;
+
+    /** @var BasicPageAlternateLinksProvider */
+    private $provider;
 
     protected function setUp(): void
     {
@@ -38,7 +41,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     /**
      * @test
      */
-    public function itReturnsRouteParameters()
+    public function itReturnsRouteParameters(): void
     {
         $basicPage = BasicPageFixture::createWithSlugs($this->locales);
 
@@ -55,7 +58,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     /**
      * @test
      */
-    public function itProvidesAlternateLinks()
+    public function itProvidesAlternateLinks(): void
     {
         $routes = [self::META_ROUTE];
 

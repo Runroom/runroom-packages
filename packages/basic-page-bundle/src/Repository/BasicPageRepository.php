@@ -19,12 +19,11 @@ use Doctrine\Persistence\ManagerRegistry;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @final
- */
+/** @final */
 class BasicPageRepository extends ServiceEntityRepository
 {
-    protected $requestStack;
+    /** @var RequestStack */
+    private $requestStack;
 
     public function __construct(ManagerRegistry $registry, RequestStack $requestStack)
     {

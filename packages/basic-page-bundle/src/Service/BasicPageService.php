@@ -18,12 +18,11 @@ use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
- * @final
- */
+/** @final */
 class BasicPageService implements EventSubscriberInterface
 {
-    protected $repository;
+    /** @var BasicPageRepository */
+    private $repository;
 
     public function __construct(BasicPageRepository $repository)
     {

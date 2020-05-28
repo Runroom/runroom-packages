@@ -18,19 +18,20 @@ use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 
-/**
- * @final
- */
+/** @final */
 class MetaInformationBuilder
 {
-    protected const DEFAULT_ROUTE = 'default';
-    protected $repository;
+    private const DEFAULT_ROUTE = 'default';
+
+    /** @var MetaInformationRepository */
+    private $repository;
 
     public function __construct(MetaInformationRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /** @param mixed $model */
     public function build(MetaInformationProviderInterface $provider, string $route, $model): MetaInformationViewModel
     {
         $routeMetas = $this->getMetasForRoute($provider, $route);

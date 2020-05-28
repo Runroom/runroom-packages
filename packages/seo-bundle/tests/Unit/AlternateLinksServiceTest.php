@@ -15,6 +15,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
@@ -29,13 +30,22 @@ class AlternateLinksServiceTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const ROUTE = 'route';
+    private const ROUTE = 'route';
 
-    protected $requestStack;
-    protected $provider;
-    protected $defaultProvider;
-    protected $builder;
-    protected $service;
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var ObjectProphecy<AbstractAlternateLinksProvider> */
+    private $provider;
+
+    /** @var DefaultAlternateLinksProvider */
+    private $defaultProvider;
+
+    /** @var ObjectProphecy<AlternateLinksBuilder> */
+    private $builder;
+
+    /** @var AlternateLinksService */
+    private $service;
 
     protected function setUp(): void
     {
@@ -55,7 +65,7 @@ class AlternateLinksServiceTest extends TestCase
     /**
      * @test
      */
-    public function itFindsAlternateLinksForRoute()
+    public function itFindsAlternateLinksForRoute(): void
     {
         $this->configureCurrentRequest();
 
@@ -71,7 +81,7 @@ class AlternateLinksServiceTest extends TestCase
     /**
      * @test
      */
-    public function itFindsAlternateLinksForRouteWithTheDefaultProvider()
+    public function itFindsAlternateLinksForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
 
@@ -87,7 +97,7 @@ class AlternateLinksServiceTest extends TestCase
     /**
      * @test
      */
-    public function itHasSubscribedEvents()
+    public function itHasSubscribedEvents(): void
     {
         $events = $this->service->getSubscribedEvents();
         $this->assertNotNull($events);

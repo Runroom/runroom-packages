@@ -32,35 +32,45 @@ class BasicPageTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="string", length=5)
+     */
+    protected $locale;
+
+    /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     /**
+     * @var string
+     *
      * @Assert\NotNull
      * @Assert\Length(max=255)
      * @ORM\Column(type="string")
      */
-    protected $title;
+    private $title;
 
     /**
+     * @var string
+     *
      * @Gedmo\Slug(fields={"title"}, unique_base="locale")
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $slug;
+    private $slug;
 
     /**
+     * @var string
+     *
      * @Assert\NotNull
      * @ORM\Column(type="text")
      */
-    protected $content;
-
-    /**
-     * @ORM\Column(type="string", length=5)
-     */
-    protected $locale;
+    private $content;
 
     public function setTitle(?string $title): self
     {

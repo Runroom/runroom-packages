@@ -26,7 +26,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     /**
      * @test
      */
-    public function itExposesConfiguration()
+    public function itExposesConfiguration(): void
     {
         $this->assertProcessedConfigurationEquals([
             'page_view_model' => PageViewModel::class,
@@ -38,7 +38,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     /**
      * @test
      */
-    public function itFailsOnInvalidConfiguration()
+    public function itFailsOnInvalidConfiguration(): void
     {
         $this->expectException(InvalidConfigurationException::class);
 

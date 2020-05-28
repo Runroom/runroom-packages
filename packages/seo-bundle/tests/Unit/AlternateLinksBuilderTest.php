@@ -16,6 +16,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -25,10 +26,17 @@ class AlternateLinksBuilderTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected $urlGenerator;
-    protected $locales;
-    protected $provider;
-    protected $builder;
+    /** @var ObjectProphecy<UrlGeneratorInterface> */
+    private $urlGenerator;
+
+    /** @var array */
+    private $locales;
+
+    /** @var DummyAlternateLinksProvider */
+    private $provider;
+
+    /** @var AlternateLinksBuilder */
+    private $builder;
 
     protected function setUp(): void
     {
@@ -45,7 +53,7 @@ class AlternateLinksBuilderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotProvideAnyAlternateLinks()
+    public function itDoesNotProvideAnyAlternateLinks(): void
     {
         $this->assertFalse($this->provider->providesAlternateLinks('default'));
     }
@@ -53,7 +61,7 @@ class AlternateLinksBuilderTest extends TestCase
     /**
      * @test
      */
-    public function itFindsAlternateLinksForRoute()
+    public function itFindsAlternateLinksForRoute(): void
     {
         $route = 'dummy_route';
 
@@ -74,7 +82,7 @@ class AlternateLinksBuilderTest extends TestCase
     /**
      * @test
      */
-    public function itReturnsEmptyAlternateLinksIfRouteDoesNotExist()
+    public function itReturnsEmptyAlternateLinksIfRouteDoesNotExist(): void
     {
         $this->urlGenerator->generate(Argument::cetera())->willThrow(RouteNotFoundException::class);
 
@@ -84,6 +92,7 @@ class AlternateLinksBuilderTest extends TestCase
 
 class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
+    /** @param string $model */
     public function getParameters($model, string $route): ?array
     {
         return [

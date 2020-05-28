@@ -15,6 +15,7 @@ namespace Runroom\BasicPageBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageService;
@@ -24,10 +25,13 @@ class BasicPageServiceTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const STATIC_SLUG = 'slug';
+    private const STATIC_SLUG = 'slug';
 
-    protected $repository;
-    protected $service;
+    /** @var ObjectProphecy<BasicPageRepository> */
+    private $repository;
+
+    /** @var BasicPageService */
+    private $service;
 
     protected function setUp(): void
     {
@@ -39,7 +43,7 @@ class BasicPageServiceTest extends TestCase
     /**
      * @test
      */
-    public function itGetsStaticViewModel()
+    public function itGetsStaticViewModel(): void
     {
         $BasicPage = new BasicPage();
 

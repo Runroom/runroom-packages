@@ -27,6 +27,8 @@ class TranslationTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -34,6 +36,8 @@ class TranslationTranslation implements TranslationInterface
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $value;

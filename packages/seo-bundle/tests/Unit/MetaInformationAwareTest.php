@@ -25,7 +25,7 @@ class MetaInformationAwareTest extends TestCase
     /**
      * @test
      */
-    public function itSetsAndGetsMetaInformation()
+    public function itSetsAndGetsMetaInformation(): void
     {
         $entityMetaInformation = $this->prophesize(EntityMetaInformation::class);
         $metaInformationAware = new MetaInformationAwareEntity();

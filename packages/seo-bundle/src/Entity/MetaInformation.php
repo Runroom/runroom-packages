@@ -30,26 +30,34 @@ class MetaInformation implements TranslatableInterface
     use ORMBehaviors\Translatable\TranslatableTrait;
 
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", unique=true)
      */
-    protected $route;
+    private $route;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string")
      */
-    protected $routeName;
+    private $routeName;
 
     /**
+     * @var MediaInterface
+     *
      * @Assert\Valid
      */
-    protected $image;
+    private $image;
 
     public function __toString(): string
     {

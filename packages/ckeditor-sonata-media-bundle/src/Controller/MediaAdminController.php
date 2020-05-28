@@ -24,8 +24,13 @@ use Twig\Environment;
 
 final class MediaAdminController extends CRUDController
 {
+    /** @var MediaManagerInterface */
     private $mediaManager;
+
+    /** @var Pool */
     private $mediaPool;
+
+    /** @var Environment */
     private $twig;
 
     public function __construct(

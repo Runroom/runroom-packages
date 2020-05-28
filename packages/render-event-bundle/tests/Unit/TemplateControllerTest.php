@@ -15,6 +15,7 @@ namespace Runroom\RenderEventBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Controller\TemplateController;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,8 +24,11 @@ class TemplateControllerTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected $renderer;
-    protected $controller;
+    /** @var ObjectProphecy<PageRenderer> */
+    private $renderer;
+
+    /** @var TemplateController */
+    private $controller;
 
     protected function setUp(): void
     {
@@ -36,7 +40,7 @@ class TemplateControllerTest extends TestCase
     /**
      * @test
      */
-    public function itRendersTemplate()
+    public function itRendersTemplate(): void
     {
         $controller = $this->controller;
         $expectedResponse = new Response();

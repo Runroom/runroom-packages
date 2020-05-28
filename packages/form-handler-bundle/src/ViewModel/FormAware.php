@@ -18,8 +18,11 @@ use Symfony\Component\Form\FormView;
 
 trait FormAware
 {
-    protected $form;
-    protected $formView;
+    /** @var FormInterface */
+    private $form;
+
+    /** @var FormView */
+    private $formView;
 
     public function setForm(FormInterface $form): void
     {

@@ -18,6 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
 trait Publishable
 {
     /**
+     * @var bool
+     *
      * @ORM\Column(type="boolean")
      */
     private $publish;

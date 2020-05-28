@@ -16,13 +16,14 @@ namespace Runroom\SeoBundle\AlternateLinks;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @final
- */
+/** @final */
 class AlternateLinksBuilder
 {
-    protected $urlGenerator;
-    protected $locales;
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
+
+    /** @var array */
+    private $locales;
 
     public function __construct(UrlGeneratorInterface $urlGenerator, array $locales)
     {
@@ -30,6 +31,7 @@ class AlternateLinksBuilder
         $this->locales = $locales;
     }
 
+    /** @param mixed $model */
     public function build(
         AlternateLinksProviderInterface $provider,
         $model,
@@ -52,6 +54,7 @@ class AlternateLinksBuilder
         return $alternateLinks;
     }
 
+    /** @param mixed $model */
     protected function getAvailableLocales(AlternateLinksProviderInterface $provider, $model): array
     {
         return array_intersect(

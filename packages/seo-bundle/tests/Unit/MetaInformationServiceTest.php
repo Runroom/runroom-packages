@@ -16,6 +16,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
@@ -31,15 +32,28 @@ class MetaInformationServiceTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const ROUTE = 'route';
+    private const ROUTE = 'route';
 
-    protected $requestStack;
-    protected $provider;
-    protected $defaultProvider;
-    protected $builder;
-    protected $model;
-    protected $service;
-    protected $expectedMetas;
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var ObjectProphecy<MetaInformationProviderInterface> */
+    private $provider;
+
+    /** @var DefaultMetaInformationProvider */
+    private $defaultProvider;
+
+    /** @var ObjectProphecy<MetaInformationBuilder> */
+    private $builder;
+
+    /** @var MetaInformationService */
+    private $service;
+
+    /** @var \stdClass */
+    private $model;
+
+    /** @var MetaInformationViewModel */
+    private $expectedMetas;
 
     protected function setUp(): void
     {
@@ -64,7 +78,7 @@ class MetaInformationServiceTest extends TestCase
     /**
      * @test
      */
-    public function itFindsMetasForRoute()
+    public function itFindsMetasForRoute(): void
     {
         $this->configureCurrentRequest();
         $this->provider->providesMetas(self::ROUTE)->willReturn(true);
@@ -80,7 +94,7 @@ class MetaInformationServiceTest extends TestCase
     /**
      * @test
      */
-    public function itFindsMetasForRouteWithTheDefaultProvider()
+    public function itFindsMetasForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
         $this->builder->build($this->defaultProvider, self::ROUTE, $this->model)
@@ -95,7 +109,7 @@ class MetaInformationServiceTest extends TestCase
     /**
      * @test
      */
-    public function itHasSubscribedEvents()
+    public function itHasSubscribedEvents(): void
     {
         $events = $this->service->getSubscribedEvents();
         $this->assertNotNull($events);

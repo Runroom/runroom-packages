@@ -15,7 +15,9 @@ namespace Runroom\CkeditorSonataMediaBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Argument\Token\TypeToken;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool as AdminPool;
@@ -40,12 +42,25 @@ class MediaAdminControllerTest extends TestCase
 {
     use ProphecyTrait;
 
+    /** @var ObjectProphecy<ContainerInterface> */
     private $container;
+
+    /** @var ObjectProphecy<BaseMediaAdmin> */
     private $admin;
+
+    /** @var Request */
     private $request;
+
+    /** @var ObjectProphecy<MediaManagerInterface> */
     private $mediaManager;
+
+    /** @var ObjectProphecy<MediaPool> */
     private $mediaPool;
+
+    /** @var ObjectProphecy<Environment> */
     private $twig;
+
+    /** @var MediaAdminController */
     private $controller;
 
     protected function setUp(): void
@@ -151,7 +166,7 @@ class MediaAdminControllerTest extends TestCase
         $this->container->get('request_stack')->willReturn($requestStack);
     }
 
-    private function configureSetFormTheme($formView, array $formTheme): void
+    private function configureSetFormTheme(FormView $formView, array $formTheme): void
     {
         $twigRenderer = $this->prophesize(FormRenderer::class);
 
@@ -160,7 +175,8 @@ class MediaAdminControllerTest extends TestCase
         $twigRenderer->setTheme($formView, $formTheme)->shouldBeCalled();
     }
 
-    private function configureRender($template, $data, $rendered): void
+    /** @param TypeToken $data */
+    private function configureRender(string $template, $data, string $rendered): void
     {
         $this->admin->getPersistentParameters()->willReturn(['param' => 'param']);
         $this->twig->render($template, $data)->willReturn($rendered);

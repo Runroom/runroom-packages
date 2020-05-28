@@ -18,9 +18,7 @@ use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Runroom\RedirectionBundle\Entity\Redirect;
 
-/**
- * @final
- */
+/** @final */
 class RedirectRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

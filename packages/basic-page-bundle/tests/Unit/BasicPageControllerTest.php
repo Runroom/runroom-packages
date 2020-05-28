@@ -15,6 +15,7 @@ namespace Runroom\BasicPageBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
@@ -25,12 +26,17 @@ class BasicPageControllerTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const STATICS = '@RunroomBasicPage/show.html.twig';
-    protected const SLUG = 'slug';
+    private const STATICS = '@RunroomBasicPage/show.html.twig';
+    private const SLUG = 'slug';
 
-    protected $renderer;
-    protected $service;
-    protected $controller;
+    /** @var ObjectProphecy<PageRenderer> */
+    private $renderer;
+
+    /** @var ObjectProphecy<BasicPageService> */
+    private $service;
+
+    /** @var BasicPageController */
+    private $controller;
 
     protected function setUp(): void
     {
@@ -46,7 +52,7 @@ class BasicPageControllerTest extends TestCase
     /**
      * @test
      */
-    public function itRendersStatic()
+    public function itRendersStatic(): void
     {
         $model = new BasicPageViewModel();
         $expectedResponse = $this->prophesize(Response::class);

@@ -25,7 +25,7 @@ class BasicPageFixture
     public const SLUG = 'slug';
     public const PUBLISH = true;
 
-    public static function create()
+    public static function create(): BasicPage
     {
         $basicPage = new BasicPage();
 
@@ -40,14 +40,14 @@ class BasicPageFixture
         return $basicPage;
     }
 
-    public static function createWithSlugs(array $locales)
+    public static function createWithSlugs(array $locales): BasicPage
     {
-        $BasicPage = new BasicPage();
+        $basicPage = new BasicPage();
 
         foreach ($locales as $locale) {
-            $BasicPage->translate($locale)->setSlug('slug_' . $locale);
+            $basicPage->translate($locale)->setSlug('slug_' . $locale);
         }
 
-        return $BasicPage;
+        return $basicPage;
     }
 }

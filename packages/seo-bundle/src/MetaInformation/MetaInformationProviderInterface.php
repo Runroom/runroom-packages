@@ -22,9 +22,12 @@ interface MetaInformationProviderInterface
 
     public function getRouteAlias(string $route): string;
 
+    /** @param mixed $model */
     public function getPlaceholders($model): array;
 
+    /** @param mixed $model */
     public function getEntityMetaInformation($model): ?EntityMetaInformation;
 
+    /** @param mixed $model */
     public function getEntityMetaImage($model): ?MediaInterface;
 }

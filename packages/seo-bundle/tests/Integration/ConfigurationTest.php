@@ -26,7 +26,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     /**
      * @test
      */
-    public function itExposesConfiguration()
+    public function itExposesConfiguration(): void
     {
         $this->assertProcessedConfigurationEquals([
             'class' => ['media' => Media::class],
@@ -40,7 +40,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     /**
      * @test
      */
-    public function itFailsOnInvalidConfiguration()
+    public function itFailsOnInvalidConfiguration(): void
     {
         $this->expectException(InvalidConfigurationException::class);
 

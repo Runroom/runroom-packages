@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class RedirectListener implements EventSubscriberInterface
 {
+    /** @var RedirectRepository */
     private $repository;
 
     public function __construct(RedirectRepository $repository)

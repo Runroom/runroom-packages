@@ -20,9 +20,10 @@ use Runroom\BasicPageBundle\Tests\TestCase\DoctrineIntegrationTestBase;
 
 class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
 {
-    protected const STATIC_PAGE_ID = 1;
+    private const STATIC_PAGE_ID = 1;
 
-    protected $repository;
+    /** @var BasicPageRepository */
+    private $repository;
 
     protected function setUp(): void
     {
@@ -34,7 +35,7 @@ class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
     /**
      * @test
      */
-    public function itFindsBasicPageGivenItsSlug()
+    public function itFindsBasicPageGivenItsSlug(): void
     {
         $BasicPage = $this->repository->findBySlug('slug');
 
@@ -45,7 +46,7 @@ class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
     /**
      * @test
      */
-    public function itDoesNotFindUnPublishedStatigPage()
+    public function itDoesNotFindUnPublishedStatigPage(): void
     {
         $this->expectException(NoResultException::class);
 

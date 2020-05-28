@@ -18,7 +18,8 @@ use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
 
 class DefaultAlternateLinksProviderTest extends TestCase
 {
-    protected $provider;
+    /** @var DefaultAlternateLinksProvider */
+    private $provider;
 
     protected function setUp(): void
     {
@@ -28,7 +29,7 @@ class DefaultAlternateLinksProviderTest extends TestCase
     /**
      * @test
      */
-    public function itProvidesMetasForAnyRoute()
+    public function itProvidesMetasForAnyRoute(): void
     {
         foreach (['default', 'home'] as $route) {
             $this->assertTrue($this->provider->providesAlternateLinks($route));
@@ -38,7 +39,7 @@ class DefaultAlternateLinksProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefineRouteParameters()
+    public function itDoesNotDefineRouteParameters(): void
     {
         $this->assertNull($this->provider->getParameters(new \stdClass(), 'es'));
     }
@@ -46,7 +47,7 @@ class DefaultAlternateLinksProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefineAvailableLocales()
+    public function itDoesNotDefineAvailableLocales(): void
     {
         $this->assertNull($this->provider->getAvailableLocales(new \stdClass()));
     }
@@ -54,7 +55,7 @@ class DefaultAlternateLinksProviderTest extends TestCase
     /**
      * @test
      */
-    public function itDoesNotDefineAssociatedRoutes()
+    public function itDoesNotDefineAssociatedRoutes(): void
     {
         $method = new \ReflectionMethod($this->provider, 'getRoutes');
         $method->setAccessible(true);
