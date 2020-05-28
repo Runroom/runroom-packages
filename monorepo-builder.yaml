@@ -11,6 +11,7 @@ parameters:
             symplify/changelog-linker: ^7.3
             symplify/monorepo-builder: ^7.3
             vimeo/psalm: ^3.11
+            weirdan/doctrine-psalm-plugin: ^0.11
 
     directories_to_repositories:
         packages/basic-page-bundle: 'git@github.com:Runroom/RunroomBasicPageBundle.git'
