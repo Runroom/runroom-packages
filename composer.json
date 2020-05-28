@@ -5,10 +5,10 @@
     "require": {
         "php": "^7.3",
         "a2lix/translation-form-bundle": "^2.4 || ^3.0",
-        "doctrine/common": "^2.12",
+        "doctrine/common": "^2.12 || ^3.0",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.7",
-        "doctrine/persistence": "^1.3",
+        "doctrine/persistence": "^1.3 || ^2.0",
         "friendsofsymfony/ckeditor-bundle": "^1.2 || ^2.2",
         "knplabs/doctrine-behaviors": "^2.0",
         "sonata-project/admin-bundle": "^3.61",
@@ -59,7 +59,8 @@
         "symfony/phpunit-bridge": "^5.0",
         "symplify/changelog-linker": "^7.3",
         "symplify/monorepo-builder": "^7.3",
-        "theofidry/alice-data-fixtures": "^1.1"
+        "theofidry/alice-data-fixtures": "^1.1",
+        "vimeo/psalm": "^3.11"
     },
     "config": {
         "sort-packages": true
@@ -112,6 +113,7 @@
             "composer normalize packages/translation-bundle/composer.json"
         ],
         "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
-        "phpstan": "phpstan analyse --level=5 --no-progress packages src"
+        "phpstan": "phpstan analyse --level=5 --no-progress packages src",
+        "psalm": "psalm --stats"
     }
 }
