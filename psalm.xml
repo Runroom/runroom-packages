@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="7"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <directory name="packages" />
+        <ignoreFiles>
+            <directory name="packages/basic-page-bundle/tests" />
+            <directory name="packages/ckeditor-sonata-media-bundle/tests" />
+            <directory name="packages/form-handler-bundle/tests" />
+            <directory name="packages/redirection-bundle/tests" />
+            <directory name="packages/render-event-bundle/tests" />
+            <directory name="packages/seo-bundle/tests" />
+            <directory name="packages/sortable-behavior-bundle/tests" />
+            <directory name="packages/translation-bundle/tests" />
+
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+</psalm>
