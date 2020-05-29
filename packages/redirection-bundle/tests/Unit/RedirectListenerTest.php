@@ -20,7 +20,6 @@ use Runroom\RedirectionBundle\Listener\RedirectListener;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -85,7 +84,7 @@ final class RedirectListenerTest extends TestCase
 
         $this->listener->onKernelRequest($event);
 
-        /** @var Response */
+        /** @var RedirectResponse */
         $response = $event->getResponse();
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
@@ -97,10 +96,6 @@ final class RedirectListenerTest extends TestCase
     {
         $kernel = $this->prophesize(Kernel::class);
 
-        return new RequestEvent(
-            $kernel->reveal(),
-            new Request(),
-            $requestType
-        );
+        return new RequestEvent($kernel->reveal(), new Request(), $requestType);
     }
 }

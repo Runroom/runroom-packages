@@ -48,6 +48,8 @@ class BasicPageFixture
             $basicPage->translate($locale)->setSlug('slug_' . $locale);
         }
 
+        $basicPage->mergeNewTranslations();
+
         return $basicPage;
     }
 }

@@ -26,25 +26,30 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     private const META_ROUTE = 'runroom.basic_page.route.show';
 
     /** @var array */
-    private $locales;
+    private $locales = ['es', 'en'];
 
     /** @var BasicPageAlternateLinksProvider */
     private $provider;
 
     protected function setUp(): void
     {
-        $this->locales = ['es', 'en'];
-
         $this->provider = new BasicPageAlternateLinksProvider();
+    }
+
+    /** @test */
+    public function itReturnsAvailableLocales(): void
+    {
+        $model = new BasicPageViewModel();
+        $model->setBasicPage(BasicPageFixture::createWithSlugs($this->locales));
+
+        $this->assertSame(['es', 'en'], $this->provider->getAvailableLocales($model));
     }
 
     /** @test */
     public function itReturnsRouteParameters(): void
     {
-        $basicPage = BasicPageFixture::createWithSlugs($this->locales);
-
         $model = new BasicPageViewModel();
-        $model->setBasicPage($basicPage);
+        $model->setBasicPage(BasicPageFixture::createWithSlugs($this->locales));
 
         foreach ($this->locales as $locale) {
             $routeParameters = $this->provider->getParameters($model, $locale);
@@ -56,9 +61,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     /** @test */
     public function itProvidesAlternateLinks(): void
     {
-        $routes = [self::META_ROUTE];
-
-        foreach ($routes as $route) {
+        foreach ([self::META_ROUTE] as $route) {
             $this->assertTrue($this->provider->providesAlternateLinks($route));
         }
     }

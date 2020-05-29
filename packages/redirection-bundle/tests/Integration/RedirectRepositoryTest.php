@@ -28,6 +28,18 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
     }
 
     /** @test */
+    public function itReturnsRedirect(): void
+    {
+        $redirect = $this->repository->findOneBy(['source' => '/redirect']);
+
+        $this->assertSame('/redirect', $redirect->__toString());
+        $this->assertSame('/redirect', $redirect->getSource());
+        $this->assertSame('/target', $redirect->getDestination());
+        $this->assertSame(301, $redirect->getHttpCode());
+        $this->assertTrue($redirect->getPublish());
+    }
+
+    /** @test */
     public function itReturnsNullIfItDoesNotFindARedirect(): void
     {
         $redirect = $this->repository->findRedirect('/it-is-not-there');
