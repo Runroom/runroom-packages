@@ -45,9 +45,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
         $this->model->setBasicPage($this->basicPage);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itProvidesMetasForBasicPageRoutes(): void
     {
         $routes = [self::META_ROUTE];
@@ -57,9 +55,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itHasPlaceholders(): void
     {
         $expectedPlaceholders = [
@@ -72,9 +68,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
         $this->assertSame($expectedPlaceholders, $placeholders);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itHasAnEntityMetaInformation(): void
     {
         $entityMetas = $this->provider->getEntityMetaInformation($this->model);

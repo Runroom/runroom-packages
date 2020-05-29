@@ -53,9 +53,7 @@ class PageRendererTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDispatchEventsOnRenderResponse(): void
     {
         $response = new Response();

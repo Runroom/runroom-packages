@@ -49,9 +49,7 @@ class BasicPageControllerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itRendersStatic(): void
     {
         $model = new BasicPageViewModel();

@@ -62,9 +62,7 @@ class AlternateLinksServiceTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itFindsAlternateLinksForRoute(): void
     {
         $this->configureCurrentRequest();
@@ -78,9 +76,7 @@ class AlternateLinksServiceTest extends TestCase
         $this->assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itFindsAlternateLinksForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
@@ -94,9 +90,7 @@ class AlternateLinksServiceTest extends TestCase
         $this->assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itHasSubscribedEvents(): void
     {
         $events = $this->service->getSubscribedEvents();

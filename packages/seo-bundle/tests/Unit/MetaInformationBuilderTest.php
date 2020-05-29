@@ -41,9 +41,7 @@ class MetaInformationBuilderTest extends TestCase
         $this->builder = new MetaInformationBuilder($this->repository->reveal());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itBuildsMetaInformationViewModel(): void
     {
         $metas = $this->builder->build(

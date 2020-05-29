@@ -38,9 +38,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         $this->provider = new BasicPageAlternateLinksProvider();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itReturnsRouteParameters(): void
     {
         $basicPage = BasicPageFixture::createWithSlugs($this->locales);
@@ -55,9 +53,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itProvidesAlternateLinks(): void
     {
         $routes = [self::META_ROUTE];

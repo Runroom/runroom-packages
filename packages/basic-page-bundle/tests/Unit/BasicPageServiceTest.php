@@ -20,12 +20,14 @@ use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
+use Runroom\RenderEventBundle\Event\PageRenderEvent;
+use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 
 class BasicPageServiceTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const STATIC_SLUG = 'slug';
+    private const SLUG = 'slug';
 
     /** @var ObjectProphecy<BasicPageRepository> */
     private $repository;
@@ -40,18 +42,36 @@ class BasicPageServiceTest extends TestCase
         $this->service = new BasicPageService($this->repository->reveal());
     }
 
-    /**
-     * @test
-     */
-    public function itGetsStaticViewModel(): void
+    /** @test */
+    public function itGetsBasicViewModel(): void
     {
-        $BasicPage = new BasicPage();
+        $basicPage = new BasicPage();
 
-        $this->repository->findBySlug(self::STATIC_SLUG)->willReturn($BasicPage);
+        $this->repository->findBySlug(self::SLUG)->willReturn($basicPage);
 
-        $model = $this->service->getBasicPageViewModel(self::STATIC_SLUG);
+        $model = $this->service->getBasicPageViewModel(self::SLUG);
 
         $this->assertInstanceOf(BasicPageViewModel::class, $model);
-        $this->assertSame($BasicPage, $model->getBasicPage());
+        $this->assertSame($basicPage, $model->getBasicPage());
+    }
+
+    /** @test */
+    public function itAddsBasicPagesToPageViewModel(): void
+    {
+        $event = new PageRenderEvent('view', new PageViewModel());
+
+        $this->repository->findBy(['publish' => true])->willReturn([]);
+
+        $this->service->onPageRender($event);
+
+        $this->assertSame([], $event->getPageViewModel()->getContext('basic_pages'));
+    }
+
+    /** @test */
+    public function itHasSubscribedEvents(): void
+    {
+        $events = $this->service->getSubscribedEvents();
+
+        $this->assertCount(1, $events);
     }
 }

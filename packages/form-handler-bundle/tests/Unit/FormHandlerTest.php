@@ -68,9 +68,7 @@ class FormHandlerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itHandlesFormsWithoutBeingSubmitted(): void
     {
         $form = $this->configureForm(false);
@@ -84,9 +82,7 @@ class FormHandlerTest extends TestCase
         $this->assertInstanceOf(BasicFormViewModel::class, $model);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itHandlesSubmittedForms(): void
     {
         $form = $this->configureForm();

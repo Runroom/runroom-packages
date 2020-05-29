@@ -19,9 +19,7 @@ use Runroom\SeoBundle\Entity\EntityMetaInformation;
 
 class BasicPageTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function itGetsProperties(): void
     {
         $BasicPage = BasicPageFixture::create();

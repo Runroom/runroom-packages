@@ -50,17 +50,13 @@ class AlternateLinksBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotProvideAnyAlternateLinks(): void
     {
         $this->assertFalse($this->provider->providesAlternateLinks('default'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itFindsAlternateLinksForRoute(): void
     {
         $route = 'dummy_route';
@@ -79,9 +75,7 @@ class AlternateLinksBuilderTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itReturnsEmptyAlternateLinksIfRouteDoesNotExist(): void
     {
         $this->urlGenerator->generate(Argument::cetera())->willThrow(RouteNotFoundException::class);

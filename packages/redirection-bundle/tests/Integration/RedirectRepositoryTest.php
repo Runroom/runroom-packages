@@ -27,9 +27,7 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
         $this->repository = static::$container->get(RedirectRepository::class);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itReturnsNullIfItDoesNotFindARedirect(): void
     {
         $redirect = $this->repository->findRedirect('/it-is-not-there');
@@ -37,9 +35,7 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
         $this->assertNull($redirect);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itReturnsNullIfTheRedirectIsUnpublish(): void
     {
         $redirect = $this->repository->findRedirect('/it-is-unpublish');
@@ -47,9 +43,7 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
         $this->assertNull($redirect);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itReturnsTheRedirect(): void
     {
         $redirect = $this->repository->findRedirect('/redirect');
