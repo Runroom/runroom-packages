@@ -20,8 +20,9 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 
 class PageRendererTest extends TestCase
@@ -31,10 +32,10 @@ class PageRendererTest extends TestCase
     /** @var ObjectProphecy<Environment> */
     private $twig;
 
-    /** @var ObjectProphecy<EventDispatcherInterface> */
+    /** @var EventDispatcher */
     private $eventDispatcher;
 
-    /** @var ObjectProphecy<PageViewModel> */
+    /** @var PageViewModel */
     private $pageViewModel;
 
     /** @var PageRenderer */
@@ -43,14 +44,25 @@ class PageRendererTest extends TestCase
     protected function setUp(): void
     {
         $this->twig = $this->prophesize(Environment::class);
-        $this->eventDispatcher = $this->prophesize(EventDispatcherInterface::class);
-        $this->pageViewModel = $this->prophesize(PageViewModel::class);
+        $this->eventDispatcher = new EventDispatcher();
+        $this->pageViewModel = new PageViewModel();
 
         $this->service = new PageRenderer(
             $this->twig->reveal(),
-            $this->eventDispatcher->reveal(),
-            $this->pageViewModel->reveal()
+            $this->eventDispatcher,
+            $this->pageViewModel
         );
+    }
+
+    /** @test */
+    public function itDispatchEventsOnRender(): void
+    {
+        $this->twig->render('test.html.twig', Argument::type('array'), null)
+            ->willReturn('Rendered test');
+
+        $result = $this->service->render('test.html.twig', []);
+
+        $this->assertSame('Rendered test', $result);
     }
 
     /** @test */
@@ -58,13 +70,36 @@ class PageRendererTest extends TestCase
     {
         $response = new Response();
 
-        $this->pageViewModel->setContent([])->shouldBeCalled();
-        $this->twig->render('test.html.twig', Argument::type('array'), null)
+        $this->twig->render('different.html.twig', Argument::type('array'), null)
             ->willReturn('Rendered test');
-        $this->eventDispatcher->dispatch(Argument::type(PageRenderEvent::class), PageRenderEvent::EVENT_NAME)->willReturnArgument(0);
+
+        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event) {
+            $pageViewModel = $event->getPageViewModel();
+            $pageViewModel->addContext('test', 'test');
+
+            $event->setPageViewModel($pageViewModel);
+            $event->setView('different.html.twig');
+        });
 
         $resultResponse = $this->service->renderResponse('test.html.twig', [], $response);
 
         $this->assertSame($response, $resultResponse);
+    }
+
+    /** @test */
+    public function itReturnsRedirectResponse(): void
+    {
+        $response = new Response();
+
+        $this->twig->render('test.html.twig', Argument::type('array'), null)
+            ->willReturn('Rendered test');
+
+        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event) {
+            $event->setResponse(new RedirectResponse('https://localhost'));
+        });
+
+        $resultResponse = $this->service->renderResponse('test.html.twig', [], $response);
+
+        $this->assertInstanceOf(RedirectResponse::class, $resultResponse);
     }
 }
