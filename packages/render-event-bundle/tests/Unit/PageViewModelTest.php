@@ -26,9 +26,7 @@ class PageViewModelTest extends TestCase
         $this->viewModel = new PageViewModel();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itSetContent(): void
     {
         $this->viewModel->setContent('content');
@@ -36,9 +34,7 @@ class PageViewModelTest extends TestCase
         $this->assertSame('content', $this->viewModel->getContent());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itAddsContext(): void
     {
         $this->viewModel->addContext('test', 'content');

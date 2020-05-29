@@ -45,9 +45,7 @@ class TranslationServiceTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itReturnsAStringTranslatedByTheRepository(): void
     {
         $translation = TranslationFixtures::create();
@@ -60,9 +58,7 @@ class TranslationServiceTest extends TestCase
         $this->assertSame(TranslationFixtures::VALUE, $result);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itReturnsAStringTranslatedByTheTranslatorComponent(): void
     {
         $this->repository->findOneBy(['key' => TranslationFixtures::KEY])->willReturn(null);

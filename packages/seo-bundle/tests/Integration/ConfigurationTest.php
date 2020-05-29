@@ -23,9 +23,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function itExposesConfiguration(): void
     {
         $this->assertProcessedConfigurationEquals([
@@ -37,9 +35,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itFailsOnInvalidConfiguration(): void
     {
         $this->expectException(InvalidConfigurationException::class);

@@ -18,9 +18,7 @@ use Runroom\SeoBundle\Tests\Fixtures\MetaInformationFixture;
 
 class MetaInformationTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function itGetsProperties(): void
     {
         $metaInformation = MetaInformationFixture::create();

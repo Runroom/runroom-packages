@@ -21,9 +21,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function itAddsGlobalXDefaultLocaleToTwig(): void
     {
         $this->setDefinition('twig', new Definition());

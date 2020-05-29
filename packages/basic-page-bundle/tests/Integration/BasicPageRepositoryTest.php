@@ -32,9 +32,7 @@ class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
         $this->repository = static::$container->get(BasicPageRepository::class);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itFindsBasicPageGivenItsSlug(): void
     {
         $BasicPage = $this->repository->findBySlug('slug');
@@ -43,9 +41,7 @@ class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
         $this->assertSame(self::STATIC_PAGE_ID, $BasicPage->getId());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotFindUnPublishedStatigPage(): void
     {
         $this->expectException(NoResultException::class);

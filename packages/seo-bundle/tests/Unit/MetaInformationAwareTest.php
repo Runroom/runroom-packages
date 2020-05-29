@@ -22,9 +22,7 @@ class MetaInformationAwareTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itSetsAndGetsMetaInformation(): void
     {
         $entityMetaInformation = $this->prophesize(EntityMetaInformation::class);

@@ -20,7 +20,8 @@ use Runroom\RedirectionBundle\Listener\RedirectListener;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -42,9 +43,7 @@ final class RedirectListenerTest extends TestCase
         $this->listener = new RedirectListener($this->repository->reveal());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itSubscribesToKernelRequestEvent(): void
     {
         $events = $this->listener->getSubscribedEvents();
@@ -52,9 +51,7 @@ final class RedirectListenerTest extends TestCase
         $this->assertArrayHasKey(KernelEvents::REQUEST, $events);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotDoAnythingIfTheRequestIsNotTheMasterOne(): void
     {
         $event = $this->getResponseEvent(HttpKernelInterface::SUB_REQUEST);
@@ -64,9 +61,7 @@ final class RedirectListenerTest extends TestCase
         $this->assertNull($event->getResponse());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotDOAnythingIfTheRouteIsNotFoundOnTheRepository(): void
     {
         $this->repository->findRedirect('/')->shouldBeCalled()->willReturn(null);
@@ -78,9 +73,7 @@ final class RedirectListenerTest extends TestCase
         $this->assertNull($event->getResponse());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesARedirectToDestinationUrl(): void
     {
         $this->repository->findRedirect('/')->shouldBeCalled()->willReturn([
@@ -92,6 +85,7 @@ final class RedirectListenerTest extends TestCase
 
         $this->listener->onKernelRequest($event);
 
+        /** @var Response */
         $response = $event->getResponse();
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
@@ -99,11 +93,11 @@ final class RedirectListenerTest extends TestCase
         $this->assertSame(301, $response->getStatusCode());
     }
 
-    private function getResponseEvent(int $requestType = HttpKernelInterface::MASTER_REQUEST): GetResponseEvent
+    private function getResponseEvent(int $requestType = HttpKernelInterface::MASTER_REQUEST): RequestEvent
     {
         $kernel = $this->prophesize(Kernel::class);
 
-        return new GetResponseEvent(
+        return new RequestEvent(
             $kernel->reveal(),
             new Request(),
             $requestType

@@ -75,9 +75,7 @@ class MetaInformationServiceTest extends TestCase
         $this->expectedMetas = new MetaInformationViewModel();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itFindsMetasForRoute(): void
     {
         $this->configureCurrentRequest();
@@ -91,9 +89,7 @@ class MetaInformationServiceTest extends TestCase
         $this->assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itFindsMetasForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
@@ -106,9 +102,7 @@ class MetaInformationServiceTest extends TestCase
         $this->assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itHasSubscribedEvents(): void
     {
         $events = $this->service->getSubscribedEvents();

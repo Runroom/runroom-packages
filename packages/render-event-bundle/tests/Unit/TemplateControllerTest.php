@@ -37,9 +37,7 @@ class TemplateControllerTest extends TestCase
         $this->controller = new TemplateController($this->renderer->reveal());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itRendersTemplate(): void
     {
         $controller = $this->controller;

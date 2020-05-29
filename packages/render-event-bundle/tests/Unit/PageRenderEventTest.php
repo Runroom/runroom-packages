@@ -44,9 +44,7 @@ class PageRenderEventTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itSetsPageViewModel(): void
     {
         $expectedViewModel = new PageViewModel();
@@ -58,9 +56,7 @@ class PageRenderEventTest extends TestCase
         $this->assertSame($expectedViewModel, $viewModel);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itGetsPageViewModel(): void
     {
         $this->pageViewModel->setContent('model');

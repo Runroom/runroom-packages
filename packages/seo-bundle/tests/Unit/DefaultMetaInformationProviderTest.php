@@ -26,9 +26,7 @@ class DefaultMetaInformationProviderTest extends TestCase
         $this->provider = new DefaultMetaInformationProvider();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itProvidesMetasForAnyRoute(): void
     {
         foreach (['default', 'home'] as $route) {
@@ -36,41 +34,31 @@ class DefaultMetaInformationProviderTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotDefineAnyAlias(): void
     {
         $this->assertSame('default', $this->provider->getRouteAlias('default'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotDefinePlaceholders(): void
     {
         $this->assertEmpty($this->provider->getPlaceholders(new \stdClass()));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotDefineEntityMetaInformation(): void
     {
         $this->assertNull($this->provider->getEntityMetaInformation(new \stdClass()));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotDefineEntityMetaImage(): void
     {
         $this->assertNull($this->provider->getEntityMetaImage(new \stdClass()));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itDoesNotDefineAssociatedRoutes(): void
     {
         $method = new \ReflectionMethod($this->provider, 'getRoutes');
