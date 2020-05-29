@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\RedirectionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Runroom\RedirectionBundle\Behaviors as Behaviors;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,8 +25,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Redirect
 {
-    use Behaviors\Publishable;
-
     public const PERMANENT = 301;
     public const TEMPORAL = 302;
 
@@ -71,6 +68,13 @@ class Redirect
      * @ORM\Column(type="integer")
      */
     private $httpCode = self::PERMANENT;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $publish;
 
     public function __toString(): string
     {
@@ -116,5 +120,17 @@ class Redirect
     public function getHttpCode(): ?int
     {
         return $this->httpCode;
+    }
+
+    public function setPublish(?bool $publish): self
+    {
+        $this->publish = $publish;
+
+        return $this;
+    }
+
+    public function getPublish(): ?bool
+    {
+        return $this->publish;
     }
 }
