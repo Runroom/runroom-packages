@@ -15,7 +15,7 @@ namespace Runroom\TranslationBundle\Service;
 
 use Doctrine\ORM\EntityRepository;
 use Runroom\TranslationBundle\Entity\Translation;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /** @final */
 class TranslationService

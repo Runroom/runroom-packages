@@ -71,7 +71,7 @@ class FormHandlerTest extends TestCase
     /** @test */
     public function itHandlesFormsWithoutBeingSubmitted(): void
     {
-        $form = $this->configureForm(false);
+        $this->configureForm(false);
 
         $this->eventDispatcher->addListener('form.form_types.event.success', function () {
             $this->fail("This shouldn't be called");
