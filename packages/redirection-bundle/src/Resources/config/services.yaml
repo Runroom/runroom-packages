@@ -2,6 +2,12 @@ services:
     _defaults:
         public: false
 
+    Runroom\RedirectionBundle\Admin\RedirectAdmin:
+        public: true
+        arguments: [null, Runroom\RedirectionBundle\Entity\Redirect, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Redirects' }
+
     Runroom\RedirectionBundle\Listener\RedirectListener:
         arguments:
             $repository: '@Runroom\RedirectionBundle\Repository\RedirectRepository'

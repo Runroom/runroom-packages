@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Runroom\SeoBundle\Admin\EntityMetaInformationAdmin;
+use Runroom\SeoBundle\Admin\MetaInformationAdmin;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
@@ -40,6 +42,8 @@ class RunroomSeoExtensionTest extends AbstractExtensionTestCase
     /** @test */
     public function itHasCoreServicesAlias(): void
     {
+        $this->assertContainerBuilderHasService(EntityMetaInformationAdmin::class);
+        $this->assertContainerBuilderHasService(MetaInformationAdmin::class);
         $this->assertContainerBuilderHasService(AlternateLinksBuilder::class);
         $this->assertContainerBuilderHasService(AlternateLinksService::class);
         $this->assertContainerBuilderHasService(DefaultAlternateLinksProvider::class);

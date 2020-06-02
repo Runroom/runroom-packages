@@ -2,6 +2,18 @@ services:
     _defaults:
         public: false
 
+    Runroom\SeoBundle\Admin\MetaInformationAdmin:
+        public: true
+        arguments: [null, Runroom\SeoBundle\Entity\MetaInformation, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'SEO' }
+
+    Runroom\SeoBundle\Admin\EntityMetaInformationAdmin:
+        public: true
+        arguments: [null, Runroom\SeoBundle\Entity\EntityMetaInformation, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Entity SEO' }
+
     Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder:
         arguments:
             $urlGenerator: '@router'

@@ -36,7 +36,6 @@ final class RunroomSeoExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
-        $loader->load('admin.yaml');
 
         $container->registerForAutoconfiguration(AlternateLinksProviderInterface::class)
             ->addTag('runroom.seo.alternate_links');
