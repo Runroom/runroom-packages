@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Runroom\TranslationBundle\Admin\TranslationAdmin;
 use Runroom\TranslationBundle\DependencyInjection\RunroomTranslationExtension;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
@@ -31,10 +32,10 @@ class RunroomTranslationExtensionTest extends AbstractExtensionTestCase
     /** @test */
     public function itHasCoreServicesAlias(): void
     {
+        $this->assertContainerBuilderHasService(TranslationAdmin::class);
         $this->assertContainerBuilderHasService(TranslationService::class);
         $this->assertContainerBuilderHasService(TranslationRepository::class);
         $this->assertContainerBuilderHasService(TwigTranslationExtension::class);
-        $this->assertContainerBuilderHasService('runroom.translation.admin.translation');
     }
 
     protected function getContainerExtensions(): array

@@ -2,6 +2,12 @@ services:
     _defaults:
         public: false
 
+    Runroom\BasicPageBundle\Admin\BasicPageAdmin:
+        public: true
+        arguments: [null, Runroom\BasicPageBundle\Entity\BasicPage, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Basic pages' }
+
     Runroom\BasicPageBundle\Controller\BasicPageController:
         public: true
         arguments:

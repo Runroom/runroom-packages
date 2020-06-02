@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Runroom\BasicPageBundle\Admin\BasicPageAdmin;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
 use Runroom\BasicPageBundle\DependencyInjection\RunroomBasicPageExtension;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
@@ -33,6 +34,7 @@ class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
     /** @test */
     public function itHasCoreServicesAlias(): void
     {
+        $this->assertContainerBuilderHasService(BasicPageAdmin::class);
         $this->assertContainerBuilderHasService(BasicPageController::class);
         $this->assertContainerBuilderHasService(BasicPageService::class);
         $this->assertContainerBuilderHasService(BasicPageAlternateLinksProvider::class);
