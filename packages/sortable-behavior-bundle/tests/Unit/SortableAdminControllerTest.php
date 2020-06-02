@@ -18,7 +18,7 @@ use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\SortableBehaviorBundle\Controller\SortableAdminController;
-use Runroom\SortableBehaviorBundle\Services\PositionHandlerInterface;
+use Runroom\SortableBehaviorBundle\Service\PositionHandlerInterface;
 use Runroom\SortableBehaviorBundle\Tests\Fixtures\ChildSortableEntity;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
