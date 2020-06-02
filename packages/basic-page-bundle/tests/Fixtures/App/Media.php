@@ -16,9 +16,7 @@ namespace Runroom\BasicPageBundle\Tests\Fixtures\App;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseMedia;
 
-/**
- * @ORM\Entity
- */
+/** @ORM\Entity */
 class Media extends BaseMedia
 {
     /**
