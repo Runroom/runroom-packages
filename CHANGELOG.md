@@ -7,7 +7,42 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.6.9 - 2020-05-27
+## v0.7.0 - 2020-06-02
+
+### RunroomRedirectionBundle
+
+#### Changed
+
+- [#33] Use ServiceEntityRepository
+
+### All packages
+
+#### Added
+
+- [#28] Add coverage
+- [#30] Add badge to readme
+- [#34] Add psalm, allow persistence 2.0 and common 3.0
+
+#### Changed
+
+- [#37] Test with lowest dependencies
+- [#35] Improve code quality
+- [#36] Keep improving code quality
+- [#46] Increase coverage of SortableBehaviorBundle
+- [#45] Increase coverage on ORMPositionHandler
+- [#40] More tests
+- [#41] Increase coverage on RenderEventBundle and RedirectionBundle
+- [#42] Increase sortable behavior coverage
+- [#43] Improve admin services
+- [#44] Improve coverage
+- [#38] Initial Unit Test for GedmoPositionHandler
+
+#### Fixed
+
+- [#39] Improve coverage and fix deprecation
+- [#31] Increase coverage and minor fixes to increase code quality
+
+## [v0.6.9] - 2020-05-27
 
 ### RunroomBasicPageBundle
 
@@ -233,3 +268,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.6.7]: https://github.com/Runroom/runroom-packages/compare/v0.6.6...v0.6.7
 [#27]: https://github.com/Runroom/runroom-packages/pull/27
 [v0.6.8]: https://github.com/Runroom/runroom-packages/compare/v0.6.7...v0.6.8
+[#46]: https://github.com/Runroom/runroom-packages/pull/46
+[#45]: https://github.com/Runroom/runroom-packages/pull/45
+[#44]: https://github.com/Runroom/runroom-packages/pull/44
+[#43]: https://github.com/Runroom/runroom-packages/pull/43
+[#42]: https://github.com/Runroom/runroom-packages/pull/42
+[#41]: https://github.com/Runroom/runroom-packages/pull/41
+[#40]: https://github.com/Runroom/runroom-packages/pull/40
+[#39]: https://github.com/Runroom/runroom-packages/pull/39
+[#38]: https://github.com/Runroom/runroom-packages/pull/38
+[#37]: https://github.com/Runroom/runroom-packages/pull/37
+[#36]: https://github.com/Runroom/runroom-packages/pull/36
+[#35]: https://github.com/Runroom/runroom-packages/pull/35
+[#34]: https://github.com/Runroom/runroom-packages/pull/34
+[#33]: https://github.com/Runroom/runroom-packages/pull/33
+[#31]: https://github.com/Runroom/runroom-packages/pull/31
+[#30]: https://github.com/Runroom/runroom-packages/pull/30
+[#28]: https://github.com/Runroom/runroom-packages/pull/28
+[v0.6.9]: https://github.com/Runroom/runroom-packages/compare/v0.6.8...v0.6.9
