@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.7.0 - 2020-06-02
+## v0.7.1 - 2020-06-03
+
+### RunroomSortableBehaviorBundle
+
+#### Fixed
+
+- [#47] Fix service in SortableAdminController
+
+## [v0.7.0] - 2020-06-02
 
 ### RunroomRedirectionBundle
 
@@ -286,3 +294,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#30]: https://github.com/Runroom/runroom-packages/pull/30
 [#28]: https://github.com/Runroom/runroom-packages/pull/28
 [v0.6.9]: https://github.com/Runroom/runroom-packages/compare/v0.6.8...v0.6.9
+[#47]: https://github.com/Runroom/runroom-packages/pull/47
+[v0.7.0]: https://github.com/Runroom/runroom-packages/compare/v0.6.9...v0.7.0
