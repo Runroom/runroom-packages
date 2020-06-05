@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the Runroom package.
+ *
+ * (c) Runroom <runroom@runroom.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Runroom\CookiesBundle\Service;
 
 use Runroom\BaseBundle\Event\PageRenderEvent;
@@ -45,7 +56,7 @@ class CookiesService implements EventSubscriberInterface
     {
         $cookies = [];
         foreach ($this->cookies[$type] as $category) {
-            $cookies = \array_merge($cookies, $category['cookies'] ?? []);
+            $cookies = array_merge($cookies, $category['cookies'] ?? []);
         }
 
         return $cookies;
