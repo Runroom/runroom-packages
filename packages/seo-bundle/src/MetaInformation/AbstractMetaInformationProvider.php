@@ -34,11 +34,6 @@ abstract class AbstractMetaInformationProvider implements MetaInformationProvide
         return $route;
     }
 
-    public function getPlaceholders($model): array
-    {
-        return [];
-    }
-
     public function getEntityMetaInformation($model): ?EntityMetaInformation
     {
         return null;

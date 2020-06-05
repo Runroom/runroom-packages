@@ -32,6 +32,7 @@ services:
     Runroom\SeoBundle\MetaInformation\MetaInformationBuilder:
         arguments:
             $repository: '@Runroom\SeoBundle\Repository\MetaInformationRepository'
+            $propertyAccessor: '@property_accessor'
 
     Runroom\SeoBundle\MetaInformation\MetaInformationService:
         arguments:

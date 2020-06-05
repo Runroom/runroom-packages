@@ -21,8 +21,8 @@ class MetaInformationFixture
     public const ROUTE = 'route';
     public const ROUTE_NAME = 'route name';
     public const IMAGE = null;
-    public const TITLE = 'title';
-    public const DESCRIPTION = 'description';
+    public const TITLE = '[placeholder] title';
+    public const DESCRIPTION = '[missing] description';
 
     public static function create(): MetaInformation
     {
