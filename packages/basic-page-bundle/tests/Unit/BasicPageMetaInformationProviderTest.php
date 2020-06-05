@@ -56,19 +56,6 @@ class BasicPageMetaInformationProviderTest extends TestCase
     }
 
     /** @test */
-    public function itHasPlaceholders(): void
-    {
-        $expectedPlaceholders = [
-            '{title}' => BasicPageFixture::TITLE,
-            '{content}' => BasicPageFixture::CONTENT,
-        ];
-
-        $placeholders = $this->provider->getPlaceholders($this->model);
-
-        $this->assertSame($expectedPlaceholders, $placeholders);
-    }
-
-    /** @test */
     public function itHasAnEntityMetaInformation(): void
     {
         $entityMetas = $this->provider->getEntityMetaInformation($this->model);

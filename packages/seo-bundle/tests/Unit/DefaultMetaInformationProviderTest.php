@@ -41,12 +41,6 @@ class DefaultMetaInformationProviderTest extends TestCase
     }
 
     /** @test */
-    public function itDoesNotDefinePlaceholders(): void
-    {
-        $this->assertEmpty($this->provider->getPlaceholders(new \stdClass()));
-    }
-
-    /** @test */
     public function itDoesNotDefineEntityMetaInformation(): void
     {
         $this->assertNull($this->provider->getEntityMetaInformation(new \stdClass()));

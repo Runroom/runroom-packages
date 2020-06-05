@@ -17,6 +17,9 @@ use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
+use function Symfony\Component\String\s;
 
 /** @final */
 class MetaInformationBuilder
@@ -26,9 +29,15 @@ class MetaInformationBuilder
     /** @var MetaInformationRepository */
     private $repository;
 
-    public function __construct(MetaInformationRepository $repository)
-    {
+    /** @var PropertyAccessor */
+    private $propertyAccessor;
+
+    public function __construct(
+        MetaInformationRepository $repository,
+        PropertyAccessor $propertyAccessor
+    ) {
         $this->repository = $repository;
+        $this->propertyAccessor = $propertyAccessor;
     }
 
     /** @param mixed $model */
@@ -37,11 +46,10 @@ class MetaInformationBuilder
         $routeMetas = $this->getMetasForRoute($provider, $route);
         $modelMetas = $provider->getEntityMetaInformation($model);
         $modelImage = $provider->getEntityMetaImage($model);
-        $placeholders = $provider->getPlaceholders($model);
 
         $metas = new MetaInformationViewModel();
-        $metas->setTitle(strtr($this->getTitle($modelMetas, $routeMetas), $placeholders));
-        $metas->setDescription(strtr($this->getDescription($modelMetas, $routeMetas), $placeholders));
+        $metas->setTitle($this->replacePlaceholders($this->getTitle($modelMetas, $routeMetas), $model));
+        $metas->setDescription($this->replacePlaceholders($this->getDescription($modelMetas, $routeMetas), $model));
         $metas->setImage($modelImage ?? $routeMetas->getImage());
 
         return $metas;
@@ -65,5 +73,18 @@ class MetaInformationBuilder
         $description = null !== $modelMetas ? $modelMetas->getDescription() : null;
 
         return (string) ($description ?? $routeMetas->getDescription());
+    }
+
+    /** @param mixed $model */
+    private function replacePlaceholders(string $text, $model): string
+    {
+        return (string) s($text)->replaceMatches('/\[(.*)\]/', function (array $match) use ($model): string {
+            try {
+                return $this->propertyAccessor->getValue($model, $match[1]);
+            } catch (NoSuchPropertyException $e) {
+            }
+
+            return '';
+        });
     }
 }

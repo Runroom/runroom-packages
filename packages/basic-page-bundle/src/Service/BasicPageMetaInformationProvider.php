@@ -23,14 +23,6 @@ final class BasicPageMetaInformationProvider extends AbstractMetaInformationProv
         return $model->getBasicPage()->getMetaInformation();
     }
 
-    public function getPlaceholders($model): array
-    {
-        return [
-            '{title}' => $model->getBasicPage()->getTitle(),
-            '{content}' => $model->getBasicPage()->getContent(),
-        ];
-    }
-
     protected function getRoutes(): array
     {
         return ['runroom.basic_page.route.show'];
