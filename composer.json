@@ -92,7 +92,7 @@
             "Runroom\\SeoBundle\\": "packages/seo-bundle/src/",
             "Runroom\\SortableBehaviorBundle\\": "packages/sortable-behavior-bundle/src/",
             "Runroom\\TranslationBundle\\": "packages/translation-bundle/src/",
-            "Runroom\\CookiesBundle": "packages/cookies-bundle/src/"
+            "Runroom\\CookiesBundle\\": "packages/cookies-bundle/src/"
         }
     },
     "autoload-dev": {
@@ -106,7 +106,7 @@
             "Runroom\\SeoBundle\\Tests\\": "packages/seo-bundle/tests/",
             "Runroom\\SortableBehaviorBundle\\Tests\\": "packages/sortable-behavior-bundle/tests/",
             "Runroom\\TranslationBundle\\Tests\\": "packages/translation-bundle/tests/",
-            "Runroom\\CookiesBundle": "packages/cookies-bundle/src/"
+            "Runroom\\CookiesBundle\\Tests\\": "packages/cookies-bundle/tests/"
         }
     },
     "scripts": {
