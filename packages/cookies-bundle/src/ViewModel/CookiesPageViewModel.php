@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\ViewModel;
 
-use Runroom\BaseBundle\ViewModel\FormAware;
-use Runroom\BaseBundle\ViewModel\FormAwareInterface;
+use Runroom\FormHandlerBundle\ViewModel\FormAware;
+use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 
 class CookiesPageViewModel implements FormAwareInterface
