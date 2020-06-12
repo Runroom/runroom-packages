@@ -1,5 +1,4 @@
 RunroomCookiesBundle
-================================
 
 [![Latest Stable Version](https://poser.pugx.org/runroom-packages/cookies-bundle/v/stable)](https://packagist.org/packages/runroom-packages/cookies-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/runroom-packages/cookies-bundle/v/unstable)](https://packagist.org/packages/runroom-packages/cookies-bundle)

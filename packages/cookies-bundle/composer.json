@@ -1,9 +1,10 @@
 {
     "name": "runroom-packages/cookies-bundle",
     "type": "symfony-bundle",
-    "description": "Manage cookies",
+    "description": "Manage your website cookies using this cookies bundle",
     "keywords": [
-        "cookies"
+        "cookies",
+        "symfony"
     ],
     "homepage": "https://github.com/runroom/RunroomCookiesBundle",
     "license": "MIT",
@@ -15,7 +16,21 @@
         }
     ],
     "require": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "a2lix/translation-form-bundle": "^2.4 || ^3.0",
+        "doctrine/orm": "^2.7",
+        "friendsofsymfony/ckeditor-bundle": "^1.2 || ^2.2",
+        "knplabs/doctrine-behaviors": "^2.0.3",
+        "runroom-packages/form-handler-bundle": "^0.7.1",
+        "runroom-packages/render-event-bundle": "^0.8",
+        "sonata-project/admin-bundle": "^3.61",
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.0",
+        "symfony/form": "^4.4 || ^5.0",
+        "symfony/http-foundation": "^4.4.7 || ^5.0.7",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/validator": "^4.4 || ^5.0"
     },
     "require-dev": {
         "phpspec/prophecy-phpunit": "^2.0",
