@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Controller;
 
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Runroom\CookiesBundle\Service\CookiesPageService;
+use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\HttpFoundation\Response;
 
 class CookiesPageController
 {
-    /** @var PageRenderer  */
+    /** @var PageRenderer */
     protected $renderer;
 
-    /** @var CookiesPageService  */
+    /** @var CookiesPageService */
     protected $service;
 
     public function __construct(

@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Service;
 
-use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
+use Runroom\FormHandlerBundle\FormHandler;
 
 class CookiesPageService
 {
-    /** @var CookiesPageRepository  */
+    /** @var CookiesPageRepository */
     protected $repository;
 
-    /** @var FormHandler  */
+    /** @var FormHandler */
     protected $handler;
 
-    /** @var array  */
+    /** @var array */
     protected $cookies;
 
     public function __construct(CookiesPageRepository $repository, FormHandler $handler, array $cookies)

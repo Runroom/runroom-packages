@@ -18,7 +18,7 @@ use Runroom\CookiesBundle\Entity\CookiesPage;
 
 class CookiesPageRepository
 {
-    /** @var EntityManagerInterface  */
+    /** @var EntityManagerInterface */
     protected $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
