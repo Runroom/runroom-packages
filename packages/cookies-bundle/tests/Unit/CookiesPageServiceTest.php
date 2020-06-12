@@ -15,7 +15,7 @@ namespace Tests\Runroom\CookiesBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Runroom\BaseBundle\Service\FormHandler;
+use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;

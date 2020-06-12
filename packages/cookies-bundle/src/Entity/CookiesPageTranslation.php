@@ -26,12 +26,16 @@ class CookiesPageTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
+     * @var string
+     *
      * @Assert\Length(max=255)
      * @ORM\Column(type="string")
      */
     protected $title;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     protected $content;

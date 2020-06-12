@@ -1,15 +1,27 @@
 services:
     _defaults:
-        autowire: true
-        autoconfigure: true
         public: false
-        bind:
-            $cookies: '%cookies%'
 
-    Runroom\CookiesBundle\:
-        resource: ../../*
-
-    Runroom\CookiesBundle\Controller\:
-        resource: ../../Controller
+    Runroom\CookiesBundle\Admin\CookiesPageAdmin:
         public: true
+        arguments: [null, Runroom\CookiesBundle\Entity\CookiesPage, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Cookies' }
+
+    Runroom\CookiesBundle\Controller\CookiesPageController:
+        public: true
+        arguments:
+            $service: '@Runroom\CookiesBundle\Service\CookiesPageService'
+            $renderer: '@Runroom\RenderEventBundle\Renderer\PageRenderer'
         tags: [controller.service_arguments]
+
+    Runroom\CookiesBundle\Service\CookiesPageService:
+        arguments:
+            $repository: '@Runroom\CookiesBundle\Repository\CookiesPageRepository'
+            $handler: '@Runroom\FormHandlerBundle\FormHandler'
+
+    Runroom\CookiesBundle\Service\CookiesService:
+
+    Runroom\CookiesBundle\Repository\CookiesPageRepository:
+        arguments:
+            $entityManager: '@doctrine'
