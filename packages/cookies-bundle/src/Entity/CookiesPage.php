@@ -31,7 +31,7 @@ class CookiesPage implements TranslationInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     public function __toString(): string
     {

@@ -13,23 +13,20 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 
-class CookiesPageRepository
+class CookiesPageRepository extends ServiceEntityRepository
 {
-    /** @var EntityManagerInterface */
-    protected $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->entityManager = $entityManager;
+        parent::__construct($registry, CookiesPage::class);
     }
 
-    public function find(): CookiesPage
+    public function findCookiesPage(): CookiesPage
     {
-        $builder = $this->entityManager->createQueryBuilder();
-        $query = $builder
+        $query = $this->createQueryBuilder('cookies_page')
             ->select('cookies_page')
             ->from('RunroomCookiesBundle:CookiesPage', 'cookies_page')
             ->getQuery();

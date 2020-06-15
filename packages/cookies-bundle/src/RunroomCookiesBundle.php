@@ -15,6 +15,6 @@ namespace Runroom\CookiesBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class RunroomCookiesBundle extends Bundle
+final class RunroomCookiesBundle extends Bundle
 {
 }

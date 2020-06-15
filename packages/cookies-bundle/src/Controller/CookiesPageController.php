@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 class CookiesPageController
 {
     /** @var PageRenderer */
-    protected $renderer;
+    private $renderer;
 
     /** @var CookiesPageService */
-    protected $service;
+    private $service;
 
     public function __construct(
         PageRenderer $renderer,

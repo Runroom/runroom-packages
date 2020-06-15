@@ -19,9 +19,12 @@ services:
         arguments:
             $repository: '@Runroom\CookiesBundle\Repository\CookiesPageRepository'
             $handler: '@Runroom\FormHandlerBundle\FormHandler'
+        tags: [kernel.event_subscriber]
 
     Runroom\CookiesBundle\Service\CookiesService:
+        tags: [runroom.cookies.service]
 
     Runroom\CookiesBundle\Repository\CookiesPageRepository:
         arguments:
-            $entityManager: '@doctrine'
+            $registry: '@doctrine'
+        tags: [doctrine.repository_service]

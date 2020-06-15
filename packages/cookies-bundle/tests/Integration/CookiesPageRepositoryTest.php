@@ -11,29 +11,29 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Runroom\CookiesBundle\Integration;
+namespace Runroom\CookiesBundle\Tests\Integration;
 
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
-use Tests\Runroom\BaseBundle\TestCase\DoctrineTestCase;
+use Runroom\CookiesBundle\Tests\TestCase\DoctrineIntegrationTestBase;
 
-class CookiesPageRepositoryTest extends DoctrineTestCase
+class CookiesPageRepositoryTest extends DoctrineIntegrationTestBase
 {
+    /** @var CookiesPageRepository */
     protected $repository;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->repository = new CookiesPageRepository(static::$entityManager);
+        $this->repository = static::$container->get(CookiesPageRepository::class);
     }
 
     /**
      * @test
      */
-    public function itFindsCookiesPage()
+    public function itFindsCookiesPage(): void
     {
-        $cookies = $this->repository->find();
-
+        $cookies = $this->repository->findCookiesPage();
         $this->assertInstanceOf(CookiesPage::class, $cookies);
     }
 

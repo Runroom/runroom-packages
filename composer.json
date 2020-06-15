@@ -43,7 +43,7 @@
         "runroom-packages/render-event-bundle": "self.version",
         "runroom-packages/seo-bundle": "self.version",
         "runroom-packages/sortable-behavior-bundle": "self.version",
-        "runroom-packages/translation-bundle": "self.version",
+        "runroom-packages/translation-bundle": "self.version"
     },
     "conflict": {
         "fzaninotto/faker": "<1.9",
