@@ -19,7 +19,10 @@ use Doctrine\Persistence\ManagerRegistry;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/** @final */
+/**
+ * @final
+ * @extends ServiceEntityRepository<BasicPage>
+ */
 class BasicPageRepository extends ServiceEntityRepository
 {
     /** @var RequestStack */

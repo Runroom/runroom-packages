@@ -17,7 +17,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Runroom\TranslationBundle\Entity\Translation;
 
-/** @final */
+/**
+ * @final
+ * @extends ServiceEntityRepository<Translation>
+ */
 class TranslationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

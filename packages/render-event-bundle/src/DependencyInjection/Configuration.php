@@ -23,21 +23,20 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('runroom_render_event');
+        $rootNode = $treeBuilder->getRootNode();
 
-        $treeBuilder
-            ->getRootNode()
-                ->children()
-                    ->scalarNode('page_view_model')
-                        ->cannotBeEmpty()
-                        ->defaultValue(PageViewModel::class)
-                        ->validate()
-                            ->ifTrue(function ($config) {
-                                return !is_a($config, PageViewModelInterface::class, true);
-                            })
-                            ->thenInvalid('%s must implement ' . PageViewModelInterface::class)
-                        ->end()
-                    ->end()
-                ->end();
+        $rootNode->children()
+            ->scalarNode('page_view_model')
+                ->cannotBeEmpty()
+                ->defaultValue(PageViewModel::class)
+                ->validate()
+                    ->ifTrue(function ($config) {
+                        return !is_a($config, PageViewModelInterface::class, true);
+                    })
+                    ->thenInvalid('%s must implement ' . PageViewModelInterface::class)
+                ->end()
+            ->end()
+        ->end();
 
         return $treeBuilder;
     }

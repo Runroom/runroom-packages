@@ -22,34 +22,33 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('runroom_seo');
+        $rootNode = $treeBuilder->getRootNode();
 
-        $treeBuilder
-            ->getRootNode()
+        $rootNode->children()
+            ->arrayNode('locales')
+                ->isRequired()
+                ->requiresAtLeastOneElement()
+                ->prototype('scalar')->cannotBeEmpty()->end()
+            ->end()
+            ->scalarNode('xdefault_locale')
+                ->isRequired()
+                ->cannotBeEmpty()
+            ->end()
+            ->arrayNode('class')
                 ->children()
-                    ->arrayNode('locales')
-                        ->isRequired()
-                        ->requiresAtLeastOneElement()
-                        ->prototype('scalar')->cannotBeEmpty()->end()
-                    ->end()
-                    ->scalarNode('xdefault_locale')
+                    ->scalarNode('media')
                         ->isRequired()
                         ->cannotBeEmpty()
-                    ->end()
-                    ->arrayNode('class')
-                        ->children()
-                            ->scalarNode('media')
-                                ->isRequired()
-                                ->cannotBeEmpty()
-                                ->validate()
-                                    ->ifTrue(function ($config) {
-                                        return !is_a($config, Media::class, true);
-                                    })
-                                    ->thenInvalid('%s must extend ' . Media::class)
-                                ->end()
-                            ->end()
+                        ->validate()
+                            ->ifTrue(function ($config) {
+                                return !is_a($config, Media::class, true);
+                            })
+                            ->thenInvalid('%s must extend ' . Media::class)
                         ->end()
                     ->end()
-                ->end();
+                ->end()
+            ->end()
+        ->end();
 
         return $treeBuilder;
     }

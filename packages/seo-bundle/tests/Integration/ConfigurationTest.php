@@ -16,7 +16,7 @@ namespace Runroom\SeoBundle\Tests\Integration;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Runroom\SeoBundle\DependencyInjection\Configuration;
 use Runroom\SeoBundle\DependencyInjection\RunroomSeoExtension;
-use Runroom\SeoBundle\Tests\Fixtures\App\Media;
+use Runroom\SeoBundle\Tests\Fixtures\Media;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
