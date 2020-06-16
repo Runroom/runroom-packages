@@ -25,12 +25,13 @@ jobs:
           ini-values: pcov.directory=packages
           coverage: pcov
           tools: composer:${{ matrix.composer }}
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - uses: actions/cache@v1
         with:
-          path: ~/.composer/cache
-          key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ matrix.dependencies }}
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ matrix.composer }}-${{ matrix.dependencies }}
           restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
       - if: matrix.dependencies == 'lowest'
         run: composer update --no-interaction --no-progress --prefer-lowest
