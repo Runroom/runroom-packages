@@ -16,5 +16,5 @@ parameters:
         - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'
     checkMissingIterableValueType: false
     excludes_analyse:
-        - */tests/Fixtures/App/var/*
+        - packages/render-event-bundle/src/Event/PageRenderEvent.php
         - */vendor/*

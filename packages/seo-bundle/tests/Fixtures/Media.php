@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\BasicPageBundle\Tests\Fixtures\App;
+namespace Runroom\SeoBundle\Tests\Fixtures;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseMedia;

@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.3']
+        php: ['7.4']
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-          tools: cs2pr
+          tools: cs2pr, composer:v2
       - uses: actions/cache@v1
         with:
           path: ~/.composer/cache

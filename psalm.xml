@@ -10,9 +10,6 @@
         <directory name="src"/>
         <directory name="packages"/>
         <ignoreFiles>
-            <directory name="packages/basic-page-bundle/tests/Fixtures/App/var"/>
-            <directory name="packages/redirection-bundle/tests/Fixtures/App/var"/>
-
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>

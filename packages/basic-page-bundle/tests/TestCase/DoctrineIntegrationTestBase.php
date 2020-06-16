@@ -19,7 +19,7 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Persistence\ManagerRegistry;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use PHPUnit\Framework\TestCase;
-use Runroom\BasicPageBundle\Tests\Fixtures\App\Kernel;
+use Runroom\BasicPageBundle\Tests\App\Kernel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +51,7 @@ abstract class DoctrineIntegrationTestBase extends TestCase
             return;
         }
 
-        static::$kernel = new Kernel('test', false);
+        static::$kernel = new Kernel('test', true);
         static::$kernel->boot();
 
         static::$container = static::$kernel->getContainer()->get('test.service_container');
