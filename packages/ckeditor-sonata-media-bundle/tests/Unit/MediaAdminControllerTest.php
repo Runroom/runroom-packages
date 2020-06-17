@@ -166,6 +166,7 @@ class MediaAdminControllerTest extends TestCase
         $this->container->get('request_stack')->willReturn($requestStack);
     }
 
+    /** @param string[] $formTheme */
     private function configureSetFormTheme(FormView $formView, array $formTheme): void
     {
         $twigRenderer = $this->prophesize(FormRenderer::class);

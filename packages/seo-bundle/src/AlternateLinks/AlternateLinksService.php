@@ -24,7 +24,7 @@ final class AlternateLinksService implements EventSubscriberInterface
     /** @var RequestStack */
     private $requestStack;
 
-    /** @var iterable */
+    /** @var iterable<AlternateLinksProviderInterface> */
     private $providers;
 
     /** @var DefaultAlternateLinksProvider */
@@ -33,6 +33,7 @@ final class AlternateLinksService implements EventSubscriberInterface
     /** @var AlternateLinksBuilder */
     private $builder;
 
+    /** @param iterable<AlternateLinksProviderInterface> $providers */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,
@@ -76,6 +77,7 @@ final class AlternateLinksService implements EventSubscriberInterface
         return $request->get('_route', '');
     }
 
+    /** @return array<string, string> */
     protected function getCurrentRouteParameters(): array
     {
         $request = $this->requestStack->getCurrentRequest();

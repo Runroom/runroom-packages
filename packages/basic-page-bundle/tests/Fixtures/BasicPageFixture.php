@@ -40,6 +40,7 @@ class BasicPageFixture
         return $basicPage;
     }
 
+    /** @param string[] $locales */
     public static function createWithSlugs(array $locales): BasicPage
     {
         $basicPage = new BasicPage();

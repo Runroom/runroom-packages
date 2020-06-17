@@ -44,10 +44,12 @@ abstract class AbstractMetaInformationProvider implements MetaInformationProvide
         return null;
     }
 
+    /** @return array<string, string[]> */
     protected function getRouteAliases(): array
     {
         return [];
     }
 
+    /** @return string[] */
     abstract protected function getRoutes(): array;
 }

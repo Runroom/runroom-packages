@@ -29,7 +29,7 @@ class AlternateLinksBuilderTest extends TestCase
     /** @var ObjectProphecy<UrlGeneratorInterface> */
     private $urlGenerator;
 
-    /** @var array */
+    /** @var string[] */
     private $locales;
 
     /** @var DummyAlternateLinksProvider */
@@ -86,6 +86,7 @@ class AlternateLinksBuilderTest extends TestCase
 
 class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
+    /** @return array<string, string>? */
     public function getParameters($model, string $route): ?array
     {
         return [
@@ -94,6 +95,7 @@ class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
         ];
     }
 
+    /** @return string[] */
     protected function getRoutes(): array
     {
         return ['dummy_route'];

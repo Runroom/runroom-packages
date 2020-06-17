@@ -22,16 +22,22 @@ class AlternateLinksBuilder
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var array */
+    /** @var string[] */
     private $locales;
 
+    /** @param string[] $locales */
     public function __construct(UrlGeneratorInterface $urlGenerator, array $locales)
     {
         $this->urlGenerator = $urlGenerator;
         $this->locales = $locales;
     }
 
-    /** @param mixed $model */
+    /**
+     * @param mixed $model
+     * @param array<string, string> $routeParameters
+     *
+     * @return array<string, string>
+     */
     public function build(
         AlternateLinksProviderInterface $provider,
         $model,
@@ -54,7 +60,11 @@ class AlternateLinksBuilder
         return $alternateLinks;
     }
 
-    /** @param mixed $model */
+    /**
+     * @param mixed $model
+     *
+     * @return string[]
+     */
     protected function getAvailableLocales(AlternateLinksProviderInterface $provider, $model): array
     {
         return array_intersect(

@@ -27,5 +27,6 @@ abstract class AbstractAlternateLinksProvider implements AlternateLinksProviderI
 
     abstract public function getParameters($model, string $locale): ?array;
 
+    /** @return string[] */
     abstract protected function getRoutes(): array;
 }
