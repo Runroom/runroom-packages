@@ -22,7 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 final class RedirectAdmin extends AbstractAdmin
 {
-    /** @var array */
+    /** @var array<string, int> */
     private static $typeChoices = [
         'redirect.httpCode.permanent' => Redirect::PERMANENT,
         'redirect.httpCode.temporal' => Redirect::TEMPORAL,

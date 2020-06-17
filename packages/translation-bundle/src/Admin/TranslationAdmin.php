@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class TranslationAdmin extends AbstractAdmin
 {
+    /** @var array{ _page: int, _sort_order: 'ASC'|'DESC', _sort_by: string } */
     protected $datagridValues = [
         '_page' => 1,
         '_sort_order' => 'ASC',

@@ -32,6 +32,7 @@ return Config::create()
         'no_useless_return' => true,
         'ordered_class_elements' => true,
         'ordered_imports' => true,
+        'phpdoc_align' => ['align' => 'left'],
         'phpdoc_order' => true,
         'compact_nullable_typehint' => true,
         'void_return' => null,

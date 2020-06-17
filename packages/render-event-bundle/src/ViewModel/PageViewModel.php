@@ -18,7 +18,7 @@ class PageViewModel implements PageViewModelInterface
     /** @var mixed */
     private $content;
 
-    /** @var array */
+    /** @var array<string, mixed> */
     private $context = [];
 
     public function setContent($content): void
@@ -31,11 +31,13 @@ class PageViewModel implements PageViewModelInterface
         return $this->content;
     }
 
+    /** @param mixed $value */
     public function addContext(string $key, $value): void
     {
         $this->context[$key] = $value;
     }
 
+    /** @return mixed */
     public function getContext(string $key)
     {
         return $this->context[$key] ?? null;

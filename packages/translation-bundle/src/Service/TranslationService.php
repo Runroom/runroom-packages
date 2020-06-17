@@ -33,6 +33,7 @@ class TranslationService
         $this->translator = $translator;
     }
 
+    /** @param array<string, string> $parameters */
     public function translate(string $key, array $parameters = [], string $locale = null): string
     {
         $translation = $this->repository->findOneBy(['key' => $key]);

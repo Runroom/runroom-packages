@@ -17,9 +17,17 @@ interface AlternateLinksProviderInterface
 {
     public function providesAlternateLinks(string $route): bool;
 
-    /** @param mixed $model */
+    /**
+     * @param mixed $model
+     *
+     * @return string[]?
+     */
     public function getAvailableLocales($model): ?array;
 
-    /** @param mixed $model */
+    /**
+     * @param mixed $model
+     *
+     * @return array<string, string>?
+     */
     public function getParameters($model, string $locale): ?array;
 }

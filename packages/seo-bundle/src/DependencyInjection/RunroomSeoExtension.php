@@ -32,6 +32,7 @@ final class RunroomSeoExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
+        /** @var array{ locales: string[], xdefault_locale: string, class: array{ media: class-string } } */
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -51,6 +52,13 @@ final class RunroomSeoExtension extends Extension
         $this->mapMediaField('image', MetaInformation::class, $config);
     }
 
+    /**
+     * @param array{
+     *     locales: string[],
+     *     xdefault_locale: string,
+     *     class: array{ media: class-string }
+     * } $config
+     */
     protected function mapMediaField(string $fieldName, string $entityName, array $config): void
     {
         // $options = OptionsBuilder::create()

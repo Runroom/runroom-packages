@@ -22,7 +22,7 @@ final class MetaInformationService implements EventSubscriberInterface
     /** @var RequestStack */
     private $requestStack;
 
-    /** @var iterable */
+    /** @var iterable<MetaInformationProviderInterface> */
     private $providers;
 
     /** @var DefaultMetaInformationProvider */
@@ -31,6 +31,7 @@ final class MetaInformationService implements EventSubscriberInterface
     /** @var MetaInformationBuilder */
     private $builder;
 
+    /** @param iterable<MetaInformationProviderInterface> $providers */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,

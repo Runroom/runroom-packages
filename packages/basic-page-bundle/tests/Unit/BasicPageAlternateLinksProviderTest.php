@@ -25,7 +25,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
 
     private const META_ROUTE = 'runroom.basic_page.route.show';
 
-    /** @var array */
+    /** @var string[] */
     private $locales = ['es', 'en'];
 
     /** @var BasicPageAlternateLinksProvider */

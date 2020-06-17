@@ -47,6 +47,7 @@ class FormHandler
         $this->session = $session;
     }
 
+    /** @param array<string, mixed> $options */
     public function handleForm(string $type, array $options = [], FormAwareInterface $model = null): FormAwareInterface
     {
         $form = $this->formFactory->create($type, null, $options);

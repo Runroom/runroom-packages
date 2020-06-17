@@ -20,7 +20,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Tests\App\Kernel;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Bundle\FrameworkBundle\Test\TestContainer;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -33,7 +33,7 @@ abstract class DoctrineIntegrationTestBase extends TestCase
     /** @var LoaderInterface */
     protected static $loader;
 
-    /** @var ContainerInterface */
+    /** @var TestContainer */
     protected static $container;
 
     /** @var EntityManagerInterface */
@@ -78,6 +78,7 @@ abstract class DoctrineIntegrationTestBase extends TestCase
         static::$connection->rollBack();
     }
 
+    /** @return string[] */
     protected function processDataFixtures(): array
     {
         return array_map(function ($value) {
@@ -87,5 +88,6 @@ abstract class DoctrineIntegrationTestBase extends TestCase
         }, $this->getDataFixtures());
     }
 
+    /** @return string[] */
     abstract protected function getDataFixtures(): array;
 }
