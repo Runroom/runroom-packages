@@ -1,0 +1,13 @@
+runroom_cookies:
+    mandatory_cookies:
+        - name: symfony
+          has_description: true
+          cookies:
+              - { name: PHPSESSID }
+              - { name: client_ip }
+              - { name: language_switched }
+        - name: consent
+          cookies:
+              - { name: cookie_message }
+              - { name: performance_cookie }
+              - { name: targeting_cookie }

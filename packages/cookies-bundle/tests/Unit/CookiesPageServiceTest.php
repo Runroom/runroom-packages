@@ -15,12 +15,12 @@ namespace Tests\Runroom\CookiesBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
+use Runroom\FormHandlerBundle\FormHandler;
 
 class CookiesPageServiceTest extends TestCase
 {

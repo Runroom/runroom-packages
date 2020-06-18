@@ -23,4 +23,14 @@ class CookiesPageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CookiesPage::class);
     }
+
+    public function findCookiesPage(string $slug): CookiesPage
+    {
+        $query = $this->createQueryBuilder('cookies_page')
+            ->select('cookies_page')
+            ->from('RunroomCookiesBundle:CookiesPage', 'cookies_page')
+            ->getQuery();
+
+        return $query->getSingleResult();
+    }
 }

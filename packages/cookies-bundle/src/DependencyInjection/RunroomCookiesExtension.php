@@ -31,4 +31,4 @@ class RunroomCookiesExtension extends Extension
         $definition = $container->getDefinition('runroom_cookies');
         $definition->setArgument(0, $config['cookies']);
     }
-}   
+}

@@ -40,7 +40,7 @@ class CookiesPageService
     {
         $viewModel = new CookiesPageViewModel();
         $viewModel
-            ->setCookiesPage($this->repository->find())
+            ->setCookiesPage($this->repository->findCookiesPage())
             ->setCookies($this->cookies);
 
         return $this->handler->handleForm(CookiesFormType::class, $viewModel);

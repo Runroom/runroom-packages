@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Tests\Runroom\CookiesBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Runroom\CookiesBundle\Service\CookiesService;
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
+use Runroom\RenderEventBundle\Event\PageRenderEvent;
+use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Symfony\Component\HttpFoundation\Response;
 
 class CookiesServiceTest extends TestCase
