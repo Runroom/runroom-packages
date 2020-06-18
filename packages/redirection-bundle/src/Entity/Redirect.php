@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\RedirectionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
