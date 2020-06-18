@@ -20,14 +20,14 @@ interface AlternateLinksProviderInterface
     /**
      * @param mixed $model
      *
-     * @return string[]?
+     * @return string[]|null
      */
     public function getAvailableLocales($model): ?array;
 
     /**
      * @param mixed $model
      *
-     * @return array<string, string>?
+     * @return array<string, string>|null
      */
     public function getParameters($model, string $locale): ?array;
 }

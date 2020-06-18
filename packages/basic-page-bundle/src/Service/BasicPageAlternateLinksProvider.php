@@ -22,7 +22,7 @@ final class BasicPageAlternateLinksProvider extends AbstractAlternateLinksProvid
         return $model->getBasicPage()->getTranslations()->getKeys();
     }
 
-    public function getParameters($model, string $locale): array
+    public function getParameters($model, string $locale): ?array
     {
         return [
             'slug' => $model->getBasicPage()->getSlug($locale),
