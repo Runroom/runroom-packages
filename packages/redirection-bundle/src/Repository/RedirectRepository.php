@@ -29,7 +29,7 @@ class RedirectRepository extends ServiceEntityRepository
         parent::__construct($registry, Redirect::class);
     }
 
-    /** @return array{ destination: string, httpCode: string }? */
+    /** @return array{ destination: string, httpCode: string }|null */
     public function findRedirect(string $source): ?array
     {
         $query = $this->createQueryBuilder('redirect')
