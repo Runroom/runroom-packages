@@ -19,9 +19,13 @@ use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 
 class CookiesPageViewModel implements FormAwareInterface
 {
+    /** @var FormAware */
     use FormAware;
 
+    /** @var CookiesPage */
     protected $cookiesPage;
+
+    /** @var array  */
     protected $cookies = [];
 
     public function setCookiesPage(CookiesPage $cookiesPage): self

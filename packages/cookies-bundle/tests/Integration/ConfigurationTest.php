@@ -1,14 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the Runroom package.
+ *
+ * (c) Runroom <runroom@runroom.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Runroom\CookiesBundle\Tests\Integration;
 
-
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Runroom\CookiesBundle\DependencyInjection\Configuration;
 use Runroom\CookiesBundle\DependencyInjection\RunroomCookiesExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
@@ -16,7 +25,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     /** @test */
     public function itExposesConfiguration(): void
     {
-        $this->assertProcessedConfigurationEquals([], [ __DIR__ . '/../Fixtures/configuration.yaml' ]);
+        $this->assertProcessedConfigurationEquals([], [__DIR__ . '/../Fixtures/configuration.yaml']);
     }
 
     /** @test */

@@ -24,10 +24,16 @@ use Runroom\FormHandlerBundle\FormHandler;
 
 class CookiesPageServiceTest extends TestCase
 {
+    /** @var array  */
     protected const COOKIES = [];
 
+    /** @var \Prophecy\Prophecy\ObjectProphecy  */
     protected $repository;
+
+    /** @var \Prophecy\Prophecy\ObjectProphecy  */
     protected $handler;
+
+    /** @var CookiesPageService  */
     protected $service;
 
     protected function setUp(): void
@@ -45,7 +51,7 @@ class CookiesPageServiceTest extends TestCase
     /**
      * @test
      */
-    public function itGetsViewModel()
+    public function itGetsViewModel(): void
     {
         $cookiesPage = $this->prophesize(CookiesPage::class);
         $this->repository->find()->shouldBeCalled()->willReturn($cookiesPage->reveal());

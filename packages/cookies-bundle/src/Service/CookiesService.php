@@ -22,6 +22,7 @@ class CookiesService implements EventSubscriberInterface
     protected const TYPE_PERFORMANCE = 'performance_cookies';
     protected const TYPE_TARGETING = 'targeting_cookies';
 
+    /** @var array  */
     protected $cookies;
 
     public function __construct(array $cookies)
@@ -32,7 +33,7 @@ class CookiesService implements EventSubscriberInterface
     public function onPageRender(PageRenderEvent $event): void
     {
         $page = $event->getPageViewModel();
-        $page->setCookies($this->buildCookiesViewModel());
+        $page->addContext('cookies', $this->buildCookiesViewModel());
         $event->setPageViewModel($page);
     }
 

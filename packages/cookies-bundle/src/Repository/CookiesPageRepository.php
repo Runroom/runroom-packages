@@ -17,20 +17,11 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 
+/** extends ServiceEntityRepository<CookiesPage> */
 class CookiesPageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, CookiesPage::class);
-    }
-
-    public function findCookiesPage(string $slug): CookiesPage
-    {
-        $query = $this->createQueryBuilder('cookies_page')
-            ->select('cookies_page')
-            ->from('RunroomCookiesBundle:CookiesPage', 'cookies_page')
-            ->getQuery();
-
-        return $query->getSingleResult();
     }
 }

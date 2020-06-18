@@ -18,14 +18,21 @@ use Runroom\CookiesBundle\Service\CookiesService;
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 class CookiesServiceTest extends TestCase
 {
+    /** @var array  */
     protected const PERFORMANCE_COOKIES = ['cookie 1', 'cookie 2', 'cookie 3', 'cookie 4'];
+
+    /** @var array  */
     protected const TARGETING_COOKIES = ['cookie 5', 'cookie 6', 'cookie 7', 'cookie 8'];
 
+    /** @var RequestStack */
     protected $requestStack;
+
+    /** @var CookiesService  */
     protected $service;
 
     protected function setUp(): void
@@ -36,7 +43,7 @@ class CookiesServiceTest extends TestCase
     /**
      * @test
      */
-    public function itSetsCookies()
+    public function itSetsCookies(): void
     {
         $event = $this->configurePageRenderEvent();
 
