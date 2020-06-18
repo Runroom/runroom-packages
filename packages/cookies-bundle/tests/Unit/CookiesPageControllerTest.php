@@ -24,13 +24,13 @@ class CookiesPageControllerTest extends TestCase
 {
     protected const VIEW = 'pages/cookies.html.twig';
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy  */
+    /** @var \Prophecy\Prophecy\ObjectProphecy */
     protected $renderer;
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy  */
+    /** @var \Prophecy\Prophecy\ObjectProphecy */
     protected $service;
 
-    /** @var CookiesPageController  */
+    /** @var CookiesPageController */
     protected $controller;
 
     protected function setUp(): void

@@ -22,7 +22,7 @@ class CookiesService implements EventSubscriberInterface
     protected const TYPE_PERFORMANCE = 'performance_cookies';
     protected const TYPE_TARGETING = 'targeting_cookies';
 
-    /** @var array  */
+    /** @var array */
     protected $cookies;
 
     public function __construct(array $cookies)

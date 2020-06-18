@@ -15,10 +15,10 @@ namespace Runroom\CookiesBundle\ViewModel;
 
 class CookiesViewModel
 {
-    /** @var array  */
+    /** @var array */
     protected $performanceCookies = [];
 
-    /** @var array  */
+    /** @var array */
     protected $targetingCookies = [];
 
     public function setPerformanceCookies(array $performanceCookies): self

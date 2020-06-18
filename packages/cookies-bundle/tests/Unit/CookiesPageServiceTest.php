@@ -24,16 +24,16 @@ use Runroom\FormHandlerBundle\FormHandler;
 
 class CookiesPageServiceTest extends TestCase
 {
-    /** @var array  */
+    /** @var array */
     protected const COOKIES = [];
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy  */
+    /** @var \Prophecy\Prophecy\ObjectProphecy */
     protected $repository;
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy  */
+    /** @var \Prophecy\Prophecy\ObjectProphecy */
     protected $handler;
 
-    /** @var CookiesPageService  */
+    /** @var CookiesPageService */
     protected $service;
 
     protected function setUp(): void
