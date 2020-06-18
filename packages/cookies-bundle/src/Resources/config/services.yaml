@@ -22,7 +22,8 @@ services:
         tags: [kernel.event_subscriber]
 
     Runroom\CookiesBundle\Service\CookiesService:
-        tags: [runroom.cookies.service]
+        arguments:
+            $cookies: null
 
     Runroom\CookiesBundle\Repository\CookiesPageRepository:
         arguments:

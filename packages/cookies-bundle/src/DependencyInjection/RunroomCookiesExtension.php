@@ -24,6 +24,11 @@ class RunroomCookiesExtension extends Extension
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
-        $loader->load('admin.yaml');
+
+        $configuration = $this->getConfiguration($configs, $container);
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $definition = $container->getDefinition('runroom_cookies');
+        $definition->setArgument(0, $config['cookies']);
     }
-}
+}   
