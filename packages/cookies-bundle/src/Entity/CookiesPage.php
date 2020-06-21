@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
+use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity
  */
-class CookiesPage implements TranslationInterface
+class CookiesPage implements TranslatableInterface
 {
-    use ORMBehaviors\Translatable\TranslationTrait;
+    use ORMBehaviors\Translatable\TranslatableTrait;
 
     /**
      * @var int
