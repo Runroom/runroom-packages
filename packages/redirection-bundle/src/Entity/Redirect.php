@@ -75,6 +75,13 @@ class Redirect
      *
      * @ORM\Column(type="boolean")
      */
+    private $automatic = false;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
     private $publish;
 
     public function __toString(): string
@@ -121,6 +128,18 @@ class Redirect
     public function getHttpCode(): ?int
     {
         return $this->httpCode;
+    }
+
+    public function setAutomatic(?bool $automatic): self
+    {
+        $this->automatic = $automatic;
+
+        return $this;
+    }
+
+    public function getAutomatic(): ?bool
+    {
+        return $this->automatic;
     }
 
     public function setPublish(?bool $publish): self

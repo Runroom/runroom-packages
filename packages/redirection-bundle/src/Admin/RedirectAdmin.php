@@ -36,6 +36,7 @@ final class RedirectAdmin extends AbstractAdmin
             ->add('httpCode', null, [], ChoiceType::class, [
                 'choices' => self::$typeChoices,
             ])
+            ->add('automatic')
             ->add('publish');
     }
 
@@ -62,6 +63,7 @@ final class RedirectAdmin extends AbstractAdmin
             ->add('publish', null, [
                 'editable' => true,
             ])
+            ->add('automatic')
             ->add('_action', null, [
                 'actions' => [
                     'edit' => [],
@@ -84,6 +86,9 @@ final class RedirectAdmin extends AbstractAdmin
                 'label' => false,
                 'expanded' => true,
             ])
-            ->add('publish');
+            ->add('publish')
+            ->add('automatic', null, [
+                'disabled' => true,
+            ]);
     }
 }

@@ -16,6 +16,7 @@ namespace Runroom\RedirectionBundle\Tests\Integration;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Runroom\RedirectionBundle\Admin\RedirectAdmin;
 use Runroom\RedirectionBundle\DependencyInjection\RunroomRedirectionExtension;
+use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
 use Runroom\RedirectionBundle\Listener\RedirectListener;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 
@@ -25,7 +26,7 @@ class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
     {
         parent::setUp();
 
-        $this->load();
+        $this->load(['enable_automatic_redirections' => true]);
     }
 
     /** @test */
@@ -33,6 +34,7 @@ class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
     {
         $this->assertContainerBuilderHasService(RedirectAdmin::class);
         $this->assertContainerBuilderHasService(RedirectListener::class);
+        $this->assertContainerBuilderHasService(AutomaticRedirectSubscriber::class);
         $this->assertContainerBuilderHasService(RedirectRepository::class);
     }
 
