@@ -62,7 +62,7 @@ class PageRendererTest extends TestCase
 
         $result = $this->service->render('test.html.twig', []);
 
-        $this->assertSame('Rendered test', $result);
+        self::assertSame('Rendered test', $result);
     }
 
     /** @test */
@@ -73,7 +73,7 @@ class PageRendererTest extends TestCase
         $this->twig->render('different.html.twig', Argument::type('array'), null)
             ->willReturn('Rendered test');
 
-        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event) {
+        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {
             $pageViewModel = $event->getPageViewModel();
             $pageViewModel->addContext('test', 'test');
 
@@ -83,7 +83,7 @@ class PageRendererTest extends TestCase
 
         $resultResponse = $this->service->renderResponse('test.html.twig', [], $response);
 
-        $this->assertSame($response, $resultResponse);
+        self::assertSame($response, $resultResponse);
     }
 
     /** @test */
@@ -94,12 +94,12 @@ class PageRendererTest extends TestCase
         $this->twig->render('test.html.twig', Argument::type('array'), null)
             ->willReturn('Rendered test');
 
-        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event) {
+        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {
             $event->setResponse(new RedirectResponse('https://localhost'));
         });
 
         $resultResponse = $this->service->renderResponse('test.html.twig', [], $response);
 
-        $this->assertInstanceOf(RedirectResponse::class, $resultResponse);
+        self::assertInstanceOf(RedirectResponse::class, $resultResponse);
     }
 }

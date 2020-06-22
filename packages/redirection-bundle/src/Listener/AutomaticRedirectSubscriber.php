@@ -64,7 +64,7 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
         $unitOfWork = $this->entityManager->getUnitOfWork();
 
         foreach ($unitOfWork->getScheduledEntityUpdates() as $entity) {
-            if ($redirect = $this->createRedirectFromEntityChanges($entity)) {
+            if (null !== ($redirect = $this->createRedirectFromEntityChanges($entity))) {
                 $this->entityManager->persist($redirect);
                 $unitOfWork->computeChangeSet($this->entityManager->getClassMetadata(Redirect::class), $redirect);
 

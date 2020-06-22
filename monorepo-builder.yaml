@@ -8,6 +8,7 @@ parameters:
             phpstan/phpstan-doctrine: ^0.12
             phpstan/phpstan-phpunit: ^0.12
             phpstan/phpstan-symfony: ^0.12
+            phpstan/phpstan-strict-rules: ^0.12
             psalm/plugin-phpunit: ^0.10
             psalm/plugin-symfony: ^1.2
             symplify/changelog-linker: ^7.3

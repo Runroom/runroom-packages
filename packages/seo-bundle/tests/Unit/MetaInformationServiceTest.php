@@ -86,7 +86,7 @@ class MetaInformationServiceTest extends TestCase
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);
 
-        $this->assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
+        self::assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
     }
 
     /** @test */
@@ -99,14 +99,15 @@ class MetaInformationServiceTest extends TestCase
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);
 
-        $this->assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
+        self::assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
     }
 
     /** @test */
     public function itHasSubscribedEvents(): void
     {
-        $events = $this->service->getSubscribedEvents();
-        $this->assertNotNull($events);
+        $events = MetaInformationService::getSubscribedEvents();
+
+        self::assertCount(1, $events);
     }
 
     protected function configurePageRenderEvent(): PageRenderEvent

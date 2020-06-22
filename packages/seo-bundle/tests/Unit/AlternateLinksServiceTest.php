@@ -73,7 +73,7 @@ class AlternateLinksServiceTest extends TestCase
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);
 
-        $this->assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
+        self::assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
     }
 
     /** @test */
@@ -87,14 +87,15 @@ class AlternateLinksServiceTest extends TestCase
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);
 
-        $this->assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
+        self::assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
     }
 
     /** @test */
     public function itHasSubscribedEvents(): void
     {
-        $events = $this->service->getSubscribedEvents();
-        $this->assertNotNull($events);
+        $events = AlternateLinksService::getSubscribedEvents();
+
+        self::assertCount(1, $events);
     }
 
     protected function configurePageRenderEvent(): PageRenderEvent

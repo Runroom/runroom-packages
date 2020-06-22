@@ -68,7 +68,7 @@ class PageRenderer
         );
 
         $response = $event->getResponse();
-        if ($response instanceof RedirectResponse || !empty($response->getContent())) {
+        if ($response instanceof RedirectResponse || '' !== $response->getContent()) {
             return $response;
         }
 

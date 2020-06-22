@@ -55,7 +55,7 @@ class TranslationServiceTest extends TestCase
 
         $result = $this->service->translate(TranslationFixtures::KEY, [], 'en');
 
-        $this->assertSame(TranslationFixtures::VALUE, $result);
+        self::assertSame(TranslationFixtures::VALUE, $result);
     }
 
     /** @test */
@@ -67,6 +67,6 @@ class TranslationServiceTest extends TestCase
 
         $result = $this->service->translate(TranslationFixtures::KEY, [], 'en');
 
-        $this->assertSame('another_translation', $result);
+        self::assertSame('another_translation', $result);
     }
 }

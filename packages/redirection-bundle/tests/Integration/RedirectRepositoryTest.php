@@ -32,12 +32,12 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
     {
         $redirect = $this->repository->findOneBy(['source' => '/redirect']);
 
-        $this->assertNotNull($redirect->getId());
-        $this->assertSame('/redirect', $redirect->__toString());
-        $this->assertSame('/redirect', $redirect->getSource());
-        $this->assertSame('/target', $redirect->getDestination());
-        $this->assertSame(301, $redirect->getHttpCode());
-        $this->assertTrue($redirect->getPublish());
+        self::assertNotNull($redirect->getId());
+        self::assertSame('/redirect', $redirect->__toString());
+        self::assertSame('/redirect', $redirect->getSource());
+        self::assertSame('/target', $redirect->getDestination());
+        self::assertSame(301, $redirect->getHttpCode());
+        self::assertTrue($redirect->getPublish());
     }
 
     /** @test */
@@ -45,7 +45,7 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
     {
         $redirect = $this->repository->findRedirect('/it-is-not-there');
 
-        $this->assertNull($redirect);
+        self::assertNull($redirect);
     }
 
     /** @test */
@@ -53,7 +53,7 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
     {
         $redirect = $this->repository->findRedirect('/it-is-unpublish');
 
-        $this->assertNull($redirect);
+        self::assertNull($redirect);
     }
 
     /** @test */
@@ -61,7 +61,7 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
     {
         $redirect = $this->repository->findRedirect('/redirect');
 
-        $this->assertSame([
+        self::assertSame([
             'destination' => '/target',
             'httpCode' => '301',
         ], $redirect);

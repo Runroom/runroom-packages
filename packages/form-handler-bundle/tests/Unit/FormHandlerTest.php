@@ -73,13 +73,13 @@ class FormHandlerTest extends TestCase
     {
         $this->configureForm(false);
 
-        $this->eventDispatcher->addListener('form.form_types.event.success', function () {
-            $this->fail("This shouldn't be called");
+        $this->eventDispatcher->addListener('form.form_types.event.success', function (): void {
+            self::fail("This shouldn't be called");
         });
 
         $model = $this->formHandler->handleForm(FormType::class);
 
-        $this->assertInstanceOf(BasicFormViewModel::class, $model);
+        self::assertInstanceOf(BasicFormViewModel::class, $model);
     }
 
     /** @test */
@@ -87,16 +87,16 @@ class FormHandlerTest extends TestCase
     {
         $form = $this->configureForm();
 
-        $this->eventDispatcher->addListener('form.form_types.event.success', function (GenericEvent $event) {
-            $this->assertTrue($event->getSubject()->formIsValid());
+        $this->eventDispatcher->addListener('form.form_types.event.success', function (GenericEvent $event): void {
+            self::assertTrue($event->getSubject()->formIsValid());
         });
 
         $model = $this->formHandler->handleForm(FormType::class);
 
-        $this->assertInstanceOf(BasicFormViewModel::class, $model);
-        $this->assertInstanceOf(FormView::class, $model->getFormView());
-        $this->assertSame($form->reveal(), $model->getForm());
-        $this->assertSame(['success'], $this->session->getFlashBag()->get('form_types'));
+        self::assertInstanceOf(BasicFormViewModel::class, $model);
+        self::assertInstanceOf(FormView::class, $model->getFormView());
+        self::assertSame($form->reveal(), $model->getForm());
+        self::assertSame(['success'], $this->session->getFlashBag()->get('form_types'));
     }
 
     /** @return ObjectProphecy<FormInterface> */

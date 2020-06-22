@@ -81,7 +81,7 @@ abstract class DoctrineIntegrationTestBase extends TestCase
     /** @return string[] */
     protected function processDataFixtures(): array
     {
-        return array_map(function ($value) {
+        return array_map(function ($value): string {
             $testClass = new \ReflectionClass(static::class);
 
             return \dirname($testClass->getFileName(), 2) . '/Fixtures/' . $value;

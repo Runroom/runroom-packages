@@ -52,7 +52,7 @@ final class TwigErrorRenderer implements ErrorRendererInterface
         $exception = $this->fallbackErrorRenderer->render($exception);
         $debug = \is_bool($this->debug) ? $this->debug : ($this->debug)($exception);
 
-        if ($debug || !$template = $this->findTemplate($exception->getStatusCode())) {
+        if ($debug || null === ($template = $this->findTemplate($exception->getStatusCode()))) {
             return $exception;
         }
 
@@ -66,7 +66,7 @@ final class TwigErrorRenderer implements ErrorRendererInterface
     public static function isDebug(RequestStack $requestStack, bool $debug): \Closure
     {
         return static function () use ($requestStack, $debug): bool {
-            if (!$request = $requestStack->getCurrentRequest()) {
+            if (null === ($request = $requestStack->getCurrentRequest())) {
                 return $debug;
             }
 
