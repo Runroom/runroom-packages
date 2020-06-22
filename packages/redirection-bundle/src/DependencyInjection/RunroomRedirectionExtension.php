@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\DependencyInjection;
 
+use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
@@ -22,7 +23,17 @@ final class RunroomRedirectionExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
+
+        if ($config['enable_automatic_redirections']) {
+            $definition = $container->getDefinition(AutomaticRedirectSubscriber::class);
+
+            $definition->replaceArgument('$configuration', $config['automatic_redirections']);
+            $definition->addTag('doctrine.event_subscriber');
+        }
     }
 }

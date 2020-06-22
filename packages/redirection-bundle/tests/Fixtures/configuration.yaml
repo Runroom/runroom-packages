@@ -1,0 +1,7 @@
+runroom_redirection:
+    enable_automatic_redirections: true
+    automatic_redirections:
+        Runroom\RedirectionBundle\Tests\App\Entity\Entity:
+            route: 'test'
+            routeParameters:
+                slug: slug
