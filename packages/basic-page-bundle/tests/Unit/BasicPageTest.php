@@ -24,13 +24,13 @@ class BasicPageTest extends TestCase
     {
         $BasicPage = BasicPageFixture::create();
 
-        $this->assertSame(BasicPageFixture::TITLE, $BasicPage->__toString());
-        $this->assertSame(BasicPageFixture::ID, $BasicPage->getId());
-        $this->assertSame(BasicPageFixture::TITLE, $BasicPage->getTitle());
-        $this->assertSame(BasicPageFixture::LOCATION, $BasicPage->getLocation());
-        $this->assertSame(BasicPageFixture::CONTENT, $BasicPage->getContent());
-        $this->assertSame(BasicPageFixture::SLUG, $BasicPage->getSlug());
-        $this->assertSame(BasicPageFixture::PUBLISH, $BasicPage->getPublish());
-        $this->assertInstanceOf(EntityMetaInformation::class, $BasicPage->getMetaInformation());
+        self::assertSame(BasicPageFixture::TITLE, $BasicPage->__toString());
+        self::assertSame(BasicPageFixture::ID, $BasicPage->getId());
+        self::assertSame(BasicPageFixture::TITLE, $BasicPage->getTitle());
+        self::assertSame(BasicPageFixture::LOCATION, $BasicPage->getLocation());
+        self::assertSame(BasicPageFixture::CONTENT, $BasicPage->getContent());
+        self::assertSame(BasicPageFixture::SLUG, $BasicPage->getSlug());
+        self::assertSame(BasicPageFixture::PUBLISH, $BasicPage->getPublish());
+        self::assertInstanceOf(EntityMetaInformation::class, $BasicPage->getMetaInformation());
     }
 }

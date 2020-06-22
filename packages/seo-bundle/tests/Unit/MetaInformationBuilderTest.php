@@ -21,7 +21,6 @@ use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\Tests\Fixtures\MetaInformationFixture;
-use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class MetaInformationBuilderTest extends TestCase
@@ -53,10 +52,9 @@ class MetaInformationBuilderTest extends TestCase
 
         $metas = $this->builder->build(new TestMetaInformationProvider(), 'test', $model);
 
-        $this->assertInstanceOf(MetaInformationViewModel::class, $metas);
-        $this->assertSame('test title', $metas->getTitle());
-        $this->assertSame(' description', $metas->getDescription());
-        $this->assertNull($metas->getImage());
+        self::assertSame('test title', $metas->getTitle());
+        self::assertSame(' description', $metas->getDescription());
+        self::assertNull($metas->getImage());
     }
 }
 

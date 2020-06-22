@@ -45,9 +45,9 @@ final class RedirectListenerTest extends TestCase
     /** @test */
     public function itSubscribesToKernelRequestEvent(): void
     {
-        $events = $this->listener->getSubscribedEvents();
+        $events = RedirectListener::getSubscribedEvents();
 
-        $this->assertArrayHasKey(KernelEvents::REQUEST, $events);
+        self::assertArrayHasKey(KernelEvents::REQUEST, $events);
     }
 
     /** @test */
@@ -57,7 +57,7 @@ final class RedirectListenerTest extends TestCase
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertNull($event->getResponse());
+        self::assertNull($event->getResponse());
     }
 
     /** @test */
@@ -69,7 +69,7 @@ final class RedirectListenerTest extends TestCase
 
         $this->listener->onKernelRequest($event);
 
-        $this->assertNull($event->getResponse());
+        self::assertNull($event->getResponse());
     }
 
     /** @test */
@@ -87,9 +87,8 @@ final class RedirectListenerTest extends TestCase
         /** @var RedirectResponse */
         $response = $event->getResponse();
 
-        $this->assertInstanceOf(RedirectResponse::class, $response);
-        $this->assertSame('/redirect', $response->getTargetUrl());
-        $this->assertSame(301, $response->getStatusCode());
+        self::assertSame('/redirect', $response->getTargetUrl());
+        self::assertSame(301, $response->getStatusCode());
     }
 
     private function getResponseEvent(int $requestType = HttpKernelInterface::MASTER_REQUEST): RequestEvent

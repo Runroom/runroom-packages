@@ -51,7 +51,7 @@ final class MediaAdminController extends CRUDController
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
 
-        if (!$filters || !\array_key_exists('context', $filters)) {
+        if (null === $filters || !\array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context');
         } else {
             $context = $filters['context']['value'];
@@ -84,7 +84,7 @@ final class MediaAdminController extends CRUDController
         $provider = $request->get('provider');
         $file = $request->files->get('upload');
 
-        if (!$request->isMethod('POST') || !$provider || null === $file) {
+        if (!$request->isMethod('POST') || null === $provider || null === $file) {
             throw $this->createNotFoundException();
         }
 

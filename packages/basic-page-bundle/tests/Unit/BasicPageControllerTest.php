@@ -61,6 +61,6 @@ class BasicPageControllerTest extends TestCase
 
         $response = $this->controller->show(self::SLUG);
 
-        $this->assertSame($expectedResponse->reveal(), $response);
+        self::assertSame($expectedResponse->reveal(), $response);
     }
 }

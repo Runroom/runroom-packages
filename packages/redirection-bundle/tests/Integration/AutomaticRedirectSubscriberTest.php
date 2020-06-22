@@ -38,21 +38,15 @@ final class AutomaticRedirectSubscriberTest extends DoctrineIntegrationTestBase
     /** @test */
     public function itDoesSubscribeToOnFlushEvent(): void
     {
-        $events = $this->subscriber->getSubscribedEvents();
-
-        $this->assertSame([Events::onFlush], $events);
-    }
-
-    /** @test */
-    public function itCanBeCreatedUsingItsConstructor(): void
-    {
         $subscriber = new AutomaticRedirectSubscriber(
             self::$container->get('router'),
             self::$container->get('property_accessor'),
             []
         );
 
-        $this->assertNotNull($subscriber);
+        $events = $subscriber->getSubscribedEvents();
+
+        self::assertSame([Events::onFlush], $events);
     }
 
     /** @test */
@@ -87,10 +81,10 @@ final class AutomaticRedirectSubscriberTest extends DoctrineIntegrationTestBase
 
         $redirects = $this->repository->findBy(['destination' => '/entity/test']);
 
-        $this->assertCount(2, $redirects);
+        self::assertCount(2, $redirects);
 
         foreach ($redirects as $redirect) {
-            $this->assertTrue($redirect->getAutomatic());
+            self::assertTrue($redirect->getAutomatic());
         }
     }
 
@@ -110,7 +104,7 @@ final class AutomaticRedirectSubscriberTest extends DoctrineIntegrationTestBase
 
         $redirects = $this->repository->findBy(['automatic' => true]);
 
-        $this->assertCount(0, $redirects);
+        self::assertCount(0, $redirects);
     }
 
     protected function getDataFixtures(): array

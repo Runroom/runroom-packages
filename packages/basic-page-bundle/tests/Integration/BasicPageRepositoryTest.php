@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Doctrine\ORM\NoResultException;
-use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Tests\TestCase\DoctrineIntegrationTestBase;
 
@@ -35,10 +34,9 @@ class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
     /** @test */
     public function itFindsBasicPageGivenItsSlug(): void
     {
-        $BasicPage = $this->repository->findBySlug('slug');
+        $basicPage = $this->repository->findBySlug('slug');
 
-        $this->assertInstanceOf(BasicPage::class, $BasicPage);
-        $this->assertSame(self::STATIC_PAGE_ID, $BasicPage->getId());
+        self::assertSame(self::STATIC_PAGE_ID, $basicPage->getId());
     }
 
     /** @test */

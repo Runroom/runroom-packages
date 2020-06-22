@@ -27,7 +27,7 @@ final class Configuration implements ConfigurationInterface
             ->booleanNode('enable_automatic_redirections')->defaultFalse()->end()
             ->arrayNode('automatic_redirections')
                 ->validate()
-                    ->ifTrue(function ($config) {
+                    ->ifTrue(function ($config): bool {
                         foreach (array_keys($config) as $entity) {
                             if (!class_exists($entity)) {
                                 return true;

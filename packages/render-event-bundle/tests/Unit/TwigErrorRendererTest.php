@@ -77,7 +77,7 @@ class TwigErrorRendererTest extends TestCase
 
         $response = $controller->render($this->exception->reveal());
 
-        $this->assertInstanceOf(FlattenException::class, $response);
+        self::assertSame(404, $response->getStatusCode());
     }
 
     /** @test */
@@ -95,7 +95,7 @@ class TwigErrorRendererTest extends TestCase
 
         $response = $controller->render($this->exception->reveal());
 
-        $this->assertInstanceOf(FlattenException::class, $response);
+        self::assertSame(404, $response->getStatusCode());
     }
 
     /** @test */
@@ -112,7 +112,7 @@ class TwigErrorRendererTest extends TestCase
 
         $response = $controller->render($this->exception->reveal());
 
-        $this->assertInstanceOf(FlattenException::class, $response);
+        self::assertSame(404, $response->getStatusCode());
     }
 
     private function configureController(bool $debug = false): TwigErrorRenderer

@@ -30,26 +30,26 @@ class DefaultMetaInformationProviderTest extends TestCase
     public function itProvidesMetasForAnyRoute(): void
     {
         foreach (['default', 'home'] as $route) {
-            $this->assertTrue($this->provider->providesMetas($route));
+            self::assertTrue($this->provider->providesMetas($route));
         }
     }
 
     /** @test */
     public function itDoesNotDefineAnyAlias(): void
     {
-        $this->assertSame('default', $this->provider->getRouteAlias('default'));
+        self::assertSame('default', $this->provider->getRouteAlias('default'));
     }
 
     /** @test */
     public function itDoesNotDefineEntityMetaInformation(): void
     {
-        $this->assertNull($this->provider->getEntityMetaInformation(new \stdClass()));
+        self::assertNull($this->provider->getEntityMetaInformation(new \stdClass()));
     }
 
     /** @test */
     public function itDoesNotDefineEntityMetaImage(): void
     {
-        $this->assertNull($this->provider->getEntityMetaImage(new \stdClass()));
+        self::assertNull($this->provider->getEntityMetaImage(new \stdClass()));
     }
 
     /** @test */
@@ -58,6 +58,6 @@ class DefaultMetaInformationProviderTest extends TestCase
         $method = new \ReflectionMethod($this->provider, 'getRoutes');
         $method->setAccessible(true);
 
-        $this->assertEmpty($method->invoke($this->provider));
+        self::assertEmpty($method->invoke($this->provider));
     }
 }

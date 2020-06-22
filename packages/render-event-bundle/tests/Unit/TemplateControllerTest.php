@@ -48,6 +48,6 @@ class TemplateControllerTest extends TestCase
 
         $response = $controller('template.html.twig', ['parameter' => 'value']);
 
-        $this->assertSame($expectedResponse, $response);
+        self::assertSame($expectedResponse, $response);
     }
 }

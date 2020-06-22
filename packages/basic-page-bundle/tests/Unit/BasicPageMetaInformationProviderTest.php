@@ -51,7 +51,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
         $routes = [self::META_ROUTE];
 
         foreach ($routes as $route) {
-            $this->assertTrue($this->provider->providesMetas($route));
+            self::assertTrue($this->provider->providesMetas($route));
         }
     }
 
@@ -60,6 +60,6 @@ class BasicPageMetaInformationProviderTest extends TestCase
     {
         $entityMetas = $this->provider->getEntityMetaInformation($this->model);
 
-        $this->assertInstanceOf(EntityMetaInformation::class, $entityMetas);
+        self::assertInstanceOf(EntityMetaInformation::class, $entityMetas);
     }
 }
