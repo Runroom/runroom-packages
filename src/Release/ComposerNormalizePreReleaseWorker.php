@@ -20,16 +20,11 @@ use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 class ComposerNormalizePreReleaseWorker implements ReleaseWorkerInterface
 {
     /** @var ProcessRunner */
-    protected $processRunner;
+    private $processRunner;
 
     public function __construct(ProcessRunner $processRunner)
     {
         $this->processRunner = $processRunner;
-    }
-
-    public function getPriority(): int
-    {
-        return 450;
     }
 
     public function work(Version $version): void
