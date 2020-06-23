@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace App\Release;
 
-class ComposerNormalizePostReleaseWorker extends ComposerNormalizePreReleaseWorker
+final class ComposerNormalizePostReleaseWorker extends ComposerNormalizePreReleaseWorker
 {
-    public function getPriority(): int
-    {
-        return 75;
-    }
 }

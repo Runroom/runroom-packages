@@ -20,7 +20,7 @@ jobs:
           tools: cs2pr, composer:v2
       - id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.php }}-composer
@@ -30,3 +30,4 @@ jobs:
       - run: composer psalm -- --threads=$(nproc) --output-format=github
       - run: composer normalize-run -- --dry-run --diff
       - run: composer validate --strict
+      - run: vendor/bin/monorepo-builder validate
