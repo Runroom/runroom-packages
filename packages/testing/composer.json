@@ -2,7 +2,13 @@
     "name": "runroom-packages/testing",
     "type": "library",
     "description": "This library provides tools to help testing our bundles and projects",
-    "keywords": [],
+    "keywords": [
+        "testing",
+        "doctrine",
+        "fixtures",
+        "integration",
+        "phpunit"
+    ],
     "homepage": "https://github.com/runroom/testing",
     "license": "MIT",
     "authors": [
