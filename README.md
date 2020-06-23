@@ -64,6 +64,12 @@ However you should not install this package but install the following ones depen
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/d/daily)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
 
+## [Testing](https://github.com/Runroom/testing)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/testing/downloads)](https://packagist.org/packages/runroom-packages/testing)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/testing/d/monthly)](https://packagist.org/packages/runroom-packages/testing)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/testing/d/daily)](https://packagist.org/packages/runroom-packages/testing)
+
 ## [RunroomTranslationBundle](https://github.com/Runroom/RunroomTranslationBundle)
 
 [![Total Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/downloads)](https://packagist.org/packages/runroom-packages/translation-bundle)

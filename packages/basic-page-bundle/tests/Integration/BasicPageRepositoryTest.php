@@ -15,7 +15,7 @@ namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Doctrine\ORM\NoResultException;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
-use Runroom\BasicPageBundle\Tests\TestCase\DoctrineIntegrationTestBase;
+use Runroom\Testing\TestCase\DoctrineIntegrationTestBase;
 
 class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
 {

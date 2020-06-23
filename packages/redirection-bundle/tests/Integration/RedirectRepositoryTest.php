@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Runroom\RedirectionBundle\Tests\Integration;
 
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
-use Runroom\RedirectionBundle\Tests\TestCase\DoctrineIntegrationTestBase;
+use Runroom\Testing\TestCase\DoctrineIntegrationTestBase;
 
 final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
 {

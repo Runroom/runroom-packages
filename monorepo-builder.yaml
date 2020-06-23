@@ -24,6 +24,7 @@ parameters:
         packages/render-event-bundle: 'git@github.com:Runroom/RunroomRenderEventBundle.git'
         packages/seo-bundle: 'git@github.com:Runroom/RunroomSeoBundle.git'
         packages/sortable-behavior-bundle: 'git@github.com:Runroom/RunroomSortableBehaviorBundle.git'
+        packages/testing: 'git@github.com:Runroom/testing.git'
         packages/translation-bundle: 'git@github.com:Runroom/RunroomTranslationBundle.git'
 
 services:
