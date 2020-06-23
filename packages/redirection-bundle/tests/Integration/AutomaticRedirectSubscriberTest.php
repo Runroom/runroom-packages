@@ -18,7 +18,7 @@ use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
 use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
-use Runroom\RedirectionBundle\Tests\TestCase\DoctrineIntegrationTestBase;
+use Runroom\Testing\TestCase\DoctrineIntegrationTestBase;
 
 final class AutomaticRedirectSubscriberTest extends DoctrineIntegrationTestBase
 {

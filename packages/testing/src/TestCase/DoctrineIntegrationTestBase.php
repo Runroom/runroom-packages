@@ -11,23 +11,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\BasicPageBundle\Tests\TestCase;
+namespace Runroom\Testing\TestCase;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\Persistence\ManagerRegistry;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use PHPUnit\Framework\TestCase;
-use Runroom\BasicPageBundle\Tests\App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Test\TestContainer;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class DoctrineIntegrationTestBase extends TestCase
 {
-    /** @var Kernel */
+    /** @var KernelInterface */
     protected static $kernel;
 
     /** @var LoaderInterface */
@@ -51,13 +50,13 @@ abstract class DoctrineIntegrationTestBase extends TestCase
             return;
         }
 
-        static::$kernel = new Kernel('test', true);
+        static::$kernel = static::createKernel();
         static::$kernel->boot();
 
         static::$container = static::$kernel->getContainer()->get('test.service_container');
         static::$entityManager = static::$container->get(EntityManagerInterface::class);
         static::$loader = static::$container->get('fidry_alice_data_fixtures.loader.doctrine');
-        static::$connection = static::$container->get(ManagerRegistry::class)->getConnection();
+        static::$connection = static::$container->get(Connection::class);
         static::$parameterBag = static::$container->getParameterBag();
 
         static::$container->get(RequestStack::class)->push(new Request());
@@ -83,11 +82,29 @@ abstract class DoctrineIntegrationTestBase extends TestCase
     {
         return array_map(function ($value): string {
             $testClass = new \ReflectionClass(static::class);
+            $filename = $testClass->getFileName();
 
-            return \dirname($testClass->getFileName(), 2) . '/Fixtures/' . $value;
+            if (false !== $filename) {
+                return \dirname($filename, 2) . '/Fixtures/' . $value;
+            }
+
+            return '';
         }, $this->getDataFixtures());
     }
 
     /** @return string[] */
     abstract protected function getDataFixtures(): array;
+
+    private static function createKernel(): KernelInterface
+    {
+        if (!isset($_SERVER['KERNEL_CLASS']) && !isset($_ENV['KERNEL_CLASS'])) {
+            throw new \LogicException(sprintf('You must set the KERNEL_CLASS environment variable to the fully-qualified class name of your Kernel in phpunit.xml / phpunit.xml.dist or override the "%1$s::createKernel()" or "%1$s::getKernelClass()" method.', static::class));
+        }
+
+        if (!class_exists($class = $_ENV['KERNEL_CLASS'] ?? $_SERVER['KERNEL_CLASS'])) {
+            throw new \RuntimeException(sprintf('Class "%s" doesn\'t exist or cannot be autoloaded. Check that the KERNEL_CLASS value in phpunit.xml matches the fully-qualified class name of your Kernel or override the "%s::createKernel()" method.', $class, static::class));
+        }
+
+        return new $class('test', true);
+    }
 }

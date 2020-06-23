@@ -29,7 +29,7 @@ final class Configuration implements ConfigurationInterface
                 ->validate()
                     ->ifTrue(function ($config): bool {
                         foreach (array_keys($config) as $entity) {
-                            if (!class_exists($entity)) {
+                            if (\is_string($entity) && !class_exists($entity)) {
                                 return true;
                             }
                         }
