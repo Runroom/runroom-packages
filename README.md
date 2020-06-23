@@ -6,6 +6,7 @@ Runroom Packages
 [![License](https://poser.pugx.org/runroom-packages/runroom-packages/license)](https://packagist.org/packages/runroom-packages/runroom-packages)
 
 ![ci](https://github.com/Runroom/runroom-packages/workflows/ci/badge.svg)
+![split-ci](https://github.com/Runroom/runroom-packages/workflows/split-ci/badge.svg)
 ![qa](https://github.com/Runroom/runroom-packages/workflows/qa/badge.svg)
 [![codecov](https://codecov.io/gh/Runroom/runroom-packages/branch/master/graph/badge.svg)](https://codecov.io/gh/Runroom/runroom-packages)
 
