@@ -64,12 +64,37 @@ final class Kernel extends BaseKernel
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite://:memory:'],
-            'orm' => ['auto_mapping' => true],
+            'orm' => [
+                'auto_mapping' => true,
+                'mappings' => [
+                    'Entity' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/Entity',
+                        'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
+                ],
+            ],
+        ]);
+
+        $container->loadFromExtension('runroom_redirection', [
+            'enable_automatic_redirections' => true,
+            'automatic_redirections' => [
+                Entity\Entity::class => [
+                    'route' => 'route.entity',
+                    'routeParameters' => ['slug' => 'slug'],
+                ],
+                Entity\WrongEntity::class => [
+                    'route' => 'route.missing',
+                    'routeParameters' => ['slug' => 'slug'],
+                ],
+            ],
         ]);
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
+        $routes->add('/entity/{slug}', 'controller', 'route.entity');
     }
 
     private function getBaseDir(): string

@@ -42,7 +42,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         $model = new BasicPageViewModel();
         $model->setBasicPage(BasicPageFixture::createWithSlugs($this->locales));
 
-        $this->assertSame(['es', 'en'], $this->provider->getAvailableLocales($model));
+        self::assertSame(['es', 'en'], $this->provider->getAvailableLocales($model));
     }
 
     /** @test */
@@ -54,7 +54,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         foreach ($this->locales as $locale) {
             $routeParameters = $this->provider->getParameters($model, $locale);
 
-            $this->assertSame(['slug' => 'slug_' . $locale], $routeParameters);
+            self::assertSame(['slug' => 'slug_' . $locale], $routeParameters);
         }
     }
 
@@ -62,7 +62,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     public function itProvidesAlternateLinks(): void
     {
         foreach ([self::META_ROUTE] as $route) {
-            $this->assertTrue($this->provider->providesAlternateLinks($route));
+            self::assertTrue($this->provider->providesAlternateLinks($route));
         }
     }
 }

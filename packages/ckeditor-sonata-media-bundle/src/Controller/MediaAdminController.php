@@ -19,6 +19,7 @@ use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool;
 use Symfony\Component\Form\FormRenderer;
+use Symfony\Component\Form\FormRendererInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -51,7 +52,7 @@ final class MediaAdminController extends CRUDController
         $datagrid = $this->admin->getDatagrid();
         $filters = $request->get('filter');
 
-        if (!$filters || !\array_key_exists('context', $filters)) {
+        if (null === $filters || !\array_key_exists('context', $filters)) {
             $context = $this->admin->getPersistentParameter('context');
         } else {
             $context = $filters['context']['value'];
@@ -67,7 +68,11 @@ final class MediaAdminController extends CRUDController
 
         $formView = $datagrid->getForm()->createView();
 
-        $this->twig->getRuntime(FormRenderer::class)->setTheme($formView, $this->admin->getFilterTheme());
+        $runtime = $this->twig->getRuntime(FormRenderer::class);
+
+        if ($runtime instanceof FormRendererInterface) {
+            $runtime->setTheme($formView, $this->admin->getFilterTheme());
+        }
 
         return $this->renderWithExtraParams('@RunroomCkeditorSonataMedia/browser.html.twig', [
             'action' => 'browser',
@@ -84,7 +89,7 @@ final class MediaAdminController extends CRUDController
         $provider = $request->get('provider');
         $file = $request->files->get('upload');
 
-        if (!$request->isMethod('POST') || !$provider || null === $file) {
+        if (!$request->isMethod('POST') || null === $provider || null === $file) {
             throw $this->createNotFoundException();
         }
 

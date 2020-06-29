@@ -55,6 +55,7 @@ final class ORMPositionHandler extends AbstractPositionHandler
         $parentEntityClass = true;
 
         while ($parentEntityClass) {
+            /** @var class-string|false */
             $parentEntityClass = ClassUtils::getParentClass($entityClass);
 
             if (false !== $parentEntityClass && class_exists($parentEntityClass)) {
@@ -76,14 +77,18 @@ final class ORMPositionHandler extends AbstractPositionHandler
                 ->select(sprintf('MAX(t.%s) as last_position', $this->getPositionFieldByEntity($entityClass)))
                 ->from($entityClass, 't');
 
-            if ($groups) {
+            if (\count($groups) > 0) {
                 $index = 1;
 
                 foreach ($groups as $groupName) {
-                    $getter = 'get' . $groupName;
-                    $value = $entity->$getter();
+                    $value = null;
+                    $callback = [$entity, 'get' . $groupName];
 
-                    if ($value) {
+                    if (\is_callable($callback)) {
+                        $value = \call_user_func($callback);
+                    }
+
+                    if (null !== $value) {
                         $queryBuilder
                             ->andWhere(sprintf('t.%s = :group_%s', $groupName, $index))
                             ->setParameter(sprintf('group_%s', $index), $value);
@@ -133,8 +138,12 @@ final class ORMPositionHandler extends AbstractPositionHandler
         $cacheKey = ClassUtils::getClass($entity);
 
         foreach ($groups as $groupName) {
-            $getter = 'get' . $groupName;
-            $value = $entity->$getter();
+            $value = '';
+            $callback = [$entity, 'get' . $groupName];
+
+            if (\is_callable($callback)) {
+                $value = \call_user_func($callback);
+            }
 
             $cacheKey .= '_' . ((\is_object($value) && method_exists($value, 'getId')) ? $value->getId() : $value);
         }

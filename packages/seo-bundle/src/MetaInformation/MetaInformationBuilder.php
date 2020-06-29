@@ -58,7 +58,7 @@ class MetaInformationBuilder
     private function getMetasForRoute(MetaInformationProviderInterface $provider, string $route): MetaInformation
     {
         return $this->repository->findOneBy(['route' => $provider->getRouteAlias($route)]) ??
-            $this->repository->findOneBy(['route' => self::DEFAULT_ROUTE]);
+            $this->repository->findOneBy(['route' => self::DEFAULT_ROUTE]) ?? new MetaInformation();
     }
 
     private function getTitle(?EntityMetaInformation $modelMetas, MetaInformation $routeMetas): string

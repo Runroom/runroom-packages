@@ -53,7 +53,7 @@ class AlternateLinksBuilderTest extends TestCase
     /** @test */
     public function itDoesNotProvideAnyAlternateLinks(): void
     {
-        $this->assertFalse($this->provider->providesAlternateLinks('default'));
+        self::assertFalse($this->provider->providesAlternateLinks('default'));
     }
 
     /** @test */
@@ -71,7 +71,7 @@ class AlternateLinksBuilderTest extends TestCase
         $alternateLinks = $this->builder->build($this->provider, 'model', $route);
 
         foreach ($this->locales as $locale) {
-            $this->assertContains($locale, $alternateLinks);
+            self::assertContains($locale, $alternateLinks);
         }
     }
 
@@ -80,7 +80,7 @@ class AlternateLinksBuilderTest extends TestCase
     {
         $this->urlGenerator->generate(Argument::cetera())->willThrow(RouteNotFoundException::class);
 
-        $this->assertEmpty($this->builder->build($this->provider, 'model', 'missing_route'));
+        self::assertEmpty($this->builder->build($this->provider, 'model', 'missing_route'));
     }
 }
 

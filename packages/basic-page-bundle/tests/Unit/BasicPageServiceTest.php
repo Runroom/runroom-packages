@@ -19,7 +19,6 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageService;
-use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 
@@ -51,8 +50,7 @@ class BasicPageServiceTest extends TestCase
 
         $model = $this->service->getBasicPageViewModel(self::SLUG);
 
-        $this->assertInstanceOf(BasicPageViewModel::class, $model);
-        $this->assertSame($basicPage, $model->getBasicPage());
+        self::assertSame($basicPage, $model->getBasicPage());
     }
 
     /** @test */
@@ -64,14 +62,14 @@ class BasicPageServiceTest extends TestCase
 
         $this->service->onPageRender($event);
 
-        $this->assertSame([], $event->getPageViewModel()->getContext('basic_pages'));
+        self::assertSame([], $event->getPageViewModel()->getContext('basic_pages'));
     }
 
     /** @test */
     public function itHasSubscribedEvents(): void
     {
-        $events = $this->service->getSubscribedEvents();
+        $events = BasicPageService::getSubscribedEvents();
 
-        $this->assertCount(1, $events);
+        self::assertCount(1, $events);
     }
 }

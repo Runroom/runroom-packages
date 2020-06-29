@@ -28,7 +28,7 @@ final class Configuration implements ConfigurationInterface
             ->arrayNode('locales')
                 ->isRequired()
                 ->requiresAtLeastOneElement()
-                ->prototype('scalar')->cannotBeEmpty()->end()
+                ->scalarPrototype()->cannotBeEmpty()->end()
             ->end()
             ->scalarNode('xdefault_locale')
                 ->isRequired()
@@ -40,7 +40,7 @@ final class Configuration implements ConfigurationInterface
                         ->isRequired()
                         ->cannotBeEmpty()
                         ->validate()
-                            ->ifTrue(function ($config) {
+                            ->ifTrue(function ($config): bool {
                                 return !is_a($config, Media::class, true);
                             })
                             ->thenInvalid('%s must extend ' . Media::class)

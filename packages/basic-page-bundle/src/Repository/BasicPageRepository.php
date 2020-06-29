@@ -17,6 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 use Runroom\BasicPageBundle\Entity\BasicPage;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -37,7 +38,7 @@ class BasicPageRepository extends ServiceEntityRepository
 
     public function findBySlug(string $slug): BasicPage
     {
-        $request = $this->requestStack->getCurrentRequest();
+        $request = $this->requestStack->getCurrentRequest() ?? new Request();
 
         $query = $this->createQueryBuilder('basic_page')
             ->leftJoin('basic_page.translations', 'translations', Join::WITH, 'translations.locale = :locale')

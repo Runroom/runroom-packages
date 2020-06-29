@@ -6,6 +6,7 @@ Runroom Packages
 [![License](https://poser.pugx.org/runroom-packages/runroom-packages/license)](https://packagist.org/packages/runroom-packages/runroom-packages)
 
 ![ci](https://github.com/Runroom/runroom-packages/workflows/ci/badge.svg)
+![split-ci](https://github.com/Runroom/runroom-packages/workflows/split-ci/badge.svg)
 ![qa](https://github.com/Runroom/runroom-packages/workflows/qa/badge.svg)
 [![codecov](https://codecov.io/gh/Runroom/runroom-packages/branch/master/graph/badge.svg)](https://codecov.io/gh/Runroom/runroom-packages)
 
@@ -62,6 +63,12 @@ However you should not install this package but install the following ones depen
 [![Total Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/downloads)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/d/daily)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
+
+## [Testing](https://github.com/Runroom/testing)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/testing/downloads)](https://packagist.org/packages/runroom-packages/testing)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/testing/d/monthly)](https://packagist.org/packages/runroom-packages/testing)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/testing/d/daily)](https://packagist.org/packages/runroom-packages/testing)
 
 ## [RunroomTranslationBundle](https://github.com/Runroom/RunroomTranslationBundle)
 

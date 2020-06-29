@@ -31,6 +31,6 @@ class MetaInformationAwareTest extends TestCase
         $expected = $entityMetaInformation->reveal();
         $metaInformationAware = $metaInformationAware->setMetaInformation($expected);
 
-        $this->assertSame($expected, $metaInformationAware->getMetaInformation());
+        self::assertSame($expected, $metaInformationAware->getMetaInformation());
     }
 }

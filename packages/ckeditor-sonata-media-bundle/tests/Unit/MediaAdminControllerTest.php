@@ -35,7 +35,6 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 class MediaAdminControllerTest extends TestCase
@@ -105,8 +104,7 @@ class MediaAdminControllerTest extends TestCase
 
         $response = $this->controller->browserAction($this->request);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame('renderResponse', $response->getContent());
+        self::assertSame('renderResponse', $response->getContent());
     }
 
     public function testUpload(): void
@@ -126,8 +124,7 @@ class MediaAdminControllerTest extends TestCase
 
         $response = $this->controller->uploadAction($this->request);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame('renderResponse', $response->getContent());
+        self::assertSame('renderResponse', $response->getContent());
     }
 
     private function configureCRUDController(): void

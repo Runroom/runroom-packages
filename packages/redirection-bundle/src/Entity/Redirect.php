@@ -30,7 +30,7 @@ class Redirect
     public const TEMPORAL = 302;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -39,7 +39,7 @@ class Redirect
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Assert\NotNull
      * @Assert\Length(max=500)
@@ -49,7 +49,7 @@ class Redirect
     private $source;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Assert\NotNull
      * @Assert\Length(max=500)
@@ -60,7 +60,7 @@ class Redirect
     private $destination;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @Assert\Choice(choices = {
      *     Redirect::PERMANENT,
@@ -71,7 +71,14 @@ class Redirect
     private $httpCode = self::PERMANENT;
 
     /**
-     * @var bool
+     * @var bool|null
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $automatic = false;
+
+    /**
+     * @var bool|null
      *
      * @ORM\Column(type="boolean")
      */
@@ -121,6 +128,18 @@ class Redirect
     public function getHttpCode(): ?int
     {
         return $this->httpCode;
+    }
+
+    public function setAutomatic(?bool $automatic): self
+    {
+        $this->automatic = $automatic;
+
+        return $this;
+    }
+
+    public function getAutomatic(): ?bool
+    {
+        return $this->automatic;
     }
 
     public function setPublish(?bool $publish): self

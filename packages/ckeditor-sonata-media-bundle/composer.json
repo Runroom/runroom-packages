@@ -54,5 +54,7 @@
         "psr-4": {
             "Runroom\\CkeditorSonataMediaBundle\\Tests\\": "tests/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

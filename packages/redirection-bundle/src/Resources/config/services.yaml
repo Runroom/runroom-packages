@@ -13,6 +13,12 @@ services:
             $repository: '@Runroom\RedirectionBundle\Repository\RedirectRepository'
         tags: [kernel.event_subscriber]
 
+    Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber:
+        arguments:
+            $urlGenerator: '@router'
+            $propertyAccessor: '@property_accessor'
+            $configuration: []
+
     Runroom\RedirectionBundle\Repository\RedirectRepository:
         arguments:
             $registry: '@doctrine'

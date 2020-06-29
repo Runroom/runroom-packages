@@ -30,20 +30,20 @@ class DefaultAlternateLinksProviderTest extends TestCase
     public function itProvidesMetasForAnyRoute(): void
     {
         foreach (['default', 'home'] as $route) {
-            $this->assertTrue($this->provider->providesAlternateLinks($route));
+            self::assertTrue($this->provider->providesAlternateLinks($route));
         }
     }
 
     /** @test */
     public function itDoesNotDefineRouteParameters(): void
     {
-        $this->assertNull($this->provider->getParameters(new \stdClass(), 'es'));
+        self::assertNull($this->provider->getParameters(new \stdClass(), 'es'));
     }
 
     /** @test */
     public function itDoesNotDefineAvailableLocales(): void
     {
-        $this->assertNull($this->provider->getAvailableLocales(new \stdClass()));
+        self::assertNull($this->provider->getAvailableLocales(new \stdClass()));
     }
 
     /** @test */
@@ -52,6 +52,6 @@ class DefaultAlternateLinksProviderTest extends TestCase
         $method = new \ReflectionMethod($this->provider, 'getRoutes');
         $method->setAccessible(true);
 
-        $this->assertEmpty($method->invoke($this->provider));
+        self::assertEmpty($method->invoke($this->provider));
     }
 }

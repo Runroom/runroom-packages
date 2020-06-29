@@ -8,10 +8,11 @@ parameters:
             phpstan/phpstan-doctrine: ^0.12
             phpstan/phpstan-phpunit: ^0.12
             phpstan/phpstan-symfony: ^0.12
+            phpstan/phpstan-strict-rules: ^0.12
             psalm/plugin-phpunit: ^0.10
             psalm/plugin-symfony: ^1.2
-            symplify/changelog-linker: ^7.3
-            symplify/monorepo-builder: ^7.3
+            symplify/changelog-linker: ^8.0
+            symplify/monorepo-builder: ^8.0
             vimeo/psalm: ^3.11
             weirdan/doctrine-psalm-plugin: ^0.11
 
@@ -23,8 +24,16 @@ parameters:
         packages/render-event-bundle: 'git@github.com:Runroom/RunroomRenderEventBundle.git'
         packages/seo-bundle: 'git@github.com:Runroom/RunroomSeoBundle.git'
         packages/sortable-behavior-bundle: 'git@github.com:Runroom/RunroomSortableBehaviorBundle.git'
+        packages/testing: 'git@github.com:Runroom/testing.git'
         packages/translation-bundle: 'git@github.com:Runroom/RunroomTranslationBundle.git'
 
 services:
-    App\Release\ComposerNormalizePreReleaseWorker: ~
-    App\Release\ComposerNormalizePostReleaseWorker: ~
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualDependenciesReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker: null
+    App\Release\ComposerNormalizePreReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker: null
+    App\Release\ComposerNormalizePostReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker: null

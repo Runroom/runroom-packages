@@ -23,12 +23,12 @@ class MetaInformationTest extends TestCase
     {
         $metaInformation = MetaInformationFixture::create();
 
-        $this->assertSame(MetaInformationFixture::ROUTE_NAME, $metaInformation->__toString());
-        $this->assertSame(MetaInformationFixture::ID, $metaInformation->getId());
-        $this->assertSame(MetaInformationFixture::ROUTE, $metaInformation->getRoute());
-        $this->assertSame(MetaInformationFixture::ROUTE_NAME, $metaInformation->getRouteName());
-        $this->assertSame(MetaInformationFixture::IMAGE, $metaInformation->getImage());
-        $this->assertSame(MetaInformationFixture::TITLE, $metaInformation->getTitle());
-        $this->assertSame(MetaInformationFixture::DESCRIPTION, $metaInformation->getDescription());
+        self::assertSame(MetaInformationFixture::ROUTE_NAME, $metaInformation->__toString());
+        self::assertSame(MetaInformationFixture::ID, $metaInformation->getId());
+        self::assertSame(MetaInformationFixture::ROUTE, $metaInformation->getRoute());
+        self::assertSame(MetaInformationFixture::ROUTE_NAME, $metaInformation->getRouteName());
+        self::assertSame(MetaInformationFixture::IMAGE, $metaInformation->getImage());
+        self::assertSame(MetaInformationFixture::TITLE, $metaInformation->getTitle());
+        self::assertSame(MetaInformationFixture::DESCRIPTION, $metaInformation->getDescription());
     }
 }
