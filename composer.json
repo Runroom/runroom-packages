@@ -127,6 +127,7 @@
             "composer normalize --no-update-lock",
             "composer normalize --no-update-lock packages/basic-page-bundle/composer.json",
             "composer normalize --no-update-lock packages/ckeditor-sonata-media-bundle/composer.json",
+            "composer normalize --no-update-lock packages/cookies-bundle/composer.json",
             "composer normalize --no-update-lock packages/form-handler-bundle/composer.json",
             "composer normalize --no-update-lock packages/redirection-bundle/composer.json",
             "composer normalize --no-update-lock packages/render-event-bundle/composer.json",

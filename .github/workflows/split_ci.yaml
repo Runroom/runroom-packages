@@ -14,6 +14,7 @@ jobs:
         packages:
           - basic-page-bundle
           - ckeditor-sonata-media-bundle
+          - cookies-bundle
           - form-handler-bundle
           - redirection-bundle
           - render-event-bundle

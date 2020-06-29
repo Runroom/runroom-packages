@@ -14,23 +14,22 @@ declare(strict_types=1);
 namespace Tests\Runroom\CookiesBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\CookiesBundle\Service\CookiesService;
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 class CookiesServiceTest extends TestCase
 {
-    /** @var array */
+    use ProphecyTrait;
+
+    /** @var string[] */
     protected const PERFORMANCE_COOKIES = ['cookie 1', 'cookie 2', 'cookie 3', 'cookie 4'];
 
-    /** @var array */
+    /** @var string[] */
     protected const TARGETING_COOKIES = ['cookie 5', 'cookie 6', 'cookie 7', 'cookie 8'];
-
-    /** @var RequestStack */
-    protected $requestStack;
 
     /** @var CookiesService */
     protected $service;
@@ -40,20 +39,18 @@ class CookiesServiceTest extends TestCase
         $this->service = new CookiesService($this->buildCookiesArray());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itSetsCookies(): void
     {
         $event = $this->configurePageRenderEvent();
 
         $this->service->onPageRender($event);
 
-        $cookies = $event->getPageViewModel()->getCookies();
+        $cookies = $event->getPageViewModel()->getContext('cookies');
 
-        $this->assertInstanceOf(CookiesViewModel::class, $cookies);
-        $this->assertSame(self::PERFORMANCE_COOKIES, $cookies->getPerformanceCookies());
-        $this->assertSame(self::TARGETING_COOKIES, $cookies->getTargetingCookies());
+        self::assertInstanceOf(CookiesViewModel::class, $cookies);
+        self::assertSame(self::PERFORMANCE_COOKIES, $cookies->getPerformanceCookies());
+        self::assertSame(self::TARGETING_COOKIES, $cookies->getTargetingCookies());
     }
 
     protected function configurePageRenderEvent(): PageRenderEvent
@@ -64,16 +61,17 @@ class CookiesServiceTest extends TestCase
         return new PageRenderEvent('view', $page, $response->reveal());
     }
 
+    /** @return array<string, array{ name: string, cookies: string[]}[]> */
     protected function buildCookiesArray(): array
     {
         return [
             'performance_cookies' => [
-                ['name' => ['category 1'], 'cookies' => ['cookie 1', 'cookie 2']],
-                ['name' => ['category 2'], 'cookies' => ['cookie 3', 'cookie 4']],
+                ['name' => 'category 1', 'cookies' => ['cookie 1', 'cookie 2']],
+                ['name' => 'category 2', 'cookies' => ['cookie 3', 'cookie 4']],
             ],
             'targeting_cookies' => [
-                ['name' => ['category 3'], 'cookies' => ['cookie 5', 'cookie 6']],
-                ['name' => ['category 4'], 'cookies' => ['cookie 7', 'cookie 8']],
+                ['name' => 'category 3', 'cookies' => ['cookie 5', 'cookie 6']],
+                ['name' => 'category 4', 'cookies' => ['cookie 7', 'cookie 8']],
             ],
         ];
     }

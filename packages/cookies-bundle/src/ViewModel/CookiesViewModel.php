@@ -15,12 +15,13 @@ namespace Runroom\CookiesBundle\ViewModel;
 
 class CookiesViewModel
 {
-    /** @var array */
+    /** @var string[] */
     protected $performanceCookies = [];
 
-    /** @var array */
+    /** @var string[] */
     protected $targetingCookies = [];
 
+    /** @param string[] $performanceCookies */
     public function setPerformanceCookies(array $performanceCookies): self
     {
         $this->performanceCookies = $performanceCookies;
@@ -28,11 +29,13 @@ class CookiesViewModel
         return $this;
     }
 
-    public function getPerformanceCookies(): ?array
+    /** @return string[] */
+    public function getPerformanceCookies(): array
     {
         return $this->performanceCookies;
     }
 
+    /** @param string[] $targetingCookies */
     public function setTargetingCookies(array $targetingCookies): self
     {
         $this->targetingCookies = $targetingCookies;
@@ -40,7 +43,8 @@ class CookiesViewModel
         return $this;
     }
 
-    public function getTargetingCookies(): ?array
+    /** @return string[] */
+    public function getTargetingCookies(): array
     {
         return $this->targetingCookies;
     }

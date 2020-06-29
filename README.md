@@ -34,6 +34,12 @@ However you should not install this package but install the following ones depen
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/ckeditor-sonata-media-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/ckeditor-sonata-media-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/ckeditor-sonata-media-bundle/d/daily)](https://packagist.org/packages/runroom-packages/ckeditor-sonata-media-bundle)
 
+## [RunroomCookiesBundle](https://github.com/Runroom/RunroomCookiesBundle)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/cookies-bundle/downloads)](https://packagist.org/packages/runroom-packages/cookies-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/cookies-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/cookies-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/cookies-bundle/d/daily)](https://packagist.org/packages/runroom-packages/cookies-bundle)
+
 ## [RunroomFormHandlerBundle](https://github.com/Runroom/RunroomFormHandlerBundle)
 
 [![Total Downloads](https://poser.pugx.org/runroom-packages/form-handler-bundle/downloads)](https://packagist.org/packages/runroom-packages/form-handler-bundle)

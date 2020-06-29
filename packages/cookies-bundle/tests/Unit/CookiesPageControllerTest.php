@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Tests\Runroom\CookiesBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\CookiesBundle\Controller\CookiesPageController;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
@@ -22,12 +24,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CookiesPageControllerTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected const VIEW = 'pages/cookies.html.twig';
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy */
+    /** @var ObjectProphecy<PageRenderer> */
     protected $renderer;
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy */
+    /** @var ObjectProphecy<CookiesPageService> */
     protected $service;
 
     /** @var CookiesPageController */
@@ -44,18 +48,16 @@ class CookiesPageControllerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itRendersCookiesPage(): void
     {
         $viewModel = $this->prophesize(CookiesPageViewModel::class);
 
         $this->service->getViewModel()->shouldBeCalled()->willReturn($viewModel->reveal());
-        $this->renderer->renderResponse(self::VIEW, $viewModel->reveal())->shouldBeCalled();
+        $this->renderer->renderResponse(self::VIEW, $viewModel->reveal())->willReturn(new Response());
 
         $response = $this->controller->index();
 
-        $this->assertInstanceOf(Response::class, $response);
+        self::assertSame(200, $response->getStatusCode());
     }
 }

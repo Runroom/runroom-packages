@@ -15,6 +15,8 @@ namespace Tests\Runroom\CookiesBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
@@ -24,13 +26,12 @@ use Runroom\FormHandlerBundle\FormHandler;
 
 class CookiesPageServiceTest extends TestCase
 {
-    /** @var array */
-    protected const COOKIES = [];
+    use ProphecyTrait;
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy */
+    /** @var ObjectProphecy<CookiesPageRepository> */
     protected $repository;
 
-    /** @var \Prophecy\Prophecy\ObjectProphecy */
+    /** @var ObjectProphecy<FormHandler> */
     protected $handler;
 
     /** @var CookiesPageService */
@@ -44,26 +45,23 @@ class CookiesPageServiceTest extends TestCase
         $this->service = new CookiesPageService(
             $this->repository->reveal(),
             $this->handler->reveal(),
-            self::COOKIES
+            []
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itGetsViewModel(): void
     {
         $cookiesPage = $this->prophesize(CookiesPage::class);
-        $this->repository->find()->shouldBeCalled()->willReturn($cookiesPage->reveal());
+        $this->repository->find(1)->shouldBeCalled()->willReturn($cookiesPage->reveal());
 
-        $this->handler
-            ->handleForm(CookiesFormType::class, Argument::type(CookiesPageViewModel::class))
+        $this->handler->handleForm(CookiesFormType::class, [], Argument::type(CookiesPageViewModel::class))
             ->shouldBeCalled()
-            ->willReturnArgument(1);
+            ->willReturnArgument(2);
 
         $viewModel = $this->service->getViewModel();
 
-        $this->assertInstanceOf(CookiesPageViewModel::class, $viewModel);
-        $this->assertSame($viewModel->getCookiesPage(), $cookiesPage->reveal());
+        self::assertInstanceOf(CookiesPageViewModel::class, $viewModel);
+        self::assertSame($viewModel->getCookiesPage(), $cookiesPage->reveal());
     }
 }

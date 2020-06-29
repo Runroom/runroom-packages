@@ -22,9 +22,10 @@ class CookiesService implements EventSubscriberInterface
     protected const TYPE_PERFORMANCE = 'performance_cookies';
     protected const TYPE_TARGETING = 'targeting_cookies';
 
-    /** @var array */
+    /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
     protected $cookies;
 
+    /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
     public function __construct(array $cookies)
     {
         $this->cookies = $cookies;
@@ -53,6 +54,7 @@ class CookiesService implements EventSubscriberInterface
         return $model;
     }
 
+    /** @return string[] */
     protected function getCookies(string $type): array
     {
         $cookies = [];

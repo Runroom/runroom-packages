@@ -19,13 +19,12 @@ use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 
 class CookiesPageViewModel implements FormAwareInterface
 {
-    /* @var FormAware */
     use FormAware;
 
     /** @var CookiesPage */
     protected $cookiesPage;
 
-    /** @var array */
+    /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
     protected $cookies = [];
 
     public function setCookiesPage(CookiesPage $cookiesPage): self
@@ -40,6 +39,7 @@ class CookiesPageViewModel implements FormAwareInterface
         return $this->cookiesPage;
     }
 
+    /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
     public function setCookies(array $cookies): self
     {
         $this->cookies = $cookies;
@@ -47,6 +47,7 @@ class CookiesPageViewModel implements FormAwareInterface
         return $this;
     }
 
+    /** @return array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
     public function getCookies(): array
     {
         return $this->cookies;

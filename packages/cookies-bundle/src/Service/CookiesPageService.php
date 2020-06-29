@@ -30,9 +30,10 @@ class CookiesPageService
     /** @var FormHandler */
     protected $handler;
 
-    /** @var array */
+    /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
     protected $cookies;
 
+    /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
     public function __construct(
         CookiesPageRepository $repository,
         FormHandler $handler,
@@ -45,10 +46,15 @@ class CookiesPageService
 
     public function getViewModel(): FormAwareInterface
     {
+        $cookiesPage = $this->repository->find(self::COOKIES_PAGE_ID);
+
         $viewModel = new CookiesPageViewModel();
-        $viewModel
-            ->setCookiesPage($this->repository->find(self::COOKIES_PAGE_ID))
-            ->setCookies($this->cookies);
+
+        if (null !== $cookiesPage) {
+            $viewModel->setCookiesPage($cookiesPage);
+        }
+
+        $viewModel->setCookies($this->cookies);
 
         return $this->handler->handleForm(CookiesFormType::class, [], $viewModel);
     }

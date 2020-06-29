@@ -25,18 +25,18 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->arrayNode('cookies')
-                ->arrayPrototype()->children()
-                    ->arrayNode('name')->children()
-                        ->booleanNode('has_description')->end()
-                        ->arrayNode('cookies')->children()
-                            ->scalarNode('name')->end()
-                            ->scalarNode('domain')->end()
+                ->arrayPrototype()
+                    ->children()
+                        ->arrayNode('name')->children()
+                            ->booleanNode('has_description')->end()
+                            ->arrayNode('cookies')->children()
+                                ->scalarNode('name')->end()
+                                ->scalarNode('domain')->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ->end()
-        ;
+            ->end();
 
         return $treeBuilder;
     }
