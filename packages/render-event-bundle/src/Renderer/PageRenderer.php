@@ -63,11 +63,11 @@ class PageRenderer
 
         /** @var PageRenderEvent */
         $event = $this->eventDispatcher->dispatch(
-            new PageRenderEvent($view, $this->pageViewModel, $response ?? new Response()),
+            new PageRenderEvent($view, $this->pageViewModel, $response),
             PageRenderEvent::EVENT_NAME
         );
 
-        $response = $event->getResponse();
+        $response = $event->getResponse() ?? new Response();
         if ($response instanceof RedirectResponse || '' !== $response->getContent()) {
             return $response;
         }

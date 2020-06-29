@@ -72,7 +72,7 @@ final class MetaInformationService implements EventSubscriberInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        return $request->get('_route', '');
+        return null !== $request ? $request->get('_route', '') : '';
     }
 
     protected function selectProvider(string $route): MetaInformationProviderInterface

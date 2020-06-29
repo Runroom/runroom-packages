@@ -28,7 +28,7 @@ class MetaInformationTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -37,7 +37,7 @@ class MetaInformationTranslation implements TranslationInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Assert\NotNull
      * @Assert\Length(max=255)
@@ -46,7 +46,7 @@ class MetaInformationTranslation implements TranslationInterface
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Assert\NotNull
      * @ORM\Column(type="text")

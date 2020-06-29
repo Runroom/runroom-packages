@@ -19,7 +19,7 @@ use Runroom\SeoBundle\Entity\EntityMetaInformation;
 trait MetaInformationAware
 {
     /**
-     * @var EntityMetaInformation
+     * @var EntityMetaInformation|null
      *
      * @ORM\OneToOne(targetEntity="Runroom\SeoBundle\Entity\EntityMetaInformation", cascade={"all"})
      * @ORM\JoinColumn(referencedColumnName="id")

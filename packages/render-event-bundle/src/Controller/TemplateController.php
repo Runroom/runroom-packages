@@ -21,7 +21,7 @@ final class TemplateController
     /** @var PageRenderer */
     private $renderer;
 
-    public function __construct(PageRenderer $renderer = null)
+    public function __construct(PageRenderer $renderer)
     {
         $this->renderer = $renderer;
     }

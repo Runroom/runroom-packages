@@ -39,7 +39,7 @@ class TranslationService
         $translation = $this->repository->findOneBy(['key' => $key]);
 
         if (null !== $translation) {
-            return strtr($translation->translate($locale)->getValue(), $parameters);
+            return strtr($translation->translate($locale)->getValue() ?? '', $parameters);
         }
 
         return $this->translator->trans($key, $parameters, null, $locale);

@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 class WrongEntity
 {
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -28,7 +28,7 @@ class WrongEntity
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string")
      */
