@@ -32,12 +32,16 @@ final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
     {
         $redirect = $this->repository->findOneBy(['source' => '/redirect']);
 
-        self::assertNotNull($redirect->getId());
-        self::assertSame('/redirect', $redirect->__toString());
-        self::assertSame('/redirect', $redirect->getSource());
-        self::assertSame('/target', $redirect->getDestination());
-        self::assertSame(301, $redirect->getHttpCode());
-        self::assertTrue($redirect->getPublish());
+        if (null !== $redirect) {
+            self::assertNotNull($redirect->getId());
+            self::assertSame('/redirect', $redirect->__toString());
+            self::assertSame('/redirect', $redirect->getSource());
+            self::assertSame('/target', $redirect->getDestination());
+            self::assertSame(301, $redirect->getHttpCode());
+            self::assertTrue($redirect->getPublish());
+        } else {
+            self::fail('not found redirect');
+        }
     }
 
     /** @test */

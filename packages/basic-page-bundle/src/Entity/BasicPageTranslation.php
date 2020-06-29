@@ -32,7 +32,7 @@ class BasicPageTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
-     * @var int
+     * @var string|null
      *
      * @ORM\Column(type="string", length=5)
      */
@@ -48,7 +48,7 @@ class BasicPageTranslation implements TranslationInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Assert\NotNull
      * @Assert\Length(max=255)
@@ -57,7 +57,7 @@ class BasicPageTranslation implements TranslationInterface
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Slug(fields={"title"}, unique_base="locale")
      * @ORM\Column(type="string", nullable=true)
@@ -65,7 +65,7 @@ class BasicPageTranslation implements TranslationInterface
     private $slug;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Assert\NotNull
      * @ORM\Column(type="text")

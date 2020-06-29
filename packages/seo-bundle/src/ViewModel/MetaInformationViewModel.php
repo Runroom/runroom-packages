@@ -17,13 +17,13 @@ use Sonata\MediaBundle\Model\MediaInterface;
 
 final class MetaInformationViewModel
 {
-    /** @var string */
+    /** @var string|null */
     private $title;
 
-    /** @var string */
+    /** @var string|null */
     private $description;
 
-    /** @var MediaInterface */
+    /** @var MediaInterface|null */
     private $image;
 
     public function setTitle(string $title): void

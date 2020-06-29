@@ -30,7 +30,7 @@ class MetaInformation implements TranslatableInterface
     use ORMBehaviors\Translatable\TranslatableTrait;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -39,21 +39,21 @@ class MetaInformation implements TranslatableInterface
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string", unique=true)
      */
     private $route;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string")
      */
     private $routeName;
 
     /**
-     * @var MediaInterface
+     * @var MediaInterface|null
      *
      * @Assert\Valid
      */

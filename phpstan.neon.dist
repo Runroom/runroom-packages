@@ -8,7 +8,7 @@ includes:
     - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
-    level: 7
+    level: 8
     paths:
         - packages
         - src

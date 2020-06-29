@@ -74,7 +74,7 @@ final class AlternateLinksService implements EventSubscriberInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        return $request->get('_route', '');
+        return null !== $request ? $request->get('_route', '') : '';
     }
 
     /** @return array<string, string> */
@@ -82,7 +82,7 @@ final class AlternateLinksService implements EventSubscriberInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $routeParameters = $request->get('_route_params', []);
+        $routeParameters = null !== $request ? $request->get('_route_params', []) : [];
 
         return array_diff_key($routeParameters, array_flip(self::EXCLUDED_PARAMETERS));
     }
