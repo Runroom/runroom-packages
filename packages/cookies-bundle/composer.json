@@ -33,6 +33,9 @@
         "symfony/http-kernel": "^4.4 || ^5.1",
         "symfony/validator": "^4.4 || ^5.1"
     },
+    "conflict": {
+        "phpdocumentor/reflection-docblock": "<4.0.1"
+    },
     "require-dev": {
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.1.3",
@@ -55,5 +58,7 @@
         "psr-4": {
             "Runroom\\CookiesBundle\\Tests\\": "tests/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
