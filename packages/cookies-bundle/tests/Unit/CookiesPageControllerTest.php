@@ -26,16 +26,16 @@ class CookiesPageControllerTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected const VIEW = 'pages/cookies.html.twig';
+    private const VIEW = 'pages/cookies.html.twig';
 
     /** @var ObjectProphecy<PageRenderer> */
-    protected $renderer;
+    private $renderer;
 
     /** @var ObjectProphecy<CookiesPageService> */
-    protected $service;
+    private $service;
 
     /** @var CookiesPageController */
-    protected $controller;
+    private $controller;
 
     protected function setUp(): void
     {

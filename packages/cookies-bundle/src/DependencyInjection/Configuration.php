@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -35,12 +36,12 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function addCookiesSection(string $name)
+    private function addCookiesSection(string $name): NodeDefinition
     {
         $treeBuilder = new TreeBuilder($name);
         $rootNode = $treeBuilder->getRootNode();
 
-        $node = $rootNode
+        return $rootNode
             ->isRequired()
             ->requiresAtLeastOneElement()
             ->arrayPrototype()
@@ -59,7 +60,5 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
-
-        return $node;
     }
 }

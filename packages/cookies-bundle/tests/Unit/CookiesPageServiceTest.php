@@ -29,13 +29,13 @@ class CookiesPageServiceTest extends TestCase
     use ProphecyTrait;
 
     /** @var ObjectProphecy<CookiesPageRepository> */
-    protected $repository;
+    private $repository;
 
     /** @var ObjectProphecy<FormHandler> */
-    protected $handler;
+    private $handler;
 
     /** @var CookiesPageService */
-    protected $service;
+    private $service;
 
     protected function setUp(): void
     {

@@ -25,13 +25,13 @@ class CookiesPageService
     private const COOKIES_PAGE_ID = 1;
 
     /** @var CookiesPageRepository */
-    protected $repository;
+    private $repository;
 
     /** @var FormHandler */
-    protected $handler;
+    private $handler;
 
     /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
-    protected $cookies;
+    private $cookies;
 
     /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
     public function __construct(

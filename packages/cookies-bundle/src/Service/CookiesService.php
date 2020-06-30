@@ -19,11 +19,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CookiesService implements EventSubscriberInterface
 {
-    protected const TYPE_PERFORMANCE = 'performance_cookies';
-    protected const TYPE_TARGETING = 'targeting_cookies';
+    private const TYPE_PERFORMANCE = 'performance_cookies';
+    private const TYPE_TARGETING = 'targeting_cookies';
 
     /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
-    protected $cookies;
+    private $cookies;
 
     /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
     public function __construct(array $cookies)
@@ -45,7 +45,7 @@ class CookiesService implements EventSubscriberInterface
         ];
     }
 
-    protected function buildCookiesViewModel(): CookiesViewModel
+    private function buildCookiesViewModel(): CookiesViewModel
     {
         $model = new CookiesViewModel();
         $model->setPerformanceCookies($this->getCookies(self::TYPE_PERFORMANCE));
@@ -55,7 +55,7 @@ class CookiesService implements EventSubscriberInterface
     }
 
     /** @return string[] */
-    protected function getCookies(string $type): array
+    private function getCookies(string $type): array
     {
         $cookies = [];
         foreach ($this->cookies[$type] as $category) {

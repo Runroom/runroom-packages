@@ -40,14 +40,14 @@ class CookiesPageTranslation implements TranslationInterface
      * @Assert\Length(max=255)
      * @ORM\Column(type="string")
      */
-    protected $title;
+    private $title;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $content;
+    private $content;
 
     public function setTitle(?string $title): self
     {

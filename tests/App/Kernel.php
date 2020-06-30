@@ -125,7 +125,7 @@ final class Kernel extends BaseKernel
                 'targeting_cookies' => [[
                     'name' => 'test',
                     'cookies' => [['name' => 'test']],
-                ]]
+                ]],
             ],
         ]);
 

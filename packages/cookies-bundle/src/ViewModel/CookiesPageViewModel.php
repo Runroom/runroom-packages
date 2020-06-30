@@ -22,10 +22,10 @@ class CookiesPageViewModel implements FormAwareInterface
     use FormAware;
 
     /** @var CookiesPage */
-    protected $cookiesPage;
+    private $cookiesPage;
 
     /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
-    protected $cookies = [];
+    private $cookies = [];
 
     public function setCookiesPage(CookiesPage $cookiesPage): self
     {

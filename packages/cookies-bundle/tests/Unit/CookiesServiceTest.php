@@ -26,13 +26,13 @@ class CookiesServiceTest extends TestCase
     use ProphecyTrait;
 
     /** @var string[] */
-    protected const PERFORMANCE_COOKIES = ['cookie 1', 'cookie 2', 'cookie 3', 'cookie 4'];
+    private const PERFORMANCE_COOKIES = ['cookie 1', 'cookie 2', 'cookie 3', 'cookie 4'];
 
     /** @var string[] */
-    protected const TARGETING_COOKIES = ['cookie 5', 'cookie 6', 'cookie 7', 'cookie 8'];
+    private const TARGETING_COOKIES = ['cookie 5', 'cookie 6', 'cookie 7', 'cookie 8'];
 
     /** @var CookiesService */
-    protected $service;
+    private $service;
 
     protected function setUp(): void
     {
@@ -53,7 +53,7 @@ class CookiesServiceTest extends TestCase
         self::assertSame(self::TARGETING_COOKIES, $cookies->getTargetingCookies());
     }
 
-    protected function configurePageRenderEvent(): PageRenderEvent
+    private function configurePageRenderEvent(): PageRenderEvent
     {
         $response = $this->prophesize(Response::class);
         $page = new PageViewModel();
@@ -62,7 +62,7 @@ class CookiesServiceTest extends TestCase
     }
 
     /** @return array<string, array{ name: string, cookies: string[]}[]> */
-    protected function buildCookiesArray(): array
+    private function buildCookiesArray(): array
     {
         return [
             'performance_cookies' => [
