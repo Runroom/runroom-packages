@@ -19,11 +19,11 @@ services:
         arguments:
             $repository: '@Runroom\CookiesBundle\Repository\CookiesPageRepository'
             $handler: '@Runroom\FormHandlerBundle\FormHandler'
-        tags: [kernel.event_subscriber]
 
     Runroom\CookiesBundle\Service\CookiesService:
         arguments:
             $cookies: null
+        tags: [kernel.event_subscriber]
 
     Runroom\CookiesBundle\Repository\CookiesPageRepository:
         arguments:

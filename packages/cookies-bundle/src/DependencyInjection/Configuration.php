@@ -25,12 +25,34 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->arrayNode('cookies')
-                ->arrayPrototype()
-                    ->children()
-                        ->arrayNode('name')->children()
-                            ->booleanNode('has_description')->end()
-                            ->arrayNode('cookies')->children()
-                                ->scalarNode('name')->end()
+                ->isRequired()
+                ->append($this->addCookiesSection('mandatory_cookies'))
+                ->append($this->addCookiesSection('performance_cookies'))
+                ->append($this->addCookiesSection('targeting_cookies'))
+            ->end()
+        ->end();
+
+        return $treeBuilder;
+    }
+
+    private function addCookiesSection(string $name)
+    {
+        $treeBuilder = new TreeBuilder($name);
+        $rootNode = $treeBuilder->getRootNode();
+
+        $node = $rootNode
+            ->isRequired()
+            ->requiresAtLeastOneElement()
+            ->arrayPrototype()
+                ->children()
+                    ->scalarNode('name')->isRequired()->cannotBeEmpty()->end()
+                    ->booleanNode('has_description')->defaultFalse()->end()
+                    ->arrayNode('cookies')
+                        ->isRequired()
+                        ->requiresAtLeastOneElement()
+                        ->arrayPrototype()
+                            ->children()
+                                ->scalarNode('name')->isRequired()->cannotBeEmpty()->end()
                                 ->scalarNode('domain')->end()
                             ->end()
                         ->end()
@@ -38,6 +60,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
-        return $treeBuilder;
+        return $node;
     }
 }

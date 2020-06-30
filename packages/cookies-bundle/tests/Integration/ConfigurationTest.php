@@ -25,7 +25,28 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
     /** @test */
     public function itExposesConfiguration(): void
     {
-        $this->assertProcessedConfigurationEquals([], [__DIR__ . '/../Fixtures/configuration.yaml']);
+        $this->assertProcessedConfigurationEquals([
+            'cookies' => [
+                'mandatory_cookies' => [
+                    ['name' => 'symfony', 'has_description' => true, 'cookies' => [
+                        ['name' => 'PHPSESSID'], ['name' => 'client_ip'], ['name' => 'language_switched'],
+                    ]],
+                    ['name' => 'consent', 'has_description' => false, 'cookies' => [
+                        ['name' => 'cookie_message'], ['name' => 'performance_cookie'], ['name' => 'targeting_cookie'],
+                    ]],
+                ],
+                'performance_cookies' => [
+                    ['name' => 'analytics', 'has_description' => false, 'cookies' => [
+                        ['name' => '_ga'], ['name' => '_gid'],
+                    ]],
+                ],
+                'targeting_cookies' => [
+                    ['name' => 'doubleclick', 'has_description' => false, 'cookies' => [
+                        ['name' => '_dc_gtm_UA-4275551-14'], ['name' => '_gat_UA-4275551-14'], ['name' => '1P_JAR', 'domain' => '.google.com'],
+                    ]]
+                ],
+            ],
+        ], [__DIR__ . '/../Fixtures/configuration.yaml']);
     }
 
     /** @test */

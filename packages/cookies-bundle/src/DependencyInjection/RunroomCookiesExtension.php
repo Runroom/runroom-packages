@@ -30,6 +30,6 @@ class RunroomCookiesExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $definition = $container->getDefinition(CookiesService::class);
-        $definition->setArgument(0, $config['cookies']);
+        $definition->setArgument('$cookies', $config['cookies']);
     }
 }
