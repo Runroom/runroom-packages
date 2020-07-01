@@ -80,15 +80,13 @@ abstract class DoctrineTestCase extends TestCase
     /** @return string[] */
     private function processDataFixtures(): array
     {
-        return array_map(function ($value): string {
-            $testClass = new \ReflectionClass(static::class);
-            $filename = $testClass->getFileName();
+        $testClass = new \ReflectionClass(static::class);
+        $filename = $testClass->getFileName();
 
-            if (false !== $filename) {
-                return \dirname($filename, 2) . '/Fixtures/' . $value;
-            }
+        \assert(false !== $filename);
 
-            return '';
+        return array_map(function ($value) use ($filename): string {
+            return \dirname($filename, 2) . '/Fixtures/' . $value;
         }, $this->getDataFixtures());
     }
 
