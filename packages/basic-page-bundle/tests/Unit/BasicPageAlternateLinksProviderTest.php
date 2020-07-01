@@ -23,8 +23,6 @@ class BasicPageAlternateLinksProviderTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const META_ROUTE = 'runroom.basic_page.route.show';
-
     /** @var string[] */
     private $locales = ['es', 'en'];
 
@@ -61,8 +59,6 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     /** @test */
     public function itProvidesAlternateLinks(): void
     {
-        foreach ([self::META_ROUTE] as $route) {
-            self::assertTrue($this->provider->providesAlternateLinks($route));
-        }
+        self::assertTrue($this->provider->providesAlternateLinks('runroom.basic_page.route.show'));
     }
 }

@@ -19,8 +19,6 @@ use Runroom\Testing\TestCase\DoctrineIntegrationTestBase;
 
 class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
 {
-    private const STATIC_PAGE_ID = 1;
-
     /** @var BasicPageRepository */
     private $repository;
 
@@ -36,7 +34,7 @@ class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
     {
         $basicPage = $this->repository->findBySlug('slug');
 
-        self::assertSame(self::STATIC_PAGE_ID, $basicPage->getId());
+        self::assertSame(1, $basicPage->getId());
     }
 
     /** @test */
