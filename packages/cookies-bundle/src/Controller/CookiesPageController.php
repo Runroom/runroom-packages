@@ -37,6 +37,6 @@ class CookiesPageController
     {
         $viewModel = $this->service->getViewModel();
 
-        return $this->renderer->renderResponse('pages/cookies.html.twig', $viewModel);
+        return $this->renderer->renderResponse('@RunroomCookies/show.html.twig', $viewModel);
     }
 }

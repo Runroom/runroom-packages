@@ -26,8 +26,6 @@ class CookiesPageControllerTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const VIEW = 'pages/cookies.html.twig';
-
     /** @var ObjectProphecy<PageRenderer> */
     private $renderer;
 
@@ -54,7 +52,8 @@ class CookiesPageControllerTest extends TestCase
         $viewModel = $this->prophesize(CookiesPageViewModel::class);
 
         $this->service->getViewModel()->shouldBeCalled()->willReturn($viewModel->reveal());
-        $this->renderer->renderResponse(self::VIEW, $viewModel->reveal())->willReturn(new Response());
+        $this->renderer->renderResponse('@RunroomCookies/show.html.twig', $viewModel->reveal())
+            ->willReturn(new Response());
 
         $response = $this->controller->index();
 
