@@ -11,12 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\RedirectionBundle\Tests\App;
+namespace Runroom\Testing\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
-use Runroom\RedirectionBundle\RunroomRedirectionBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -35,7 +34,6 @@ class Kernel extends BaseKernel
             new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
             new NelmioAliceBundle(),
-            new RunroomRedirectionBundle(),
         ];
     }
 
@@ -64,41 +62,16 @@ class Kernel extends BaseKernel
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite://:memory:'],
-            'orm' => [
-                'auto_mapping' => true,
-                'mappings' => [
-                    'Entity' => [
-                        'type' => 'annotation',
-                        'dir' => '%kernel.project_dir%/Entity',
-                        'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',
-                        'is_bundle' => false,
-                    ],
-                ],
-            ],
-        ]);
-
-        $container->loadFromExtension('runroom_redirection', [
-            'enable_automatic_redirections' => true,
-            'automatic_redirections' => [
-                Entity\Entity::class => [
-                    'route' => 'route.entity',
-                    'routeParameters' => ['slug' => 'slug'],
-                ],
-                Entity\WrongEntity::class => [
-                    'route' => 'route.missing',
-                    'routeParameters' => ['slug' => 'slug'],
-                ],
-            ],
+            'orm' => ['auto_mapping' => true],
         ]);
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
-        $routes->add('/entity/{slug}', 'controller', 'route.entity');
     }
 
     private function getBaseDir(): string
     {
-        return sys_get_temp_dir() . '/runroom-redirection-bundle/var';
+        return sys_get_temp_dir() . '/runroom-testing/var';
     }
 }
