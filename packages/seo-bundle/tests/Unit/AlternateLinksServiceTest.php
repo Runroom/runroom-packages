@@ -30,8 +30,6 @@ class AlternateLinksServiceTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const ROUTE = 'route';
-
     /** @var RequestStack */
     private $requestStack;
 
@@ -67,8 +65,8 @@ class AlternateLinksServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
 
-        $this->provider->providesAlternateLinks(self::ROUTE)->willReturn(true);
-        $this->builder->build($this->provider->reveal(), 'model', self::ROUTE, [])->willReturn(['alternate_links']);
+        $this->provider->providesAlternateLinks('route')->willReturn(true);
+        $this->builder->build($this->provider->reveal(), 'model', 'route', [])->willReturn(['alternate_links']);
 
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);
@@ -81,8 +79,8 @@ class AlternateLinksServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
 
-        $this->provider->providesAlternateLinks(self::ROUTE)->willReturn(false);
-        $this->builder->build($this->defaultProvider, 'model', self::ROUTE, [])->willReturn(['alternate_links']);
+        $this->provider->providesAlternateLinks('route')->willReturn(false);
+        $this->builder->build($this->defaultProvider, 'model', 'route', [])->willReturn(['alternate_links']);
 
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);
@@ -113,6 +111,6 @@ class AlternateLinksServiceTest extends TestCase
 
         $this->requestStack->push($request);
 
-        $request->attributes->set('_route', self::ROUTE);
+        $request->attributes->set('_route', 'route');
     }
 }

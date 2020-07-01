@@ -32,8 +32,6 @@ class MetaInformationServiceTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const ROUTE = 'route';
-
     /** @var RequestStack */
     private $requestStack;
 
@@ -79,8 +77,8 @@ class MetaInformationServiceTest extends TestCase
     public function itFindsMetasForRoute(): void
     {
         $this->configureCurrentRequest();
-        $this->provider->providesMetas(self::ROUTE)->willReturn(true);
-        $this->builder->build($this->provider->reveal(), self::ROUTE, $this->model)
+        $this->provider->providesMetas('route')->willReturn(true);
+        $this->builder->build($this->provider->reveal(), 'route', $this->model)
             ->willReturn($this->expectedMetas);
 
         $event = $this->configurePageRenderEvent();
@@ -93,7 +91,7 @@ class MetaInformationServiceTest extends TestCase
     public function itFindsMetasForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
-        $this->builder->build($this->defaultProvider, self::ROUTE, $this->model)
+        $this->builder->build($this->defaultProvider, 'route', $this->model)
             ->willReturn($this->expectedMetas);
 
         $event = $this->configurePageRenderEvent();
@@ -125,6 +123,6 @@ class MetaInformationServiceTest extends TestCase
 
         $this->requestStack->push($request);
 
-        $request->attributes->set('_route', self::ROUTE);
+        $request->attributes->set('_route', 'route');
     }
 }

@@ -26,8 +26,6 @@ class BasicPageServiceTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const SLUG = 'slug';
-
     /** @var ObjectProphecy<BasicPageRepository> */
     private $repository;
 
@@ -46,9 +44,9 @@ class BasicPageServiceTest extends TestCase
     {
         $basicPage = new BasicPage();
 
-        $this->repository->findBySlug(self::SLUG)->willReturn($basicPage);
+        $this->repository->findBySlug('slug')->willReturn($basicPage);
 
-        $model = $this->service->getBasicPageViewModel(self::SLUG);
+        $model = $this->service->getBasicPageViewModel('slug');
 
         self::assertSame($basicPage, $model->getBasicPage());
     }

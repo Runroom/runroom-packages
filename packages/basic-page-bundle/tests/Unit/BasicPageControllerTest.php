@@ -26,9 +26,6 @@ class BasicPageControllerTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const STATICS = '@RunroomBasicPage/show.html.twig';
-    private const SLUG = 'slug';
-
     /** @var ObjectProphecy<PageRenderer> */
     private $renderer;
 
@@ -55,11 +52,11 @@ class BasicPageControllerTest extends TestCase
         $model = new BasicPageViewModel();
         $expectedResponse = $this->prophesize(Response::class);
 
-        $this->service->getBasicPageViewModel(self::SLUG)->willReturn($model);
-        $this->renderer->renderResponse(self::STATICS, $model, null)
+        $this->service->getBasicPageViewModel('slug')->willReturn($model);
+        $this->renderer->renderResponse('@RunroomBasicPage/show.html.twig', $model, null)
             ->willReturn($expectedResponse->reveal());
 
-        $response = $this->controller->show(self::SLUG);
+        $response = $this->controller->show('slug');
 
         self::assertSame($expectedResponse->reveal(), $response);
     }
