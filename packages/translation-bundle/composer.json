@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "a2lix/translation-form-bundle": "^2.4 || ^3.0",
+        "a2lix/translation-form-bundle": "^3.0",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/orm": "^2.7",
         "doctrine/persistence": "^1.3 || ^2.0",

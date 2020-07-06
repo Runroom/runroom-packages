@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Tests\App;
 
+use A2lix\AutoFormBundle\A2lixAutoFormBundle;
+use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
+use FOS\CKEditorBundle\FOSCKEditorBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
@@ -29,6 +33,8 @@ use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SortableBehaviorBundle\RunroomSortableBehaviorBundle;
 use Runroom\TranslationBundle\RunroomTranslationBundle;
+use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -46,14 +52,20 @@ final class Kernel extends BaseKernel
     public function registerBundles(): iterable
     {
         return [
+            new A2lixAutoFormBundle(),
+            new A2lixTranslationFormBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FidryAliceDataFixturesBundle(),
+            new FOSCKEditorBundle(),
             new FrameworkBundle(),
+            new KnpMenuBundle(),
             new NelmioAliceBundle(),
             new SecurityBundle(),
             new TwigBundle(),
             new SonataMediaBundle(),
+            new SonataDoctrineORMAdminBundle(),
+            new SonataAdminBundle(),
 
             new RunroomBasicPageBundle(),
             new RunroomCkeditorSonataMediaBundle(),
@@ -74,11 +86,13 @@ final class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
+        $container->setParameter('kernel.default_locale', 'en');
+
         $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'session' => null,
+            'session' => ['storage_id' => 'session.storage.mock_file'],
         ]);
 
         $container->loadFromExtension('security', [
@@ -103,6 +117,10 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('twig', [
             'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
+        ]);
+
+        $container->loadFromExtension('a2lix_translation_form', [
+            'locales' => ['es', 'en', 'ca'],
         ]);
 
         $container->loadFromExtension('sonata_media', [
