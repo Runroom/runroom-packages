@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Tests\Runroom\CookiesBundle\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\CookiesBundle\Service\CookiesService;
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
@@ -23,8 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CookiesServiceTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var CookiesService */
     private $service;
 
@@ -36,7 +33,7 @@ class CookiesServiceTest extends TestCase
     /** @test */
     public function itSetsCookies(): void
     {
-        $event = $this->configurePageRenderEvent();
+        $event = new PageRenderEvent('view', new PageViewModel(), new Response());
 
         $this->service->onPageRender($event);
 
@@ -45,14 +42,6 @@ class CookiesServiceTest extends TestCase
         self::assertInstanceOf(CookiesViewModel::class, $cookies);
         self::assertSame(['cookie 1', 'cookie 2', 'cookie 3', 'cookie 4'], $cookies->getPerformanceCookies());
         self::assertSame(['cookie 5', 'cookie 6', 'cookie 7', 'cookie 8'], $cookies->getTargetingCookies());
-    }
-
-    private function configurePageRenderEvent(): PageRenderEvent
-    {
-        $response = $this->prophesize(Response::class);
-        $page = new PageViewModel();
-
-        return new PageRenderEvent('view', $page, $response->reveal());
     }
 
     /** @return array<string, array{ name: string, cookies: string[]}[]> */

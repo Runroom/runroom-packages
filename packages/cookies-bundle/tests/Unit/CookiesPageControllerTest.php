@@ -49,10 +49,10 @@ class CookiesPageControllerTest extends TestCase
     /** @test */
     public function itRendersCookiesPage(): void
     {
-        $viewModel = $this->prophesize(CookiesPageViewModel::class);
+        $viewModel = new CookiesPageViewModel();
 
-        $this->service->getViewModel()->shouldBeCalled()->willReturn($viewModel->reveal());
-        $this->renderer->renderResponse('@RunroomCookies/show.html.twig', $viewModel->reveal())
+        $this->service->getViewModel()->shouldBeCalled()->willReturn($viewModel);
+        $this->renderer->renderResponse('@RunroomCookies/show.html.twig', $viewModel)
             ->willReturn(new Response());
 
         $response = $this->controller->index();

@@ -52,8 +52,8 @@ class CookiesPageServiceTest extends TestCase
     /** @test */
     public function itGetsViewModel(): void
     {
-        $cookiesPage = $this->prophesize(CookiesPage::class);
-        $this->repository->find(1)->shouldBeCalled()->willReturn($cookiesPage->reveal());
+        $cookiesPage = new CookiesPage();
+        $this->repository->find(1)->shouldBeCalled()->willReturn($cookiesPage);
 
         $this->handler->handleForm(CookiesFormType::class, [], Argument::type(CookiesPageViewModel::class))
             ->shouldBeCalled()
@@ -62,6 +62,6 @@ class CookiesPageServiceTest extends TestCase
         $viewModel = $this->service->getViewModel();
 
         self::assertInstanceOf(CookiesPageViewModel::class, $viewModel);
-        self::assertSame($viewModel->getCookiesPage(), $cookiesPage->reveal());
+        self::assertSame($viewModel->getCookiesPage(), $cookiesPage);
     }
 }
