@@ -1,0 +1,68 @@
+{
+    "name": "runroom-packages/cookies-bundle",
+    "type": "symfony-bundle",
+    "description": "Manage your website cookies with GDPR compliance",
+    "keywords": [
+        "cookies",
+        "symfony",
+        "GDPR"
+    ],
+    "homepage": "https://github.com/runroom/RunroomCookiesBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Runroom",
+            "email": "software@runroom.com",
+            "homepage": "https://www.runroom.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "a2lix/translation-form-bundle": "^2.4 || ^3.0",
+        "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/orm": "^2.7",
+        "doctrine/persistence": "^1.3 || ^2.0",
+        "friendsofsymfony/ckeditor-bundle": "^1.2 || ^2.2",
+        "knplabs/doctrine-behaviors": "^2.0.6",
+        "runroom-packages/form-handler-bundle": "^0.8",
+        "runroom-packages/render-event-bundle": "^0.8",
+        "sonata-project/admin-bundle": "^3.61",
+        "symfony/config": "^4.4 || ^5.1",
+        "symfony/dependency-injection": "^4.4 || ^5.1",
+        "symfony/event-dispatcher": "^4.4 || ^5.1",
+        "symfony/form": "^4.4 || ^5.1",
+        "symfony/http-foundation": "^4.4.7 || ^5.1",
+        "symfony/http-kernel": "^4.4 || ^5.1",
+        "symfony/validator": "^4.4 || ^5.1"
+    },
+    "conflict": {
+        "phpdocumentor/reflection-docblock": "<4.0.1"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.1.3",
+        "symfony/phpunit-bridge": "^5.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.8-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Runroom\\CookiesBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Runroom\\CookiesBundle\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

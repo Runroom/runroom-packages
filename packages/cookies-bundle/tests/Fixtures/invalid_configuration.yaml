@@ -1,0 +1,13 @@
+runroom_cookies:
+    cookies:
+        mandatory_cookies:
+            - name: symfony
+              has_description: true
+              cookies:
+                - { name: PHPSESSID }
+        performance_cookies:
+            - name: test
+              cookies:
+                - { name: test }
+        targeting_cookies:
+            - name: test

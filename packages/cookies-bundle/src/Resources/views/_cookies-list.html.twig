@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Cookies</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in cookiesList %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>
+                    <ul>
+                        {% for cookie in category.cookies %}
+                            <li>{{ cookie.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

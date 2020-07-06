@@ -42,6 +42,7 @@
     "replace": {
         "runroom-packages/basic-page-bundle": "self.version",
         "runroom-packages/ckeditor-sonata-media-bundle": "self.version",
+        "runroom-packages/cookies-bundle": "self.version",
         "runroom-packages/form-handler-bundle": "self.version",
         "runroom-packages/redirection-bundle": "self.version",
         "runroom-packages/render-event-bundle": "self.version",
@@ -88,6 +89,7 @@
         "psr-4": {
             "Runroom\\BasicPageBundle\\": "packages/basic-page-bundle/src/",
             "Runroom\\CkeditorSonataMediaBundle\\": "packages/ckeditor-sonata-media-bundle/src/",
+            "Runroom\\CookiesBundle\\": "packages/cookies-bundle/src/",
             "Runroom\\FormHandlerBundle\\": "packages/form-handler-bundle/src/",
             "Runroom\\RedirectionBundle\\": "packages/redirection-bundle/src/",
             "Runroom\\RenderEventBundle\\": "packages/render-event-bundle/src/",
@@ -102,6 +104,7 @@
             "App\\": "src/",
             "Runroom\\BasicPageBundle\\Tests\\": "packages/basic-page-bundle/tests/",
             "Runroom\\CkeditorSonataMediaBundle\\Tests\\": "packages/ckeditor-sonata-media-bundle/tests/",
+            "Runroom\\CookiesBundle\\Tests\\": "packages/cookies-bundle/tests/",
             "Runroom\\FormHandlerBundle\\Tests\\": "packages/form-handler-bundle/tests/",
             "Runroom\\RedirectionBundle\\Tests\\": "packages/redirection-bundle/tests/",
             "Runroom\\RenderEventBundle\\Tests\\": "packages/render-event-bundle/tests/",
@@ -124,6 +127,7 @@
             "composer normalize --no-update-lock",
             "composer normalize --no-update-lock packages/basic-page-bundle/composer.json",
             "composer normalize --no-update-lock packages/ckeditor-sonata-media-bundle/composer.json",
+            "composer normalize --no-update-lock packages/cookies-bundle/composer.json",
             "composer normalize --no-update-lock packages/form-handler-bundle/composer.json",
             "composer normalize --no-update-lock packages/redirection-bundle/composer.json",
             "composer normalize --no-update-lock packages/render-event-bundle/composer.json",

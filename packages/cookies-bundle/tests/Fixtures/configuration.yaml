@@ -1,0 +1,25 @@
+runroom_cookies:
+    cookies:
+        mandatory_cookies:
+            - name: symfony
+              has_description: true
+              cookies:
+                - { name: PHPSESSID }
+                - { name: client_ip }
+                - { name: language_switched }
+            - name: consent
+              cookies:
+                - { name: cookie_message }
+                - { name: performance_cookie }
+                - { name: targeting_cookie }
+        performance_cookies:
+            - name: analytics
+              cookies:
+                - { name: _ga }
+                - { name: _gid }
+        targeting_cookies:
+            - name: doubleclick
+              cookies:
+                - { name: _dc_gtm_UA-4275551-14 }
+                - { name: _gat_UA-4275551-14 }
+                - { name: 1P_JAR, domain: .google.com }

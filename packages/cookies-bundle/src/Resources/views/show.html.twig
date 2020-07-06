@@ -1,0 +1,27 @@
+<h1>{{ page.content.cookiesPage.title }}</h1>
+<div>{{ page.content.cookiesPage.content|raw }}</div>
+
+{{- form_start(page.content.formView) -}}
+    <h2>Mandatory Cookies</h2>
+    {{- form_row(page.content.formView.mandatoryCookies) -}}
+
+    {% include '@RunroomCookies/_cookies-list.html.twig' with {
+        cookiesList: page.content.cookies.mandatory_cookies
+    } %}
+
+    <h2>Performance Cookies</h2>
+    {{- form_row(page.content.formView.performanceCookies) -}}
+
+    {% include '@RunroomCookies/_cookies-list.html.twig' with {
+        cookiesList: page.content.cookies.performance_cookies
+    } %}
+
+    <h2>Targeting Cookies</h2>
+    {{- form_row(page.content.formView.targetingCookies) -}}
+
+    {% include '@RunroomCookies/_cookies-list.html.twig' with {
+        cookiesList: page.content.cookies.targeting_cookies
+    } %}
+
+    {{- form_row(page.content.formView.send) -}}
+{{- form_end(page.content.formView) -}}

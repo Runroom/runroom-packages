@@ -20,6 +20,7 @@ use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\BasicPageBundle\Tests\App\Media;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
+use Runroom\CookiesBundle\RunroomCookiesBundle;
 use Runroom\FormHandlerBundle\RunroomFormHandlerBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
@@ -56,6 +57,7 @@ final class Kernel extends BaseKernel
 
             new RunroomBasicPageBundle(),
             new RunroomCkeditorSonataMediaBundle(),
+            new RunroomCookiesBundle(),
             new RunroomFormHandlerBundle(),
             new RunroomRedirectionBundle(),
             new RunroomRenderEventBundle(),
@@ -108,6 +110,23 @@ final class Kernel extends BaseKernel
             'contexts' => ['default' => []],
             'cdn' => null,
             'filesystem' => ['local' => null],
+        ]);
+
+        $container->loadFromExtension('runroom_cookies', [
+            'cookies' => [
+                'mandatory_cookies' => [[
+                    'name' => 'test',
+                    'cookies' => [['name' => 'test']],
+                ]],
+                'performance_cookies' => [[
+                    'name' => 'test',
+                    'cookies' => [['name' => 'test']],
+                ]],
+                'targeting_cookies' => [[
+                    'name' => 'test',
+                    'cookies' => [['name' => 'test']],
+                ]],
+            ],
         ]);
 
         $container->loadFromExtension('runroom_seo', [
