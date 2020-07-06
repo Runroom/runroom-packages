@@ -1,0 +1,9 @@
+Runroom\TranslationBundle\Entity\Translation:
+    translations:
+        key: 'test'
+
+Runroom\TranslationBundle\Entity\TranslationTranslation:
+    translation_translations_{@translations}:
+        translatable: '<current()>'
+        value: <randomHtml()>
+        locale: en

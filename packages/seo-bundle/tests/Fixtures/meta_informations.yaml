@@ -1,0 +1,21 @@
+Runroom\SeoBundle\Entity\MetaInformation:
+    meta_informations_default:
+        route: default
+        route_name: Default Metas
+
+    meta_informations_route:
+        route: test
+        route_name: Test Route Metas
+
+Runroom\SeoBundle\Entity\MetaInformationTranslation:
+    meta_informations_translations_{@meta_informations_default}:
+        translatable: '<current()>'
+        description: <randomHtml()>
+        title: <name()>
+        locale: en
+
+    meta_informations_translations_{@meta_informations_route}:
+        translatable: '<current()>'
+        description: <randomHtml()>
+        title: <name()>
+        locale: en
