@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Runroom\RedirectionBundle\Tests\Integration;
 
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
-use Runroom\Testing\TestCase\DoctrineIntegrationTestBase;
+use Runroom\Testing\TestCase\DoctrineTestCase;
 
-final class RedirectRepositoryTest extends DoctrineIntegrationTestBase
+class RedirectRepositoryTest extends DoctrineTestCase
 {
     /** @var RedirectRepository */
     private $repository;

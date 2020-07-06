@@ -25,8 +25,6 @@ class BasicPageMetaInformationProviderTest extends TestCase
 {
     use ProphecyTrait;
 
-    private const META_ROUTE = 'runroom.basic_page.route.show';
-
     /** @var BasicPage */
     private $basicPage;
 
@@ -48,11 +46,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
     /** @test */
     public function itProvidesMetasForBasicPageRoutes(): void
     {
-        $routes = [self::META_ROUTE];
-
-        foreach ($routes as $route) {
-            self::assertTrue($this->provider->providesMetas($route));
-        }
+        self::assertTrue($this->provider->providesMetas('runroom.basic_page.route.show'));
     }
 
     /** @test */

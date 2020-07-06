@@ -15,12 +15,10 @@ namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Doctrine\ORM\NoResultException;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
-use Runroom\Testing\TestCase\DoctrineIntegrationTestBase;
+use Runroom\Testing\TestCase\DoctrineTestCase;
 
-class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
+class BasicPageRepositoryTest extends DoctrineTestCase
 {
-    private const STATIC_PAGE_ID = 1;
-
     /** @var BasicPageRepository */
     private $repository;
 
@@ -36,7 +34,7 @@ class BasicPageRepositoryTest extends DoctrineIntegrationTestBase
     {
         $basicPage = $this->repository->findBySlug('slug');
 
-        self::assertSame(self::STATIC_PAGE_ID, $basicPage->getId());
+        self::assertSame(1, $basicPage->getId());
     }
 
     /** @test */
