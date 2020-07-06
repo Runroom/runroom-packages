@@ -35,7 +35,7 @@ class TranslationRepositoryTest extends DoctrineTestCase
 
         if (null !== $translation) {
             self::assertSame(1, $translation->getId());
-            self::assertSame('test', $translation->getKey());
+            self::assertSame('test', $translation->__toString());
             self::assertNotNull($translation->getValue());
         } else {
             self::fail('not found translation');
