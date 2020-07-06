@@ -19,6 +19,7 @@ use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
 use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 
+/** @final */
 class CookiesPageService
 {
     /** @var int */

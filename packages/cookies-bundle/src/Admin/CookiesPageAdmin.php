@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CookiesPageAdmin extends AbstractAdmin
+final class CookiesPageAdmin extends AbstractAdmin
 {
     protected function configureRoutes(RouteCollection $collection): void
     {

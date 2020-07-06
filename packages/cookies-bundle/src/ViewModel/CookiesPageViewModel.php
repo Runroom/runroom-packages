@@ -17,7 +17,7 @@ use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\FormHandlerBundle\ViewModel\FormAware;
 use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 
-class CookiesPageViewModel implements FormAwareInterface
+final class CookiesPageViewModel implements FormAwareInterface
 {
     use FormAware;
 

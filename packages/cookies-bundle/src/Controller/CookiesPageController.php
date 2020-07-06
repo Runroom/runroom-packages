@@ -17,7 +17,7 @@ use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\HttpFoundation\Response;
 
-class CookiesPageController
+final class CookiesPageController
 {
     /** @var PageRenderer */
     private $renderer;

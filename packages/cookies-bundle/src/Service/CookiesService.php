@@ -17,7 +17,7 @@ use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CookiesService implements EventSubscriberInterface
+final class CookiesService implements EventSubscriberInterface
 {
     private const TYPE_PERFORMANCE = 'performance_cookies';
     private const TYPE_TARGETING = 'targeting_cookies';

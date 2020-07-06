@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\ViewModel;
 
-class CookiesViewModel
+final class CookiesViewModel
 {
     /** @var string[] */
     private $performanceCookies = [];
