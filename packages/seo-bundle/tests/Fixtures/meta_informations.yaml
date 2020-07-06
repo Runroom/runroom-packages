@@ -9,13 +9,13 @@ Runroom\SeoBundle\Entity\MetaInformation:
 
 Runroom\SeoBundle\Entity\MetaInformationTranslation:
     meta_informations_translations_{@meta_informations_default}:
-        translatable: '<current()>'
+        translatable: <current()>
         description: <randomHtml()>
         title: <name()>
         locale: en
 
     meta_informations_translations_{@meta_informations_route}:
-        translatable: '<current()>'
+        translatable: <current()>
         description: <randomHtml()>
         title: <name()>
         locale: en

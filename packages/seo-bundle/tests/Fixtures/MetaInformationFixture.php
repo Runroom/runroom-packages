@@ -17,7 +17,6 @@ use Runroom\SeoBundle\Entity\MetaInformation;
 
 class MetaInformationFixture
 {
-    public const ID = 1;
     public const ROUTE = 'route';
     public const ROUTE_NAME = 'route name';
     public const IMAGE = null;
@@ -28,7 +27,6 @@ class MetaInformationFixture
     {
         $metaInformation = new MetaInformation();
 
-        $metaInformation->setId(self::ID);
         $metaInformation->setRoute(self::ROUTE);
         $metaInformation->setRouteName(self::ROUTE_NAME);
         $metaInformation->setImage(self::IMAGE);

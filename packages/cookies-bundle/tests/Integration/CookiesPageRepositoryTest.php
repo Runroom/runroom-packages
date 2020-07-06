@@ -35,7 +35,7 @@ class CookiesPageRepositoryTest extends DoctrineTestCase
 
         if (null !== $cookiesPage) {
             self::assertSame(1, $cookiesPage->getId());
-            self::assertNotNull($cookiesPage->getTitle());
+            self::assertSame('Cookies policy', $cookiesPage->__toString());
             self::assertNotNull($cookiesPage->getContent());
         } else {
             self::fail('not found cookiesPage');

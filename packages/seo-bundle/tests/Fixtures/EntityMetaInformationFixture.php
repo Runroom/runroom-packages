@@ -17,7 +17,6 @@ use Runroom\SeoBundle\Entity\EntityMetaInformation;
 
 class EntityMetaInformationFixture
 {
-    public const ID = 1;
     public const TITLE = 'title';
     public const DESCRIPTION = 'description';
 
@@ -25,7 +24,6 @@ class EntityMetaInformationFixture
     {
         $metaInformation = new EntityMetaInformation();
 
-        $metaInformation->setId(self::ID);
         $metaInformation->translate()->setTitle(self::TITLE);
         $metaInformation->translate()->setDescription(self::DESCRIPTION);
 

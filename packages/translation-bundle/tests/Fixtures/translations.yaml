@@ -4,6 +4,6 @@ Runroom\TranslationBundle\Entity\Translation:
 
 Runroom\TranslationBundle\Entity\TranslationTranslation:
     translation_translations_{@translations}:
-        translatable: '<current()>'
+        translatable: <current()>
         value: <randomHtml()>
         locale: en

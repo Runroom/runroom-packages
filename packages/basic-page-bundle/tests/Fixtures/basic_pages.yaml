@@ -13,21 +13,21 @@ Runroom\BasicPageBundle\Entity\BasicPage:
 
 Runroom\BasicPageBundle\Entity\BasicPageTranslation:
     basic_page_translations_{@basic_pages_publish}:
-        translatable: '<current()>'
+        translatable: <current()>
         content: <randomHtml()>
-        title: <name()>
+        title: Publish basic page
         slug: slug
         locale: en
 
     basic_page_translations_{@basic_pages_footer}:
-        translatable: '<current()>'
+        translatable: <current()>
         content: <randomHtml()>
         title: <name()>
         slug: another-slug
         locale: en
 
     basic_page_translations_{@basic_pages_unpublish}:
-        translatable: '<current()>'
+        translatable: <current()>
         content: <randomHtml()>
         title: <name()>
         slug: unpublished

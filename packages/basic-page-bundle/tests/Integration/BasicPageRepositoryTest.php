@@ -35,6 +35,11 @@ class BasicPageRepositoryTest extends DoctrineTestCase
         $basicPage = $this->repository->findBySlug('slug');
 
         self::assertSame(1, $basicPage->getId());
+        self::assertSame('Publish basic page', $basicPage->__toString());
+        self::assertSame('none', $basicPage->getLocation());
+        self::assertNotNull($basicPage->getContent());
+        self::assertNotNull($basicPage->getSlug());
+        self::assertTrue($basicPage->getPublish());
     }
 
     /** @test */
