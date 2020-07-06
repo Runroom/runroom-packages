@@ -37,8 +37,9 @@ class MetaInformationRepositoryTest extends DoctrineTestCase
         if (null !== $metaInformation) {
             self::assertSame(1, $metaInformation->getId());
             self::assertSame(MetaInformationBuilder::DEFAULT_ROUTE, $metaInformation->getRoute());
+            self::assertNull($metaInformation->getImage());
             self::assertNotNull($metaInformation->getRouteName());
-            self::assertNotNull($metaInformation->getTitle());
+            self::assertSame('Default Metas', $metaInformation->__toString());
             self::assertNotNull($metaInformation->getDescription());
         } else {
             self::fail('not found metaInformation');

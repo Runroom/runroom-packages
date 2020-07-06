@@ -24,7 +24,7 @@ class EntityMetaInformationTest extends TestCase
         $metaInformation = EntityMetaInformationFixture::create();
 
         self::assertSame(EntityMetaInformationFixture::TITLE, $metaInformation->__toString());
-        self::assertSame(EntityMetaInformationFixture::ID, $metaInformation->getId());
+        self::assertNull($metaInformation->getId());
         self::assertSame(EntityMetaInformationFixture::TITLE, $metaInformation->getTitle());
         self::assertSame(EntityMetaInformationFixture::DESCRIPTION, $metaInformation->getDescription());
     }

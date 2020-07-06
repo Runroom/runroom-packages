@@ -18,7 +18,6 @@ use Runroom\SeoBundle\Entity\EntityMetaInformation;
 
 class BasicPageFixture
 {
-    public const ID = 1;
     public const TITLE = 'title';
     public const CONTENT = 'content';
     public const LOCATION = 'none';
@@ -29,7 +28,6 @@ class BasicPageFixture
     {
         $basicPage = new BasicPage();
 
-        $basicPage->setId(self::ID);
         $basicPage->setLocation(self::LOCATION);
         $basicPage->translate()->setTitle(self::TITLE);
         $basicPage->translate()->setContent(self::CONTENT);
