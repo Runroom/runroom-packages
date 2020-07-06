@@ -63,5 +63,6 @@ class CookiesPageServiceTest extends TestCase
 
         self::assertInstanceOf(CookiesPageViewModel::class, $viewModel);
         self::assertSame($viewModel->getCookiesPage(), $cookiesPage);
+        self::assertSame($viewModel->getCookies(), []);
     }
 }
