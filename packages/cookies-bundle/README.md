@@ -9,7 +9,7 @@ RunroomCookiesBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/cookies-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/cookies-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/cookies-bundle/d/daily)](https://packagist.org/packages/runroom-packages/cookies-bundle)
 
-//TODO write description
+This bundle allows you to manage your cookies with GDPR compliance.
 
 ## Installation
 
