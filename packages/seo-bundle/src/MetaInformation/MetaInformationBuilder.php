@@ -24,7 +24,7 @@ use function Symfony\Component\String\s;
 /** @final */
 class MetaInformationBuilder
 {
-    private const DEFAULT_ROUTE = 'default';
+    public const DEFAULT_ROUTE = 'default';
 
     /** @var MetaInformationRepository */
     private $repository;

@@ -1,0 +1,9 @@
+Runroom\CookiesBundle\Entity\CookiesPage:
+    cookies_page:
+
+Runroom\CookiesBundle\Entity\CookiesPageTranslation:
+    cookies_page_translations_{@cookies_page}:
+        translatable: '<current()>'
+        content: <randomHtml()>
+        title: <name()>
+        locale: en
