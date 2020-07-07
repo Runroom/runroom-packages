@@ -100,7 +100,7 @@ final class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:'],
+            'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
@@ -127,6 +127,7 @@ final class Kernel extends BaseKernel
             'default_context' => 'default',
             'contexts' => ['default' => []],
             'cdn' => null,
+            'class' => ['media' => Media::class],
             'filesystem' => ['local' => null],
         ]);
 

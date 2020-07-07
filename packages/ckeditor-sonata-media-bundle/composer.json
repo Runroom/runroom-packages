@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "sonata-project/admin-bundle": "^3.61",
+        "sonata-project/admin-bundle": "^3.68",
         "sonata-project/media-bundle": "^3.24",
         "symfony/config": "^4.4 || ^5.1",
         "symfony/dependency-injection": "^4.4 || ^5.1",

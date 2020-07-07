@@ -28,7 +28,7 @@
         "knplabs/doctrine-behaviors": "^2.0.6",
         "runroom-packages/render-event-bundle": "^0.8",
         "runroom-packages/seo-bundle": "^0.8",
-        "sonata-project/admin-bundle": "^3.61",
+        "sonata-project/admin-bundle": "^3.68",
         "sonata-project/doctrine-orm-admin-bundle": "^3.20",
         "symfony/config": "^4.4 || ^5.1",
         "symfony/dependency-injection": "^4.4 || ^5.1",

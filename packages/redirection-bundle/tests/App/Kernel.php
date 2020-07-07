@@ -15,10 +15,15 @@ namespace Runroom\RedirectionBundle\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
+use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -34,7 +39,13 @@ class Kernel extends BaseKernel
             new DoctrineBundle(),
             new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
+            new KnpMenuBundle(),
             new NelmioAliceBundle(),
+            new SecurityBundle(),
+            new SonataAdminBundle(),
+            new SonataDoctrineORMAdminBundle(),
+            new TwigBundle(),
+
             new RunroomRedirectionBundle(),
         ];
     }
@@ -62,8 +73,12 @@ class Kernel extends BaseKernel
             'secret' => 'secret',
         ]);
 
+        $container->loadFromExtension('security', [
+            'firewalls' => ['main' => ['anonymous' => true]],
+        ]);
+
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:'],
+            'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
@@ -75,6 +90,11 @@ class Kernel extends BaseKernel
                     ],
                 ],
             ],
+        ]);
+
+        $container->loadFromExtension('twig', [
+            'exception_controller' => null,
+            'strict_variables' => '%kernel.debug%',
         ]);
 
         $container->loadFromExtension('runroom_redirection', [
