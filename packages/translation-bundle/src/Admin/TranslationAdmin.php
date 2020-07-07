@@ -24,12 +24,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class TranslationAdmin extends AbstractAdmin
 {
-    /** @var array{ _page: int, _sort_order: 'ASC'|'DESC', _sort_by: string } */
-    protected $datagridValues = [
-        '_page' => 1,
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'key',
-    ];
+    /** @param array{ _page: int, _sort_order: 'ASC'|'DESC', _sort_by: string } $sortValues */
+    protected function configureDefaultSortValues(array &$sortValues): void
+    {
+        $sortValues['_sort_by'] = 'key';
+    }
 
     protected function configureRoutes(RouteCollection $collection): void
     {

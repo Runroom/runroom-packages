@@ -13,13 +13,19 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\App;
 
+use A2lix\AutoFormBundle\A2lixAutoFormBundle;
+use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SeoBundle\Tests\Fixtures\Media;
+use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -36,15 +42,22 @@ class Kernel extends BaseKernel
     public function registerBundles(): iterable
     {
         return [
+            new A2lixAutoFormBundle(),
+            new A2lixTranslationFormBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
+            new KnpMenuBundle(),
             new NelmioAliceBundle(),
+            new SecurityBundle(),
+            new SonataAdminBundle(),
+            new SonataMediaBundle(),
+            new SonataDoctrineORMAdminBundle(),
+            new TwigBundle(),
+
             new RunroomRenderEventBundle(),
             new RunroomSeoBundle(),
-            new SecurityBundle(),
-            new TwigBundle(),
         ];
     }
 
@@ -65,11 +78,13 @@ class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
+        $container->setParameter('kernel.default_locale', 'en');
+
         $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'session' => null,
+            'session' => ['storage_id' => 'session.storage.mock_file'],
         ]);
 
         $container->loadFromExtension('security', [
@@ -77,7 +92,7 @@ class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:'],
+            'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => ['auto_mapping' => true],
         ]);
 
@@ -86,8 +101,20 @@ class Kernel extends BaseKernel
             'strict_variables' => '%kernel.debug%',
         ]);
 
+        $container->loadFromExtension('a2lix_translation_form', [
+            'locales' => ['es', 'en', 'ca'],
+        ]);
+
+        $container->loadFromExtension('sonata_media', [
+            'default_context' => 'default',
+            'contexts' => ['default' => []],
+            'cdn' => null,
+            'class' => ['media' => Media::class],
+            'filesystem' => ['local' => null],
+        ]);
+
         $container->loadFromExtension('runroom_seo', [
-            'locales' => ['es'],
+            'locales' => ['es', 'en', 'ca'],
             'xdefault_locale' => 'es',
             'class' => ['media' => Media::class],
         ]);

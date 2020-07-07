@@ -13,13 +13,19 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Tests\App;
 
+use A2lix\AutoFormBundle\A2lixAutoFormBundle;
+use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
+use FOS\CKEditorBundle\FOSCKEditorBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
 use Runroom\FormHandlerBundle\RunroomFormHandlerBundle;
 use Runroom\RenderEventBundle\RunroomRenderEventBundle;
+use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -36,16 +42,23 @@ class Kernel extends BaseKernel
     public function registerBundles(): iterable
     {
         return [
+            new A2lixAutoFormBundle(),
+            new A2lixTranslationFormBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
+            new KnpMenuBundle(),
             new FidryAliceDataFixturesBundle(),
+            new FOSCKEditorBundle(),
             new FrameworkBundle(),
             new NelmioAliceBundle(),
+            new SecurityBundle(),
+            new SonataAdminBundle(),
+            new SonataDoctrineORMAdminBundle(),
+            new TwigBundle(),
+
             new RunroomFormHandlerBundle(),
             new RunroomRenderEventBundle(),
             new RunroomCookiesBundle(),
-            new SecurityBundle(),
-            new TwigBundle(),
         ];
     }
 
@@ -66,11 +79,13 @@ class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
+        $container->setParameter('kernel.default_locale', 'en');
+
         $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'session' => null,
+            'session' => ['storage_id' => 'session.storage.mock_file'],
         ]);
 
         $container->loadFromExtension('security', [
@@ -78,13 +93,17 @@ class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:'],
+            'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => ['auto_mapping' => true],
         ]);
 
         $container->loadFromExtension('twig', [
             'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
+        ]);
+
+        $container->loadFromExtension('a2lix_translation_form', [
+            'locales' => ['es', 'en', 'ca'],
         ]);
 
         $container->loadFromExtension('runroom_cookies', [
