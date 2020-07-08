@@ -24,7 +24,7 @@ use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
-use Runroom\SeoBundle\Tests\Fixtures\Media;
+use Runroom\SeoBundle\Tests\App\Entity\Media;
 
 class RunroomSeoExtensionTest extends AbstractExtensionTestCase
 {

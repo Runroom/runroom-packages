@@ -11,13 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\RedirectionBundle\Tests\App;
+namespace Runroom\SortableBehaviorBundle\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
-use Runroom\RedirectionBundle\RunroomRedirectionBundle;
+use Runroom\SortableBehaviorBundle\RunroomSortableBehaviorBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -37,16 +35,14 @@ class Kernel extends BaseKernel
     {
         return [
             new DoctrineBundle(),
-            new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
-            new NelmioAliceBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
             new SonataDoctrineORMAdminBundle(),
             new TwigBundle(),
 
-            new RunroomRedirectionBundle(),
+            new RunroomSortableBehaviorBundle(),
         ];
     }
 
@@ -67,6 +63,8 @@ class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
+        $loader->load($this->getProjectDir() . '/services.yaml');
+
         $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
@@ -82,10 +80,10 @@ class Kernel extends BaseKernel
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
-                    'redirection' => [
+                    'sortable_behavior' => [
                         'type' => 'annotation',
                         'dir' => '%kernel.project_dir%/Entity',
-                        'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',
+                        'prefix' => 'Runroom\SortableBehaviorBundle\Tests\App\Entity',
                         'is_bundle' => false,
                     ],
                 ],
@@ -96,29 +94,14 @@ class Kernel extends BaseKernel
             'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
-
-        $container->loadFromExtension('runroom_redirection', [
-            'enable_automatic_redirections' => true,
-            'automatic_redirections' => [
-                Entity\Entity::class => [
-                    'route' => 'route.entity',
-                    'routeParameters' => ['slug' => 'slug'],
-                ],
-                Entity\WrongEntity::class => [
-                    'route' => 'route.missing',
-                    'routeParameters' => ['slug' => 'slug'],
-                ],
-            ],
-        ]);
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
-        $routes->add('/entity/{slug}', 'controller', 'route.entity');
     }
 
     private function getBaseDir(): string
     {
-        return sys_get_temp_dir() . '/runroom-redirection-bundle/var';
+        return sys_get_temp_dir() . '/runroom-sortable-behavior-bundle/var';
     }
 }

@@ -1,5 +1,5 @@
 runroom_seo:
     class:
-        media: Runroom\SeoBundle\Tests\Fixtures\Media
+        media: Runroom\SeoBundle\Tests\App\Entity\Media
     locales: [es]
     xdefault_locale: es

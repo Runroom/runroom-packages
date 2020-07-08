@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\RedirectionBundle\Tests\App;
+namespace Runroom\CkeditorSonataMediaBundle\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
-use Runroom\RedirectionBundle\RunroomRedirectionBundle;
+use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
+use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -37,16 +37,15 @@ class Kernel extends BaseKernel
     {
         return [
             new DoctrineBundle(),
-            new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
-            new NelmioAliceBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
             new SonataDoctrineORMAdminBundle(),
+            new SonataMediaBundle(),
             new TwigBundle(),
 
-            new RunroomRedirectionBundle(),
+            new RunroomCkeditorSonataMediaBundle(),
         ];
     }
 
@@ -81,14 +80,6 @@ class Kernel extends BaseKernel
             'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => [
                 'auto_mapping' => true,
-                'mappings' => [
-                    'redirection' => [
-                        'type' => 'annotation',
-                        'dir' => '%kernel.project_dir%/Entity',
-                        'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',
-                        'is_bundle' => false,
-                    ],
-                ],
             ],
         ]);
 
@@ -97,28 +88,22 @@ class Kernel extends BaseKernel
             'strict_variables' => '%kernel.debug%',
         ]);
 
-        $container->loadFromExtension('runroom_redirection', [
-            'enable_automatic_redirections' => true,
-            'automatic_redirections' => [
-                Entity\Entity::class => [
-                    'route' => 'route.entity',
-                    'routeParameters' => ['slug' => 'slug'],
-                ],
-                Entity\WrongEntity::class => [
-                    'route' => 'route.missing',
-                    'routeParameters' => ['slug' => 'slug'],
-                ],
-            ],
+        $container->loadFromExtension('sonata_media', [
+            'default_context' => 'default',
+            'contexts' => ['default' => []],
+            'cdn' => null,
+            'db_driver' => 'doctrine_orm',
+            'class' => ['media' => Media::class],
+            'filesystem' => ['local' => null],
         ]);
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
-        $routes->add('/entity/{slug}', 'controller', 'route.entity');
     }
 
     private function getBaseDir(): string
     {
-        return sys_get_temp_dir() . '/runroom-redirection-bundle/var';
+        return sys_get_temp_dir() . '/runroom-ckeditor-sonata-media-bundle/var';
     }
 }

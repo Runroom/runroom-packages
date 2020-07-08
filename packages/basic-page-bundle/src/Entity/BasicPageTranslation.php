@@ -39,7 +39,7 @@ class BasicPageTranslation implements TranslationInterface
     protected $locale;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Id
      * @ORM\GeneratedValue
