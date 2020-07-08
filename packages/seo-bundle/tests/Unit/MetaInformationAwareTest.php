@@ -16,7 +16,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
-use Runroom\SeoBundle\Tests\Fixtures\MetaInformationAwareEntity;
+use Runroom\SeoBundle\Tests\App\Entity\MetaInformationAwareEntity;
 
 class MetaInformationAwareTest extends TestCase
 {

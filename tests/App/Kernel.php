@@ -22,7 +22,6 @@ use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
-use Runroom\BasicPageBundle\Tests\App\Media;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
 use Runroom\FormHandlerBundle\RunroomFormHandlerBundle;
@@ -44,6 +43,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Tests\App\Entity\Media;
 
 final class Kernel extends BaseKernel
 {
@@ -86,6 +86,8 @@ final class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
+        $loader->load($this->getProjectDir() . '/services.yaml');
+
         $container->setParameter('kernel.default_locale', 'en');
 
         $container->loadFromExtension('framework', [
@@ -104,10 +106,16 @@ final class Kernel extends BaseKernel
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
-                    'Entity' => [
+                    'redirection' => [
                         'type' => 'annotation',
                         'dir' => '%kernel.project_dir%/../../packages/redirection-bundle/tests/App/Entity',
                         'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
+                    'sortable_behavior' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/../../packages/sortable-behavior-bundle/tests/App/Entity',
+                        'prefix' => 'Runroom\SortableBehaviorBundle\Tests\App\Entity',
                         'is_bundle' => false,
                     ],
                 ],
@@ -127,6 +135,7 @@ final class Kernel extends BaseKernel
             'default_context' => 'default',
             'contexts' => ['default' => []],
             'cdn' => null,
+            'db_driver' => 'doctrine_orm',
             'class' => ['media' => Media::class],
             'filesystem' => ['local' => null],
         ]);

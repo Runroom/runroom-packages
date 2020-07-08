@@ -11,13 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\SeoBundle\Tests\Fixtures;
+namespace Runroom\SortableBehaviorBundle\Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\MediaBundle\Entity\BaseMedia;
 
 /** @ORM\Entity */
-class Media extends BaseMedia
+class SortableGroup
 {
     /**
      * @var int

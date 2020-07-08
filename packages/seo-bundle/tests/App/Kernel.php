@@ -22,7 +22,7 @@ use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
-use Runroom\SeoBundle\Tests\Fixtures\Media;
+use Runroom\SeoBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\SonataMediaBundle;
@@ -109,6 +109,7 @@ class Kernel extends BaseKernel
             'default_context' => 'default',
             'contexts' => ['default' => []],
             'cdn' => null,
+            'db_driver' => 'doctrine_orm',
             'class' => ['media' => Media::class],
             'filesystem' => ['local' => null],
         ]);

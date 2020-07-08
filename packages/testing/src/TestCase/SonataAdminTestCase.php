@@ -79,6 +79,6 @@ abstract class SonataAdminTestCase extends KernelTestCase
         self::assertTrue(isset($filterParameters[$filter]) && (null === $value || $filterParameters[$filter] === $value), 'It does not contain filter parameter: ' . $filter);
     }
 
-    /** @return class-string<AbstractAdmin>  */
+    /** @return class-string<AbstractAdmin>|string  */
     abstract protected function getAdminClass(): string;
 }

@@ -11,9 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\SortableBehaviorBundle\Tests\Fixtures;
+namespace Runroom\SeoBundle\Tests\App\Entity;
 
-abstract class AbstractSortableEntity
+use Runroom\SeoBundle\Behaviors\MetaInformationAware;
+
+class MetaInformationAwareEntity
 {
-    abstract public function getId(): ?int;
+    use MetaInformationAware;
 }
