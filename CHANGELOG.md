@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.8.0 - 2020-07-08
+## v0.8.1 - 2020-07-08
+
+### Testing
+
+#### Added
+
+- [#64] Add assert for show fields
+
+## [v0.8.0] - 2020-07-08
 
 ### RunroomCookiesBundle
 
@@ -353,3 +361,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#29]: https://github.com/Runroom/runroom-packages/pull/29
 [v0.7.1]: https://github.com/Runroom/runroom-packages/compare/v0.7.0...v0.7.1
 [@DaniCristante]: https://github.com/DaniCristante
+[#64]: https://github.com/Runroom/runroom-packages/pull/64
+[v0.8.0]: https://github.com/Runroom/runroom-packages/compare/v0.7.1...v0.8.0
