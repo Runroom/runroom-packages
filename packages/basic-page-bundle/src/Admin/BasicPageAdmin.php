@@ -57,7 +57,7 @@ final class BasicPageAdmin extends AbstractAdmin
             ->add('publish', 'boolean', [
                 'editable' => true,
             ])
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'open' => [
                         'template' => '@RunroomBasicPage/open.html.twig',

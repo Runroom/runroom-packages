@@ -48,6 +48,13 @@ abstract class SonataAdminTestCase extends KernelTestCase
         self::assertFalse($this->admin->hasRoute($route), 'It does contain route: ' . $route);
     }
 
+    final protected function assertAdminShowContainsField(string $field): void
+    {
+        \assert($this->admin instanceof AbstractAdmin);
+
+        self::assertTrue($this->admin->hasShowFieldDescription($field), 'It does not contain show field: ' . $field);
+    }
+
     final protected function assertAdminListContainsField(string $field): void
     {
         \assert($this->admin instanceof AbstractAdmin);

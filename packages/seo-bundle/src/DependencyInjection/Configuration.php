@@ -35,6 +35,7 @@ final class Configuration implements ConfigurationInterface
                 ->cannotBeEmpty()
             ->end()
             ->arrayNode('class')
+                ->isRequired()
                 ->children()
                     ->scalarNode('media')
                         ->isRequired()
