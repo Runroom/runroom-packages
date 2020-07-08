@@ -64,7 +64,7 @@ final class RedirectAdmin extends AbstractAdmin
                 'editable' => true,
             ])
             ->add('automatic')
-            ->add('_action', null, [
+            ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
                     'delete' => [],
