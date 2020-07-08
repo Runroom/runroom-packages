@@ -7,7 +7,47 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.7.1 - 2020-06-03
+## v0.8.0 - 2020-07-08
+
+### RunroomCookiesBundle
+
+#### Added
+
+- [#29] Add bundle, Thanks to [@DaniCristante]
+
+### RunroomSeoBundle
+
+- [#48] Add real placeholders using property-access
+
+### Testing
+
+- [#62] Add AdminTestCase
+
+### All Packages
+
+- [#63] add missing test
+- [#60] add coverage for missing repositories
+- [#55] Add split ci testing
+
+#### Changed
+
+- [#61] improve coverage 2.0
+- [#57] PHPStan level 8
+- [#54] Improve code quality
+- [#53] Implement automatic redirections based on entity modifications
+- [#50] Improve static code analisis
+- [#49] Simplify integration test and upgrade packages
+
+#### Fixed
+
+- [#52] Fix entity repository
+- [#51] Fix nullable types
+
+#### Removed
+
+- [#58] Remove const whenever possible
+
+## [v0.7.1] - 2020-06-03
 
 ### RunroomSortableBehaviorBundle
 
@@ -296,3 +336,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.6.9]: https://github.com/Runroom/runroom-packages/compare/v0.6.8...v0.6.9
 [#47]: https://github.com/Runroom/runroom-packages/pull/47
 [v0.7.0]: https://github.com/Runroom/runroom-packages/compare/v0.6.9...v0.7.0
+[#63]: https://github.com/Runroom/runroom-packages/pull/63
+[#62]: https://github.com/Runroom/runroom-packages/pull/62
+[#61]: https://github.com/Runroom/runroom-packages/pull/61
+[#60]: https://github.com/Runroom/runroom-packages/pull/60
+[#58]: https://github.com/Runroom/runroom-packages/pull/58
+[#57]: https://github.com/Runroom/runroom-packages/pull/57
+[#55]: https://github.com/Runroom/runroom-packages/pull/55
+[#54]: https://github.com/Runroom/runroom-packages/pull/54
+[#53]: https://github.com/Runroom/runroom-packages/pull/53
+[#52]: https://github.com/Runroom/runroom-packages/pull/52
+[#51]: https://github.com/Runroom/runroom-packages/pull/51
+[#50]: https://github.com/Runroom/runroom-packages/pull/50
+[#49]: https://github.com/Runroom/runroom-packages/pull/49
+[#48]: https://github.com/Runroom/runroom-packages/pull/48
+[#29]: https://github.com/Runroom/runroom-packages/pull/29
+[v0.7.1]: https://github.com/Runroom/runroom-packages/compare/v0.7.0...v0.7.1
+[@DaniCristante]: https://github.com/DaniCristante
