@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class TranslationAdmin extends AbstractAdmin
 {
-    /** @param array{ _page?: int, _sort_order?: 'ASC'|'DESC', _sort_by?: string } $sortValues */
+    /** @param mixed[] $sortValues */
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues['_sort_by'] = 'key';

@@ -38,13 +38,7 @@ class AutomaticRedirectSubscriberTest extends DoctrineTestCase
     /** @test */
     public function itDoesSubscribeToOnFlushEvent(): void
     {
-        $subscriber = new AutomaticRedirectSubscriber(
-            self::$container->get('router'),
-            self::$container->get('property_accessor'),
-            []
-        );
-
-        $events = $subscriber->getSubscribedEvents();
+        $events = $this->subscriber->getSubscribedEvents();
 
         self::assertSame([Events::onFlush], $events);
     }
