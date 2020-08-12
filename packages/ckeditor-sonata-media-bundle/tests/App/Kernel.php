@@ -18,6 +18,7 @@ use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -41,6 +42,7 @@ class Kernel extends BaseKernel
             new KnpMenuBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
+            new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataMediaBundle(),
             new TwigBundle(),
