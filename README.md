@@ -9,6 +9,7 @@ Runroom Packages
 ![split-ci](https://github.com/Runroom/runroom-packages/workflows/split-ci/badge.svg)
 ![qa](https://github.com/Runroom/runroom-packages/workflows/qa/badge.svg)
 [![codecov](https://codecov.io/gh/Runroom/runroom-packages/branch/master/graph/badge.svg)](https://codecov.io/gh/Runroom/runroom-packages)
+[![shepherd](https://shepherd.dev/github/Runroom/runroom-packages/coverage.svg)](https://shepherd.dev/github/Runroom/runroom-packages)
 
 This is the [Runroom](https://www.runroom.com/) monorepo repository for the Symfony projects, and this work gives the ability to reuse several features that we currently need on most of the projects.
 

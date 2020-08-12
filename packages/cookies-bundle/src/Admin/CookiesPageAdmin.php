@@ -24,8 +24,6 @@ final class CookiesPageAdmin extends AbstractAdmin
 {
     protected function configureRoutes(RouteCollection $collection): void
     {
-        parent::configureRoutes($collection);
-
         $collection->remove('show');
         $collection->remove('delete');
         $collection->remove('list');
