@@ -33,6 +33,7 @@ use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SortableBehaviorBundle\RunroomSortableBehaviorBundle;
 use Runroom\TranslationBundle\RunroomTranslationBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -43,6 +44,8 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Tests\App\Entity\Gallery;
+use Tests\App\Entity\GalleryHasMedia;
 use Tests\App\Entity\Media;
 
 final class Kernel extends BaseKernel
@@ -64,6 +67,7 @@ final class Kernel extends BaseKernel
             new SecurityBundle(),
             new TwigBundle(),
             new SonataMediaBundle(),
+            new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataAdminBundle(),
 
@@ -106,6 +110,12 @@ final class Kernel extends BaseKernel
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
+                    'entity' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/Entity',
+                        'prefix' => 'Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
                     'redirection' => [
                         'type' => 'annotation',
                         'dir' => '%kernel.project_dir%/../../packages/redirection-bundle/tests/App/Entity',
@@ -136,7 +146,11 @@ final class Kernel extends BaseKernel
             'contexts' => ['default' => []],
             'cdn' => null,
             'db_driver' => 'doctrine_orm',
-            'class' => ['media' => Media::class],
+            'class' => [
+                'media' => Media::class,
+                'gallery_has_media' => GalleryHasMedia::class,
+                'gallery' => Gallery::class,
+            ],
             'filesystem' => ['local' => null],
         ]);
 

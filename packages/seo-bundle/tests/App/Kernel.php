@@ -22,8 +22,11 @@ use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
+use Runroom\SeoBundle\Tests\App\Entity\Gallery;
+use Runroom\SeoBundle\Tests\App\Entity\GalleryHasMedia;
 use Runroom\SeoBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -53,6 +56,7 @@ class Kernel extends BaseKernel
             new SecurityBundle(),
             new SonataAdminBundle(),
             new SonataMediaBundle(),
+            new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new TwigBundle(),
 
@@ -93,7 +97,17 @@ class Kernel extends BaseKernel
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
-            'orm' => ['auto_mapping' => true],
+            'orm' => [
+                'auto_mapping' => true,
+                'mappings' => [
+                    'redirection' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/Entity',
+                        'prefix' => 'Runroom\SeoBundle\Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
+                ],
+            ],
         ]);
 
         $container->loadFromExtension('twig', [
@@ -110,7 +124,11 @@ class Kernel extends BaseKernel
             'contexts' => ['default' => []],
             'cdn' => null,
             'db_driver' => 'doctrine_orm',
-            'class' => ['media' => Media::class],
+            'class' => [
+                'media' => Media::class,
+                'gallery_has_media' => GalleryHasMedia::class,
+                'gallery' => Gallery::class,
+            ],
             'filesystem' => ['local' => null],
         ]);
 

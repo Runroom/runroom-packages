@@ -16,6 +16,8 @@ namespace Runroom\CkeditorSonataMediaBundle\Tests\App;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
+use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Gallery;
+use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\GalleryHasMedia;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
@@ -80,9 +82,7 @@ class Kernel extends BaseKernel
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
-            'orm' => [
-                'auto_mapping' => true,
-            ],
+            'orm' => ['auto_mapping' => true],
         ]);
 
         $container->loadFromExtension('twig', [
@@ -95,7 +95,11 @@ class Kernel extends BaseKernel
             'contexts' => ['default' => []],
             'cdn' => null,
             'db_driver' => 'doctrine_orm',
-            'class' => ['media' => Media::class],
+            'class' => [
+                'media' => Media::class,
+                'gallery_has_media' => GalleryHasMedia::class,
+                'gallery' => Gallery::class,
+            ],
             'filesystem' => ['local' => null],
         ]);
     }
