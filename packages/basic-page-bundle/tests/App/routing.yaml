@@ -1,0 +1,2 @@
+basic_page:
+    resource: '@RunroomBasicPageBundle/Resources/config/routing.yaml'

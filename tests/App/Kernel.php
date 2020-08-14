@@ -194,6 +194,8 @@ final class Kernel extends BaseKernel
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
+        $routes->import($this->getProjectDir() . '/routing.yaml');
+
         $routes->add('/entity/{slug}', 'controller', 'route.entity');
     }
 }

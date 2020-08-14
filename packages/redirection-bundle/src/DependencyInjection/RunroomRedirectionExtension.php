@@ -16,7 +16,7 @@ namespace Runroom\RedirectionBundle\DependencyInjection;
 use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class RunroomRedirectionExtension extends Extension
@@ -26,8 +26,8 @@ final class RunroomRedirectionExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yaml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.php');
 
         if ($config['enable_automatic_redirections']) {
             $definition = $container->getDefinition(AutomaticRedirectSubscriber::class);
