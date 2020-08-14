@@ -17,9 +17,8 @@ use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksProviderInterface;
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
-// use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
-// use Sonata\Doctrine\Mapper\DoctrineCollector;
-use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
+use Sonata\Doctrine\Mapper\DoctrineCollector;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
@@ -61,23 +60,12 @@ final class RunroomSeoExtension extends Extension
      */
     protected function mapMediaField(string $fieldName, string $entityName, array $config): void
     {
-        // $options = OptionsBuilder::create()
-        //     ->add('fieldName', $fieldName)
-        //     ->add('targetEntity', $config['class']['media'])
-        //     ->add('cascade', ['all'])
-        //     ->add('mappedBy', null)
-        //     ->add('inversedBy', null)
-        //     ->add('joinColumns', [['referencedColumnName' => 'id']])
-        //     ->add('orphanRemoval', false);
-        $options = [
-            'fieldName' => $fieldName,
-            'targetEntity' => $config['class']['media'],
-            'cascade' => ['all'],
-            'mappedBy' => null,
-            'inversedBy' => null,
-            'joinColumns' => [['referencedColumnName' => 'id']],
-            'orphanRemoval' => false,
-        ];
+        $options = OptionsBuilder::createManyToOne($fieldName, $config['class']['media'])
+            ->cascade(['all'])
+            ->addJoin([
+                'name' => 'image_id',
+                'referencedColumnName' => 'id',
+            ]);
 
         DoctrineCollector::getInstance()->addAssociation($entityName, 'mapManyToOne', $options);
     }
