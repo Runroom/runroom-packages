@@ -1,0 +1,2 @@
+cookies:
+    resource: '@RunroomCookiesBundle/Resources/config/routing.yaml'

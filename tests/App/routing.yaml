@@ -1,0 +1,5 @@
+cookies:
+    resource: '@RunroomCookiesBundle/Resources/config/routing.yaml'
+
+basic_page:
+    resource: '@RunroomBasicPageBundle/Resources/config/routing.yaml'
