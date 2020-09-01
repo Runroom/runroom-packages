@@ -52,15 +52,15 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
+    protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader): void
     {
-        $container->loadFromExtension('framework', [
+        $c->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
         ]);
 
-        $container->loadFromExtension('doctrine', [
+        $c->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => ['auto_mapping' => true],
         ]);

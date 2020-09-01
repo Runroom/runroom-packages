@@ -38,7 +38,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ matrix.packages }}
           restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
       - run: cd packages/${{ matrix.packages }} && composer validate --strict
-      - run: composer update --no-interaction --no-progress
+      - run: composer update --no-interaction --no-progress --prefer-stable
       - run: vendor/bin/monorepo-builder localize-composer-paths
-      - run: cd packages/${{ matrix.packages }} && composer update --no-interaction --no-progress
+      - run: cd packages/${{ matrix.packages }} && composer update --no-interaction --no-progress --prefer-stable
       - run: cd packages/${{ matrix.packages }} && vendor/bin/phpunit

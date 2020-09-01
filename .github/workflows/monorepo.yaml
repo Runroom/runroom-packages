@@ -24,7 +24,7 @@ jobs:
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.php }}-composer
-      - run: composer update --prefer-dist --no-progress --no-interaction
+      - run: composer update --no-interaction --no-progress --prefer-stable
       - run: vendor/bin/monorepo-builder split --max-processes 7
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
