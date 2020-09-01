@@ -77,36 +77,36 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
+    protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader): void
     {
-        $container->setParameter('kernel.default_locale', 'en');
+        $c->setParameter('kernel.default_locale', 'en');
 
-        $container->loadFromExtension('framework', [
+        $c->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
             'session' => ['storage_id' => 'session.storage.mock_file'],
         ]);
 
-        $container->loadFromExtension('security', [
+        $c->loadFromExtension('security', [
             'firewalls' => ['main' => ['anonymous' => true]],
         ]);
 
-        $container->loadFromExtension('doctrine', [
+        $c->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => ['auto_mapping' => true],
         ]);
 
-        $container->loadFromExtension('twig', [
+        $c->loadFromExtension('twig', [
             'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
 
-        $container->loadFromExtension('a2lix_translation_form', [
+        $c->loadFromExtension('a2lix_translation_form', [
             'locales' => ['es', 'en', 'ca'],
         ]);
 
-        $container->loadFromExtension('runroom_cookies', [
+        $c->loadFromExtension('runroom_cookies', [
             'cookies' => [
                 'mandatory_cookies' => [[
                     'name' => 'test',
