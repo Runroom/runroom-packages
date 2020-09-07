@@ -32,8 +32,8 @@
         "theofidry/alice-data-fixtures": "^1.2"
     },
     "conflict": {
-        "fzaninotto/faker": "<1.9",
-        "phpdocumentor/reflection-docblock": "<4.0.1"
+        "doctrine/persistence": ">=2.0",
+        "phpdocumentor/reflection-docblock": "5.0.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^5.1"
