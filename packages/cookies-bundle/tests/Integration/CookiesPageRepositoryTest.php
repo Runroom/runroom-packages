@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\Cookiesbundle\Tests\Integration;
+namespace Runroom\CookiesBundle\Tests\Integration;
 
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\Testing\TestCase\DoctrineTestCase;
