@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\CookiesPageBundle\Tests\Integration;
+namespace Runroom\CookiesBundle\Tests\Integration;
 
 use Runroom\CookiesBundle\Admin\CookiesPageAdmin;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
