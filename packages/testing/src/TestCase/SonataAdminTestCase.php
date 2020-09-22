@@ -17,9 +17,12 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @phpstan-template T of object
+ */
 abstract class SonataAdminTestCase extends KernelTestCase
 {
-    /** @var AbstractAdmin|null */
+    /** @var AbstractAdmin<T>|null */
     protected $admin;
 
     protected function setUp(): void

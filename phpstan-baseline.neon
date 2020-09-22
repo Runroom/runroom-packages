@@ -1,0 +1,14 @@
+parameters:
+    ignoreErrors:
+        -
+            message: "#^Method Runroom\\\\CkeditorSonataMediaBundle\\\\Admin\\\\MediaAdminExtension\\:\\:configureRoutes\\(\\) has parameter \\$admin with generic interface Sonata\\\\AdminBundle\\\\Admin\\\\AdminInterface but does not specify its types\\: T$#"
+            count: 1
+            path: packages/ckeditor-sonata-media-bundle/src/Admin/MediaAdminExtension.php
+
+        -
+            message: "#^Property Runroom\\\\SortableBehaviorBundle\\\\Tests\\\\Unit\\\\SortableAdminControllerTest\\:\\:\\$admin with generic interface Sonata\\\\AdminBundle\\\\Admin\\\\AdminInterface does not specify its types\\: T$#"
+            count: 1
+            path: packages/sortable-behavior-bundle/tests/Unit/SortableAdminControllerTest.php
+
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition(.|\n)+#'
+        - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'

@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\Tests\Integration;
 
 use Runroom\CookiesBundle\Admin\CookiesPageAdmin;
+use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 
+/** @extends SonataAdminTestCase<CookiesPage> */
 class CookiesPageAdminTest extends SonataAdminTestCase
 {
     /** @test */

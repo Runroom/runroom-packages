@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/** @extends AbstractAdmin<EntityMetaInformation> */
 final class EntityMetaInformationAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper): void

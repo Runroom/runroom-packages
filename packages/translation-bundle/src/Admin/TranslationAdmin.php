@@ -15,6 +15,7 @@ namespace Runroom\TranslationBundle\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Runroom\TranslationBundle\Entity\Translation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -22,6 +23,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/** @extends AbstractAdmin<Translation> */
 final class TranslationAdmin extends AbstractAdmin
 {
     /** @param mixed[] $sortValues */

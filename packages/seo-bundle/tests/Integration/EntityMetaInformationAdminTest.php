@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\Integration;
 
 use Runroom\SeoBundle\Admin\EntityMetaInformationAdmin;
+use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 
+/** @extends SonataAdminTestCase<EntityMetaInformation> */
 class EntityMetaInformationAdminTest extends SonataAdminTestCase
 {
     /** @test */

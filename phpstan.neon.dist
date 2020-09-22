@@ -6,6 +6,7 @@ includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - vendor/phpstan/phpstan-symfony/extension.neon
     - vendor/phpstan/phpstan-symfony/rules.neon
+    - phpstan-baseline.neon
 
 parameters:
     level: 8
@@ -13,9 +14,6 @@ parameters:
         - packages
         - src
         - tests
-    ignoreErrors:
-        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition(.|\n)+#'
-        - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'
     excludes_analyse:
         - */vendor/*
         - tests/App/var/*
