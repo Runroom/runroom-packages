@@ -15,7 +15,9 @@ namespace Runroom\TranslationBundle\Tests\Integration;
 
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Runroom\TranslationBundle\Admin\TranslationAdmin;
+use Runroom\TranslationBundle\Entity\Translation;
 
+/** @extends SonataAdminTestCase<Translation> */
 class TranslationAdminTest extends SonataAdminTestCase
 {
     /** @test */

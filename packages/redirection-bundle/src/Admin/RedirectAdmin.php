@@ -20,6 +20,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+/** @extends AbstractAdmin<Redirect> */
 final class RedirectAdmin extends AbstractAdmin
 {
     /** @var array<string, int> */

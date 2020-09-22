@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Runroom\RedirectionBundle\Tests\Integration;
 
 use Runroom\RedirectionBundle\Admin\RedirectAdmin;
+use Runroom\RedirectionBundle\Entity\Redirect;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 
+/** @extends SonataAdminTestCase<Redirect> */
 class RedirectAdminTest extends SonataAdminTestCase
 {
     /** @test */

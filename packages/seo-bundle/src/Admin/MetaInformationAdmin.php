@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Runroom\SeoBundle\Entity\MetaInformation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -22,6 +23,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/** @extends AbstractAdmin<MetaInformation> */
 final class MetaInformationAdmin extends AbstractAdmin
 {
     /** @param mixed[] $sortValues */

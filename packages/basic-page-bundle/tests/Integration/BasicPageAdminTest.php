@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Runroom\BasicPageBundle\Admin\BasicPageAdmin;
+use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 
+/** @extends SonataAdminTestCase<BasicPage> */
 class BasicPageAdminTest extends SonataAdminTestCase
 {
     /** @test */
