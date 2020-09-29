@@ -7,7 +7,38 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## v0.8.2 - 2020-07-08
+<!-- dumped content start -->
+## 0.9.0 - 2020-09-29
+
+### RunroomCookiesBundle
+
+#### Fixed
+
+- [#74] Disable performance cookies by default
+
+### All
+
+#### Added
+
+- [#68] Add shepherd type check
+
+#### Changed
+
+- [#70] Transform config to PHP and avoid using yaml for internal config
+- [#66] Increase psalm to level 4, with baseline
+
+#### Fixed
+
+- [#73] Fix phpstan issues
+
+#### Removed
+
+- [#72] Remove verbose logs
+- [#69] Remove SonataEasyExtendsBundle
+
+<!-- dumped content end -->
+
+## [v0.8.2] - 2020-07-08
 
 ### RunroomCookiesBundle
 
@@ -373,3 +404,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [v0.8.0]: https://github.com/Runroom/runroom-packages/compare/v0.7.1...v0.8.0
 [#65]: https://github.com/Runroom/runroom-packages/pull/65
 [v0.8.1]: https://github.com/Runroom/runroom-packages/compare/v0.8.0...v0.8.1
+[#74]: https://github.com/Runroom/runroom-packages/pull/74
+[#73]: https://github.com/Runroom/runroom-packages/pull/73
+[#72]: https://github.com/Runroom/runroom-packages/pull/72
+[#70]: https://github.com/Runroom/runroom-packages/pull/70
+[#69]: https://github.com/Runroom/runroom-packages/pull/69
+[#68]: https://github.com/Runroom/runroom-packages/pull/68
+[#66]: https://github.com/Runroom/runroom-packages/pull/66
+[v0.8.2]: https://github.com/Runroom/runroom-packages/compare/v0.8.1...v0.8.2
