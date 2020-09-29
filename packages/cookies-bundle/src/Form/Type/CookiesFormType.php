@@ -32,7 +32,6 @@ final class CookiesFormType extends AbstractType
             ->add('performanceCookies', CheckboxType::class, [
                 'label' => 'cookies.performance_cookies.label',
                 'required' => false,
-                'data' => true,
             ])
             ->add('targetingCookies', CheckboxType::class, [
                 'label' => 'cookies.targeting_cookies.label',
