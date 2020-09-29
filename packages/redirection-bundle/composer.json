@@ -45,7 +45,7 @@
         "phpspec/prophecy": "^1.11.1",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.3",
-        "runroom-packages/testing": "^0.9",
+        "runroom-packages/testing": "^0.10",
         "symfony/framework-bundle": "^4.4 || ^5.1",
         "symfony/phpunit-bridge": "^5.1",
         "theofidry/alice-data-fixtures": "^1.2"
@@ -55,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     },
     "autoload": {
