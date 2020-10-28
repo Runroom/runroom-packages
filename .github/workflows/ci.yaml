@@ -8,19 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.allowed_to_fail }}
     strategy:
       matrix:
-        php: ['7.3', '7.4']
+        php: ['7.3', '7.4', '8.0']
         dependencies: [highest]
-        allowed_to_fail: [false]
         include:
           - php: '7.3'
             dependencies: lowest
-            allowed_to_fail: false
-          - php: '8.0'
-            dependencies: highest
-            allowed_to_fail: true
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
@@ -28,7 +22,6 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: pcov.directory=packages
           coverage: pcov
-          tools: composer:v2
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"

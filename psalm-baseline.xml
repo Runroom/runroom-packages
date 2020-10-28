@@ -1,121 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.12.2@7c7ebd068f8acaba211d4a2c707c4ba90874fa26">
-    <file src="packages/basic-page-bundle/src/Entity/BasicPage.php">
-        <UndefinedInterfaceMethod occurrences="3">
-            <code>getTitle</code>
-            <code>getSlug</code>
-            <code>getContent</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/basic-page-bundle/tests/Fixtures/BasicPageFixture.php">
-        <UndefinedInterfaceMethod occurrences="4">
-            <code>setTitle</code>
-            <code>setContent</code>
-            <code>setSlug</code>
-            <code>setSlug</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/basic-page-bundle/tests/Integration/BasicPageRepositoryTest.php">
-        <InternalMethod occurrences="1">
-            <code>get</code>
-        </InternalMethod>
-    </file>
-    <file src="packages/cookies-bundle/src/Entity/CookiesPage.php">
-        <UndefinedInterfaceMethod occurrences="2">
-            <code>getTitle</code>
-            <code>getContent</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/cookies-bundle/tests/Integration/CookiesPageRepositoryTest.php">
-        <InternalMethod occurrences="1">
-            <code>get</code>
-        </InternalMethod>
-    </file>
-    <file src="packages/form-handler-bundle/src/FormHandler.php">
-        <TooManyArguments occurrences="1">
-            <code>dispatch</code>
-        </TooManyArguments>
-    </file>
-    <file src="packages/redirection-bundle/src/Listener/AutomaticRedirectSubscriber.php">
-        <InternalMethod occurrences="3">
-            <code>computeChangeSet</code>
-            <code>computeChangeSet</code>
-            <code>computeChangeSet</code>
-        </InternalMethod>
-    </file>
-    <file src="packages/redirection-bundle/tests/Integration/AutomaticRedirectSubscriberTest.php">
-        <InternalMethod occurrences="2">
-            <code>get</code>
-            <code>get</code>
-        </InternalMethod>
-    </file>
-    <file src="packages/redirection-bundle/tests/Integration/RedirectRepositoryTest.php">
-        <InternalMethod occurrences="1">
-            <code>get</code>
-        </InternalMethod>
-    </file>
-    <file src="packages/render-event-bundle/src/Renderer/PageRenderer.php">
-        <TooManyArguments occurrences="2">
-            <code>dispatch</code>
-            <code>dispatch</code>
-        </TooManyArguments>
-    </file>
-    <file src="packages/seo-bundle/src/Entity/EntityMetaInformation.php">
-        <UndefinedInterfaceMethod occurrences="2">
-            <code>getTitle</code>
-            <code>getDescription</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/seo-bundle/src/Entity/MetaInformation.php">
-        <UndefinedInterfaceMethod occurrences="2">
-            <code>getTitle</code>
-            <code>getDescription</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/seo-bundle/tests/Fixtures/EntityMetaInformationFixture.php">
-        <UndefinedInterfaceMethod occurrences="2">
-            <code>setTitle</code>
-            <code>setDescription</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/seo-bundle/tests/Fixtures/MetaInformationFixture.php">
-        <UndefinedInterfaceMethod occurrences="2">
-            <code>setTitle</code>
-            <code>setDescription</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/seo-bundle/tests/Integration/MetaInformationRepositoryTest.php">
-        <InternalMethod occurrences="1">
-            <code>get</code>
-        </InternalMethod>
-    </file>
-    <file src="packages/testing/src/TestCase/DoctrineTestCase.php">
-        <InternalMethod occurrences="5">
-            <code>get</code>
-            <code>get</code>
-            <code>get</code>
-            <code>getParameterBag</code>
-            <code>get</code>
-        </InternalMethod>
-    </file>
-    <file src="packages/translation-bundle/src/Entity/Translation.php">
-        <UndefinedInterfaceMethod occurrences="1">
-        <code>getValue</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/translation-bundle/src/Service/TranslationService.php">
-        <UndefinedInterfaceMethod occurrences="1">
-            <code>getValue</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/translation-bundle/tests/Fixtures/TranslationFixtures.php">
-        <UndefinedInterfaceMethod occurrences="1">
-            <code>setValue</code>
-        </UndefinedInterfaceMethod>
-    </file>
-    <file src="packages/translation-bundle/tests/Integration/TranslationRepositoryTest.php">
-        <InternalMethod occurrences="1">
-            <code>get</code>
-        </InternalMethod>
-    </file>
+<files psalm-version="3.18.2@19aa905f7c3c7350569999a93c40ae91ae4e1626">
+  <file src="packages/basic-page-bundle/src/Entity/BasicPage.php">
+    <UndefinedInterfaceMethod occurrences="3">
+      <code>getContent</code>
+      <code>getSlug</code>
+      <code>getTitle</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/basic-page-bundle/src/Repository/BasicPageRepository.php">
+    <InvalidArgument occurrences="1">
+      <code>$registry</code>
+    </InvalidArgument>
+  </file>
+  <file src="packages/basic-page-bundle/tests/Fixtures/BasicPageFixture.php">
+    <UndefinedInterfaceMethod occurrences="4">
+      <code>setContent</code>
+      <code>setSlug</code>
+      <code>setSlug</code>
+      <code>setTitle</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/basic-page-bundle/tests/Integration/BasicPageRepositoryTest.php">
+    <InternalMethod occurrences="1">
+      <code>get</code>
+    </InternalMethod>
+  </file>
+  <file src="packages/cookies-bundle/src/Entity/CookiesPage.php">
+    <UndefinedInterfaceMethod occurrences="2">
+      <code>getContent</code>
+      <code>getTitle</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/cookies-bundle/src/Repository/CookiesPageRepository.php">
+    <InvalidArgument occurrences="1">
+      <code>$registry</code>
+    </InvalidArgument>
+  </file>
+  <file src="packages/cookies-bundle/tests/Integration/CookiesPageRepositoryTest.php">
+    <InternalMethod occurrences="1">
+      <code>get</code>
+    </InternalMethod>
+  </file>
+  <file src="packages/form-handler-bundle/src/FormHandler.php">
+    <TooManyArguments occurrences="1">
+      <code>dispatch</code>
+    </TooManyArguments>
+  </file>
+  <file src="packages/redirection-bundle/src/Listener/AutomaticRedirectSubscriber.php">
+    <InternalMethod occurrences="3">
+      <code>computeChangeSet</code>
+      <code>computeChangeSet</code>
+      <code>computeChangeSet</code>
+    </InternalMethod>
+  </file>
+  <file src="packages/redirection-bundle/src/Repository/RedirectRepository.php">
+    <InvalidArgument occurrences="1">
+      <code>$registry</code>
+    </InvalidArgument>
+  </file>
+  <file src="packages/redirection-bundle/tests/Integration/AutomaticRedirectSubscriberTest.php">
+    <InternalMethod occurrences="2">
+      <code>get</code>
+      <code>get</code>
+    </InternalMethod>
+  </file>
+  <file src="packages/redirection-bundle/tests/Integration/RedirectRepositoryTest.php">
+    <InternalMethod occurrences="1">
+      <code>get</code>
+    </InternalMethod>
+  </file>
+  <file src="packages/render-event-bundle/src/Renderer/PageRenderer.php">
+    <TooManyArguments occurrences="2">
+      <code>dispatch</code>
+      <code>dispatch</code>
+    </TooManyArguments>
+  </file>
+  <file src="packages/seo-bundle/src/Entity/EntityMetaInformation.php">
+    <UndefinedInterfaceMethod occurrences="2">
+      <code>getDescription</code>
+      <code>getTitle</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/seo-bundle/src/Entity/MetaInformation.php">
+    <UndefinedInterfaceMethod occurrences="2">
+      <code>getDescription</code>
+      <code>getTitle</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/seo-bundle/src/Repository/MetaInformationRepository.php">
+    <InvalidArgument occurrences="1">
+      <code>$registry</code>
+    </InvalidArgument>
+  </file>
+  <file src="packages/seo-bundle/tests/Fixtures/EntityMetaInformationFixture.php">
+    <UndefinedInterfaceMethod occurrences="2">
+      <code>setDescription</code>
+      <code>setTitle</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/seo-bundle/tests/Fixtures/MetaInformationFixture.php">
+    <UndefinedInterfaceMethod occurrences="2">
+      <code>setDescription</code>
+      <code>setTitle</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/seo-bundle/tests/Integration/MetaInformationRepositoryTest.php">
+    <InternalMethod occurrences="1">
+      <code>get</code>
+    </InternalMethod>
+  </file>
+  <file src="packages/sortable-behavior-bundle/src/Service/GedmoPositionHandler.php">
+    <InvalidArgument occurrences="2">
+      <code>$this-&gt;entityManager</code>
+      <code>$this-&gt;entityManager</code>
+    </InvalidArgument>
+  </file>
+  <file src="packages/testing/src/TestCase/DoctrineTestCase.php">
+    <InternalMethod occurrences="5">
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>getParameterBag</code>
+    </InternalMethod>
+  </file>
+  <file src="packages/translation-bundle/src/Entity/Translation.php">
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>getValue</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/translation-bundle/src/Repository/TranslationRepository.php">
+    <InvalidArgument occurrences="1">
+      <code>$registry</code>
+    </InvalidArgument>
+  </file>
+  <file src="packages/translation-bundle/src/Service/TranslationService.php">
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>getValue</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/translation-bundle/tests/Fixtures/TranslationFixtures.php">
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>setValue</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="packages/translation-bundle/tests/Integration/TranslationRepositoryTest.php">
+    <InternalMethod occurrences="1">
+      <code>get</code>
+    </InternalMethod>
+  </file>
 </files>
