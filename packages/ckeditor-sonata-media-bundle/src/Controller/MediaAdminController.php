@@ -62,6 +62,10 @@ final class MediaAdminController extends CRUDController
         $datagrid->setValue('providerName', null, $this->admin->getPersistentParameter('provider'));
 
         $formats = [];
+
+        /**
+         * @var MediaInterface $media
+         */
         foreach ($datagrid->getResults() as $media) {
             $formats[$media->getId()] = $this->mediaPool->getFormatNamesByContext($media->getContext());
         }
