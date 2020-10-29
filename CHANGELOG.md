@@ -5,10 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-<!-- changelog-linker -->
+## 0.9.1 - 2020-10-29
 
-<!-- dumped content start -->
-## 0.9.0 - 2020-09-29
+### All
+
+#### Changed
+
+- [#77] Replace prophecy for phpunit mocks
+- [#76] Composer v2 and php 8 support
+
+### RunroomCookiesBundle
+
+#### Removed
+
+- [#75] Remove csrf from CookiesFormType
+
+## [0.9.0] - 2020-09-29
 
 ### RunroomCookiesBundle
 
@@ -412,3 +424,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#68]: https://github.com/Runroom/runroom-packages/pull/68
 [#66]: https://github.com/Runroom/runroom-packages/pull/66
 [v0.8.2]: https://github.com/Runroom/runroom-packages/compare/v0.8.1...v0.8.2
+[#77]: https://github.com/Runroom/runroom-packages/pull/77
+[#76]: https://github.com/Runroom/runroom-packages/pull/76
+[#75]: https://github.com/Runroom/runroom-packages/pull/75
+[0.9.0]: https://github.com/Runroom/runroom-packages/compare/v0.8.2...0.9.0
