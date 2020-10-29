@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
 use Runroom\BasicPageBundle\Tests\Fixtures\BasicPageFixture;
@@ -23,8 +22,6 @@ use Runroom\SeoBundle\Entity\EntityMetaInformation;
 
 class BasicPageMetaInformationProviderTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var BasicPage */
     private $basicPage;
 

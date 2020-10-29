@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageService;
@@ -24,9 +23,7 @@ use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 
 class BasicPageServiceTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<BasicPageRepository> */
+    /** @var MockObject&BasicPageRepository */
     private $repository;
 
     /** @var BasicPageService */
@@ -34,9 +31,9 @@ class BasicPageServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->repository = $this->prophesize(BasicPageRepository::class);
+        $this->repository = $this->createMock(BasicPageRepository::class);
 
-        $this->service = new BasicPageService($this->repository->reveal());
+        $this->service = new BasicPageService($this->repository);
     }
 
     /** @test */
@@ -44,7 +41,7 @@ class BasicPageServiceTest extends TestCase
     {
         $basicPage = new BasicPage();
 
-        $this->repository->findBySlug('slug')->willReturn($basicPage);
+        $this->repository->method('findBySlug')->with('slug')->willReturn($basicPage);
 
         $model = $this->service->getBasicPageViewModel('slug');
 
@@ -56,7 +53,7 @@ class BasicPageServiceTest extends TestCase
     {
         $event = new PageRenderEvent('view', new PageViewModel());
 
-        $this->repository->findBy(['publish' => true])->willReturn([]);
+        $this->repository->method('findBy')->with(['publish' => true])->willReturn([]);
 
         $this->service->onPageRender($event);
 

@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\FormHandlerBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\FormHandlerBundle\ViewModel\BasicFormViewModel;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -31,9 +30,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class FormHandlerTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<FormFactoryInterface> */
+    /** @var MockObject&FormFactoryInterface */
     private $formFactory;
 
     /** @var EventDispatcher */
@@ -53,7 +50,7 @@ class FormHandlerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->formFactory = $this->prophesize(FormFactoryInterface::class);
+        $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->eventDispatcher = new EventDispatcher();
         $this->requestStack = new RequestStack();
         $this->request = new Request();
@@ -61,7 +58,7 @@ class FormHandlerTest extends TestCase
         $this->session = new Session(new MockArraySessionStorage());
 
         $this->formHandler = new FormHandler(
-            $this->formFactory->reveal(),
+            $this->formFactory,
             $this->eventDispatcher,
             $this->requestStack,
             $this->session
@@ -95,23 +92,23 @@ class FormHandlerTest extends TestCase
 
         self::assertInstanceOf(BasicFormViewModel::class, $model);
         self::assertInstanceOf(FormView::class, $model->getFormView());
-        self::assertSame($form->reveal(), $model->getForm());
+        self::assertSame($form, $model->getForm());
         self::assertSame(['success'], $this->session->getFlashBag()->get('form_types'));
     }
 
-    /** @return ObjectProphecy<FormInterface> */
-    private function configureForm(bool $submitted = true, bool $valid = true): ObjectProphecy
+    /** @return MockObject&FormInterface */
+    private function configureForm(bool $submitted = true, bool $valid = true): MockObject
     {
-        $form = $this->prophesize(FormInterface::class);
+        $form = $this->createMock(FormInterface::class);
         $formView = new FormView();
 
-        $this->formFactory->create(FormType::class, null, [])->willReturn($form->reveal());
+        $this->formFactory->method('create')->with(FormType::class, null, [])->willReturn($form);
 
-        $form->handleRequest($this->request)->shouldBeCalled();
-        $form->getName()->willReturn('form_types');
-        $form->isSubmitted()->willReturn($submitted);
-        $form->isValid()->willReturn($valid);
-        $form->createView()->willReturn($formView);
+        $form->expects(self::once())->method('handleRequest')->with($this->request);
+        $form->method('getName')->willReturn('form_types');
+        $form->method('isSubmitted')->willReturn($submitted);
+        $form->method('isValid')->willReturn($valid);
+        $form->method('createView')->willReturn($formView);
 
         return $form;
     }

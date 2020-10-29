@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RedirectionBundle\Listener\RedirectListener;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,9 +26,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class RedirectListenerTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<RedirectRepository> */
+    /** @var MockObject&RedirectRepository */
     private $repository;
 
     /** @var RedirectListener */
@@ -37,9 +34,9 @@ class RedirectListenerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->repository = $this->prophesize(RedirectRepository::class);
+        $this->repository = $this->createMock(RedirectRepository::class);
 
-        $this->listener = new RedirectListener($this->repository->reveal());
+        $this->listener = new RedirectListener($this->repository);
     }
 
     /** @test */
@@ -63,7 +60,7 @@ class RedirectListenerTest extends TestCase
     /** @test */
     public function itDoesNotDOAnythingIfTheRouteIsNotFoundOnTheRepository(): void
     {
-        $this->repository->findRedirect('/')->shouldBeCalled()->willReturn(null);
+        $this->repository->expects(self::once())->method('findRedirect')->with('/');
 
         $event = $this->getResponseEvent();
 
@@ -75,7 +72,7 @@ class RedirectListenerTest extends TestCase
     /** @test */
     public function itDoesARedirectToDestinationUrl(): void
     {
-        $this->repository->findRedirect('/')->shouldBeCalled()->willReturn([
+        $this->repository->expects(self::once())->method('findRedirect')->with('/')->willReturn([
             'destination' => '/redirect',
             'httpCode' => 301,
         ]);
@@ -93,8 +90,6 @@ class RedirectListenerTest extends TestCase
 
     private function getResponseEvent(int $requestType = HttpKernelInterface::MASTER_REQUEST): RequestEvent
     {
-        $kernel = $this->prophesize(Kernel::class);
-
-        return new RequestEvent($kernel->reveal(), new Request(), $requestType);
+        return new RequestEvent($this->createStub(Kernel::class), new Request(), $requestType);
     }
 }

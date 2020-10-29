@@ -13,18 +13,15 @@ declare(strict_types=1);
 
 namespace Runroom\TranslationBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
 
 class TranslationExtensionTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<TranslationService> */
+    /** @var MockObject&TranslationService */
     private $service;
 
     /** @var TranslationExtension */
@@ -32,15 +29,15 @@ class TranslationExtensionTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->service = $this->prophesize(TranslationService::class);
+        $this->service = $this->createMock(TranslationService::class);
 
-        $this->extension = new TranslationExtension($this->service->reveal());
+        $this->extension = new TranslationExtension($this->service);
     }
 
     /** @test */
     public function itTranslates(): void
     {
-        $this->service->translate(TranslationFixtures::KEY, [], null)->willReturn(TranslationFixtures::VALUE);
+        $this->service->method('translate')->with(TranslationFixtures::KEY, [], null)->willReturn(TranslationFixtures::VALUE);
 
         $result = $this->extension->translate(TranslationFixtures::KEY);
 

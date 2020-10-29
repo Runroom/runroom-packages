@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
@@ -24,12 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BasicPageControllerTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<PageRenderer> */
+    /** @var MockObject&PageRenderer */
     private $renderer;
 
-    /** @var ObjectProphecy<BasicPageService> */
+    /** @var MockObject&BasicPageService */
     private $service;
 
     /** @var BasicPageController */
@@ -37,12 +34,12 @@ class BasicPageControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->renderer = $this->prophesize(PageRenderer::class);
-        $this->service = $this->prophesize(BasicPageService::class);
+        $this->renderer = $this->createMock(PageRenderer::class);
+        $this->service = $this->createMock(BasicPageService::class);
 
         $this->controller = new BasicPageController(
-            $this->renderer->reveal(),
-            $this->service->reveal()
+            $this->renderer,
+            $this->service
         );
     }
 
@@ -50,14 +47,14 @@ class BasicPageControllerTest extends TestCase
     public function itRendersStatic(): void
     {
         $model = new BasicPageViewModel();
-        $expectedResponse = $this->prophesize(Response::class);
+        $expectedResponse = new Response();
 
-        $this->service->getBasicPageViewModel('slug')->willReturn($model);
-        $this->renderer->renderResponse('@RunroomBasicPage/show.html.twig', $model, null)
-            ->willReturn($expectedResponse->reveal());
+        $this->service->method('getBasicPageViewModel')->with('slug')->willReturn($model);
+        $this->renderer->method('renderResponse')->with('@RunroomBasicPage/show.html.twig', $model, null)
+            ->willReturn($expectedResponse);
 
         $response = $this->controller->show('slug');
 
-        self::assertSame($expectedResponse->reveal(), $response);
+        self::assertSame($expectedResponse, $response);
     }
 }

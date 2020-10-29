@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\TranslationBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
@@ -23,12 +22,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TranslationServiceTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<TranslationRepository> */
+    /** @var MockObject&TranslationRepository */
     private $repository;
 
-    /** @var ObjectProphecy<TranslatorInterface> */
+    /** @var MockObject&TranslatorInterface */
     private $translator;
 
     /** @var TranslationService */
@@ -36,12 +33,12 @@ class TranslationServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->repository = $this->prophesize(TranslationRepository::class);
-        $this->translator = $this->prophesize(TranslatorInterface::class);
+        $this->repository = $this->createMock(TranslationRepository::class);
+        $this->translator = $this->createMock(TranslatorInterface::class);
 
         $this->service = new TranslationService(
-            $this->repository->reveal(),
-            $this->translator->reveal()
+            $this->repository,
+            $this->translator
         );
     }
 
@@ -50,8 +47,8 @@ class TranslationServiceTest extends TestCase
     {
         $translation = TranslationFixtures::create();
 
-        $this->repository->findOneBy(['key' => TranslationFixtures::KEY])->willReturn($translation);
-        $this->translator->trans(TranslationFixtures::KEY, [], null, 'en')->shouldNotBeCalled();
+        $this->repository->method('findOneBy')->with(['key' => TranslationFixtures::KEY])->willReturn($translation);
+        $this->translator->expects(self::never())->method('trans')->with(TranslationFixtures::KEY, [], null, 'en');
 
         $result = $this->service->translate(TranslationFixtures::KEY, [], 'en');
 
@@ -61,8 +58,8 @@ class TranslationServiceTest extends TestCase
     /** @test */
     public function itReturnsAStringTranslatedByTheTranslatorComponent(): void
     {
-        $this->repository->findOneBy(['key' => TranslationFixtures::KEY])->willReturn(null);
-        $this->translator->trans(TranslationFixtures::KEY, [], null, 'en')
+        $this->repository->method('findOneBy')->with(['key' => TranslationFixtures::KEY])->willReturn(null);
+        $this->translator->method('trans')->with(TranslationFixtures::KEY, [], null, 'en')
             ->willReturn('another_translation');
 
         $result = $this->service->translate(TranslationFixtures::KEY, [], 'en');
