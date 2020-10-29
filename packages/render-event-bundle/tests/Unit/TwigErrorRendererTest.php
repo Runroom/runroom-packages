@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Runroom\RenderEventBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\ErrorRenderer\TwigErrorRenderer;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
@@ -27,24 +27,22 @@ use Twig\Loader\LoaderInterface;
 
 class TwigErrorRendererTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<Environment> */
+    /** @var Stub&Environment */
     private $twig;
 
-    /** @var ObjectProphecy<HtmlErrorRenderer> */
+    /** @var MockObject&HtmlErrorRenderer */
     private $fallbackErrorRenderer;
 
-    /** @var ObjectProphecy<PageRenderer> */
+    /** @var MockObject&PageRenderer */
     private $renderer;
 
-    /** @var ObjectProphecy<\Throwable> */
+    /** @var Stub&\Throwable */
     private $exception;
 
-    /** @var ObjectProphecy<FlattenException> */
+    /** @var MockObject&FlattenException */
     private $flattenException;
 
-    /** @var ObjectProphecy<LoaderInterface> */
+    /** @var MockObject&LoaderInterface */
     private $twigLoader;
 
     /** @var RequestStack */
@@ -52,22 +50,22 @@ class TwigErrorRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->twig = $this->prophesize(Environment::class);
-        $this->fallbackErrorRenderer = $this->prophesize(HtmlErrorRenderer::class);
-        $this->renderer = $this->prophesize(PageRenderer::class);
-        $this->exception = $this->prophesize(\Throwable::class);
-        $this->flattenException = $this->prophesize(FlattenException::class);
-        $this->twigLoader = $this->prophesize(LoaderInterface::class);
+        $this->twig = $this->createStub(Environment::class);
+        $this->fallbackErrorRenderer = $this->createMock(HtmlErrorRenderer::class);
+        $this->renderer = $this->createMock(PageRenderer::class);
+        $this->exception = $this->createStub(\Throwable::class);
+        $this->flattenException = $this->createMock(FlattenException::class);
+        $this->twigLoader = $this->createMock(LoaderInterface::class);
 
         $this->requestStack = new RequestStack();
         $this->requestStack->push(new Request());
 
-        $this->twig->getLoader()->willReturn($this->twigLoader->reveal());
-        $this->flattenException->getStatusCode()->willReturn(404);
-        $this->flattenException->getStatusText()->willReturn('status_text');
-        $this->flattenException->setAsString('renderer_template')->willReturn($this->flattenException->reveal());
-        $this->fallbackErrorRenderer->render($this->exception->reveal())
-            ->willReturn($this->flattenException->reveal());
+        $this->twig->method('getLoader')->willReturn($this->twigLoader);
+        $this->flattenException->method('getStatusCode')->willReturn(404);
+        $this->flattenException->method('getStatusText')->willReturn('status_text');
+        $this->flattenException->method('setAsString')->with('renderer_template')->willReturn($this->flattenException);
+        $this->fallbackErrorRenderer->method('render')->with($this->exception)
+            ->willReturn($this->flattenException);
     }
 
     /** @test */
@@ -75,7 +73,7 @@ class TwigErrorRendererTest extends TestCase
     {
         $controller = $this->configureController(true);
 
-        $response = $controller->render($this->exception->reveal());
+        $response = $controller->render($this->exception);
 
         self::assertSame(404, $response->getStatusCode());
     }
@@ -83,17 +81,19 @@ class TwigErrorRendererTest extends TestCase
     /** @test */
     public function itRendersGenericErrorPage(): void
     {
-        $this->renderer->render('@Twig/Exception/error.html.twig', [
-            'exception' => $this->flattenException->reveal(),
+        $this->renderer->method('render')->with('@Twig/Exception/error.html.twig', [
+            'exception' => $this->flattenException,
             'status_code' => 404,
             'status_text' => 'status_text',
         ])->willReturn('renderer_template');
-        $this->twigLoader->exists('@Twig/Exception/error404.html.twig')->willReturn(false);
-        $this->twigLoader->exists('@Twig/Exception/error.html.twig')->willReturn(true);
+        $this->twigLoader->method('exists')->willReturnMap([
+            ['@Twig/Exception/error404.html.twig', false],
+            ['@Twig/Exception/error.html.twig', true],
+        ]);
 
         $controller = $this->configureController();
 
-        $response = $controller->render($this->exception->reveal());
+        $response = $controller->render($this->exception);
 
         self::assertSame(404, $response->getStatusCode());
     }
@@ -101,16 +101,16 @@ class TwigErrorRendererTest extends TestCase
     /** @test */
     public function itRenders404ErrorPage(): void
     {
-        $this->renderer->render('@Twig/Exception/error404.html.twig', [
-            'exception' => $this->flattenException->reveal(),
+        $this->renderer->method('render')->with('@Twig/Exception/error404.html.twig', [
+            'exception' => $this->flattenException,
             'status_code' => 404,
             'status_text' => 'status_text',
         ])->willReturn('renderer_template');
-        $this->twigLoader->exists('@Twig/Exception/error404.html.twig')->willReturn(true);
+        $this->twigLoader->method('exists')->with('@Twig/Exception/error404.html.twig')->willReturn(true);
 
         $controller = $this->configureController();
 
-        $response = $controller->render($this->exception->reveal());
+        $response = $controller->render($this->exception);
 
         self::assertSame(404, $response->getStatusCode());
     }
@@ -118,9 +118,9 @@ class TwigErrorRendererTest extends TestCase
     private function configureController(bool $debug = false): TwigErrorRenderer
     {
         return new TwigErrorRenderer(
-            $this->twig->reveal(),
-            $this->fallbackErrorRenderer->reveal(),
-            $this->renderer->reveal(),
+            $this->twig,
+            $this->fallbackErrorRenderer,
+            $this->renderer,
             TwigErrorRenderer::isDebug($this->requestStack, $debug)
         );
     }

@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\RenderEventBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
@@ -27,9 +25,7 @@ use Twig\Environment;
 
 class PageRendererTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<Environment> */
+    /** @var MockObject&Environment */
     private $twig;
 
     /** @var EventDispatcher */
@@ -43,12 +39,12 @@ class PageRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->twig = $this->prophesize(Environment::class);
+        $this->twig = $this->createMock(Environment::class);
         $this->eventDispatcher = new EventDispatcher();
         $this->pageViewModel = new PageViewModel();
 
         $this->service = new PageRenderer(
-            $this->twig->reveal(),
+            $this->twig,
             $this->eventDispatcher,
             $this->pageViewModel
         );
@@ -57,7 +53,7 @@ class PageRendererTest extends TestCase
     /** @test */
     public function itDispatchEventsOnRender(): void
     {
-        $this->twig->render('test.html.twig', Argument::type('array'), null)
+        $this->twig->method('render')->with('test.html.twig', self::isType('array'))
             ->willReturn('Rendered test');
 
         $result = $this->service->render('test.html.twig', []);
@@ -70,7 +66,7 @@ class PageRendererTest extends TestCase
     {
         $response = new Response();
 
-        $this->twig->render('different.html.twig', Argument::type('array'), null)
+        $this->twig->method('render')->with('different.html.twig', self::isType('array'))
             ->willReturn('Rendered test');
 
         $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {
@@ -91,7 +87,7 @@ class PageRendererTest extends TestCase
     {
         $response = new Response();
 
-        $this->twig->render('test.html.twig', Argument::type('array'), null)
+        $this->twig->method('render')->with('test.html.twig', self::isType('array'), null)
             ->willReturn('Rendered test');
 
         $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {

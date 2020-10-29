@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\CookiesBundle\Controller\CookiesPageController;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
@@ -24,12 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CookiesPageControllerTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<PageRenderer> */
+    /** @var MockObject&PageRenderer */
     private $renderer;
 
-    /** @var ObjectProphecy<CookiesPageService> */
+    /** @var MockObject&CookiesPageService */
     private $service;
 
     /** @var CookiesPageController */
@@ -37,12 +34,12 @@ class CookiesPageControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->renderer = $this->prophesize(PageRenderer::class);
-        $this->service = $this->prophesize(CookiesPageService::class);
+        $this->renderer = $this->createMock(PageRenderer::class);
+        $this->service = $this->createMock(CookiesPageService::class);
 
         $this->controller = new CookiesPageController(
-            $this->renderer->reveal(),
-            $this->service->reveal()
+            $this->renderer,
+            $this->service
         );
     }
 
@@ -51,8 +48,8 @@ class CookiesPageControllerTest extends TestCase
     {
         $viewModel = new CookiesPageViewModel();
 
-        $this->service->getViewModel()->shouldBeCalled()->willReturn($viewModel);
-        $this->renderer->renderResponse('@RunroomCookies/show.html.twig', $viewModel)
+        $this->service->expects(self::once())->method('getViewModel')->willReturn($viewModel);
+        $this->renderer->method('renderResponse')->with('@RunroomCookies/show.html.twig', $viewModel)
             ->willReturn(new Response());
 
         $response = $this->controller->index();

@@ -14,23 +14,19 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\Tests\App\Entity\MetaInformationAwareEntity;
 
 class MetaInformationAwareTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @test */
     public function itSetsAndGetsMetaInformation(): void
     {
-        $entityMetaInformation = $this->prophesize(EntityMetaInformation::class);
+        $entityMetaInformation = $this->createStub(EntityMetaInformation::class);
         $metaInformationAware = new MetaInformationAwareEntity();
 
-        $expected = $entityMetaInformation->reveal();
-        $metaInformationAware = $metaInformationAware->setMetaInformation($expected);
+        $metaInformationAware = $metaInformationAware->setMetaInformation($entityMetaInformation);
 
-        self::assertSame($expected, $metaInformationAware->getMetaInformation());
+        self::assertSame($entityMetaInformation, $metaInformationAware->getMetaInformation());
     }
 }

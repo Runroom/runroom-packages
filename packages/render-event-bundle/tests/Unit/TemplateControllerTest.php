@@ -13,18 +13,15 @@ declare(strict_types=1);
 
 namespace Runroom\RenderEventBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Controller\TemplateController;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\HttpFoundation\Response;
 
 class TemplateControllerTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<PageRenderer> */
+    /** @var MockObject&PageRenderer */
     private $renderer;
 
     /** @var TemplateController */
@@ -32,9 +29,9 @@ class TemplateControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->renderer = $this->prophesize(PageRenderer::class);
+        $this->renderer = $this->createMock(PageRenderer::class);
 
-        $this->controller = new TemplateController($this->renderer->reveal());
+        $this->controller = new TemplateController($this->renderer);
     }
 
     /** @test */
@@ -43,7 +40,7 @@ class TemplateControllerTest extends TestCase
         $controller = $this->controller;
         $expectedResponse = new Response();
 
-        $this->renderer->renderResponse('template.html.twig', ['parameter' => 'value'])
+        $this->renderer->method('renderResponse')->with('template.html.twig', ['parameter' => 'value'])
             ->willReturn($expectedResponse);
 
         $response = $controller('template.html.twig', ['parameter' => 'value']);

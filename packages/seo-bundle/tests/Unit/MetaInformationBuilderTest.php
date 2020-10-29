@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
@@ -25,9 +23,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class MetaInformationBuilderTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<MetaInformationRepository> */
+    /** @var Stub&MetaInformationRepository */
     private $repository;
 
     /** @var MetaInformationBuilder */
@@ -35,11 +31,11 @@ class MetaInformationBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->repository = $this->prophesize(MetaInformationRepository::class);
-        $this->repository->findOneBy(Argument::any())->willReturn(MetaInformationFixture::create());
+        $this->repository = $this->createStub(MetaInformationRepository::class);
+        $this->repository->method('findOneBy')->willReturn(MetaInformationFixture::create());
 
         $this->builder = new MetaInformationBuilder(
-            $this->repository->reveal(),
+            $this->repository,
             PropertyAccess::createPropertyAccessor()
         );
     }

@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider;
 use Runroom\BasicPageBundle\Tests\Fixtures\BasicPageFixture;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 
 class BasicPageAlternateLinksProviderTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var string[] */
     private $locales = ['es', 'en'];
 

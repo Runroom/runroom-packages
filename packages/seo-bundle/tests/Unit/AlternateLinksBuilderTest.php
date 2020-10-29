@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -24,9 +22,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AlternateLinksBuilderTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<UrlGeneratorInterface> */
+    /** @var Stub&UrlGeneratorInterface */
     private $urlGenerator;
 
     /** @var string[] */
@@ -40,12 +36,12 @@ class AlternateLinksBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->urlGenerator = $this->prophesize(UrlGeneratorInterface::class);
+        $this->urlGenerator = $this->createStub(UrlGeneratorInterface::class);
         $this->locales = ['es', 'en'];
 
         $this->provider = new DummyAlternateLinksProvider();
         $this->builder = new AlternateLinksBuilder(
-            $this->urlGenerator->reveal(),
+            $this->urlGenerator,
             $this->locales
         );
     }
@@ -61,12 +57,14 @@ class AlternateLinksBuilderTest extends TestCase
     {
         $route = 'dummy_route';
 
-        foreach ($this->locales as $locale) {
-            $this->urlGenerator->generate($route . '.' . $locale, [
-                'dummy_param' => 'dummy_value',
-                'dummy_query' => 'dummy_value',
-            ], UrlGeneratorInterface::ABSOLUTE_URL)->willReturn($locale);
-        }
+        $this->urlGenerator->method('generate')->willReturnMap(
+            array_map(function (string $locale) use ($route): array {
+                return [$route . '.' . $locale, [
+                    'dummy_param' => 'dummy_value',
+                    'dummy_query' => 'dummy_value',
+                ], UrlGeneratorInterface::ABSOLUTE_URL, $locale];
+            }, $this->locales)
+        );
 
         $alternateLinks = $this->builder->build($this->provider, 'model', $route);
 
@@ -78,7 +76,7 @@ class AlternateLinksBuilderTest extends TestCase
     /** @test */
     public function itReturnsEmptyAlternateLinksIfRouteDoesNotExist(): void
     {
-        $this->urlGenerator->generate(Argument::cetera())->willThrow(RouteNotFoundException::class);
+        $this->urlGenerator->method('generate')->willThrowException(new RouteNotFoundException());
 
         self::assertEmpty($this->builder->build($this->provider, 'model', 'missing_route'));
     }

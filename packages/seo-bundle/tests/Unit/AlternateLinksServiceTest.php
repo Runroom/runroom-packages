@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
@@ -28,18 +27,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AlternateLinksServiceTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var RequestStack */
     private $requestStack;
 
-    /** @var ObjectProphecy<AbstractAlternateLinksProvider> */
+    /** @var MockObject&AbstractAlternateLinksProvider */
     private $provider;
 
     /** @var DefaultAlternateLinksProvider */
     private $defaultProvider;
 
-    /** @var ObjectProphecy<AlternateLinksBuilder> */
+    /** @var MockObject&AlternateLinksBuilder */
     private $builder;
 
     /** @var AlternateLinksService */
@@ -48,15 +45,15 @@ class AlternateLinksServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->requestStack = new RequestStack();
-        $this->provider = $this->prophesize(AbstractAlternateLinksProvider::class);
+        $this->provider = $this->createMock(AbstractAlternateLinksProvider::class);
         $this->defaultProvider = new DefaultAlternateLinksProvider();
-        $this->builder = $this->prophesize(AlternateLinksBuilder::class);
+        $this->builder = $this->createMock(AlternateLinksBuilder::class);
 
         $this->service = new AlternateLinksService(
             $this->requestStack,
-            [$this->provider->reveal()],
+            [$this->provider],
             $this->defaultProvider,
-            $this->builder->reveal()
+            $this->builder
         );
     }
 
@@ -65,8 +62,8 @@ class AlternateLinksServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
 
-        $this->provider->providesAlternateLinks('route')->willReturn(true);
-        $this->builder->build($this->provider->reveal(), 'model', 'route', [])->willReturn(['alternate_links']);
+        $this->provider->method('providesAlternateLinks')->with('route')->willReturn(true);
+        $this->builder->method('build')->with($this->provider, 'model', 'route', [])->willReturn(['alternate_links']);
 
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);
@@ -79,8 +76,8 @@ class AlternateLinksServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
 
-        $this->provider->providesAlternateLinks('route')->willReturn(false);
-        $this->builder->build($this->defaultProvider, 'model', 'route', [])->willReturn(['alternate_links']);
+        $this->provider->method('providesAlternateLinks')->with('route')->willReturn(false);
+        $this->builder->method('build')->with($this->defaultProvider, 'model', 'route', [])->willReturn(['alternate_links']);
 
         $event = $this->configurePageRenderEvent();
         $this->service->onPageRender($event);

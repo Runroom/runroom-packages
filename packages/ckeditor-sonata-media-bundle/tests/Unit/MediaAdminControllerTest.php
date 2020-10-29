@@ -13,11 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\CkeditorSonataMediaBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\Argument\Token\TypeToken;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool as AdminPool;
@@ -39,24 +36,22 @@ use Twig\Environment;
 
 class MediaAdminControllerTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy<ContainerInterface> */
+    /** @var MockObject&ContainerInterface */
     private $container;
 
-    /** @var ObjectProphecy<BaseMediaAdmin> */
+    /** @var MockObject&BaseMediaAdmin */
     private $admin;
 
     /** @var Request */
     private $request;
 
-    /** @var ObjectProphecy<MediaManagerInterface> */
+    /** @var MockObject&MediaManagerInterface */
     private $mediaManager;
 
-    /** @var ObjectProphecy<MediaPool> */
+    /** @var MockObject&MediaPool */
     private $mediaPool;
 
-    /** @var ObjectProphecy<Environment> */
+    /** @var MockObject&Environment */
     private $twig;
 
     /** @var MediaAdminController */
@@ -64,43 +59,48 @@ class MediaAdminControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->admin = $this->prophesize(BaseMediaAdmin::class);
+        $this->container = $this->createMock(ContainerInterface::class);
+        $this->admin = $this->createMock(BaseMediaAdmin::class);
         $this->request = new Request();
-        $this->mediaManager = $this->prophesize(MediaManagerInterface::class);
-        $this->mediaPool = $this->prophesize(MediaPool::class);
-        $this->twig = $this->prophesize(Environment::class);
+        $this->mediaManager = $this->createMock(MediaManagerInterface::class);
+        $this->mediaPool = $this->createMock(MediaPool::class);
+        $this->twig = $this->createMock(Environment::class);
 
         $this->configureCRUDController();
         $this->configureRequest();
+        $this->configureContainer();
 
         $this->controller = new MediaAdminController(
-            $this->mediaManager->reveal(),
-            $this->mediaPool->reveal(),
-            $this->twig->reveal()
+            $this->mediaManager,
+            $this->mediaPool,
+            $this->twig
         );
-        $this->controller->setContainer($this->container->reveal());
+        $this->controller->setContainer($this->container);
     }
 
     public function testBrowserAction(): void
     {
-        $datagrid = $this->prophesize(DatagridInterface::class);
-        $form = $this->prophesize(Form::class);
+        $datagrid = $this->createMock(DatagridInterface::class);
+        $form = $this->createStub(Form::class);
         $formView = new FormView();
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
-        $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', Argument::type('array'), 'renderResponse');
-        $datagrid->setValue('context', null, 'another_context')->shouldBeCalled();
-        $datagrid->setValue('providerName', null, 'provider')->shouldBeCalled();
-        $datagrid->getResults()->willReturn([]);
-        $datagrid->getForm()->willReturn($form->reveal());
-        $this->mediaPool->getDefaultContext()->willReturn('context');
-        $form->createView()->willReturn($formView);
-        $this->admin->checkAccess('list')->shouldBeCalled();
-        $this->admin->getDatagrid()->willReturn($datagrid->reveal());
-        $this->admin->getPersistentParameter('context')->willReturn('another_context');
-        $this->admin->getPersistentParameter('provider')->willReturn('provider');
-        $this->admin->getFilterTheme()->willReturn(['filterTheme']);
+        $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', 'renderResponse');
+        $datagrid->expects(self::exactly(2))->method('setValue')->withConsecutive(
+            ['context', null, 'another_context'],
+            ['providerName', null, 'provider']
+        );
+        $datagrid->method('getResults')->willReturn([]);
+        $datagrid->method('getForm')->willReturn($form);
+        $this->mediaPool->method('getDefaultContext')->willReturn('context');
+        $form->method('createView')->willReturn($formView);
+        $this->admin->expects(self::once())->method('checkAccess')->with('list');
+        $this->admin->method('getDatagrid')->willReturn($datagrid);
+        $this->admin->method('getPersistentParameter')->willReturnMap([
+            ['context', 'another_context'],
+            ['provider', 'provider'],
+        ]);
+        $this->admin->method('getFilterTheme')->willReturn(['filterTheme']);
 
         $response = $this->controller->browserAction($this->request);
 
@@ -109,18 +109,17 @@ class MediaAdminControllerTest extends TestCase
 
     public function testUpload(): void
     {
-        $media = $this->prophesize(MediaInterface::class);
-        $provider = $this->prophesize(MediaProviderInterface::class);
+        $media = $this->createStub(MediaInterface::class);
+        $provider = $this->createStub(MediaProviderInterface::class);
 
-        $this->configureRender('@RunroomCkeditorSonataMedia/upload.html.twig', Argument::type('array'), 'renderResponse');
+        $this->configureRender('@RunroomCkeditorSonataMedia/upload.html.twig', 'renderResponse');
 
-        $this->mediaPool->getDefaultContext()->willReturn('context');
-        $this->mediaPool->getProvider('provider')->willReturn($provider->reveal());
-        $this->mediaManager->create()->willReturn($media->reveal());
-        $this->mediaManager->save($media->reveal())->shouldBeCalled();
-        $this->admin->checkAccess('create')->shouldBeCalled();
-        $this->admin->createObjectSecurity($media->reveal())->shouldBeCalled();
-        $this->container->getParameter('kernel.bundles')->willReturn(['SonataMediaBundle' => true]);
+        $this->mediaPool->method('getDefaultContext')->willReturn('context');
+        $this->mediaPool->method('getProvider')->with('provider')->willReturn($provider);
+        $this->mediaManager->method('create')->willReturn($media);
+        $this->mediaManager->expects(self::once())->method('save')->with($media);
+        $this->admin->expects(self::once())->method('checkAccess')->with('create');
+        $this->admin->expects(self::once())->method('createObjectSecurity')->with($media);
 
         $response = $this->controller->uploadAction($this->request);
 
@@ -129,24 +128,15 @@ class MediaAdminControllerTest extends TestCase
 
     private function configureCRUDController(): void
     {
-        $pool = $this->prophesize(AdminPool::class);
-        $breadcrumbsBuilder = $this->prophesize(BreadcrumbsBuilderInterface::class);
-
-        $this->configureGetCurrentRequest();
-        $pool->getAdminByAdminCode('admin_code')->willReturn($this->admin->reveal());
-        $this->container->get('sonata.admin.pool')->willReturn($pool->reveal());
-        $this->container->get('sonata.admin.breadcrumbs_builder')->willReturn($breadcrumbsBuilder->reveal());
-        $this->admin->getTemplate('layout')->willReturn('layout.html.twig');
-        $this->admin->isChild()->willReturn(false);
-        $this->admin->setRequest($this->request)->shouldBeCalled();
-        $this->container->get('admin_code.template_registry')->willReturn(new TemplateRegistry());
-        $this->admin->getCode()->willReturn('admin_code');
+        $this->admin->method('getTemplate')->with('layout')->willReturn('layout.html.twig');
+        $this->admin->method('isChild')->willReturn(false);
+        $this->admin->expects(self::once())->method('setRequest')->with($this->request);
+        $this->admin->method('getCode')->willReturn('admin_code');
     }
 
     private function configureRequest(): void
     {
-        // it does not work with prophesize
-        $upload = $this->createMock(UploadedFile::class);
+        $upload = $this->createStub(UploadedFile::class);
 
         $this->request->query->set('_sonata_admin', 'admin_code');
         $this->request->query->set('provider', 'provider');
@@ -154,33 +144,45 @@ class MediaAdminControllerTest extends TestCase
         $this->request->setMethod('POST');
     }
 
-    private function configureGetCurrentRequest(): void
-    {
-        $requestStack = new RequestStack();
-        $requestStack->push($this->request);
-
-        $this->container->has('request_stack')->willReturn(true);
-        $this->container->get('request_stack')->willReturn($requestStack);
-    }
-
     /** @param string[] $formTheme */
     private function configureSetFormTheme(FormView $formView, array $formTheme): void
     {
-        $twigRenderer = $this->prophesize(FormRenderer::class);
+        $twigRenderer = $this->createMock(FormRenderer::class);
 
-        $this->twig->getRuntime(FormRenderer::class)->willReturn($twigRenderer->reveal());
+        $this->twig->method('getRuntime')->with(FormRenderer::class)->willReturn($twigRenderer);
 
-        $twigRenderer->setTheme($formView, $formTheme)->shouldBeCalled();
+        $twigRenderer->expects(self::once())->method('setTheme')->with($formView, $formTheme);
     }
 
-    /** @param TypeToken $data */
-    private function configureRender(string $template, $data, string $rendered): void
+    private function configureRender(string $template, string $rendered): void
     {
-        $this->admin->getPersistentParameters()->willReturn(['param' => 'param']);
-        $this->twig->render($template, $data)->willReturn($rendered);
-        $this->container->has('templating')->willReturn(false);
-        $this->container->has('twig')->willReturn(true);
-        $this->container->get('twig')->willReturn($this->twig->reveal());
-        $this->container->get('sonata.media.pool')->willReturn($this->mediaPool->reveal());
+        $this->admin->method('getPersistentParameters')->willReturn(['param' => 'param']);
+        $this->twig->method('render')->with($template, self::isType('array'))->willReturn($rendered);
+    }
+
+    private function configureContainer(): void
+    {
+        $pool = $this->createMock(AdminPool::class);
+        $breadcrumbsBuilder = $this->createStub(BreadcrumbsBuilderInterface::class);
+
+        $pool->method('getAdminByAdminCode')->with('admin_code')->willReturn($this->admin);
+
+        $requestStack = new RequestStack();
+        $requestStack->push($this->request);
+
+        $this->container->method('has')->willReturnMap([
+            ['request_stack', true],
+            ['templating', false],
+            ['twig', true],
+        ]);
+        $this->container->method('get')->willReturnMap([
+            ['sonata.admin.pool', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $pool],
+            ['sonata.admin.breadcrumbs_builder', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $breadcrumbsBuilder],
+            ['request_stack', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $requestStack],
+            ['twig', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->twig],
+            ['sonata.media.pool', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->mediaPool],
+            ['admin_code.template_registry', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, new TemplateRegistry()],
+        ]);
+        $this->container->method('getParameter')->with('kernel.bundles')->willReturn(['SonataMediaBundle' => true]);
     }
 }
