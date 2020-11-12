@@ -13,55 +13,39 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\MetaInformation;
 
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Runroom\SeoBundle\Model\SeoModelInterface;
+use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class MetaInformationService implements EventSubscriberInterface
+final class MetaInformationService implements MetaInformationServiceInterface
 {
     private RequestStack $requestStack;
 
-    /** @var iterable<MetaInformationProviderInterface> */
+    /** @var iterable<MetaInformationProviderInterface<SeoModelInterface>> */
     private iterable $providers;
 
-    private DefaultMetaInformationProvider $defaultProvider;
     private MetaInformationBuilder $builder;
 
-    /** @param iterable<MetaInformationProviderInterface> $providers */
+    /** @param iterable<MetaInformationProviderInterface<SeoModelInterface>> $providers */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,
-        DefaultMetaInformationProvider $defaultProvider,
         MetaInformationBuilder $builder
     ) {
         $this->requestStack = $requestStack;
         $this->providers = $providers;
-        $this->defaultProvider = $defaultProvider;
         $this->builder = $builder;
     }
 
-    public function onPageRender(PageRenderEvent $event): void
+    public function build(SeoModelInterface $model): MetaInformationViewModel
     {
-        $page = $event->getPageViewModel();
-
         $route = $this->getCurrentRoute();
 
-        $metas = $this->builder->build(
+        return $this->builder->build(
             $this->selectProvider($route),
-            $route,
-            $page->getContent()
+            $model,
+            $route
         );
-
-        $page->addContext('metas', $metas);
-
-        $event->setPageViewModel($page);
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            PageRenderEvent::EVENT_NAME => 'onPageRender',
-        ];
     }
 
     private function getCurrentRoute(): string
@@ -71,6 +55,7 @@ final class MetaInformationService implements EventSubscriberInterface
         return null !== $request ? $request->get('_route', '') : '';
     }
 
+    /** @phpstan-return MetaInformationProviderInterface<SeoModelInterface> */
     private function selectProvider(string $route): MetaInformationProviderInterface
     {
         foreach ($this->providers as $provider) {
@@ -79,6 +64,6 @@ final class MetaInformationService implements EventSubscriberInterface
             }
         }
 
-        return $this->defaultProvider;
+        throw new \RuntimeException('There is no provided selected to build meta information');
     }
 }

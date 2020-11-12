@@ -13,14 +13,19 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Service;
 
+use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
+use Runroom\SeoBundle\Model\SeoModelInterface;
 
+/** @phpstan-extends AbstractMetaInformationProvider<BasicPageViewModel> */
 final class BasicPageMetaInformationProvider extends AbstractMetaInformationProvider
 {
-    public function getEntityMetaInformation($model): ?EntityMetaInformation
+    public function getEntityMetaInformation(SeoModelInterface $model): ?EntityMetaInformation
     {
-        return $model->getBasicPage()->getMetaInformation();
+        $basicPage = $model->getBasicPage();
+
+        return null !== $basicPage ? $basicPage->getMetaInformation() : null;
     }
 
     protected function getRoutes(): array

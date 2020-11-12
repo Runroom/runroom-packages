@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\DependencyInjection;
 
+use Runroom\SeoBundle\Context\DefaultContextExtractor;
 use Sonata\MediaBundle\Model\Media;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -33,6 +34,19 @@ final class Configuration implements ConfigurationInterface
             ->scalarNode('xdefault_locale')
                 ->isRequired()
                 ->cannotBeEmpty()
+            ->end()
+            ->arrayNode('context')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode('extractor')
+                        ->cannotBeEmpty()
+                        ->defaultValue(DefaultContextExtractor::class)
+                    ->end()
+                    ->scalarNode('modelKey')
+                        ->cannotBeEmpty()
+                        ->defaultValue('model')
+                    ->end()
+                ->end()
             ->end()
             ->arrayNode('class')
                 ->isRequired()

@@ -16,12 +16,15 @@ use Runroom\SeoBundle\Admin\MetaInformationAdmin;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
+use Runroom\SeoBundle\Context\DefaultContextExtractor;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
+use Runroom\SeoBundle\Twig\SeoExtension;
+use Runroom\SeoBundle\Twig\SeoRuntime;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -48,11 +51,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(AlternateLinksService::class)
         ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->arg('$providers', tagged_iterator('runroom.seo.alternate_links'))
-        ->arg('$defaultProvider', new ReferenceConfigurator(DefaultAlternateLinksProvider::class))
-        ->arg('$builder', new ReferenceConfigurator(AlternateLinksBuilder::class))
-        ->tag('kernel.event_subscriber');
+        ->arg('$builder', new ReferenceConfigurator(AlternateLinksBuilder::class));
 
-    $services->set(DefaultAlternateLinksProvider::class);
+    $services->set(DefaultAlternateLinksProvider::class)
+        ->tag('runroom.seo.alternate_links', ['priority' => -1]);
+
+    $services->set(DefaultContextExtractor::class)
+        ->arg('$modelKey', null);
 
     $services->set(MetaInformationBuilder::class)
         ->arg('$repository', new ReferenceConfigurator(MetaInformationRepository::class))
@@ -61,13 +66,21 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(MetaInformationService::class)
         ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->arg('$providers', tagged_iterator('runroom.seo.meta_information'))
-        ->arg('$defaultProvider', new ReferenceConfigurator(DefaultMetaInformationProvider::class))
-        ->arg('$builder', new ReferenceConfigurator(MetaInformationBuilder::class))
-        ->tag('kernel.event_subscriber');
+        ->arg('$builder', new ReferenceConfigurator(MetaInformationBuilder::class));
 
-    $services->set(DefaultMetaInformationProvider::class);
+    $services->set(DefaultMetaInformationProvider::class)
+        ->tag('runroom.seo.meta_information', ['priority' => -1]);
 
     $services->set(MetaInformationRepository::class)
         ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->tag('doctrine.repository_service');
+
+    $services->set(SeoExtension::class)
+        ->tag('twig.extension');
+
+    $services->set(SeoRuntime::class)
+        ->arg('$alternateLinks', new ReferenceConfigurator(AlternateLinksService::class))
+        ->arg('$metaInformation', new ReferenceConfigurator(MetaInformationService::class))
+        ->arg('$contextExtractor', null)
+        ->tag('twig.runtime');
 };

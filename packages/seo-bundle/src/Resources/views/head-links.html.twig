@@ -1,4 +1,4 @@
-{% set alternateLinks = page.context('alternate_links') %}
+{% set alternateLinks = build_alternate_links() %}
 
 {% block alternateLinks %}
     {% for lang, href in alternateLinks %}

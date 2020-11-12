@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\ViewModel;
 
 use Runroom\BasicPageBundle\Entity\BasicPage;
+use Runroom\SeoBundle\Model\SeoModelInterface;
 
-final class BasicPageViewModel
+final class BasicPageViewModel implements SeoModelInterface
 {
     private ?BasicPage $basicPage = null;
 

@@ -14,18 +14,9 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\MetaInformation;
 
 use Runroom\SeoBundle\Model\SeoModelInterface;
+use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 
-/** @phpstan-extends AbstractMetaInformationProvider<SeoModelInterface> */
-final class DefaultMetaInformationProvider extends AbstractMetaInformationProvider
+interface MetaInformationServiceInterface
 {
-    public function providesMetas(string $route): bool
-    {
-        return true;
-    }
-
-    /** @return string[] */
-    protected function getRoutes(): array
-    {
-        return [];
-    }
+    public function build(SeoModelInterface $model): MetaInformationViewModel;
 }

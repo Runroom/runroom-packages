@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\AlternateLinks;
 
+use Runroom\SeoBundle\Model\SeoModelInterface;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -32,43 +34,36 @@ class AlternateLinksBuilder
     }
 
     /**
-     * @param mixed $model
+     * @phpstan-template T of SeoModelInterface
+     *
+     * @phpstan-param AlternateLinksProviderInterface<T> $provider
+     * @phpstan-param T $model
+     *
      * @param array<string, string> $routeParameters
      *
      * @return array<string, string>
      */
     public function build(
         AlternateLinksProviderInterface $provider,
-        $model,
+        SeoModelInterface $model,
         string $route,
         array $routeParameters = []
     ): array {
         $alternateLinks = [];
 
-        foreach ($this->getAvailableLocales($provider, $model) as $locale) {
+        foreach ($this->locales as $locale) {
             try {
-                $alternateLinks[$locale] = $this->urlGenerator->generate(
-                    $route . '.' . $locale,
-                    $provider->getParameters($model, $locale) ?? $routeParameters,
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                );
-            } catch (RouteNotFoundException $e) {
+                if ($provider->canGenerateAlternateLink($model, $locale)) {
+                    $alternateLinks[$locale] = $this->urlGenerator->generate(
+                        $route . '.' . $locale,
+                        $provider->getParameters($model, $locale) ?? $routeParameters,
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    );
+                }
+            } catch (RouteNotFoundException | InvalidParameterException $exception) {
             }
         }
 
         return $alternateLinks;
-    }
-
-    /**
-     * @param mixed $model
-     *
-     * @return string[]
-     */
-    protected function getAvailableLocales(AlternateLinksProviderInterface $provider, $model): array
-    {
-        return array_intersect(
-            $this->locales,
-            $provider->getAvailableLocales($model) ?? $this->locales
-        );
     }
 }

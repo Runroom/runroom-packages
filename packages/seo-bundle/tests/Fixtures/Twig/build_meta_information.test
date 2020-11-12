@@ -1,0 +1,11 @@
+--TEST--
+"build_meta_information" function
+--TEMPLATE--
+{% set metaInformation = build_meta_information() %}
+{{ metaInformation.title }}
+{{ metaInformation.description }}
+--DATA--
+return []
+--EXPECT--
+seo title
+seo description

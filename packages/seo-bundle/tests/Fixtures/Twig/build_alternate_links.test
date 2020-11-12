@@ -1,0 +1,11 @@
+--TEST--
+"build_alternate_links" function
+--TEMPLATE--
+{% set alternateLinks = build_alternate_links() %}
+{% for lang, link in alternateLinks %}
+    {{ lang }} {{ link }}
+{% endfor %}
+--DATA--
+return []
+--EXPECT--
+es https://www.runroom.com

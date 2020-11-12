@@ -13,57 +13,41 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\AlternateLinks;
 
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Runroom\SeoBundle\Model\SeoModelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class AlternateLinksService implements EventSubscriberInterface
+final class AlternateLinksService implements AlternateLinksServiceInterface
 {
     private const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
 
     private RequestStack $requestStack;
 
-    /** @var iterable<AlternateLinksProviderInterface> */
+    /** @var iterable<AlternateLinksProviderInterface<SeoModelInterface>> */
     private iterable $providers;
 
-    private DefaultAlternateLinksProvider $defaultProvider;
     private AlternateLinksBuilder $builder;
 
-    /** @param iterable<AlternateLinksProviderInterface> $providers */
+    /** @param iterable<AlternateLinksProviderInterface<SeoModelInterface>> $providers */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,
-        DefaultAlternateLinksProvider $defaultProvider,
         AlternateLinksBuilder $builder
     ) {
         $this->requestStack = $requestStack;
         $this->providers = $providers;
-        $this->defaultProvider = $defaultProvider;
         $this->builder = $builder;
     }
 
-    public function onPageRender(PageRenderEvent $event): void
+    public function build(SeoModelInterface $model): array
     {
-        $page = $event->getPageViewModel();
         $route = $this->getCurrentRoute();
 
-        $alternateLinks = $this->builder->build(
+        return $this->builder->build(
             $this->selectProvider($route),
-            $page->getContent(),
+            $model,
             $route,
             $this->getCurrentRouteParameters()
         );
-
-        $page->addContext('alternate_links', $alternateLinks);
-
-        $event->setPageViewModel($page);
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            PageRenderEvent::EVENT_NAME => 'onPageRender',
-        ];
     }
 
     private function getCurrentRoute(): string
@@ -83,6 +67,7 @@ final class AlternateLinksService implements EventSubscriberInterface
         return array_diff_key($routeParameters, array_flip(self::EXCLUDED_PARAMETERS));
     }
 
+    /** @phpstan-return AlternateLinksProviderInterface<SeoModelInterface> */
     private function selectProvider(string $route): AlternateLinksProviderInterface
     {
         foreach ($this->providers as $provider) {
@@ -91,6 +76,6 @@ final class AlternateLinksService implements EventSubscriberInterface
             }
         }
 
-        return $this->defaultProvider;
+        throw new \RuntimeException('There is no provided selected to build alternate links');
     }
 }

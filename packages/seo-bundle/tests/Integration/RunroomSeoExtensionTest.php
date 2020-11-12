@@ -19,12 +19,15 @@ use Runroom\SeoBundle\Admin\MetaInformationAdmin;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
+use Runroom\SeoBundle\Context\DefaultContextExtractor;
 use Runroom\SeoBundle\DependencyInjection\RunroomSeoExtension;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\Tests\App\Entity\Media;
+use Runroom\SeoBundle\Twig\SeoExtension;
+use Runroom\SeoBundle\Twig\SeoRuntime;
 
 class RunroomSeoExtensionTest extends AbstractExtensionTestCase
 {
@@ -51,6 +54,10 @@ class RunroomSeoExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService(MetaInformationService::class);
         $this->assertContainerBuilderHasService(DefaultMetaInformationProvider::class);
         $this->assertContainerBuilderHasService(MetaInformationRepository::class);
+        $this->assertContainerBuilderHasService(DefaultContextExtractor::class);
+        $this->assertContainerBuilderHasService(SeoExtension::class);
+        $this->assertContainerBuilderHasService(SeoRuntime::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(SeoRuntime::class, 2, DefaultContextExtractor::class);
         $this->assertContainerBuilderHasParameter(RunroomSeoExtension::XDEFAULT_LOCALE, 'es');
     }
 

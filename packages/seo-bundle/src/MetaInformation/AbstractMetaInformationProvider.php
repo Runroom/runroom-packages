@@ -14,8 +14,13 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\MetaInformation;
 
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
+use Runroom\SeoBundle\Model\SeoModelInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 
+/**
+ * @phpstan-template T of SeoModelInterface
+ * @phpstan-implements MetaInformationProviderInterface<T>
+ */
 abstract class AbstractMetaInformationProvider implements MetaInformationProviderInterface
 {
     public function providesMetas(string $route): bool
@@ -34,12 +39,12 @@ abstract class AbstractMetaInformationProvider implements MetaInformationProvide
         return $route;
     }
 
-    public function getEntityMetaInformation($model): ?EntityMetaInformation
+    public function getEntityMetaInformation(SeoModelInterface $model): ?EntityMetaInformation
     {
         return null;
     }
 
-    public function getEntityMetaImage($model): ?MediaInterface
+    public function getEntityMetaImage(SeoModelInterface $model): ?MediaInterface
     {
         return null;
     }

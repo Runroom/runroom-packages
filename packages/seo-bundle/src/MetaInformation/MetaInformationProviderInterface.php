@@ -14,17 +14,19 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\MetaInformation;
 
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
+use Runroom\SeoBundle\Model\SeoModelInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 
+/** @phpstan-template T of SeoModelInterface */
 interface MetaInformationProviderInterface
 {
     public function providesMetas(string $route): bool;
 
     public function getRouteAlias(string $route): string;
 
-    /** @param mixed $model */
-    public function getEntityMetaInformation($model): ?EntityMetaInformation;
+    /** @phpstan-param T $model */
+    public function getEntityMetaInformation(SeoModelInterface $model): ?EntityMetaInformation;
 
-    /** @param mixed $model */
-    public function getEntityMetaImage($model): ?MediaInterface;
+    /** @phpstan-param T $model */
+    public function getEntityMetaImage(SeoModelInterface $model): ?MediaInterface;
 }

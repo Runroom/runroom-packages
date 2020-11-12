@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
+use Runroom\SeoBundle\Context\DefaultContextExtractor;
 use Runroom\SeoBundle\DependencyInjection\Configuration;
 use Runroom\SeoBundle\DependencyInjection\RunroomSeoExtension;
 use Runroom\SeoBundle\Tests\App\Entity\Media;
@@ -30,6 +31,10 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'class' => ['media' => Media::class],
             'locales' => ['es'],
             'xdefault_locale' => 'es',
+            'context' => [
+                'extractor' => DefaultContextExtractor::class,
+                'modelKey' => 'model',
+            ],
         ], [
             __DIR__ . '/../Fixtures/configuration.yaml',
         ]);

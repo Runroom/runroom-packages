@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class Kernel extends BaseKernel
@@ -78,7 +79,8 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    /** @param RouteCollectionBuilder|RouteConfigurator $routes */
+    protected function configureRoutes($routes): void
     {
     }
 

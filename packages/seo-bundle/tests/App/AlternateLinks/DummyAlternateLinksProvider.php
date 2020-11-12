@@ -11,18 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\SeoBundle\AlternateLinks;
+namespace Runroom\SeoBundle\Tests\App\AlternateLinks;
 
+use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 use Runroom\SeoBundle\Model\SeoModelInterface;
+use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
-/** @phpstan-extends AbstractAlternateLinksProvider<SeoModelInterface> */
-final class DefaultAlternateLinksProvider extends AbstractAlternateLinksProvider
+/** @phpstan-extends AbstractAlternateLinksProvider<DummyViewModel> */
+class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
-    public function providesAlternateLinks(string $route): bool
-    {
-        return true;
-    }
-
     public function canGenerateAlternateLink(SeoModelInterface $model, string $locale): bool
     {
         return true;
@@ -30,11 +27,15 @@ final class DefaultAlternateLinksProvider extends AbstractAlternateLinksProvider
 
     public function getParameters(SeoModelInterface $model, string $locale): ?array
     {
-        return null;
+        return [
+            'dummy_param' => 'dummy_value',
+            'dummy_query' => 'dummy_value',
+        ];
     }
 
+    /** @return string[] */
     protected function getRoutes(): array
     {
-        return [];
+        return ['dummy_route'];
     }
 }

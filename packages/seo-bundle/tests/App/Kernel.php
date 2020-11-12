@@ -18,7 +18,6 @@ use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
-use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SeoBundle\Tests\App\Entity\Gallery;
 use Runroom\SeoBundle\Tests\App\Entity\GalleryHasMedia;
@@ -34,6 +33,7 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -58,7 +58,6 @@ class Kernel extends BaseKernel
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
 
-            new RunroomRenderEventBundle(),
             new RunroomSeoBundle(),
         ];
     }
@@ -137,7 +136,8 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    /** @param RouteCollectionBuilder|RouteConfigurator $routes */
+    protected function configureRoutes($routes): void
     {
     }
 

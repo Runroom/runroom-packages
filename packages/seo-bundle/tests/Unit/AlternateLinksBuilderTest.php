@@ -13,16 +13,17 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\Unit;
 
-use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
+use Runroom\SeoBundle\Tests\App\AlternateLinks\DummyAlternateLinksProvider;
+use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AlternateLinksBuilderTest extends TestCase
 {
-    /** @var Stub&UrlGeneratorInterface */
+    /** @var MockObject&UrlGeneratorInterface */
     private $urlGenerator;
 
     /** @var string[] */
@@ -33,7 +34,7 @@ class AlternateLinksBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->urlGenerator = $this->createStub(UrlGeneratorInterface::class);
+        $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->locales = ['es', 'en'];
 
         $this->provider = new DummyAlternateLinksProvider();
@@ -54,7 +55,7 @@ class AlternateLinksBuilderTest extends TestCase
     {
         $route = 'dummy_route';
 
-        $this->urlGenerator->method('generate')->willReturnMap(
+        $this->urlGenerator->expects(self::exactly(2))->method('generate')->willReturnMap(
             array_map(function (string $locale) use ($route): array {
                 return [$route . '.' . $locale, [
                     'dummy_param' => 'dummy_value',
@@ -63,7 +64,7 @@ class AlternateLinksBuilderTest extends TestCase
             }, $this->locales)
         );
 
-        $alternateLinks = $this->builder->build($this->provider, 'model', $route);
+        $alternateLinks = $this->builder->build($this->provider, new DummyViewModel(), $route);
 
         foreach ($this->locales as $locale) {
             self::assertContains($locale, $alternateLinks);
@@ -75,24 +76,6 @@ class AlternateLinksBuilderTest extends TestCase
     {
         $this->urlGenerator->method('generate')->willThrowException(new RouteNotFoundException());
 
-        self::assertEmpty($this->builder->build($this->provider, 'model', 'missing_route'));
-    }
-}
-
-class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
-{
-    /** @return array<string, string>|null */
-    public function getParameters($model, string $locale): ?array
-    {
-        return [
-            'dummy_param' => 'dummy_value',
-            'dummy_query' => 'dummy_value',
-        ];
-    }
-
-    /** @return string[] */
-    protected function getRoutes(): array
-    {
-        return ['dummy_route'];
+        self::assertEmpty($this->builder->build($this->provider, new DummyViewModel(), 'missing_route'));
     }
 }
