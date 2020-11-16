@@ -36,8 +36,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->decorate('twig.error_renderer.html')
         ->arg('$twig', ref('twig'))
         ->arg('$fallbackErrorRenderer', ref('error_handler.error_renderer.html'))
-        ->arg('$debug', inline('bool')->factory([inline(TwigErrorRenderer::class), 'isDebug']))
-        ->arg('$renderer', ref(PageRenderer::class));
+        ->arg('$renderer', ref(PageRenderer::class))
+        ->arg('$debug', inline(TwigErrorRenderer::class)
+            ->factory([TwigErrorRenderer::class, 'isDebug'])
+            ->args([ref('request_stack'), '%kernel.debug%'])
+        );
 
     $services->set('runroom.render_event.page_view_model');
 };
