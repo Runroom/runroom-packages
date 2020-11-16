@@ -43,7 +43,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "nelmio/alice": "^3.7",
         "phpunit/phpunit": "^9.3",
-        "runroom-packages/testing": "^0.10",
+        "runroom-packages/testing": "^0.9.2",
         "symfony/phpunit-bridge": "^5.1",
         "theofidry/alice-data-fixtures": "^1.2"
     },
