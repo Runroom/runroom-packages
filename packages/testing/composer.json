@@ -32,7 +32,6 @@
         "theofidry/alice-data-fixtures": "^1.2"
     },
     "conflict": {
-        "doctrine/persistence": ">=2.0",
         "phpdocumentor/reflection-docblock": "5.0.0"
     },
     "require-dev": {
