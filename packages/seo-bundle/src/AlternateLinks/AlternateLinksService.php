@@ -70,7 +70,7 @@ final class AlternateLinksService implements EventSubscriberInterface
         ];
     }
 
-    protected function getCurrentRoute(): string
+    private function getCurrentRoute(): string
     {
         $request = $this->requestStack->getCurrentRequest();
 
@@ -78,7 +78,7 @@ final class AlternateLinksService implements EventSubscriberInterface
     }
 
     /** @return array<string, string> */
-    protected function getCurrentRouteParameters(): array
+    private function getCurrentRouteParameters(): array
     {
         $request = $this->requestStack->getCurrentRequest();
 
@@ -87,7 +87,7 @@ final class AlternateLinksService implements EventSubscriberInterface
         return array_diff_key($routeParameters, array_flip(self::EXCLUDED_PARAMETERS));
     }
 
-    protected function selectProvider(string $route): AlternateLinksProviderInterface
+    private function selectProvider(string $route): AlternateLinksProviderInterface
     {
         foreach ($this->providers as $provider) {
             if ($provider->providesAlternateLinks($route)) {

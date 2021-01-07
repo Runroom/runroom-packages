@@ -68,14 +68,14 @@ final class MetaInformationService implements EventSubscriberInterface
         ];
     }
 
-    protected function getCurrentRoute(): string
+    private function getCurrentRoute(): string
     {
         $request = $this->requestStack->getCurrentRequest();
 
         return null !== $request ? $request->get('_route', '') : '';
     }
 
-    protected function selectProvider(string $route): MetaInformationProviderInterface
+    private function selectProvider(string $route): MetaInformationProviderInterface
     {
         foreach ($this->providers as $provider) {
             if ($provider->providesMetas($route)) {

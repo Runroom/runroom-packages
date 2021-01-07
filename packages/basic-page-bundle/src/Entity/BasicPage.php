@@ -30,8 +30,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class BasicPage implements TranslatableInterface
 {
-    use ORMBehaviors\Translatable\TranslatableTrait;
     use MetaInformationAware;
+    use ORMBehaviors\Translatable\TranslatableTrait;
 
     public const LOCATION_NONE = 'none';
     public const LOCATION_FOOTER = 'footer';
