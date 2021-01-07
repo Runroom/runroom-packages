@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/** @extends CRUDController<MediaInterface> */
 final class MediaAdminController extends CRUDController
 {
     /** @var MediaManagerInterface */
