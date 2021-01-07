@@ -17,7 +17,9 @@ use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\MediaBundle\Model\MediaInterface;
 
+/** @extends AbstractAdminExtension<MediaInterface> */
 final class MediaAdminExtension extends AbstractAdminExtension
 {
     public function configureRoutes(AdminInterface $admin, RouteCollection $collection): void

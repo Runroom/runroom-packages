@@ -73,32 +73,32 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader): void
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-        $c->setParameter('kernel.default_locale', 'en');
+        $container->setParameter('kernel.default_locale', 'en');
 
-        $c->loadFromExtension('framework', [
+        $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
             'session' => ['storage_id' => 'session.storage.mock_file'],
         ]);
 
-        $c->loadFromExtension('security', [
+        $container->loadFromExtension('security', [
             'firewalls' => ['main' => ['anonymous' => true]],
         ]);
 
-        $c->loadFromExtension('doctrine', [
+        $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
             'orm' => ['auto_mapping' => true],
         ]);
 
-        $c->loadFromExtension('twig', [
+        $container->loadFromExtension('twig', [
             'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
 
-        $c->loadFromExtension('a2lix_translation_form', [
+        $container->loadFromExtension('a2lix_translation_form', [
             'locales' => ['es', 'en', 'ca'],
         ]);
     }
