@@ -34,6 +34,6 @@ class ComposerNormalizePreReleaseWorker implements ReleaseWorkerInterface
 
     public function getDescription(Version $version): string
     {
-        return sprintf('Composer normalize');
+        return 'Composer normalize';
     }
 }

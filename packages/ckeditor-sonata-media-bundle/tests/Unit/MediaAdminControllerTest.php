@@ -78,7 +78,8 @@ class MediaAdminControllerTest extends TestCase
         $this->controller->setContainer($this->container);
     }
 
-    public function testBrowserAction(): void
+    /** @test */
+    public function browserAction(): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
         $form = $this->createStub(Form::class);
@@ -107,7 +108,8 @@ class MediaAdminControllerTest extends TestCase
         self::assertSame('renderResponse', $response->getContent());
     }
 
-    public function testUpload(): void
+    /** @test */
+    public function upload(): void
     {
         $media = $this->createStub(MediaInterface::class);
         $provider = $this->createStub(MediaProviderInterface::class);
