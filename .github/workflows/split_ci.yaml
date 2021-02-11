@@ -27,6 +27,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          extensions: zip
           coverage: none
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - id: composer-cache
