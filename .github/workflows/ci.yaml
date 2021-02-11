@@ -20,7 +20,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: zip
+          extensions: zip, pdo_sqlite
           ini-values: pcov.directory=packages
           coverage: pcov
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
