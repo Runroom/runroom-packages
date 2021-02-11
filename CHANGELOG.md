@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- changelog-linker -->
 
-## 0.9.2 - 2020-11-16
+## 0.9.3 - 2021-02-11
+
+### Testing
+
+#### Fixed
+
+- [#81] Fix bool casting
+
+### All
+
+#### Removed
+
+- [#80] Remove persistence restriction
+
+## [0.9.2] - 2020-11-16
 
 ### RunroomRenderEventBundle
 
@@ -438,3 +452,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [0.9.0]: https://github.com/Runroom/runroom-packages/compare/v0.8.2...0.9.0
 [#79]: https://github.com/Runroom/runroom-packages/pull/79
 [0.9.1]: https://github.com/Runroom/runroom-packages/compare/0.9.0...0.9.1
+[#81]: https://github.com/Runroom/runroom-packages/pull/81
+[#80]: https://github.com/Runroom/runroom-packages/pull/80
+[0.9.2]: https://github.com/Runroom/runroom-packages/compare/0.9.1...0.9.2
