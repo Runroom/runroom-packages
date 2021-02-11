@@ -73,7 +73,7 @@ abstract class DoctrineTestCase extends TestCase
 
         return new $class(
             $_ENV['APP_ENV'] ?? $_SERVER['APP_ENV'] ?? 'test',
-            $_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? true
+            (bool) ($_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? true)
         );
     }
 
