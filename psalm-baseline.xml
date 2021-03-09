@@ -7,11 +7,6 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/basic-page-bundle/src/Repository/BasicPageRepository.php">
-    <InvalidArgument occurrences="1">
-      <code>$registry</code>
-    </InvalidArgument>
-  </file>
   <file src="packages/basic-page-bundle/tests/Fixtures/BasicPageFixture.php">
     <UndefinedInterfaceMethod occurrences="4">
       <code>setContent</code>
@@ -31,11 +26,6 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/cookies-bundle/src/Repository/CookiesPageRepository.php">
-    <InvalidArgument occurrences="1">
-      <code>$registry</code>
-    </InvalidArgument>
-  </file>
   <file src="packages/cookies-bundle/tests/Integration/CookiesPageRepositoryTest.php">
     <InternalMethod occurrences="1">
       <code>get</code>
@@ -52,11 +42,6 @@
       <code>computeChangeSet</code>
       <code>computeChangeSet</code>
     </InternalMethod>
-  </file>
-  <file src="packages/redirection-bundle/src/Repository/RedirectRepository.php">
-    <InvalidArgument occurrences="1">
-      <code>$registry</code>
-    </InvalidArgument>
   </file>
   <file src="packages/redirection-bundle/tests/Integration/AutomaticRedirectSubscriberTest.php">
     <InternalMethod occurrences="2">
@@ -86,11 +71,6 @@
       <code>getDescription</code>
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/seo-bundle/src/Repository/MetaInformationRepository.php">
-    <InvalidArgument occurrences="1">
-      <code>$registry</code>
-    </InvalidArgument>
   </file>
   <file src="packages/seo-bundle/tests/Fixtures/EntityMetaInformationFixture.php">
     <UndefinedInterfaceMethod occurrences="2">
@@ -128,11 +108,6 @@
     <UndefinedInterfaceMethod occurrences="1">
       <code>getValue</code>
     </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/translation-bundle/src/Repository/TranslationRepository.php">
-    <InvalidArgument occurrences="1">
-      <code>$registry</code>
-    </InvalidArgument>
   </file>
   <file src="packages/translation-bundle/src/Service/TranslationService.php">
     <UndefinedInterfaceMethod occurrences="1">

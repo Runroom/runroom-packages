@@ -5,5 +5,4 @@ parameters:
             count: 1
             path: packages/sortable-behavior-bundle/tests/Unit/SortableAdminControllerTest.php
 
-        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition(.|\n)+#'
         - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'
