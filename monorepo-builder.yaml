@@ -9,12 +9,12 @@ parameters:
             phpstan/phpstan-symfony: ^0.12
             phpstan/phpstan-strict-rules: ^0.12
             phpunit/phpunit: ^9.3
-            psalm/plugin-phpunit: ^0.12
-            psalm/plugin-symfony: ^1.2
+            psalm/plugin-phpunit: ^0.15
+            psalm/plugin-symfony: ^2.0
             symplify/changelog-linker: ^8.0
             symplify/monorepo-builder: ^8.0
-            vimeo/psalm: ^3.11
-            weirdan/doctrine-psalm-plugin: ^0.11
+            vimeo/psalm: ^4.0
+            weirdan/doctrine-psalm-plugin: ^1.0
 
     directories_to_repositories:
         packages/basic-page-bundle: 'git@github.com:Runroom/RunroomBasicPageBundle.git'

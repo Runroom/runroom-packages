@@ -29,8 +29,8 @@ abstract class SonataAdminTestCase extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
+        /** @var AbstractAdmin<T> */
         $admin = $kernel->getContainer()->get($this->getAdminClass());
-        \assert($admin instanceof AbstractAdmin);
 
         $this->admin = $admin;
         $this->admin->setSubject($this->admin->getNewInstance());
