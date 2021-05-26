@@ -38,15 +38,15 @@ final class MetaInformationAdmin extends AbstractAdmin
         $collection->remove('delete');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('routeName');
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('routeName')
             ->add('title', null, [
                 'sortable' => true,
@@ -68,9 +68,9 @@ final class MetaInformationAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->with('Translations', [
                 'box_class' => 'box box-solid box-primary',
             ])

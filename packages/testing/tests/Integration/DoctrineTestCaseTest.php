@@ -14,37 +14,18 @@ declare(strict_types=1);
 namespace Runroom\Testing\Tests\Integration;
 
 use Runroom\Testing\TestCase\DoctrineTestCase;
+use Runroom\Testing\Tests\App\Entity\Test;
 
 class DoctrineTestCaseTest extends DoctrineTestCase
 {
     /** @test */
     public function itDoesInitializeTheDatabase(): void
     {
-        self::assertNotNull(static::$kernel);
-    }
-
-    /** @test */
-    public function itThrowsExceptionWhenKernelClassIsNotSet(): void
-    {
-        $this->expectException(\LogicException::class);
-
-        unset($_SERVER['KERNEL_CLASS'], $_ENV['KERNEL_CLASS']);
-
-        $this->createKernel();
-    }
-
-    /** @test */
-    public function itThrowsExceptionWhenKernelClassDoesNotExist(): void
-    {
-        $this->expectException(\RuntimeException::class);
-
-        $_SERVER['KERNEL_CLASS'] = $_ENV['KERNEL_CLASS'] = 'App\DoesNotExist\Kernel';
-
-        $this->createKernel();
+        self::assertNotNull(self::$entityManager->find(Test::class, 1));
     }
 
     protected function getDataFixtures(): array
     {
-        return [];
+        return ['test.yaml'];
     }
 }

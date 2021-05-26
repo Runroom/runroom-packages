@@ -16,7 +16,6 @@ namespace Runroom\TranslationBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\TranslationBundle\Service\TranslationService;
-use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
 
 class TranslationExtensionTest extends TestCase
@@ -37,11 +36,11 @@ class TranslationExtensionTest extends TestCase
     /** @test */
     public function itTranslates(): void
     {
-        $this->service->method('translate')->with(TranslationFixtures::KEY, [], null)->willReturn(TranslationFixtures::VALUE);
+        $this->service->method('translate')->with('key', [], null)->willReturn('value');
 
-        $result = $this->extension->translate(TranslationFixtures::KEY);
+        $result = $this->extension->translate('key');
 
-        self::assertSame(TranslationFixtures::VALUE, $result);
+        self::assertSame('value', $result);
     }
 
     /** @test */

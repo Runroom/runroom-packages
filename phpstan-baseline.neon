@@ -1,8 +1,3 @@
 parameters:
     ignoreErrors:
-        -
-            message: "#^Property Runroom\\\\SortableBehaviorBundle\\\\Tests\\\\Unit\\\\SortableAdminControllerTest\\:\\:\\$admin with generic interface Sonata\\\\AdminBundle\\\\Admin\\\\AdminInterface does not specify its types\\: T$#"
-            count: 1
-            path: packages/sortable-behavior-bundle/tests/Unit/SortableAdminControllerTest.php
-
         - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'

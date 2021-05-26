@@ -38,16 +38,16 @@ final class TranslationAdmin extends AbstractAdmin
         $collection->remove('delete');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('key')
             ->add('translations.value', null, ['label' => 'Value']);
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('key')
             ->add('value', 'html', [
                 'sortable' => true,
@@ -56,9 +56,9 @@ final class TranslationAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('key')
             ->add('translations', TranslationsType::class, [
                 'label' => false,

@@ -16,6 +16,7 @@ namespace Runroom\CookiesBundle\Factory;
 use Runroom\CookiesBundle\Entity\CookiesPageTranslation;
 use Zenstruck\Foundry\ModelFactory;
 
+/** @extends ModelFactory<CookiesPageTranslation> */
 final class CookiesPageTranslationFactory extends ModelFactory
 {
     /** @return array<string, mixed> */
@@ -24,7 +25,7 @@ final class CookiesPageTranslationFactory extends ModelFactory
         return [
             'title' => self::faker()->words(3, true),
             'content' => self::faker()->paragraph(),
-            'locale' => self::faker()->unique()->languageCode(),
+            'locale' => self::faker()->unique()->languageCode,
         ];
     }
 

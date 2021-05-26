@@ -16,6 +16,7 @@ namespace Runroom\BasicPageBundle\Factory;
 use Runroom\BasicPageBundle\Entity\BasicPageTranslation;
 use Zenstruck\Foundry\ModelFactory;
 
+/** @extends ModelFactory<BasicPageTranslation> */
 final class BasicPageTranslationFactory extends ModelFactory
 {
     /** @return array<string, mixed> */
@@ -25,7 +26,7 @@ final class BasicPageTranslationFactory extends ModelFactory
             'title' => self::faker()->words(3, true),
             'content' => self::faker()->paragraph(),
             'slug' => self::faker()->unique()->slug(),
-            'locale' => self::faker()->unique()->languageCode(),
+            'locale' => self::faker()->unique()->languageCode,
         ];
     }
 

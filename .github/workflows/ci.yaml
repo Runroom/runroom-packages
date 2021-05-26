@@ -34,8 +34,8 @@ jobs:
       - if: matrix.php == '8.0'
         run: composer config platform.php 7.4.99
       - if: matrix.dependencies == 'lowest'
-        run: composer update --no-interaction --no-progress --prefer-stable --prefer-lowest
+        run: composer update --no-interaction --no-progress --prefer-lowest
       - if: matrix.dependencies == 'highest'
-        run: composer update --no-interaction --no-progress --prefer-stable
+        run: composer update --no-interaction --no-progress
       - run: vendor/bin/phpunit --coverage-clover=clover.xml
       - uses: codecov/codecov-action@v1

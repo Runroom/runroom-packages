@@ -16,11 +16,9 @@ namespace Runroom\BasicPageBundle\Tests\App;
 use A2lix\AutoFormBundle\A2lixAutoFormBundle;
 use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
-use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\BasicPageBundle\Tests\App\Entity\Media;
 use Runroom\RenderEventBundle\RunroomRenderEventBundle;
@@ -35,6 +33,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 class Kernel extends BaseKernel
 {
@@ -47,15 +46,14 @@ class Kernel extends BaseKernel
             new A2lixTranslationFormBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
-            new FidryAliceDataFixturesBundle(),
             new FOSCKEditorBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
-            new NelmioAliceBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
             new SonataDoctrineORMAdminBundle(),
             new TwigBundle(),
+            new ZenstruckFoundryBundle(),
 
             new RunroomBasicPageBundle(),
             new RunroomRenderEventBundle(),
@@ -92,8 +90,12 @@ class Kernel extends BaseKernel
             'firewalls' => ['main' => ['anonymous' => true]],
         ]);
 
+        $container->loadFromExtension('zenstruck_foundry', [
+            'auto_refresh_proxies' => false,
+        ]);
+
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
+            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
             'orm' => ['auto_mapping' => true],
         ]);
 

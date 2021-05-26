@@ -112,7 +112,7 @@ final class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:/tests/App/var/database', 'logging' => false],
+            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
@@ -132,6 +132,12 @@ final class Kernel extends BaseKernel
                         'type' => 'annotation',
                         'dir' => '%kernel.project_dir%/../../packages/sortable-behavior-bundle/tests/App/Entity',
                         'prefix' => 'Runroom\SortableBehaviorBundle\Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
+                    'testing' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/../../packages/testing/tests/App/Entity',
+                        'prefix' => 'Runroom\Testing\Tests\App\Entity',
                         'is_bundle' => false,
                     ],
                 ],

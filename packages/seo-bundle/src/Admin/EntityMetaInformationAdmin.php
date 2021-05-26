@@ -22,9 +22,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /** @extends AbstractAdmin<EntityMetaInformation> */
 final class EntityMetaInformationAdmin extends AbstractAdmin
 {
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->with('Translations', [
                 'box_class' => 'box box-solid box-primary',
             ])

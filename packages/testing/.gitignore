@@ -1,3 +1,4 @@
+/tests/App/var
 /vendor
 composer.lock
 phpunit.xml

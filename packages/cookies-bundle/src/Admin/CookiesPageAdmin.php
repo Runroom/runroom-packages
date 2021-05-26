@@ -33,9 +33,9 @@ final class CookiesPageAdmin extends AbstractAdmin
         $collection->remove('export');
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->with('Translations', [
                 'box_class' => 'box box-solid box-primary',
             ])

@@ -17,6 +17,7 @@ use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\SeoBundle\Factory\EntityMetaInformationFactory;
 use Zenstruck\Foundry\ModelFactory;
 
+/** @extends ModelFactory<BasicPage> */
 final class BasicPageFactory extends ModelFactory
 {
     /** @return array<string, mixed> */

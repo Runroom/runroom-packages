@@ -16,6 +16,7 @@ namespace Runroom\RedirectionBundle\Factory;
 use Runroom\RedirectionBundle\Entity\Redirect;
 use Zenstruck\Foundry\ModelFactory;
 
+/** @extends ModelFactory<Redirect> */
 final class RedirectFactory extends ModelFactory
 {
     /** @return array<string, mixed> */
@@ -24,8 +25,8 @@ final class RedirectFactory extends ModelFactory
         $uniqueUrl = self::faker()->unique();
 
         return [
-            'source' => $uniqueUrl->url(),
-            'destination' => $uniqueUrl->url(),
+            'source' => $uniqueUrl->url,
+            'destination' => $uniqueUrl->url,
             'httpCode' => self::faker()->randomElement([
                 Redirect::PERMANENT,
                 Redirect::TEMPORAL,
