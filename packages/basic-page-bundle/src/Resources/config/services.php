@@ -20,9 +20,10 @@ use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
     $services->set(BasicPageAdmin::class)
@@ -31,12 +32,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Basic pages']);
 
     $services->set(BasicPageController::class)
-        ->arg('$service', ref(BasicPageService::class))
-        ->arg('$renderer', ref(PageRenderer::class))
+        ->arg('$service', new ReferenceConfigurator(BasicPageService::class))
+        ->arg('$renderer', new ReferenceConfigurator(PageRenderer::class))
         ->tag('controller.service_arguments');
 
     $services->set(BasicPageService::class)
-        ->arg('$repository', ref(BasicPageRepository::class))
+        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class))
         ->tag('kernel.event_subscriber');
 
     $services->set(BasicPageAlternateLinksProvider::class)
@@ -46,7 +47,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('runroom.seo.meta_information');
 
     $services->set(BasicPageRepository::class)
-        ->arg('$registry', ref('doctrine'))
-        ->arg('$requestStack', ref('request_stack'))
+        ->arg('$registry', new ReferenceConfigurator('doctrine'))
+        ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->tag('doctrine.repository_service');
 };

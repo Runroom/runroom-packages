@@ -17,9 +17,10 @@ use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
     $services->set(TranslationAdmin::class)
@@ -28,14 +29,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Translations']);
 
     $services->set(TranslationService::class)
-        ->arg('$repository', ref(TranslationRepository::class))
-        ->arg('$translator', ref('translator'));
+        ->arg('$repository', new ReferenceConfigurator(TranslationRepository::class))
+        ->arg('$translator', new ReferenceConfigurator('translator'));
 
     $services->set(TranslationRepository::class)
-        ->arg('$registry', ref('doctrine'))
+        ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->tag('doctrine.repository_service');
 
     $services->set(TranslationExtension::class)
-        ->arg('$service', ref(TranslationService::class))
+        ->arg('$service', new ReferenceConfigurator(TranslationService::class))
         ->tag('twig.extension');
 };

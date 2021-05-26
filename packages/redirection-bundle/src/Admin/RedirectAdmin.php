@@ -34,8 +34,11 @@ final class RedirectAdmin extends AbstractAdmin
         $datagridMapper
             ->add('source')
             ->add('destination')
-            ->add('httpCode', null, [], ChoiceType::class, [
-                'choices' => self::$typeChoices,
+            ->add('httpCode', null, [
+                'field_options' => [
+                    'choices' => self::$typeChoices,
+                ],
+                'field_type' => ChoiceType::class,
             ])
             ->add('automatic')
             ->add('publish');
