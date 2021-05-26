@@ -19,6 +19,19 @@ use Zenstruck\Foundry\ModelFactory;
 /** @extends ModelFactory<MetaInformation> */
 final class MetaInformationFactory extends ModelFactory
 {
+    /**
+     * @param string[] $locales
+     * @param array<string, mixed> $defaultAttributes
+     */
+    public function withTranslations(array $locales, array $defaultAttributes = []): self
+    {
+        return $this->addState([
+            'translations' => MetaInformationTranslationFactory::createMany(\count($locales), array_merge($defaultAttributes, [
+                'locale' => self::faker()->unique()->randomElement($locales),
+            ])),
+        ]);
+    }
+
     /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
@@ -26,16 +39,6 @@ final class MetaInformationFactory extends ModelFactory
             'route' => self::faker()->unique()->word(),
             'routeName' => self::faker()->words(3, true),
         ];
-    }
-
-    /** @param string[] $locales */
-    public function withTranslations(array $locales, array $defaultAttributes = []): self
-    {
-        return $this->addState([
-            'translations' => MetaInformationTranslationFactory::createMany(count($locales), \array_merge($defaultAttributes, [
-                'locale' => self::faker()->unique()->randomElement($locales),
-            ])),
-        ]);
     }
 
     protected static function getClass(): string

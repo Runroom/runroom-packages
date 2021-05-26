@@ -19,22 +19,25 @@ use Zenstruck\Foundry\ModelFactory;
 /** @extends ModelFactory<Translation> */
 final class TranslationFactory extends ModelFactory
 {
+    /**
+     * @param string[] $locales
+     * @param array<string, mixed> $defaultAttributes
+     */
+    public function withTranslations(array $locales, array $defaultAttributes = []): self
+    {
+        return $this->addState([
+            'translations' => TranslationTranslationFactory::createMany(\count($locales), array_merge($defaultAttributes, [
+                'locale' => self::faker()->unique()->randomElement($locales),
+            ])),
+        ]);
+    }
+
     /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
         return [
             'key' => self::faker()->unique()->word(),
         ];
-    }
-
-    /** @param string[] $locales */
-    public function withTranslations(array $locales, array $defaultAttributes = []): self
-    {
-        return $this->addState([
-            'translations' => TranslationTranslationFactory::createMany(count($locales), \array_merge($defaultAttributes, [
-                'locale' => self::faker()->unique()->randomElement($locales),
-            ])),
-        ]);
     }
 
     protected static function getClass(): string
