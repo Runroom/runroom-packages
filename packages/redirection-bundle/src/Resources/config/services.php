@@ -17,9 +17,10 @@ use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
 use Runroom\RedirectionBundle\Listener\RedirectListener;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
     $services->set(RedirectAdmin::class)
@@ -28,15 +29,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Redirects']);
 
     $services->set(RedirectListener::class)
-        ->arg('$repository', ref(RedirectRepository::class))
+        ->arg('$repository', new ReferenceConfigurator(RedirectRepository::class))
         ->tag('kernel.event_subscriber');
 
     $services->set(AutomaticRedirectSubscriber::class)
-        ->arg('$urlGenerator', ref('router'))
-        ->arg('$propertyAccessor', ref('property_accessor'))
+        ->arg('$urlGenerator', new ReferenceConfigurator('router'))
+        ->arg('$propertyAccessor', new ReferenceConfigurator('property_accessor'))
         ->arg('$configuration', []);
 
     $services->set(RedirectRepository::class)
-        ->arg('$registry', ref('doctrine'))
+        ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->tag('doctrine.repository_service');
 };

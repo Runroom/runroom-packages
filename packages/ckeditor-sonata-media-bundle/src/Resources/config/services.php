@@ -14,16 +14,17 @@ declare(strict_types=1);
 use Runroom\CkeditorSonataMediaBundle\Admin\MediaAdminExtension;
 use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
     $services->set(MediaAdminController::class)
         ->public()
-        ->arg('$mediaManager', ref('sonata.media.manager.media'))
-        ->arg('$mediaPool', ref('sonata.media.pool'))
-        ->arg('$twig', ref('twig'));
+        ->arg('$mediaManager', new ReferenceConfigurator('sonata.media.manager.media'))
+        ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'))
+        ->arg('$twig', new ReferenceConfigurator('twig'));
 
     $services->set(MediaAdminExtension::class)
         ->tag('sonata.admin.extension', ['target' => 'sonata.media.admin.media']);

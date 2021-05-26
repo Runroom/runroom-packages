@@ -23,10 +23,12 @@ use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
     $services->set(MetaInformationAdmin::class)
@@ -40,32 +42,32 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Entity SEO']);
 
     $services->set(AlternateLinksBuilder::class)
-        ->arg('$urlGenerator', ref('router'))
+        ->arg('$urlGenerator', new ReferenceConfigurator('router'))
         ->arg('$locales', null);
 
     $services->set(AlternateLinksService::class)
-        ->arg('$requestStack', ref('request_stack'))
+        ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->arg('$providers', tagged_iterator('runroom.seo.alternate_links'))
-        ->arg('$defaultProvider', ref(DefaultAlternateLinksProvider::class))
-        ->arg('$builder', ref(AlternateLinksBuilder::class))
+        ->arg('$defaultProvider', new ReferenceConfigurator(DefaultAlternateLinksProvider::class))
+        ->arg('$builder', new ReferenceConfigurator(AlternateLinksBuilder::class))
         ->tag('kernel.event_subscriber');
 
     $services->set(DefaultAlternateLinksProvider::class);
 
     $services->set(MetaInformationBuilder::class)
-        ->arg('$repository', ref(MetaInformationRepository::class))
-        ->arg('$propertyAccessor', ref('property_accessor'));
+        ->arg('$repository', new ReferenceConfigurator(MetaInformationRepository::class))
+        ->arg('$propertyAccessor', new ReferenceConfigurator('property_accessor'));
 
     $services->set(MetaInformationService::class)
-        ->arg('$requestStack', ref('request_stack'))
+        ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->arg('$providers', tagged_iterator('runroom.seo.meta_information'))
-        ->arg('$defaultProvider', ref(DefaultMetaInformationProvider::class))
-        ->arg('$builder', ref(MetaInformationBuilder::class))
+        ->arg('$defaultProvider', new ReferenceConfigurator(DefaultMetaInformationProvider::class))
+        ->arg('$builder', new ReferenceConfigurator(MetaInformationBuilder::class))
         ->tag('kernel.event_subscriber');
 
     $services->set(DefaultMetaInformationProvider::class);
 
     $services->set(MetaInformationRepository::class)
-        ->arg('$registry', ref('doctrine'))
+        ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->tag('doctrine.repository_service');
 };

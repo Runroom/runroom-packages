@@ -20,9 +20,10 @@ use Runroom\CookiesBundle\Service\CookiesService;
 use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
     $services->set(CookiesPageAdmin::class)
@@ -31,13 +32,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Cookies']);
 
     $services->set(CookiesPageController::class)
-        ->arg('$service', ref(CookiesPageService::class))
-        ->arg('$renderer', ref(PageRenderer::class))
+        ->arg('$service', new ReferenceConfigurator(CookiesPageService::class))
+        ->arg('$renderer', new ReferenceConfigurator(PageRenderer::class))
         ->tag('controller.service_arguments');
 
     $services->set(CookiesPageService::class)
-        ->arg('$repository', ref(CookiesPageRepository::class))
-        ->arg('$handler', ref(FormHandler::class))
+        ->arg('$repository', new ReferenceConfigurator(CookiesPageRepository::class))
+        ->arg('$handler', new ReferenceConfigurator(FormHandler::class))
         ->arg('$cookies', null);
 
     $services->set(CookiesService::class)
@@ -45,6 +46,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('kernel.event_subscriber');
 
     $services->set(CookiesPageRepository::class)
-        ->arg('$registry', ref('doctrine'))
+        ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->tag('doctrine.repository_service');
 };
