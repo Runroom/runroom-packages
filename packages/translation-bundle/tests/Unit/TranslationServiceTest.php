@@ -16,7 +16,6 @@ namespace Runroom\TranslationBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\TranslationBundle\Factory\TranslationFactory;
-use Runroom\TranslationBundle\Factory\TranslationTranslationFactory;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Symfony\Contracts\Translation\TranslatorInterface;

@@ -19,20 +19,23 @@ use Zenstruck\Foundry\ModelFactory;
 /** @extends ModelFactory<CookiesPage> */
 final class CookiesPageFactory extends ModelFactory
 {
+    /**
+     * @param string[] $locales
+     * @param array<string, mixed> $defaultAttributes
+     */
+    public function withTranslations(array $locales, array $defaultAttributes = []): self
+    {
+        return $this->addState([
+            'translations' => CookiesPageTranslationFactory::createMany(\count($locales), array_merge($defaultAttributes, [
+                'locale' => self::faker()->unique()->randomElement($locales),
+            ])),
+        ]);
+    }
+
     /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
         return [];
-    }
-
-    /** @param string[] $locales */
-    public function withTranslations(array $locales, array $defaultAttributes = []): self
-    {
-        return $this->addState([
-            'translations' => CookiesPageTranslationFactory::createMany(count($locales), \array_merge($defaultAttributes, [
-                'locale' => self::faker()->unique()->randomElement($locales),
-            ])),
-        ]);
     }
 
     protected static function getClass(): string
