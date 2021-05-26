@@ -22,7 +22,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 
 class CookiesPageRepositoryTest extends KernelTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /** @var CookiesPageRepository */
     private $repository;

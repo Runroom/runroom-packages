@@ -22,7 +22,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 
 class RedirectRepositoryTest extends KernelTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /** @var RedirectRepository */
     private $repository;

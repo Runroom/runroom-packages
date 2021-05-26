@@ -65,7 +65,7 @@ abstract class DoctrineTestCase extends TestCase
             throw new \LogicException(sprintf('You must set the KERNEL_CLASS environment variable to the fully-qualified class name of your Kernel in phpunit.xml / phpunit.xml.dist or override the "%1$s::createKernel()" or "%1$s::getKernelClass()" method.', self::class));
         }
 
-        /** @var class-string<KernelInterface> */
+        /** @phpstan-var class-string<KernelInterface> */
         $class = $_ENV['KERNEL_CLASS'] ?? $_SERVER['KERNEL_CLASS'];
 
         if (!class_exists($class)) {
