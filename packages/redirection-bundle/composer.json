@@ -38,15 +38,13 @@
         "symfony/yaml": "^4.4 || ^5.1"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.9",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "nelmio/alice": "^3.7",
         "phpunit/phpunit": "^9.3",
         "runroom-packages/testing": "^0.10",
         "symfony/framework-bundle": "^4.4 || ^5.1",
         "symfony/phpunit-bridge": "^5.1",
-        "theofidry/alice-data-fixtures": "^1.2"
+        "zenstruck/foundry": "^1.10"
     },
     "config": {
         "sort-packages": true

@@ -13,17 +13,23 @@ declare(strict_types=1);
 
 namespace Runroom\TranslationBundle\Tests\Integration;
 
-use Runroom\Testing\TestCase\DoctrineTestCase;
+use Runroom\TranslationBundle\Factory\TranslationFactory;
+use Runroom\TranslationBundle\Factory\TranslationTranslationFactory;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class TranslationRepositoryTest extends DoctrineTestCase
+class TranslationRepositoryTest extends KernelTestCase
 {
+    use Factories, ResetDatabase;
+
     /** @var TranslationRepository */
     private $repository;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
 
         $this->repository = static::$container->get(TranslationRepository::class);
     }
@@ -31,19 +37,21 @@ class TranslationRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itFindsTranslationsByKey(): void
     {
+        TranslationFactory::createOne([
+            'key' => 'test',
+            'translations' => TranslationTranslationFactory::createMany(1, [
+                'locale' => 'en',
+            ]),
+        ]);
+
         $translation = $this->repository->findOneBy(['key' => 'test']);
 
         if (null !== $translation) {
             self::assertSame(1, $translation->getId());
-            self::assertSame('test', $translation->__toString());
+            self::assertSame('test', (string) $translation);
             self::assertNotNull($translation->getValue());
         } else {
             self::fail('not found translation');
         }
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['translations.yaml'];
     }
 }

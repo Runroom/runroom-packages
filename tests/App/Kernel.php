@@ -47,6 +47,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 use Tests\App\Entity\Gallery;
 use Tests\App\Entity\GalleryHasMedia;
 use Tests\App\Entity\Media;
+use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 final class Kernel extends BaseKernel
 {
@@ -70,6 +71,7 @@ final class Kernel extends BaseKernel
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataAdminBundle(),
+            new ZenstruckFoundryBundle(),
 
             new RunroomBasicPageBundle(),
             new RunroomCkeditorSonataMediaBundle(),
@@ -105,8 +107,12 @@ final class Kernel extends BaseKernel
             'firewalls' => ['main' => ['anonymous' => true]],
         ]);
 
+        $container->loadFromExtension('zenstruck_foundry', [
+            'auto_refresh_proxies' => false,
+        ]);
+
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
+            'dbal' => ['url' => 'sqlite://:memory:/tests/App/var/database', 'logging' => false],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [

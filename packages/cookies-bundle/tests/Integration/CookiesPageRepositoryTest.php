@@ -13,17 +13,23 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Tests\Integration;
 
+use Runroom\CookiesBundle\Factory\CookiesPageFactory;
+use Runroom\CookiesBundle\Factory\CookiesPageTranslationFactory;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
-use Runroom\Testing\TestCase\DoctrineTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class CookiesPageRepositoryTest extends DoctrineTestCase
+class CookiesPageRepositoryTest extends KernelTestCase
 {
+    use Factories, ResetDatabase;
+
     /** @var CookiesPageRepository */
     private $repository;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
 
         $this->repository = static::$container->get(CookiesPageRepository::class);
     }
@@ -31,19 +37,17 @@ class CookiesPageRepositoryTest extends DoctrineTestCase
     /** @test */
     public function ifFindsCookiesPageById(): void
     {
+        CookiesPageFactory::createOne([
+            'translations' => CookiesPageTranslationFactory::createMany(1, [
+                'locale' => 'en',
+            ]),
+        ]);
+
         $cookiesPage = $this->repository->find(1);
 
-        if (null !== $cookiesPage) {
-            self::assertSame(1, $cookiesPage->getId());
-            self::assertSame('Cookies policy', $cookiesPage->__toString());
-            self::assertNotNull($cookiesPage->getContent());
-        } else {
-            self::fail('not found cookiesPage');
-        }
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['cookies_page.yaml'];
+        self::assertNotNull($cookiesPage);
+        self::assertSame(1, $cookiesPage->getId());
+        self::assertNotEmpty((string) $cookiesPage);
+        self::assertNotNull($cookiesPage->getContent());
     }
 }
