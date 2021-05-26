@@ -25,7 +25,7 @@ final class BasicPageFactory extends ModelFactory
         return [
             'location' => self::faker()->randomElement([
                 BasicPage::LOCATION_FOOTER,
-                BasicPage::LOCATION_NONE
+                BasicPage::LOCATION_NONE,
             ]),
             'publish' => self::faker()->boolean(),
             'translations' => BasicPageTranslationFactory::createMany(2),

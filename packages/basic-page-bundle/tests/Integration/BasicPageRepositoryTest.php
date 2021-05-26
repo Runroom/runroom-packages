@@ -23,7 +23,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 
 class BasicPageRepositoryTest extends KernelTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /** @var BasicPageRepository */
     private $repository;

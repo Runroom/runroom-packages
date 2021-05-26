@@ -24,7 +24,7 @@ final class CookiesPageTranslationFactory extends ModelFactory
         return [
             'title' => self::faker()->words(3, true),
             'content' => self::faker()->paragraph(),
-            'locale' => self::faker()->unique()->languageCode()
+            'locale' => self::faker()->unique()->languageCode(),
         ];
     }
 

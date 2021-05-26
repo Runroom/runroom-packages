@@ -24,7 +24,7 @@ final class EntityMetaInformationTranslationFactory extends ModelFactory
         return [
             'title' => self::faker()->words(3, true),
             'description' => self::faker()->paragraph(),
-            'locale' => self::faker()->unique()->languageCode()
+            'locale' => self::faker()->unique()->languageCode(),
         ];
     }
 

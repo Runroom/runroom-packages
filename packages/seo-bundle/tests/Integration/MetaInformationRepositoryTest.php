@@ -23,7 +23,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 
 class MetaInformationRepositoryTest extends KernelTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /** @var MetaInformationRepository */
     private $repository;

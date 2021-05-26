@@ -22,7 +22,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 
 class TranslationRepositoryTest extends KernelTestCase
 {
-    use Factories, ResetDatabase;
+    use Factories;
+    use ResetDatabase;
 
     /** @var TranslationRepository */
     private $repository;
