@@ -52,13 +52,10 @@
         "runroom-packages/testing": "self.version",
         "runroom-packages/translation-bundle": "self.version"
     },
-    "conflict": {
-        "phpdocumentor/reflection-docblock": "5.0.0"
-    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.2",
         "fakerphp/faker": "^1.13",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "nelmio/alice": "^3.7",

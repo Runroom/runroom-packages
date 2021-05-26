@@ -64,9 +64,7 @@ final class MediaAdminController extends CRUDController
 
         $formats = [];
 
-        /**
-         * @var MediaInterface $media
-         */
+        /** @var MediaInterface $media */
         foreach ($datagrid->getResults() as $media) {
             $formats[$media->getId()] = $this->mediaPool->getFormatNamesByContext($media->getContext());
         }
