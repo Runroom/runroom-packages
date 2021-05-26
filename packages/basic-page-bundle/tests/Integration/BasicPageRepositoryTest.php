@@ -15,7 +15,6 @@ namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Doctrine\ORM\NoResultException;
 use Runroom\BasicPageBundle\Factory\BasicPageFactory;
-use Runroom\BasicPageBundle\Factory\BasicPageTranslationFactory;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -39,13 +38,9 @@ class BasicPageRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsBasicPageGivenItsSlug(): void
     {
-        BasicPageFactory::createOne([
-            'translations' => BasicPageTranslationFactory::createMany(1, [
-                'locale' => 'en',
-                'slug' => 'slug',
-            ]),
-            'publish' => true,
-        ]);
+        BasicPageFactory::new(['publish' => true])->withTranslations(['en'], [
+            'slug' => 'slug',
+        ])->create();
 
         $basicPage = $this->repository->findBySlug('slug');
 

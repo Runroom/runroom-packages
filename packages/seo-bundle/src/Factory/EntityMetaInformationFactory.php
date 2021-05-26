@@ -22,9 +22,17 @@ final class EntityMetaInformationFactory extends ModelFactory
     /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
-        return [
-            'translations' => EntityMetaInformationTranslationFactory::createMany(2),
-        ];
+        return [];
+    }
+
+    /** @param string[] $locales */
+    public function withTranslations(array $locales, array $defaultAttributes = []): self
+    {
+        return $this->addState([
+            'translations' => EntityMetaInformationTranslationFactory::createMany(count($locales), \array_merge($defaultAttributes, [
+                'locale' => self::faker()->unique()->randomElement($locales),
+            ])),
+        ]);
     }
 
     protected static function getClass(): string

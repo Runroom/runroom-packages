@@ -47,11 +47,11 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     /** @test */
     public function itReturnsRouteParameters(): void
     {
-        $basicPage = BasicPageFactory::createOne()->object();
+        $basicPage = BasicPageFactory::new()->withTranslations(['en'])->create()->object();
         $model = new BasicPageViewModel();
         $model->setBasicPage($basicPage);
 
-        foreach ($basicPage->getTranslations()->getKeys() as $locale) {
+        foreach (['en'] as $locale) {
             self::assertSame(
                 ['slug' => $basicPage->translate($locale)->getSlug()],
                 $this->provider->getParameters($model, $locale)

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\Tests\Integration;
 
 use Runroom\CookiesBundle\Factory\CookiesPageFactory;
-use Runroom\CookiesBundle\Factory\CookiesPageTranslationFactory;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -38,11 +37,7 @@ class CookiesPageRepositoryTest extends KernelTestCase
     /** @test */
     public function ifFindsCookiesPageById(): void
     {
-        CookiesPageFactory::createOne([
-            'translations' => CookiesPageTranslationFactory::createMany(1, [
-                'locale' => 'en',
-            ]),
-        ]);
+        CookiesPageFactory::new()->withTranslations(['en'])->create();
 
         $cookiesPage = $this->repository->find(1);
 

@@ -25,8 +25,17 @@ final class MetaInformationFactory extends ModelFactory
         return [
             'route' => self::faker()->unique()->word(),
             'routeName' => self::faker()->words(3, true),
-            'translations' => MetaInformationTranslationFactory::createMany(2),
         ];
+    }
+
+    /** @param string[] $locales */
+    public function withTranslations(array $locales, array $defaultAttributes = []): self
+    {
+        return $this->addState([
+            'translations' => MetaInformationTranslationFactory::createMany(count($locales), \array_merge($defaultAttributes, [
+                'locale' => self::faker()->unique()->randomElement($locales),
+            ])),
+        ]);
     }
 
     protected static function getClass(): string

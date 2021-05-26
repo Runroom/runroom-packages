@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Tests\Integration;
 
 use Runroom\TranslationBundle\Factory\TranslationFactory;
-use Runroom\TranslationBundle\Factory\TranslationTranslationFactory;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -38,12 +37,7 @@ class TranslationRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsTranslationsByKey(): void
     {
-        TranslationFactory::createOne([
-            'key' => 'test',
-            'translations' => TranslationTranslationFactory::createMany(1, [
-                'locale' => 'en',
-            ]),
-        ]);
+        TranslationFactory::new(['key' => 'test'])->withTranslations(['en'])->create();
 
         $translation = $this->repository->findOneBy(['key' => 'test']);
 

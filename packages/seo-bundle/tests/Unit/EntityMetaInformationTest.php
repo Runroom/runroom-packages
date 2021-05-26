@@ -15,7 +15,6 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\Factory\EntityMetaInformationFactory;
-use Runroom\SeoBundle\Factory\MetaInformationTranslationFactory;
 use Zenstruck\Foundry\Test\Factories;
 
 class EntityMetaInformationTest extends TestCase
@@ -25,11 +24,7 @@ class EntityMetaInformationTest extends TestCase
     /** @test */
     public function itGetsProperties(): void
     {
-        $metaInformation = EntityMetaInformationFactory::createOne([
-            'translations' => MetaInformationTranslationFactory::createMany(1, [
-                'locale' => 'en',
-            ]),
-        ]);
+        $metaInformation = EntityMetaInformationFactory::new()->withTranslations(['en'])->create();
 
         self::assertNotEmpty((string) $metaInformation);
         self::assertNull($metaInformation->getId());

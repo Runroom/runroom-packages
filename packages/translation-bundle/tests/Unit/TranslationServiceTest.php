@@ -49,11 +49,7 @@ class TranslationServiceTest extends TestCase
     /** @test */
     public function itReturnsAStringTranslatedByTheRepository(): void
     {
-        $translation = TranslationFactory::createOne([
-            'translations' => TranslationTranslationFactory::createMany(1, [
-                'locale' => 'en',
-            ]),
-        ]);
+        $translation = TranslationFactory::new(['key' => 'key'])->withTranslations(['en'])->create();
 
         $this->repository->method('findOneBy')->with(['key' => 'key'])->willReturn($translation);
         $this->translator->expects(self::never())->method('trans')->with('key', [], null, 'en');
