@@ -18,7 +18,8 @@ use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+
 use function Symfony\Component\String\s;
 
 /** @final */
@@ -29,12 +30,12 @@ class MetaInformationBuilder
     /** @var MetaInformationRepository */
     private $repository;
 
-    /** @var PropertyAccessor */
+    /** @var PropertyAccessorInterface */
     private $propertyAccessor;
 
     public function __construct(
         MetaInformationRepository $repository,
-        PropertyAccessor $propertyAccessor
+        PropertyAccessorInterface $propertyAccessor
     ) {
         $this->repository = $repository;
         $this->propertyAccessor = $propertyAccessor;
