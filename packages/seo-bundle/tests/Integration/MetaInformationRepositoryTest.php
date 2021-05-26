@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\Integration;
 
 use Runroom\SeoBundle\Factory\MetaInformationFactory;
-use Runroom\SeoBundle\Factory\MetaInformationTranslationFactory;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -39,12 +38,7 @@ class MetaInformationRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsDefaultMetaInformation(): void
     {
-        MetaInformationFactory::createOne([
-            'route' => MetaInformationBuilder::DEFAULT_ROUTE,
-            'translations' => MetaInformationTranslationFactory::createMany(1, [
-                'locale' => 'en',
-            ]),
-        ]);
+        MetaInformationFactory::new(['route' => MetaInformationBuilder::DEFAULT_ROUTE])->withTranslations(['en'])->create();
 
         $metaInformation = $this->repository->findOneBy(['route' => MetaInformationBuilder::DEFAULT_ROUTE]);
 

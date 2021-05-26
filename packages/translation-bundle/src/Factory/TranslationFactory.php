@@ -24,8 +24,17 @@ final class TranslationFactory extends ModelFactory
     {
         return [
             'key' => self::faker()->unique()->word(),
-            'translations' => TranslationTranslationFactory::createMany(2),
         ];
+    }
+
+    /** @param string[] $locales */
+    public function withTranslations(array $locales, array $defaultAttributes = []): self
+    {
+        return $this->addState([
+            'translations' => TranslationTranslationFactory::createMany(count($locales), \array_merge($defaultAttributes, [
+                'locale' => self::faker()->unique()->randomElement($locales),
+            ])),
+        ]);
     }
 
     protected static function getClass(): string

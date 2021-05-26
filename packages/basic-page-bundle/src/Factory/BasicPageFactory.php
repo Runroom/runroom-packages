@@ -29,9 +29,18 @@ final class BasicPageFactory extends ModelFactory
                 BasicPage::LOCATION_NONE,
             ]),
             'publish' => self::faker()->boolean(),
-            'translations' => BasicPageTranslationFactory::createMany(2),
             'metaInformation' => EntityMetaInformationFactory::createOne(),
         ];
+    }
+
+    /** @param string[] $locales */
+    public function withTranslations(array $locales, array $defaultAttributes = []): self
+    {
+        return $this->addState([
+            'translations' => BasicPageTranslationFactory::createMany(count($locales), \array_merge($defaultAttributes, [
+                'locale' => self::faker()->unique()->randomElement($locales),
+            ])),
+        ]);
     }
 
     protected static function getClass(): string

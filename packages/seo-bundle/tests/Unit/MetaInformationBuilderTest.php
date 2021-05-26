@@ -16,7 +16,6 @@ namespace Runroom\SeoBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\Factory\MetaInformationFactory;
-use Runroom\SeoBundle\Factory\MetaInformationTranslationFactory;
 use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
@@ -49,13 +48,10 @@ class MetaInformationBuilderTest extends TestCase
         $model = new \stdClass();
         $model->placeholder = 'test';
 
-        $metaInformation = MetaInformationFactory::createOne([
-            'translations' => MetaInformationTranslationFactory::createMany(1, [
-                'title' => '[placeholder] title',
-                'description' => '[missing] description',
-                'locale' => 'en',
-            ]),
-        ])->object();
+        $metaInformation = MetaInformationFactory::new()->withTranslations(['en'], [
+            'title' => '[placeholder] title',
+            'description' => '[missing] description',
+        ])->create()->object();
 
         $this->repository->method('findOneBy')->willReturn($metaInformation);
 
