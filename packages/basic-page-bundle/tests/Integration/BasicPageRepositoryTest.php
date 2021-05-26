@@ -49,7 +49,6 @@ class BasicPageRepositoryTest extends KernelTestCase
 
         $basicPage = $this->repository->findBySlug('slug');
 
-        self::assertNotNull($basicPage);
         self::assertSame(1, $basicPage->getId());
         self::assertNotEmpty((string) $basicPage);
         self::assertNotNull($basicPage->getLocation());

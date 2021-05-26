@@ -68,19 +68,13 @@
         "psalm/plugin-symfony": "^2.0",
         "psr/event-dispatcher": "^1.0",
         "symfony/phpunit-bridge": "^5.1",
-        "symplify/changelog-linker": "^8.0",
-        "symplify/monorepo-builder": "^8.0",
+        "symplify/monorepo-builder": "^9.0",
         "vimeo/psalm": "^4.0",
         "weirdan/doctrine-psalm-plugin": "^1.0",
         "zenstruck/foundry": "^1.10"
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.x-dev"
-        }
     },
     "autoload": {
         "psr-4": {
@@ -115,11 +109,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "changelog": [
-            "changelog-linker dump-merges --in-packages --in-categories --ansi",
-            "changelog-linker link --ansi",
-            "changelog-linker cleanup --ansi"
-        ],
         "normalize-run": [
             "composer normalize --no-update-lock",
             "composer normalize --no-update-lock packages/basic-page-bundle/composer.json",

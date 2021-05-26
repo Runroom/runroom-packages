@@ -38,7 +38,10 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         $model = new BasicPageViewModel();
         $model->setBasicPage($basicPage);
 
-        self::assertCount($basicPage->getTranslations()->count(), $this->provider->getAvailableLocales($model));
+        $locales = $this->provider->getAvailableLocales($model);
+
+        self::assertNotNull($locales);
+        self::assertCount($basicPage->getTranslations()->count(), $locales);
     }
 
     /** @test */

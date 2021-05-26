@@ -61,8 +61,18 @@ class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite://:memory:', 'logging' => false],
-            'orm' => ['auto_mapping' => true],
+            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'orm' => [
+                'auto_mapping' => true,
+                'mappings' => [
+                    'redirection' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/Entity',
+                        'prefix' => 'Runroom\Testing\Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
+                ],
+            ],
         ]);
     }
 

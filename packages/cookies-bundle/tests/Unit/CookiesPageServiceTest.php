@@ -58,7 +58,6 @@ class CookiesPageServiceTest extends TestCase
             ->with(CookiesFormType::class, [], self::isInstanceOf(CookiesPageViewModel::class))
             ->willReturnArgument(2);
 
-        /** @var CookiesPageViewModel */
         $viewModel = $this->service->getViewModel();
 
         self::assertInstanceOf(CookiesPageViewModel::class, $viewModel);

@@ -5,23 +5,41 @@ on:
     branches: [master]
   pull_request:
 
+env:
+  COMPOSER_ROOT_VERSION: dev-master
+
 jobs:
-  build:
+  provide_packages_json:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php: ['7.4']
-        packages:
-          - basic-page-bundle
-          - ckeditor-sonata-media-bundle
-          - cookies-bundle
-          - form-handler-bundle
-          - redirection-bundle
-          - render-event-bundle
-          - seo-bundle
-          - sortable-behavior-bundle
-          - testing
-          - translation-bundle
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: zip, pdo_sqlite, gd
+          coverage: none
+      - id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ matrix.packages }}
+          restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
+      - run: composer update --no-interaction --no-progress
+      - id: output_data
+        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --tests)"
+    outputs:
+      matrix: ${{ steps.output_data.outputs.matrix }}
+  build:
+    runs-on: ubuntu-latest
+    needs: provide_packages_json
+    strategy:
+      matrix:
+        php: ['7.4']
+        packages: ${{ fromJson(needs.provide_packages_json.outputs.matrix ) }}
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
@@ -38,7 +56,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ matrix.packages }}
           restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
       - run: cd packages/${{ matrix.packages }} && composer validate --strict
-      - run: composer update --no-interaction --no-progress --prefer-stable
-      - run: vendor/bin/monorepo-builder localize-composer-paths
-      - run: cd packages/${{ matrix.packages }} && composer update --no-interaction --no-progress --prefer-stable
+      - run: composer update --no-interaction --no-progress
+      - run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.packages }}/composer.json --ansi
+      - run: composer update --no-interaction --no-progress --working-dir packages/${{ matrix.packages }}
       - run: cd packages/${{ matrix.packages }} && vendor/bin/phpunit

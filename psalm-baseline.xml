@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.18.2@19aa905f7c3c7350569999a93c40ae91ae4e1626">
+<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
   <file src="packages/basic-page-bundle/src/Entity/BasicPage.php">
     <UndefinedInterfaceMethod occurrences="3">
       <code>getContent</code>
@@ -7,10 +7,15 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/basic-page-bundle/tests/Integration/BasicPageRepositoryTest.php">
-    <InternalMethod occurrences="1">
-      <code>get</code>
-    </InternalMethod>
+  <file src="packages/cookies-bundle/src/DependencyInjection/Configuration.php">
+    <PossiblyNullReference occurrences="2">
+      <code>booleanNode</code>
+      <code>end</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedMethod occurrences="2">
+      <code>booleanNode</code>
+      <code>end</code>
+    </PossiblyUndefinedMethod>
   </file>
   <file src="packages/cookies-bundle/src/Entity/CookiesPage.php">
     <UndefinedInterfaceMethod occurrences="2">
@@ -18,39 +23,47 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/cookies-bundle/tests/Integration/CookiesPageRepositoryTest.php">
-    <InternalMethod occurrences="1">
-      <code>get</code>
-    </InternalMethod>
-  </file>
   <file src="packages/form-handler-bundle/src/FormHandler.php">
     <TooManyArguments occurrences="1">
       <code>dispatch</code>
     </TooManyArguments>
   </file>
+  <file src="packages/redirection-bundle/src/DependencyInjection/Configuration.php">
+    <PossiblyNullReference occurrences="1">
+      <code>arrayNode</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>arrayNode</code>
+    </PossiblyUndefinedMethod>
+  </file>
   <file src="packages/redirection-bundle/src/Listener/AutomaticRedirectSubscriber.php">
-    <InternalMethod occurrences="3">
-      <code>computeChangeSet</code>
-      <code>computeChangeSet</code>
-      <code>computeChangeSet</code>
-    </InternalMethod>
+    <InvalidArgument occurrences="3">
+      <code>$metadata</code>
+      <code>$metadata</code>
+      <code>$this-&gt;entityManager-&gt;getClassMetadata(Redirect::class)</code>
+    </InvalidArgument>
   </file>
-  <file src="packages/redirection-bundle/tests/Integration/AutomaticRedirectSubscriberTest.php">
-    <InternalMethod occurrences="2">
-      <code>get</code>
-      <code>get</code>
-    </InternalMethod>
-  </file>
-  <file src="packages/redirection-bundle/tests/Integration/RedirectRepositoryTest.php">
-    <InternalMethod occurrences="1">
-      <code>get</code>
-    </InternalMethod>
+  <file src="packages/render-event-bundle/src/DependencyInjection/Configuration.php">
+    <PossiblyNullReference occurrences="1">
+      <code>end</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>end</code>
+    </PossiblyUndefinedMethod>
   </file>
   <file src="packages/render-event-bundle/src/Renderer/PageRenderer.php">
     <TooManyArguments occurrences="2">
       <code>dispatch</code>
       <code>dispatch</code>
     </TooManyArguments>
+  </file>
+  <file src="packages/seo-bundle/src/DependencyInjection/Configuration.php">
+    <PossiblyNullReference occurrences="1">
+      <code>end</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>end</code>
+    </PossiblyUndefinedMethod>
   </file>
   <file src="packages/seo-bundle/src/Entity/EntityMetaInformation.php">
     <UndefinedInterfaceMethod occurrences="2">
@@ -64,37 +77,19 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/seo-bundle/tests/Fixtures/EntityMetaInformationFixture.php">
-    <UndefinedInterfaceMethod occurrences="2">
-      <code>setDescription</code>
-      <code>setTitle</code>
-    </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/seo-bundle/tests/Fixtures/MetaInformationFixture.php">
-    <UndefinedInterfaceMethod occurrences="2">
-      <code>setDescription</code>
-      <code>setTitle</code>
-    </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/seo-bundle/tests/Integration/MetaInformationRepositoryTest.php">
-    <InternalMethod occurrences="1">
-      <code>get</code>
-    </InternalMethod>
+  <file src="packages/sortable-behavior-bundle/src/DependencyInjection/Configuration.php">
+    <PossiblyNullReference occurrences="1">
+      <code>arrayNode</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>arrayNode</code>
+    </PossiblyUndefinedMethod>
   </file>
   <file src="packages/sortable-behavior-bundle/src/Service/GedmoPositionHandler.php">
     <InvalidArgument occurrences="2">
       <code>$this-&gt;entityManager</code>
       <code>$this-&gt;entityManager</code>
     </InvalidArgument>
-  </file>
-  <file src="packages/testing/src/TestCase/DoctrineTestCase.php">
-    <InternalMethod occurrences="5">
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>getParameterBag</code>
-    </InternalMethod>
   </file>
   <file src="packages/translation-bundle/src/Entity/Translation.php">
     <UndefinedInterfaceMethod occurrences="1">
@@ -105,15 +100,5 @@
     <UndefinedInterfaceMethod occurrences="1">
       <code>getValue</code>
     </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/translation-bundle/tests/Fixtures/TranslationFixtures.php">
-    <UndefinedInterfaceMethod occurrences="1">
-      <code>setValue</code>
-    </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/translation-bundle/tests/Integration/TranslationRepositoryTest.php">
-    <InternalMethod occurrences="1">
-      <code>get</code>
-    </InternalMethod>
   </file>
 </files>

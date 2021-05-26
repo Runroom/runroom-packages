@@ -27,18 +27,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 /** @extends AbstractAdmin<BasicPage> */
 final class BasicPageAdmin extends AbstractAdmin
 {
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('translations.title', null, [
                 'label' => 'Title',
             ])
             ->add('publish');
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'sortable' => true,
                 'sort_field_mapping' => [
@@ -68,9 +68,9 @@ final class BasicPageAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->with('Basic', [
                 'box_class' => 'box box-solid box-primary',
             ])

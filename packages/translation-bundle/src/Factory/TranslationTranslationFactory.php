@@ -16,6 +16,7 @@ namespace Runroom\TranslationBundle\Factory;
 use Runroom\TranslationBundle\Entity\TranslationTranslation;
 use Zenstruck\Foundry\ModelFactory;
 
+/** @extends ModelFactory<TranslationTranslation> */
 final class TranslationTranslationFactory extends ModelFactory
 {
     /** @return array<string, mixed> */
@@ -23,7 +24,7 @@ final class TranslationTranslationFactory extends ModelFactory
     {
         return [
             'value' => self::faker()->words(3, true),
-            'locale' => self::faker()->unique()->languageCode(),
+            'locale' => self::faker()->unique()->languageCode,
         ];
     }
 

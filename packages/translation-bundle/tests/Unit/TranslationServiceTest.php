@@ -15,13 +15,17 @@ namespace Runroom\TranslationBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Runroom\TranslationBundle\Factory\TranslationFactory;
+use Runroom\TranslationBundle\Factory\TranslationTranslationFactory;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
-use Runroom\TranslationBundle\Tests\Fixtures\TranslationFixtures;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Zenstruck\Foundry\Test\Factories;
 
 class TranslationServiceTest extends TestCase
 {
+    use Factories;
+
     /** @var MockObject&TranslationRepository */
     private $repository;
 
@@ -45,24 +49,28 @@ class TranslationServiceTest extends TestCase
     /** @test */
     public function itReturnsAStringTranslatedByTheRepository(): void
     {
-        $translation = TranslationFixtures::create();
+        $translation = TranslationFactory::createOne([
+            'translations' => TranslationTranslationFactory::createMany(1, [
+                'locale' => 'en',
+            ]),
+        ]);
 
-        $this->repository->method('findOneBy')->with(['key' => TranslationFixtures::KEY])->willReturn($translation);
-        $this->translator->expects(self::never())->method('trans')->with(TranslationFixtures::KEY, [], null, 'en');
+        $this->repository->method('findOneBy')->with(['key' => 'key'])->willReturn($translation);
+        $this->translator->expects(self::never())->method('trans')->with('key', [], null, 'en');
 
-        $result = $this->service->translate(TranslationFixtures::KEY, [], 'en');
+        $result = $this->service->translate('key', [], 'en');
 
-        self::assertSame(TranslationFixtures::VALUE, $result);
+        self::assertSame($translation->getValue(), $result);
     }
 
     /** @test */
     public function itReturnsAStringTranslatedByTheTranslatorComponent(): void
     {
-        $this->repository->method('findOneBy')->with(['key' => TranslationFixtures::KEY])->willReturn(null);
-        $this->translator->method('trans')->with(TranslationFixtures::KEY, [], null, 'en')
+        $this->repository->method('findOneBy')->with(['key' => 'key'])->willReturn(null);
+        $this->translator->method('trans')->with('key', [], null, 'en')
             ->willReturn('another_translation');
 
-        $result = $this->service->translate(TranslationFixtures::KEY, [], 'en');
+        $result = $this->service->translate('key', [], 'en');
 
         self::assertSame('another_translation', $result);
     }
