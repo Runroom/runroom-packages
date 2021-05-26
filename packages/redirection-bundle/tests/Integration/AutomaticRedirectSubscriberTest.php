@@ -13,26 +13,35 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\Integration;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
 use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
-use Runroom\Testing\TestCase\DoctrineTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class AutomaticRedirectSubscriberTest extends DoctrineTestCase
+class AutomaticRedirectSubscriberTest extends KernelTestCase
 {
+    use ResetDatabase;
+
     /** @var RedirectRepository */
     private $repository;
 
     /** @var AutomaticRedirectSubscriber */
     private $subscriber;
 
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
+
         $this->repository = static::$container->get(RedirectRepository::class);
         $this->subscriber = static::$container->get(AutomaticRedirectSubscriber::class);
+        $this->entityManager = static::$container->get(EntityManagerInterface::class);
     }
 
     /** @test */
@@ -50,28 +59,28 @@ class AutomaticRedirectSubscriberTest extends DoctrineTestCase
         $entity->setTitle('Test');
         $entity->setSlug('test');
 
-        static::$entityManager->persist($entity);
-        static::$entityManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         $entity->setSlug('another-test');
 
-        static::$entityManager->persist($entity);
-        static::$entityManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         $entity->setSlug('another-test-again');
 
-        static::$entityManager->persist($entity);
-        static::$entityManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         $entity->setSlug('test');
 
-        static::$entityManager->persist($entity);
-        static::$entityManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         $entity->setTitle('Another Test');
 
-        static::$entityManager->persist($entity);
-        static::$entityManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         $redirects = $this->repository->findBy(['destination' => '/entity/test']);
 
@@ -88,21 +97,16 @@ class AutomaticRedirectSubscriberTest extends DoctrineTestCase
         $entity = new WrongEntity();
         $entity->setSlug('test');
 
-        static::$entityManager->persist($entity);
-        static::$entityManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         $entity->setSlug('another-test');
 
-        static::$entityManager->persist($entity);
-        static::$entityManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         $redirects = $this->repository->findBy(['automatic' => true]);
 
         self::assertCount(0, $redirects);
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['redirects.yaml'];
     }
 }

@@ -15,13 +15,16 @@ namespace Runroom\BasicPageBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Entity\BasicPage;
+use Runroom\BasicPageBundle\Factory\BasicPageFactory;
 use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
-use Runroom\BasicPageBundle\Tests\Fixtures\BasicPageFixture;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
+use Zenstruck\Foundry\Test\Factories;
 
 class BasicPageMetaInformationProviderTest extends TestCase
 {
+    use Factories;
+
     /** @var BasicPage */
     private $basicPage;
 
@@ -33,7 +36,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->basicPage = BasicPageFixture::create();
+        $this->basicPage = BasicPageFactory::createOne()->object();
         $this->provider = new BasicPageMetaInformationProvider();
 
         $this->model = new BasicPageViewModel();

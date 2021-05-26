@@ -178,8 +178,8 @@ class MediaAdminControllerTest extends TestCase
             ['twig', true],
         ]);
         $this->container->method('get')->willReturnMap([
-            ['sonata.admin.pool', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $pool],
-            ['sonata.admin.breadcrumbs_builder', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $breadcrumbsBuilder],
+            ['sonata.admin.pool.do-not-use', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $pool],
+            ['sonata.admin.breadcrumbs_builder.do-not-use', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $breadcrumbsBuilder],
             ['request_stack', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $requestStack],
             ['twig', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->twig],
             ['sonata.media.pool', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->mediaPool],

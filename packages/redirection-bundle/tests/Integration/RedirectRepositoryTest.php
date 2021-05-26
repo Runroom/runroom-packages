@@ -13,31 +13,40 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\Integration;
 
+use Runroom\RedirectionBundle\Entity\Redirect;
+use Runroom\RedirectionBundle\Factory\RedirectFactory;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
-use Runroom\Testing\TestCase\DoctrineTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class RedirectRepositoryTest extends DoctrineTestCase
+class RedirectRepositoryTest extends KernelTestCase
 {
+    use Factories, ResetDatabase;
+
     /** @var RedirectRepository */
     private $repository;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
+
         $this->repository = static::$container->get(RedirectRepository::class);
     }
 
     /** @test */
     public function itReturnsRedirect(): void
     {
+        RedirectFactory::createOne(['source' => '/redirect', 'publish' => true]);
+
         $redirect = $this->repository->findOneBy(['source' => '/redirect']);
 
         if (null !== $redirect) {
+            self::assertSame('/redirect', (string) $redirect);
             self::assertNotNull($redirect->getId());
-            self::assertSame('/redirect', $redirect->__toString());
             self::assertSame('/redirect', $redirect->getSource());
-            self::assertSame('/target', $redirect->getDestination());
-            self::assertSame(301, $redirect->getHttpCode());
+            self::assertNotEmpty($redirect->getDestination());
+            self::assertNotNull($redirect->getHttpCode());
             self::assertTrue($redirect->getPublish());
         } else {
             self::fail('not found redirect');
@@ -55,6 +64,11 @@ class RedirectRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itReturnsNullIfTheRedirectIsUnpublish(): void
     {
+        RedirectFactory::createOne([
+            'source' => '/it-is-unpublish',
+            'publish' => false,
+        ]);
+
         $redirect = $this->repository->findRedirect('/it-is-unpublish');
 
         self::assertNull($redirect);
@@ -63,16 +77,18 @@ class RedirectRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itReturnsTheRedirect(): void
     {
+        RedirectFactory::createOne([
+            'source' => '/redirect',
+            'destination' => '/target',
+            'httpCode' => Redirect::PERMANENT,
+            'publish' => true,
+        ]);
+
         $redirect = $this->repository->findRedirect('/redirect');
 
         self::assertSame([
             'destination' => '/target',
-            'httpCode' => '301',
+            'httpCode' => (string) Redirect::PERMANENT,
         ], $redirect);
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['redirects.yaml'];
     }
 }

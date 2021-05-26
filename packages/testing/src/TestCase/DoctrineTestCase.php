@@ -23,6 +23,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Zenstruck\Foundry\Test\DatabaseResetter;
 
 abstract class DoctrineTestCase extends TestCase
 {
@@ -110,7 +111,9 @@ abstract class DoctrineTestCase extends TestCase
 
         static::$container->get(RequestStack::class)->push(new Request());
 
-        $schemaTool = new SchemaTool(static::$entityManager);
-        $schemaTool->createSchema(static::$entityManager->getMetadataFactory()->getAllMetadata());
+        if (!class_exists(DatabaseResetter::class) || !DatabaseResetter::hasBeenReset()) {
+            $schemaTool = new SchemaTool(static::$entityManager);
+            $schemaTool->createSchema(static::$entityManager->getMetadataFactory()->getAllMetadata());
+        }
     }
 }

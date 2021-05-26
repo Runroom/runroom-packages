@@ -13,18 +13,24 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\Integration;
 
+use Runroom\SeoBundle\Factory\MetaInformationFactory;
+use Runroom\SeoBundle\Factory\MetaInformationTranslationFactory;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
-use Runroom\Testing\TestCase\DoctrineTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class MetaInformationRepositoryTest extends DoctrineTestCase
+class MetaInformationRepositoryTest extends KernelTestCase
 {
+    use Factories, ResetDatabase;
+
     /** @var MetaInformationRepository */
     private $repository;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
 
         $this->repository = static::$container->get(MetaInformationRepository::class);
     }
@@ -32,14 +38,21 @@ class MetaInformationRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itFindsDefaultMetaInformation(): void
     {
+        MetaInformationFactory::createOne([
+            'route' => MetaInformationBuilder::DEFAULT_ROUTE,
+            'translations' => MetaInformationTranslationFactory::createMany(1, [
+                'locale' => 'en',
+            ]),
+        ]);
+
         $metaInformation = $this->repository->findOneBy(['route' => MetaInformationBuilder::DEFAULT_ROUTE]);
 
         if (null !== $metaInformation) {
             self::assertSame(1, $metaInformation->getId());
+            self::assertNotEmpty((string) $metaInformation);
             self::assertSame(MetaInformationBuilder::DEFAULT_ROUTE, $metaInformation->getRoute());
             self::assertNull($metaInformation->getImage());
             self::assertNotNull($metaInformation->getRouteName());
-            self::assertSame('Default Metas', $metaInformation->__toString());
             self::assertNotNull($metaInformation->getDescription());
         } else {
             self::fail('not found metaInformation');
@@ -49,17 +62,14 @@ class MetaInformationRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itFindsRouteMetaInformation(): void
     {
+        MetaInformationFactory::createOne(['route' => 'test']);
+
         $metaInformation = $this->repository->findOneBy(['route' => 'test']);
 
         if (null !== $metaInformation) {
-            self::assertSame(2, $metaInformation->getId());
+            self::assertSame(1, $metaInformation->getId());
         } else {
             self::fail('not found metaInformation');
         }
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['meta_informations.yaml'];
     }
 }

@@ -39,18 +39,13 @@
         "twig/string-extra": "^3.0",
         "twig/twig": "^2.12 || ^3.0"
     },
-    "conflict": {
-        "phpdocumentor/reflection-docblock": "5.0.0"
-    },
     "require-dev": {
-        "fzaninotto/faker": "^1.9",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "nelmio/alice": "^3.7",
         "phpunit/phpunit": "^9.3",
         "runroom-packages/testing": "^0.10",
         "symfony/phpunit-bridge": "^5.1",
-        "theofidry/alice-data-fixtures": "^1.2"
+        "zenstruck/foundry": "^1.10"
     },
     "config": {
         "sort-packages": true

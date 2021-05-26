@@ -14,32 +14,47 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Doctrine\ORM\NoResultException;
+use Runroom\BasicPageBundle\Factory\BasicPageFactory;
+use Runroom\BasicPageBundle\Factory\BasicPageTranslationFactory;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
-use Runroom\Testing\TestCase\DoctrineTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class BasicPageRepositoryTest extends DoctrineTestCase
+class BasicPageRepositoryTest extends KernelTestCase
 {
+    use Factories, ResetDatabase;
+
     /** @var BasicPageRepository */
     private $repository;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
 
-        $this->repository = static::$container->get(BasicPageRepository::class);
+        $this->repository = self::$container->get(BasicPageRepository::class);
     }
 
     /** @test */
     public function itFindsBasicPageGivenItsSlug(): void
     {
+        BasicPageFactory::createOne([
+            'translations' => BasicPageTranslationFactory::createMany(1, [
+                'locale' => 'en',
+                'slug' => 'slug',
+            ]),
+            'publish' => true,
+        ]);
+
         $basicPage = $this->repository->findBySlug('slug');
 
+        self::assertNotNull($basicPage);
         self::assertSame(1, $basicPage->getId());
-        self::assertSame('Publish basic page', $basicPage->__toString());
-        self::assertSame('none', $basicPage->getLocation());
+        self::assertNotEmpty((string) $basicPage);
+        self::assertNotNull($basicPage->getLocation());
         self::assertNotNull($basicPage->getContent());
         self::assertNotNull($basicPage->getSlug());
-        self::assertTrue($basicPage->getPublish());
+        self::assertIsBool($basicPage->getPublish());
     }
 
     /** @test */
@@ -48,10 +63,5 @@ class BasicPageRepositoryTest extends DoctrineTestCase
         $this->expectException(NoResultException::class);
 
         $this->repository->findBySlug('unpublished');
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['basic_pages.yaml'];
     }
 }

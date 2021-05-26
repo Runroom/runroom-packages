@@ -7,14 +7,6 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/basic-page-bundle/tests/Fixtures/BasicPageFixture.php">
-    <UndefinedInterfaceMethod occurrences="4">
-      <code>setContent</code>
-      <code>setSlug</code>
-      <code>setSlug</code>
-      <code>setTitle</code>
-    </UndefinedInterfaceMethod>
-  </file>
   <file src="packages/basic-page-bundle/tests/Integration/BasicPageRepositoryTest.php">
     <InternalMethod occurrences="1">
       <code>get</code>

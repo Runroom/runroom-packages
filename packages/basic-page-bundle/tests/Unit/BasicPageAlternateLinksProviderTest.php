@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Runroom\BasicPageBundle\Factory\BasicPageFactory;
 use Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider;
-use Runroom\BasicPageBundle\Tests\Fixtures\BasicPageFixture;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
+use Zenstruck\Foundry\Test\Factories;
 
 class BasicPageAlternateLinksProviderTest extends TestCase
 {
-    /** @var string[] */
-    private $locales = ['es', 'en'];
+    use Factories;
 
     /** @var BasicPageAlternateLinksProvider */
     private $provider;
@@ -34,22 +34,25 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     /** @test */
     public function itReturnsAvailableLocales(): void
     {
+        $basicPage = BasicPageFactory::createOne()->object();
         $model = new BasicPageViewModel();
-        $model->setBasicPage(BasicPageFixture::createWithSlugs($this->locales));
+        $model->setBasicPage($basicPage);
 
-        self::assertSame(['es', 'en'], $this->provider->getAvailableLocales($model));
+        self::assertCount($basicPage->getTranslations()->count(), $this->provider->getAvailableLocales($model));
     }
 
     /** @test */
     public function itReturnsRouteParameters(): void
     {
+        $basicPage = BasicPageFactory::createOne()->object();
         $model = new BasicPageViewModel();
-        $model->setBasicPage(BasicPageFixture::createWithSlugs($this->locales));
+        $model->setBasicPage($basicPage);
 
-        foreach ($this->locales as $locale) {
-            $routeParameters = $this->provider->getParameters($model, $locale);
-
-            self::assertSame(['slug' => 'slug_' . $locale], $routeParameters);
+        foreach ($basicPage->getTranslations()->getKeys() as $locale) {
+            self::assertSame(
+                ['slug' => $basicPage->translate($locale)->getSlug()],
+                $this->provider->getParameters($model, $locale)
+            );
         }
     }
 

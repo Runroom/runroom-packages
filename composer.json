@@ -74,7 +74,8 @@
         "symplify/changelog-linker": "^8.0",
         "symplify/monorepo-builder": "^8.0",
         "vimeo/psalm": "^4.0",
-        "weirdan/doctrine-psalm-plugin": "^1.0"
+        "weirdan/doctrine-psalm-plugin": "^1.0",
+        "zenstruck/foundry": "^1.10"
     },
     "config": {
         "sort-packages": true
