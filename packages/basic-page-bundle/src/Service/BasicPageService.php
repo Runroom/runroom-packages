@@ -21,8 +21,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /** @final */
 class BasicPageService implements EventSubscriberInterface
 {
-    /** @var BasicPageRepository */
-    private $repository;
+    private BasicPageRepository $repository;
 
     public function __construct(BasicPageRepository $repository)
     {

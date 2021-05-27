@@ -25,8 +25,7 @@ class MetaInformationRepositoryTest extends KernelTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @var MetaInformationRepository */
-    private $repository;
+    private MetaInformationRepository $repository;
 
     protected function setUp(): void
     {

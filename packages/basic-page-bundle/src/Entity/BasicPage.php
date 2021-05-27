@@ -37,31 +37,23 @@ class BasicPage implements TranslatableInterface
     public const LOCATION_FOOTER = 'footer';
 
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var string|null
-     *
      * @Assert\Choice(choices = {
      *     BasicPage::LOCATION_NONE,
      *     BasicPage::LOCATION_FOOTER,
      * })
      * @ORM\Column(type="string")
      */
-    private $location = self::LOCATION_NONE;
+    private ?string $location = self::LOCATION_NONE;
 
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(type="boolean")
-     */
-    private $publish;
+    /** @ORM\Column(type="boolean") */
+    private ?bool $publish = null;
 
     public function __toString(): string
     {

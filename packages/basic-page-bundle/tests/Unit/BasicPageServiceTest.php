@@ -26,8 +26,7 @@ class BasicPageServiceTest extends TestCase
     /** @var MockObject&BasicPageRepository */
     private $repository;
 
-    /** @var BasicPageService */
-    private $service;
+    private BasicPageService $service;
 
     protected function setUp(): void
     {

@@ -27,13 +27,11 @@ class EntityMetaInformation implements TranslatableInterface
     use ORMBehaviors\Translatable\TranslatableTrait;
 
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     public function __toString(): string
     {

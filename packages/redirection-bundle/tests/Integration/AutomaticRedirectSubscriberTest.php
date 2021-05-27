@@ -26,14 +26,9 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
 {
     use ResetDatabase;
 
-    /** @var RedirectRepository */
-    private $repository;
-
-    /** @var AutomaticRedirectSubscriber */
-    private $subscriber;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private RedirectRepository $repository;
+    private AutomaticRedirectSubscriber $subscriber;
+    private EntityManagerInterface $entityManager;
 
     protected function setUp(): void
     {

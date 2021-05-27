@@ -22,8 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CookiesServiceTest extends TestCase
 {
-    /** @var CookiesService */
-    private $service;
+    private CookiesService $service;
 
     protected function setUp(): void
     {

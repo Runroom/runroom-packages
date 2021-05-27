@@ -19,7 +19,7 @@ class PageViewModel implements PageViewModelInterface
     private $content;
 
     /** @var array<string, mixed> */
-    private $context = [];
+    private array $context = [];
 
     public function setContent($content): void
     {

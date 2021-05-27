@@ -19,11 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class BasicPageController
 {
-    /** @var PageRenderer */
-    private $renderer;
-
-    /** @var BasicPageService */
-    private $service;
+    private PageRenderer $renderer;
+    private BasicPageService $service;
 
     public function __construct(
         PageRenderer $renderer,

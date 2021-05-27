@@ -25,14 +25,9 @@ class BasicPageMetaInformationProviderTest extends TestCase
 {
     use Factories;
 
-    /** @var BasicPage */
-    private $basicPage;
-
-    /** @var BasicPageMetaInformationProvider */
-    private $provider;
-
-    /** @var BasicPageViewModel */
-    private $model;
+    private BasicPage $basicPage;
+    private BasicPageMetaInformationProvider $provider;
+    private BasicPageViewModel $model;
 
     protected function setUp(): void
     {

@@ -19,20 +19,14 @@ use Doctrine\ORM\Mapping as ORM;
 class WrongEntity
 {
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string")
-     */
-    private $slug;
+    /** @ORM\Column(type="string") */
+    private ?string $slug = null;
 
     public function getId(): ?int
     {

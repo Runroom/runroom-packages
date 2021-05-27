@@ -18,8 +18,7 @@ use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 
 class PageViewModelTest extends TestCase
 {
-    /** @var PageViewModel */
-    private $viewModel;
+    private PageViewModel $viewModel;
 
     protected function setUp(): void
     {

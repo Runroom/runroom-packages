@@ -22,14 +22,9 @@ use Twig\Environment;
 
 final class TwigErrorRenderer implements ErrorRendererInterface
 {
-    /** @var Environment */
-    private $twig;
-
-    /** @var HtmlErrorRenderer */
-    private $fallbackErrorRenderer;
-
-    /** @var PageRenderer */
-    private $renderer;
+    private Environment $twig;
+    private HtmlErrorRenderer $fallbackErrorRenderer;
+    private PageRenderer $renderer;
 
     /** @var bool|callable */
     private $debug;

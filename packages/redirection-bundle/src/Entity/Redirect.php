@@ -30,59 +30,43 @@ class Redirect
     public const TEMPORAL = 302;
 
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var string|null
-     *
      * @Assert\NotNull
      * @Assert\Length(max=500)
      * @Assert\Regex("/^\/.*$/")
      * @ORM\Column(type="string", length=500, unique=true)
      */
-    private $source;
+    private ?string $source = null;
 
     /**
-     * @var string|null
-     *
      * @Assert\NotNull
      * @Assert\Length(max=500)
      * @Assert\Regex("/^(\/|https?:\/\/).*$/")
      * @Assert\NotEqualTo(propertyPath="source")
      * @ORM\Column(type="string", length=500)
      */
-    private $destination;
+    private ?string $destination = null;
 
     /**
-     * @var int|null
-     *
      * @Assert\Choice(choices = {
      *     Redirect::PERMANENT,
      *     Redirect::TEMPORAL,
      * })
      * @ORM\Column(type="integer")
      */
-    private $httpCode = self::PERMANENT;
+    private ?int $httpCode = self::PERMANENT;
 
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(type="boolean")
-     */
-    private $automatic = false;
+    /** @ORM\Column(type="boolean") */
+    private ?bool $automatic = false;
 
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(type="boolean")
-     */
-    private $publish;
+    /** @ORM\Column(type="boolean") */
+    private ?bool $publish = null;
 
     public function __toString(): string
     {

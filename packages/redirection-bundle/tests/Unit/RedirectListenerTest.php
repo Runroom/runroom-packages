@@ -29,8 +29,7 @@ class RedirectListenerTest extends TestCase
     /** @var MockObject&RedirectRepository */
     private $repository;
 
-    /** @var RedirectListener */
-    private $listener;
+    private RedirectListener $listener;
 
     protected function setUp(): void
     {

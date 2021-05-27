@@ -24,8 +24,7 @@ class TemplateControllerTest extends TestCase
     /** @var MockObject&PageRenderer */
     private $renderer;
 
-    /** @var TemplateController */
-    private $controller;
+    private TemplateController $controller;
 
     protected function setUp(): void
     {

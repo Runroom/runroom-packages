@@ -19,17 +19,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class MetaInformationService implements EventSubscriberInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     /** @var iterable<MetaInformationProviderInterface> */
-    private $providers;
+    private iterable $providers;
 
-    /** @var DefaultMetaInformationProvider */
-    private $defaultProvider;
-
-    /** @var MetaInformationBuilder */
-    private $builder;
+    private DefaultMetaInformationProvider $defaultProvider;
+    private MetaInformationBuilder $builder;
 
     /** @param iterable<MetaInformationProviderInterface> $providers */
     public function __construct(

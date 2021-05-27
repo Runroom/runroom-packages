@@ -23,8 +23,7 @@ class TranslationExtensionTest extends TestCase
     /** @var MockObject&TranslationService */
     private $service;
 
-    /** @var TranslationExtension */
-    private $extension;
+    private TranslationExtension $extension;
 
     protected function setUp(): void
     {

@@ -19,13 +19,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Test
 {
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     public function getId(): ?int
     {

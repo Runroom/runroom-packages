@@ -16,10 +16,10 @@ namespace Runroom\CookiesBundle\ViewModel;
 final class CookiesViewModel
 {
     /** @var string[] */
-    private $performanceCookies = [];
+    private array $performanceCookies = [];
 
     /** @var string[] */
-    private $targetingCookies = [];
+    private array $targetingCookies = [];
 
     /** @param string[] $performanceCookies */
     public function setPerformanceCookies(array $performanceCookies): self

@@ -28,20 +28,14 @@ class Translation implements TranslatableInterface
     use ORMBehaviors\Translatable\TranslatableTrait;
 
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="translation_key", type="string", unique=true)
-     */
-    private $key;
+    /** @ORM\Column(name="translation_key", type="string", unique=true) */
+    private ?string $key = null;
 
     public function __toString(): string
     {

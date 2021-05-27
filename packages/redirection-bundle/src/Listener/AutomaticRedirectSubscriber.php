@@ -24,23 +24,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class AutomaticRedirectSubscriber implements EventSubscriber
 {
-    /** @var int */
     private const PREVIOUS_VALUE = 0;
-
-    /** @var int */
     private const NEXT_VALUE = 1;
 
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
-
-    /** @var PropertyAccessorInterface */
-    private $propertyAccessor;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private UrlGeneratorInterface $urlGenerator;
+    private PropertyAccessorInterface $propertyAccessor;
+    private EntityManagerInterface $entityManager;
 
     /** @var array<class-string, array{ route: string, routeParameters: array<string, string> }> */
-    private $configuration = [];
+    private array $configuration = [];
 
     /** @param array<class-string, array{ route: string, routeParameters: array<string, string> }> $configuration */
     public function __construct(

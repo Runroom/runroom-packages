@@ -25,8 +25,7 @@ class BasicPageRepositoryTest extends KernelTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @var BasicPageRepository */
-    private $repository;
+    private BasicPageRepository $repository;
 
     protected function setUp(): void
     {

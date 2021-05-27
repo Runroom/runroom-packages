@@ -28,28 +28,20 @@ class CookiesPageTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var string|null
-     *
      * @Assert\Length(max=255)
      * @ORM\Column(type="string")
      */
-    private $title;
+    private ?string $title = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $content;
+    /** @ORM\Column(type="text", nullable=true) */
+    private ?string $content = null;
 
     public function setTitle(?string $title): self
     {

@@ -22,14 +22,9 @@ class PageRenderEvent extends Event
 {
     public const EVENT_NAME = 'runroom.event.page.render';
 
-    /** @var string */
-    private $view;
-
-    /** @var PageViewModelInterface */
-    private $pageViewModel;
-
-    /** @var Response|null */
-    private $response;
+    private string $view;
+    private PageViewModelInterface $pageViewModel;
+    private ?Response $response = null;
 
     public function __construct(
         string $view,

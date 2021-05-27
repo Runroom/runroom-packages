@@ -28,26 +28,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MetaInformationServiceTest extends TestCase
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     /** @var MockObject&MetaInformationProviderInterface */
     private $provider;
 
-    /** @var DefaultMetaInformationProvider */
-    private $defaultProvider;
+    private DefaultMetaInformationProvider $defaultProvider;
 
     /** @var MockObject&MetaInformationBuilder */
     private $builder;
 
-    /** @var MetaInformationService */
-    private $service;
-
-    /** @var \stdClass */
-    private $model;
-
-    /** @var MetaInformationViewModel */
-    private $expectedMetas;
+    private MetaInformationService $service;
+    private \stdClass $model;
+    private MetaInformationViewModel $expectedMetas;
 
     protected function setUp(): void
     {

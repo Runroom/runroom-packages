@@ -19,11 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CookiesPageController
 {
-    /** @var PageRenderer */
-    private $renderer;
-
-    /** @var CookiesPageService */
-    private $service;
+    private PageRenderer $renderer;
+    private CookiesPageService $service;
 
     public function __construct(
         PageRenderer $renderer,

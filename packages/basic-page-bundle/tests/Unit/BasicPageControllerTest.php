@@ -29,8 +29,7 @@ class BasicPageControllerTest extends TestCase
     /** @var MockObject&BasicPageService */
     private $service;
 
-    /** @var BasicPageController */
-    private $controller;
+    private BasicPageController $controller;
 
     protected function setUp(): void
     {

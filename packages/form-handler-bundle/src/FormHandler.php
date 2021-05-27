@@ -24,17 +24,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class FormHandler
 {
-    /** @var FormFactoryInterface */
-    private $formFactory;
-
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var Session */
-    private $session;
+    private FormFactoryInterface $formFactory;
+    private EventDispatcherInterface $eventDispatcher;
+    private RequestStack $requestStack;
+    private Session $session;
 
     public function __construct(
         FormFactoryInterface $formFactory,

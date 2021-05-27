@@ -24,8 +24,7 @@ class CookiesPageRepositoryTest extends KernelTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @var CookiesPageRepository */
-    private $repository;
+    private CookiesPageRepository $repository;
 
     protected function setUp(): void
     {

@@ -19,11 +19,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /** @final */
 class AlternateLinksBuilder
 {
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
     /** @var string[] */
-    private $locales;
+    private array $locales;
 
     /** @param string[] $locales */
     public function __construct(UrlGeneratorInterface $urlGenerator, array $locales)

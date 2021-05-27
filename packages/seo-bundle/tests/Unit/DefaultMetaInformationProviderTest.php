@@ -18,8 +18,7 @@ use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 
 class DefaultMetaInformationProviderTest extends TestCase
 {
-    /** @var DefaultMetaInformationProvider */
-    private $provider;
+    private DefaultMetaInformationProvider $provider;
 
     protected function setUp(): void
     {

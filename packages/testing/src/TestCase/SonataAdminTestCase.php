@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 abstract class SonataAdminTestCase extends KernelTestCase
 {
     /** @var AbstractAdmin<T>|null */
-    protected $admin;
+    protected ?AbstractAdmin $admin = null;
 
     protected function setUp(): void
     {

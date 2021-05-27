@@ -26,8 +26,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class BasicPageRepository extends ServiceEntityRepository
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     public function __construct(ManagerRegistry $registry, RequestStack $requestStack)
     {
