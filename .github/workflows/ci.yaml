@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.3', '7.4', '8.0']
+        php: ['7.4', '8.0']
         dependencies: [highest]
         include:
-          - php: '7.3'
+          - php: '7.4'
             dependencies: lowest
     steps:
       - uses: actions/checkout@v2
