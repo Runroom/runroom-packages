@@ -41,16 +41,16 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "replace": {
-        "runroom-packages/basic-page-bundle": "0.10.0",
-        "runroom-packages/ckeditor-sonata-media-bundle": "0.10.0",
-        "runroom-packages/cookies-bundle": "0.10.0",
-        "runroom-packages/form-handler-bundle": "0.10.0",
-        "runroom-packages/redirection-bundle": "0.10.0",
-        "runroom-packages/render-event-bundle": "0.10.0",
-        "runroom-packages/seo-bundle": "0.10.0",
-        "runroom-packages/sortable-behavior-bundle": "0.10.0",
-        "runroom-packages/testing": "0.10.0",
-        "runroom-packages/translation-bundle": "0.10.0"
+        "runroom-packages/basic-page-bundle": "0.10.1",
+        "runroom-packages/ckeditor-sonata-media-bundle": "0.10.1",
+        "runroom-packages/cookies-bundle": "0.10.1",
+        "runroom-packages/form-handler-bundle": "0.10.1",
+        "runroom-packages/redirection-bundle": "0.10.1",
+        "runroom-packages/render-event-bundle": "0.10.1",
+        "runroom-packages/seo-bundle": "0.10.1",
+        "runroom-packages/sortable-behavior-bundle": "0.10.1",
+        "runroom-packages/testing": "0.10.1",
+        "runroom-packages/translation-bundle": "0.10.1"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.2",
@@ -110,17 +110,17 @@
     "prefer-stable": true,
     "scripts": {
         "normalize-run": [
-            "composer normalize --no-update-lock",
-            "composer normalize --no-update-lock packages/basic-page-bundle/composer.json",
-            "composer normalize --no-update-lock packages/ckeditor-sonata-media-bundle/composer.json",
-            "composer normalize --no-update-lock packages/cookies-bundle/composer.json",
-            "composer normalize --no-update-lock packages/form-handler-bundle/composer.json",
-            "composer normalize --no-update-lock packages/redirection-bundle/composer.json",
-            "composer normalize --no-update-lock packages/render-event-bundle/composer.json",
-            "composer normalize --no-update-lock packages/seo-bundle/composer.json",
-            "composer normalize --no-update-lock packages/sortable-behavior-bundle/composer.json",
-            "composer normalize --no-update-lock packages/testing/composer.json",
-            "composer normalize --no-update-lock packages/translation-bundle/composer.json"
+            "composer normalize --no-check-lock --no-update-lock",
+            "composer normalize --no-check-lock --no-update-lock packages/basic-page-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/ckeditor-sonata-media-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/cookies-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/form-handler-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/redirection-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/render-event-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/seo-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/sortable-behavior-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/testing/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/translation-bundle/composer.json"
         ],
         "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
         "phpstan": "phpstan analyse --no-progress",
