@@ -26,13 +26,10 @@ class AlternateLinksBuilderTest extends TestCase
     private $urlGenerator;
 
     /** @var string[] */
-    private $locales;
+    private array $locales;
 
-    /** @var DummyAlternateLinksProvider */
-    private $provider;
-
-    /** @var AlternateLinksBuilder */
-    private $builder;
+    private DummyAlternateLinksProvider $provider;
+    private AlternateLinksBuilder $builder;
 
     protected function setUp(): void
     {

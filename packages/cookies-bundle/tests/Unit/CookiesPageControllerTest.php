@@ -29,8 +29,7 @@ class CookiesPageControllerTest extends TestCase
     /** @var MockObject&CookiesPageService */
     private $service;
 
-    /** @var CookiesPageController */
-    private $controller;
+    private CookiesPageController $controller;
 
     protected function setUp(): void
     {

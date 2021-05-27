@@ -27,20 +27,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AlternateLinksServiceTest extends TestCase
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     /** @var MockObject&AbstractAlternateLinksProvider */
     private $provider;
 
-    /** @var DefaultAlternateLinksProvider */
-    private $defaultProvider;
+    private DefaultAlternateLinksProvider $defaultProvider;
 
     /** @var MockObject&AlternateLinksBuilder */
     private $builder;
 
-    /** @var AlternateLinksService */
-    private $service;
+    private AlternateLinksService $service;
 
     protected function setUp(): void
     {

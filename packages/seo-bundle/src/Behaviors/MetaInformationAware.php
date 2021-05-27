@@ -19,12 +19,10 @@ use Runroom\SeoBundle\Entity\EntityMetaInformation;
 trait MetaInformationAware
 {
     /**
-     * @var EntityMetaInformation|null
-     *
      * @ORM\OneToOne(targetEntity="Runroom\SeoBundle\Entity\EntityMetaInformation", cascade={"all"})
      * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $metaInformation;
+    private ?EntityMetaInformation $metaInformation = null;
 
     public function setMetaInformation(?EntityMetaInformation $metaInformation): self
     {

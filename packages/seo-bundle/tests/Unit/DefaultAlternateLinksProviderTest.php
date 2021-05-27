@@ -18,8 +18,7 @@ use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
 
 class DefaultAlternateLinksProviderTest extends TestCase
 {
-    /** @var DefaultAlternateLinksProvider */
-    private $provider;
+    private DefaultAlternateLinksProvider $provider;
 
     protected function setUp(): void
     {

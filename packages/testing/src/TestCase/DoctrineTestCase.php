@@ -25,20 +25,11 @@ use Zenstruck\Foundry\Test\DatabaseResetter;
 
 abstract class DoctrineTestCase extends KernelTestCase
 {
-    /** @var LoaderInterface */
-    protected static $loader;
-
-    /** @var EntityManagerInterface */
-    protected static $entityManager;
-
-    /** @var Connection */
-    protected static $connection;
-
-    /** @var ContainerBagInterface */
-    protected static $containerBag;
-
-    /** @var bool */
-    protected static $schemaCreated = false;
+    protected static LoaderInterface $loader;
+    protected static EntityManagerInterface $entityManager;
+    protected static Connection $connection;
+    protected static ContainerBagInterface $containerBag;
+    protected static bool $schemaCreated = false;
 
     protected function setUp(): void
     {

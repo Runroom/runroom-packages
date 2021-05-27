@@ -42,8 +42,7 @@ class MediaAdminControllerTest extends TestCase
     /** @var MockObject&BaseMediaAdmin */
     private $admin;
 
-    /** @var Request */
-    private $request;
+    private Request $request;
 
     /** @var MockObject&MediaManagerInterface */
     private $mediaManager;
@@ -54,8 +53,7 @@ class MediaAdminControllerTest extends TestCase
     /** @var MockObject&Environment */
     private $twig;
 
-    /** @var MediaAdminController */
-    private $controller;
+    private MediaAdminController $controller;
 
     protected function setUp(): void
     {

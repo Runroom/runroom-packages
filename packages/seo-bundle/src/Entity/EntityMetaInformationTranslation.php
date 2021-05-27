@@ -28,28 +28,20 @@ class EntityMetaInformationTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var string|null
-     *
      * @Assert\Length(max=255)
      * @ORM\Column(type="string", nullable=true)
      */
-    private $title;
+    private ?string $title = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
+    /** @ORM\Column(type="text", nullable=true) */
+    private ?string $description = null;
 
     public function setTitle(?string $title): self
     {

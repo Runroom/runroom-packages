@@ -33,20 +33,11 @@ class FormHandlerTest extends TestCase
     /** @var MockObject&FormFactoryInterface */
     private $formFactory;
 
-    /** @var EventDispatcher */
-    private $eventDispatcher;
-
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var Request */
-    private $request;
-
-    /** @var Session */
-    private $session;
-
-    /** @var FormHandler */
-    private $formHandler;
+    private EventDispatcher $eventDispatcher;
+    private RequestStack $requestStack;
+    private Request $request;
+    private Session $session;
+    private FormHandler $formHandler;
 
     protected function setUp(): void
     {

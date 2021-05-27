@@ -23,8 +23,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
 {
     use Factories;
 
-    /** @var BasicPageAlternateLinksProvider */
-    private $provider;
+    private BasicPageAlternateLinksProvider $provider;
 
     protected function setUp(): void
     {

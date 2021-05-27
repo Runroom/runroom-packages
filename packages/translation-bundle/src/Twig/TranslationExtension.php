@@ -19,8 +19,7 @@ use Twig\TwigFilter;
 
 final class TranslationExtension extends AbstractExtension
 {
-    /** @var TranslationService */
-    private $service;
+    private TranslationService $service;
 
     public function __construct(TranslationService $service)
     {

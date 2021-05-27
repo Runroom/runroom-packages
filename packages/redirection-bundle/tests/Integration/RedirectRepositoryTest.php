@@ -25,8 +25,7 @@ class RedirectRepositoryTest extends KernelTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @var RedirectRepository */
-    private $repository;
+    private RedirectRepository $repository;
 
     protected function setUp(): void
     {

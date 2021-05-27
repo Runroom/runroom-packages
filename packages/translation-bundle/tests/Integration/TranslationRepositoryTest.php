@@ -24,8 +24,7 @@ class TranslationRepositoryTest extends KernelTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @var TranslationRepository */
-    private $repository;
+    private TranslationRepository $repository;
 
     protected function setUp(): void
     {

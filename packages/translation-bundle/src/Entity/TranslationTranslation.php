@@ -27,20 +27,14 @@ class TranslationTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $value;
+    /** @ORM\Column(type="text", nullable=true) */
+    private ?string $value = null;
 
     public function setValue(?string $value): self
     {

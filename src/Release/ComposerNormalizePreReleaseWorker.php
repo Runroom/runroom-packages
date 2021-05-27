@@ -19,8 +19,7 @@ use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 
 class ComposerNormalizePreReleaseWorker implements ReleaseWorkerInterface
 {
-    /** @var ProcessRunner */
-    private $processRunner;
+    private ProcessRunner $processRunner;
 
     public function __construct(ProcessRunner $processRunner)
     {

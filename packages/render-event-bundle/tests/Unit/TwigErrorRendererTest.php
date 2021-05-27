@@ -45,8 +45,7 @@ class TwigErrorRendererTest extends TestCase
     /** @var MockObject&LoaderInterface */
     private $twigLoader;
 
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     protected function setUp(): void
     {

@@ -20,11 +20,9 @@ use Sonata\MediaBundle\Entity\BaseGalleryHasMedia;
 class GalleryHasMedia extends BaseGalleryHasMedia
 {
     /**
-     * @var int|null
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 }

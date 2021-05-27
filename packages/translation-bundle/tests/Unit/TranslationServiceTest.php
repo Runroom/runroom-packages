@@ -31,8 +31,7 @@ class TranslationServiceTest extends TestCase
     /** @var MockObject&TranslatorInterface */
     private $translator;
 
-    /** @var TranslationService */
-    private $service;
+    private TranslationService $service;
 
     protected function setUp(): void
     {

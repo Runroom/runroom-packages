@@ -18,8 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TemplateController
 {
-    /** @var PageRenderer */
-    private $renderer;
+    private PageRenderer $renderer;
 
     public function __construct(PageRenderer $renderer)
     {

@@ -23,7 +23,7 @@ final class CookiesService implements EventSubscriberInterface
     private const TYPE_TARGETING = 'targeting_cookies';
 
     /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
-    private $cookies;
+    private array $cookies;
 
     /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
     public function __construct(array $cookies)

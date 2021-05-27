@@ -27,11 +27,8 @@ class MetaInformationBuilder
 {
     public const DEFAULT_ROUTE = 'default';
 
-    /** @var MetaInformationRepository */
-    private $repository;
-
-    /** @var PropertyAccessorInterface */
-    private $propertyAccessor;
+    private MetaInformationRepository $repository;
+    private PropertyAccessorInterface $propertyAccessor;
 
     public function __construct(
         MetaInformationRepository $repository,

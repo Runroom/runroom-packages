@@ -33,8 +33,7 @@ class CookiesPageServiceTest extends TestCase
     /** @var MockObject&FormHandler */
     private $handler;
 
-    /** @var CookiesPageService */
-    private $service;
+    private CookiesPageService $service;
 
     protected function setUp(): void
     {

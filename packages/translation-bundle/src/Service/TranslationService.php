@@ -21,10 +21,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class TranslationService
 {
     /** @var EntityRepository<Translation> */
-    private $repository;
+    private EntityRepository $repository;
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     /** @param EntityRepository<Translation> $repository */
     public function __construct(EntityRepository $repository, TranslatorInterface $translator)

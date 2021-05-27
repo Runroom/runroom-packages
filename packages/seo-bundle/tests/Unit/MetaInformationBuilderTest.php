@@ -29,8 +29,7 @@ class MetaInformationBuilderTest extends TestCase
     /** @var Stub&MetaInformationRepository */
     private $repository;
 
-    /** @var MetaInformationBuilder */
-    private $builder;
+    private MetaInformationBuilder $builder;
 
     protected function setUp(): void
     {

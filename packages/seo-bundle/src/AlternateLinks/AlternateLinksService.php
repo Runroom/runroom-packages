@@ -21,17 +21,13 @@ final class AlternateLinksService implements EventSubscriberInterface
 {
     private const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
 
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
     /** @var iterable<AlternateLinksProviderInterface> */
-    private $providers;
+    private iterable $providers;
 
-    /** @var DefaultAlternateLinksProvider */
-    private $defaultProvider;
-
-    /** @var AlternateLinksBuilder */
-    private $builder;
+    private DefaultAlternateLinksProvider $defaultProvider;
+    private AlternateLinksBuilder $builder;
 
     /** @param iterable<AlternateLinksProviderInterface> $providers */
     public function __construct(

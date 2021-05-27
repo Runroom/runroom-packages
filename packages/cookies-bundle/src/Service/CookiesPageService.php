@@ -22,17 +22,13 @@ use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 /** @final */
 class CookiesPageService
 {
-    /** @var int */
     private const COOKIES_PAGE_ID = 1;
 
-    /** @var CookiesPageRepository */
-    private $repository;
-
-    /** @var FormHandler */
-    private $handler;
+    private CookiesPageRepository $repository;
+    private FormHandler $handler;
 
     /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
-    private $cookies;
+    private array $cookies;
 
     /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
     public function __construct(

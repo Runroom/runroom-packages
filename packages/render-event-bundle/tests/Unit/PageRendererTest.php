@@ -28,14 +28,9 @@ class PageRendererTest extends TestCase
     /** @var MockObject&Environment */
     private $twig;
 
-    /** @var EventDispatcher */
-    private $eventDispatcher;
-
-    /** @var PageViewModel */
-    private $pageViewModel;
-
-    /** @var PageRenderer */
-    private $service;
+    private EventDispatcher $eventDispatcher;
+    private PageViewModel $pageViewModel;
+    private PageRenderer $service;
 
     protected function setUp(): void
     {
