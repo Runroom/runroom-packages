@@ -127,6 +127,7 @@ class SortableAdminControllerTest extends TestCase
 
     private function configureCRUDController(): void
     {
+        /* @phpstan-ignore-next-line */
         if (method_exists(AdminInterface::class, 'hasTemplateRegistry')) {
             $this->admin->method('hasTemplateRegistry')->willReturn(true);
         }
