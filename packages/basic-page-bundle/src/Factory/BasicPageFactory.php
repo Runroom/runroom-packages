@@ -27,9 +27,9 @@ final class BasicPageFactory extends ModelFactory
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
         return $this->addState([
-            'translations' => BasicPageTranslationFactory::createMany(\count($locales), array_merge($defaultAttributes, [
-                'locale' => self::faker()->unique()->randomElement($locales),
-            ])),
+            'translations' => BasicPageTranslationFactory::new(function () use (&$locales, $defaultAttributes): array {
+                return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
+            })->many(\count($locales)),
         ]);
     }
 
@@ -42,7 +42,7 @@ final class BasicPageFactory extends ModelFactory
                 BasicPage::LOCATION_NONE,
             ]),
             'publish' => self::faker()->boolean(),
-            'metaInformation' => EntityMetaInformationFactory::createOne(),
+            'metaInformation' => EntityMetaInformationFactory::new(),
         ];
     }
 
