@@ -26,9 +26,9 @@ final class EntityMetaInformationFactory extends ModelFactory
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
         return $this->addState([
-            'translations' => EntityMetaInformationTranslationFactory::createMany(\count($locales), array_merge($defaultAttributes, [
-                'locale' => self::faker()->unique()->randomElement($locales),
-            ])),
+            'translations' => EntityMetaInformationTranslationFactory::new(function () use (&$locales, $defaultAttributes): array {
+                return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
+            })->many(\count($locales)),
         ]);
     }
 
