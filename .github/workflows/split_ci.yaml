@@ -39,8 +39,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: zip, pdo_sqlite, gd
-          ini-values: pcov.directory=packages
-          coverage: pcov
+          coverage: none
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - run: cd packages/${{ matrix.packages }} && composer validate --strict
       - uses: ramsey/composer-install@v1
@@ -49,4 +48,3 @@ jobs:
         with:
           composer-options: --working-dir=packages/${{ matrix.packages }}
       - run: cd packages/${{ matrix.packages }} && vendor/bin/phpunit --coverage-clover=clover.xml
-      - uses: codecov/codecov-action@v1
