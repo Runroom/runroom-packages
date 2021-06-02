@@ -10,11 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.4', '8.0']
+        php: ['7.4']
         dependencies: [highest]
         include:
           - php: '7.4'
             dependencies: lowest
+          - php: '8.0'
+            dependencies: highest
+            composer-options: "--ignore-platform-req=php"
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
@@ -24,18 +27,9 @@ jobs:
           ini-values: pcov.directory=packages
           coverage: pcov
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-      - id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v2
+      - uses: ramsey/composer-install@v1
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ matrix.dependencies }}
-          restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
-      - if: matrix.php == '8.0'
-        run: composer config platform.php 7.4.99
-      - if: matrix.dependencies == 'lowest'
-        run: composer update --no-interaction --no-progress --prefer-lowest
-      - if: matrix.dependencies == 'highest'
-        run: composer update --no-interaction --no-progress
+          dependency-versions: ${{ matrix.dependencies }}
+          composer-options: ${{ matrix.composer-options }}
       - run: vendor/bin/phpunit --coverage-clover=clover.xml
       - uses: codecov/codecov-action@v1
