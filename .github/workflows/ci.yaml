@@ -17,7 +17,7 @@ jobs:
             dependencies: lowest
           - php: '8.0'
             dependencies: highest
-            composer-options: "--ignore-platform-req=php"
+            composer-options: --ignore-platform-req=php
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
