@@ -69,10 +69,6 @@ class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'session' => [
-                'enabled' => true,
-                'storage_id' => 'session.storage.mock_file',
-            ],
         ]);
 
         $container->loadFromExtension('security', [
