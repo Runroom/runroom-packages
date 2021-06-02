@@ -19,13 +19,7 @@ jobs:
           extensions: zip, pdo_sqlite, gd
           coverage: none
           tools: cs2pr
-      - id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-${{ matrix.php }}-composer
-      - run: composer update --no-interaction --no-progress
+      - uses: ramsey/composer-install@v1
       - run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
       - run: vendor/bin/phpunit
       - run: composer phpstan

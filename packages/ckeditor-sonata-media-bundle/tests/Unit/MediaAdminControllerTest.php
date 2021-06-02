@@ -25,7 +25,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool as MediaPool;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
@@ -36,8 +36,7 @@ use Twig\Environment;
 
 class MediaAdminControllerTest extends TestCase
 {
-    /** @var MockObject&ContainerInterface */
-    private $container;
+    private Container $container;
 
     /** @var MockObject&BaseMediaAdmin */
     private $admin;
@@ -57,7 +56,7 @@ class MediaAdminControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->createMock(ContainerInterface::class);
+        $this->container = new Container();
         $this->admin = $this->createMock(BaseMediaAdmin::class);
         $this->request = new Request();
         $this->mediaManager = $this->createMock(MediaManagerInterface::class);
@@ -162,29 +161,23 @@ class MediaAdminControllerTest extends TestCase
 
     private function configureContainer(): void
     {
-        $pool = $this->createMock(AdminPool::class);
+        $pool = new AdminPool($this->container, [
+            'admin_code' => 'admin_code',
+        ]);
         $breadcrumbsBuilder = $this->createStub(BreadcrumbsBuilderInterface::class);
-
-        $pool->method('getAdminByAdminCode')->with('admin_code')->willReturn($this->admin);
 
         $requestStack = new RequestStack();
         $requestStack->push($this->request);
 
-        $this->container->method('has')->willReturnMap([
-            ['request_stack', true],
-            ['templating', false],
-            ['twig', true],
-        ]);
-        $this->container->method('get')->willReturnMap([
-            ['sonata.admin.pool', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $pool],
-            ['sonata.admin.pool.do-not-use', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $pool],
-            ['sonata.admin.breadcrumbs_builder', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $breadcrumbsBuilder],
-            ['sonata.admin.breadcrumbs_builder.do-not-use', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $breadcrumbsBuilder],
-            ['request_stack', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $requestStack],
-            ['twig', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->twig],
-            ['sonata.media.pool', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $this->mediaPool],
-            ['admin_code.template_registry', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, new TemplateRegistry()],
-        ]);
-        $this->container->method('getParameter')->with('kernel.bundles')->willReturn(['SonataMediaBundle' => true]);
+        $this->container->setParameter('kernel.bundles', ['SonataMediaBundle' => true]);
+        $this->container->set('admin_code', $this->admin);
+        $this->container->set('request_stack', $requestStack);
+        $this->container->set('sonata.media.pool', $this->mediaPool);
+        $this->container->set('twig', $this->twig);
+        $this->container->set('admin_code.template_registry', new TemplateRegistry());
+        $this->container->set('sonata.admin.pool', $pool);
+        $this->container->set('sonata.admin.pool.do-not-use', $pool);
+        $this->container->set('sonata.admin.breadcrumbs_builder', $breadcrumbsBuilder);
+        $this->container->set('sonata.admin.breadcrumbs_builder.do-not-use', $breadcrumbsBuilder);
     }
 }
