@@ -32,6 +32,15 @@ class BasicPageTranslation implements TranslationInterface
     use ORMBehaviors\Translatable\TranslationTrait;
 
     /**
+     * @var string|null
+     *
+     * This property is needed to do the Join::WITH on the BasicPageRepository
+     *
+     * @ORM\Column(type="string", length=5)
+     */
+    protected $locale;
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
