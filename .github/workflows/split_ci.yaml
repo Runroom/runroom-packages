@@ -47,4 +47,4 @@ jobs:
       - uses: ramsey/composer-install@v1
         with:
           composer-options: --working-dir=packages/${{ matrix.packages }}
-      - run: cd packages/${{ matrix.packages }} && vendor/bin/phpunit --coverage-clover=clover.xml
+      - run: cd packages/${{ matrix.packages }} && vendor/bin/phpunit
