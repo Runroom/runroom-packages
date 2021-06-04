@@ -58,6 +58,8 @@ class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'annotations' => ['enabled' => true],
+            'property_access' => ['enabled' => true],
         ]);
 
         $container->loadFromExtension('doctrine', [
