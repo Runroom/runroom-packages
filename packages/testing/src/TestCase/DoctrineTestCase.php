@@ -68,15 +68,19 @@ abstract class DoctrineTestCase extends KernelTestCase
             return;
         }
 
-        static::$entityManager = static::$container->get(EntityManagerInterface::class);
-        static::$loader = static::$container->get('fidry_alice_data_fixtures.loader.doctrine');
-        static::$connection = static::$container->get(Connection::class);
-        static::$containerBag = static::$container->get(ContainerBagInterface::class);
+        /* @phpstan-ignore-next-line */
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
-        static::$container->get(RequestStack::class)->push(new Request());
+        static::$entityManager = $container->get(EntityManagerInterface::class);
+        static::$loader = $container->get('fidry_alice_data_fixtures.loader.doctrine');
+        static::$connection = $container->get(Connection::class);
+        static::$containerBag = $container->get(ContainerBagInterface::class);
+
+        $container->get(RequestStack::class)->push(new Request());
 
         if (!class_exists(DatabaseResetter::class)) {
             $schemaTool = new SchemaTool(static::$entityManager);
+            $schemaTool->dropDatabase();
             $schemaTool->createSchema(static::$entityManager->getMetadataFactory()->getAllMetadata());
         }
 
