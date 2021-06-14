@@ -15,6 +15,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
+use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
 class DefaultAlternateLinksProviderTest extends TestCase
 {
@@ -36,13 +37,14 @@ class DefaultAlternateLinksProviderTest extends TestCase
     /** @test */
     public function itDoesNotDefineRouteParameters(): void
     {
-        self::assertNull($this->provider->getParameters(new \stdClass(), 'es'));
+        self::assertNull($this->provider->getParameters(new DummyViewModel(), 'es'));
     }
 
     /** @test */
     public function itDoesNotDefineAvailableLocales(): void
     {
-        self::assertNull($this->provider->getAvailableLocales(new \stdClass()));
+        self::assertTrue($this->provider->canGenerateAlternateLink(new DummyViewModel(), 'random_lang'));
+        self::assertTrue($this->provider->canGenerateAlternateLink(new DummyViewModel(), 'es'));
     }
 
     /** @test */

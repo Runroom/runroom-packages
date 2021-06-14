@@ -13,19 +13,39 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Service;
 
+use Doctrine\Common\Collections\Collection;
+use Runroom\BasicPageBundle\Entity\BasicPageTranslation;
+use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
+use Runroom\SeoBundle\Model\SeoModelInterface;
 
+/** @phpstan-extends AbstractAlternateLinksProvider<BasicPageViewModel> */
 final class BasicPageAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
-    public function getAvailableLocales($model): ?array
+    public function canGenerateAlternateLink(SeoModelInterface $model, string $locale): bool
     {
-        return $model->getBasicPage()->getTranslations()->getKeys();
+        $basicPage = $model->getBasicPage();
+
+        if (null === $basicPage) {
+            return false;
+        }
+
+        /** @var Collection<string, BasicPageTranslation> */
+        $translations = $basicPage->getTranslations();
+
+        return $translations->containsKey($locale);
     }
 
-    public function getParameters($model, string $locale): ?array
+    public function getParameters(SeoModelInterface $model, string $locale): ?array
     {
+        $basicPage = $model->getBasicPage();
+
+        if (null === $basicPage) {
+            return null;
+        }
+
         return [
-            'slug' => $model->getBasicPage()->getSlug($locale),
+            'slug' => $basicPage->getSlug($locale),
         ];
     }
 

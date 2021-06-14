@@ -1,4 +1,4 @@
-{% set metas = page.context('metas') %}
+{% set metas = build_meta_information() %}
 
 {% if metas is not empty %}
     {% set title = metas.title|striptags %}

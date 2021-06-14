@@ -15,22 +15,21 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
+use Runroom\SeoBundle\Model\SeoModelInterface;
+use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class MetaInformationServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    /** @var MockObject&MetaInformationProviderInterface */
+    /** @phpstan-var MockObject&MetaInformationProviderInterface<SeoModelInterface> */
     private $provider;
 
     private DefaultMetaInformationProvider $defaultProvider;
@@ -39,7 +38,8 @@ class MetaInformationServiceTest extends TestCase
     private $builder;
 
     private MetaInformationService $service;
-    private \stdClass $model;
+    private DummyViewModel $model;
+
     private MetaInformationViewModel $expectedMetas;
 
     protected function setUp(): void
@@ -51,12 +51,11 @@ class MetaInformationServiceTest extends TestCase
 
         $this->service = new MetaInformationService(
             $this->requestStack,
-            [$this->provider],
-            $this->defaultProvider,
+            $this->getProviders(),
             $this->builder
         );
 
-        $this->model = new \stdClass();
+        $this->model = new DummyViewModel();
         $this->expectedMetas = new MetaInformationViewModel();
     }
 
@@ -65,13 +64,12 @@ class MetaInformationServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
         $this->provider->method('providesMetas')->with('route')->willReturn(true);
-        $this->builder->method('build')->with($this->provider, 'route', $this->model)
+        $this->builder->method('build')->with($this->provider, $this->model, 'route')
             ->willReturn($this->expectedMetas);
 
-        $event = $this->configurePageRenderEvent();
-        $this->service->onPageRender($event);
+        $generatedMetas = $this->service->build($this->model);
 
-        self::assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
+        self::assertSame($this->expectedMetas, $generatedMetas);
     }
 
     /** @test */
@@ -79,38 +77,38 @@ class MetaInformationServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
         $this->provider->method('providesMetas')->with('route')->willReturn(false);
-        $this->builder->method('build')->with($this->defaultProvider, 'route', $this->model)
+        $this->builder->method('build')->with($this->defaultProvider, $this->model, 'route')
             ->willReturn($this->expectedMetas);
 
-        $event = $this->configurePageRenderEvent();
-        $this->service->onPageRender($event);
+        $generatedMetas = $this->service->build($this->model);
 
-        self::assertSame($this->expectedMetas, $event->getPageViewModel()->getContext('metas'));
+        self::assertSame($this->expectedMetas, $generatedMetas);
     }
 
     /** @test */
-    public function itHasSubscribedEvents(): void
+    public function itThrowsIfNoProviderIsFound(): void
     {
-        $events = MetaInformationService::getSubscribedEvents();
+        $service = new MetaInformationService($this->requestStack, [], $this->builder);
 
-        self::assertCount(1, $events);
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('There is no provided selected to build meta information');
+
+        $service->build($this->model);
     }
 
-    protected function configurePageRenderEvent(): PageRenderEvent
-    {
-        $response = $this->createStub(Response::class);
-        $page = new PageViewModel();
-        $page->setContent($this->model);
-
-        return new PageRenderEvent('view', $page, $response);
-    }
-
-    protected function configureCurrentRequest(): void
+    private function configureCurrentRequest(): void
     {
         $request = new Request();
 
         $this->requestStack->push($request);
 
         $request->attributes->set('_route', 'route');
+    }
+
+    /** @return iterable<MetaInformationProviderInterface<SeoModelInterface>> */
+    private function getProviders(): iterable
+    {
+        yield $this->provider;
+        yield $this->defaultProvider;
     }
 }

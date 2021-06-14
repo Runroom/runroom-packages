@@ -31,16 +31,22 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAvailableLocales(): void
+    public function itCanGenerateAlternateLinks(): void
     {
-        $basicPage = BasicPageFactory::createOne()->object();
+        $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
         $model = new BasicPageViewModel();
         $model->setBasicPage($basicPage);
 
-        $locales = $this->provider->getAvailableLocales($model);
+        self::assertTrue($this->provider->canGenerateAlternateLink($model, 'es'));
+        self::assertTrue($this->provider->canGenerateAlternateLink($model, 'en'));
+    }
 
-        self::assertNotNull($locales);
-        self::assertCount($basicPage->getTranslations()->count(), $locales);
+    /** @test */
+    public function itCantGenerateAlternateLinksIfNoBasicPageIsProvided(): void
+    {
+        $model = new BasicPageViewModel();
+
+        self::assertFalse($this->provider->canGenerateAlternateLink($model, 'es'));
     }
 
     /** @test */
@@ -56,6 +62,12 @@ class BasicPageAlternateLinksProviderTest extends TestCase
                 $this->provider->getParameters($model, $locale)
             );
         }
+    }
+
+    /** @test */
+    public function itReturnsNoRouteParametersIfNoBasicPageIsProvided(): void
+    {
+        self::assertNull($this->provider->getParameters(new BasicPageViewModel(), 'en'));
     }
 
     /** @test */

@@ -15,6 +15,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
+use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
 class DefaultMetaInformationProviderTest extends TestCase
 {
@@ -42,13 +43,13 @@ class DefaultMetaInformationProviderTest extends TestCase
     /** @test */
     public function itDoesNotDefineEntityMetaInformation(): void
     {
-        self::assertNull($this->provider->getEntityMetaInformation(new \stdClass()));
+        self::assertNull($this->provider->getEntityMetaInformation(new DummyViewModel()));
     }
 
     /** @test */
     public function itDoesNotDefineEntityMetaImage(): void
     {
-        self::assertNull($this->provider->getEntityMetaImage(new \stdClass()));
+        self::assertNull($this->provider->getEntityMetaImage(new DummyViewModel()));
     }
 
     /** @test */

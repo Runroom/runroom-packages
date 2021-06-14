@@ -15,21 +15,20 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Runroom\RenderEventBundle\ViewModel\PageViewModel;
-use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
+use Runroom\SeoBundle\AlternateLinks\AlternateLinksProviderInterface;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
+use Runroom\SeoBundle\Model\SeoModelInterface;
+use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class AlternateLinksServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    /** @var MockObject&AbstractAlternateLinksProvider */
+    /** @phpstan-var MockObject&AlternateLinksProviderInterface<SeoModelInterface> */
     private $provider;
 
     private DefaultAlternateLinksProvider $defaultProvider;
@@ -38,20 +37,22 @@ class AlternateLinksServiceTest extends TestCase
     private $builder;
 
     private AlternateLinksService $service;
+    private DummyViewModel $model;
 
     protected function setUp(): void
     {
         $this->requestStack = new RequestStack();
-        $this->provider = $this->createMock(AbstractAlternateLinksProvider::class);
+        $this->provider = $this->createMock(AlternateLinksProviderInterface::class);
         $this->defaultProvider = new DefaultAlternateLinksProvider();
         $this->builder = $this->createMock(AlternateLinksBuilder::class);
 
         $this->service = new AlternateLinksService(
             $this->requestStack,
-            [$this->provider],
-            $this->defaultProvider,
+            $this->getProviders(),
             $this->builder
         );
+
+        $this->model = new DummyViewModel();
     }
 
     /** @test */
@@ -60,12 +61,11 @@ class AlternateLinksServiceTest extends TestCase
         $this->configureCurrentRequest();
 
         $this->provider->method('providesAlternateLinks')->with('route')->willReturn(true);
-        $this->builder->method('build')->with($this->provider, 'model', 'route', [])->willReturn(['alternate_links']);
+        $this->builder->method('build')->with($this->provider, $this->model, 'route', [])->willReturn(['es' => 'alternate_link']);
 
-        $event = $this->configurePageRenderEvent();
-        $this->service->onPageRender($event);
+        $alternateLinks = $this->service->build($this->model);
 
-        self::assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
+        self::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
     /** @test */
@@ -74,37 +74,37 @@ class AlternateLinksServiceTest extends TestCase
         $this->configureCurrentRequest();
 
         $this->provider->method('providesAlternateLinks')->with('route')->willReturn(false);
-        $this->builder->method('build')->with($this->defaultProvider, 'model', 'route', [])->willReturn(['alternate_links']);
+        $this->builder->method('build')->with($this->defaultProvider, $this->model, 'route', [])->willReturn(['es' => 'alternate_link']);
 
-        $event = $this->configurePageRenderEvent();
-        $this->service->onPageRender($event);
+        $alternateLinks = $this->service->build($this->model);
 
-        self::assertSame(['alternate_links'], $event->getPageViewModel()->getContext('alternate_links'));
+        self::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
     /** @test */
-    public function itHasSubscribedEvents(): void
+    public function itThrowsIfNoProviderIsFound(): void
     {
-        $events = AlternateLinksService::getSubscribedEvents();
+        $service = new AlternateLinksService($this->requestStack, [], $this->builder);
 
-        self::assertCount(1, $events);
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('There is no provided selected to build alternate links');
+
+        $service->build($this->model);
     }
 
-    protected function configurePageRenderEvent(): PageRenderEvent
-    {
-        $response = new Response();
-        $page = new PageViewModel();
-        $page->setContent('model');
-
-        return new PageRenderEvent('view', $page, $response);
-    }
-
-    protected function configureCurrentRequest(): void
+    private function configureCurrentRequest(): void
     {
         $request = new Request();
 
         $this->requestStack->push($request);
 
         $request->attributes->set('_route', 'route');
+    }
+
+    /** @return iterable<AlternateLinksProviderInterface<SeoModelInterface>> */
+    private function getProviders(): iterable
+    {
+        yield $this->provider;
+        yield $this->defaultProvider;
     }
 }
