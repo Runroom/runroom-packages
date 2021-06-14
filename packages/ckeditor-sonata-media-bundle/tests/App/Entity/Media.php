@@ -26,6 +26,11 @@ class Media extends BaseMedia
      */
     private ?int $id = null;
 
+    public function setId(?int $id = null): void
+    {
+        $this->id = $id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
