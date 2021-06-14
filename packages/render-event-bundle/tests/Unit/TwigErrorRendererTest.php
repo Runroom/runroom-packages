@@ -114,6 +114,28 @@ class TwigErrorRendererTest extends TestCase
         self::assertSame(404, $response->getStatusCode());
     }
 
+    /** @test */
+    public function itReturnsExceptionIfNoTemplateIsAvailable(): void
+    {
+        $this->twigLoader->method('exists')->willReturnMap([
+            ['@Twig/Exception/error404.html.twig', false],
+            ['@Twig/Exception/error.html.twig', false],
+        ]);
+
+        $controller = $this->configureController();
+
+        $response = $controller->render($this->exception);
+
+        self::assertSame(404, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function itReturnsSecondParameterIfRequestStackDoesNotHaveRequest(): void
+    {
+        self::assertTrue(TwigErrorRenderer::isDebug(new RequestStack(), true)());
+        self::assertFalse(TwigErrorRenderer::isDebug(new RequestStack(), false)());
+    }
+
     private function configureController(bool $debug = false): TwigErrorRenderer
     {
         return new TwigErrorRenderer(
