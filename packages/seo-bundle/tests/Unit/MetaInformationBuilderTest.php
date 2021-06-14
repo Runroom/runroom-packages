@@ -18,6 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\Factory\MetaInformationFactory;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
+use Runroom\SeoBundle\Tests\App\Entity\Media;
 use Runroom\SeoBundle\Tests\App\MetaInformation\TestMetaInformationProvider;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -45,7 +46,11 @@ class MetaInformationBuilderTest extends TestCase
     /** @test */
     public function itBuildsMetaInformationViewModel(): void
     {
-        $metaInformation = MetaInformationFactory::new()->withTranslations(['en'], [
+        $media = new Media();
+
+        $metaInformation = MetaInformationFactory::new([
+            'image' => $media,
+        ])->withTranslations(['en'], [
             'title' => '[placeholder] title',
             'description' => '[missing] description',
         ])->create()->object();
@@ -56,6 +61,6 @@ class MetaInformationBuilderTest extends TestCase
 
         self::assertSame('test title', $metas->getTitle());
         self::assertSame(' description', $metas->getDescription());
-        self::assertNull($metas->getImage());
+        self::assertSame($media, $metas->getImage());
     }
 }
