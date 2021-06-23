@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\SortableBehaviorBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 /**

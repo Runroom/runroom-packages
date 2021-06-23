@@ -29,7 +29,7 @@ if (class_exists(BaseGalleryItem::class)) {
          */
         private ?int $id = null;
 
-        public function getId(): ?int
+        public function getId(): int
         {
             return $this->id;
         }

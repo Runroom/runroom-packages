@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\MediaBundle\Model\MediaInterface;
 
 /** @extends AbstractAdminExtension<MediaInterface> */
 final class MediaAdminExtension extends AbstractAdminExtension
