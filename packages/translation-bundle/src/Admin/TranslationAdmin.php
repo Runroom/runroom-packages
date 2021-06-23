@@ -33,9 +33,7 @@ final class TranslationAdmin extends AbstractAdmin
         $sortValues['_sort_by'] = 'key';
     }
 
-    /**
-     * @param RouteCollection|RouteCollectionInterface $collection
-     */
+    /** @param RouteCollection|RouteCollectionInterface $collection */
     protected function configureRoutes(object $collection): void
     {
         $collection->remove('create');
