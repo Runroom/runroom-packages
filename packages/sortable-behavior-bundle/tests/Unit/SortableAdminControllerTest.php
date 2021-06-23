@@ -109,6 +109,7 @@ class SortableAdminControllerTest extends TestCase
 
         $this->request->headers->set('X-Requested-With', 'XMLHttpRequest');
         $this->admin->method('isGranted')->with('EDIT')->willReturn(true);
+        $this->admin->method('hasSubject')->willReturn(true);
         $this->admin->method('getSubject')->willReturn($entity);
         $this->admin->expects(self::once())->method('update')->with($entity);
         $this->admin->method('getNormalizedIdentifier')->with($entity)->willReturn('identifier');
