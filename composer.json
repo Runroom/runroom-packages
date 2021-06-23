@@ -52,6 +52,9 @@
         "runroom-packages/testing": "0.10.3",
         "runroom-packages/translation-bundle": "0.10.3"
     },
+    "conflict": {
+        "sonata-project/admin-bundle": "<=4.0.0-alpha-2"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.2",
         "fakerphp/faker": "^1.13",
