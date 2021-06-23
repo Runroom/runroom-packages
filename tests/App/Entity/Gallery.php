@@ -33,9 +33,7 @@ class Gallery extends BaseGallery
         return $this->id;
     }
 
-    /**
-     * @param GalleryItemInterface|GalleryHasMediaInterface $galleryItem
-     */
+    /** @param GalleryItemInterface|GalleryHasMediaInterface $galleryItem */
     public function removeGalleryItem(object $galleryItem): void
     {
         if ($this->galleryItems->contains($galleryItem)) {
