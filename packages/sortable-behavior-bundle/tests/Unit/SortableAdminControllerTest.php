@@ -88,6 +88,7 @@ class SortableAdminControllerTest extends TestCase
         $entity = new ChildSortableEntity();
 
         $this->admin->method('isGranted')->with('EDIT')->willReturn(true);
+        $this->admin->method('hasSubject')->willReturn(true);
         $this->admin->method('getSubject')->willReturn($entity);
         $this->admin->method('generateUrl')->with('list', ['filter' => []])->willReturn('https://localhost');
         $this->admin->method('getFilterParameters')->willReturn([]);
