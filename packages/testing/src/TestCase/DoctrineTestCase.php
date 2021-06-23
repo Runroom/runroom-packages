@@ -62,13 +62,13 @@ abstract class DoctrineTestCase extends KernelTestCase
         }, $this->getDataFixtures());
     }
 
+    /* @todo: Simplify when dropping support for Symfony 4 */
     private function ensureSchemaIsCreated(): void
     {
         if (static::$schemaCreated) {
             return;
         }
 
-        /* @phpstan-ignore-next-line */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         static::$entityManager = $container->get(EntityManagerInterface::class);

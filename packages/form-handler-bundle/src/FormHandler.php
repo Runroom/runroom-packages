@@ -27,18 +27,15 @@ class FormHandler
     private FormFactoryInterface $formFactory;
     private EventDispatcherInterface $eventDispatcher;
     private RequestStack $requestStack;
-    private Session $session;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack,
-        Session $session
+        RequestStack $requestStack
     ) {
         $this->formFactory = $formFactory;
         $this->eventDispatcher = $eventDispatcher;
         $this->requestStack = $requestStack;
-        $this->session = $session;
     }
 
     /**
@@ -47,8 +44,14 @@ class FormHandler
      */
     public function handleForm(string $type, array $options = [], FormAwareInterface $model = null): FormAwareInterface
     {
+        $request = $this->requestStack->getCurrentRequest();
+
+        if (null === $request) {
+            throw new \RuntimeException('You can not handle a form without a request.');
+        }
+
         $form = $this->formFactory->create($type, null, $options);
-        $form->handleRequest($this->requestStack->getCurrentRequest());
+        $form->handleRequest($request);
 
         $model = $model ?? new BasicFormViewModel();
         $model->setForm($form);
@@ -59,7 +62,10 @@ class FormHandler
                 'form.' . $form->getName() . '.event.success'
             );
 
-            $this->session->getFlashBag()->add($form->getName(), 'success');
+            $session = $request->getSession();
+            \assert($session instanceof Session);
+
+            $session->getFlashBag()->add($form->getName(), 'success');
         }
 
         return $model;

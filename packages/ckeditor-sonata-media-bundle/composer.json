@@ -18,23 +18,23 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "sonata-project/admin-bundle": "^3.100 || ^4.0",
-        "sonata-project/doctrine-extensions": "^1.9",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
-        "sonata-project/media-bundle": "^3.24",
-        "symfony/config": "^4.4 || ^5.1",
-        "symfony/dependency-injection": "^4.4 || ^5.1",
-        "symfony/form": "^4.4 || ^5.1",
-        "symfony/http-foundation": "^4.4.7 || ^5.1",
-        "symfony/http-kernel": "^4.4.13 || ^5.1.5",
+        "sonata-project/admin-bundle": "^3.103 || ^4.0@dev",
+        "sonata-project/doctrine-extensions": "^1.13",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@dev",
+        "sonata-project/media-bundle": "^3.32 || ^4.0@dev",
+        "symfony/config": "^4.4 || ^5.3",
+        "symfony/dependency-injection": "^4.4 || ^5.3",
+        "symfony/form": "^4.4 || ^5.3",
+        "symfony/http-foundation": "^4.4.7 || ^5.3",
+        "symfony/http-kernel": "^4.4.13 || ^5.3",
         "twig/twig": "^2.12 || ^3.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "phpunit/phpunit": "^9.3",
-        "runroom-packages/testing": "^0.11",
-        "symfony/phpunit-bridge": "^5.1"
+        "phpunit/phpunit": "^9.5",
+        "runroom-packages/testing": "^0.11@dev",
+        "symfony/phpunit-bridge": "^5.3"
     },
     "config": {
         "sort-packages": true
@@ -53,7 +53,5 @@
         "psr-4": {
             "Runroom\\CkeditorSonataMediaBundle\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

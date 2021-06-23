@@ -14,10 +14,15 @@ declare(strict_types=1);
 namespace Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\MediaBundle\Entity\BaseGalleryHasMedia;
+use Sonata\MediaBundle\Entity\BaseGalleryItem;
+
+/* @todo: Keep only the if part when dropping support for sonata-project/media-bundle 3 */
+if (!class_exists(BaseGalleryItem::class)) {
+    class_alias('Sonata\MediaBundle\Entity\BaseGalleryHasMedia', BaseGalleryItem::class);
+}
 
 /** @ORM\Entity */
-class GalleryHasMedia extends BaseGalleryHasMedia
+class GalleryItem extends BaseGalleryItem
 {
     /**
      * @ORM\Id
@@ -25,4 +30,9 @@ class GalleryHasMedia extends BaseGalleryHasMedia
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 }

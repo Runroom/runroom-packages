@@ -19,12 +19,18 @@ use Runroom\CookiesBundle\Entity\CookiesPage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /** @extends AbstractAdmin<CookiesPage> */
 final class CookiesPageAdmin extends AbstractAdmin
 {
-    protected function configureRoutes(RouteCollection $collection): void
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
+    protected function configureRoutes(object $collection): void
     {
         $collection->remove('show');
         $collection->remove('delete');

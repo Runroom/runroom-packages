@@ -28,9 +28,11 @@ use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorageFactory;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 class Kernel extends BaseKernel
@@ -72,20 +74,36 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
+    /** @todo: Simplify security configuration when dropping support for Symfony 4.4 */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->setParameter('kernel.default_locale', 'en');
 
-        $container->loadFromExtension('framework', [
+        $frameworkConfig = [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'session' => ['storage_id' => 'session.storage.mock_file'],
-        ]);
+        ];
 
-        $container->loadFromExtension('security', [
-            'firewalls' => ['main' => ['anonymous' => true]],
-        ]);
+        if (class_exists(NativeSessionStorageFactory::class)) {
+            $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
+        } else {
+            $frameworkConfig['session'] = ['storage_id' => 'session.storage.mock_file'];
+        }
+
+        $container->loadFromExtension('framework', $frameworkConfig);
+
+        $securityConfig = [
+            'firewalls' => ['main' => []],
+        ];
+
+        if (class_exists(AuthenticatorManager::class)) {
+            $securityConfig['enable_authenticator_manager'] = true;
+        } else {
+            $securityConfig['firewalls']['main']['anonymous'] = true;
+        }
+
+        $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
@@ -102,7 +120,11 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    /** @param RouteCollectionBuilder|RouteConfigurator $routes */
+    /**
+     * @todo: Simplify this method when dropping support for Symfony 4.4
+     *
+     * @param RouteCollectionBuilder|RoutingConfigurator $routes
+     */
     protected function configureRoutes($routes): void
     {
     }

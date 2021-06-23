@@ -22,6 +22,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(FormHandler::class)
         ->arg('$formFactory', new ReferenceConfigurator('form.factory'))
         ->arg('$eventDispatcher', new ReferenceConfigurator('event_dispatcher'))
-        ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
-        ->arg('$session', new ReferenceConfigurator('session'));
+        ->arg('$requestStack', new ReferenceConfigurator('request_stack'));
 };

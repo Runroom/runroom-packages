@@ -35,6 +35,7 @@ use Runroom\TranslationBundle\RunroomTranslationBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -42,10 +43,13 @@ use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorageFactory;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Tests\App\Entity\Gallery;
-use Tests\App\Entity\GalleryHasMedia;
+use Tests\App\Entity\GalleryItem;
 use Tests\App\Entity\Media;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -90,22 +94,41 @@ final class Kernel extends BaseKernel
         return __DIR__;
     }
 
+    /**
+     * @todo: Simplify security configuration when dropping support for Symfony 4.4
+     * @todo: Simplify media configuration when dropping support for Sonata 3
+     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $loader->load($this->getProjectDir() . '/services.yaml');
 
         $container->setParameter('kernel.default_locale', 'en');
 
-        $container->loadFromExtension('framework', [
+        $frameworkConfig = [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'session' => ['storage_id' => 'session.storage.mock_file'],
-        ]);
+        ];
 
-        $container->loadFromExtension('security', [
-            'firewalls' => ['main' => ['anonymous' => true]],
-        ]);
+        if (class_exists(NativeSessionStorageFactory::class)) {
+            $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
+        } else {
+            $frameworkConfig['session'] = ['storage_id' => 'session.storage.mock_file'];
+        }
+
+        $container->loadFromExtension('framework', $frameworkConfig);
+
+        $securityConfig = [
+            'firewalls' => ['main' => []],
+        ];
+
+        if (class_exists(AuthenticatorManager::class)) {
+            $securityConfig['enable_authenticator_manager'] = true;
+        } else {
+            $securityConfig['firewalls']['main']['anonymous'] = true;
+        }
+
+        $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('zenstruck_foundry', [
             'auto_refresh_proxies' => false,
@@ -153,6 +176,8 @@ final class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
+        $galleryItemKey = interface_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
+
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
             'contexts' => ['default' => []],
@@ -160,7 +185,7 @@ final class Kernel extends BaseKernel
             'db_driver' => 'doctrine_orm',
             'class' => [
                 'media' => Media::class,
-                'gallery_has_media' => GalleryHasMedia::class,
+                $galleryItemKey => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
             'filesystem' => ['local' => null],
@@ -204,8 +229,22 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    /**
+     * @todo: Simplify this method when dropping support for Symfony 4.4
+     *
+     * @param RouteCollectionBuilder|RoutingConfigurator $routes
+     */
+    protected function configureRoutes($routes): void
     {
+        if ($routes instanceof RoutingConfigurator) {
+            $routes->import($this->getProjectDir() . '/routing.yaml');
+
+            $routes->add('route.entity', '/entity/{slug}')
+                ->controller('controller');
+
+            return;
+        }
+
         $routes->import($this->getProjectDir() . '/routing.yaml');
 
         $routes->add('/entity/{slug}', 'controller', 'route.entity');

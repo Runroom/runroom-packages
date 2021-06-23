@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <psalm
     errorLevel="3"
+    findUnusedPsalmSuppress="true"
     resolveFromConfigFile="true"
     totallyTyped="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -21,7 +22,7 @@
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
-            <containerXml>tests/App/var/cache/test/AppTests_App_KernelTestDebugContainer.xml</containerXml>
+            <containerXml>tests/App/var/cache/test/Tests_App_KernelTestDebugContainer.xml</containerXml>
         </pluginClass>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
     </plugins>

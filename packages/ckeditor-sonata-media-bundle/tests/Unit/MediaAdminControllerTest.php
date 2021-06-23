@@ -17,11 +17,13 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool as AdminPool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
+use Sonata\AdminBundle\Request\AdminFetcher;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
-use Sonata\MediaBundle\Admin\BaseMediaAdmin;
+use Sonata\AdminBundle\Templating\TemplateRegistryAwareInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
@@ -40,7 +42,7 @@ class MediaAdminControllerTest extends TestCase
 {
     private Container $container;
 
-    /** @var MockObject&BaseMediaAdmin */
+    /** @var MockObject&AdminInterface<object> */
     private $admin;
 
     private Request $request;
@@ -56,25 +58,26 @@ class MediaAdminControllerTest extends TestCase
 
     private MediaAdminController $controller;
 
+    /** @psalm-suppress InternalMethod */
     protected function setUp(): void
     {
         $this->container = new Container();
-        $this->admin = $this->createMock(BaseMediaAdmin::class);
+        $this->admin = $this->createMock(AdminInterface::class);
         $this->request = new Request();
         $this->mediaManager = $this->createMock(MediaManagerInterface::class);
         $this->mediaPool = $this->createMock(MediaPool::class);
         $this->twig = $this->createMock(Environment::class);
 
-        $this->configureCRUDController();
+        $this->configureAdmin();
         $this->configureRequest();
         $this->configureContainer();
 
         $this->controller = new MediaAdminController(
             $this->mediaManager,
-            $this->mediaPool,
-            $this->twig
+            $this->mediaPool
         );
         $this->controller->setContainer($this->container);
+        $this->controller->configureAdmin($this->request);
     }
 
     /** @test */
@@ -83,9 +86,14 @@ class MediaAdminControllerTest extends TestCase
         $datagrid = $this->createMock(DatagridInterface::class);
         $form = $this->createStub(Form::class);
         $formView = new FormView();
+
         $media = new Media();
         $media->setId(1);
         $media->setContext('context');
+
+        $media2 = new Media();
+        $media2->setId(2);
+        $media2->setContext('context2');
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', 'renderResponse');
@@ -93,15 +101,14 @@ class MediaAdminControllerTest extends TestCase
             ['context', null, 'another_context'],
             ['providerName', null, null]
         );
-        $datagrid->method('getResults')->willReturn([new Media()]);
+        $datagrid->method('getResults')->willReturn([new Media(), $media, $media2]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturn('');
+        $this->mediaPool->method('getFormatNamesByContext')->willReturnMap([
+            ['context', ['format1' => []]],
+        ]);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
-        $this->admin->method('getPersistentParameter')->willReturnMap([
-            ['context', 'another_context'],
-        ]);
         $this->admin->method('getFilterTheme')->willReturn(['filterTheme']);
 
         $response = $this->controller->browserAction($this->request);
@@ -128,7 +135,7 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturn('');
+        $this->mediaPool->method('getFormatNamesByContext')->willReturn(['']);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
@@ -165,16 +172,24 @@ class MediaAdminControllerTest extends TestCase
         $this->request->setMethod('GET');
 
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Not Found');
 
         $this->controller->uploadAction($this->request);
     }
 
-    private function configureCRUDController(): void
+    /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */
+    private function configureAdmin(): void
     {
-        $this->admin->method('getTemplate')->with('layout')->willReturn('layout.html.twig');
+        if (method_exists(AdminInterface::class, 'getTemplate')) {
+            $this->admin->method('getTemplate')->with('layout')->willReturn('layout.html.twig');
+        }
+
+        /* @phpstan-ignore-next-line */
+        if (method_exists(TemplateRegistryAwareInterface::class, 'hasTemplateRegistry')) {
+            $this->admin->method('hasTemplateRegistry')->willReturn(true);
+        }
+
         $this->admin->method('isChild')->willReturn(false);
-        $this->admin->expects(self::once())->method('setRequest')->with($this->request);
+        $this->admin->method('setRequest')->with($this->request);
         $this->admin->method('getCode')->willReturn('admin_code');
     }
 
@@ -198,12 +213,17 @@ class MediaAdminControllerTest extends TestCase
         $twigRenderer->expects(self::once())->method('setTheme')->with($formView, $formTheme);
     }
 
+    /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */
     private function configureRender(string $template, string $rendered): void
     {
-        $this->admin->method('getPersistentParameters')->willReturn(['param' => 'param']);
+        $this->admin->method('getPersistentParameters')->willReturn([
+            'param' => 'param',
+            'context' => 'another_context',
+        ]);
         $this->twig->method('render')->with($template, self::isType('array'))->willReturn($rendered);
     }
 
+    /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */
     private function configureContainer(): void
     {
         $pool = new AdminPool($this->container, [
@@ -224,5 +244,9 @@ class MediaAdminControllerTest extends TestCase
         $this->container->set('sonata.admin.pool.do-not-use', $pool);
         $this->container->set('sonata.admin.breadcrumbs_builder', $breadcrumbsBuilder);
         $this->container->set('sonata.admin.breadcrumbs_builder.do-not-use', $breadcrumbsBuilder);
+
+        if (class_exists(AdminFetcher::class)) {
+            $this->container->set('sonata.admin.request.fetcher', new AdminFetcher($pool));
+        }
     }
 }
