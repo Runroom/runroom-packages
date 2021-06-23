@@ -21,6 +21,7 @@ use Runroom\SortableBehaviorBundle\Tests\App\Entity\ChildSortableEntity;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
+use Sonata\AdminBundle\Request\AdminFetcher;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -76,7 +77,7 @@ class SortableAdminControllerTest extends TestCase
         $this->admin->method('getFilterParameters')->willReturn([]);
         $this->admin->method('getTranslationDomain')->willReturn('domain');
 
-        $response = $this->controller->moveAction('up');
+        $response = $this->controller->moveAction($this->request, 'up');
 
         self::assertInstanceOf(RedirectResponse::class, $response);
     }
@@ -96,7 +97,7 @@ class SortableAdminControllerTest extends TestCase
         $this->positionHandler->method('getPosition')->with($entity, 'up', 2)->willReturn(1);
         $this->positionHandler->method('getPositionFieldByEntity')->with($entity)->willReturn('position');
 
-        $response = $this->controller->moveAction('up');
+        $response = $this->controller->moveAction($this->request, 'up');
 
         self::assertInstanceOf(RedirectResponse::class, $response);
     }
@@ -115,7 +116,7 @@ class SortableAdminControllerTest extends TestCase
         $this->positionHandler->method('getPosition')->with($entity, 'up', 2)->willReturn(1);
         $this->positionHandler->method('getPositionFieldByEntity')->with($entity)->willReturn('position');
 
-        $response = $this->controller->moveAction('up');
+        $response = $this->controller->moveAction($this->request, 'up');
 
         self::assertInstanceOf(JsonResponse::class, $response);
     }
@@ -160,5 +161,6 @@ class SortableAdminControllerTest extends TestCase
         $this->container->set('sonata.admin.pool.do-not-use', $pool);
         $this->container->set('sonata.admin.breadcrumbs_builder', $breadcrumbsBuilder);
         $this->container->set('sonata.admin.breadcrumbs_builder.do-not-use', $breadcrumbsBuilder);
+        $this->container->set('sonata.admin.request.fetcher', new AdminFetcher($pool));
     }
 }

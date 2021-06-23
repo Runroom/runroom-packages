@@ -29,7 +29,10 @@ abstract class AbstractSortableAdmin extends AbstractAdmin
         $sortValues['_sort_by'] = 'position';
     }
 
-    protected function configureRoutes(RouteCollectionInterface $collection): void
+    /**
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
+    protected function configureRoutes(object $collection): void
     {
         $collection->add('move', $this->getRouterIdParameter() . '/move/{position}');
     }

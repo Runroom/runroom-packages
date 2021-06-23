@@ -68,7 +68,6 @@ abstract class DoctrineTestCase extends KernelTestCase
             return;
         }
 
-        /* @phpstan-ignore-next-line */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         static::$entityManager = $container->get(EntityManagerInterface::class);

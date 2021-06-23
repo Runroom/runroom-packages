@@ -35,6 +35,7 @@ use Runroom\TranslationBundle\RunroomTranslationBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\MediaBundle\Document\BaseGalleryItem;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -45,7 +46,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Tests\App\Entity\Gallery;
-use Tests\App\Entity\GalleryHasMedia;
+use Tests\App\Entity\GalleryItem;
 use Tests\App\Entity\Media;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -153,6 +154,8 @@ final class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
+        $galleryItemKey = class_exists(BaseGalleryItem::class) ? 'gallery_item' : 'gallery_has_media';
+
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
             'contexts' => ['default' => []],
@@ -160,7 +163,7 @@ final class Kernel extends BaseKernel
             'db_driver' => 'doctrine_orm',
             'class' => [
                 'media' => Media::class,
-                'gallery_has_media' => GalleryHasMedia::class,
+                $galleryItemKey => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
             'filesystem' => ['local' => null],
