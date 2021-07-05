@@ -23,7 +23,6 @@ use Sonata\AdminBundle\Admin\Pool as AdminPool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Request\AdminFetcher;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
-use Sonata\MediaBundle\Admin\BaseMediaAdmin;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;

@@ -15,7 +15,6 @@ namespace Runroom\SeoBundle\Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseGallery;
-use Sonata\MediaBundle\Model\GalleryItemInterface;
 
 /** @ORM\Entity */
 class Gallery extends BaseGallery

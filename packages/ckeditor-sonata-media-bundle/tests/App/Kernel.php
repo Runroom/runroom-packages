@@ -22,6 +22,7 @@ use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -30,7 +31,6 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
