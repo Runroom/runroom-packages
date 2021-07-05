@@ -23,7 +23,11 @@ use Sonata\MediaBundle\Model\MediaInterface;
 /** @extends AbstractAdminExtension<MediaInterface> */
 final class MediaAdminExtension extends AbstractAdminExtension
 {
-    /** @param RouteCollection|RouteCollectionInterface $collection */
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
     public function configureRoutes(AdminInterface $admin, object $collection): void
     {
         $collection->add('ckeditor_browser', 'ckeditor_browser', [

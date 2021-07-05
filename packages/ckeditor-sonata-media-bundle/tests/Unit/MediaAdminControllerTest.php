@@ -98,7 +98,7 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([new Media()]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturn('');
+        $this->mediaPool->method('getFormatNamesByContext')->willReturn(['']);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
@@ -131,7 +131,7 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturn('');
+        $this->mediaPool->method('getFormatNamesByContext')->willReturn(['']);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);

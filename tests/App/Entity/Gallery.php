@@ -27,7 +27,7 @@ class Gallery extends BaseGallery
      */
     private ?int $id = null;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

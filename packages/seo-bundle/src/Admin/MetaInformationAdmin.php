@@ -33,7 +33,11 @@ final class MetaInformationAdmin extends AbstractAdmin
         $sortValues['_sort_by'] = 'routeName';
     }
 
-    /** @param RouteCollection|RouteCollectionInterface $collection */
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
     protected function configureRoutes(object $collection): void
     {
         $collection->remove('create');

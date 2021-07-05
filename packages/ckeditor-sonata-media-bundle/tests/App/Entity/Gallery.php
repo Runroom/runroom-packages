@@ -27,16 +27,8 @@ class Gallery extends BaseGallery
      */
     private ?int $id = null;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /** @param GalleryItemInterface $galleryItem */
-    public function removeGalleryItem(object $galleryItem): void
-    {
-        if ($this->galleryItems->contains($galleryItem)) {
-            $this->galleryItems->removeElement($galleryItem);
-        }
     }
 }

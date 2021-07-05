@@ -20,11 +20,12 @@ use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SeoBundle\Tests\App\Entity\Gallery;
-use Runroom\SeoBundle\Tests\App\Entity\GalleryHasMedia;
+use Runroom\SeoBundle\Tests\App\Entity\GalleryItem;
 use Runroom\SeoBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -34,6 +35,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -116,6 +118,8 @@ class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
+        $galleryItemKey = class_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
+
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
             'contexts' => ['default' => []],
@@ -123,7 +127,7 @@ class Kernel extends BaseKernel
             'db_driver' => 'doctrine_orm',
             'class' => [
                 'media' => Media::class,
-                'gallery_has_media' => GalleryHasMedia::class,
+                $galleryItemKey => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
             'filesystem' => ['local' => null],
@@ -136,7 +140,11 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    /** @param RouteCollectionBuilder|RouteConfigurator $routes */
+    /**
+     * @todo: Simplify this method when dropping support for Symfony 4.4
+     *
+     * @param RouteCollectionBuilder|RoutingConfigurator $routes
+     */
     protected function configureRoutes($routes): void
     {
     }

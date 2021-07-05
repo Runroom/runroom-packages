@@ -25,7 +25,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /** @extends AbstractAdmin<CookiesPage> */
 final class CookiesPageAdmin extends AbstractAdmin
 {
-    /** @param RouteCollection|RouteCollectionInterface $collection */
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
     protected function configureRoutes(object $collection): void
     {
         $collection->remove('show');

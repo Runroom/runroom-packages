@@ -17,7 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Gallery;
-use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\GalleryHasMedia;
+use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\GalleryItem;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
@@ -31,6 +31,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RouteConfigurator;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class Kernel extends BaseKernel
@@ -91,6 +92,8 @@ class Kernel extends BaseKernel
             'strict_variables' => '%kernel.debug%',
         ]);
 
+        $galleryItemKey = class_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
+
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
             'contexts' => ['default' => []],
@@ -98,14 +101,18 @@ class Kernel extends BaseKernel
             'db_driver' => 'doctrine_orm',
             'class' => [
                 'media' => Media::class,
-                'gallery_has_media' => GalleryHasMedia::class,
+                $galleryItemKey => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
             'filesystem' => ['local' => null],
         ]);
     }
 
-    /** @param RouteCollectionBuilder|RouteConfigurator $routes */
+    /**
+     * @todo: Simplify this method when dropping support for Symfony 4.4
+     *
+     * @param RouteCollectionBuilder|RoutingConfigurator $routes
+     */
     protected function configureRoutes($routes): void
     {
     }

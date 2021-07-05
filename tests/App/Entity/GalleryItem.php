@@ -14,35 +14,25 @@ declare(strict_types=1);
 namespace Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\MediaBundle\Entity\BaseGalleryHasMedia;
 use Sonata\MediaBundle\Entity\BaseGalleryItem;
 
-/* @todo Keep only the if part when dropping support for sonata-project/media-bundle 3 */
-if (class_exists(BaseGalleryItem::class)) {
-    /** @ORM\Entity */
-    class GalleryItem extends BaseGalleryItem
-    {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        private ?int $id = null;
+/* @todo: Keep only the if part when dropping support for sonata-project/media-bundle 3 */
+if (!class_exists(BaseGalleryItem::class)) {
+    class_alias('Sonata\MediaBundle\Entity\BaseGalleryHasMedia', BaseGalleryItem::class);
+}
 
-        public function getId(): int
-        {
-            return $this->id;
-        }
-    }
-} else {
-    /** @ORM\Entity */
-    class GalleryItem extends BaseGalleryHasMedia
+/** @ORM\Entity */
+class GalleryItem extends BaseGalleryItem
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private ?int $id = null;
+
+    public function getId(): ?int
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        private ?int $id = null;
+        return $this->id;
     }
 }
