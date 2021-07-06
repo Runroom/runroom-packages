@@ -11,6 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use App\ComposerJson\ComposerVersionManipulator as AppComposerVersionManipulator;
 use App\Release\ComposerNormalizePostReleaseWorker;
 use App\Release\ComposerNormalizePreReleaseWorker;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -22,6 +23,7 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesRele
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
+use Symplify\MonorepoBuilder\Testing\ComposerJson\ComposerVersionManipulator as SimplifyComposerVersionManipulator;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -45,6 +47,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'weirdan/doctrine-psalm-plugin' => '^1.0',
         ],
     ]);
+
+    $services->alias(SimplifyComposerVersionManipulator::class, AppComposerVersionManipulator::class);
 
     $services->set(UpdateReplaceReleaseWorker::class);
     $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
