@@ -57,7 +57,7 @@
         "symplify/monorepo-builder": ">=9.4.0"
     },
     "require-dev": {
-        "a2lix/auto-form-bundle": "^0.3",
+        "a2lix/auto-form-bundle": "^0.3.1",
         "ergebnis/composer-normalize": "^2.2",
         "fakerphp/faker": "^1.13",
         "friendsofphp/php-cs-fixer": "^3.0",
