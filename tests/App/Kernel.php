@@ -36,6 +36,7 @@ use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\Document\BaseGalleryItem;
+use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -93,7 +94,10 @@ final class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    /** @todo: Simplify security configuration when dropping support for Symfony 4.4 */
+    /**
+     * @todo: Simplify security configuration when dropping support for Symfony 4.4
+     * @todo: Simplify media configuration when dropping support for Sonata 3
+     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $loader->load($this->getProjectDir() . '/services.yaml');
@@ -113,6 +117,8 @@ final class Kernel extends BaseKernel
 
         if (class_exists(AuthenticatorManager::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
+        } else {
+            $securityConfig['firewalls']['main']['anonymous'] = true;
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -163,7 +169,7 @@ final class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
-        $galleryItemKey = class_exists(BaseGalleryItem::class) ? 'gallery_item' : 'gallery_has_media';
+        $galleryItemKey = interface_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
 
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
