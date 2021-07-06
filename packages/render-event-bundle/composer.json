@@ -55,7 +55,5 @@
         "psr-4": {
             "Runroom\\RenderEventBundle\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

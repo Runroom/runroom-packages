@@ -28,8 +28,8 @@
         "knplabs/doctrine-behaviors": "^2.0.6",
         "runroom-packages/render-event-bundle": "^0.11",
         "runroom-packages/seo-bundle": "^0.11",
-        "sonata-project/admin-bundle": "^3.100 || ^4.0",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
+        "sonata-project/admin-bundle": "^3.100 || ^4.0@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@dev",
         "symfony/config": "^4.4 || ^5.1",
         "symfony/dependency-injection": "^4.4 || ^5.1",
         "symfony/event-dispatcher": "^4.4 || ^5.1",
@@ -69,7 +69,5 @@
         "psr-4": {
             "Runroom\\BasicPageBundle\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
