@@ -54,6 +54,7 @@
     },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.3.1",
+        "cweagans/composer-patches": "^1.7",
         "doctrine/data-fixtures": "^1.4",
         "doctrine/dbal": "^2.10 || ^3.0",
         "ergebnis/composer-normalize": "^2.2",
@@ -79,6 +80,14 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "symplify/monorepo-builder": {
+                "Use @dev for 'localize-composer-path' command": "patches/at_dev.patch"
+            }
+        }
     },
     "autoload": {
         "psr-4": {
