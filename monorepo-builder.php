@@ -47,8 +47,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
     ]);
 
-    $parameters->set(Option::PACKAGE_ALIAS_FORMAT, '<major>.<minor>-dev@dev');
-
     $services->set(UpdateReplaceReleaseWorker::class);
     $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
     $services->set(ComposerNormalizePreReleaseWorker::class);
