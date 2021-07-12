@@ -30,7 +30,10 @@ final class RedirectListener implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        /* @phpstan-ignore-next-line */
+        $isMainRequest = method_exists($event, 'isMainRequest') ? $event->isMainRequest() : $event->isMasterRequest();
+
+        if (!$isMainRequest) {
             return;
         }
 

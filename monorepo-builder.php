@@ -30,6 +30,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::DATA_TO_APPEND, [
         ComposerJsonSection::REQUIRE_DEV => [
+            'cweagans/composer-patches' => '^1.7',
             'ergebnis/composer-normalize' => '^2.2',
             'friendsofphp/php-cs-fixer' => '^3.0',
             'phpstan/phpstan' => '^0.12',

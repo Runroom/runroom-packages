@@ -1,0 +1,13 @@
+diff --git a/packages/Testing/ComposerJson/ComposerVersionManipulator.php b/packages/Testing/ComposerJson/ComposerVersionManipulator.php
+index ce129b20..adbaf726 100644
+--- a/packages/Testing/ComposerJson/ComposerVersionManipulator.php
++++ b/packages/Testing/ComposerJson/ComposerVersionManipulator.php
+@@ -21,7 +21,7 @@ final class ComposerVersionManipulator
+     {
+         $this->branchAliasTarget = self::COMPOSER_BRANCH_PREFIX . $parameterProvider->provideStringParameter(
+             Option::DEFAULT_BRANCH_NAME
+-        );
++        ) . '@dev';
+     }
+ 
+     /**

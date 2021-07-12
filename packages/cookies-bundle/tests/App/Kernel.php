@@ -31,6 +31,7 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -75,6 +76,7 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
+    /** @todo: Simplify security configuration when dropping support for Symfony 4.4 */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->setParameter('kernel.default_locale', 'en');
@@ -86,9 +88,17 @@ class Kernel extends BaseKernel
             'session' => ['storage_id' => 'session.storage.mock_file'],
         ]);
 
-        $container->loadFromExtension('security', [
-            'firewalls' => ['main' => ['anonymous' => true]],
-        ]);
+        $securityConfig = [
+            'firewalls' => ['main' => []],
+        ];
+
+        if (class_exists(AuthenticatorManager::class)) {
+            $securityConfig['enable_authenticator_manager'] = true;
+        } else {
+            $securityConfig['firewalls']['main']['anonymous'] = true;
+        }
+
+        $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('zenstruck_foundry', [
             'auto_refresh_proxies' => false,
@@ -126,7 +136,12 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    /**
+     * @todo: Simplify this method when dropping support for Symfony 4.4
+     *
+     * @param RouteCollectionBuilder|RoutingConfigurator $routes
+     */
+    protected function configureRoutes($routes): void
     {
         $routes->import($this->getProjectDir() . '/routing.yaml');
     }

@@ -15,6 +15,7 @@ namespace Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseGallery;
+use Sonata\MediaBundle\Model\GalleryItemInterface;
 
 /** @ORM\Entity */
 class Gallery extends BaseGallery
@@ -25,4 +26,17 @@ class Gallery extends BaseGallery
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /** @param GalleryItemInterface $galleryItem */
+    public function removeGalleryItem(object $galleryItem): void
+    {
+        if ($this->galleryItems->contains($galleryItem)) {
+            $this->galleryItems->removeElement($galleryItem);
+        }
+    }
 }

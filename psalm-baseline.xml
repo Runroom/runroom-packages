@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
+<files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
   <file src="packages/basic-page-bundle/src/Entity/BasicPage.php">
     <UndefinedInterfaceMethod occurrences="3">
       <code>getContent</code>
@@ -7,63 +7,11 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/cookies-bundle/src/DependencyInjection/Configuration.php">
-    <PossiblyNullReference occurrences="2">
-      <code>booleanNode</code>
-      <code>end</code>
-    </PossiblyNullReference>
-    <PossiblyUndefinedMethod occurrences="2">
-      <code>booleanNode</code>
-      <code>end</code>
-    </PossiblyUndefinedMethod>
-  </file>
   <file src="packages/cookies-bundle/src/Entity/CookiesPage.php">
     <UndefinedInterfaceMethod occurrences="2">
       <code>getContent</code>
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/form-handler-bundle/src/FormHandler.php">
-    <TooManyArguments occurrences="1">
-      <code>dispatch</code>
-    </TooManyArguments>
-  </file>
-  <file src="packages/redirection-bundle/src/DependencyInjection/Configuration.php">
-    <PossiblyNullReference occurrences="1">
-      <code>arrayNode</code>
-    </PossiblyNullReference>
-    <PossiblyUndefinedMethod occurrences="1">
-      <code>arrayNode</code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="packages/redirection-bundle/src/Listener/AutomaticRedirectSubscriber.php">
-    <InvalidArgument occurrences="3">
-      <code>$metadata</code>
-      <code>$metadata</code>
-      <code>$this-&gt;entityManager-&gt;getClassMetadata(Redirect::class)</code>
-    </InvalidArgument>
-  </file>
-  <file src="packages/render-event-bundle/src/DependencyInjection/Configuration.php">
-    <PossiblyNullReference occurrences="1">
-      <code>end</code>
-    </PossiblyNullReference>
-    <PossiblyUndefinedMethod occurrences="1">
-      <code>end</code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="packages/render-event-bundle/src/Renderer/PageRenderer.php">
-    <TooManyArguments occurrences="2">
-      <code>dispatch</code>
-      <code>dispatch</code>
-    </TooManyArguments>
-  </file>
-  <file src="packages/seo-bundle/src/DependencyInjection/Configuration.php">
-    <PossiblyNullReference occurrences="1">
-      <code>end</code>
-    </PossiblyNullReference>
-    <PossiblyUndefinedMethod occurrences="1">
-      <code>end</code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="packages/seo-bundle/src/Entity/EntityMetaInformation.php">
     <UndefinedInterfaceMethod occurrences="2">
@@ -76,14 +24,6 @@
       <code>getDescription</code>
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/sortable-behavior-bundle/src/DependencyInjection/Configuration.php">
-    <PossiblyNullReference occurrences="1">
-      <code>arrayNode</code>
-    </PossiblyNullReference>
-    <PossiblyUndefinedMethod occurrences="1">
-      <code>arrayNode</code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="packages/sortable-behavior-bundle/src/Service/GedmoPositionHandler.php">
     <InvalidArgument occurrences="2">

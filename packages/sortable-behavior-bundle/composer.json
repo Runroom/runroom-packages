@@ -34,9 +34,9 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.3",
-        "runroom-packages/testing": "^0.11",
-        "sonata-project/admin-bundle": "^3.100 || ^4.0",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
+        "runroom-packages/testing": "^0.11@dev",
+        "sonata-project/admin-bundle": "^3.100 || ^4.0@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@dev",
         "symfony/phpunit-bridge": "^5.1"
     },
     "suggest": {
@@ -60,7 +60,5 @@
         "psr-4": {
             "Runroom\\SortableBehaviorBundle\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

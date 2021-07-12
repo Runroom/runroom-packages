@@ -17,11 +17,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool as AdminPool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
+use Sonata\AdminBundle\Request\AdminFetcher;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
-use Sonata\MediaBundle\Admin\BaseMediaAdmin;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
@@ -40,7 +41,7 @@ class MediaAdminControllerTest extends TestCase
 {
     private Container $container;
 
-    /** @var MockObject&BaseMediaAdmin */
+    /** @var MockObject&AdminInterface<object> */
     private $admin;
 
     private Request $request;
@@ -59,13 +60,13 @@ class MediaAdminControllerTest extends TestCase
     protected function setUp(): void
     {
         $this->container = new Container();
-        $this->admin = $this->createMock(BaseMediaAdmin::class);
+        $this->admin = $this->createMock(AdminInterface::class);
         $this->request = new Request();
         $this->mediaManager = $this->createMock(MediaManagerInterface::class);
         $this->mediaPool = $this->createMock(MediaPool::class);
         $this->twig = $this->createMock(Environment::class);
 
-        $this->configureCRUDController();
+        $this->configureAdmin();
         $this->configureRequest();
         $this->configureContainer();
 
@@ -75,6 +76,7 @@ class MediaAdminControllerTest extends TestCase
             $this->twig
         );
         $this->controller->setContainer($this->container);
+        $this->controller->configureAdmin($this->request);
     }
 
     /** @test */
@@ -95,7 +97,7 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([new Media()]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturn('');
+        $this->mediaPool->method('getFormatNamesByContext')->willReturn(['']);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
@@ -128,7 +130,7 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturn('');
+        $this->mediaPool->method('getFormatNamesByContext')->willReturn(['']);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
@@ -170,9 +172,13 @@ class MediaAdminControllerTest extends TestCase
         $this->controller->uploadAction($this->request);
     }
 
-    private function configureCRUDController(): void
+    private function configureAdmin(): void
     {
-        $this->admin->method('getTemplate')->with('layout')->willReturn('layout.html.twig');
+        if (method_exists(AdminInterface::class, 'getTemplate')) {
+            $this->admin->method('getTemplate')->with('layout')->willReturn('layout.html.twig');
+        }
+
+        $this->admin->method('hasTemplateRegistry')->willReturn(true);
         $this->admin->method('isChild')->willReturn(false);
         $this->admin->expects(self::once())->method('setRequest')->with($this->request);
         $this->admin->method('getCode')->willReturn('admin_code');
@@ -224,5 +230,9 @@ class MediaAdminControllerTest extends TestCase
         $this->container->set('sonata.admin.pool.do-not-use', $pool);
         $this->container->set('sonata.admin.breadcrumbs_builder', $breadcrumbsBuilder);
         $this->container->set('sonata.admin.breadcrumbs_builder.do-not-use', $breadcrumbsBuilder);
+
+        if (class_exists(AdminFetcher::class)) {
+            $this->container->set('sonata.admin.request.fetcher', new AdminFetcher($pool));
+        }
     }
 }

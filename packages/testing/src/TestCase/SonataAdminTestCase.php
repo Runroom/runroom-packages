@@ -27,10 +27,12 @@ abstract class SonataAdminTestCase extends KernelTestCase
 
     protected function setUp(): void
     {
-        $kernel = self::bootKernel();
+        self::bootKernel();
+
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         /** @var AbstractAdmin<T> */
-        $admin = $kernel->getContainer()->get($this->getAdminClass());
+        $admin = $container->get($this->getAdminClass());
 
         $this->admin = $admin;
         $this->admin->setSubject($this->admin->getNewInstance());
