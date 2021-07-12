@@ -38,9 +38,6 @@
         "twig/string-extra": "^3.0",
         "twig/twig": "^2.12 || ^3.0"
     },
-    "conflict": {
-        "sonata-project/admin-bundle": "<=4.0.0-alpha-2"
-    },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.3.1",
         "matthiasnoback/symfony-config-test": "^4.2",
