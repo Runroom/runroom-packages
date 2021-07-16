@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.4']
+        php: ['7.4', '8.0']
         dependencies: [highest]
         include:
           - php: '7.4'
             dependencies: lowest
-          - php: '8.0'
-            dependencies: highest
-            composer-options: --ignore-platform-req=php
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
