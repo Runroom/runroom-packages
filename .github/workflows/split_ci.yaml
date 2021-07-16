@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.4']
+        php: ['8.0']
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
@@ -31,7 +31,7 @@ jobs:
     needs: provide_packages_json
     strategy:
       matrix:
-        php: ['7.4']
+        php: ['8.0']
         packages: ${{ fromJson(needs.provide_packages_json.outputs.matrix ) }}
     steps:
       - uses: actions/checkout@v2

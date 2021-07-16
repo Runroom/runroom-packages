@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4']
+        php: ['8.0']
         package:
           - { folder: basic-page-bundle, repository: RunroomBasicPageBundle }
           - { folder: ckeditor-sonata-media-bundle, repository: RunroomCkeditorSonataMediaBundle }
