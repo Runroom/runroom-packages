@@ -25,7 +25,9 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 class Kernel extends BaseKernel
@@ -63,6 +65,7 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
+    /** @todo: Simplify security configuration when dropping support for Symfony 4.4 */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->loadFromExtension('framework', [
@@ -71,9 +74,17 @@ class Kernel extends BaseKernel
             'secret' => 'secret',
         ]);
 
-        $container->loadFromExtension('security', [
-            'firewalls' => ['main' => ['anonymous' => true]],
-        ]);
+        $securityConfig = [
+            'firewalls' => ['main' => []],
+        ];
+
+        if (class_exists(AuthenticatorManager::class)) {
+            $securityConfig['enable_authenticator_manager'] = true;
+        } else {
+            $securityConfig['firewalls']['main']['anonymous'] = true;
+        }
+
+        $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
@@ -110,8 +121,20 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    /**
+     * @todo: Simplify this method when dropping support for Symfony 4.4
+     *
+     * @param RouteCollectionBuilder|RoutingConfigurator $routes
+     */
+    protected function configureRoutes($routes): void
     {
+        if ($routes instanceof RoutingConfigurator) {
+            $routes->add('route.entity', '/entity/{slug}')
+                ->controller('controller');
+
+            return;
+        }
+
         $routes->add('/entity/{slug}', 'controller', 'route.entity');
     }
 

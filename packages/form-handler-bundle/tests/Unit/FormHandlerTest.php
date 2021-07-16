@@ -44,16 +44,27 @@ class FormHandlerTest extends TestCase
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->eventDispatcher = new EventDispatcher();
         $this->requestStack = new RequestStack();
-        $this->request = new Request();
-        $this->requestStack->push($this->request);
         $this->session = new Session(new MockArraySessionStorage());
+        $this->request = new Request();
+        $this->request->setSession($this->session);
+        $this->requestStack->push($this->request);
 
         $this->formHandler = new FormHandler(
             $this->formFactory,
             $this->eventDispatcher,
-            $this->requestStack,
-            $this->session
+            $this->requestStack
         );
+    }
+
+    /** @test */
+    public function itThrowsWhenThereIsNoRequest(): void
+    {
+        $this->requestStack->pop();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('You can not handle a form without a request.');
+
+        $this->formHandler->handleForm(FormType::class);
     }
 
     /** @test */

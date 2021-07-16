@@ -25,8 +25,8 @@ final class RedirectFactory extends ModelFactory
         $uniqueUrl = self::faker()->unique();
 
         return [
-            'source' => $uniqueUrl->url,
-            'destination' => $uniqueUrl->url,
+            'source' => $uniqueUrl->url(),
+            'destination' => $uniqueUrl->url(),
             'httpCode' => self::faker()->randomElement([
                 Redirect::PERMANENT,
                 Redirect::TEMPORAL,

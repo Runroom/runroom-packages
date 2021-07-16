@@ -19,28 +19,25 @@ use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool;
 use Symfony\Component\Form\FormRenderer;
-use Symfony\Component\Form\FormRendererInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @extends CRUDController<MediaInterface> */
 final class MediaAdminController extends CRUDController
 {
     private MediaManagerInterface $mediaManager;
     private Pool $mediaPool;
-    private Environment $twig;
 
     public function __construct(
         MediaManagerInterface $mediaManager,
-        Pool $mediaPool,
-        Environment $twig
+        Pool $mediaPool
     ) {
         $this->mediaManager = $mediaManager;
         $this->mediaPool = $mediaPool;
-        $this->twig = $twig;
     }
 
+    /* @todo: Simplify this when dropping support for sonata-project/admin-bundle 3 */
     public function browserAction(Request $request): Response
     {
         $this->admin->checkAccess('list');
@@ -49,28 +46,40 @@ final class MediaAdminController extends CRUDController
         $filters = $request->get('filter');
 
         if (null === $filters || !\array_key_exists('context', $filters)) {
-            $context = $this->admin->getPersistentParameter('context');
+            $context = $this->getPersistentParameter('context');
         } else {
             $context = $filters['context']['value'];
         }
 
         $datagrid->setValue('context', null, $context ?? $this->mediaPool->getDefaultContext());
-        $datagrid->setValue('providerName', null, $this->admin->getPersistentParameter('provider'));
+        $datagrid->setValue('providerName', null, $this->getPersistentParameter('provider'));
 
         $formats = [];
 
         /** @var MediaInterface $media */
         foreach ($datagrid->getResults() as $media) {
-            $formats[$media->getId()] = $this->mediaPool->getFormatNamesByContext($media->getContext());
+            $id = $media->getId();
+            $context = $media->getContext();
+
+            if (null === $id || null === $context) {
+                continue;
+            }
+
+            $formatNames = $this->mediaPool->getFormatNamesByContext($context);
+
+            if (null === $formatNames) {
+                continue;
+            }
+
+            $formats[$id] = $formatNames;
         }
 
         $formView = $datagrid->getForm()->createView();
 
-        $runtime = $this->twig->getRuntime(FormRenderer::class);
+        $formRenderer = $this->get('twig')->getRuntime(FormRenderer::class);
+        \assert($formRenderer instanceof FormRenderer);
 
-        if ($runtime instanceof FormRendererInterface) {
-            $runtime->setTheme($formView, $this->admin->getFilterTheme());
-        }
+        $formRenderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->renderWithExtraParams('@RunroomCkeditorSonataMedia/browser.html.twig', [
             'action' => 'browser',
@@ -88,7 +97,7 @@ final class MediaAdminController extends CRUDController
         $file = $request->files->get('upload');
 
         if (!$request->isMethod('POST') || null === $provider || null === $file) {
-            throw $this->createNotFoundException();
+            throw new NotFoundHttpException();
         }
 
         $context = $request->get('context', $this->mediaPool->getDefaultContext());
@@ -110,5 +119,17 @@ final class MediaAdminController extends CRUDController
                 $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
             ),
         ]);
+    }
+
+    /**
+     * @todo: Simplify this when dropping support for sonata-project/admin-bundle 3
+     *
+     * @return mixed
+     */
+    private function getPersistentParameter(string $name)
+    {
+        $parameters = $this->admin->getPersistentParameters();
+
+        return $parameters[$name] ?? null;
     }
 }

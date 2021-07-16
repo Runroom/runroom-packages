@@ -1,3 +1,51 @@
 parameters:
     ignoreErrors:
-        - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface(.|\n)+#'
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:languageCode\\(\\)\\.$#"
+            count: 1
+            path: packages/basic-page-bundle/src/Factory/BasicPageTranslationFactory.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:slug\\(\\)\\.$#"
+            count: 1
+            path: packages/basic-page-bundle/src/Factory/BasicPageTranslationFactory.php
+
+        -
+            message: "#^Possibly invalid array key type int\\|object\\|string\\.$#"
+            count: 1
+            path: packages/ckeditor-sonata-media-bundle/src/Controller/MediaAdminController.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:languageCode\\(\\)\\.$#"
+            count: 1
+            path: packages/cookies-bundle/src/Factory/CookiesPageTranslationFactory.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:url\\(\\)\\.$#"
+            count: 2
+            path: packages/redirection-bundle/src/Factory/RedirectFactory.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:languageCode\\(\\)\\.$#"
+            count: 1
+            path: packages/seo-bundle/src/Factory/EntityMetaInformationTranslationFactory.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:word\\(\\)\\.$#"
+            count: 1
+            path: packages/seo-bundle/src/Factory/MetaInformationFactory.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:languageCode\\(\\)\\.$#"
+            count: 1
+            path: packages/seo-bundle/src/Factory/MetaInformationTranslationFactory.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:word\\(\\)\\.$#"
+            count: 1
+            path: packages/translation-bundle/src/Factory/TranslationFactory.php
+
+        -
+            message: "#^Call to an undefined method Faker\\\\UniqueGenerator\\:\\:languageCode\\(\\)\\.$#"
+            count: 1
+            path: packages/translation-bundle/src/Factory/TranslationTranslationFactory.php

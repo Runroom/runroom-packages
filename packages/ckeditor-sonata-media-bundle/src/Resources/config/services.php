@@ -23,8 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(MediaAdminController::class)
         ->public()
         ->arg('$mediaManager', new ReferenceConfigurator('sonata.media.manager.media'))
-        ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'))
-        ->arg('$twig', new ReferenceConfigurator('twig'));
+        ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'));
 
     $services->set(MediaAdminExtension::class)
         ->tag('sonata.admin.extension', ['target' => 'sonata.media.admin.media']);
