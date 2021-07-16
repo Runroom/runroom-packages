@@ -48,7 +48,7 @@ class CookiesPageServiceTest extends TestCase
     }
 
     /** @test */
-    public function itGetsViewModel(): void
+    public function itGetsCookiesPage(): void
     {
         $cookiesPage = CookiesPageFactory::createOne()->object();
         $this->repository->expects(self::once())->method('find')->with(1)->willReturn($cookiesPage);
@@ -57,10 +57,10 @@ class CookiesPageServiceTest extends TestCase
             ->with(CookiesFormType::class, [], self::isInstanceOf(CookiesPageViewModel::class))
             ->willReturnArgument(2);
 
-        $viewModel = $this->service->getViewModel();
+        $model = $this->service->getCookiesPageViewModel();
 
-        self::assertInstanceOf(CookiesPageViewModel::class, $viewModel);
-        self::assertSame($viewModel->getCookiesPage(), $cookiesPage);
-        self::assertSame($viewModel->getCookies(), []);
+        self::assertInstanceOf(CookiesPageViewModel::class, $model);
+        self::assertSame($model->getCookiesPage(), $cookiesPage);
+        self::assertSame($model->getCookies(), []);
     }
 }

@@ -18,7 +18,6 @@ use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\Service\CookiesService;
 use Runroom\FormHandlerBundle\FormHandler;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -33,7 +32,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(CookiesPageController::class)
         ->arg('$service', new ReferenceConfigurator(CookiesPageService::class))
-        ->arg('$renderer', new ReferenceConfigurator(PageRenderer::class))
         ->tag('controller.service_arguments');
 
     $services->set(CookiesPageService::class)

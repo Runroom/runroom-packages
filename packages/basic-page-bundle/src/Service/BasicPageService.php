@@ -15,11 +15,9 @@ namespace Runroom\BasicPageBundle\Service;
 
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /** @final */
-class BasicPageService implements EventSubscriberInterface
+class BasicPageService
 {
     private BasicPageRepository $repository;
 
@@ -36,21 +34,5 @@ class BasicPageService implements EventSubscriberInterface
         $model->setBasicPage($basicPage);
 
         return $model;
-    }
-
-    public function onPageRender(PageRenderEvent $event): void
-    {
-        $page = $event->getPageViewModel();
-
-        $page->addContext('basic_pages', $this->repository->findBy(['publish' => true]));
-
-        $event->setPageViewModel($page);
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            PageRenderEvent::EVENT_NAME => 'onPageRender',
-        ];
     }
 }

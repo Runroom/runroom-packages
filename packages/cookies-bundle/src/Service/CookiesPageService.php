@@ -41,7 +41,7 @@ class CookiesPageService
         $this->cookies = $cookies;
     }
 
-    public function getViewModel(): FormAwareInterface
+    public function getCookiesPageViewModel(): FormAwareInterface
     {
         $cookiesPage = $this->repository->find(self::COOKIES_PAGE_ID);
 

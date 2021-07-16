@@ -14,26 +14,24 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\Controller;
 
 use Runroom\CookiesBundle\Service\CookiesPageService;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CookiesPageController
+final class CookiesPageController extends AbstractController
 {
-    private PageRenderer $renderer;
     private CookiesPageService $service;
 
-    public function __construct(
-        PageRenderer $renderer,
-        CookiesPageService $service
-    ) {
-        $this->renderer = $renderer;
+    public function __construct(CookiesPageService $service)
+    {
         $this->service = $service;
     }
 
     public function index(): Response
     {
-        $viewModel = $this->service->getViewModel();
+        $model = $this->service->getCookiesPageViewModel();
 
-        return $this->renderer->renderResponse('@RunroomCookies/show.html.twig', $viewModel);
+        return $this->render('@RunroomCookies/show.html.twig', [
+            'model' => $model,
+        ]);
     }
 }

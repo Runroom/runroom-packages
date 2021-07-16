@@ -21,7 +21,6 @@ use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
 use Runroom\FormHandlerBundle\RunroomFormHandlerBundle;
-use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -58,7 +57,6 @@ class Kernel extends BaseKernel
             new ZenstruckFoundryBundle(),
 
             new RunroomFormHandlerBundle(),
-            new RunroomRenderEventBundle(),
             new RunroomCookiesBundle(),
         ];
     }

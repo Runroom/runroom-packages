@@ -26,7 +26,6 @@
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "gedmo/doctrine-extensions": "^3.0",
         "knplabs/doctrine-behaviors": "^2.0.6",
-        "runroom-packages/render-event-bundle": "^0.11@dev",
         "runroom-packages/seo-bundle": "^0.11@dev",
         "sonata-project/admin-bundle": "^3.103 || ^4.0@dev",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@dev",

@@ -18,7 +18,6 @@ use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider;
 use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
 use Runroom\BasicPageBundle\Service\BasicPageService;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -33,12 +32,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(BasicPageController::class)
         ->arg('$service', new ReferenceConfigurator(BasicPageService::class))
-        ->arg('$renderer', new ReferenceConfigurator(PageRenderer::class))
-        ->tag('controller.service_arguments');
+        ->call('setContainer', [new ReferenceConfigurator('service_container')])
+        ->tag('controller.service_subscriber');
 
     $services->set(BasicPageService::class)
-        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class))
-        ->tag('kernel.event_subscriber');
+        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class));
 
     $services->set(BasicPageAlternateLinksProvider::class)
         ->tag('runroom.seo.alternate_links');

@@ -21,7 +21,6 @@ use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\BasicPageBundle\Tests\App\Entity\Media;
-use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
@@ -58,7 +57,6 @@ class Kernel extends BaseKernel
             new ZenstruckFoundryBundle(),
 
             new RunroomBasicPageBundle(),
-            new RunroomRenderEventBundle(),
             new RunroomSeoBundle(),
         ];
     }
