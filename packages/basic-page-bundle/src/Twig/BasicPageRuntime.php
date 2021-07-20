@@ -35,6 +35,6 @@ class BasicPageRuntime implements RuntimeExtensionInterface
             $criteria['location'] = $location;
         }
 
-        return $this->repository->findBy($criteria) ?? [];
+        return $this->repository->findBy($criteria);
     }
 }

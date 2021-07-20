@@ -21,6 +21,7 @@ use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\TranslationBundle\RunroomTranslationBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -118,6 +119,14 @@ class Kernel extends BaseKernel
         $container->loadFromExtension('a2lix_translation_form', [
             'locales' => ['es', 'en', 'ca'],
         ]);
+
+        if (class_exists(DeprecatedTextExtension::class)) {
+            $container->loadFromExtension('sonata_admin', [
+                'options' => [
+                    'legacy_twig_text_extension' => false,
+                ],
+            ]);
+        }
     }
 
     /**
