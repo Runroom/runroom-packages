@@ -1,0 +1,13 @@
+--TEST--
+"get_basic_pages" function
+--TEMPLATE--
+{% set basicPages = get_basic_pages('footer') %}
+
+{% for basicPage in basicPages %}
+{{ basicPage.getLocation }}
+{% endfor %}
+--DATA--
+return []
+--EXPECT--
+footer
+footer

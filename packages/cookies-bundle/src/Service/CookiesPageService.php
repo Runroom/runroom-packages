@@ -45,12 +45,12 @@ class CookiesPageService
     {
         $cookiesPage = $this->repository->find(self::COOKIES_PAGE_ID);
 
-        $viewModel = new CookiesPageViewModel();
-
-        if (null !== $cookiesPage) {
-            $viewModel->setCookiesPage($cookiesPage);
+        if (null === $cookiesPage) {
+            throw new \RuntimeException('Cookies page not found, did you forget to generate it?');
         }
 
+        $viewModel = new CookiesPageViewModel();
+        $viewModel->setCookiesPage($cookiesPage);
         $viewModel->setCookies($this->cookies);
 
         return $this->handler->handleForm(CookiesFormType::class, [], $viewModel);

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\DependencyInjection;
 
 use Runroom\CookiesBundle\Service\CookiesPageService;
-use Runroom\CookiesBundle\Service\CookiesService;
+use Runroom\CookiesBundle\Twig\CookiesRuntime;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
@@ -30,7 +30,7 @@ final class RunroomCookiesExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition(CookiesService::class);
+        $definition = $container->getDefinition(CookiesRuntime::class);
         $definition->setArgument('$cookies', $config['cookies']);
 
         $definition = $container->getDefinition(CookiesPageService::class);

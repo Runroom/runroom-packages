@@ -24,6 +24,7 @@
         "doctrine/persistence": "^2.0",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "knplabs/doctrine-behaviors": "^2.0.6",
+        "psr/container": "^1.1 || ^2.0",
         "runroom-packages/form-handler-bundle": "^0.11@dev",
         "sonata-project/admin-bundle": "^3.103 || ^4.0@dev",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@dev",
@@ -33,7 +34,8 @@
         "symfony/form": "^4.4 || ^5.3",
         "symfony/http-foundation": "^4.4.7 || ^5.3",
         "symfony/http-kernel": "^4.4.13 || ^5.3",
-        "symfony/validator": "^4.4 || ^5.3"
+        "symfony/validator": "^4.4 || ^5.3",
+        "twig/twig": "^2.12 || ^3.0"
     },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.3.1",
@@ -41,6 +43,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
         "runroom-packages/testing": "^0.11@dev",
+        "symfony/browser-kit": "^5.3",
         "symfony/phpunit-bridge": "^5.3",
         "zenstruck/foundry": "^1.10"
     },

@@ -48,6 +48,15 @@ class CookiesPageServiceTest extends TestCase
     }
 
     /** @test */
+    public function itThrowsExceptionIfCoookiesPageNotFound(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Cookies page not found, did you forget to generate it?');
+
+        $this->service->getCookiesPageViewModel();
+    }
+
+    /** @test */
     public function itGetsCookiesPage(): void
     {
         $cookiesPage = CookiesPageFactory::createOne()->object();

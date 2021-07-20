@@ -1,0 +1,11 @@
+--TEST--
+"build_cookies" function
+--TEMPLATE--
+{% set cookies = build_cookies() %}
+{{ cookies.performanceCookies|json_encode|raw }}
+{{ cookies.targetingCookies|json_encode|raw }}
+--DATA--
+return []
+--EXPECT--
+["test1","test2","test3","test4","test5","test6"]
+["test1","test2","test3","test4","test5","test6"]
