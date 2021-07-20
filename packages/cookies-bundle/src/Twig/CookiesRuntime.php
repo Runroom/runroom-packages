@@ -16,15 +16,16 @@ namespace Runroom\CookiesBundle\Twig;
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
 use Twig\Extension\RuntimeExtensionInterface;
 
+/** @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration */
 class CookiesRuntime implements RuntimeExtensionInterface
 {
     private const TYPE_PERFORMANCE = 'performance_cookies';
     private const TYPE_TARGETING = 'targeting_cookies';
 
-    /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
+    /** @phpstan-var CookiesData */
     private array $cookies;
 
-    /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
+    /** @phpstan-param CookiesData $cookies */
     public function __construct(array $cookies)
     {
         $this->cookies = $cookies;

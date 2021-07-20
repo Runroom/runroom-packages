@@ -18,30 +18,35 @@ use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
 use Runroom\FormHandlerBundle\FormHandler;
 use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
-/** @final */
+/**
+ * @final
+ *
+ * @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration
+ */
 class CookiesPageService
 {
     private const COOKIES_PAGE_ID = 1;
 
     private CookiesPageRepository $repository;
-    private FormHandler $handler;
+    private FormFactoryInterface $formFactory;
 
-    /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
+    /** @phpstan-var CookiesData */
     private array $cookies;
 
-    /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
+    /** @phpstan-param CookiesData $cookies */
     public function __construct(
         CookiesPageRepository $repository,
-        FormHandler $handler,
+        FormFactoryInterface $formFactory,
         array $cookies
     ) {
         $this->repository = $repository;
-        $this->handler = $handler;
+        $this->formFactory = $formFactory;
         $this->cookies = $cookies;
     }
 
-    public function getCookiesPageViewModel(): FormAwareInterface
+    public function getCookiesPageViewModel(): CookiesPageViewModel
     {
         $cookiesPage = $this->repository->find(self::COOKIES_PAGE_ID);
 
@@ -49,10 +54,13 @@ class CookiesPageService
             throw new \RuntimeException('Cookies page not found, did you forget to generate it?');
         }
 
-        $viewModel = new CookiesPageViewModel();
-        $viewModel->setCookiesPage($cookiesPage);
-        $viewModel->setCookies($this->cookies);
+        $form = $this->formFactory->create(CookiesFormType::class);
 
-        return $this->handler->handleForm(CookiesFormType::class, [], $viewModel);
+        $model = new CookiesPageViewModel();
+        $model->setCookiesPage($cookiesPage);
+        $model->setFormView($form->createView());
+        $model->setCookies($this->cookies);
+
+        return $model;
     }
 }

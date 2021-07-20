@@ -14,17 +14,17 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\ViewModel;
 
 use Runroom\CookiesBundle\Entity\CookiesPage;
-use Runroom\FormHandlerBundle\ViewModel\FormAware;
-use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
+use Symfony\Component\Form\FormView;
 
-final class CookiesPageViewModel implements FormAwareInterface
+/** @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration */
+final class CookiesPageViewModel
 {
-    use FormAware;
-
     private ?CookiesPage $cookiesPage = null;
 
-    /** @var array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
+    /** @phpstan-var CookiesData */
     private array $cookies = [];
+
+    private ?FormView $formView = null;
 
     public function setCookiesPage(CookiesPage $cookiesPage): self
     {
@@ -38,7 +38,7 @@ final class CookiesPageViewModel implements FormAwareInterface
         return $this->cookiesPage;
     }
 
-    /** @param array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> $cookies */
+    /** @phpstan-param CookiesData $cookies */
     public function setCookies(array $cookies): self
     {
         $this->cookies = $cookies;
@@ -46,9 +46,21 @@ final class CookiesPageViewModel implements FormAwareInterface
         return $this;
     }
 
-    /** @return array<string, array{ name: string, has_description?: bool, cookies: string[]}[]> */
+    /** @phpstan-return CookiesData */
     public function getCookies(): array
     {
         return $this->cookies;
+    }
+
+    public function setFormView(FormView $formView): self
+    {
+        $this->formView = $formView;
+
+        return $this;
+    }
+
+    public function getFormView(): ?FormView
+    {
+        return $this->formView;
     }
 }

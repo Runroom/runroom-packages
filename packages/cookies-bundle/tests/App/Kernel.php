@@ -20,7 +20,6 @@ use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
-use Runroom\FormHandlerBundle\RunroomFormHandlerBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
@@ -57,7 +56,6 @@ class Kernel extends BaseKernel
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
 
-            new RunroomFormHandlerBundle(),
             new RunroomCookiesBundle(),
         ];
     }

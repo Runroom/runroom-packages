@@ -1,27 +1,29 @@
 <h1>{{ model.cookiesPage.title }}</h1>
 <div>{{ model.cookiesPage.content|raw }}</div>
 
-{{- form_start(model.formView) -}}
-    <h2>Mandatory Cookies</h2>
-    {{- form_row(model.formView.mandatoryCookies) -}}
+{% if model.formView %}
+    {{- form_start(model.formView) -}}
+        <h2>Mandatory Cookies</h2>
+        {{- form_row(model.formView.mandatoryCookies) -}}
 
-    {% include '@RunroomCookies/_cookies-list.html.twig' with {
-        cookiesList: model.cookies.mandatory_cookies
-    } %}
+        {% include '@RunroomCookies/_cookies-list.html.twig' with {
+            cookiesList: model.cookies.mandatory_cookies
+        } %}
 
-    <h2>Performance Cookie  s</h2>
-    {{- form_row(model.formView.performanceCookies) -}}
+        <h2>Performance Cookie  s</h2>
+        {{- form_row(model.formView.performanceCookies) -}}
 
-    {% include '@RunroomCookies/_cookies-list.html.twig' with {
-        cookiesList: model.cookies.performance_cookies
-    } %}
+        {% include '@RunroomCookies/_cookies-list.html.twig' with {
+            cookiesList: model.cookies.performance_cookies
+        } %}
 
-    <h2>Targeting Cookies</h2>
-    {{- form_row(model.formView.targetingCookies) -}}
+        <h2>Targeting Cookies</h2>
+        {{- form_row(model.formView.targetingCookies) -}}
 
-    {% include '@RunroomCookies/_cookies-list.html.twig' with {
-        cookiesList: model.cookies.targeting_cookies
-    } %}
+        {% include '@RunroomCookies/_cookies-list.html.twig' with {
+            cookiesList: model.cookies.targeting_cookies
+        } %}
 
-    {{- form_row(model.formView.send) -}}
-{{- form_end(model.formView) -}}
+        {{- form_row(model.formView.send) -}}
+    {{- form_end(model.formView) -}}
+{% endif %}

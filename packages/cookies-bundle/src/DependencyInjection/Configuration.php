@@ -17,6 +17,13 @@ use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * @phpstan-type CookiesData = array<string, array{
+ *     name: string,
+ *     has_description?: bool,
+ *     cookies: string[]
+ * }[]>
+ */
 final class Configuration implements ConfigurationInterface
 {
     /**
