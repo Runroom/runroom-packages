@@ -18,38 +18,38 @@ use PHPUnit\Framework\TestCase;
 use Runroom\CookiesBundle\Controller\CookiesPageController;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\Container;
+use Twig\Environment;
 
 class CookiesPageControllerTest extends TestCase
 {
-    /** @var MockObject&PageRenderer */
-    private $renderer;
-
     /** @var MockObject&CookiesPageService */
     private $service;
 
+    /** @var MockObject&Environment */
+    private $twig;
+
     private CookiesPageController $controller;
 
+    /** @psalm-suppress InternalMethod setContainer is internal on Symfony 5.x */
     protected function setUp(): void
     {
-        $this->renderer = $this->createMock(PageRenderer::class);
         $this->service = $this->createMock(CookiesPageService::class);
+        $this->twig = $this->createMock(Environment::class);
 
-        $this->controller = new CookiesPageController(
-            $this->renderer,
-            $this->service
-        );
+        $container = new Container();
+        $container->set('twig', $this->twig);
+
+        $this->controller = new CookiesPageController($this->service);
+        $this->controller->setContainer($container);
     }
 
     /** @test */
     public function itRendersCookiesPage(): void
     {
-        $viewModel = new CookiesPageViewModel();
+        $model = new CookiesPageViewModel();
 
-        $this->service->expects(self::once())->method('getViewModel')->willReturn($viewModel);
-        $this->renderer->method('renderResponse')->with('@RunroomCookies/show.html.twig', $viewModel)
-            ->willReturn(new Response());
+        $this->service->expects(self::once())->method('getCookiesPageViewModel')->willReturn($model);
 
         $response = $this->controller->index();
 

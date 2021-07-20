@@ -19,7 +19,8 @@ use Runroom\CookiesBundle\Controller\CookiesPageController;
 use Runroom\CookiesBundle\DependencyInjection\RunroomCookiesExtension;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
-use Runroom\CookiesBundle\Service\CookiesService;
+use Runroom\CookiesBundle\Twig\CookiesExtension;
+use Runroom\CookiesBundle\Twig\CookiesRuntime;
 
 class RunroomCookiesExtensionTest extends AbstractExtensionTestCase
 {
@@ -46,8 +47,9 @@ class RunroomCookiesExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService(CookiesPageAdmin::class);
         $this->assertContainerBuilderHasService(CookiesPageController::class);
         $this->assertContainerBuilderHasService(CookiesPageService::class);
-        $this->assertContainerBuilderHasService(CookiesService::class);
         $this->assertContainerBuilderHasService(CookiesPageRepository::class);
+        $this->assertContainerBuilderHasService(CookiesExtension::class);
+        $this->assertContainerBuilderHasService(CookiesRuntime::class);
     }
 
     protected function getContainerExtensions(): array

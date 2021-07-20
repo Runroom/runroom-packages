@@ -11,13 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\CookiesBundle\Service;
+namespace Runroom\CookiesBundle\Twig;
 
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Twig\Extension\RuntimeExtensionInterface;
 
-final class CookiesService implements EventSubscriberInterface
+class CookiesRuntime implements RuntimeExtensionInterface
 {
     private const TYPE_PERFORMANCE = 'performance_cookies';
     private const TYPE_TARGETING = 'targeting_cookies';
@@ -31,21 +30,7 @@ final class CookiesService implements EventSubscriberInterface
         $this->cookies = $cookies;
     }
 
-    public function onPageRender(PageRenderEvent $event): void
-    {
-        $page = $event->getPageViewModel();
-        $page->addContext('cookies', $this->buildCookiesViewModel());
-        $event->setPageViewModel($page);
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            PageRenderEvent::EVENT_NAME => 'onPageRender',
-        ];
-    }
-
-    private function buildCookiesViewModel(): CookiesViewModel
+    public function buildCookies(): CookiesViewModel
     {
         $model = new CookiesViewModel();
         $model->setPerformanceCookies($this->getCookies(self::TYPE_PERFORMANCE));

@@ -14,19 +14,15 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Controller;
 
 use Runroom\BasicPageBundle\Service\BasicPageService;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-final class BasicPageController
+final class BasicPageController extends AbstractController
 {
-    private PageRenderer $renderer;
     private BasicPageService $service;
 
-    public function __construct(
-        PageRenderer $renderer,
-        BasicPageService $service
-    ) {
-        $this->renderer = $renderer;
+    public function __construct(BasicPageService $service)
+    {
         $this->service = $service;
     }
 
@@ -34,6 +30,8 @@ final class BasicPageController
     {
         $model = $this->service->getBasicPageViewModel($slug);
 
-        return $this->renderer->renderResponse('@RunroomBasicPage/show.html.twig', $model);
+        return $this->render('@RunroomBasicPage/show.html.twig', [
+            'model' => $model,
+        ]);
     }
 }

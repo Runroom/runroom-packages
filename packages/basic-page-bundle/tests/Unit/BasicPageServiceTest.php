@@ -18,8 +18,6 @@ use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageService;
-use Runroom\RenderEventBundle\Event\PageRenderEvent;
-use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 
 class BasicPageServiceTest extends TestCase
 {
@@ -36,7 +34,7 @@ class BasicPageServiceTest extends TestCase
     }
 
     /** @test */
-    public function itGetsBasicViewModel(): void
+    public function itGetsBasicPage(): void
     {
         $basicPage = new BasicPage();
 
@@ -45,25 +43,5 @@ class BasicPageServiceTest extends TestCase
         $model = $this->service->getBasicPageViewModel('slug');
 
         self::assertSame($basicPage, $model->getBasicPage());
-    }
-
-    /** @test */
-    public function itAddsBasicPagesToPageViewModel(): void
-    {
-        $event = new PageRenderEvent('view', new PageViewModel());
-
-        $this->repository->method('findBy')->with(['publish' => true])->willReturn([]);
-
-        $this->service->onPageRender($event);
-
-        self::assertSame([], $event->getPageViewModel()->getContext('basic_pages'));
-    }
-
-    /** @test */
-    public function itHasSubscribedEvents(): void
-    {
-        $events = BasicPageService::getSubscribedEvents();
-
-        self::assertCount(1, $events);
     }
 }

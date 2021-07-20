@@ -11,6 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Psr\Container\ContainerInterface;
 use Runroom\BasicPageBundle\Admin\BasicPageAdmin;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
 use Runroom\BasicPageBundle\Entity\BasicPage;
@@ -18,7 +19,8 @@ use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider;
 use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
 use Runroom\BasicPageBundle\Service\BasicPageService;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
+use Runroom\BasicPageBundle\Twig\BasicPageExtension;
+use Runroom\BasicPageBundle\Twig\BasicPageRuntime;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -32,13 +34,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Basic pages']);
 
     $services->set(BasicPageController::class)
+        ->public()
         ->arg('$service', new ReferenceConfigurator(BasicPageService::class))
-        ->arg('$renderer', new ReferenceConfigurator(PageRenderer::class))
+        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
+        ->tag('container.service_subscriber')
         ->tag('controller.service_arguments');
 
     $services->set(BasicPageService::class)
-        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class))
-        ->tag('kernel.event_subscriber');
+        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class));
 
     $services->set(BasicPageAlternateLinksProvider::class)
         ->tag('runroom.seo.alternate_links');
@@ -50,4 +53,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->tag('doctrine.repository_service');
+
+    $services->set(BasicPageExtension::class)
+        ->tag('twig.extension');
+
+    $services->set(BasicPageRuntime::class)
+        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class))
+        ->tag('twig.runtime');
 };

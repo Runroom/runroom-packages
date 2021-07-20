@@ -18,42 +18,41 @@ use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\Container;
+use Twig\Environment;
 
 class BasicPageControllerTest extends TestCase
 {
-    /** @var MockObject&PageRenderer */
-    private $renderer;
-
     /** @var MockObject&BasicPageService */
     private $service;
 
+    /** @var MockObject&Environment */
+    private $twig;
+
     private BasicPageController $controller;
 
+    /** @psalm-suppress InternalMethod setContainer is internal on Symfony 5.x */
     protected function setUp(): void
     {
-        $this->renderer = $this->createMock(PageRenderer::class);
         $this->service = $this->createMock(BasicPageService::class);
+        $this->twig = $this->createMock(Environment::class);
 
-        $this->controller = new BasicPageController(
-            $this->renderer,
-            $this->service
-        );
+        $container = new Container();
+        $container->set('twig', $this->twig);
+
+        $this->controller = new BasicPageController($this->service);
+        $this->controller->setContainer($container);
     }
 
     /** @test */
     public function itRendersStatic(): void
     {
         $model = new BasicPageViewModel();
-        $expectedResponse = new Response();
 
         $this->service->method('getBasicPageViewModel')->with('slug')->willReturn($model);
-        $this->renderer->method('renderResponse')->with('@RunroomBasicPage/show.html.twig', $model, null)
-            ->willReturn($expectedResponse);
 
         $response = $this->controller->show('slug');
 
-        self::assertSame($expectedResponse, $response);
+        self::assertSame(200, $response->getStatusCode());
     }
 }

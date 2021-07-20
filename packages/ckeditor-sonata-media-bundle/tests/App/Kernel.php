@@ -20,6 +20,7 @@ use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Gallery;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\GalleryItem;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\Model\GalleryItemInterface;
@@ -104,6 +105,14 @@ class Kernel extends BaseKernel
             'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
+
+        if (class_exists(DeprecatedTextExtension::class)) {
+            $container->loadFromExtension('sonata_admin', [
+                'options' => [
+                    'legacy_twig_text_extension' => false,
+                ],
+            ]);
+        }
 
         $galleryItemKey = interface_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
 

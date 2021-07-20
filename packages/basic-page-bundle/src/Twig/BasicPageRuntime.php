@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\BasicPageBundle\Service;
+namespace Runroom\BasicPageBundle\Twig;
 
+use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
-use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
+use Twig\Extension\RuntimeExtensionInterface;
 
-/** @final */
-class BasicPageService
+class BasicPageRuntime implements RuntimeExtensionInterface
 {
     private BasicPageRepository $repository;
 
@@ -26,13 +26,15 @@ class BasicPageService
         $this->repository = $repository;
     }
 
-    public function getBasicPageViewModel(string $slug): BasicPageViewModel
+    /** @return BasicPage[] */
+    public function getBasicPages(?string $location = null): array
     {
-        $basicPage = $this->repository->findBySlug($slug);
+        $criteria = ['publish' => true];
 
-        $model = new BasicPageViewModel();
-        $model->setBasicPage($basicPage);
+        if (null !== $location) {
+            $criteria['location'] = $location;
+        }
 
-        return $model;
+        return $this->repository->findBy($criteria);
     }
 }
