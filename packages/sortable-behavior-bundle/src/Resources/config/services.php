@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 
 use Gedmo\Sortable\SortableListener;
+use Psr\Container\ContainerInterface;
 use Runroom\SortableBehaviorBundle\Controller\SortableAdminController;
 use Runroom\SortableBehaviorBundle\Service\GedmoPositionHandler;
 use Runroom\SortableBehaviorBundle\Service\ORMPositionHandler;
@@ -28,7 +29,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(SortableAdminController::class)
         ->public()
         ->arg('$accessor', new ReferenceConfigurator('property_accessor'))
-        ->arg('$positionHandler', new ReferenceConfigurator('sortable_behavior.position'));
+        ->arg('$positionHandler', new ReferenceConfigurator('sortable_behavior.position'))
+        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
+        ->tag('container.service_subscriber')
+        ->tag('controller.service_arguments');
 
     $services->set(ORMPositionHandler::class)
         ->arg('$entityManager', new ReferenceConfigurator('doctrine.orm.entity_manager'))
