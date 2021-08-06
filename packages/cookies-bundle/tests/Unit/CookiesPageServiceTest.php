@@ -19,7 +19,6 @@ use Runroom\CookiesBundle\Factory\CookiesPageFactory;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
-use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
