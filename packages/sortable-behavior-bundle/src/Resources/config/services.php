@@ -17,6 +17,8 @@ use Runroom\SortableBehaviorBundle\Controller\SortableAdminController;
 use Runroom\SortableBehaviorBundle\Service\GedmoPositionHandler;
 use Runroom\SortableBehaviorBundle\Service\ORMPositionHandler;
 use Runroom\SortableBehaviorBundle\Twig\ObjectPositionExtension;
+use Sonata\AdminBundle\Controller\CRUDController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -26,13 +28,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->defaults();
 
-    $services->set(SortableAdminController::class)
+    $sortableAdminController = $services->set(SortableAdminController::class)
         ->public()
         ->arg('$accessor', new ReferenceConfigurator('property_accessor'))
-        ->arg('$positionHandler', new ReferenceConfigurator('sortable_behavior.position'))
-        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
-        ->tag('container.service_subscriber')
-        ->tag('controller.service_arguments');
+        ->arg('$positionHandler', new ReferenceConfigurator('sortable_behavior.position'));
+
+    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    if (is_a(CRUDController::class, AbstractController::class, true)) {
+        $sortableAdminController
+            ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
+            ->tag('container.service_subscriber')
+            ->tag('controller.service_arguments');
+    }
 
     $services->set(ORMPositionHandler::class)
         ->arg('$entityManager', new ReferenceConfigurator('doctrine.orm.entity_manager'))
