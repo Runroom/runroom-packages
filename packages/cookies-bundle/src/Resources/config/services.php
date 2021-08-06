@@ -19,7 +19,6 @@ use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\Twig\CookiesExtension;
 use Runroom\CookiesBundle\Twig\CookiesRuntime;
-use Runroom\FormHandlerBundle\FormHandler;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -42,7 +41,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(CookiesPageService::class)
         ->arg('$repository', new ReferenceConfigurator(CookiesPageRepository::class))
-        ->arg('$handler', new ReferenceConfigurator(FormHandler::class))
+        ->arg('$formFactory', new ReferenceConfigurator('form.factory'))
         ->arg('$cookies', null);
 
     $services->set(CookiesPageRepository::class)

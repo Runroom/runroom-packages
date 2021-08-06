@@ -21,6 +21,10 @@ use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
 use Runroom\FormHandlerBundle\FormHandler;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Zenstruck\Foundry\Test\Factories;
 
 class CookiesPageServiceTest extends TestCase
@@ -30,19 +34,19 @@ class CookiesPageServiceTest extends TestCase
     /** @var MockObject&CookiesPageRepository */
     private $repository;
 
-    /** @var MockObject&FormHandler */
-    private $handler;
+    /** @var MockObject&FormFactoryInterface */
+    private $formFactory;
 
     private CookiesPageService $service;
 
     protected function setUp(): void
     {
         $this->repository = $this->createMock(CookiesPageRepository::class);
-        $this->handler = $this->createMock(FormHandler::class);
+        $this->formFactory = $this->createMock(FormFactoryInterface::class);
 
         $this->service = new CookiesPageService(
             $this->repository,
-            $this->handler,
+            $this->formFactory,
             []
         );
     }
@@ -60,16 +64,21 @@ class CookiesPageServiceTest extends TestCase
     public function itGetsCookiesPage(): void
     {
         $cookiesPage = CookiesPageFactory::createOne()->object();
-        $this->repository->expects(self::once())->method('find')->with(1)->willReturn($cookiesPage);
+        $form = $this->createStub(FormInterface::class);
+        $formView = $this->createStub(FormView::class);
 
-        $this->handler->expects(self::once())->method('handleForm')
-            ->with(CookiesFormType::class, [], self::isInstanceOf(CookiesPageViewModel::class))
-            ->willReturnArgument(2);
+        $form->method('createView')->willReturn($formView);
+
+        $this->repository->expects(self::once())->method('find')->with(1)->willReturn($cookiesPage);
+        $this->formFactory->expects(self::once())->method('create')
+            ->with(CookiesFormType::class)
+            ->willReturn($form);
 
         $model = $this->service->getCookiesPageViewModel();
 
         self::assertInstanceOf(CookiesPageViewModel::class, $model);
         self::assertSame($model->getCookiesPage(), $cookiesPage);
+        self::assertSame($model->getFormView(), $formView);
         self::assertSame($model->getCookies(), []);
     }
 }
