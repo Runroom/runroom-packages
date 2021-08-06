@@ -24,6 +24,7 @@ use Sonata\Doctrine\Mapper\DoctrineCollector;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -60,7 +61,7 @@ final class RunroomSeoExtension extends Extension
             ->setArgument(0, $config['context']['modelKey']);
 
         $container->getDefinition(SeoRuntime::class)
-            ->setArgument(2, $config['context']['extractor']);
+            ->setArgument(2, new Reference($config['context']['extractor']));
 
         $container->setParameter(self::XDEFAULT_LOCALE, $config['xdefault_locale']);
 
