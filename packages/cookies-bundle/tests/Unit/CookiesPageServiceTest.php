@@ -74,7 +74,6 @@ class CookiesPageServiceTest extends TestCase
 
         $model = $this->service->getCookiesPageViewModel();
 
-        self::assertInstanceOf(CookiesPageViewModel::class, $model);
         self::assertSame($model->getCookiesPage(), $cookiesPage);
         self::assertSame($model->getFormView(), $formView);
         self::assertSame($model->getCookies(), []);
