@@ -61,17 +61,11 @@ final class MediaAdminController extends CRUDController
             $id = $media->getId();
             $context = $media->getContext();
 
-            if (null === $id || null === $context) {
+            if (null === $id || null === $context || !$this->mediaPool->hasContext($context)) {
                 continue;
             }
 
-            $formatNames = $this->mediaPool->getFormatNamesByContext($context);
-
-            if (null === $formatNames) {
-                continue;
-            }
-
-            $formats[$id] = $formatNames;
+            $formats[$id] = $this->mediaPool->getFormatNamesByContext($context);
         }
 
         $formView = $datagrid->getForm()->createView();
