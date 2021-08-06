@@ -103,6 +103,10 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([new Media(), $media, $media2]);
         $datagrid->method('getForm')->willReturn($form);
+        $this->mediaPool->method('hasContext')->willReturnMap([
+            ['context', true],
+            ['context2', false],
+        ]);
         $this->mediaPool->method('getFormatNamesByContext')->willReturnMap([
             ['context', ['format1' => []]],
         ]);
