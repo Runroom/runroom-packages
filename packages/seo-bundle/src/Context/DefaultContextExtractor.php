@@ -29,10 +29,10 @@ final class DefaultContextExtractor implements ContextExtractorInterface
      *
      * @throws \RuntimeException if model is not found or not instance of SeoModelInterface
      */
-    public function extract(array $context): SeoModelInterface
+    public function extract(array $context): ?SeoModelInterface
     {
         if (!isset($context[$this->modelKey])) {
-            throw new \RuntimeException('Model not found on the context using key: ' . $this->modelKey);
+            return null;
         }
 
         $model = $context[$this->modelKey];

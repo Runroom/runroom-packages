@@ -28,12 +28,9 @@ class DefaultContextExtractorTest extends TestCase
     }
 
     /** @test */
-    public function itThrowsifNoModelKeyIsFound(): void
+    public function itReturnsNullifNoModelKeyIsFound(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Model not found on the context using key: model');
-
-        $this->extractor->extract([]);
+        self::assertNull($this->extractor->extract([]));
     }
 
     /** @test */

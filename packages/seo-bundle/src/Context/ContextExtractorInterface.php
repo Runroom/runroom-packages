@@ -18,5 +18,5 @@ use Runroom\SeoBundle\Model\SeoModelInterface;
 interface ContextExtractorInterface
 {
     /** @param array<string, mixed> $context */
-    public function extract(array $context): SeoModelInterface;
+    public function extract(array $context): ?SeoModelInterface;
 }

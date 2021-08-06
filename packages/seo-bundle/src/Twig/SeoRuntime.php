@@ -38,20 +38,20 @@ class SeoRuntime implements RuntimeExtensionInterface
     /**
      * @param array<string, mixed> $context
      *
-     * @return array<string, string>
+     * @return array<string, string>|null
      */
-    public function buildAlternateLinks(array $context): array
+    public function buildAlternateLinks(array $context): ?array
     {
         $model = $this->contextExtractor->extract($context);
 
-        return $this->alternateLinks->build($model);
+        return null !== $model ? $this->alternateLinks->build($model) : null;
     }
 
     /** @param array<string, mixed> $context */
-    public function buildMetaInformation(array $context): MetaInformationViewModel
+    public function buildMetaInformation(array $context): ?MetaInformationViewModel
     {
         $model = $this->contextExtractor->extract($context);
 
-        return $this->metaInformation->build($model);
+        return null !== $model ? $this->metaInformation->build($model) : null;
     }
 }
