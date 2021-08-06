@@ -16,8 +16,6 @@ namespace Runroom\CookiesBundle\Service;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
-use Runroom\FormHandlerBundle\FormHandler;
-use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
