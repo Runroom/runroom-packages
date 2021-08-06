@@ -37,7 +37,7 @@ final class DefaultContextExtractor implements ContextExtractorInterface
 
         $model = $context[$this->modelKey];
 
-        if ($model !== null && !$model instanceof SeoModelInterface) {
+        if (null !== $model && !$model instanceof SeoModelInterface) {
             throw new \RuntimeException('Model is not an instance of: ' . SeoModelInterface::class);
         }
 
