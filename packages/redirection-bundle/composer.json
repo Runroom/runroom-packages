@@ -41,7 +41,7 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
-        "runroom-packages/testing": "^0.11",
+        "runroom-packages/testing": "^0.11@dev",
         "symfony/framework-bundle": "^4.4 || ^5.3",
         "symfony/phpunit-bridge": "^5.3",
         "zenstruck/foundry": "^1.10"
@@ -51,7 +51,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         }
     },
     "autoload": {
