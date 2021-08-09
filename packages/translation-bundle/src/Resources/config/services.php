@@ -11,8 +11,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\TranslationBundle\Admin\TranslationAdmin;
-use Runroom\TranslationBundle\Entity\Translation;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
@@ -22,11 +20,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
-
-    $services->set(TranslationAdmin::class)
-        ->public()
-        ->args([null, Translation::class, null])
-        ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Translations']);
 
     $services->set(TranslationService::class)
         ->arg('$repository', new ReferenceConfigurator(TranslationRepository::class))

@@ -23,11 +23,18 @@ final class RunroomRedirectionExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
+
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
+
+        if (isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin.php');
+        }
 
         if ($config['enable_automatic_redirections']) {
             $definition = $container->getDefinition(AutomaticRedirectSubscriber::class);

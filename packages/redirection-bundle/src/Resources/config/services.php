@@ -11,8 +11,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\RedirectionBundle\Admin\RedirectAdmin;
-use Runroom\RedirectionBundle\Entity\Redirect;
 use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
 use Runroom\RedirectionBundle\Listener\RedirectListener;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
@@ -22,11 +20,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
-
-    $services->set(RedirectAdmin::class)
-        ->public()
-        ->args([null, Redirect::class, null])
-        ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Redirects']);
 
     $services->set(RedirectListener::class)
         ->arg('$repository', new ReferenceConfigurator(RedirectRepository::class))

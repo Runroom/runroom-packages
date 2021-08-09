@@ -11,14 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\SeoBundle\Admin\EntityMetaInformationAdmin;
-use Runroom\SeoBundle\Admin\MetaInformationAdmin;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
 use Runroom\SeoBundle\Context\DefaultContextExtractor;
-use Runroom\SeoBundle\Entity\EntityMetaInformation;
-use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
@@ -34,16 +30,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
     // Use "abstract_arg" function for creating references to arguments without value when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
-
-    $services->set(MetaInformationAdmin::class)
-        ->public()
-        ->args([null, MetaInformation::class, null])
-        ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'SEO']);
-
-    $services->set(EntityMetaInformationAdmin::class)
-        ->public()
-        ->args([null, EntityMetaInformation::class, null])
-        ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Entity SEO']);
 
     $services->set(AlternateLinksBuilder::class)
         ->arg('$urlGenerator', new ReferenceConfigurator('router'))
