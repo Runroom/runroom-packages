@@ -24,8 +24,15 @@ final class RunroomCookiesExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
+
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
+
+        if (isset($bundles['SonataAdminBundle'], $bundles['FOSCKEditorBundle'], $bundles['A2lixTranslationFormBundle'])) {
+            $loader->load('admin.php');
+        }
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);

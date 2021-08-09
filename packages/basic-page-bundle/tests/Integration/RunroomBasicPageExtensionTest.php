@@ -27,6 +27,11 @@ class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->container->setParameter('kernel.bundles', [
+            'SonataAdminBundle' => true,
+            'FOSCKEditorBundle' => true,
+            'A2lixTranslationFormBundle' => true,
+        ]);
 
         $this->load();
     }

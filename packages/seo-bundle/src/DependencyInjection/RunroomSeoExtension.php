@@ -41,12 +41,19 @@ final class RunroomSeoExtension extends Extension
 
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $configuration = new Configuration();
-        /** @phpstan-var SeoBundleConfiguration */
-        $config = $this->processConfiguration($configuration, $configs);
+        $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
+
+        if (isset($bundles['SonataAdminBundle'], $bundles['A2lixTranslationFormBundle'])) {
+            $loader->load('admin.php');
+        }
+
+        $configuration = new Configuration();
+        /** @phpstan-var SeoBundleConfiguration */
+        $config = $this->processConfiguration($configuration, $configs);
 
         $container->registerForAutoconfiguration(AlternateLinksProviderInterface::class)
             ->addTag('runroom.seo.alternate_links');
