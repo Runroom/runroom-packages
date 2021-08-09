@@ -15,7 +15,6 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\Context\DefaultContextExtractor;
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
 class DefaultContextExtractorTest extends TestCase
@@ -34,12 +33,9 @@ class DefaultContextExtractorTest extends TestCase
     }
 
     /** @test */
-    public function itThrowsifModelKeyIsNotSeoModelInterface(): void
+    public function itReturnsNullIfModelIsNotASeoModelInterface(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Model is not an instance of: ' . SeoModelInterface::class);
-
-        $this->extractor->extract(['model' => 'not_seo_model']);
+        self::assertNull($this->extractor->extract(['model' => 'not_seo_model']));
     }
 
     /** @test */
