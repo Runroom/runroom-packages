@@ -24,8 +24,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
-    $services->defaults();
-
     $services->set(TemplateController::class)
         ->arg('$renderer', new ReferenceConfigurator(PageRenderer::class))
         ->tag('controller.service_arguments');
