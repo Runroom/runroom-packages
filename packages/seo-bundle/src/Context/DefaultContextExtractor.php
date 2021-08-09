@@ -24,11 +24,6 @@ final class DefaultContextExtractor implements ContextExtractorInterface
         $this->modelKey = $modelKey;
     }
 
-    /**
-     * @param array<string, mixed> $context
-     *
-     * @throws \RuntimeException if model is not found or not instance of SeoModelInterface
-     */
     public function extract(array $context): ?SeoModelInterface
     {
         if (!isset($context[$this->modelKey])) {
@@ -38,7 +33,7 @@ final class DefaultContextExtractor implements ContextExtractorInterface
         $model = $context[$this->modelKey];
 
         if (!$model instanceof SeoModelInterface) {
-            throw new \RuntimeException('Model is not an instance of: ' . SeoModelInterface::class);
+            return null;
         }
 
         return $model;
