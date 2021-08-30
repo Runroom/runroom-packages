@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\App\MetaInformation;
 
 use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
-use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
-/** @phpstan-extends AbstractMetaInformationProvider<DummyViewModel> */
 class TestMetaInformationProvider extends AbstractMetaInformationProvider
 {
     protected function getRoutes(): array

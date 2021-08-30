@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\AlternateLinks;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
-
 interface AlternateLinksServiceInterface
 {
-    /** @return array<string, string> */
-    public function build(SeoModelInterface $model): array;
+    /**
+     * @param array<string, mixed> $context
+     *
+     * @return array<string, string>
+     */
+    public function build(array $context): array;
 }

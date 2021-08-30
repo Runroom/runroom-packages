@@ -14,18 +14,15 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\App\AlternateLinks;
 
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
-use Runroom\SeoBundle\Model\SeoModelInterface;
-use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
-/** @phpstan-extends AbstractAlternateLinksProvider<DummyViewModel> */
 class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
-    public function canGenerateAlternateLink(SeoModelInterface $model, string $locale): bool
+    public function canGenerateAlternateLink(array $context, string $locale): bool
     {
         return true;
     }
 
-    public function getParameters(SeoModelInterface $model, string $locale): ?array
+    public function getParameters(array $context, string $locale): ?array
     {
         return [
             'dummy_param' => 'dummy_value',

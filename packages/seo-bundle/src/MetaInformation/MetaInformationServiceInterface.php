@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\MetaInformation;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 
 interface MetaInformationServiceInterface
 {
-    public function build(SeoModelInterface $model): MetaInformationViewModel;
+    /** @param array<string, mixed> $context */
+    public function build(array $context): MetaInformationViewModel;
 }

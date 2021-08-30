@@ -14,7 +14,6 @@ declare(strict_types=1);
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
-use Runroom\SeoBundle\Context\DefaultContextExtractor;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
@@ -43,9 +42,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(DefaultAlternateLinksProvider::class)
         ->tag('runroom.seo.alternate_links', ['priority' => -1]);
 
-    $services->set(DefaultContextExtractor::class)
-        ->arg('$modelKey', null);
-
     $services->set(MetaInformationBuilder::class)
         ->arg('$repository', new ReferenceConfigurator(MetaInformationRepository::class))
         ->arg('$propertyAccessor', new ReferenceConfigurator('property_accessor'));
@@ -68,6 +64,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(SeoRuntime::class)
         ->arg('$alternateLinks', new ReferenceConfigurator(AlternateLinksService::class))
         ->arg('$metaInformation', new ReferenceConfigurator(MetaInformationService::class))
-        ->arg('$contextExtractor', null)
         ->tag('twig.runtime');
 };

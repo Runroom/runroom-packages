@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\Integration;
 
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksServiceInterface;
-use Runroom\SeoBundle\Context\ContextExtractorInterface;
 use Runroom\SeoBundle\MetaInformation\MetaInformationServiceInterface;
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Runroom\SeoBundle\Twig\SeoExtension;
 use Runroom\SeoBundle\Twig\SeoRuntime;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
@@ -41,7 +39,6 @@ class SeoExtensionTest extends IntegrationTestCase
     {
         $alternateLinksService = $this->createStub(AlternateLinksServiceInterface::class);
         $metaInformationService = $this->createStub(MetaInformationServiceInterface::class);
-        $contextExtractor = $this->createStub(ContextExtractorInterface::class);
 
         $metaInformation = new MetaInformationViewModel();
         $metaInformation->setTitle('seo title');
@@ -52,12 +49,10 @@ class SeoExtensionTest extends IntegrationTestCase
         ]);
 
         $metaInformationService->method('build')->willReturn($metaInformation);
-        $contextExtractor->method('extract')->willReturn($this->createStub(SeoModelInterface::class));
 
         $seoRuntime = new SeoRuntime(
             $alternateLinksService,
-            $metaInformationService,
-            $contextExtractor
+            $metaInformationService
         );
 
         $runtimeLoader = $this->createMock(RuntimeLoaderInterface::class);

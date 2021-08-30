@@ -28,11 +28,6 @@ class BasicPageService
 
     public function getBasicPageViewModel(string $slug): BasicPageViewModel
     {
-        $basicPage = $this->repository->findBySlug($slug);
-
-        $model = new BasicPageViewModel();
-        $model->setBasicPage($basicPage);
-
-        return $model;
+        return new BasicPageViewModel($this->repository->findBySlug($slug));
     }
 }

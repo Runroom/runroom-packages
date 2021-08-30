@@ -31,43 +31,36 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     }
 
     /** @test */
-    public function itCanGenerateAlternateLinks(): void
+    public function itCanGenerateAlternateLinksIfValidContext(): void
     {
         $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
-        $model = new BasicPageViewModel();
-        $model->setBasicPage($basicPage);
+        $context = ['model' => new BasicPageViewModel($basicPage)];
 
-        self::assertTrue($this->provider->canGenerateAlternateLink($model, 'es'));
-        self::assertTrue($this->provider->canGenerateAlternateLink($model, 'en'));
-    }
-
-    /** @test */
-    public function itCantGenerateAlternateLinksIfNoBasicPageIsProvided(): void
-    {
-        $model = new BasicPageViewModel();
-
-        self::assertFalse($this->provider->canGenerateAlternateLink($model, 'es'));
+        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
+        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'en'));
+        self::assertFalse($this->provider->canGenerateAlternateLink([], 'es'));
+        self::assertFalse($this->provider->canGenerateAlternateLink(['model' => new \stdClass()], 'es'));
     }
 
     /** @test */
     public function itReturnsRouteParameters(): void
     {
         $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
-        $model = new BasicPageViewModel();
-        $model->setBasicPage($basicPage);
+        $context = ['model' => new BasicPageViewModel($basicPage)];
 
         foreach (['en', 'es'] as $locale) {
             self::assertSame(
                 ['slug' => $basicPage->getSlug($locale)],
-                $this->provider->getParameters($model, $locale)
+                $this->provider->getParameters($context, $locale)
             );
         }
     }
 
     /** @test */
-    public function itReturnsNoRouteParametersIfNoBasicPageIsProvided(): void
+    public function itReturnsNullParametersForAnInvalidContext(): void
     {
-        self::assertNull($this->provider->getParameters(new BasicPageViewModel(), 'en'));
+        self::assertNull($this->provider->getParameters([], 'es'));
+        self::assertNull($this->provider->getParameters(['model' => new \stdClass()], 'es'));
     }
 
     /** @test */

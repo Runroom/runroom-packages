@@ -13,20 +13,17 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\AlternateLinks;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
-
-/** @phpstan-template T of SeoModelInterface */
 interface AlternateLinksProviderInterface
 {
     public function providesAlternateLinks(string $route): bool;
 
-    /** @phpstan-param T $model */
-    public function canGenerateAlternateLink(SeoModelInterface $model, string $locale): bool;
+    /** @param array<string, mixed> $context */
+    public function canGenerateAlternateLink(array $context, string $locale): bool;
 
     /**
-     * @phpstan-param T $model
+     * @param array<string, mixed> $context
      *
      * @return array<string, string|null>|null
      */
-    public function getParameters(SeoModelInterface $model, string $locale): ?array;
+    public function getParameters(array $context, string $locale): ?array;
 }

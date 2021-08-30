@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\AlternateLinks;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
-
-/** @phpstan-extends AbstractAlternateLinksProvider<SeoModelInterface> */
 final class DefaultAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
     public function providesAlternateLinks(string $route): bool
@@ -23,12 +20,12 @@ final class DefaultAlternateLinksProvider extends AbstractAlternateLinksProvider
         return true;
     }
 
-    public function canGenerateAlternateLink(SeoModelInterface $model, string $locale): bool
+    public function canGenerateAlternateLink(array $context, string $locale): bool
     {
         return true;
     }
 
-    public function getParameters(SeoModelInterface $model, string $locale): ?array
+    public function getParameters(array $context, string $locale): ?array
     {
         return null;
     }

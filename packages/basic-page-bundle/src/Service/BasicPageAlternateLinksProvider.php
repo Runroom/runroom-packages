@@ -15,36 +15,26 @@ namespace Runroom\BasicPageBundle\Service;
 
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
-use Runroom\SeoBundle\Model\SeoModelInterface;
 
-/** @phpstan-extends AbstractAlternateLinksProvider<BasicPageViewModel> */
 final class BasicPageAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
     /** @psalm-suppress MissingTemplateParam, InvalidTemplateParam, InvalidArgument getTranslations misses the correct template parameters */
-    public function canGenerateAlternateLink(SeoModelInterface $model, string $locale): bool
+    public function canGenerateAlternateLink(array $context, string $locale): bool
     {
-        $basicPage = $model->getBasicPage();
-
-        if (null === $basicPage) {
+        if (!isset($context['model']) || !$context['model'] instanceof BasicPageViewModel) {
             return false;
         }
 
-        $translations = $basicPage->getTranslations();
-
-        return $translations->containsKey($locale);
+        return $context['model']->getBasicPage()->getTranslations()->containsKey($locale);
     }
 
-    public function getParameters(SeoModelInterface $model, string $locale): ?array
+    public function getParameters(array $context, string $locale): ?array
     {
-        $basicPage = $model->getBasicPage();
-
-        if (null === $basicPage) {
+        if (!isset($context['model']) || !$context['model'] instanceof BasicPageViewModel) {
             return null;
         }
 
-        return [
-            'slug' => $basicPage->getSlug($locale),
-        ];
+        return ['slug' => $context['model']->getBasicPage()->getSlug($locale)];
     }
 
     protected function getRoutes(): array

@@ -15,23 +15,19 @@ namespace Runroom\SeoBundle\DependencyInjection;
 
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksProviderInterface;
-use Runroom\SeoBundle\Context\DefaultContextExtractor;
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
-use Runroom\SeoBundle\Twig\SeoRuntime;
 use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
 use Sonata\Doctrine\Mapper\DoctrineCollector;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * @phpstan-type SeoBundleConfiguration = array{
  *     locales: string[],
  *     xdefault_locale: string,
- *     context: array{ extractor: string, modelKey: string },
  *     class: array{ media: class-string },
  * }
  */
@@ -62,12 +58,6 @@ final class RunroomSeoExtension extends Extension
 
         $container->getDefinition(AlternateLinksBuilder::class)
             ->setArgument(1, $config['locales']);
-
-        $container->getDefinition(DefaultContextExtractor::class)
-            ->setArgument(0, $config['context']['modelKey']);
-
-        $container->getDefinition(SeoRuntime::class)
-            ->setArgument(2, new Reference($config['context']['extractor']));
 
         $container->setParameter(self::XDEFAULT_LOCALE, $config['xdefault_locale']);
 

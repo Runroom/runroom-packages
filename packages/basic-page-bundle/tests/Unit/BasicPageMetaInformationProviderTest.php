@@ -33,9 +33,7 @@ class BasicPageMetaInformationProviderTest extends TestCase
     {
         $this->basicPage = BasicPageFactory::createOne()->object();
         $this->provider = new BasicPageMetaInformationProvider();
-
-        $this->model = new BasicPageViewModel();
-        $this->model->setBasicPage($this->basicPage);
+        $this->model = new BasicPageViewModel($this->basicPage);
     }
 
     /** @test */
@@ -45,10 +43,10 @@ class BasicPageMetaInformationProviderTest extends TestCase
     }
 
     /** @test */
-    public function itHasAnEntityMetaInformation(): void
+    public function itReturnsEntityMetaInformationWhenValidContextIsGiven(): void
     {
-        $entityMetas = $this->provider->getEntityMetaInformation($this->model);
-
-        self::assertInstanceOf(EntityMetaInformation::class, $entityMetas);
+        self::assertInstanceOf(EntityMetaInformation::class, $this->provider->getEntityMetaInformation(['model' => $this->model]));
+        self::assertNull($this->provider->getEntityMetaInformation([]));
+        self::assertNull($this->provider->getEntityMetaInformation(['model' => new \stdClass()]));
     }
 }

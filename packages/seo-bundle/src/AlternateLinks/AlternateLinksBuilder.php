@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\AlternateLinks;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -34,18 +33,14 @@ class AlternateLinksBuilder
     }
 
     /**
-     * @phpstan-template T of SeoModelInterface
-     *
-     * @phpstan-param AlternateLinksProviderInterface<T> $provider
-     * @phpstan-param T $model
-     *
+     * @param array<string, mixed> $context
      * @param array<string, string> $routeParameters
      *
      * @return array<string, string>
      */
     public function build(
         AlternateLinksProviderInterface $provider,
-        SeoModelInterface $model,
+        array $context,
         string $route,
         array $routeParameters = []
     ): array {
@@ -53,10 +48,10 @@ class AlternateLinksBuilder
 
         foreach ($this->locales as $locale) {
             try {
-                if ($provider->canGenerateAlternateLink($model, $locale)) {
+                if ($provider->canGenerateAlternateLink($context, $locale)) {
                     $alternateLinks[$locale] = $this->urlGenerator->generate(
                         $route . '.' . $locale,
-                        $provider->getParameters($model, $locale) ?? $routeParameters,
+                        $provider->getParameters($context, $locale) ?? $routeParameters,
                         UrlGeneratorInterface::ABSOLUTE_URL
                     );
                 }

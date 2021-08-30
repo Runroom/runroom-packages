@@ -16,6 +16,7 @@ namespace Runroom\BasicPageBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
+use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Symfony\Component\DependencyInjection\Container;
@@ -47,7 +48,7 @@ class BasicPageControllerTest extends TestCase
     /** @test */
     public function itRendersStatic(): void
     {
-        $model = new BasicPageViewModel();
+        $model = new BasicPageViewModel(new BasicPage());
 
         $this->service->method('getBasicPageViewModel')->with('slug')->willReturn($model);
 

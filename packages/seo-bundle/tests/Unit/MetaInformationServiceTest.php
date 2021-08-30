@@ -19,7 +19,6 @@ use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
 use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +28,7 @@ class MetaInformationServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    /** @phpstan-var MockObject&MetaInformationProviderInterface<SeoModelInterface> */
+    /** @phpstan-var MockObject&MetaInformationProviderInterface */
     private $provider;
 
     private DefaultMetaInformationProvider $defaultProvider;
@@ -38,7 +37,9 @@ class MetaInformationServiceTest extends TestCase
     private $builder;
 
     private MetaInformationService $service;
-    private DummyViewModel $model;
+
+    /** @var array<string, mixed> */
+    private array $context;
 
     private MetaInformationViewModel $expectedMetas;
 
@@ -55,7 +56,7 @@ class MetaInformationServiceTest extends TestCase
             $this->builder
         );
 
-        $this->model = new DummyViewModel();
+        $this->context = ['model' => new DummyViewModel()];
         $this->expectedMetas = new MetaInformationViewModel();
     }
 
@@ -64,10 +65,10 @@ class MetaInformationServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
         $this->provider->method('providesMetas')->with('route')->willReturn(true);
-        $this->builder->method('build')->with($this->provider, $this->model, 'route')
+        $this->builder->method('build')->with($this->provider, $this->context, 'route')
             ->willReturn($this->expectedMetas);
 
-        $generatedMetas = $this->service->build($this->model);
+        $generatedMetas = $this->service->build($this->context);
 
         self::assertSame($this->expectedMetas, $generatedMetas);
     }
@@ -77,10 +78,10 @@ class MetaInformationServiceTest extends TestCase
     {
         $this->configureCurrentRequest();
         $this->provider->method('providesMetas')->with('route')->willReturn(false);
-        $this->builder->method('build')->with($this->defaultProvider, $this->model, 'route')
+        $this->builder->method('build')->with($this->defaultProvider, $this->context, 'route')
             ->willReturn($this->expectedMetas);
 
-        $generatedMetas = $this->service->build($this->model);
+        $generatedMetas = $this->service->build($this->context);
 
         self::assertSame($this->expectedMetas, $generatedMetas);
     }
@@ -93,7 +94,7 @@ class MetaInformationServiceTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('There is no provided selected to build meta information');
 
-        $service->build($this->model);
+        $service->build($this->context);
     }
 
     private function configureCurrentRequest(): void
@@ -105,7 +106,7 @@ class MetaInformationServiceTest extends TestCase
         $request->attributes->set('_route', 'route');
     }
 
-    /** @return iterable<MetaInformationProviderInterface<SeoModelInterface>> */
+    /** @return iterable<MetaInformationProviderInterface> */
     private function getProviders(): iterable
     {
         yield $this->provider;

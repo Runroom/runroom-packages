@@ -64,7 +64,7 @@ class AlternateLinksBuilderTest extends TestCase
             }, $this->locales)
         );
 
-        $alternateLinks = $this->builder->build($this->provider, new DummyViewModel(), $route);
+        $alternateLinks = $this->builder->build($this->provider, ['model' => new DummyViewModel()], $route);
 
         foreach ($this->locales as $locale) {
             self::assertContains($locale, $alternateLinks);
@@ -76,6 +76,6 @@ class AlternateLinksBuilderTest extends TestCase
     {
         $this->urlGenerator->method('generate')->willThrowException(new RouteNotFoundException());
 
-        self::assertEmpty($this->builder->build($this->provider, new DummyViewModel(), 'missing_route'));
+        self::assertEmpty($this->builder->build($this->provider, ['model' => new DummyViewModel()], 'missing_route'));
     }
 }
