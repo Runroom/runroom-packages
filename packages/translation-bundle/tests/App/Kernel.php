@@ -121,6 +121,10 @@ class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
+        $container->loadFromExtension('zenstruck_foundry', [
+            'auto_refresh_proxies' => false,
+        ]);
+
         if (class_exists(DeprecatedTextExtension::class)) {
             $container->loadFromExtension('sonata_admin', [
                 'options' => [

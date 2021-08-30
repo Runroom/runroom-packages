@@ -37,7 +37,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'phpstan/phpstan-symfony' => '^0.12',
             'phpstan/phpstan-strict-rules' => '^0.12',
             'psalm/plugin-phpunit' => '^0.16',
-            'psalm/plugin-symfony' => '^2.0',
+            'psalm/plugin-symfony' => '^3.0',
             'symplify/monorepo-builder' => '^9.3',
             'vimeo/psalm' => '^4.0',
             'weirdan/doctrine-psalm-plugin' => '^1.0',

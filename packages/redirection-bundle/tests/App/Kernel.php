@@ -107,6 +107,10 @@ class Kernel extends BaseKernel
             'strict_variables' => '%kernel.debug%',
         ]);
 
+        $container->loadFromExtension('zenstruck_foundry', [
+            'auto_refresh_proxies' => false,
+        ]);
+
         if (class_exists(DeprecatedTextExtension::class)) {
             $container->loadFromExtension('sonata_admin', [
                 'options' => [

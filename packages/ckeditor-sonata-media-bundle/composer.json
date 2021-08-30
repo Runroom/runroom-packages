@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "sonata-project/admin-bundle": "^3.103 || ^4.0@dev",
+        "sonata-project/admin-bundle": "^3.103 || ^4.0@rc",
         "sonata-project/doctrine-extensions": "^1.13",
         "sonata-project/media-bundle": "^3.32 || ^4.0@dev",
         "symfony/config": "^4.4 || ^5.3",
@@ -34,7 +34,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
         "runroom-packages/testing": "^0.12@dev",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@rc",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/security-bundle": "^4.4 || ^5.3",
         "symfony/twig-bundle": "^4.4 || ^5.3"

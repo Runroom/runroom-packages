@@ -60,7 +60,7 @@ class AlternateLinksBuilder
                         UrlGeneratorInterface::ABSOLUTE_URL
                     );
                 }
-            } catch (RouteNotFoundException | InvalidParameterException $exception) {
+            } catch (RouteNotFoundException|InvalidParameterException $exception) {
             }
         }
 
