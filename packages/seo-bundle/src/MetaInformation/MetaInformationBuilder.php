@@ -15,7 +15,6 @@ namespace Runroom\SeoBundle\MetaInformation;
 
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\Entity\MetaInformation;
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
@@ -39,30 +38,24 @@ class MetaInformationBuilder
         $this->propertyAccessor = $propertyAccessor;
     }
 
-    /**
-     * @phpstan-template T of SeoModelInterface
-     *
-     * @phpstan-param MetaInformationProviderInterface<T> $provider
-     * @phpstan-param T $model
-     */
+    /** @param array<string, mixed> $context */
     public function build(
         MetaInformationProviderInterface $provider,
-        SeoModelInterface $model,
+        array $context,
         string $route
     ): MetaInformationViewModel {
         $routeMetas = $this->getMetasForRoute($provider, $route);
-        $modelMetas = $provider->getEntityMetaInformation($model);
-        $modelImage = $provider->getEntityMetaImage($model);
+        $modelMetas = $provider->getEntityMetaInformation($context);
+        $modelImage = $provider->getEntityMetaImage($context);
 
         $metas = new MetaInformationViewModel();
-        $metas->setTitle($this->replacePlaceholders($model, $this->getTitle($modelMetas, $routeMetas)));
-        $metas->setDescription($this->replacePlaceholders($model, $this->getDescription($modelMetas, $routeMetas)));
+        $metas->setTitle($this->replacePlaceholders($context, $this->getTitle($modelMetas, $routeMetas)));
+        $metas->setDescription($this->replacePlaceholders($context, $this->getDescription($modelMetas, $routeMetas)));
         $metas->setImage($modelImage ?? $routeMetas->getImage());
 
         return $metas;
     }
 
-    /** @phpstan-param MetaInformationProviderInterface<SeoModelInterface> $provider */
     private function getMetasForRoute(MetaInformationProviderInterface $provider, string $route): MetaInformation
     {
         return $this->repository->findOneBy(['route' => $provider->getRouteAlias($route)]) ??
@@ -83,11 +76,14 @@ class MetaInformationBuilder
         return (string) ($description ?? $routeMetas->getDescription());
     }
 
-    private function replacePlaceholders(SeoModelInterface $model, string $text): string
+    /** @param array<string, mixed> $context */
+    private function replacePlaceholders(array $context, string $text): string
     {
-        return (string) s($text)->replaceMatches('/\[(.*)\]/', function (array $match) use ($model): string {
+        $contextObject = (object) $context;
+
+        return (string) s($text)->replaceMatches('/\[(.*)\]/', function (array $match) use ($contextObject): string {
             try {
-                return $this->propertyAccessor->getValue($model, $match[1]);
+                return $this->propertyAccessor->getValue($contextObject, $match[1]);
             } catch (NoSuchPropertyException $e) {
             }
 

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\AlternateLinks;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class AlternateLinksService implements AlternateLinksServiceInterface
@@ -22,12 +21,12 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
 
     private RequestStack $requestStack;
 
-    /** @var iterable<AlternateLinksProviderInterface<SeoModelInterface>> */
+    /** @var iterable<AlternateLinksProviderInterface> */
     private iterable $providers;
 
     private AlternateLinksBuilder $builder;
 
-    /** @param iterable<AlternateLinksProviderInterface<SeoModelInterface>> $providers */
+    /** @param iterable<AlternateLinksProviderInterface> $providers */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,
@@ -38,13 +37,13 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
         $this->builder = $builder;
     }
 
-    public function build(SeoModelInterface $model): array
+    public function build(array $context): array
     {
         $route = $this->getCurrentRoute();
 
         return $this->builder->build(
             $this->selectProvider($route),
-            $model,
+            $context,
             $route,
             $this->getCurrentRouteParameters()
         );
@@ -67,7 +66,6 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
         return array_diff_key($routeParameters, array_flip(self::EXCLUDED_PARAMETERS));
     }
 
-    /** @phpstan-return AlternateLinksProviderInterface<SeoModelInterface> */
     private function selectProvider(string $route): AlternateLinksProviderInterface
     {
         foreach ($this->providers as $provider) {

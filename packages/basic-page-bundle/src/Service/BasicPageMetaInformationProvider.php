@@ -16,16 +16,16 @@ namespace Runroom\BasicPageBundle\Service;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
-use Runroom\SeoBundle\Model\SeoModelInterface;
 
-/** @phpstan-extends AbstractMetaInformationProvider<BasicPageViewModel> */
 final class BasicPageMetaInformationProvider extends AbstractMetaInformationProvider
 {
-    public function getEntityMetaInformation(SeoModelInterface $model): ?EntityMetaInformation
+    public function getEntityMetaInformation(array $context): ?EntityMetaInformation
     {
-        $basicPage = $model->getBasicPage();
+        if (!isset($context['model']) || !$context['model'] instanceof BasicPageViewModel) {
+            return null;
+        }
 
-        return null !== $basicPage ? $basicPage->getMetaInformation() : null;
+        return $context['model']->getBasicPage()->getMetaInformation();
     }
 
     protected function getRoutes(): array

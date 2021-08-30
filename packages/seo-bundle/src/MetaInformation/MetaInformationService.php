@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\MetaInformation;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -21,12 +20,12 @@ final class MetaInformationService implements MetaInformationServiceInterface
 {
     private RequestStack $requestStack;
 
-    /** @var iterable<MetaInformationProviderInterface<SeoModelInterface>> */
+    /** @var iterable<MetaInformationProviderInterface> */
     private iterable $providers;
 
     private MetaInformationBuilder $builder;
 
-    /** @param iterable<MetaInformationProviderInterface<SeoModelInterface>> $providers */
+    /** @param iterable<MetaInformationProviderInterface> $providers */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,
@@ -37,13 +36,13 @@ final class MetaInformationService implements MetaInformationServiceInterface
         $this->builder = $builder;
     }
 
-    public function build(SeoModelInterface $model): MetaInformationViewModel
+    public function build(array $context): MetaInformationViewModel
     {
         $route = $this->getCurrentRoute();
 
         return $this->builder->build(
             $this->selectProvider($route),
-            $model,
+            $context,
             $route
         );
     }
@@ -55,7 +54,6 @@ final class MetaInformationService implements MetaInformationServiceInterface
         return null !== $request ? $request->get('_route', '') : '';
     }
 
-    /** @phpstan-return MetaInformationProviderInterface<SeoModelInterface> */
     private function selectProvider(string $route): MetaInformationProviderInterface
     {
         foreach ($this->providers as $provider) {

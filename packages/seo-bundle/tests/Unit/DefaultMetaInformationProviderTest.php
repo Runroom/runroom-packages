@@ -43,13 +43,13 @@ class DefaultMetaInformationProviderTest extends TestCase
     /** @test */
     public function itDoesNotDefineEntityMetaInformation(): void
     {
-        self::assertNull($this->provider->getEntityMetaInformation(new DummyViewModel()));
+        self::assertNull($this->provider->getEntityMetaInformation(['model' => new DummyViewModel()]));
     }
 
     /** @test */
     public function itDoesNotDefineEntityMetaImage(): void
     {
-        self::assertNull($this->provider->getEntityMetaImage(new DummyViewModel()));
+        self::assertNull($this->provider->getEntityMetaImage(['model' => new DummyViewModel()]));
     }
 
     /** @test */

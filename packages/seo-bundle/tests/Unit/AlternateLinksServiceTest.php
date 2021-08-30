@@ -19,7 +19,6 @@ use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksProviderInterface;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
-use Runroom\SeoBundle\Model\SeoModelInterface;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -28,7 +27,7 @@ class AlternateLinksServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    /** @phpstan-var MockObject&AlternateLinksProviderInterface<SeoModelInterface> */
+    /** @phpstan-var MockObject&AlternateLinksProviderInterface */
     private $provider;
 
     private DefaultAlternateLinksProvider $defaultProvider;
@@ -37,7 +36,9 @@ class AlternateLinksServiceTest extends TestCase
     private $builder;
 
     private AlternateLinksService $service;
-    private DummyViewModel $model;
+
+    /** @var array<string, mixed> */
+    private array $context;
 
     protected function setUp(): void
     {
@@ -52,7 +53,7 @@ class AlternateLinksServiceTest extends TestCase
             $this->builder
         );
 
-        $this->model = new DummyViewModel();
+        $this->context = ['model' => new DummyViewModel()];
     }
 
     /** @test */
@@ -61,9 +62,9 @@ class AlternateLinksServiceTest extends TestCase
         $this->configureCurrentRequest();
 
         $this->provider->method('providesAlternateLinks')->with('route')->willReturn(true);
-        $this->builder->method('build')->with($this->provider, $this->model, 'route', [])->willReturn(['es' => 'alternate_link']);
+        $this->builder->method('build')->with($this->provider, $this->context, 'route', [])->willReturn(['es' => 'alternate_link']);
 
-        $alternateLinks = $this->service->build($this->model);
+        $alternateLinks = $this->service->build($this->context);
 
         self::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
@@ -74,9 +75,9 @@ class AlternateLinksServiceTest extends TestCase
         $this->configureCurrentRequest();
 
         $this->provider->method('providesAlternateLinks')->with('route')->willReturn(false);
-        $this->builder->method('build')->with($this->defaultProvider, $this->model, 'route', [])->willReturn(['es' => 'alternate_link']);
+        $this->builder->method('build')->with($this->defaultProvider, $this->context, 'route', [])->willReturn(['es' => 'alternate_link']);
 
-        $alternateLinks = $this->service->build($this->model);
+        $alternateLinks = $this->service->build($this->context);
 
         self::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
@@ -89,7 +90,7 @@ class AlternateLinksServiceTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('There is no provided selected to build alternate links');
 
-        $service->build($this->model);
+        $service->build($this->context);
     }
 
     private function configureCurrentRequest(): void
@@ -101,7 +102,7 @@ class AlternateLinksServiceTest extends TestCase
         $request->attributes->set('_route', 'route');
     }
 
-    /** @return iterable<AlternateLinksProviderInterface<SeoModelInterface>> */
+    /** @return iterable<AlternateLinksProviderInterface> */
     private function getProviders(): iterable
     {
         yield $this->provider;

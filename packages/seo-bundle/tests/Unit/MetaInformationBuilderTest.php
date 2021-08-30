@@ -51,13 +51,17 @@ class MetaInformationBuilderTest extends TestCase
         $metaInformation = MetaInformationFactory::new([
             'image' => $media,
         ])->withTranslations(['en'], [
-            'title' => '[placeholder] title',
-            'description' => '[missing] description',
+            'title' => '[model.placeholder] title',
+            'description' => '[model.missing] description',
         ])->create()->object();
 
         $this->repository->method('findOneBy')->willReturn($metaInformation);
 
-        $metas = $this->builder->build(new TestMetaInformationProvider(), new DummyViewModel(), 'test');
+        $metas = $this->builder->build(
+            new TestMetaInformationProvider(),
+            ['model' => new DummyViewModel()],
+            'test'
+        );
 
         self::assertSame('test title', $metas->getTitle());
         self::assertSame(' description', $metas->getDescription());

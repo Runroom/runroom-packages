@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\MetaInformation;
 
-use Runroom\SeoBundle\Model\SeoModelInterface;
-
-/** @phpstan-extends AbstractMetaInformationProvider<SeoModelInterface> */
 final class DefaultMetaInformationProvider extends AbstractMetaInformationProvider
 {
     public function providesMetas(string $route): bool

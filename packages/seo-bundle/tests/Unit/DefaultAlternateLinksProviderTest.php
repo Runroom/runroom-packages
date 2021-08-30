@@ -37,14 +37,16 @@ class DefaultAlternateLinksProviderTest extends TestCase
     /** @test */
     public function itDoesNotDefineRouteParameters(): void
     {
-        self::assertNull($this->provider->getParameters(new DummyViewModel(), 'es'));
+        self::assertNull($this->provider->getParameters(['model' => new DummyViewModel()], 'es'));
     }
 
     /** @test */
     public function itDoesNotDefineAvailableLocales(): void
     {
-        self::assertTrue($this->provider->canGenerateAlternateLink(new DummyViewModel(), 'random_lang'));
-        self::assertTrue($this->provider->canGenerateAlternateLink(new DummyViewModel(), 'es'));
+        $context = ['model' => new DummyViewModel()];
+
+        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'random_lang'));
+        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
     }
 
     /** @test */
