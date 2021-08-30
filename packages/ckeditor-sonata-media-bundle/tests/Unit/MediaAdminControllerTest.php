@@ -50,7 +50,7 @@ class MediaAdminControllerTest extends TestCase
     /** @var MockObject&MediaManagerInterface */
     private $mediaManager;
 
-    /** @var MockObject&MediaPool */
+    /** @var MediaPool */
     private $mediaPool;
 
     /** @var MockObject&Environment */
@@ -58,14 +58,14 @@ class MediaAdminControllerTest extends TestCase
 
     private MediaAdminController $controller;
 
-    /** @psalm-suppress InternalMethod */
+    /** @psalm-suppress InternalMethod setContainer is internal on Symfony 5.x */
     protected function setUp(): void
     {
         $this->container = new Container();
         $this->admin = $this->createMock(AdminInterface::class);
         $this->request = new Request();
         $this->mediaManager = $this->createMock(MediaManagerInterface::class);
-        $this->mediaPool = $this->createMock(MediaPool::class);
+        $this->mediaPool = new MediaPool('context');
         $this->twig = $this->createMock(Environment::class);
 
         $this->configureAdmin();
@@ -95,6 +95,16 @@ class MediaAdminControllerTest extends TestCase
         $media2->setId(2);
         $media2->setContext('context2');
 
+        $this->mediaPool->addContext('context', [], ['format1' => [
+            'width' => null,
+            'height' => null,
+            'quality' => 80,
+            'format' => 'jpg',
+            'constraint' => true,
+            'resizer' => false,
+            'resizer_options' => [],
+        ]]);
+
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', 'renderResponse');
         $datagrid->expects(self::exactly(2))->method('setValue')->withConsecutive(
@@ -103,13 +113,6 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([new Media(), $media, $media2]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('hasContext')->willReturnMap([
-            ['context', true],
-            ['context2', false],
-        ]);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturnMap([
-            ['context', ['format1' => []]],
-        ]);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
@@ -139,7 +142,6 @@ class MediaAdminControllerTest extends TestCase
         );
         $datagrid->method('getResults')->willReturn([]);
         $datagrid->method('getForm')->willReturn($form);
-        $this->mediaPool->method('getFormatNamesByContext')->willReturn(['']);
         $form->method('createView')->willReturn($formView);
         $this->admin->expects(self::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
@@ -158,8 +160,8 @@ class MediaAdminControllerTest extends TestCase
 
         $this->configureRender('@RunroomCkeditorSonataMedia/upload.html.twig', 'renderResponse');
 
-        $this->mediaPool->method('getDefaultContext')->willReturn('context');
-        $this->mediaPool->method('getProvider')->with('provider')->willReturn($provider);
+        $this->mediaPool->addProvider('provider', $provider);
+
         $this->mediaManager->method('create')->willReturn($media);
         $this->mediaManager->expects(self::once())->method('save')->with($media);
         $this->admin->expects(self::once())->method('checkAccess')->with('create');

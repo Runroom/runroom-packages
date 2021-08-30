@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Service;
 
-use Doctrine\Common\Collections\Collection;
-use Runroom\BasicPageBundle\Entity\BasicPageTranslation;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 use Runroom\SeoBundle\Model\SeoModelInterface;
@@ -22,6 +20,7 @@ use Runroom\SeoBundle\Model\SeoModelInterface;
 /** @phpstan-extends AbstractAlternateLinksProvider<BasicPageViewModel> */
 final class BasicPageAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
+    /** @psalm-suppress MissingTemplateParam, InvalidTemplateParam, InvalidArgument getTranslations misses the correct template parameters */
     public function canGenerateAlternateLink(SeoModelInterface $model, string $locale): bool
     {
         $basicPage = $model->getBasicPage();
@@ -30,7 +29,6 @@ final class BasicPageAlternateLinksProvider extends AbstractAlternateLinksProvid
             return false;
         }
 
-        /** @var Collection<string, BasicPageTranslation> */
         $translations = $basicPage->getTranslations();
 
         return $translations->containsKey($locale);
