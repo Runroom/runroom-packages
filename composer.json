@@ -36,16 +36,16 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "replace": {
-        "runroom-packages/basic-page-bundle": "0.13.0",
-        "runroom-packages/ckeditor-sonata-media-bundle": "0.13.0",
-        "runroom-packages/cookies-bundle": "0.13.0",
-        "runroom-packages/form-handler-bundle": "0.13.0",
-        "runroom-packages/redirection-bundle": "0.13.0",
-        "runroom-packages/render-event-bundle": "0.13.0",
-        "runroom-packages/seo-bundle": "0.13.0",
-        "runroom-packages/sortable-behavior-bundle": "0.13.0",
-        "runroom-packages/testing": "0.13.0",
-        "runroom-packages/translation-bundle": "0.13.0"
+        "runroom-packages/basic-page-bundle": "0.13.1",
+        "runroom-packages/ckeditor-sonata-media-bundle": "0.13.1",
+        "runroom-packages/cookies-bundle": "0.13.1",
+        "runroom-packages/form-handler-bundle": "0.13.1",
+        "runroom-packages/redirection-bundle": "0.13.1",
+        "runroom-packages/render-event-bundle": "0.13.1",
+        "runroom-packages/seo-bundle": "0.13.1",
+        "runroom-packages/sortable-behavior-bundle": "0.13.1",
+        "runroom-packages/testing": "0.13.1",
+        "runroom-packages/translation-bundle": "0.13.1"
     },
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
