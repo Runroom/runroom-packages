@@ -20,8 +20,8 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfi
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "inline_service" function for creating inline services when dropping support for Symfony 4.4
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
+    // Use "inline_service" function for creating inline services when dropping support for Symfony 4
+    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set(TemplateController::class)

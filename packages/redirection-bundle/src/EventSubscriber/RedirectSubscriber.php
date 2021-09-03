@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\RedirectionBundle\Listener;
+namespace Runroom\RedirectionBundle\EventSubscriber;
 
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class RedirectListener implements EventSubscriberInterface
+final class RedirectSubscriber implements EventSubscriberInterface
 {
     private RedirectRepository $repository;
 

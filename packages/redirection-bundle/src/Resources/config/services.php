@@ -11,17 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
-use Runroom\RedirectionBundle\Listener\RedirectListener;
+use Runroom\RedirectionBundle\EventSubscriber\AutomaticRedirectSubscriber;
+use Runroom\RedirectionBundle\EventSubscriber\RedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
+    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set(RedirectListener::class)
+    $services->set(RedirectSubscriber::class)
         ->arg('$repository', new ReferenceConfigurator(RedirectRepository::class))
         ->tag('kernel.event_subscriber');
 

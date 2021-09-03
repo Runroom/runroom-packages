@@ -96,7 +96,7 @@ final class Kernel extends BaseKernel
     }
 
     /**
-     * @todo: Simplify security configuration when dropping support for Symfony 4.4
+     * @todo: Simplify security configuration when dropping support for Symfony 4
      * @todo: Simplify media configuration when dropping support for Sonata 3
      */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
@@ -239,7 +239,7 @@ final class Kernel extends BaseKernel
     }
 
     /**
-     * @todo: Simplify this method when dropping support for Symfony 4.4
+     * @todo: Simplify this method when dropping support for Symfony 4
      *
      * @param RouteCollectionBuilder|RoutingConfigurator $routes
      */

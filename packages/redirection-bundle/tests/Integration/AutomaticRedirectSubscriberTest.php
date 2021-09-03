@@ -15,7 +15,7 @@ namespace Runroom\RedirectionBundle\Tests\Integration;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
-use Runroom\RedirectionBundle\Listener\AutomaticRedirectSubscriber;
+use Runroom\RedirectionBundle\EventSubscriber\AutomaticRedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
 use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;

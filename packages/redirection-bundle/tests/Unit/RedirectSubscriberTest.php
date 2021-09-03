@@ -15,7 +15,7 @@ namespace Runroom\RedirectionBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\RedirectionBundle\Listener\RedirectListener;
+use Runroom\RedirectionBundle\EventSubscriber\RedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,26 +24,24 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class RedirectListenerTest extends TestCase
+class RedirectSubscriberTest extends TestCase
 {
     /** @var MockObject&RedirectRepository */
     private $repository;
 
-    private RedirectListener $listener;
+    private RedirectSubscriber $subscriber;
 
     protected function setUp(): void
     {
         $this->repository = $this->createMock(RedirectRepository::class);
 
-        $this->listener = new RedirectListener($this->repository);
+        $this->subscriber = new RedirectSubscriber($this->repository);
     }
 
     /** @test */
     public function itSubscribesToKernelRequestEvent(): void
     {
-        $events = RedirectListener::getSubscribedEvents();
-
-        self::assertArrayHasKey(KernelEvents::REQUEST, $events);
+        self::assertArrayHasKey(KernelEvents::REQUEST, RedirectSubscriber::getSubscribedEvents());
     }
 
     /** @test */
@@ -51,7 +49,7 @@ class RedirectListenerTest extends TestCase
     {
         $event = $this->getResponseEvent(HttpKernelInterface::SUB_REQUEST);
 
-        $this->listener->onKernelRequest($event);
+        $this->subscriber->onKernelRequest($event);
 
         self::assertNull($event->getResponse());
     }
@@ -63,7 +61,7 @@ class RedirectListenerTest extends TestCase
 
         $event = $this->getResponseEvent();
 
-        $this->listener->onKernelRequest($event);
+        $this->subscriber->onKernelRequest($event);
 
         self::assertNull($event->getResponse());
     }
@@ -78,7 +76,7 @@ class RedirectListenerTest extends TestCase
 
         $event = $this->getResponseEvent();
 
-        $this->listener->onKernelRequest($event);
+        $this->subscriber->onKernelRequest($event);
 
         /** @var RedirectResponse */
         $response = $event->getResponse();
@@ -87,6 +85,7 @@ class RedirectListenerTest extends TestCase
         self::assertSame(301, $response->getStatusCode());
     }
 
+    /** @todo: Change to MAIN_REQUEST when dropping support for Symfony 4 */
     private function getResponseEvent(int $requestType = HttpKernelInterface::MASTER_REQUEST): RequestEvent
     {
         return new RequestEvent($this->createStub(Kernel::class), new Request(), $requestType);
