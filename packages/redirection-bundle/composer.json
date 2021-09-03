@@ -36,7 +36,8 @@
         "symfony/yaml": "^4.4 || ^5.3"
     },
     "conflict": {
-        "sonata-project/admin-bundle": "<3.103"
+        "sonata-project/admin-bundle": "<3.103",
+        "zenstruck/foundry": ">=1.13"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
