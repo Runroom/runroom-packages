@@ -15,6 +15,7 @@ namespace Runroom\FormHandlerBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Runroom\FormHandlerBundle\DependencyInjection\RunroomFormHandlerExtension;
+use Runroom\FormHandlerBundle\EventSubscriber\FormRenderSubscriber;
 use Runroom\FormHandlerBundle\FormHandler;
 
 class RunroomFormHandlerExtensionTest extends AbstractExtensionTestCase
@@ -22,6 +23,7 @@ class RunroomFormHandlerExtensionTest extends AbstractExtensionTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->container->setParameter('kernel.bundles', ['RunroomRenderEventBundle' => true]);
 
         $this->load();
     }
@@ -30,6 +32,7 @@ class RunroomFormHandlerExtensionTest extends AbstractExtensionTestCase
     public function itHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService(FormHandler::class);
+        $this->assertContainerBuilderHasService(FormRenderSubscriber::class);
     }
 
     protected function getContainerExtensions(): array

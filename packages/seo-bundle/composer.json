@@ -37,7 +37,8 @@
     },
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
-        "sonata-project/admin-bundle": "<3.103"
+        "sonata-project/admin-bundle": "<3.103",
+        "zenstruck/foundry": ">=1.13"
     },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.3.1",
@@ -58,7 +59,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.13-dev"
         }
     },
     "autoload": {

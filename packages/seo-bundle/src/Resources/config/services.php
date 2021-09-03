@@ -26,8 +26,8 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigura
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
-    // Use "abstract_arg" function for creating references to arguments without value when dropping support for Symfony 4.4
+    // Use "service" function for creating references to services when dropping support for Symfony 4
+    // Use "abstract_arg" function for creating references to arguments without value when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set(AlternateLinksBuilder::class)

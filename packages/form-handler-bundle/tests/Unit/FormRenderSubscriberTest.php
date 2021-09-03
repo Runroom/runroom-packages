@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Runroom package.
+ *
+ * (c) Runroom <runroom@runroom.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Runroom\FormHandlerBundle\Tests\Unit;
+
+use PHPUnit\Framework\TestCase;
+use Runroom\FormHandlerBundle\EventSubscriber\FormRenderSubscriber;
+use Runroom\FormHandlerBundle\ViewModel\BasicFormViewModel;
+use Runroom\RenderEventBundle\Event\PageRenderEvent;
+use Runroom\RenderEventBundle\ViewModel\PageViewModel;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
+
+class FormRenderSubscriberTest extends TestCase
+{
+    /** @test */
+    public function itDoesSubscribeToOnFlushEvent(): void
+    {
+        self::assertArrayHasKey(PageRenderEvent::EVENT_NAME, FormRenderSubscriber::getSubscribedEvents());
+    }
+
+    /** @test */
+    public function itSets422OnResponseIfFormIsInvalidSubmitted(): void
+    {
+        $form = $this->createStub(FormInterface::class);
+        $form->method('isSubmitted')->willReturn(true);
+        $form->method('isValid')->willReturn(false);
+
+        $basicFormModel = new BasicFormViewModel();
+        $basicFormModel->setForm($form);
+
+        $pageModel = new PageViewModel();
+        $pageModel->setContent($basicFormModel);
+
+        $event = new PageRenderEvent('view.html.twig', $pageModel);
+
+        $subscriber = new FormRenderSubscriber();
+        $subscriber->pageRenderEvent($event);
+
+        self::assertInstanceOf(Response::class, $event->getResponse());
+        self::assertSame(422, $event->getResponse()->getStatusCode());
+    }
+}

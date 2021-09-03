@@ -22,7 +22,13 @@ final class RunroomFormHandlerExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $bundles = $container->getParameter('kernel.bundles');
+
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
+
+        if (isset($bundles['RunroomRenderEventBundle'])) {
+            $loader->load('render_event.php');
+        }
     }
 }

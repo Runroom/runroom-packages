@@ -25,7 +25,7 @@
         "gedmo/doctrine-extensions": "^3.0",
         "knplabs/doctrine-behaviors": "^2.0.6",
         "psr/container": "^1.1 || ^2.0",
-        "runroom-packages/seo-bundle": "^0.12@dev",
+        "runroom-packages/seo-bundle": "^0.13@dev",
         "symfony/asset": "^4.4 || ^5.3",
         "symfony/config": "^4.4 || ^5.3",
         "symfony/dependency-injection": "^4.4 || ^5.3",
@@ -40,7 +40,8 @@
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
         "friendsofsymfony/ckeditor-bundle": "<2.2",
-        "sonata-project/admin-bundle": "<3.103"
+        "sonata-project/admin-bundle": "<3.103",
+        "zenstruck/foundry": ">=1.13"
     },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.3.1",
@@ -65,7 +66,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.13-dev"
         }
     },
     "autoload": {

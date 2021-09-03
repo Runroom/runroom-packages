@@ -80,7 +80,7 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * @todo: Simplify this method when dropping support for Symfony 4.4
+     * @todo: Simplify this method when dropping support for Symfony 4
      *
      * @param RouteCollectionBuilder|RoutingConfigurator $routes
      */
