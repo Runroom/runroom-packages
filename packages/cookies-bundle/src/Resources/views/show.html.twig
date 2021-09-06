@@ -6,23 +6,23 @@
         <h2>Mandatory Cookies</h2>
         {{- form_row(model.formView.mandatoryCookies) -}}
 
-        {% include '@RunroomCookies/_cookies-list.html.twig' with {
+        {{ include('@RunroomCookies/_cookies-list.html.twig', {
             cookiesList: model.cookies.mandatory_cookies
-        } %}
+        }) }}
 
-        <h2>Performance Cookie  s</h2>
+        <h2>Performance Cookies</h2>
         {{- form_row(model.formView.performanceCookies) -}}
 
-        {% include '@RunroomCookies/_cookies-list.html.twig' with {
+        {{ include('@RunroomCookies/_cookies-list.html.twig', {
             cookiesList: model.cookies.performance_cookies
-        } %}
+        }) }}
 
         <h2>Targeting Cookies</h2>
         {{- form_row(model.formView.targetingCookies) -}}
 
-        {% include '@RunroomCookies/_cookies-list.html.twig' with {
+        {{ include('@RunroomCookies/_cookies-list.html.twig', {
             cookiesList: model.cookies.targeting_cookies
-        } %}
+        }) }}
 
         {{- form_row(model.formView.send) -}}
     {{- form_end(model.formView) -}}
