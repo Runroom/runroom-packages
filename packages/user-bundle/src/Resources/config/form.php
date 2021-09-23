@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Runroom package.
+ *
+ * (c) Runroom <runroom@runroom.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Runroom\UserBundle\Form\RolesMatrixType;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4
+    // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
+    $services = $containerConfigurator->services();
+
+    $services->set('runroom_user.form.type.roles_matrix', RolesMatrixType::class)
+        ->arg('$rolesBuilder', new ReferenceConfigurator('runroom_user.security.roles_builder.matrix'))
+        ->tag('form.type');
+};

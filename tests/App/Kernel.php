@@ -32,6 +32,7 @@ use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SortableBehaviorBundle\RunroomSortableBehaviorBundle;
 use Runroom\TranslationBundle\RunroomTranslationBundle;
+use Runroom\UserBundle\RunroomUserBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
@@ -49,6 +50,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
+use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Tests\App\Entity\Gallery;
 use Tests\App\Entity\GalleryItem;
 use Tests\App\Entity\Media;
@@ -76,6 +78,7 @@ final class Kernel extends BaseKernel
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataAdminBundle(),
+            new SymfonyCastsResetPasswordBundle(),
             new ZenstruckFoundryBundle(),
 
             new RunroomBasicPageBundle(),
@@ -87,6 +90,7 @@ final class Kernel extends BaseKernel
             new RunroomSeoBundle(),
             new RunroomSortableBehaviorBundle(),
             new RunroomTranslationBundle(),
+            new RunroomUserBundle(),
         ];
     }
 
@@ -109,6 +113,7 @@ final class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'mailer' => ['enabled' => true],
         ];
 
         if (class_exists(NativeSessionStorageFactory::class)) {
@@ -177,6 +182,10 @@ final class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
+        $container->loadFromExtension('symfonycasts_reset_password', [
+            'request_password_repository' => 'symfonycasts.reset_password.fake_request_repository',
+        ]);
+
         if (class_exists(DeprecatedTextExtension::class)) {
             $container->loadFromExtension('sonata_admin', [
                 'options' => [
@@ -234,6 +243,13 @@ final class Kernel extends BaseKernel
                     'route' => 'route.missing',
                     'routeParameters' => ['slug' => 'slug'],
                 ],
+            ],
+        ]);
+
+        $container->loadFromExtension('runroom_user', [
+            'from_email' => [
+                'address' => 'my@email.com',
+                'sender_name' => 'Backoffice',
             ],
         ]);
     }
