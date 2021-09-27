@@ -50,7 +50,8 @@ class BasicPageControllerTest extends TestCase
     {
         $model = new BasicPageViewModel(new BasicPage());
 
-        $this->service->method('getBasicPageViewModel')->with('slug')->willReturn($model);
+        $this->service->expects(self::once())->method('getBasicPageViewModel')->with('slug')->willReturn($model);
+        $this->twig->expects(static::once())->method('render')->with('@RunroomBasicPage/show.html.twig', ['model' => $model])->willReturn('rendered');
 
         $response = $this->controller->show('slug');
 
