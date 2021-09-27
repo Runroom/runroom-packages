@@ -11,21 +11,21 @@
     processIsolation="false"
     stopOnFailure="false"
     bootstrap="vendor/autoload.php"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
 >
-    <coverage>
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </coverage>
-
-    <testsuite name="Runroom Testing">
+    <testsuite name="Testing">
         <directory>tests</directory>
     </testsuite>
 
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
     </listeners>
+
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
 
     <php>
         <ini name="precision" value="8"/>
