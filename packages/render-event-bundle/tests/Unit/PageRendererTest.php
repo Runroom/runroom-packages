@@ -48,12 +48,12 @@ class PageRendererTest extends TestCase
     /** @test */
     public function itDispatchEventsOnRender(): void
     {
-        $this->twig->method('render')->with('test.html.twig', self::isType('array'))
+        $this->twig->method('render')->with('test.html.twig', static::isType('array'))
             ->willReturn('Rendered test');
 
         $result = $this->service->render('test.html.twig', []);
 
-        self::assertSame('Rendered test', $result);
+        static::assertSame('Rendered test', $result);
     }
 
     /** @test */
@@ -61,7 +61,7 @@ class PageRendererTest extends TestCase
     {
         $response = new Response();
 
-        $this->twig->method('render')->with('different.html.twig', self::isType('array'))
+        $this->twig->method('render')->with('different.html.twig', static::isType('array'))
             ->willReturn('Rendered test');
 
         $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {
@@ -74,7 +74,7 @@ class PageRendererTest extends TestCase
 
         $resultResponse = $this->service->renderResponse('test.html.twig', [], $response);
 
-        self::assertSame($response, $resultResponse);
+        static::assertSame($response, $resultResponse);
     }
 
     /** @test */
@@ -82,7 +82,7 @@ class PageRendererTest extends TestCase
     {
         $response = new Response();
 
-        $this->twig->method('render')->with('test.html.twig', self::isType('array'), null)
+        $this->twig->method('render')->with('test.html.twig', static::isType('array'), null)
             ->willReturn('Rendered test');
 
         $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {
@@ -91,6 +91,6 @@ class PageRendererTest extends TestCase
 
         $resultResponse = $this->service->renderResponse('test.html.twig', [], $response);
 
-        self::assertInstanceOf(RedirectResponse::class, $resultResponse);
+        static::assertInstanceOf(RedirectResponse::class, $resultResponse);
     }
 }

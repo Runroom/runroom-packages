@@ -2,6 +2,13 @@
     "name": "runroom-packages/runroom-packages",
     "description": "Runroom packages for Symfony development",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Runroom",
+            "email": "software@runroom.com",
+            "homepage": "https://www.runroom.com"
+        }
+    ],
     "require": {
         "php": "^7.4 || ^8.0",
         "doctrine/common": "^3.1",
@@ -12,7 +19,7 @@
         "knplabs/doctrine-behaviors": "^2.0.6",
         "phpunit/phpunit": "^9.5",
         "psr/container": "^1.1 || ^2.0",
-        "sonata-project/admin-bundle": "^3.103 || ^4.0@rc",
+        "sonata-project/admin-bundle": "^3.103 || ^4.0",
         "sonata-project/doctrine-extensions": "^1.13",
         "sonata-project/media-bundle": "^3.32 || ^4.0@dev",
         "symfony/asset": "^4.4 || ^5.3",
@@ -36,16 +43,16 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "replace": {
-        "runroom-packages/basic-page-bundle": "0.13.2",
-        "runroom-packages/ckeditor-sonata-media-bundle": "0.13.2",
-        "runroom-packages/cookies-bundle": "0.13.2",
-        "runroom-packages/form-handler-bundle": "0.13.2",
-        "runroom-packages/redirection-bundle": "0.13.2",
-        "runroom-packages/render-event-bundle": "0.13.2",
-        "runroom-packages/seo-bundle": "0.13.2",
-        "runroom-packages/sortable-behavior-bundle": "0.13.2",
-        "runroom-packages/testing": "0.13.2",
-        "runroom-packages/translation-bundle": "0.13.2"
+        "runroom-packages/basic-page-bundle": "self.version",
+        "runroom-packages/ckeditor-sonata-media-bundle": "self.version",
+        "runroom-packages/cookies-bundle": "self.version",
+        "runroom-packages/form-handler-bundle": "self.version",
+        "runroom-packages/redirection-bundle": "self.version",
+        "runroom-packages/render-event-bundle": "self.version",
+        "runroom-packages/seo-bundle": "self.version",
+        "runroom-packages/sortable-behavior-bundle": "self.version",
+        "runroom-packages/testing": "self.version",
+        "runroom-packages/translation-bundle": "self.version"
     },
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
@@ -73,7 +80,7 @@
         "psalm/plugin-phpunit": "^0.16",
         "psalm/plugin-symfony": "^3.0",
         "psr/event-dispatcher": "^1.0",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0@rc",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
         "symfony/browser-kit": "^5.3",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/security-bundle": "^4.4 || ^5.3",

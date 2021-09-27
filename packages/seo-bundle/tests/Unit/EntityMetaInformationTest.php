@@ -26,9 +26,9 @@ class EntityMetaInformationTest extends TestCase
     {
         $metaInformation = EntityMetaInformationFactory::new()->withTranslations(['en'])->create();
 
-        self::assertNotEmpty((string) $metaInformation);
-        self::assertNull($metaInformation->getId());
-        self::assertNotNull($metaInformation->getTitle());
-        self::assertNotNull($metaInformation->getDescription());
+        static::assertNotEmpty((string) $metaInformation);
+        static::assertNull($metaInformation->getId());
+        static::assertNotNull($metaInformation->getTitle());
+        static::assertNotNull($metaInformation->getDescription());
     }
 }

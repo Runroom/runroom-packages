@@ -42,14 +42,14 @@ class RedirectRepositoryTest extends KernelTestCase
         $redirect = $this->repository->findOneBy(['source' => '/redirect']);
 
         if (null !== $redirect) {
-            self::assertSame('/redirect', (string) $redirect);
-            self::assertNotNull($redirect->getId());
-            self::assertSame('/redirect', $redirect->getSource());
-            self::assertNotEmpty($redirect->getDestination());
-            self::assertNotNull($redirect->getHttpCode());
-            self::assertTrue($redirect->getPublish());
+            static::assertSame('/redirect', (string) $redirect);
+            static::assertNotNull($redirect->getId());
+            static::assertSame('/redirect', $redirect->getSource());
+            static::assertNotEmpty($redirect->getDestination());
+            static::assertNotNull($redirect->getHttpCode());
+            static::assertTrue($redirect->getPublish());
         } else {
-            self::fail('not found redirect');
+            static::fail('not found redirect');
         }
     }
 
@@ -58,7 +58,7 @@ class RedirectRepositoryTest extends KernelTestCase
     {
         $redirect = $this->repository->findRedirect('/it-is-not-there');
 
-        self::assertNull($redirect);
+        static::assertNull($redirect);
     }
 
     /** @test */
@@ -71,7 +71,7 @@ class RedirectRepositoryTest extends KernelTestCase
 
         $redirect = $this->repository->findRedirect('/it-is-unpublish');
 
-        self::assertNull($redirect);
+        static::assertNull($redirect);
     }
 
     /** @test */
@@ -86,7 +86,7 @@ class RedirectRepositoryTest extends KernelTestCase
 
         $redirect = $this->repository->findRedirect('/redirect');
 
-        self::assertSame([
+        static::assertSame([
             'destination' => '/target',
             'httpCode' => (string) Redirect::PERMANENT,
         ], $redirect);

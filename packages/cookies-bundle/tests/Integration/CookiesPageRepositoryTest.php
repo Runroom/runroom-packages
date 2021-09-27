@@ -40,9 +40,9 @@ class CookiesPageRepositoryTest extends KernelTestCase
 
         $cookiesPage = $this->repository->find(1);
 
-        self::assertNotNull($cookiesPage);
-        self::assertSame(1, $cookiesPage->getId());
-        self::assertNotEmpty((string) $cookiesPage);
-        self::assertNotNull($cookiesPage->getContent());
+        static::assertNotNull($cookiesPage);
+        static::assertSame(1, $cookiesPage->getId());
+        static::assertNotEmpty((string) $cookiesPage);
+        static::assertNotNull($cookiesPage->getContent());
     }
 }

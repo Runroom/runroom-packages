@@ -78,7 +78,7 @@ class FormHandlerTest extends TestCase
 
         $model = $this->formHandler->handleForm(FormType::class);
 
-        self::assertInstanceOf(BasicFormViewModel::class, $model);
+        static::assertInstanceOf(BasicFormViewModel::class, $model);
     }
 
     /** @test */
@@ -92,10 +92,10 @@ class FormHandlerTest extends TestCase
 
         $model = $this->formHandler->handleForm(FormType::class);
 
-        self::assertInstanceOf(BasicFormViewModel::class, $model);
-        self::assertInstanceOf(FormView::class, $model->getFormView());
-        self::assertSame($form, $model->getForm());
-        self::assertSame(['success'], $this->session->getFlashBag()->get('form_types'));
+        static::assertInstanceOf(BasicFormViewModel::class, $model);
+        static::assertInstanceOf(FormView::class, $model->getFormView());
+        static::assertSame($form, $model->getForm());
+        static::assertSame(['success'], $this->session->getFlashBag()->get('form_types'));
     }
 
     /** @return MockObject&FormInterface */
@@ -106,7 +106,7 @@ class FormHandlerTest extends TestCase
 
         $this->formFactory->method('create')->with(FormType::class, null, [])->willReturn($form);
 
-        $form->expects(self::once())->method('handleRequest')->with($this->request);
+        $form->expects(static::once())->method('handleRequest')->with($this->request);
         $form->method('getName')->willReturn('form_types');
         $form->method('isSubmitted')->willReturn($submitted);
         $form->method('isValid')->willReturn($valid);

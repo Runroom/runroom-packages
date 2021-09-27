@@ -66,15 +66,15 @@ class CookiesPageServiceTest extends TestCase
 
         $form->method('createView')->willReturn($formView);
 
-        $this->repository->expects(self::once())->method('find')->with(1)->willReturn($cookiesPage);
-        $this->formFactory->expects(self::once())->method('create')
+        $this->repository->expects(static::once())->method('find')->with(1)->willReturn($cookiesPage);
+        $this->formFactory->expects(static::once())->method('create')
             ->with(CookiesFormType::class)
             ->willReturn($form);
 
         $model = $this->service->getCookiesPageViewModel();
 
-        self::assertSame($model->getCookiesPage(), $cookiesPage);
-        self::assertSame($model->getFormView(), $formView);
-        self::assertSame($model->getCookies(), []);
+        static::assertSame($model->getCookiesPage(), $cookiesPage);
+        static::assertSame($model->getFormView(), $formView);
+        static::assertSame($model->getCookies(), []);
     }
 }

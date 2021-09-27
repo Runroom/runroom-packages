@@ -49,10 +49,11 @@ class CookiesPageControllerTest extends TestCase
     {
         $model = new CookiesPageViewModel();
 
-        $this->service->expects(self::once())->method('getCookiesPageViewModel')->willReturn($model);
+        $this->service->expects(static::once())->method('getCookiesPageViewModel')->willReturn($model);
+        $this->twig->expects(static::once())->method('render')->with('@RunroomCookies/show.html.twig', ['model' => $model])->willReturn('rendered');
 
         $response = $this->controller->index();
 
-        self::assertSame(200, $response->getStatusCode());
+        static::assertSame(200, $response->getStatusCode());
     }
 }

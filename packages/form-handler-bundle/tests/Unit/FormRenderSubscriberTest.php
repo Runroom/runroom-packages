@@ -26,7 +26,7 @@ class FormRenderSubscriberTest extends TestCase
     /** @test */
     public function itDoesSubscribeToOnFlushEvent(): void
     {
-        self::assertArrayHasKey(PageRenderEvent::EVENT_NAME, FormRenderSubscriber::getSubscribedEvents());
+        static::assertArrayHasKey(PageRenderEvent::EVENT_NAME, FormRenderSubscriber::getSubscribedEvents());
     }
 
     /** @test */
@@ -47,7 +47,7 @@ class FormRenderSubscriberTest extends TestCase
         $subscriber = new FormRenderSubscriber();
         $subscriber->pageRenderEvent($event);
 
-        self::assertInstanceOf(Response::class, $event->getResponse());
-        self::assertSame(422, $event->getResponse()->getStatusCode());
+        static::assertInstanceOf(Response::class, $event->getResponse());
+        static::assertSame(422, $event->getResponse()->getStatusCode());
     }
 }

@@ -101,26 +101,26 @@ class MediaAdminControllerTest extends TestCase
             'quality' => 80,
             'format' => 'jpg',
             'constraint' => true,
-            'resizer' => false,
+            'resizer' => null,
             'resizer_options' => [],
         ]]);
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', 'renderResponse');
-        $datagrid->expects(self::exactly(2))->method('setValue')->withConsecutive(
+        $datagrid->expects(static::exactly(2))->method('setValue')->withConsecutive(
             ['context', null, 'another_context'],
             ['providerName', null, null]
         );
         $datagrid->method('getResults')->willReturn([new Media(), $media, $media2]);
         $datagrid->method('getForm')->willReturn($form);
         $form->method('createView')->willReturn($formView);
-        $this->admin->expects(self::once())->method('checkAccess')->with('list');
+        $this->admin->expects(static::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
         $this->admin->method('getFilterTheme')->willReturn(['filterTheme']);
 
         $response = $this->controller->browserAction($this->request);
 
-        self::assertSame('renderResponse', $response->getContent());
+        static::assertSame('renderResponse', $response->getContent());
     }
 
     /** @test */
@@ -136,20 +136,20 @@ class MediaAdminControllerTest extends TestCase
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', 'renderResponse');
-        $datagrid->expects(self::exactly(2))->method('setValue')->withConsecutive(
+        $datagrid->expects(static::exactly(2))->method('setValue')->withConsecutive(
             ['context', null, 'context'],
             ['providerName', null, null]
         );
         $datagrid->method('getResults')->willReturn([]);
         $datagrid->method('getForm')->willReturn($form);
         $form->method('createView')->willReturn($formView);
-        $this->admin->expects(self::once())->method('checkAccess')->with('list');
+        $this->admin->expects(static::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
         $this->admin->method('getFilterTheme')->willReturn(['filterTheme']);
 
         $response = $this->controller->browserAction($this->request);
 
-        self::assertSame('renderResponse', $response->getContent());
+        static::assertSame('renderResponse', $response->getContent());
     }
 
     /** @test */
@@ -163,13 +163,13 @@ class MediaAdminControllerTest extends TestCase
         $this->mediaPool->addProvider('provider', $provider);
 
         $this->mediaManager->method('create')->willReturn($media);
-        $this->mediaManager->expects(self::once())->method('save')->with($media);
-        $this->admin->expects(self::once())->method('checkAccess')->with('create');
-        $this->admin->expects(self::once())->method('createObjectSecurity')->with($media);
+        $this->mediaManager->expects(static::once())->method('save')->with($media);
+        $this->admin->expects(static::once())->method('checkAccess')->with('create');
+        $this->admin->expects(static::once())->method('createObjectSecurity')->with($media);
 
         $response = $this->controller->uploadAction($this->request);
 
-        self::assertSame('renderResponse', $response->getContent());
+        static::assertSame('renderResponse', $response->getContent());
     }
 
     /** @test */
@@ -216,7 +216,7 @@ class MediaAdminControllerTest extends TestCase
 
         $this->twig->method('getRuntime')->with(FormRenderer::class)->willReturn($twigRenderer);
 
-        $twigRenderer->expects(self::once())->method('setTheme')->with($formView, $formTheme);
+        $twigRenderer->expects(static::once())->method('setTheme')->with($formView, $formTheme);
     }
 
     /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */
@@ -226,7 +226,7 @@ class MediaAdminControllerTest extends TestCase
             'param' => 'param',
             'context' => 'another_context',
         ]);
-        $this->twig->method('render')->with($template, self::isType('array'))->willReturn($rendered);
+        $this->twig->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 
     /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */

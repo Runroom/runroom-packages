@@ -47,7 +47,7 @@ class AlternateLinksBuilderTest extends TestCase
     /** @test */
     public function itDoesNotProvideAnyAlternateLinks(): void
     {
-        self::assertFalse($this->provider->providesAlternateLinks('default'));
+        static::assertFalse($this->provider->providesAlternateLinks('default'));
     }
 
     /** @test */
@@ -55,7 +55,7 @@ class AlternateLinksBuilderTest extends TestCase
     {
         $route = 'dummy_route';
 
-        $this->urlGenerator->expects(self::exactly(2))->method('generate')->willReturnMap(
+        $this->urlGenerator->expects(static::exactly(2))->method('generate')->willReturnMap(
             array_map(function (string $locale) use ($route): array {
                 return [$route . '.' . $locale, [
                     'dummy_param' => 'dummy_value',
@@ -67,7 +67,7 @@ class AlternateLinksBuilderTest extends TestCase
         $alternateLinks = $this->builder->build($this->provider, ['model' => new DummyViewModel()], $route);
 
         foreach ($this->locales as $locale) {
-            self::assertContains($locale, $alternateLinks);
+            static::assertContains($locale, $alternateLinks);
         }
     }
 
@@ -76,6 +76,6 @@ class AlternateLinksBuilderTest extends TestCase
     {
         $this->urlGenerator->method('generate')->willThrowException(new RouteNotFoundException());
 
-        self::assertEmpty($this->builder->build($this->provider, ['model' => new DummyViewModel()], 'missing_route'));
+        static::assertEmpty($this->builder->build($this->provider, ['model' => new DummyViewModel()], 'missing_route'));
     }
 }

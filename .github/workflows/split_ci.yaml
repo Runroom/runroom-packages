@@ -33,6 +33,7 @@ jobs:
       matrix:
         php: ['8.0']
         packages: ${{ fromJson(needs.provide_packages_json.outputs.matrix ) }}
+        dependencies: [lowest, highest]
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
@@ -46,5 +47,6 @@ jobs:
       - run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.packages }}/composer.json --ansi
       - uses: ramsey/composer-install@v1
         with:
+          dependency-versions: ${{ matrix.dependencies }}
           composer-options: --working-dir=packages/${{ matrix.packages }}
       - run: cd packages/${{ matrix.packages }} && vendor/bin/phpunit

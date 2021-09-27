@@ -28,7 +28,7 @@ Then, enable the bundle by adding it to the list of registered bundles in `confi
 
 return [
     // ...
-    Runroom\TranslationBundle\TranslationBundle::class => ['all' => true],
+    Runroom\TranslationBundle\RunroomTranslationBundle::class => ['all' => true],
 ];
 ```
 

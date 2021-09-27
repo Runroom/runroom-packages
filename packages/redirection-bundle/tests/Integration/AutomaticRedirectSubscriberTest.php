@@ -44,7 +44,7 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
     {
         $events = $this->subscriber->getSubscribedEvents();
 
-        self::assertSame([Events::onFlush], $events);
+        static::assertSame([Events::onFlush], $events);
     }
 
     /** @test */
@@ -79,10 +79,10 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
 
         $redirects = $this->repository->findBy(['destination' => '/entity/test']);
 
-        self::assertCount(2, $redirects);
+        static::assertCount(2, $redirects);
 
         foreach ($redirects as $redirect) {
-            self::assertTrue($redirect->getAutomatic());
+            static::assertTrue($redirect->getAutomatic());
         }
     }
 
@@ -102,6 +102,6 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
 
         $redirects = $this->repository->findBy(['automatic' => true]);
 
-        self::assertCount(0, $redirects);
+        static::assertCount(0, $redirects);
     }
 }

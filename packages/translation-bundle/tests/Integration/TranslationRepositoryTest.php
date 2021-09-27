@@ -41,11 +41,11 @@ class TranslationRepositoryTest extends KernelTestCase
         $translation = $this->repository->findOneBy(['key' => 'test']);
 
         if (null !== $translation) {
-            self::assertSame(1, $translation->getId());
-            self::assertSame('test', (string) $translation);
-            self::assertNotNull($translation->getValue());
+            static::assertSame(1, $translation->getId());
+            static::assertSame('test', (string) $translation);
+            static::assertNotNull($translation->getValue());
         } else {
-            self::fail('not found translation');
+            static::fail('not found translation');
         }
     }
 }

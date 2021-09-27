@@ -44,42 +44,42 @@ abstract class SonataAdminTestCase extends KernelTestCase
     {
         \assert($this->admin instanceof AbstractAdmin);
 
-        self::assertTrue($this->admin->hasRoute($route), 'It does not contain route: ' . $route);
+        static::assertTrue($this->admin->hasRoute($route), 'It does not contain route: ' . $route);
     }
 
     final protected function assertAdminRoutesDoesNotContainRoute(string $route): void
     {
         \assert($this->admin instanceof AbstractAdmin);
 
-        self::assertFalse($this->admin->hasRoute($route), 'It does contain route: ' . $route);
+        static::assertFalse($this->admin->hasRoute($route), 'It does contain route: ' . $route);
     }
 
     final protected function assertAdminShowContainsField(string $field): void
     {
         \assert($this->admin instanceof AbstractAdmin);
 
-        self::assertTrue($this->admin->hasShowFieldDescription($field), 'It does not contain show field: ' . $field);
+        static::assertTrue($this->admin->hasShowFieldDescription($field), 'It does not contain show field: ' . $field);
     }
 
     final protected function assertAdminListContainsField(string $field): void
     {
         \assert($this->admin instanceof AbstractAdmin);
 
-        self::assertTrue($this->admin->hasListFieldDescription($field), 'It does not contain list field: ' . $field);
+        static::assertTrue($this->admin->hasListFieldDescription($field), 'It does not contain list field: ' . $field);
     }
 
     final protected function assertAdminFormContainsField(string $field): void
     {
         \assert($this->admin instanceof AbstractAdmin);
 
-        self::assertTrue($this->admin->hasFormFieldDescription($field), 'It does not contain form field: ' . $field);
+        static::assertTrue($this->admin->hasFormFieldDescription($field), 'It does not contain form field: ' . $field);
     }
 
     final protected function assertAdminFilterContainsField(string $field): void
     {
         \assert($this->admin instanceof AbstractAdmin);
 
-        self::assertTrue($this->admin->hasFilterFieldDescription($field), 'It does not contain filter field: ' . $field);
+        static::assertTrue($this->admin->hasFilterFieldDescription($field), 'It does not contain filter field: ' . $field);
     }
 
     /** @param mixed $value */
@@ -89,7 +89,7 @@ abstract class SonataAdminTestCase extends KernelTestCase
 
         $filterParameters = $this->admin->getFilterParameters();
 
-        self::assertTrue(isset($filterParameters[$filter]) && (null === $value || $filterParameters[$filter] === $value), 'It does not contain filter parameter: ' . $filter);
+        static::assertTrue(isset($filterParameters[$filter]) && (null === $value || $filterParameters[$filter] === $value), 'It does not contain filter parameter: ' . $filter);
     }
 
     /** @return class-string<AbstractAdmin>|string  */

@@ -30,14 +30,14 @@ class DefaultAlternateLinksProviderTest extends TestCase
     public function itProvidesMetasForAnyRoute(): void
     {
         foreach (['default', 'home'] as $route) {
-            self::assertTrue($this->provider->providesAlternateLinks($route));
+            static::assertTrue($this->provider->providesAlternateLinks($route));
         }
     }
 
     /** @test */
     public function itDoesNotDefineRouteParameters(): void
     {
-        self::assertNull($this->provider->getParameters(['model' => new DummyViewModel()], 'es'));
+        static::assertNull($this->provider->getParameters(['model' => new DummyViewModel()], 'es'));
     }
 
     /** @test */
@@ -45,8 +45,8 @@ class DefaultAlternateLinksProviderTest extends TestCase
     {
         $context = ['model' => new DummyViewModel()];
 
-        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'random_lang'));
-        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
+        static::assertTrue($this->provider->canGenerateAlternateLink($context, 'random_lang'));
+        static::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
     }
 
     /** @test */
@@ -55,6 +55,6 @@ class DefaultAlternateLinksProviderTest extends TestCase
         $method = new \ReflectionMethod($this->provider, 'getRoutes');
         $method->setAccessible(true);
 
-        self::assertEmpty($method->invoke($this->provider));
+        static::assertEmpty($method->invoke($this->provider));
     }
 }

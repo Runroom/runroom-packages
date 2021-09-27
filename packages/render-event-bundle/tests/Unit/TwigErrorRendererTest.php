@@ -74,7 +74,7 @@ class TwigErrorRendererTest extends TestCase
 
         $response = $controller->render($this->exception);
 
-        self::assertSame(404, $response->getStatusCode());
+        static::assertSame(404, $response->getStatusCode());
     }
 
     /** @test */
@@ -94,7 +94,7 @@ class TwigErrorRendererTest extends TestCase
 
         $response = $controller->render($this->exception);
 
-        self::assertSame(404, $response->getStatusCode());
+        static::assertSame(404, $response->getStatusCode());
     }
 
     /** @test */
@@ -111,7 +111,7 @@ class TwigErrorRendererTest extends TestCase
 
         $response = $controller->render($this->exception);
 
-        self::assertSame(404, $response->getStatusCode());
+        static::assertSame(404, $response->getStatusCode());
     }
 
     /** @test */
@@ -126,14 +126,14 @@ class TwigErrorRendererTest extends TestCase
 
         $response = $controller->render($this->exception);
 
-        self::assertSame(404, $response->getStatusCode());
+        static::assertSame(404, $response->getStatusCode());
     }
 
     /** @test */
     public function itReturnsSecondParameterIfRequestStackDoesNotHaveRequest(): void
     {
-        self::assertTrue(TwigErrorRenderer::isDebug(new RequestStack(), true)());
-        self::assertFalse(TwigErrorRenderer::isDebug(new RequestStack(), false)());
+        static::assertTrue(TwigErrorRenderer::isDebug(new RequestStack(), true)());
+        static::assertFalse(TwigErrorRenderer::isDebug(new RequestStack(), false)());
     }
 
     private function configureController(bool $debug = false): TwigErrorRenderer

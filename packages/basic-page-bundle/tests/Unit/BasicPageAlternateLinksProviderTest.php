@@ -36,10 +36,10 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
         $context = ['model' => new BasicPageViewModel($basicPage)];
 
-        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
-        self::assertTrue($this->provider->canGenerateAlternateLink($context, 'en'));
-        self::assertFalse($this->provider->canGenerateAlternateLink([], 'es'));
-        self::assertFalse($this->provider->canGenerateAlternateLink(['model' => new \stdClass()], 'es'));
+        static::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
+        static::assertTrue($this->provider->canGenerateAlternateLink($context, 'en'));
+        static::assertFalse($this->provider->canGenerateAlternateLink([], 'es'));
+        static::assertFalse($this->provider->canGenerateAlternateLink(['model' => new \stdClass()], 'es'));
     }
 
     /** @test */
@@ -49,7 +49,7 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         $context = ['model' => new BasicPageViewModel($basicPage)];
 
         foreach (['en', 'es'] as $locale) {
-            self::assertSame(
+            static::assertSame(
                 ['slug' => $basicPage->getSlug($locale)],
                 $this->provider->getParameters($context, $locale)
             );
@@ -59,13 +59,13 @@ class BasicPageAlternateLinksProviderTest extends TestCase
     /** @test */
     public function itReturnsNullParametersForAnInvalidContext(): void
     {
-        self::assertNull($this->provider->getParameters([], 'es'));
-        self::assertNull($this->provider->getParameters(['model' => new \stdClass()], 'es'));
+        static::assertNull($this->provider->getParameters([], 'es'));
+        static::assertNull($this->provider->getParameters(['model' => new \stdClass()], 'es'));
     }
 
     /** @test */
     public function itProvidesAlternateLinks(): void
     {
-        self::assertTrue($this->provider->providesAlternateLinks('runroom.basic_page.route.show'));
+        static::assertTrue($this->provider->providesAlternateLinks('runroom.basic_page.route.show'));
     }
 }

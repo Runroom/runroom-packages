@@ -28,8 +28,8 @@ class CookiesFormTypeTest extends TypeTestCase
             'targetingCookies' => false,
         ]);
 
-        self::assertTrue($form->isSynchronized());
-        self::assertSame($form->getData(), [
+        static::assertTrue($form->isSynchronized());
+        static::assertSame($form->getData(), [
             'performanceCookies' => false,
             'targetingCookies' => false,
         ]);
