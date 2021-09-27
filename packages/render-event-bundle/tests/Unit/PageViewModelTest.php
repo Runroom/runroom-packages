@@ -30,7 +30,7 @@ class PageViewModelTest extends TestCase
     {
         $this->viewModel->setContent('content');
 
-        self::assertSame('content', $this->viewModel->getContent());
+        static::assertSame('content', $this->viewModel->getContent());
     }
 
     /** @test */
@@ -38,7 +38,7 @@ class PageViewModelTest extends TestCase
     {
         $this->viewModel->addContext('test', 'content');
 
-        self::assertSame('content', $this->viewModel->getContext('test'));
-        self::assertNull($this->viewModel->getContext('no_context'));
+        static::assertSame('content', $this->viewModel->getContext('test'));
+        static::assertNull($this->viewModel->getContext('no_context'));
     }
 }

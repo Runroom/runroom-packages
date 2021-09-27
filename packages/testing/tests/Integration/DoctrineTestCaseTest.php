@@ -21,7 +21,7 @@ class DoctrineTestCaseTest extends DoctrineTestCase
     /** @test */
     public function itDoesInitializeTheDatabase(): void
     {
-        self::assertNotNull(self::$entityManager->find(Test::class, 1));
+        static::assertNotNull(self::$entityManager->find(Test::class, 1));
     }
 
     protected function getDataFixtures(): array

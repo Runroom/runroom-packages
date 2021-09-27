@@ -42,6 +42,6 @@ class BasicPageServiceTest extends TestCase
 
         $model = $this->service->getBasicPageViewModel('slug');
 
-        self::assertSame($basicPage, $model->getBasicPage());
+        static::assertSame($basicPage, $model->getBasicPage());
     }
 }

@@ -42,14 +42,14 @@ class MetaInformationRepositoryTest extends KernelTestCase
         $metaInformation = $this->repository->findOneBy(['route' => MetaInformationBuilder::DEFAULT_ROUTE]);
 
         if (null !== $metaInformation) {
-            self::assertSame(1, $metaInformation->getId());
-            self::assertNotEmpty((string) $metaInformation);
-            self::assertSame(MetaInformationBuilder::DEFAULT_ROUTE, $metaInformation->getRoute());
-            self::assertNull($metaInformation->getImage());
-            self::assertNotNull($metaInformation->getRouteName());
-            self::assertNotNull($metaInformation->getDescription());
+            static::assertSame(1, $metaInformation->getId());
+            static::assertNotEmpty((string) $metaInformation);
+            static::assertSame(MetaInformationBuilder::DEFAULT_ROUTE, $metaInformation->getRoute());
+            static::assertNull($metaInformation->getImage());
+            static::assertNotNull($metaInformation->getRouteName());
+            static::assertNotNull($metaInformation->getDescription());
         } else {
-            self::fail('not found metaInformation');
+            static::fail('not found metaInformation');
         }
     }
 
@@ -61,9 +61,9 @@ class MetaInformationRepositoryTest extends KernelTestCase
         $metaInformation = $this->repository->findOneBy(['route' => 'test']);
 
         if (null !== $metaInformation) {
-            self::assertSame(1, $metaInformation->getId());
+            static::assertSame(1, $metaInformation->getId());
         } else {
-            self::fail('not found metaInformation');
+            static::fail('not found metaInformation');
         }
     }
 }

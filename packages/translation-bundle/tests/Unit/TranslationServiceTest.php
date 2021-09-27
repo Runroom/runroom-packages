@@ -50,11 +50,11 @@ class TranslationServiceTest extends TestCase
         $translation = TranslationFactory::new(['key' => 'key'])->withTranslations(['en'])->create();
 
         $this->repository->method('findOneBy')->with(['key' => 'key'])->willReturn($translation);
-        $this->translator->expects(self::never())->method('trans')->with('key', [], null, 'en');
+        $this->translator->expects(static::never())->method('trans')->with('key', [], null, 'en');
 
         $result = $this->service->translate('key', [], 'en');
 
-        self::assertSame($translation->getValue(), $result);
+        static::assertSame($translation->getValue(), $result);
     }
 
     /** @test */
@@ -66,6 +66,6 @@ class TranslationServiceTest extends TestCase
 
         $result = $this->service->translate('key', [], 'en');
 
-        self::assertSame('another_translation', $result);
+        static::assertSame('another_translation', $result);
     }
 }

@@ -27,6 +27,6 @@ class MetaInformationAwareTest extends TestCase
 
         $metaInformationAware = $metaInformationAware->setMetaInformation($entityMetaInformation);
 
-        self::assertSame($entityMetaInformation, $metaInformationAware->getMetaInformation());
+        static::assertSame($entityMetaInformation, $metaInformationAware->getMetaInformation());
     }
 }

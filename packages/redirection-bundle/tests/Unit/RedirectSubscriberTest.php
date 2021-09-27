@@ -41,7 +41,7 @@ class RedirectSubscriberTest extends TestCase
     /** @test */
     public function itSubscribesToKernelRequestEvent(): void
     {
-        self::assertArrayHasKey(KernelEvents::REQUEST, RedirectSubscriber::getSubscribedEvents());
+        static::assertArrayHasKey(KernelEvents::REQUEST, RedirectSubscriber::getSubscribedEvents());
     }
 
     /** @test */
@@ -51,25 +51,25 @@ class RedirectSubscriberTest extends TestCase
 
         $this->subscriber->onKernelRequest($event);
 
-        self::assertNull($event->getResponse());
+        static::assertNull($event->getResponse());
     }
 
     /** @test */
     public function itDoesNotDOAnythingIfTheRouteIsNotFoundOnTheRepository(): void
     {
-        $this->repository->expects(self::once())->method('findRedirect')->with('/');
+        $this->repository->expects(static::once())->method('findRedirect')->with('/');
 
         $event = $this->getResponseEvent();
 
         $this->subscriber->onKernelRequest($event);
 
-        self::assertNull($event->getResponse());
+        static::assertNull($event->getResponse());
     }
 
     /** @test */
     public function itDoesARedirectToDestinationUrl(): void
     {
-        $this->repository->expects(self::once())->method('findRedirect')->with('/')->willReturn([
+        $this->repository->expects(static::once())->method('findRedirect')->with('/')->willReturn([
             'destination' => '/redirect',
             'httpCode' => 301,
         ]);
@@ -81,8 +81,8 @@ class RedirectSubscriberTest extends TestCase
         /** @var RedirectResponse */
         $response = $event->getResponse();
 
-        self::assertSame('/redirect', $response->getTargetUrl());
-        self::assertSame(301, $response->getStatusCode());
+        static::assertSame('/redirect', $response->getTargetUrl());
+        static::assertSame(301, $response->getStatusCode());
     }
 
     /** @todo: Change to MAIN_REQUEST when dropping support for Symfony 4 */

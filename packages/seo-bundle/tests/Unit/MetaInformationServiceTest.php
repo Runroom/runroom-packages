@@ -70,7 +70,7 @@ class MetaInformationServiceTest extends TestCase
 
         $generatedMetas = $this->service->build($this->context);
 
-        self::assertSame($this->expectedMetas, $generatedMetas);
+        static::assertSame($this->expectedMetas, $generatedMetas);
     }
 
     /** @test */
@@ -83,7 +83,7 @@ class MetaInformationServiceTest extends TestCase
 
         $generatedMetas = $this->service->build($this->context);
 
-        self::assertSame($this->expectedMetas, $generatedMetas);
+        static::assertSame($this->expectedMetas, $generatedMetas);
     }
 
     /** @test */

@@ -66,7 +66,7 @@ class AlternateLinksServiceTest extends TestCase
 
         $alternateLinks = $this->service->build($this->context);
 
-        self::assertSame(['es' => 'alternate_link'], $alternateLinks);
+        static::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
     /** @test */
@@ -79,7 +79,7 @@ class AlternateLinksServiceTest extends TestCase
 
         $alternateLinks = $this->service->build($this->context);
 
-        self::assertSame(['es' => 'alternate_link'], $alternateLinks);
+        static::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
     /** @test */

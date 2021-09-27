@@ -39,7 +39,7 @@ class TranslationExtensionTest extends TestCase
 
         $result = $this->extension->translate('key');
 
-        self::assertSame('value', $result);
+        static::assertSame('value', $result);
     }
 
     /** @test */
@@ -47,6 +47,6 @@ class TranslationExtensionTest extends TestCase
     {
         $filters = $this->extension->getFilters();
 
-        self::assertCount(1, $filters);
+        static::assertCount(1, $filters);
     }
 }

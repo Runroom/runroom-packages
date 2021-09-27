@@ -63,8 +63,8 @@ class MetaInformationBuilderTest extends TestCase
             'test'
         );
 
-        self::assertSame('test title', $metas->getTitle());
-        self::assertSame(' description', $metas->getDescription());
-        self::assertSame($media, $metas->getImage());
+        static::assertSame('test title', $metas->getTitle());
+        static::assertSame(' description', $metas->getDescription());
+        static::assertSame($media, $metas->getImage());
     }
 }
