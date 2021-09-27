@@ -15,14 +15,21 @@ namespace Runroom\Testing\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
+use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
+use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 
 class Kernel extends BaseKernel
 {
@@ -34,7 +41,12 @@ class Kernel extends BaseKernel
             new DoctrineBundle(),
             new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
+            new KnpMenuBundle(),
             new NelmioAliceBundle(),
+            new SecurityBundle(),
+            new SonataAdminBundle(),
+            new SonataDoctrineORMAdminBundle(),
+            new TwigBundle(),
         ];
     }
 
@@ -55,13 +67,37 @@ class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
+        $loader->load($this->getProjectDir() . '/services.yaml');
+
         $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
             'annotations' => ['enabled' => true],
             'property_access' => null,
+            'translator' => null,
+            'form' => null,
         ]);
+
+        $securityConfig = [
+            'firewalls' => ['main' => []],
+        ];
+
+        if (class_exists(AuthenticatorManager::class)) {
+            $securityConfig['enable_authenticator_manager'] = true;
+        } else {
+            $securityConfig['firewalls']['main']['anonymous'] = true;
+        }
+
+        $container->loadFromExtension('security', $securityConfig);
+
+        if (class_exists(DeprecatedTextExtension::class)) {
+            $container->loadFromExtension('sonata_admin', [
+                'options' => [
+                    'legacy_twig_text_extension' => false,
+                ],
+            ]);
+        }
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],

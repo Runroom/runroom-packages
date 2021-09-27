@@ -1,0 +1,6 @@
+services:
+    Runroom\Testing\Tests\App\Admin\TestAdmin:
+        public: true
+        arguments: [null, Runroom\Testing\Tests\App\Entity\Test, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Test Entity' }
