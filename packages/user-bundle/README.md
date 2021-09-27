@@ -9,7 +9,7 @@ RunroomUserBundle
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/user-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/user-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/user-bundle/d/daily)](https://packagist.org/packages/runroom-packages/user-bundle)
 
-This bundle gives the ability to define and use translations directly on the Sonata Backoffice as a replacement for `yaml` translations of Symfony.
+This bundle replaces [SonataUserBundle](https://github.com/sonata-project/SonataUserBundle) to have a working solution for Symfony 5 with the new authentication mechanism.
 
 ## Installation
 
