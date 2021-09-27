@@ -83,6 +83,12 @@ However you should not install this package but install the following ones depen
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/translation-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/translation-bundle/d/daily)](https://packagist.org/packages/runroom-packages/translation-bundle)
 
+## [RunroomUserBundle](https://github.com/Runroom/RunroomUserBundle)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/user-bundle/downloads)](https://packagist.org/packages/runroom-packages/user-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/user-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/user-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/user-bundle/d/daily)](https://packagist.org/packages/runroom-packages/user-bundle)
+
 ## License
 
 This bundle is under the [MIT license](LICENSE).

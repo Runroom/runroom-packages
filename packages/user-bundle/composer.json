@@ -1,0 +1,48 @@
+{
+    "name": "runroom-packages/user-bundle",
+    "type": "symfony-bundle",
+    "description": "Manage admin users for Sonata",
+    "keywords": [
+        "user",
+        "symfony",
+        "doctrine",
+        "admin",
+        "sonata"
+    ],
+    "homepage": "https://github.com/runroom/RunroomUserBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Runroom",
+            "email": "software@runroom.com",
+            "homepage": "https://www.runroom.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
+    "conflict": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "symfony/phpunit-bridge": "^5.3"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.13-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Runroom\\UserBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Runroom\\UserBundle\\Tests\\": "tests/"
+        }
+    }
+}
