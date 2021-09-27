@@ -52,7 +52,8 @@
         "runroom-packages/seo-bundle": "self.version",
         "runroom-packages/sortable-behavior-bundle": "self.version",
         "runroom-packages/testing": "self.version",
-        "runroom-packages/translation-bundle": "self.version"
+        "runroom-packages/translation-bundle": "self.version",
+        "runroom-packages/user-bundle": "self.version"
     },
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
@@ -105,7 +106,8 @@
             "Runroom\\SeoBundle\\": "packages/seo-bundle/src/",
             "Runroom\\SortableBehaviorBundle\\": "packages/sortable-behavior-bundle/src/",
             "Runroom\\Testing\\": "packages/testing/src/",
-            "Runroom\\TranslationBundle\\": "packages/translation-bundle/src/"
+            "Runroom\\TranslationBundle\\": "packages/translation-bundle/src/",
+            "Runroom\\UserBundle\\": "packages/user-bundle/src/"
         }
     },
     "autoload-dev": {
@@ -121,6 +123,7 @@
             "Runroom\\SortableBehaviorBundle\\Tests\\": "packages/sortable-behavior-bundle/tests/",
             "Runroom\\Testing\\Tests\\": "packages/testing/tests/",
             "Runroom\\TranslationBundle\\Tests\\": "packages/translation-bundle/tests/",
+            "Runroom\\UserBundle\\Tests\\": "packages/user-bundle/tests/",
             "Tests\\": "tests/"
         }
     },
@@ -136,7 +139,8 @@
             "composer normalize --no-check-lock --no-update-lock packages/seo-bundle/composer.json",
             "composer normalize --no-check-lock --no-update-lock packages/sortable-behavior-bundle/composer.json",
             "composer normalize --no-check-lock --no-update-lock packages/testing/composer.json",
-            "composer normalize --no-check-lock --no-update-lock packages/translation-bundle/composer.json"
+            "composer normalize --no-check-lock --no-update-lock packages/translation-bundle/composer.json",
+            "composer normalize --no-check-lock --no-update-lock packages/user-bundle/composer.json"
         ],
         "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
         "phpstan": "phpstan analyse --no-progress",

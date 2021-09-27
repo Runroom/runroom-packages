@@ -11,14 +11,14 @@
     processIsolation="false"
     stopOnFailure="false"
     bootstrap="vendor/autoload.php"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
 >
     <testsuite name="RunroomBasicPageBundle">
         <directory>tests</directory>
     </testsuite>
 
     <listeners>
-         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
     </listeners>
 
     <coverage>

@@ -23,6 +23,7 @@ jobs:
           - { folder: sortable-behavior-bundle, repository: RunroomSortableBehaviorBundle }
           - { folder: testing, repository: testing }
           - { folder: translation-bundle, repository: RunroomTranslationBundle }
+          - { folder: user-bundle, repository: RunroomUserBundle }
     steps:
       - uses: actions/checkout@v2
       - if: "!startsWith(github.ref, 'refs/tags/')"
