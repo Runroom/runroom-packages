@@ -27,6 +27,5 @@ jobs:
       - uses: ramsey/composer-install@v1
         with:
           dependency-versions: ${{ matrix.dependencies }}
-          composer-options: ${{ matrix.composer-options }}
       - run: vendor/bin/phpunit --coverage-clover=clover.xml
       - uses: codecov/codecov-action@v1
