@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Repository;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Runroom\UserBundle\Entity\ResetPasswordRequest;
@@ -61,7 +62,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
     {
         $resetPasswordRequest = $this->getRepository()->createQueryBuilder('t')
             ->where('t.user = :user')
-            ->setParameter('user', $user)
+            ->setParameter('user', $user, Types::OBJECT)
             ->orderBy('t.requestedAt', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
@@ -79,7 +80,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
         $this->getRepository()->createQueryBuilder('t')
             ->delete()
             ->where('t.user = :user')
-            ->setParameter('user', $resetPasswordRequest->getUser())
+            ->setParameter('user', $resetPasswordRequest->getUser(), Types::OBJECT)
             ->getQuery()
             ->execute();
     }
@@ -89,7 +90,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
         $query = $this->getRepository()->createQueryBuilder('t')
             ->delete()
             ->where('t.expiresAt <= :time')
-            ->setParameter('time', new \DateTimeImmutable('-1 week'))
+            ->setParameter('time', new \DateTimeImmutable('-1 week'), Types::DATETIME_IMMUTABLE)
             ->getQuery();
 
         return $query->execute();
