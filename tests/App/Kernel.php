@@ -247,10 +247,7 @@ final class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('runroom_user', [
-            'from_email' => [
-                'address' => 'my@email.com',
-                'sender_name' => 'Backoffice',
-            ],
+            'reset_password' => ['enabled' => true],
         ]);
     }
 

@@ -17,14 +17,16 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 
 /**
  * @phpstan-type UserBundleConfiguration = array{
- *     from_email: array{
- *         address: string,
- *         sender_name: string,
- *     },
  *     reset_password: array{
+ *         enabled: bool,
+ *         email: array{
+ *             address: string,
+ *             sender_name: string,
+ *         },
  *         lifetime: int,
  *         throttle_limit: int,
  *         enable_garbage_collection: bool,
@@ -52,25 +54,50 @@ final class RunroomUserExtension extends Extension
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.php');
-
-            if (isset($bundles['SymfonyCastsResetPasswordBundle'])) {
-                $loader->load('admin_reset_password.php');
-            }
         }
 
-        if (isset($bundles['SymfonyCastsResetPasswordBundle'])) {
-            $loader->load('reset_password.php');
-
-            $container->getDefinition('runroom_user.reset_password.helper')
-                ->setArgument(3, $config['reset_password']['lifetime'])
-                ->setArgument(4, $config['reset_password']['throttle_limit']);
-
-            $container->getDefinition('runroom_user.reset_password.cleaner')
-                ->setArgument(1, $config['reset_password']['enable_garbage_collection']);
-
-            $container->getDefinition('runroom_user.service.mailer')
-                ->setArgument(4, $config['from_email']['address'])
-                ->setArgument(5, $config['from_email']['sender_name']);
+        if ($this->isConfigEnabled($container, $config['reset_password'])) {
+            $this->registerReserPasswordConfiguration($container, $config['reset_password'], $loader);
         }
+    }
+
+    /**
+     * @param array<string, int|bool|array> $config
+     *
+     * @phpstan-param array{
+     *     enabled: bool,
+     *     email: array{
+     *         address: string,
+     *         sender_name: string,
+     *     },
+     *     lifetime: int,
+     *     throttle_limit: int,
+     *     enable_garbage_collection: bool,
+     * } $config
+     */
+    private function registerReserPasswordConfiguration(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+
+        if (!class_exists(SymfonyCastsResetPasswordBundle::class) || !isset($bundles['SymfonyCastsResetPasswordBundle'])) {
+            throw new \LogicException('Reset password support cannot be enabled as the SymfonyCastsResetPasswordBundle is not installed or not registered. Try running "composer require symfonycasts/reset-password-bundle".');
+        }
+
+        $loader->load('reset_password.php');
+
+        if (isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin_reset_password.php');
+        }
+
+        $container->getDefinition('runroom_user.reset_password.helper')
+            ->setArgument('$resetRequestLifetime', $config['lifetime'])
+            ->setArgument('$requestThrottleTime', $config['throttle_limit']);
+
+        $container->getDefinition('runroom_user.reset_password.cleaner')
+            ->setArgument('$enabled', $config['enable_garbage_collection']);
+
+        $container->getDefinition('runroom_user.service.mailer')
+            ->setArgument('$fromEmail', $config['email']['address'])
+            ->setArgument('$fromName', $config['email']['sender_name']);
     }
 }

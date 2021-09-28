@@ -95,7 +95,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
         return $query->execute();
     }
 
-    /** @phpstan-return EntityRepository<UserInterface> */
+    /** @phpstan-return EntityRepository<ResetPasswordRequestInterface> */
     private function getRepository(): EntityRepository
     {
         return $this->entityManager->getRepository($this->class);
