@@ -15,11 +15,10 @@ namespace Runroom\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Runroom\UserBundle\Model\UserInterface;
-use Runroom\UserBundle\Repository\ResetPasswordRequestRepository;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestTrait;
 
-/** @ORM\Entity(repositoryClass=ResetPasswordRequestRepository::class) */
+/** @ORM\Entity */
 class ResetPasswordRequest implements ResetPasswordRequestInterface
 {
     use ResetPasswordRequestTrait;

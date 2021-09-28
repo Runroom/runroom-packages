@@ -44,6 +44,24 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
     ]);
 
+    // @todo: Remove this when removing support for Symfony 4
+    $parameters->set(Option::EXCLUDE_PACKAGE_VERSION_CONFLICTS, [
+        'symfony/config',
+        'symfony/dependency-injection',
+        'symfony/http-foundation',
+        'symfony/http-kernel',
+        'symfony/routing',
+        'symfony/validator',
+        'sonata-project/admin-bundle',
+        'sonata-project/doctrine-orm-admin-bundle',
+        'symfony/security-bundle',
+        'symfony/twig-bundle',
+        'symfony/form',
+        'symfony/framework-bundle',
+        'symfony/translation',
+        'symfony/doctrine-bridge',
+    ]);
+
     $services->set(UpdateReplaceReleaseWorker::class);
     $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
     $services->set(ComposerNormalizePreReleaseWorker::class);

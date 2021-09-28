@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-use Runroom\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -23,12 +22,18 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
-/** @extends ServiceEntityRepository<UserInterface> */
-final class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserLoaderInterface
+final class UserRepository implements PasswordUpgraderInterface, UserLoaderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private EntityManagerInterface $entityManager;
+
+    /** @phpstan-var class-string<UserInterface> */
+    private string $class;
+
+    /** @phpstan-param class-string<UserInterface> $class */
+    public function __construct(EntityManagerInterface $entityManager, string $class)
     {
-        parent::__construct($registry, User::class);
+        $this->entityManager = $entityManager;
+        $this->class = $class;
     }
 
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
@@ -38,20 +43,16 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
         }
 
         $user->setPassword($newHashedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
     public function loadUserByIdentifier(string $identifier): ?SymfonyUserInterface
     {
-        $query = $this->createQueryBuilder('user')
-            ->where('user.email = :email')
-            ->andWhere('user.enabled = :enabled')
-            ->setParameter('email', $identifier)
-            ->setParameter('enabled', true)
-            ->getQuery();
-
-        return $query->getOneOrNullResult();
+        return $this->getRepository()->findOneBy([
+            'email' => $identifier,
+            'enabled' => true,
+        ]);
     }
 
     public function loadUserByUsername(string $username): ?SymfonyUserInterface
@@ -61,12 +62,18 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
 
     public function create(): UserInterface
     {
-        return new User();
+        return new $this->class();
     }
 
     public function save(UserInterface $user): void
     {
-        $this->_em->persist($user);
-        $this->_em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+
+    /** @phpstan-return EntityRepository<UserInterface> */
+    private function getRepository(): EntityRepository
+    {
+        return $this->entityManager->getRepository($this->class);
     }
 }

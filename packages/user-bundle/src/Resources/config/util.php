@@ -11,7 +11,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\UserBundle\Repository\UserRepository;
 use Runroom\UserBundle\Util\UserManipulator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
@@ -21,6 +20,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('runroom_user.util.user_manipulator', UserManipulator::class)
-        ->arg('$userRepository', new ReferenceConfigurator(UserRepository::class))
+        ->arg('$userRepository', new ReferenceConfigurator('runroom_user.repository.user'))
         ->arg('$passwordHasher', new ReferenceConfigurator('security.password_hasher'));
 };

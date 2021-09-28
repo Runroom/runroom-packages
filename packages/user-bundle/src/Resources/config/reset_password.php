@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
 use Runroom\UserBundle\Controller\ResetPasswordController;
+use Runroom\UserBundle\Entity\ResetPasswordRequest;
 use Runroom\UserBundle\Form\ChangePasswordFormType;
 use Runroom\UserBundle\Form\ResetPasswordRequestFormType;
 use Runroom\UserBundle\Repository\ResetPasswordRequestRepository;
-use Runroom\UserBundle\Repository\UserRepository;
 use Runroom\UserBundle\Service\MailerService;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
@@ -38,7 +38,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$resetPasswordHelper', new ReferenceConfigurator('runroom_user.reset_password.helper'))
         ->arg('$passwordHasher', new ReferenceConfigurator('security.password_hasher'))
         ->arg('$mailerService', new ReferenceConfigurator('runroom_user.service.mailer'))
-        ->arg('$userRepository', new ReferenceConfigurator(UserRepository::class))
+        ->arg('$userRepository', new ReferenceConfigurator('runroom_user.repository.user'))
         ->tag('container.service_subscriber')
         ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
 
@@ -54,19 +54,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$fromEmail', null)
         ->arg('$fromName', null);
 
-    $services->set(ResetPasswordRequestRepository::class)
-        ->arg('$registry', new ReferenceConfigurator('doctrine'))
-        ->tag('doctrine.repository_service');
+    $services->set('runroom_user.repository.reset_password_request', ResetPasswordRequestRepository::class)
+        ->arg('$entityManager', new ReferenceConfigurator('doctrine.orm.entity_manager'))
+        ->arg('$class', ResetPasswordRequest::class);
 
     // Services from SymfonyCasts Reset Password Bundle
     $services->set('runroom_user.reset_password.cleaner', ResetPasswordCleaner::class)
-        ->arg('$repository', new ReferenceConfigurator(ResetPasswordRequestRepository::class))
+        ->arg('$repository', new ReferenceConfigurator('runroom_user.repository.reset_password_request'))
         ->arg('$enabled', null);
 
     $services->set('runroom_user.reset_password.helper', ResetPasswordHelper::class)
         ->arg('$generator', new ReferenceConfigurator('symfonycasts.reset_password.token_generator'))
         ->arg('$cleaner', new ReferenceConfigurator('runroom_user.reset_password.cleaner'))
-        ->arg('$repository', new ReferenceConfigurator(ResetPasswordRequestRepository::class))
+        ->arg('$repository', new ReferenceConfigurator('runroom_user.repository.reset_password_request'))
         ->arg('$resetRequestLifetime', null)
         ->arg('$requestThrottleTime', null);
 };

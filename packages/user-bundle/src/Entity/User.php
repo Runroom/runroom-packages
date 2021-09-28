@@ -15,11 +15,10 @@ namespace Runroom\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Runroom\UserBundle\Model\UserInterface;
-use Runroom\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
