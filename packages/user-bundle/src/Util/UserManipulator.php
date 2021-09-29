@@ -15,16 +15,28 @@ namespace Runroom\UserBundle\Util;
 
 use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepository;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserManipulator
 {
     private UserRepository $userRepository;
-    private UserPasswordHasher $passwordHasher;
 
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     *
+     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface|null
+     */
+    private object $passwordHasher;
+
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     *
+     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     */
     public function __construct(
         UserRepository $userRepository,
-        UserPasswordHasher $passwordHasher
+        object $passwordHasher
     ) {
         $this->userRepository = $userRepository;
         $this->passwordHasher = $passwordHasher;
@@ -35,7 +47,15 @@ final class UserManipulator
         $user = $this->userRepository->create();
 
         $user->setEmail($email);
-        $user->setPassword($this->passwordHasher->hashPassword($user, $password));
+
+        /* @todo: Simplify this when dropping support for Symfony 4 */
+        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+        } else {
+            $hashedPassword = $this->passwordHasher->encodePassword($user, $password);
+        }
+
+        $user->setPassword($hashedPassword);
         $user->setEnabled($active);
 
         $this->userRepository->save($user);
@@ -61,7 +81,14 @@ final class UserManipulator
     {
         $user = $this->findUserByUsernameOrThrowException($email);
 
-        $user->setPassword($this->passwordHasher->hashPassword($user, $password));
+        /* @todo: Simplify this when dropping support for Symfony 4 */
+        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+        } else {
+            $hashedPassword = $this->passwordHasher->encodePassword($user, $password);
+        }
+
+        $user->setPassword($hashedPassword);
 
         $this->userRepository->save($user);
     }
