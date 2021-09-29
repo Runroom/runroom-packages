@@ -16,6 +16,7 @@ namespace Runroom\UserBundle\Provider;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use Runroom\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -101,13 +102,10 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     }
 
     /** @todo: Simplify when dropping support for Symfony 4 */
-    private function buildUserNotFoundException(string $message, string $identifier): \Exception
+    private function buildUserNotFoundException(string $message, string $identifier): AuthenticationException
     {
         if (!class_exists(UserNotFoundException::class)) {
-            $exception = new UsernameNotFoundException($message);
-            $exception->setUsername($identifier);
-
-            return $exception;
+            return new UsernameNotFoundException($message);
         }
 
         $exception = new UserNotFoundException($message);
