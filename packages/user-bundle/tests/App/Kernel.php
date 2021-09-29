@@ -97,6 +97,9 @@ class Kernel extends BaseKernel
 
         $securityConfig = [
             'access_decision_manager' => ['strategy' => 'unanimous'],
+            'access_control' => [
+                ['path' => '^/dashboard$', 'role' => 'ROLE_USER'],
+            ],
             'providers' => [
                 'admin_user_provider' => [
                     'id' => 'runroom_user.provider.user',
