@@ -22,6 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
@@ -31,13 +32,25 @@ final class ResetPasswordController extends AbstractController
     use ResetPasswordControllerTrait;
 
     private ResetPasswordHelperInterface $resetPasswordHelper;
-    private UserPasswordHasherInterface $passwordHasher;
+
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     *
+     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
+     */
+    private object $passwordHasher;
+
     private MailerService $mailerService;
     private UserProvider $userProvider;
 
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     *
+     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     */
     public function __construct(
         ResetPasswordHelperInterface $resetPasswordHelper,
-        UserPasswordHasherInterface $passwordHasher,
+        object $passwordHasher,
         MailerService $mailerService,
         UserProvider $userProvider
     ) {
@@ -105,10 +118,14 @@ final class ResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->resetPasswordHelper->removeResetRequest($token);
 
-            $this->userProvider->upgradePassword($user, $this->passwordHasher->hashPassword(
-                $user,
-                $form->get('plainPassword')->getData()
-            ));
+            /* @todo: Simplify this when dropping support for Symfony 4 */
+            if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
+                $password = $this->passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
+            } else {
+                $password = $this->passwordHasher->encodePassword($user, $form->get('plainPassword')->getData());
+            }
+
+            $this->userProvider->upgradePassword($user, $password);
 
             $this->cleanSessionAfterReset();
 
