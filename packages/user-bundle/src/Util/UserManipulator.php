@@ -25,7 +25,7 @@ final class UserManipulator
     /**
      * @todo: Simplify this when dropping support for Symfony 4
      *
-     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface|null
+     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
      */
     private object $passwordHasher;
 
