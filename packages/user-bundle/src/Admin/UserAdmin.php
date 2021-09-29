@@ -22,13 +22,24 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /** @extends AbstractAdmin<UserInterface> */
 final class UserAdmin extends AbstractAdmin
 {
-    private ?UserPasswordHasherInterface $passwordHasher = null;
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     *
+     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface|null
+     */
+    private ?object $passwordHasher = null;
 
-    public function setPasswordHasher(UserPasswordHasherInterface $passwordHasher): void
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     *
+     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     */
+    public function setPasswordHasher(object $passwordHasher): void
     {
         $this->passwordHasher = $passwordHasher;
     }
@@ -122,14 +133,24 @@ final class UserAdmin extends AbstractAdmin
 
     private function updatePassword(UserInterface $user): void
     {
+        if (null === $this->passwordHasher) {
+            return;
+        }
+
         /** @var mixed[] */
         $submittedData = $this->getRequest()->request->get($this->getUniqId());
 
-        if (isset($submittedData['plainPassword']) && '' !== $submittedData['plainPassword'] && null !== $this->passwordHasher) {
-            $user->setPassword($this->passwordHasher->hashPassword(
-                $user,
-                $submittedData['plainPassword']
-            ));
+        if (!isset($submittedData['plainPassword']) || '' === $submittedData['plainPassword']) {
+            return;
         }
+
+        /* @todo: Simplify this when dropping support for Symfony 4 */
+        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
+            $password = $this->passwordHasher->hashPassword($user, $submittedData['plainPassword']);
+        } else {
+            $password = $this->passwordHasher->encodePassword($user, $submittedData['plainPassword']);
+        }
+
+        $user->setPassword($password);
     }
 }
