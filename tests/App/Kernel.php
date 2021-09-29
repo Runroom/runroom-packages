@@ -36,10 +36,12 @@ use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\RunroomUserBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
+use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
+use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -75,10 +77,12 @@ final class Kernel extends BaseKernel
             new NelmioAliceBundle(),
             new SecurityBundle(),
             new TwigBundle(),
-            new SonataMediaBundle(),
+            new SonataAdminBundle(),
+            new SonataBlockBundle(),
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
-            new SonataAdminBundle(),
+            new SonataMediaBundle(),
+            new SonataTwigBundle(),
             new SymfonyCastsResetPasswordBundle(),
             new ZenstruckFoundryBundle(),
 

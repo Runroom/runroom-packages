@@ -19,7 +19,10 @@ use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\RunroomUserBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
+use Sonata\BlockBundle\SonataBlockBundle;
+use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -46,7 +49,10 @@ class Kernel extends BaseKernel
             new KnpMenuBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
+            new SonataBlockBundle(),
+            new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
+            new SonataTwigBundle(),
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
             new SymfonyCastsResetPasswordBundle(),

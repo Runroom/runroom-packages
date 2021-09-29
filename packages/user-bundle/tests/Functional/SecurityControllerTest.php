@@ -15,7 +15,6 @@ namespace Runroom\UserBundle\Tests\Functional;
 
 use Runroom\UserBundle\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -45,12 +44,13 @@ class SecurityControllerTest extends WebTestCase
         ])->create();
 
         $client->request('GET', '/login');
+        $client->followRedirects(true);
         $client->submitForm('submit', [
             '_username' => 'email@localhost',
             '_password' => UserFactory::DEFAULT_PASSWORD,
         ]);
 
-        self::assertResponseRedirects(class_exists(AuthenticatorManager::class) ? '/dashboard' : 'http://localhost/dashboard');
+        self::assertRouteSame('sonata_admin_dashboard');
     }
 
     /** @test */
@@ -64,11 +64,12 @@ class SecurityControllerTest extends WebTestCase
         ])->create();
 
         $client->request('GET', '/login');
+        $client->followRedirects(true);
         $client->submitForm('submit', [
             '_username' => 'email@localhost',
             '_password' => UserFactory::DEFAULT_PASSWORD,
         ]);
 
-        self::assertResponseRedirects(class_exists(AuthenticatorManager::class) ? '/login' : 'http://localhost/login');
+        self::assertRouteSame('runroom_user_login');
     }
 }
