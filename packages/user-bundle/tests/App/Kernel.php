@@ -15,6 +15,7 @@ namespace Runroom\UserBundle\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
+use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\RunroomUserBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
@@ -76,6 +77,7 @@ class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'assets' => ['enabled' => true],
             'mailer' => ['enabled' => true],
         ];
 
@@ -88,13 +90,42 @@ class Kernel extends BaseKernel
         $container->loadFromExtension('framework', $frameworkConfig);
 
         $securityConfig = [
-            'firewalls' => ['main' => []],
+            'access_decision_manager' => ['strategy' => 'unanimous'],
+            'providers' => [
+                'admin_user_provider' => [
+                    'id' => 'runroom_user.provider.user',
+                ],
+            ],
+            'firewalls' => ['main' => [
+                'pattern' => '/(.*)',
+                'provider' => 'admin_user_provider',
+                'context' => 'user',
+                'logout' => [
+                    'path' => 'runroom_user_logout',
+                    'target' => 'runroom_user_login',
+                ],
+                'remember_me' => [
+                    'secret' => 'secret',
+                    'lifetime' => 2629746,
+                    'path' => '/',
+                ],
+            ]],
         ];
 
         if (class_exists(AuthenticatorManager::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
+            $securityConfig['firewalls']['main']['custom_authenticator'] = 'runroom_user.security.user_authenticator';
+            $securityConfig['firewalls']['main']['lazy'] = true;
+            $securityConfig['password_hashers'] = [User::class => ['algorithm' => 'auto']];
         } else {
             $securityConfig['firewalls']['main']['anonymous'] = true;
+            $securityConfig['firewalls']['main']['form_login'] = [
+                'login_path' => 'runroom_user_login',
+                'check_path' => 'runroom_user_login',
+                'default_target_path' => 'sonata_admin_dashboard',
+            ];
+
+            $securityConfig['encoders'] = [User::class => 'auto'];
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -137,6 +168,7 @@ class Kernel extends BaseKernel
      */
     protected function configureRoutes($routes): void
     {
+        $routes->import($this->getProjectDir() . '/routing.yaml');
     }
 
     private function getBaseDir(): string

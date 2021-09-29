@@ -39,9 +39,9 @@ final class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): PassportInterface
     {
-        $email = $request->request->get('email', '');
+        $email = $request->request->get('_username', '');
         \assert(\is_string($email));
-        $password = $request->request->get('password', '');
+        $password = $request->request->get('_password', '');
         \assert(\is_string($password));
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);

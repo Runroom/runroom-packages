@@ -40,14 +40,24 @@ final class UserAdmin extends AbstractAdmin
         });
     }
 
-    public function prePersist(object $object): void
+    /**
+     * @todo: Add typehint when dropping support for Sonata 3
+     *
+     * @param UserInterface $object
+     */
+    public function prePersist($object): void
     {
         $this->updatePassword($object);
 
         $object->setCreatedAt(new \DateTimeImmutable());
     }
 
-    public function preUpdate(object $object): void
+    /**
+     * @todo: Add typehint when dropping support for Sonata 3
+     *
+     * @param UserInterface $object
+     */
+    public function preUpdate($object): void
     {
         $this->updatePassword($object);
     }

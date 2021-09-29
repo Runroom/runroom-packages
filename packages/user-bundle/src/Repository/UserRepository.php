@@ -16,13 +16,8 @@ namespace Runroom\UserBundle\Repository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Runroom\UserBundle\Model\UserInterface;
-use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
-final class UserRepository implements PasswordUpgraderInterface, UserLoaderInterface
+final class UserRepository
 {
     private EntityManagerInterface $entityManager;
 
@@ -36,28 +31,12 @@ final class UserRepository implements PasswordUpgraderInterface, UserLoaderInter
         $this->class = $class;
     }
 
-    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
-    {
-        if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
-        }
-
-        $user->setPassword($newHashedPassword);
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-    }
-
-    public function loadUserByIdentifier(string $identifier): ?SymfonyUserInterface
+    public function loadUserByIdentifier(string $identifier): ?UserInterface
     {
         return $this->getRepository()->findOneBy([
             'email' => $identifier,
             'enabled' => true,
         ]);
-    }
-
-    public function loadUserByUsername(string $username): ?SymfonyUserInterface
-    {
-        return $this->loadUserByIdentifier($username);
     }
 
     public function create(): UserInterface

@@ -16,7 +16,18 @@ namespace Runroom\UserBundle\Model;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
-interface UserInterface extends SymfonyUserInterface, PasswordAuthenticatedUserInterface
+/* @todo: Simplify this when dropping support for Symfony 4 */
+if (interface_exists(PasswordAuthenticatedUserInterface::class)) {
+    interface BCPasswordAuthenticatedUserInterface extends PasswordAuthenticatedUserInterface
+    {
+    }
+} else {
+    interface BCPasswordAuthenticatedUserInterface
+    {
+    }
+}
+
+interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUserInterface
 {
     public const ROLE_DEFAULT = 'ROLE_USER';
 

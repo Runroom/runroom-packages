@@ -6,9 +6,3 @@ user_security:
 
 user_reset_password:
     resource: '@RunroomUserBundle/Resources/config/routing/reset_password.yaml'
-
-cookies:
-    resource: '@RunroomCookiesBundle/Resources/config/routing.yaml'
-
-basic_page:
-    resource: '@RunroomBasicPageBundle/Resources/config/routing.yaml'

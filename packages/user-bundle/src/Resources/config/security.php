@@ -14,7 +14,6 @@ declare(strict_types=1);
 use Runroom\UserBundle\Security\RolesBuilder\AdminRolesBuilder;
 use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilder;
 use Runroom\UserBundle\Security\RolesBuilder\SecurityRolesBuilder;
-use Runroom\UserBundle\Security\UserAuthenticator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -22,9 +21,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
     $services = $containerConfigurator->services();
-
-    $services->set('runroom_user.security.user_authenticator', UserAuthenticator::class)
-        ->arg('$urlGenerator', new ReferenceConfigurator('router'));
 
     $services->set('runroom_user.security.roles_builder.admin', AdminRolesBuilder::class)
         ->arg('$authorizationChecker', new ReferenceConfigurator('security.authorization_checker'))

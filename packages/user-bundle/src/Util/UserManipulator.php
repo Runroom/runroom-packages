@@ -70,7 +70,6 @@ final class UserManipulator
     private function findUserByUsernameOrThrowException(string $email): UserInterface
     {
         $user = $this->userRepository->loadUserByIdentifier($email);
-        \assert(null === $user || $user instanceof UserInterface);
 
         if (null === $user) {
             throw new \InvalidArgumentException(sprintf('User identified by "%s" username does not exist.', $email));

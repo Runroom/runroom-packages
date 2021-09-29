@@ -16,7 +16,7 @@ namespace Runroom\UserBundle\Controller;
 use Runroom\UserBundle\Form\ChangePasswordFormType;
 use Runroom\UserBundle\Form\ResetPasswordRequestFormType;
 use Runroom\UserBundle\Model\UserInterface;
-use Runroom\UserBundle\Repository\UserRepository;
+use Runroom\UserBundle\Provider\UserProvider;
 use Runroom\UserBundle\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,18 +33,18 @@ final class ResetPasswordController extends AbstractController
     private ResetPasswordHelperInterface $resetPasswordHelper;
     private UserPasswordHasherInterface $passwordHasher;
     private MailerService $mailerService;
-    private UserRepository $userRepository;
+    private UserProvider $userProvider;
 
     public function __construct(
         ResetPasswordHelperInterface $resetPasswordHelper,
         UserPasswordHasherInterface $passwordHasher,
         MailerService $mailerService,
-        UserRepository $userRepository
+        UserProvider $userProvider
     ) {
         $this->resetPasswordHelper = $resetPasswordHelper;
         $this->passwordHasher = $passwordHasher;
         $this->mailerService = $mailerService;
-        $this->userRepository = $userRepository;
+        $this->userProvider = $userProvider;
     }
 
     public function request(Request $request): Response
@@ -105,7 +105,7 @@ final class ResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->resetPasswordHelper->removeResetRequest($token);
 
-            $this->userRepository->upgradePassword($user, $this->passwordHasher->hashPassword(
+            $this->userProvider->upgradePassword($user, $this->passwordHasher->hashPassword(
                 $user,
                 $form->get('plainPassword')->getData()
             ));
@@ -122,12 +122,8 @@ final class ResetPasswordController extends AbstractController
 
     private function processSendingPasswordResetEmail(string $identifier): void
     {
-        $user = $this->userRepository->loadUserByIdentifier($identifier);
-        \assert(null === $user || $user instanceof UserInterface);
-
-        if (null === $user) {
-            return;
-        }
+        $user = $this->userProvider->loadUserByIdentifier($identifier);
+        \assert($user instanceof UserInterface);
 
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);

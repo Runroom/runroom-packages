@@ -20,6 +20,7 @@ use Runroom\UserBundle\Repository\ResetPasswordRequestRepository;
 use Runroom\UserBundle\Service\MailerService;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use SymfonyCasts\Bundle\ResetPassword\Command\ResetPasswordRemoveExpiredCommand;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelper;
 use SymfonyCasts\Bundle\ResetPassword\Util\ResetPasswordCleaner;
@@ -29,6 +30,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "abstract_arg" function for referencing parameters that will be replaced when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
+    /** @todo: Simplify this when dropping support for Symfony 4 */
+    $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
+
     $services->set('runroom_user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class)
         ->arg('$cleaner', new ReferenceConfigurator('runroom_user.reset_password.cleaner'))
         ->tag('console.command', ['command' => 'runroom:user:remove-expired-password-request']);
@@ -36,9 +40,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set('runroom_user.controller.reset_password', ResetPasswordController::class)
         ->public()
         ->arg('$resetPasswordHelper', new ReferenceConfigurator('runroom_user.reset_password.helper'))
-        ->arg('$passwordHasher', new ReferenceConfigurator('security.password_hasher'))
+        ->arg('$passwordHasher', new ReferenceConfigurator($passwordHasherId))
         ->arg('$mailerService', new ReferenceConfigurator('runroom_user.service.mailer'))
-        ->arg('$userRepository', new ReferenceConfigurator('runroom_user.repository.user'))
+        ->arg('$userProvider', new ReferenceConfigurator('runroom_user.provider.user'))
         ->tag('container.service_subscriber')
         ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
 

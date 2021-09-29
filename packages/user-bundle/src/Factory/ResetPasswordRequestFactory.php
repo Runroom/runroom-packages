@@ -26,8 +26,8 @@ final class ResetPasswordRequestFactory extends ModelFactory
             'user' => UserFactory::new(),
             'selector' => self::faker()->unique()->slug(),
             'hashedToken' => self::faker()->uuid(),
-            'requestedAt' => self::faker()->date(),
-            'expiresAt' => self::faker()->date(),
+            'requestedAt' => self::faker()->dateTime(),
+            'expiresAt' => self::faker()->dateTime(),
         ];
     }
 
