@@ -23,9 +23,9 @@ class ChangePasswordFormTypeTest extends TypeTestCase
 {
     /**
      * @test
-     * @dataProvider dataProvider
+     * @dataProvider submitValuesProvider
      */
-    public function itSubmitWithDifferentValues(string $fistPassword, string $secondPassword, bool $isValid, ?string $expectedData): void
+    public function itSubmitsWithDifferentValues(string $fistPassword, string $secondPassword, bool $isValid, ?string $expectedData): void
     {
         $formData = [
             'plainPassword' => [
@@ -43,7 +43,7 @@ class ChangePasswordFormTypeTest extends TypeTestCase
     }
 
     /** @return iterable<array{string, string, bool, string|null}> */
-    public function dataProvider(): iterable
+    public function submitValuesProvider(): iterable
     {
         yield ['newPassword', 'oldPassword', false, null];
         yield ['newPassword', 'newPassword', true, 'newPassword'];
@@ -51,6 +51,7 @@ class ChangePasswordFormTypeTest extends TypeTestCase
         yield 'Password length shorter than 6 characters' => ['new', 'new', false, 'new'];
     }
 
+    /** @test */
     public function itGetsFormDefaultOptions(): void
     {
         $form = $this->factory->create(ChangePasswordFormType::class);
