@@ -39,7 +39,7 @@ final class ActivateUserCommand extends Command
 
         $this
             ->setDescription(static::$defaultDescription)
-            ->addArgument('email', InputArgument::REQUIRED, 'The email')
+            ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->setHelp(<<<'EOT'
 The <info>%command.full_name%</info> command activates a user (so they will be able to log in):
 
@@ -50,11 +50,11 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $email = $input->getArgument('email');
+        $identifier = $input->getArgument('identifier');
 
-        $this->userManipulator->activate($email);
+        $this->userManipulator->activate($identifier);
 
-        $output->writeln(sprintf('User "%s" has been activated.', $email));
+        $output->writeln(sprintf('User "%s" has been activated.', $identifier));
 
         return 0;
     }

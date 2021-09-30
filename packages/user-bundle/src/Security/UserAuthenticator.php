@@ -39,14 +39,14 @@ final class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): PassportInterface
     {
-        $email = $request->request->get('_username', '');
-        \assert(\is_string($email));
+        $identifier = $request->request->get('_username', '');
+        \assert(\is_string($identifier));
         $password = $request->request->get('_password', '');
         \assert(\is_string($password));
 
-        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        $request->getSession()->set(Security::LAST_USERNAME, $identifier);
 
-        return new Passport(new UserBadge($email), new PasswordCredentials($password));
+        return new Passport(new UserBadge($identifier), new PasswordCredentials($password));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

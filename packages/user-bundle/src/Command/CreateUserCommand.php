@@ -40,7 +40,7 @@ final class CreateUserCommand extends Command
 
         $this
             ->setDescription(static::$defaultDescription)
-            ->addArgument('email', InputArgument::REQUIRED, 'The email')
+            ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->addArgument('password', InputArgument::REQUIRED, 'The password')
             ->addOption('inactive', null, InputOption::VALUE_NONE, 'Set the user as inactive')
             ->setHelp(<<<'EOT'
@@ -57,13 +57,13 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $email = $input->getArgument('email');
+        $identifier = $input->getArgument('identifier');
         $password = $input->getArgument('password');
         $inactive = $input->getOption('inactive');
 
-        $this->userManipulator->create($email, $password, !$inactive);
+        $this->userManipulator->create($identifier, $password, !$inactive);
 
-        $output->writeln(sprintf('Created user <comment>%s</comment>', $email));
+        $output->writeln(sprintf('Created user <comment>%s</comment>', $identifier));
 
         return 0;
     }

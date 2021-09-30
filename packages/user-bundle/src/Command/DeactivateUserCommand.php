@@ -39,7 +39,7 @@ final class DeactivateUserCommand extends Command
 
         $this
             ->setDescription(static::$defaultDescription)
-            ->addArgument('email', InputArgument::REQUIRED, 'The email')
+            ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->setHelp(<<<'EOT'
 The <info>%command.full_name%</info> command deactivates a user (will not be able to log in):
 
@@ -50,11 +50,11 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $email = $input->getArgument('email');
+        $identifier = $input->getArgument('identifier');
 
-        $this->userManipulator->deactivate($email);
+        $this->userManipulator->deactivate($identifier);
 
-        $output->writeln(sprintf('User "%s" has been deactivated.', $email));
+        $output->writeln(sprintf('User "%s" has been deactivated.', $identifier));
 
         return 0;
     }

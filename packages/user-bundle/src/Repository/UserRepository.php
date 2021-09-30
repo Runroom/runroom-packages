@@ -33,10 +33,7 @@ final class UserRepository
 
     public function loadUserByIdentifier(string $identifier): ?UserInterface
     {
-        return $this->getRepository()->findOneBy([
-            'email' => $identifier,
-            'enabled' => true,
-        ]);
+        return $this->getRepository()->findOneBy(['email' => $identifier]);
     }
 
     public function create(): UserInterface

@@ -19,6 +19,11 @@ interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUse
 {
     public const ROLE_DEFAULT = 'ROLE_USER';
 
+    /** @return mixed */
+    public function getId();
+
+    public function getUserIdentifier(): string;
+
     public function getEmail(): ?string;
 
     public function setEmail(?string $email): self;

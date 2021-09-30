@@ -39,7 +39,7 @@ final class ChangePasswordCommand extends Command
 
         $this
             ->setDescription(static::$defaultDescription)
-            ->addArgument('email', InputArgument::REQUIRED, 'The email')
+            ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->addArgument('password', InputArgument::REQUIRED, 'The password')
             ->setHelp(<<<'EOT'
 The <info>%command.full_name%</info> command changes the password of a user:
@@ -51,12 +51,12 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $email = $input->getArgument('email');
+        $identifier = $input->getArgument('identifier');
         $password = $input->getArgument('password');
 
-        $this->userManipulator->changePassword($email, $password);
+        $this->userManipulator->changePassword($identifier, $password);
 
-        $output->writeln(sprintf('Changed password for user <comment>%s</comment>', $email));
+        $output->writeln(sprintf('Changed password for user <comment>%s</comment>', $identifier));
 
         return 0;
     }

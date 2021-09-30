@@ -54,7 +54,7 @@ class User implements UserInterface
         return $this->getUserIdentifier();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }

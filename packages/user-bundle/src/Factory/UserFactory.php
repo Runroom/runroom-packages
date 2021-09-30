@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Factory;
 
 use Runroom\UserBundle\Entity\User;
+use Runroom\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<User> */
+/** @extends ModelFactory<UserInterface> */
 final class UserFactory extends ModelFactory
 {
     public const DEFAULT_PASSWORD = '1234';

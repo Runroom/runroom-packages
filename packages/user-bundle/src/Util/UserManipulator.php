@@ -42,11 +42,11 @@ final class UserManipulator
         $this->passwordHasher = $passwordHasher;
     }
 
-    public function create(string $email, string $password, bool $active): void
+    public function create(string $identifier, string $password, bool $active): void
     {
         $user = $this->userRepository->create();
 
-        $user->setEmail($email);
+        $user->setEmail($identifier);
 
         /* @todo: Simplify this when dropping support for Symfony 4 */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
@@ -61,25 +61,25 @@ final class UserManipulator
         $this->userRepository->save($user);
     }
 
-    public function activate(string $email): void
+    public function activate(string $identifier): void
     {
-        $user = $this->findUserByUsernameOrThrowException($email);
+        $user = $this->findUserByIdentifierOrThrowException($identifier);
         $user->setEnabled(true);
 
         $this->userRepository->save($user);
     }
 
-    public function deactivate(string $email): void
+    public function deactivate(string $identifier): void
     {
-        $user = $this->findUserByUsernameOrThrowException($email);
+        $user = $this->findUserByIdentifierOrThrowException($identifier);
         $user->setEnabled(false);
 
         $this->userRepository->save($user);
     }
 
-    public function changePassword(string $email, string $password): void
+    public function changePassword(string $identifier, string $password): void
     {
-        $user = $this->findUserByUsernameOrThrowException($email);
+        $user = $this->findUserByIdentifierOrThrowException($identifier);
 
         /* @todo: Simplify this when dropping support for Symfony 4 */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
@@ -94,12 +94,12 @@ final class UserManipulator
     }
 
     /** @throws \InvalidArgumentException When user does not exist */
-    private function findUserByUsernameOrThrowException(string $email): UserInterface
+    private function findUserByIdentifierOrThrowException(string $identifier): UserInterface
     {
-        $user = $this->userRepository->loadUserByIdentifier($email);
+        $user = $this->userRepository->loadUserByIdentifier($identifier);
 
         if (null === $user) {
-            throw new \InvalidArgumentException(sprintf('User identified by "%s" username does not exist.', $email));
+            throw new \InvalidArgumentException(sprintf('User identified by "%s" username does not exist.', $identifier));
         }
 
         return $user;

@@ -11,7 +11,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Provider\UserProvider;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
@@ -21,6 +20,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('runroom_user.provider.user', UserProvider::class)
-        ->arg('$objectManager', new ReferenceConfigurator('doctrine.orm.entity_manager'))
-        ->arg('$class', User::class);
+        ->arg('$userRepository', new ReferenceConfigurator('runroom_user.repository.user'));
 };

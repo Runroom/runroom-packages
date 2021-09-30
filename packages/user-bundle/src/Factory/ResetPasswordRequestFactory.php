@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Factory;
 
 use Runroom\UserBundle\Entity\ResetPasswordRequest;
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<ResetPasswordRequest> */
+/** @extends ModelFactory<ResetPasswordRequestInterface> */
 final class ResetPasswordRequestFactory extends ModelFactory
 {
     /** @return array<string, mixed> */

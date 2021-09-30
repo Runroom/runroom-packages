@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Provider;
 
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use Runroom\UserBundle\Model\UserInterface;
+use Runroom\UserBundle\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -26,16 +26,11 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 final class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
-    private ObjectManager $objectManager;
+    private UserRepository $userRepository;
 
-    /** @phpstan-var class-string<UserInterface> $class */
-    private string $class;
-
-    /** @phpstan-param class-string<UserInterface> $class */
-    public function __construct(ObjectManager $objectManager, string $class)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->objectManager = $objectManager;
-        $this->class = $class;
+        $this->userRepository = $userRepository;
     }
 
     /** @param string $username */
@@ -46,12 +41,9 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
 
     public function loadUserByIdentifier(string $identifier): SymfonyUserInterface
     {
-        $user = $this->getRepository()->findOneBy([
-            'email' => $identifier,
-            'enabled' => true,
-        ]);
+        $user = $this->userRepository->loadUserByIdentifier($identifier);
 
-        if (null === $user) {
+        if (null === $user || !$user->getEnabled()) {
             throw $this->buildUserNotFoundException(sprintf('User "%s" not found.', $identifier), $identifier);
         }
 
@@ -60,18 +52,14 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
 
     public function refreshUser(SymfonyUserInterface $user): SymfonyUserInterface
     {
-        if (!$user instanceof $this->class) {
+        if (!$user instanceof UserInterface) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_debug_type($user)));
         }
 
-        $id = $this->objectManager->getClassMetadata($this->class)->getIdentifierValues($user);
-        $refreshedUser = $this->getRepository()->find($id);
+        $refreshedUser = $this->userRepository->loadUserByIdentifier($user->getUserIdentifier());
 
         if (null === $refreshedUser) {
-            $identifier = json_encode($id);
-            $identifier = false === $identifier ? '' : $identifier;
-
-            throw $this->buildUserNotFoundException(sprintf('User with id "%s" not found.', $identifier), $identifier);
+            throw $this->buildUserNotFoundException(sprintf('User with id "%s" not found.', $user->getId()), $user->getUserIdentifier());
         }
 
         return $refreshedUser;
@@ -91,14 +79,8 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         }
 
         $user->setPassword($newHashedPassword);
-        $this->objectManager->persist($user);
-        $this->objectManager->flush();
-    }
 
-    /** @phpstan-return ObjectRepository<UserInterface> */
-    private function getRepository(): ObjectRepository
-    {
-        return $this->objectManager->getRepository($this->class);
+        $this->userRepository->save($user);
     }
 
     /** @todo: Simplify when dropping support for Symfony 4 */
