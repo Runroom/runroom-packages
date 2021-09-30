@@ -18,6 +18,7 @@ use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -44,11 +45,11 @@ class ActivateUserCommandTest extends KernelTestCase
 
     public function testUserIsAlreadyActivated(): void
     {
+        /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::new([
             'email' => 'email@localhost',
             'enabled' => true,
         ])->create()->enableAutoRefresh()->object();
-        \assert($user instanceof UserInterface);
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
@@ -57,11 +58,11 @@ class ActivateUserCommandTest extends KernelTestCase
 
     public function testItActivatesDisabledUser(): void
     {
+        /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::new([
             'email' => 'email@localhost',
             'enabled' => false,
-        ])->create()->enableAutoRefresh()->object();
-        \assert($user instanceof UserInterface);
+        ])->create()->enableAutoRefresh();
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
