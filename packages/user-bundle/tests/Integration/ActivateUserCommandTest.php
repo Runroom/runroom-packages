@@ -36,14 +36,16 @@ class ActivateUserCommandTest extends KernelTestCase
         );
     }
 
-    public function testUserDoesNotExist(): void
+    /** @test */
+    public function isThrowsWhenUserDoesNotExist(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
     }
 
-    public function testUserIsAlreadyActivated(): void
+    /** @test */
+    public function itDoesNothingToAnAlreadyActiveUser(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::new([
@@ -56,7 +58,8 @@ class ActivateUserCommandTest extends KernelTestCase
         static::assertTrue($user->getEnabled());
     }
 
-    public function testItActivatesDisabledUser(): void
+    /** @test */
+    public function itActivatesDisabledUser(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::new([
