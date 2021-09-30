@@ -34,7 +34,7 @@
             <p class="login-box-msg">{{ 'reset_password.submit'|trans({}, 'RunroomUserBundle') }}</p>
             {{ form_start(requestForm) }}
                 <div class="form-group has-feedback">
-                    {{ form_widget(requestForm.email, {'attr': {
+                    {{ form_widget(requestForm.identifier, {'attr': {
                         'class': 'form-control',
                         'placeholder': 'form.email'
                     }}) }}
