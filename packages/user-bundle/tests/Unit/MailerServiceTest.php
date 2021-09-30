@@ -31,20 +31,18 @@ class MailerServiceTest extends TestCase
     private MailerService $service;
 
     private string $fromEmail;
-    private string $fromName;
 
     protected function setUp(): void
     {
         $this->mailer = $this->createMock(MailerInterface::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
         $this->fromEmail = 'user@email.com';
-        $this->fromName = 'user';
 
         $this->service = new MailerService(
             $this->mailer,
             $this->translator,
             $this->fromEmail,
-            $this->fromName
+            'userName'
         );
     }
 
@@ -52,7 +50,7 @@ class MailerServiceTest extends TestCase
     public function itCallsMailerWhenUserHasEmail(): void
     {
         $user = new User();
-        $user->setEmail('user@email.com');
+        $user->setEmail($this->fromEmail);
         $resetPasswordToken = new ResetPasswordToken(
             'token',
             new \DateTime()
