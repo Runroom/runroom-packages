@@ -48,7 +48,6 @@ final class RunroomUserExtension extends Extension
         $loader->load('command.php');
         $loader->load('controller.php');
         $loader->load('form.php');
-        $loader->load('provider.php');
         $loader->load('repository.php');
         $loader->load('security.php');
         $loader->load('twig.php');
@@ -57,8 +56,6 @@ final class RunroomUserExtension extends Extension
         /* @todo: Simplify this when dropping support for Symfony 4 */
         if (class_exists(AuthenticatorManager::class)) {
             $loader->load('security_sf5.php');
-        } else {
-            $loader->load('security_sf4.php');
         }
 
         if (isset($bundles['SonataAdminBundle'])) {

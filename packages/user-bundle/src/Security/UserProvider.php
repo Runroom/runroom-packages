@@ -11,9 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\UserBundle\Provider;
+namespace Runroom\UserBundle\Security;
 
-use Doctrine\Persistence\ObjectRepository;
 use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;

@@ -16,7 +16,7 @@ namespace Runroom\UserBundle\Controller;
 use Runroom\UserBundle\Form\ChangePasswordFormType;
 use Runroom\UserBundle\Form\ResetPasswordRequestFormType;
 use Runroom\UserBundle\Model\UserInterface;
-use Runroom\UserBundle\Provider\UserProvider;
+use Runroom\UserBundle\Security\UserProvider;
 use Runroom\UserBundle\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
