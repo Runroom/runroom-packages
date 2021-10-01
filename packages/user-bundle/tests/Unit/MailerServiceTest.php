@@ -53,13 +53,13 @@ class MailerServiceTest extends TestCase
         $user->setEmail($this->fromEmail);
         $resetPasswordToken = new ResetPasswordToken(
             'token',
-            new \DateTime()
+            new \DateTime(),
+            0
         );
 
         $this->translator->method('trans')->with('email.subject')->willReturn('Subject');
 
-        $this->mailer->expects(static::once())
-            ->method('send');
+        $this->mailer->expects(static::once())->method('send');
 
         $this->service->sendResetPasswordEmail($user, $resetPasswordToken);
     }
@@ -70,13 +70,13 @@ class MailerServiceTest extends TestCase
         $user = new User();
         $resetPasswordToken = new ResetPasswordToken(
             'token',
-            new \DateTime()
+            new \DateTimeImmutable(),
+            0
         );
 
         $this->translator->method('trans')->with('email.subject')->willReturn('Subject');
 
-        $this->mailer->expects(static::never())
-            ->method('send');
+        $this->mailer->expects(static::never())->method('send');
 
         $this->service->sendResetPasswordEmail($user, $resetPasswordToken);
     }
