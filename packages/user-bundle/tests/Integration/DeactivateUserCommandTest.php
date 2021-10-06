@@ -22,7 +22,7 @@ use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ActivateUserCommandTest extends KernelTestCase
+class DeactivateUserCommandTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -34,7 +34,7 @@ class ActivateUserCommandTest extends KernelTestCase
         static::bootKernel();
 
         $this->commandTester = new CommandTester(
-            (new Application(static::createKernel()))->find('runroom:user:activate')
+            (new Application(static::createKernel()))->find('runroom:user:deactivate')
         );
     }
 
@@ -47,21 +47,7 @@ class ActivateUserCommandTest extends KernelTestCase
     }
 
     /** @test */
-    public function itDoesNothingToAnAlreadyActiveUser(): void
-    {
-        /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
-            'email' => 'email@localhost',
-            'enabled' => true,
-        ])->create()->enableAutoRefresh();
-
-        $this->commandTester->execute(['identifier' => 'email@localhost']);
-
-        static::assertTrue($user->getEnabled());
-    }
-
-    /** @test */
-    public function itActivatesUser(): void
+    public function itDoesNothingToAnAlreadyInactiveUser(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::new([
@@ -71,7 +57,21 @@ class ActivateUserCommandTest extends KernelTestCase
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
-        static::assertTrue($user->getEnabled());
-        static::assertStringContainsString('User "email@localhost" has been activated.', $this->commandTester->getDisplay());
+        static::assertFalse($user->getEnabled());
+    }
+
+    /** @test */
+    public function itDeactivatesUser(): void
+    {
+        /** @phpstan-var Proxy<UserInterface> */
+        $user = UserFactory::new([
+            'email' => 'email@localhost',
+            'enabled' => true,
+        ])->create()->enableAutoRefresh();
+
+        $this->commandTester->execute(['identifier' => 'email@localhost']);
+
+        static::assertFalse($user->getEnabled());
+        static::assertStringContainsString('User "email@localhost" has been deactivated.', $this->commandTester->getDisplay());
     }
 }
