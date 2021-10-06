@@ -60,9 +60,11 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
 
     public function getMostRecentNonExpiredRequestDate(object $user): ?\DateTimeInterface
     {
+        \assert($user instanceof UserInterface);
+
         $resetPasswordRequest = $this->getRepository()->createQueryBuilder('t')
             ->where('t.user = :user')
-            ->setParameter('user', $user, Types::OBJECT)
+            ->setParameter('user', $user->getId())
             ->orderBy('t.requestedAt', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
