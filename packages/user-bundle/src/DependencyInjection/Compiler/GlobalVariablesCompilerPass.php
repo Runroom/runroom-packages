@@ -21,7 +21,9 @@ final class GlobalVariablesCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        $container->getDefinition('twig')
-            ->addMethodCall('addGlobal', ['runroom_user', new Reference('runroom_user.twig.global_variables')]);
+        if ($container->hasDefinition('twig')) {
+            $container->getDefinition('twig')
+                ->addMethodCall('addGlobal', ['runroom_user', new Reference('runroom_user.twig.global_variables')]);
+        }
     }
 }

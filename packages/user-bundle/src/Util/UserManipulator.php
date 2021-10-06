@@ -57,6 +57,7 @@ final class UserManipulator
 
         $user->setPassword($hashedPassword);
         $user->setEnabled($active);
+        $user->setCreatedAt(new \DateTimeImmutable());
 
         $this->userRepository->save($user);
     }

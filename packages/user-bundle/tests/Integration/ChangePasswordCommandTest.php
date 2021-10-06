@@ -18,11 +18,12 @@ use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ActivateUserCommandTest extends KernelTestCase
+class ChangePasswordCommandTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -34,7 +35,7 @@ class ActivateUserCommandTest extends KernelTestCase
         static::bootKernel();
 
         $this->commandTester = new CommandTester(
-            (new Application(static::createKernel()))->find('runroom:user:activate')
+            (new Application(static::createKernel()))->find('runroom:user:change-password')
         );
     }
 
@@ -43,35 +44,31 @@ class ActivateUserCommandTest extends KernelTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->commandTester->execute(['identifier' => 'email@localhost']);
+        $this->commandTester->execute([
+            'identifier' => 'email@localhost',
+            'password' => 'password',
+        ]);
     }
 
     /** @test */
-    public function itDoesNothingToAnAlreadyActiveUser(): void
+    public function itChangesUserPassword(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::new([
             'email' => 'email@localhost',
-            'enabled' => true,
         ])->create()->enableAutoRefresh();
 
-        $this->commandTester->execute(['identifier' => 'email@localhost']);
+        /** @todo: Simplify this when dropping support for Symfony 4 */
+        $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
+        $passwordHasher = static::$container->get($passwordHasherId);
 
-        static::assertTrue($user->getEnabled());
-    }
+        static::assertTrue($passwordHasher->isPasswordValid($user->object(), '1234'));
 
-    /** @test */
-    public function itActivatesUser(): void
-    {
-        /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
-            'email' => 'email@localhost',
-            'enabled' => false,
-        ])->create()->enableAutoRefresh();
+        $this->commandTester->execute([
+            'identifier' => 'email@localhost',
+            'password' => 'password',
+        ]);
 
-        $this->commandTester->execute(['identifier' => 'email@localhost']);
-
-        static::assertTrue($user->getEnabled());
-        static::assertStringContainsString('User "email@localhost" has been activated.', $this->commandTester->getDisplay());
+        static::assertTrue($passwordHasher->isPasswordValid($user->object(), 'password'));
     }
 }
