@@ -31,7 +31,7 @@ class UserRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->repository = self::$container->get('runroom_user.repository.user');
+        $this->repository = static::$container->get('runroom_user.repository.user');
     }
 
     /** @test */

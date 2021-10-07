@@ -55,6 +55,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set('runroom_user.service.mailer', MailerService::class)
         ->arg('$mailer', new ReferenceConfigurator('mailer'))
         ->arg('$translator', new ReferenceConfigurator('translator'))
+        ->arg('$twig', new ReferenceConfigurator('twig'))
         ->arg('$fromEmail', null)
         ->arg('$fromName', null);
 

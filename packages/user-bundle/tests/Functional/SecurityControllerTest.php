@@ -30,7 +30,7 @@ class SecurityControllerTest extends WebTestCase
 
         $client->request('GET', '/login');
 
-        self::assertResponseIsSuccessful();
+        static::assertResponseIsSuccessful();
     }
 
     /** @test */
@@ -50,7 +50,7 @@ class SecurityControllerTest extends WebTestCase
             '_password' => UserFactory::DEFAULT_PASSWORD,
         ]);
 
-        self::assertRouteSame('sonata_admin_dashboard');
+        static::assertRouteSame('sonata_admin_dashboard');
     }
 
     /** @test */
@@ -70,6 +70,17 @@ class SecurityControllerTest extends WebTestCase
             '_password' => UserFactory::DEFAULT_PASSWORD,
         ]);
 
-        self::assertRouteSame('runroom_user_login');
+        static::assertRouteSame('runroom_user_login');
+    }
+
+    /** @test */
+    public function itLogouts(): void
+    {
+        $client = static::createClient();
+
+        $client->followRedirects(true);
+        $client->request('GET', '/logout');
+
+        static::assertRouteSame('runroom_user_login');
     }
 }

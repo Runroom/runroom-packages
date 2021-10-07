@@ -14,27 +14,31 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Service;
 
 use Runroom\UserBundle\Model\UserInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
+use Twig\Environment;
 
 final class MailerService
 {
     private MailerInterface $mailer;
     private TranslatorInterface $translator;
+    private Environment $twig;
     private string $fromEmail;
     private string $fromName;
 
     public function __construct(
         MailerInterface $mailer,
         TranslatorInterface $translator,
+        Environment $twig,
         string $fromEmail,
         string $fromName
     ) {
         $this->mailer = $mailer;
         $this->translator = $translator;
+        $this->twig = $twig;
         $this->fromEmail = $fromEmail;
         $this->fromName = $fromName;
     }
@@ -47,15 +51,18 @@ final class MailerService
             return;
         }
 
-        $this->mailer->send((new TemplatedEmail())
+        $this->mailer->send((new Email())
             ->from(new Address($this->fromEmail, $this->fromName))
             ->to($email)
             ->subject($this->translator->trans('email.subject'))
-            ->htmlTemplate('@RunroomUser/email/reset.html.twig')
-            ->textTemplate('@RunroomUser/email/reset.txt.twig')
-            ->context([
+            ->html($this->twig->render('@RunroomUser/email/reset.html.twig', [
                 'userEmail' => $email,
                 'resetToken' => $resetToken,
-            ]));
+            ]))
+            ->text($this->twig->render('@RunroomUser/email/reset.txt.twig', [
+                'userEmail' => $email,
+                'resetToken' => $resetToken,
+            ]))
+        );
     }
 }

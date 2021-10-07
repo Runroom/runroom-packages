@@ -84,7 +84,10 @@ class Kernel extends BaseKernel
             'router' => ['utf8' => true],
             'secret' => 'secret',
             'assets' => ['enabled' => true],
-            'mailer' => ['enabled' => true],
+            'mailer' => [
+                'enabled' => true,
+                'dsn' => 'null://null',
+            ],
         ];
 
         if (class_exists(NativeSessionStorageFactory::class)) {

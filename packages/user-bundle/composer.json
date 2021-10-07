@@ -38,7 +38,7 @@
         "symfony/security-core": "^4.4 || ^5.3",
         "symfony/security-http": "^4.4 || ^5.3",
         "symfony/translation": "^4.4 || ^5.3",
-        "symfony/twig-bridge": "^4.4 || ^5.3",
+        "symfony/twig-bundle": "^4.4 || ^5.3",
         "symfony/validator": "^4.4 || ^5.3",
         "twig/twig": "^2.12 || ^3.0"
     },
@@ -59,7 +59,6 @@
         "symfony/mailer": "^4.4 || ^5.3",
         "symfony/mime": "^4.4 || ^5.3",
         "symfony/phpunit-bridge": "^5.3",
-        "symfony/twig-bundle": "^4.4 || ^5.3",
         "symfony/yaml": "^4.4 || ^5.3",
         "symfonycasts/reset-password-bundle": "^1.9",
         "zenstruck/foundry": "^1.13.2"

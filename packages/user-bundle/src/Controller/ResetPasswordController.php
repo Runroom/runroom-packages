@@ -23,6 +23,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
@@ -66,7 +68,7 @@ final class ResetPasswordController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->processSendingPasswordResetEmail($form->get('email')->getData());
+            $this->processSendingPasswordResetEmail($form->get('identifier')->getData());
 
             return $this->redirectToRoute('runroom_user_check_email');
         }
@@ -139,8 +141,12 @@ final class ResetPasswordController extends AbstractController
 
     private function processSendingPasswordResetEmail(string $identifier): void
     {
-        $user = $this->userProvider->loadUserByIdentifier($identifier);
-        \assert($user instanceof UserInterface);
+        try {
+            $user = $this->userProvider->loadUserByIdentifier($identifier);
+            \assert($user instanceof UserInterface);
+        } catch (UserNotFoundException | UsernameNotFoundException $exception) {
+            return;
+        }
 
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);

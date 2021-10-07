@@ -44,7 +44,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
 
     public function getUserIdentifier(object $user): string
     {
-        return $this->entityManager->getUnitOfWork()->getSingleIdentifierValue($user);
+        return (string) $this->entityManager->getUnitOfWork()->getSingleIdentifierValue($user);
     }
 
     public function persistResetPasswordRequest(ResetPasswordRequestInterface $resetPasswordRequest): void
