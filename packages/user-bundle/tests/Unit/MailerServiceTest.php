@@ -15,33 +15,40 @@ namespace Runroom\UserBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\UserBundle\Entity\User;
+use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Service\MailerService;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
+use Twig\Environment;
+use Zenstruck\Foundry\Test\Factories;
 
 class MailerServiceTest extends TestCase
 {
+    use Factories;
+
     /** @var MockObject&MailerInterface */
     private $mailer;
+
     /** @var MockObject&TranslatorInterface */
     private $translator;
 
-    private MailerService $service;
+    /** @var MockObject&Environment */
+    private $twig;
 
-    private string $fromEmail;
+    private MailerService $service;
 
     protected function setUp(): void
     {
         $this->mailer = $this->createMock(MailerInterface::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
-        $this->fromEmail = 'user@email.com';
+        $this->twig = $this->createMock(Environment::class);
 
         $this->service = new MailerService(
             $this->mailer,
             $this->translator,
-            $this->fromEmail,
+            $this->twig,
+            'user@email.com',
             'userName'
         );
     }
@@ -49,16 +56,10 @@ class MailerServiceTest extends TestCase
     /** @test */
     public function itCallsMailerWhenUserHasEmail(): void
     {
-        $user = new User();
-        $user->setEmail($this->fromEmail);
-        $resetPasswordToken = new ResetPasswordToken(
-            'token',
-            new \DateTime(),
-            0
-        );
+        $user = UserFactory::createOne(['email' => 'user@email.com'])->object();
+        $resetPasswordToken = new ResetPasswordToken('token', new \DateTimeImmutable(), 0);
 
         $this->translator->method('trans')->with('email.subject')->willReturn('Subject');
-
         $this->mailer->expects(static::once())->method('send');
 
         $this->service->sendResetPasswordEmail($user, $resetPasswordToken);
@@ -67,14 +68,8 @@ class MailerServiceTest extends TestCase
     /** @test */
     public function itDoesntCallMailerWhenUserDoesntHaveEmail(): void
     {
-        $user = new User();
-        $resetPasswordToken = new ResetPasswordToken(
-            'token',
-            new \DateTimeImmutable(),
-            0
-        );
-
-        $this->translator->method('trans')->with('email.subject')->willReturn('Subject');
+        $user = UserFactory::createOne(['email' => null])->object();
+        $resetPasswordToken = new ResetPasswordToken('token', new \DateTimeImmutable(), 0);
 
         $this->mailer->expects(static::never())->method('send');
 

@@ -38,10 +38,10 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        UserFactory::new([
+        UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
-        ])->create();
+        ]);
 
         $client->request('GET', '/login');
         $client->followRedirects(true);
@@ -58,10 +58,10 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        UserFactory::new([
+        UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => false,
-        ])->create();
+        ]);
 
         $client->request('GET', '/login');
         $client->followRedirects(true);

@@ -73,8 +73,8 @@ final class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('runroom_user_check_email');
         }
 
-        return $this->renderForm('@RunroomUser/reset_password/request.html.twig', [
-            'requestForm' => $form,
+        return $this->render('@RunroomUser/reset_password/request.html.twig', [
+            'requestForm' => $form->createView(),
         ]);
     }
 

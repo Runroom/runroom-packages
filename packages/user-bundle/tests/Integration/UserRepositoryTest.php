@@ -37,10 +37,10 @@ class UserRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsUserGivenItsSlug(): void
     {
-        UserFactory::new([
+        UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
-        ])->create();
+        ]);
 
         $user = $this->repository->loadUserByIdentifier('email@localhost');
 

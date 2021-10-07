@@ -50,10 +50,10 @@ class DeactivateUserCommandTest extends KernelTestCase
     public function itDoesNothingToAnAlreadyInactiveUser(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
+        $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => false,
-        ])->create()->enableAutoRefresh();
+        ])->enableAutoRefresh();
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
@@ -64,10 +64,10 @@ class DeactivateUserCommandTest extends KernelTestCase
     public function itDeactivatesUser(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
+        $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
-        ])->create()->enableAutoRefresh();
+        ])->enableAutoRefresh();
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 

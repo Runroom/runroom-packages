@@ -18,6 +18,8 @@ use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
@@ -54,13 +56,13 @@ class ChangePasswordCommandTest extends KernelTestCase
     public function itChangesUserPassword(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
+        $user = UserFactory::createOne([
             'email' => 'email@localhost',
-        ])->create()->enableAutoRefresh();
+        ])->enableAutoRefresh();
 
         /** @todo: Simplify this when dropping support for Symfony 4 */
-        $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
-        $passwordHasher = static::$container->get($passwordHasherId);
+        $passwordHasher = static::$container->get(class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder');
+        \assert($passwordHasher instanceof UserPasswordHasherInterface || $passwordHasher instanceof UserPasswordEncoderInterface);
 
         static::assertTrue($passwordHasher->isPasswordValid($user->object(), '1234'));
 

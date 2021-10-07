@@ -56,10 +56,10 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        UserFactory::new([
+        UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
-        ])->create();
+        ]);
 
         $client->request('GET', '/reset-password');
         $client->submitForm('submit', [

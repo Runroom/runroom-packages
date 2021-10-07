@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Integration;
 
-use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Factory\ResetPasswordRequestFactory;
 use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Repository\ResetPasswordRequestRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -38,11 +38,11 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     /** @test */
     public function itCreatesResetPasswordRequest(): void
     {
-        $user = new User();
+        $user = UserFactory::createOne()->object();
         $date = new \DateTimeImmutable();
         $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
 
-        static::assertNotNull($userPasswordRequest);
+        static::assertInstanceOf(ResetPasswordRequestInterface::class, $userPasswordRequest);
         static::assertSame($userPasswordRequest->getUser(), $user);
         static::assertSame($userPasswordRequest->getHashedToken(), 'token');
         static::assertSame($userPasswordRequest->getExpiresAt(), $date);
@@ -51,7 +51,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     /** @test */
     public function itGetsUserIdentifier(): void
     {
-        $user = UserFactory::new()->create()->object();
+        $user = UserFactory::createOne()->object();
         $identifier = $this->repository->getUserIdentifier($user);
 
         static::assertSame('1', $identifier);
@@ -60,7 +60,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     /** @test */
     public function itPersistsResetPasswordRequest(): void
     {
-        $user = UserFactory::new()->create()->object();
+        $user = UserFactory::createOne()->object();
         $date = new \DateTimeImmutable();
         $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
 
@@ -75,10 +75,10 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsResetPasswordRequestBySelector(): void
     {
-        ResetPasswordRequestFactory::new([
+        ResetPasswordRequestFactory::createOne([
             'selector' => 'newSelector',
             'hashedToken' => 'token',
-        ])->create();
+        ]);
 
         $resetPasswordRequest = $this->repository->findResetPasswordRequest('newSelector');
 
@@ -99,9 +99,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     public function itGetsNullWhenThereIsAExpiredMostRecentRequestPassword(): void
     {
         $user = UserFactory::createOne()->object();
-        ResetPasswordRequestFactory::createOne([
-            'user' => $user,
-        ]);
+        ResetPasswordRequestFactory::createOne(['user' => $user]);
 
         $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
 
