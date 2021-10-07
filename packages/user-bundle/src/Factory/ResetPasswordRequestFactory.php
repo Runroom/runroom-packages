@@ -37,7 +37,7 @@ final class ResetPasswordRequestFactory extends ModelFactory
         return ResetPasswordRequest::class;
     }
 
-    protected function initialize(): self
+    protected function initialize()
     {
         return $this->instantiateWith((new Instantiator())->alwaysForceProperties());
     }
