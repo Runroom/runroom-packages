@@ -20,28 +20,32 @@ use Runroom\UserBundle\Service\MailerService;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
+use Twig\Environment;
 
 class MailerServiceTest extends TestCase
 {
     /** @var MockObject&MailerInterface */
     private $mailer;
+
     /** @var MockObject&TranslatorInterface */
     private $translator;
 
-    private MailerService $service;
+    /** @var MockObject&Environment */
+    private $twig;
 
-    private string $fromEmail;
+    private MailerService $service;
 
     protected function setUp(): void
     {
         $this->mailer = $this->createMock(MailerInterface::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
-        $this->fromEmail = 'user@email.com';
+        $this->twig = $this->createMock(Environment::class);
 
         $this->service = new MailerService(
             $this->mailer,
             $this->translator,
-            $this->fromEmail,
+            $this->twig,
+            'user@email.com',
             'userName'
         );
     }
@@ -50,7 +54,7 @@ class MailerServiceTest extends TestCase
     public function itCallsMailerWhenUserHasEmail(): void
     {
         $user = new User();
-        $user->setEmail($this->fromEmail);
+        $user->setEmail('user@email.com');
         $resetPasswordToken = new ResetPasswordToken(
             'token',
             new \DateTime(),

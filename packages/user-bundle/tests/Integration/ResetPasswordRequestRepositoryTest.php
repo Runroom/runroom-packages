@@ -56,7 +56,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     /** @test */
     public function itPersistsResetPasswordRequest(): void
     {
-        $user = UserFactory::new()->create()->object();
+        $user = UserFactory::createOne()->object();
         $date = new \DateTimeImmutable();
         $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
 
@@ -71,10 +71,10 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsResetPasswordRequestBySelector(): void
     {
-        ResetPasswordRequestFactory::new([
+        ResetPasswordRequestFactory::createOne([
             'selector' => 'newSelector',
             'hashedToken' => 'token',
-        ])->create();
+        ]);
 
         $resetPasswordRequest = $this->repository->findResetPasswordRequest('newSelector');
 

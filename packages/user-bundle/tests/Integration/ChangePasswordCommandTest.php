@@ -54,9 +54,9 @@ class ChangePasswordCommandTest extends KernelTestCase
     public function itChangesUserPassword(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
+        $user = UserFactory::createOne([
             'email' => 'email@localhost',
-        ])->create()->enableAutoRefresh();
+        ])->enableAutoRefresh();
 
         /** @todo: Simplify this when dropping support for Symfony 4 */
         $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';

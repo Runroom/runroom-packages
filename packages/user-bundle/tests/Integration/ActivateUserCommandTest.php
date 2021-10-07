@@ -50,10 +50,10 @@ class ActivateUserCommandTest extends KernelTestCase
     public function itDoesNothingToAnAlreadyActiveUser(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
+        $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
-        ])->create()->enableAutoRefresh();
+        ])->enableAutoRefresh();
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
@@ -64,10 +64,10 @@ class ActivateUserCommandTest extends KernelTestCase
     public function itActivatesUser(): void
     {
         /** @phpstan-var Proxy<UserInterface> */
-        $user = UserFactory::new([
+        $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => false,
-        ])->create()->enableAutoRefresh();
+        ])->enableAutoRefresh();
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
