@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Integration;
 
-use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Factory\ResetPasswordRequestFactory;
 use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Repository\ResetPasswordRequestRepository;
@@ -38,7 +37,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     /** @test */
     public function itCreatesResetPasswordRequest(): void
     {
-        $user = new User();
+        $user = UserFactory::createOne()->object();
         $date = new \DateTimeImmutable();
         $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
 
@@ -95,10 +94,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     public function itGetsNullWhenThereIsAExpiredMostRecentRequestPassword(): void
     {
         $user = UserFactory::createOne()->object();
-
-        ResetPasswordRequestFactory::createOne([
-            'user' => $user,
-        ]);
+        ResetPasswordRequestFactory::createOne(['user' => $user]);
 
         $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
 
