@@ -35,73 +35,118 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         $this->repository = static::$container->get('runroom_user.repository.reset_password_request');
     }
 
+//    /** @test */
+//    public function itCreatesResetPasswordRequest(): void
+//    {
+//        $user = new User();
+//        $date = new \DateTimeImmutable();
+//        $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
+//
+//        static::assertNotNull($userPasswordRequest);
+//        static::assertSame($userPasswordRequest->getUser(), $user);
+//        static::assertSame($userPasswordRequest->getHashedToken(), 'token');
+//        static::assertSame($userPasswordRequest->getExpiresAt(), $date);
+//    }
+//
+//    /** @test */
+//    public function itGetsUserIdentifier(): void
+//    {
+//        $user = UserFactory::new()->create()->object();
+//        $identifier = $this->repository->getUserIdentifier($user);
+//
+//        static::assertSame('1', $identifier);
+//    }
+//
+//    /** @test */
+//    public function itPersistsResetPasswordRequest(): void
+//    {
+//        $user = UserFactory::new()->create()->object();
+//        $date = new \DateTimeImmutable();
+//        $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
+//
+//        $this->repository->persistResetPasswordRequest($userPasswordRequest);
+//
+//        $resetPasswordRequestResult = ResetPasswordRequestFactory::find(['user' => $user]);
+//
+//        static::assertNotNull($resetPasswordRequestResult);
+//        static::assertSame($userPasswordRequest->getUser(), $resetPasswordRequestResult->getUser());
+//    }
+//
+//    /** @test */
+//    public function itFindsResetPasswordRequestBySelector(): void
+//    {
+//        ResetPasswordRequestFactory::new([
+//            'selector' => 'newSelector',
+//            'hashedToken' => 'token',
+//        ])->create();
+//
+//        $resetPasswordRequest = $this->repository->findResetPasswordRequest('newSelector');
+//
+//        static::assertNotNull($resetPasswordRequest);
+//        static::assertSame('token', $resetPasswordRequest->getHashedToken());
+//    }
+//
+//    /** @test */
+//    public function itGetsNullWhenThereIsNoMostRecentExpiredRequestPassword(): void
+//    {
+//        $user = UserFactory::createOne()->object();
+//        $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
+//
+//        static::assertNull($requestDate);
+//    }
+//
+//    /** @test */
+//    public function itGetsNullWhenThereIsAExpiredMostRecentRequestPassword(): void
+//    {
+//        $user = UserFactory::createOne()->object();
+//        ResetPasswordRequestFactory::createOne([
+//            'user' => $user,
+//        ]);
+//
+//        $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
+//
+//        static::assertNull($requestDate);
+//    }
+//
+//    /** @test */
+//    public function itGetsTheMostNonExpiredRequestDate(): void
+//    {
+//        $user = UserFactory::createOne()->object();
+//        $date = new \DateTimeImmutable();
+//
+//        ResetPasswordRequestFactory::createOne([
+//            'user' => $user,
+//            'expiresAt' => $date->add(new \DateInterval('PT1H')),
+//        ]);
+//
+//        $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
+//
+//        static::assertNotNull($requestDate);
+//    }
+
     /** @test */
-    public function itCreatesResetPasswordRequest(): void
-    {
-        $user = new User();
-        $date = new \DateTimeImmutable();
-        $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
-
-        static::assertNotNull($userPasswordRequest);
-        static::assertSame($userPasswordRequest->getUser(), $user);
-        static::assertSame($userPasswordRequest->getHashedToken(), 'token');
-        static::assertSame($userPasswordRequest->getExpiresAt(), $date);
-    }
-
-    /** @test */
-    public function itGetsUserIdentifier(): void
-    {
-    }
-
-    /** @test */
-    public function itPersistsResetPasswordRequest(): void
-    {
-        $user = UserFactory::new()->create()->object();
-        $date = new \DateTimeImmutable();
-        $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
-
-        $this->repository->persistResetPasswordRequest($userPasswordRequest);
-
-        $resetPasswordRequestResult = ResetPasswordRequestFactory::find(['user' => $user]);
-
-        static::assertNotNull($resetPasswordRequestResult);
-        static::assertSame($userPasswordRequest->getUser(), $resetPasswordRequestResult->getUser());
-    }
-
-    /** @test */
-    public function itFindsResetPasswordRequestBySelector(): void
-    {
-        ResetPasswordRequestFactory::new([
-            'selector' => 'newSelector',
-            'hashedToken' => 'token',
-        ])->create();
-
-        $resetPasswordRequest = $this->repository->findResetPasswordRequest('newSelector');
-
-        static::assertNotNull($resetPasswordRequest);
-        static::assertSame('token', $resetPasswordRequest->getHashedToken());
-    }
-
-    /** @test */
-    public function itGetsNullWhenThereIsNoMostRecentExpiredRequestPassword(): void
+    public function itGetsTheMostNonExpiredRequestDateWithTwoResetPasswords(): void
     {
         $user = UserFactory::createOne()->object();
-        $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
-
-        static::assertNull($requestDate);
-    }
-
-    /** @test */
-    public function itGetsNullWhenThereIsAExpiredMostRecentRequestPassword(): void
-    {
-        $user = UserFactory::createOne()->object();
+        $date = new \DateTimeImmutable();
+        $oneHour = $date->add(new \DateInterval('PT1H'));
+        $twoHours = $date->add(new \DateInterval('PT2H'));
 
         ResetPasswordRequestFactory::createOne([
             'user' => $user,
+            'expiresAt' => $oneHour,
+            'requestedAt' => $oneHour,
         ]);
+
+        $secondResetPasswordRequest = ResetPasswordRequestFactory::createOne([
+            'user' => $user,
+            'expiresAt' => $oneHour,
+            'requestedAt' => $twoHours,
+        ])->object();
 
         $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
 
-        static::assertNull($requestDate);
+        static::assertNotNull($requestDate);
+        static::assertSame($secondResetPasswordRequest->getRequestedAt(), $requestDate);
     }
 }

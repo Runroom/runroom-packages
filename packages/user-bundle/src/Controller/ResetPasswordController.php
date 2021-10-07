@@ -144,7 +144,7 @@ final class ResetPasswordController extends AbstractController
         try {
             $user = $this->userProvider->loadUserByIdentifier($identifier);
             \assert($user instanceof UserInterface);
-        } catch (UserNotFoundException | UsernameNotFoundException $exception) {
+        } catch (UserNotFoundException|UsernameNotFoundException $exception) {
             return;
         }
 
