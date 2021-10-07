@@ -17,6 +17,7 @@ use Runroom\UserBundle\Factory\ResetPasswordRequestFactory;
 use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Repository\ResetPasswordRequestRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -41,7 +42,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         $date = new \DateTimeImmutable();
         $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
 
-        static::assertNotNull($userPasswordRequest);
+        static::assertInstanceOf(ResetPasswordRequestInterface::class, $userPasswordRequest);
         static::assertSame($userPasswordRequest->getUser(), $user);
         static::assertSame($userPasswordRequest->getHashedToken(), 'token');
         static::assertSame($userPasswordRequest->getExpiresAt(), $date);
