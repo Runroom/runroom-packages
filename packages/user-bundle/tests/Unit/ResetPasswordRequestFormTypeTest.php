@@ -27,9 +27,7 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
      */
     public function itSubmitsWithDifferentValues(string $email, bool $isValid): void
     {
-        $formData = [
-            'identifier' => $email,
-        ];
+        $formData = ['identifier' => $email];
 
         $form = $this->factory->create(ResetPasswordRequestFormType::class);
         $form->submit($formData);
@@ -42,7 +40,7 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
     public function submitValuesProvider(): iterable
     {
         yield ['', false];
-        yield ['emailNotValid', false];
+        yield ['emailNotValid', true];
         yield ['email@localhost.com', true];
     }
 
