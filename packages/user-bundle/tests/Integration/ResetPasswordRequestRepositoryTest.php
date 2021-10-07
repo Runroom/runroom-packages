@@ -32,7 +32,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->repository = self::$container->get('runroom_user.repository.reset_password_request');
+        $this->repository = static::$container->get('runroom_user.repository.reset_password_request');
     }
 
     /** @test */

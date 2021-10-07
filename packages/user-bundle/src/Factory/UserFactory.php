@@ -26,10 +26,10 @@ final class UserFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'email' => self::faker()->unique()->email(),
+            'email' => static::faker()->unique()->email(),
             'password' => '$argon2id$v=19$m=65536,t=4,p=1$pLFF3D2gnvDmxMuuqH4BrA$3vKfv0cw+6EaNspq9btVAYc+jCOqrmWRstInB2fRPeQ',
-            'enabled' => self::faker()->boolean(),
-            'createdAt' => self::faker()->dateTime(),
+            'enabled' => static::faker()->boolean(),
+            'createdAt' => static::faker()->dateTime(),
         ];
     }
 
