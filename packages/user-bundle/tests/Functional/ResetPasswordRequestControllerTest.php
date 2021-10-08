@@ -80,6 +80,7 @@ class ResetPasswordRequestControllerTest extends WebTestCase
      * @test
      *
      * @psalm-suppress InternalMethod
+     *
      * @see We need to use the internal token generator to generate a valid token for testing purposes
      */
     public function itResetsPassword(): void
