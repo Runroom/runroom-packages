@@ -76,7 +76,12 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_check_email');
     }
 
-    /** @test */
+    /**
+     * @test
+     *
+     * @psalm-suppress InternalMethod
+     * @see We need to use the internal token generator to generate a valid token for testing purposes
+     */
     public function itResetsPassword(): void
     {
         $client = static::createClient();
