@@ -147,4 +147,36 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertNotNull($requestDate);
         static::assertSame($secondResetPasswordRequest->getRequestedAt(), $requestDate);
     }
+
+    /** @test */
+    public function itCanRemoveExpiredResetPasswordByObject(): void
+    {
+        $user = UserFactory::createOne()->object();
+        $resetPasswordRequest = ResetPasswordRequestFactory::createOne([
+            'user' => $user,
+            'selector' => 'newSelector',
+        ])->object();
+
+        $this->repository->removeResetPasswordRequest($resetPasswordRequest);
+        $resetPasswordRequestResult = $this->repository->findResetPasswordRequest('newSelector');
+
+        static::assertNull($resetPasswordRequestResult);
+    }
+
+    /** @test */
+    public function itCanRemoveExpiredResetPasswords(): void
+    {
+        $user = UserFactory::createOne()->object();
+
+        ResetPasswordRequestFactory::createOne([
+            'user' => $user,
+            'expiresAt' => new \DateTimeImmutable('-2 week'),
+            'selector' => 'newSelector',
+        ]);
+
+        $this->repository->removeExpiredResetPasswordRequests();
+        $resetPasswordRequestResult = $this->repository->findResetPasswordRequest('newSelector');
+
+        static::assertNull($resetPasswordRequestResult);
+    }
 }
