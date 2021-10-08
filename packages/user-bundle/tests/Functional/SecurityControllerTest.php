@@ -24,16 +24,6 @@ class SecurityControllerTest extends WebTestCase
     use ResetDatabase;
 
     /** @test */
-    public function itRendersLoginPage(): void
-    {
-        $client = static::createClient();
-
-        $client->request('GET', '/login');
-
-        static::assertResponseIsSuccessful();
-    }
-
-    /** @test */
     public function itSubmitsLoginForm(): void
     {
         $client = static::createClient();
@@ -44,11 +34,14 @@ class SecurityControllerTest extends WebTestCase
         ]);
 
         $client->request('GET', '/login');
-        $client->followRedirects(true);
+
+        static::assertResponseIsSuccessful();
+
         $client->submitForm('submit', [
             '_username' => 'email@localhost',
             '_password' => UserFactory::DEFAULT_PASSWORD,
         ]);
+        $client->followRedirect();
 
         static::assertRouteSame('sonata_admin_dashboard');
     }
@@ -64,11 +57,14 @@ class SecurityControllerTest extends WebTestCase
         ]);
 
         $client->request('GET', '/login');
-        $client->followRedirects(true);
+
+        static::assertResponseIsSuccessful();
+
         $client->submitForm('submit', [
             '_username' => 'email@localhost',
             '_password' => UserFactory::DEFAULT_PASSWORD,
         ]);
+        $client->followRedirect();
 
         static::assertRouteSame('runroom_user_login');
     }
@@ -78,8 +74,8 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->followRedirects(true);
         $client->request('GET', '/logout');
+        $client->followRedirect();
 
         static::assertRouteSame('runroom_user_login');
     }
