@@ -28,13 +28,13 @@ class MailerServiceTest extends TestCase
     use Factories;
 
     /** @var MockObject&MailerInterface */
-    private $mailer;
+    private MockObject $mailer;
 
     /** @var MockObject&TranslatorInterface */
-    private $translator;
+    private MockObject $translator;
 
     /** @var MockObject&Environment */
-    private $twig;
+    private MockObject $twig;
 
     private MailerService $service;
 

@@ -44,6 +44,11 @@ class SecurityControllerTest extends WebTestCase
         $client->followRedirect();
 
         static::assertRouteSame('sonata_admin_dashboard');
+
+        $client->request('GET', '/login');
+        $client->followRedirect();
+
+        static::assertRouteSame('sonata_admin_dashboard');
     }
 
     /** @test */
