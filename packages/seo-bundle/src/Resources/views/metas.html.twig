@@ -6,7 +6,7 @@
     {% set url = app.request.uri %}
     {% set imageUrl = null %}
     {% if metas.image is not empty %}
-        {% set imagePath %}{% path metas.image, 'reference' %}{% endset %}
+        {% set imagePath = sonata_path(metas.image, 'reference') %}
         {% set imageUrl = app.request.schemeAndHttpHost ~ imagePath %}
     {% endif %}
 
