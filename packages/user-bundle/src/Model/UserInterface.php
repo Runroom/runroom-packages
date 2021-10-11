@@ -36,6 +36,10 @@ interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUse
 
     public function setPassword(?string $password): self;
 
+    public function getPlainPassword(): ?string;
+
+    public function setPlainPassword(?string $plainPassword): self;
+
     public function getEnabled(): bool;
 
     public function setEnabled(bool $enabled): self;

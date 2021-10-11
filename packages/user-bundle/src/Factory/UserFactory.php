@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Factory;
 
 use Runroom\UserBundle\Entity\User;
-use Runroom\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<UserInterface> */
+/** @extends ModelFactory<User> */
 final class UserFactory extends ModelFactory
 {
     /** @return array<string, mixed> */

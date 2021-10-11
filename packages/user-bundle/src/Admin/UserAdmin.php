@@ -56,7 +56,7 @@ final class UserAdmin extends AbstractAdmin
      *
      * @param UserInterface $object
      */
-    public function prePersist($object): void
+    protected function prePersist($object): void
     {
         $this->updatePassword($object);
 
@@ -68,7 +68,7 @@ final class UserAdmin extends AbstractAdmin
      *
      * @param UserInterface $object
      */
-    public function preUpdate($object): void
+    protected function preUpdate($object): void
     {
         $this->updatePassword($object);
     }
@@ -114,7 +114,6 @@ final class UserAdmin extends AbstractAdmin
                 ->add('email')
                 ->add('plainPassword', TextType::class, [
                     'required' => $this->isCurrentRoute('create'),
-                    'mapped' => false,
                 ])
                 ->add('enabled')
             ->end()
@@ -137,20 +136,20 @@ final class UserAdmin extends AbstractAdmin
             return;
         }
 
-        /** @var mixed[] */
-        $submittedData = $this->getRequest()->request->get($this->getUniqId());
+        $plainPassword = $user->getPlainPassword();
 
-        if (!isset($submittedData['plainPassword']) || '' === $submittedData['plainPassword']) {
+        if (null === $plainPassword) {
             return;
         }
 
         /* @todo: Simplify this when dropping support for Symfony 4 */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
-            $password = $this->passwordHasher->hashPassword($user, $submittedData['plainPassword']);
+            $password = $this->passwordHasher->hashPassword($user, $plainPassword);
         } else {
-            $password = $this->passwordHasher->encodePassword($user, $submittedData['plainPassword']);
+            $password = $this->passwordHasher->encodePassword($user, $plainPassword);
         }
 
+        $user->eraseCredentials();
         $user->setPassword($password);
     }
 }

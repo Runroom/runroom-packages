@@ -42,6 +42,7 @@ class User implements UserInterface
 
     /** @ORM\Column(type="string") */
     private ?string $password = null;
+    private ?string $plainPassword = null;
 
     /** @ORM\Column(type="boolean") */
     private bool $enabled = true;
@@ -108,6 +109,18 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     public function getEnabled(): bool
     {
         return $this->enabled;
@@ -139,5 +152,6 @@ class User implements UserInterface
 
     public function eraseCredentials(): void
     {
+        $this->setPlainPassword(null);
     }
 }

@@ -23,6 +23,7 @@ class TestAdminTest extends SonataAdminTestCase
     /** @test */
     public function itDoesNotHaveDeleteRoute(): void
     {
+        $this->assertAdminRoutesDoesContainRoute('create');
         $this->assertAdminRoutesDoesNotContainRoute('delete');
     }
 
@@ -48,6 +49,13 @@ class TestAdminTest extends SonataAdminTestCase
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('id');
+    }
+
+    /** @test */
+    public function itHasAllExportFields(): void
+    {
+        $this->assertAdminExportDoesContainField('id');
+        $this->assertAdminExportDoesNotContainField('random_field');
     }
 
     protected function getAdminClass(): string
