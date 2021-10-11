@@ -16,30 +16,35 @@ namespace Runroom\UserBundle\Tests\Unit;
 use Runroom\UserBundle\Form\ChangePasswordFormType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormExtensionInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
 
 class ChangePasswordFormTypeTest extends TypeTestCase
 {
+    private FormInterface $form;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->form = $this->factory->create(ChangePasswordFormType::class);
+    }
+
     /**
      * @test
      * @dataProvider submitValuesProvider
      */
     public function itSubmitsWithDifferentValues(string $fistPassword, string $secondPassword, bool $isValid, ?string $expectedData): void
     {
-        $formData = [
-            'plainPassword' => [
-                'first' => $fistPassword,
-                'second' => $secondPassword,
-            ],
-        ];
+        $this->form->submit(['plainPassword' => [
+            'first' => $fistPassword,
+            'second' => $secondPassword,
+        ]]);
 
-        $form = $this->factory->create(ChangePasswordFormType::class);
-        $form->submit($formData);
-
-        static::assertSame($isValid, $form->isValid());
-        static::assertTrue($form->isSynchronized());
-        static::assertSame($expectedData, $form->get('plainPassword')->getData());
+        static::assertSame($isValid, $this->form->isValid());
+        static::assertTrue($this->form->isSynchronized());
+        static::assertSame($expectedData, $this->form->get('plainPassword')->getData());
     }
 
     /** @return iterable<array{string, string, bool, string|null}> */
@@ -54,8 +59,7 @@ class ChangePasswordFormTypeTest extends TypeTestCase
     /** @test */
     public function itGetsFormDefaultOptions(): void
     {
-        $form = $this->factory->create(ChangePasswordFormType::class);
-        static::assertSame('RunroomUserBundle', $form->getConfig()->getOption('translation_domain'));
+        static::assertSame('RunroomUserBundle', $this->form->getConfig()->getOption('translation_domain'));
     }
 
     /** @return FormExtensionInterface[] */

@@ -16,22 +16,31 @@ namespace Runroom\UserBundle\Tests\Unit;
 use Runroom\UserBundle\Form\ResetPasswordRequestFormType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormExtensionInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
 
 class ResetPasswordRequestFormTypeTest extends TypeTestCase
 {
+    private FormInterface $form;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->form = $this->factory->create(ResetPasswordRequestFormType::class);
+    }
+
     /**
      * @test
      * @dataProvider submitValuesProvider
      */
     public function itSubmitsWithDifferentValues(string $email, bool $isValid): void
     {
-        $form = $this->factory->create(ResetPasswordRequestFormType::class);
-        $form->submit(['identifier' => $email]);
+        $this->form->submit(['identifier' => $email]);
 
-        static::assertSame($isValid, $form->isValid());
-        static::assertTrue($form->isSynchronized());
+        static::assertSame($isValid, $this->form->isValid());
+        static::assertTrue($this->form->isSynchronized());
     }
 
     /** @return iterable<array{string, bool}> */
@@ -45,8 +54,7 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
     /** @test */
     public function itGetsFormDefaultOptions(): void
     {
-        $form = $this->factory->create(ResetPasswordRequestFormType::class);
-        static::assertSame('RunroomUserBundle', $form->getConfig()->getOption('translation_domain'));
+        static::assertSame('RunroomUserBundle', $this->form->getConfig()->getOption('translation_domain'));
     }
 
     /** @return FormExtensionInterface[] */
