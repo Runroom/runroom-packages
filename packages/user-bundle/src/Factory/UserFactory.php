@@ -20,15 +20,14 @@ use Zenstruck\Foundry\ModelFactory;
 /** @extends ModelFactory<UserInterface> */
 final class UserFactory extends ModelFactory
 {
-    public const DEFAULT_PASSWORD = '1234';
-
     /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
         return [
             'email' => static::faker()->unique()->email(),
-            'password' => '$argon2id$v=19$m=65536,t=4,p=1$pLFF3D2gnvDmxMuuqH4BrA$3vKfv0cw+6EaNspq9btVAYc+jCOqrmWRstInB2fRPeQ',
+            'password' => static::faker()->password(),
             'enabled' => static::faker()->boolean(),
+            'roles' => [],
             'createdAt' => static::faker()->dateTime(),
         ];
     }

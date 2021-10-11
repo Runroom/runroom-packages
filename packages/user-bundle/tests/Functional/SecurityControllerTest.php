@@ -30,6 +30,7 @@ class SecurityControllerTest extends WebTestCase
 
         UserFactory::createOne([
             'email' => 'email@localhost',
+            'password' => 'random_password',
             'enabled' => true,
         ]);
 
@@ -39,7 +40,7 @@ class SecurityControllerTest extends WebTestCase
 
         $client->submitForm('submit', [
             '_username' => 'email@localhost',
-            '_password' => UserFactory::DEFAULT_PASSWORD,
+            '_password' => 'random_password',
         ]);
         $client->followRedirect();
 
@@ -58,6 +59,7 @@ class SecurityControllerTest extends WebTestCase
 
         UserFactory::createOne([
             'email' => 'email@localhost',
+            'password' => 'random_password',
             'enabled' => false,
         ]);
 
@@ -67,7 +69,7 @@ class SecurityControllerTest extends WebTestCase
 
         $client->submitForm('submit', [
             '_username' => 'email@localhost',
-            '_password' => UserFactory::DEFAULT_PASSWORD,
+            '_password' => 'random_password',
         ]);
         $client->followRedirect();
 

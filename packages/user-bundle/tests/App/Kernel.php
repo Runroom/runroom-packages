@@ -128,7 +128,7 @@ class Kernel extends BaseKernel
             $securityConfig['enable_authenticator_manager'] = true;
             $securityConfig['firewalls']['main']['custom_authenticator'] = 'runroom_user.security.user_authenticator';
             $securityConfig['firewalls']['main']['lazy'] = true;
-            $securityConfig['password_hashers'] = [User::class => ['algorithm' => 'auto']];
+            $securityConfig['password_hashers'] = [User::class => ['algorithm' => 'plaintext']];
         } else {
             $securityConfig['firewalls']['main']['anonymous'] = true;
             $securityConfig['firewalls']['main']['form_login'] = [
@@ -136,8 +136,7 @@ class Kernel extends BaseKernel
                 'check_path' => 'runroom_user_login',
                 'default_target_path' => 'sonata_admin_dashboard',
             ];
-
-            $securityConfig['encoders'] = [User::class => 'auto'];
+            $securityConfig['encoders'] = [User::class => 'plaintext'];
         }
 
         $container->loadFromExtension('security', $securityConfig);

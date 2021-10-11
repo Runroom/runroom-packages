@@ -17,9 +17,6 @@ use Runroom\UserBundle\Factory\ResetPasswordRequestFactory;
 use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
@@ -89,18 +86,15 @@ class ResetPasswordRequestControllerTest extends WebTestCase
 
         $tokenGenerator = static::$container->get('symfonycasts.reset_password.token_generator');
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
-        $passwordHasher = static::$container->get(class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder');
-        \assert($passwordHasher instanceof UserPasswordHasherInterface || $passwordHasher instanceof UserPasswordEncoderInterface);
-
         /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
+            'password' => '1234',
         ])->enableAutoRefresh();
 
         $expiresAt = new \DateTimeImmutable(sprintf('+%d seconds', 3600));
-        $tokenComponents = $tokenGenerator->createToken($expiresAt, (string) $user->object()->getId());
+        $tokenComponents = $tokenGenerator->createToken($expiresAt, (string) $user->getId());
 
         ResetPasswordRequestFactory::createOne([
             'user' => $user->object(),
@@ -109,7 +103,7 @@ class ResetPasswordRequestControllerTest extends WebTestCase
             'hashedToken' => $tokenComponents->getHashedToken(),
         ]);
 
-        static::assertTrue($passwordHasher->isPasswordValid($user->object(), '1234'));
+        static::assertSame($user->getPassword(), '1234');
 
         $client->request('GET', sprintf('/reset-password/reset/%s', $tokenComponents->getPublicToken()));
         $client->followRedirect();
@@ -123,6 +117,6 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         $client->followRedirect();
 
         static::assertRouteSame('sonata_admin_dashboard');
-        static::assertTrue($passwordHasher->isPasswordValid($user->object(), 'new_password'));
+        static::assertSame($user->getPassword(), 'new_password');
     }
 }

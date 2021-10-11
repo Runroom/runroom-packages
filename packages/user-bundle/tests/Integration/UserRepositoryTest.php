@@ -56,4 +56,28 @@ class UserRepositoryTest extends KernelTestCase
         static::assertNotEmpty($user->getCreatedAt());
         static::assertNull($user->getSalt());
     }
+
+    /** @test */
+    public function itCreatesAnUser(): void
+    {
+        $user = $this->repository->create();
+
+        static::assertInstanceOf(User::class, $user);
+    }
+
+
+    /** @test */
+    public function itPersistAnUser(): void
+    {
+        $user = $this->repository->create();
+        $user->setEmail('email@localhost');
+        $user->setPassword('password');
+        $user->setCreatedAt(new \DateTimeImmutable());
+
+        $this->repository->save($user);
+
+        $foundUser = UserFactory::find(['email' => 'email@localhost']);
+
+        static::assertSame('password', $foundUser->getPassword());
+    }
 }
