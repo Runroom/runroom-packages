@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Twig;
 
-use Runroom\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 
@@ -29,6 +28,6 @@ final class GlobalVariables
     /** @phpstan-return AdminInterface<object> */
     public function getUserAdmin(): AdminInterface
     {
-        return $this->pool->getAdminByClass(User::class);
+        return $this->pool->getAdminByAdminCode('runroom_user.admin.user');
     }
 }
