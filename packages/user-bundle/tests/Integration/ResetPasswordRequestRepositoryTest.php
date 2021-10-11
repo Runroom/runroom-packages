@@ -66,10 +66,10 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
         $this->repository->persistResetPasswordRequest($userPasswordRequest);
 
-        $resetPasswordRequestResult = ResetPasswordRequestFactory::find(['user' => $user]);
+        $foundResetPasswordRequest = ResetPasswordRequestFactory::find(['user' => $user]);
 
-        static::assertNotNull($resetPasswordRequestResult);
-        static::assertSame($userPasswordRequest->getUser(), $resetPasswordRequestResult->getUser());
+        static::assertNotNull($foundResetPasswordRequest->getId());
+        static::assertSame($userPasswordRequest->getUser(), $foundResetPasswordRequest->getUser());
     }
 
     /** @test */
