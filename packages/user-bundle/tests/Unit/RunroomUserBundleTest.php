@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Runroom\UserBundle\RunroomUserBundle;
 use Runroom\UserBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
+use Runroom\UserBundle\RunroomUserBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class RunroomUserBundleTest extends TestCase

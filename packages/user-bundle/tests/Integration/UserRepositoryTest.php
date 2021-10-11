@@ -65,7 +65,6 @@ class UserRepositoryTest extends KernelTestCase
         static::assertInstanceOf(User::class, $user);
     }
 
-
     /** @test */
     public function itPersistAnUser(): void
     {
