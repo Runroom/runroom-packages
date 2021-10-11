@@ -3,7 +3,7 @@ name: monorepo
 on:
   push:
     branches: [master]
-    # tags: ['*']
+    tags: ['*']
 
 jobs:
   split:
