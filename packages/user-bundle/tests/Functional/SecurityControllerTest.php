@@ -80,7 +80,6 @@ class SecurityControllerTest extends WebTestCase
     public function itLogouts(): void
     {
         $client = static::createClient();
-
         $client->request('GET', '/logout');
         $client->followRedirect();
 

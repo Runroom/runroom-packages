@@ -30,7 +30,6 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     public function itSubmitsResetPasswordRequestWithNonExistentUser(): void
     {
         $client = static::createClient();
-
         $client->request('GET', '/reset-password');
 
         static::assertResponseIsSuccessful();
@@ -71,6 +70,26 @@ class ResetPasswordRequestControllerTest extends WebTestCase
 
         static::assertResponseIsSuccessful();
         static::assertRouteSame('runroom_user_check_email');
+    }
+
+    /** @test */
+    public function itThrows404IfTryToResetPasswordWithoutToken(): void
+    {
+        $client = static::createClient();
+        $client->catchExceptions(true);
+        $client->request('GET', '/reset-password/reset');
+
+        static::assertResponseStatusCodeSame(404);
+    }
+
+    /** @test */
+    public function itRedirectsToResetPasswordRequestOnInvalidToken(): void
+    {
+        $client = static::createClient();
+        $client->followRedirects(true);
+        $client->request('GET', '/reset-password/reset/25');
+
+        static::assertRouteSame('runroom_user_forgot_password_request');
     }
 
     /**
