@@ -52,11 +52,11 @@ final class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @todo: Add typehint when dropping support for Sonata 3
+     * @todo: Add typehint when dropping support for Sonata 3 and make it protected
      *
      * @param UserInterface $object
      */
-    protected function prePersist($object): void
+    public function prePersist($object): void
     {
         $this->updatePassword($object);
 
@@ -64,11 +64,11 @@ final class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @todo: Add typehint when dropping support for Sonata 3
+     * @todo: Add typehint when dropping support for Sonata 3 and make it protected
      *
      * @param UserInterface $object
      */
-    protected function preUpdate($object): void
+    public function preUpdate($object): void
     {
         $this->updatePassword($object);
     }
