@@ -55,15 +55,15 @@ final class AdminRolesBuilder
     /**
      * @return array<string, array<string, string|bool>>
      *
-     * @phpstan-return Role[]
+     * @phpstan-return array<string, Role>
      */
     public function getRoles(?string $domain = null): array
     {
         $adminRoles = [];
         foreach ($this->pool->getAdminServiceIds() as $id) {
             $admin = $this->pool->getInstance($id);
-            $securityHandler = $admin->getSecurityHandler();
-            $baseRole = $securityHandler->getBaseRole($admin);
+            $baseRole = $admin->getSecurityHandler()->getBaseRole($admin);
+
             foreach (array_keys($admin->getSecurityInformation()) as $key) {
                 $role = sprintf($baseRole, $key);
                 $adminRoles[$role] = [

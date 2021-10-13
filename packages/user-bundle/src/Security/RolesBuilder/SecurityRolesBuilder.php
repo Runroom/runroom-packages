@@ -43,7 +43,7 @@ final class SecurityRolesBuilder
     /**
      * @return array<string, array<string, string|bool>>
      *
-     * @phpstan-return Role[]
+     * @phpstan-return array<string, Role>
      */
     public function getExpandedRoles(?string $domain = null): array
     {
@@ -76,7 +76,7 @@ final class SecurityRolesBuilder
     /**
      * @return array<string, array<string, string|bool>>
      *
-     * @phpstan-return Role[]
+     * @phpstan-return array<string, Role>
      */
     public function getRoles(?string $domain = null): array
     {
