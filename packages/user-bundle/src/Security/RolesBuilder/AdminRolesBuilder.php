@@ -55,7 +55,7 @@ final class AdminRolesBuilder
     /**
      * @return array<string, array<string, string|bool>>
      *
-     * @phpstan-return Role[]
+     * @phpstan-return array<string, Role>
      */
     public function getRoles(?string $domain = null): array
     {
