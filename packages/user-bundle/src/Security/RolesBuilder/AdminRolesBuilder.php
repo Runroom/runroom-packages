@@ -62,8 +62,8 @@ final class AdminRolesBuilder
         $adminRoles = [];
         foreach ($this->pool->getAdminServiceIds() as $id) {
             $admin = $this->pool->getInstance($id);
-            $securityHandler = $admin->getSecurityHandler();
-            $baseRole = $securityHandler->getBaseRole($admin);
+            $baseRole = $admin->getSecurityHandler()->getBaseRole($admin);
+
             foreach (array_keys($admin->getSecurityInformation()) as $key) {
                 $role = sprintf($baseRole, $key);
                 $adminRoles[$role] = [
