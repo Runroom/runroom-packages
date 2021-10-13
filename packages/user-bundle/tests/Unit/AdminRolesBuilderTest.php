@@ -91,14 +91,14 @@ class AdminRolesBuilderTest extends TestCase
             'ADMIN' => ['MASTER'],
         ]);
 
-        $expected = [
+        $permissionLabels = $this->rolesBuilder->getPermissionLabels();
+
+        static::assertSame([
             'GUEST' => 'GUEST',
             'STAFF' => 'STAFF',
             'EDITOR' => 'EDITOR',
             'ADMIN' => 'ADMIN',
-        ];
-
-        static::assertSame($expected, $this->rolesBuilder->getPermissionLabels());
+        ], $permissionLabels);
     }
 
     /** @test */
@@ -115,7 +115,9 @@ class AdminRolesBuilderTest extends TestCase
             'ADMIN' => ['MASTER'],
         ]);
 
-        $expected = [
+        $roles = $this->rolesBuilder->getRoles('domain');
+
+        $expectedRoles = [
             'ROLE_SONATA_FOO_GUEST' => [
                 'role' => 'ROLE_SONATA_FOO_GUEST',
                 'label' => 'GUEST',
@@ -146,6 +148,6 @@ class AdminRolesBuilderTest extends TestCase
             ],
         ];
 
-        static::assertSame($expected, $this->rolesBuilder->getRoles('domain'));
+        static::assertSame($expectedRoles, $roles);
     }
 }
