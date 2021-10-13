@@ -41,7 +41,7 @@ class SecurityRolesBuilderTest extends TestCase
             'html5_validate' => true,
             'javascripts' => [],
             'js_debug' => true,
-            'list_action_button_content' => 'content',
+            'list_action_button_content' => 'text',
             'lock_protection' => true,
             'logo_content' => 'text',
             'mosaic_background' => 'background',
