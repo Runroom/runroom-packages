@@ -100,4 +100,52 @@ class AdminRolesBuilderTest extends TestCase
 
         static::assertSame($expected, $this->rolesBuilder->getPermissionLabels());
     }
+
+    /** @test */
+    public function itGetsRoles(): void
+    {
+        $securityHandler = $this->createMock(SecurityHandlerInterface::class);
+        $securityHandler->method('getBaseRole')->willReturn('ROLE_SONATA_FOO_%s');
+
+        $this->admin->method('getSecurityHandler')->willReturn($securityHandler);
+        $this->admin->method('getSecurityInformation')->willReturn([
+            'GUEST' => ['VIEW', 'LIST'],
+            'STAFF' => ['EDIT', 'LIST', 'CREATE'],
+            'EDITOR' => ['OPERATOR', 'EXPORT'],
+            'ADMIN' => ['MASTER'],
+        ]);
+
+        $expected = [
+            'ROLE_SONATA_FOO_GUEST' => [
+                'role' => 'ROLE_SONATA_FOO_GUEST',
+                'label' => 'GUEST',
+                'role_translated' => 'ROLE_SONATA_FOO_GUEST',
+                'is_granted' => false,
+                'admin_label' => null,
+            ],
+            'ROLE_SONATA_FOO_STAFF' => [
+                'role' => 'ROLE_SONATA_FOO_STAFF',
+                'label' => 'STAFF',
+                'role_translated' => 'ROLE_SONATA_FOO_STAFF',
+                'is_granted' => false,
+                'admin_label' => null,
+            ],
+            'ROLE_SONATA_FOO_EDITOR' => [
+                'role' => 'ROLE_SONATA_FOO_EDITOR',
+                'label' => 'EDITOR',
+                'role_translated' => 'ROLE_SONATA_FOO_EDITOR',
+                'is_granted' => false,
+                'admin_label' => null,
+            ],
+            'ROLE_SONATA_FOO_ADMIN' => [
+                'role' => 'ROLE_SONATA_FOO_ADMIN',
+                'label' => 'ADMIN',
+                'role_translated' => 'ROLE_SONATA_FOO_ADMIN',
+                'is_granted' => false,
+                'admin_label' => null,
+            ],
+        ];
+
+        static::assertSame($expected, $this->rolesBuilder->getRoles('domain'));
+    }
 }
