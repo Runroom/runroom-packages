@@ -52,7 +52,7 @@ class SecurityRolesBuilderTest extends TestCase
             'skin' => 'blue',
             'sort_admins' => true,
             'stylesheets' => [],
-            'use_bootl' => true,
+            'use_bootlint' => true,
             'use_icheck' => true,
             'use_select2' => true,
             'use_stickyforms' => true,

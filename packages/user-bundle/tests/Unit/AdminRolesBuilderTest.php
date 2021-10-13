@@ -37,11 +37,7 @@ class AdminRolesBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->admin = $this->createMock(AdminInterface::class);
-
-        $container = new Container();
-        $container->set('runroom_user.admin.user', $this->admin);
-
+        $translator = new Translator('en');
         $sonataConfiguration = new SonataConfiguration('title', 'logo', [
             'confirm_exit' => true,
             'default_group' => 'group',
@@ -63,11 +59,17 @@ class AdminRolesBuilderTest extends TestCase
             'skin' => 'blue',
             'sort_admins' => true,
             'stylesheets' => [],
-            'use_bootl' => true,
+            'use_bootlint' => true,
             'use_icheck' => true,
             'use_select2' => true,
             'use_stickyforms' => true,
         ]);
+
+        $this->admin = $this->createMock(AdminInterface::class);
+        $this->admin->method('getTranslator')->willReturn($translator);
+
+        $container = new Container();
+        $container->set('runroom_user.admin.user', $this->admin);
 
         $this->rolesBuilder = new AdminRolesBuilder(
             $this->createStub(AuthorizationCheckerInterface::class),
@@ -123,28 +125,28 @@ class AdminRolesBuilderTest extends TestCase
                 'label' => 'GUEST',
                 'role_translated' => 'ROLE_SONATA_FOO_GUEST',
                 'is_granted' => false,
-                'admin_label' => null,
+                'admin_label' => '',
             ],
             'ROLE_SONATA_FOO_STAFF' => [
                 'role' => 'ROLE_SONATA_FOO_STAFF',
                 'label' => 'STAFF',
                 'role_translated' => 'ROLE_SONATA_FOO_STAFF',
                 'is_granted' => false,
-                'admin_label' => null,
+                'admin_label' => '',
             ],
             'ROLE_SONATA_FOO_EDITOR' => [
                 'role' => 'ROLE_SONATA_FOO_EDITOR',
                 'label' => 'EDITOR',
                 'role_translated' => 'ROLE_SONATA_FOO_EDITOR',
                 'is_granted' => false,
-                'admin_label' => null,
+                'admin_label' => '',
             ],
             'ROLE_SONATA_FOO_ADMIN' => [
                 'role' => 'ROLE_SONATA_FOO_ADMIN',
                 'label' => 'ADMIN',
                 'role_translated' => 'ROLE_SONATA_FOO_ADMIN',
                 'is_granted' => false,
-                'admin_label' => null,
+                'admin_label' => '',
             ],
         ];
 
