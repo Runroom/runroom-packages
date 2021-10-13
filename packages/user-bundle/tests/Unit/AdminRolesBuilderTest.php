@@ -63,10 +63,10 @@ class AdminRolesBuilderTest extends TestCase
             'skin' => 'blue',
             'sort_admins' => true,
             'stylesheets' => [],
-            'use_bootl' =>true,
+            'use_bootl' => true,
             'use_icheck' => true,
             'use_select2' => true,
-            'use_stickyforms' => true
+            'use_stickyforms' => true,
         ]);
 
         $this->rolesBuilder = new AdminRolesBuilder(
