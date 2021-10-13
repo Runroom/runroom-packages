@@ -26,7 +26,11 @@ use Symfony\Component\Translation\Translator;
 
 class AdminRolesBuilderTest extends TestCase
 {
-    /** @var MockObject&AdminInterface */
+    /**
+     * @var MockObject&AdminInterface
+     *
+     * @phpstan-var MockObject&AdminInterface<object>
+     */
     private MockObject $admin;
 
     private AdminRolesBuilder $rolesBuilder;
@@ -38,10 +42,37 @@ class AdminRolesBuilderTest extends TestCase
         $container = new Container();
         $container->set('runroom_user.admin.user', $this->admin);
 
+        $sonataConfiguration = new SonataConfiguration('title', 'logo', [
+            'confirm_exit' => true,
+            'default_group' => 'group',
+            'default_icon' => 'icon',
+            'default_label_catalogue' => 'label_catalogue',
+            'dropdown_number_groups_per_colums' => 1,
+            'form_type' => 'type',
+            'html5_validate' => true,
+            'javascripts' => [],
+            'js_debug' => true,
+            'list_action_button_content' => 'content',
+            'lock_protection' => true,
+            'logo_content' => 'text',
+            'mosaic_background' => 'background',
+            'pager_links' => 1,
+            'role_admin' => 'ROLE_ADMIN',
+            'role_super_admin' => 'ROLE_SUPER_ADMIN',
+            'search' => true,
+            'skin' => 'blue',
+            'sort_admins' => true,
+            'stylesheets' => [],
+            'use_bootl' =>true,
+            'use_icheck' => true,
+            'use_select2' => true,
+            'use_stickyforms' => true
+        ]);
+
         $this->rolesBuilder = new AdminRolesBuilder(
             $this->createStub(AuthorizationCheckerInterface::class),
             new Pool($container, ['runroom_user.admin.user']),
-            new SonataConfiguration('title', 'logo', []),
+            $sonataConfiguration,
             new Translator('en')
         );
     }

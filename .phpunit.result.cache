@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Unit\\AdminRolesBuilderTest::itGetsPermissionLabels":3},"times":{"Unit\\AdminRolesBuilderTest::itGetsPermissionLabels":0.105,"Runroom\\UserBundle\\Tests\\Unit\\AdminRolesBuilderTest::itGetsPermissionLabels":0.045}}
