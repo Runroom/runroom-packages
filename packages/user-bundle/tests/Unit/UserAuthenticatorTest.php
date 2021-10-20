@@ -23,13 +23,15 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 
 class UserAuthenticatorTest extends TestCase
 {
-    private UserAuthenticator $userAuthenticator;
+    /* @var MockObject&UrlGeneratorInterface **/
     private MockObject $urlGenerator;
+    private UserAuthenticator $userAuthenticator;
     private Session $session;
 
     protected function setUp(): void
@@ -42,6 +44,9 @@ class UserAuthenticatorTest extends TestCase
     /** @test */
     public function itCanAuthenticateWithRequest(): void
     {
+        if (class_exists(AbstractLoginFormAuthenticator::class)) {
+            static::markTestSkipped('Only works with SF 5.1 or higher');
+        }
         $request = new Request([], [
             '_username' => 'username',
             '_password' => 'secret',
@@ -63,6 +68,9 @@ class UserAuthenticatorTest extends TestCase
     /** @test */
     public function itRedirectsWhenAuthenticationIsSuccess(): void
     {
+        if (class_exists(AbstractLoginFormAuthenticator::class)) {
+            static::markTestSkipped('Only works with SF 5.1 or higher');
+        }
         $request = new Request();
         $request->setSession($this->session);
         $token = new UsernamePasswordToken('username', 'secret', 'firewallName');
