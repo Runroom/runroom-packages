@@ -36,7 +36,7 @@ class UserAuthenticatorTest extends TestCase
 
     protected function setUp(): void
     {
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /* @todo: Simplify this when dropping support for Symfony 4 */
         if (!class_exists(AbstractLoginFormAuthenticator::class)) {
             static::markTestSkipped('Only works with SF 5.1 or higher');
         }
