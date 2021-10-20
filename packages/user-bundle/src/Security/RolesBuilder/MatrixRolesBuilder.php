@@ -15,36 +15,22 @@ namespace Runroom\UserBundle\Security\RolesBuilder;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-/**
- * @phpstan-type Role = array{
- *     role: string,
- *     role_translated: string,
- *     is_granted: boolean,
- *     label?: string,
- *     admin_label?: string
- * }
- */
-final class MatrixRolesBuilder
+final class MatrixRolesBuilder implements MatrixRolesBuilderInterface
 {
     private TokenStorageInterface $tokenStorage;
-    private AdminRolesBuilder $adminRolesBuilder;
-    private SecurityRolesBuilder $securityRolesBuilder;
+    private AdminRolesBuilderInterface $adminRolesBuilder;
+    private ExpandableRolesBuilderInterface $securityRolesBuilder;
 
     public function __construct(
         TokenStorageInterface $tokenStorage,
-        AdminRolesBuilder $adminRolesBuilder,
-        SecurityRolesBuilder $securityRolesBuilder
+        AdminRolesBuilderInterface $adminRolesBuilder,
+        ExpandableRolesBuilderInterface $securityRolesBuilder
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->adminRolesBuilder = $adminRolesBuilder;
         $this->securityRolesBuilder = $securityRolesBuilder;
     }
 
-    /**
-     * @return array<string, array<string, string|bool>>
-     *
-     * @phpstan-return array<string, Role>
-     */
     public function getRoles(?string $domain = null): array
     {
         if (null === $this->tokenStorage->getToken()) {
@@ -57,11 +43,6 @@ final class MatrixRolesBuilder
         );
     }
 
-    /**
-     * @return array<string, array<string, string|bool>>
-     *
-     * @phpstan-return array<string, Role>
-     */
     public function getExpandedRoles(?string $domain = null): array
     {
         if (null === $this->tokenStorage->getToken()) {
@@ -74,7 +55,6 @@ final class MatrixRolesBuilder
         );
     }
 
-    /** @return array<string, string> */
     public function getPermissionLabels(): array
     {
         return $this->adminRolesBuilder->getPermissionLabels();

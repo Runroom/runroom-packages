@@ -17,7 +17,7 @@ use Runroom\UserBundle\Form\ChangePasswordFormType;
 use Runroom\UserBundle\Form\ResetPasswordRequestFormType;
 use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Security\UserProvider;
-use Runroom\UserBundle\Service\MailerService;
+use Runroom\UserBundle\Service\MailerServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +42,7 @@ final class ResetPasswordController extends AbstractController
      */
     private object $passwordHasher;
 
-    private MailerService $mailerService;
+    private MailerServiceInterface $mailerService;
     private UserProvider $userProvider;
 
     /**
@@ -53,7 +53,7 @@ final class ResetPasswordController extends AbstractController
     public function __construct(
         ResetPasswordHelperInterface $resetPasswordHelper,
         object $passwordHasher,
-        MailerService $mailerService,
+        MailerServiceInterface $mailerService,
         UserProvider $userProvider
     ) {
         $this->resetPasswordHelper = $resetPasswordHelper;
