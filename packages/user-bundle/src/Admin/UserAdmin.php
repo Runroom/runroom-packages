@@ -38,6 +38,8 @@ final class UserAdmin extends AbstractAdmin
      * @todo: Simplify this when dropping support for Symfony 4
      *
      * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     *
+     * @phpstan-param class-string<UserInterface> $class
      */
     public function __construct(string $code, string $class, string $baseControllerName, object $passwordHasher)
     {
