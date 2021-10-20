@@ -93,7 +93,7 @@ class MatrixRolesBuilderTest extends TestCase
     {
         $this->tokenStorage->method('getToken')->willReturn(null);
 
-        $result = $this->matrixRolesBuilder->getRoles('domain');
+        $result = $this->matrixRolesBuilder->getExpandedRoles('domain');
 
         static::assertSame([], $result);
     }
