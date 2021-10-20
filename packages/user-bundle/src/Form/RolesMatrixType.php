@@ -32,11 +32,7 @@ final class RolesMatrixType extends AbstractType
     {
         $resolver->setDefaults([
             'expanded' => true,
-            'choices' => function (Options $options, array $parentChoices): array {
-                if ([] !== $parentChoices) {
-                    return [];
-                }
-
+            'choices' => function (Options $options): array {
                 $roles = $this->rolesBuilder->getRoles($options['choice_translation_domain']);
                 $roles = array_keys($roles);
 
