@@ -51,11 +51,6 @@ class RolesMatrixTypeTest extends TypeTestCase
         $this->form = $this->factory->create(RolesMatrixType::class);
     }
 
-    protected function getTypes(): array
-    {
-        return [$this->rolesMatrixType];
-    }
-
     /** @test */
     public function itSubmits(): void
     {
@@ -90,5 +85,10 @@ class RolesMatrixTypeTest extends TypeTestCase
     public function itGetsParent(): void
     {
         static::assertSame(ChoiceType::class, $this->rolesMatrixType->getParent());
+    }
+
+    protected function getTypes(): array
+    {
+        return [$this->rolesMatrixType];
     }
 }
