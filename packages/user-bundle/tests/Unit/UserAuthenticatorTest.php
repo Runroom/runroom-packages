@@ -36,9 +36,11 @@ class UserAuthenticatorTest extends TestCase
 
     protected function setUp(): void
     {
+        /* @todo: Simplify this when dropping support for Symfony 4 */
         if (!class_exists(AbstractLoginFormAuthenticator::class)) {
             static::markTestSkipped('Only works with SF 5.1 or higher');
         }
+
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->userAuthenticator = new UserAuthenticator($this->urlGenerator);
         $this->session = new Session(new MockArraySessionStorage());

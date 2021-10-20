@@ -30,17 +30,21 @@ final class UserAdmin extends AbstractAdmin
     /**
      * @todo: Simplify this when dropping support for Symfony 4
      *
-     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface|null
+     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
      */
-    private ?object $passwordHasher = null;
+    private object $passwordHasher;
 
     /**
      * @todo: Simplify this when dropping support for Symfony 4
      *
      * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     *
+     * @phpstan-param class-string<UserInterface> $class
      */
-    public function setPasswordHasher(object $passwordHasher): void
+    public function __construct(string $code, string $class, string $baseControllerName, object $passwordHasher)
     {
+        parent::__construct($code, $class, $baseControllerName);
+
         $this->passwordHasher = $passwordHasher;
     }
 
@@ -132,10 +136,6 @@ final class UserAdmin extends AbstractAdmin
 
     private function updatePassword(UserInterface $user): void
     {
-        if (null === $this->passwordHasher) {
-            return;
-        }
-
         $plainPassword = $user->getPlainPassword();
 
         if (null === $plainPassword) {

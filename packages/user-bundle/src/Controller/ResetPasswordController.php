@@ -144,18 +144,13 @@ final class ResetPasswordController extends AbstractController
         try {
             $user = $this->userProvider->loadUserByIdentifier($identifier);
             \assert($user instanceof UserInterface);
-        } catch (UserNotFoundException|UsernameNotFoundException $exception) {
-            return;
-        }
 
-        try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
-        } catch (ResetPasswordExceptionInterface $exception) {
+        } catch (UserNotFoundException|UsernameNotFoundException|ResetPasswordExceptionInterface $exception) {
             return;
         }
 
         $this->mailerService->sendResetPasswordEmail($user, $resetToken);
-
         $this->setTokenObjectInSession($resetToken);
     }
 }

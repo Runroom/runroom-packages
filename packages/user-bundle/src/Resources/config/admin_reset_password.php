@@ -21,6 +21,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set('runroom_user.admin.reset_password_request', ResetPasswordRequestAdmin::class)
         ->public()
-        ->args([null, ResetPasswordRequest::class, null])
+        ->arg(0, null)
+        ->arg(1, ResetPasswordRequest::class)
+        ->arg(2, null)
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Reset password request']);
 };

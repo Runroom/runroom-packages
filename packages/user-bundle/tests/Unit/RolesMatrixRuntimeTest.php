@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilderInterface;
 use Runroom\UserBundle\Twig\RolesMatrixRuntime;
@@ -21,21 +23,115 @@ use Twig\Environment;
 
 class RolesMatrixRuntimeTest extends TestCase
 {
+    /** @var MockObject&Environment */
+    private MockObject $twig;
+
+    /** @var Stub&MatrixRolesBuilderInterface */
+    private Stub $rolesBuilder;
     private RolesMatrixRuntime $runtime;
 
     protected function setUp(): void
     {
-        $twig = $this->createStub(Environment::class);
-        $rolesBuilder = $this->createStub(MatrixRolesBuilderInterface::class);
+        $this->twig = $this->createMock(Environment::class);
+        $this->rolesBuilder = $this->createStub(MatrixRolesBuilderInterface::class);
 
-        $this->runtime = new RolesMatrixRuntime($twig, $rolesBuilder);
+        $this->runtime = new RolesMatrixRuntime($this->twig, $this->rolesBuilder);
     }
 
     /** @test */
-    public function foo(): void
+    public function itRendersRolesList(): void
     {
-        $form = $this->createStub(FormView::class);
+        $childForm = new FormView();
+        $childForm->vars['value'] = 'ROLE';
+        $childForm2 = new FormView();
+        $childForm2->vars['value'] = 'ROLE_ADMIN';
 
-        $this->runtime->renderRolesList($form);
+        $form = new FormView();
+        $form->children = [
+            'foo2' => $childForm2,
+            'foo' => $childForm,
+        ];
+
+        $this->rolesBuilder->method('getRoles')->willReturn([
+            'ROLE' => [
+                'role' => 'ROLE',
+                'role_translated' => 'Role translated',
+                'is_granted' => true,
+            ],
+            'ROLE_ADMIN' => [
+                'role' => 'ROLE_ADMIN',
+                'role_translated' => 'Role admin translated',
+                'admin_label' => 'Role admin label',
+                'is_granted' => true,
+            ],
+        ]);
+
+        $this->twig->expects(static::once())->method('render')->with(
+            '@RunroomUser/admin/roles_matrix_list.html.twig',
+            ['roles' => [
+                'ROLE' => [
+                    'role' => 'ROLE',
+                    'role_translated' => 'Role translated',
+                    'is_granted' => true,
+                    'form' => $childForm,
+                ],
+            ]]
+        )->willReturn('rendered string');
+
+        $rolesList = $this->runtime->renderRolesList($form);
+
+        static::assertSame('rendered string', $rolesList);
+    }
+
+    /** @test */
+    public function itRendersRolesMatrix(): void
+    {
+        $childForm = new FormView();
+        $childForm->vars['value'] = 'ROLE';
+        $childForm2 = new FormView();
+        $childForm2->vars['value'] = 'ROLE_ADMIN';
+
+        $form = new FormView();
+        $form->children = [
+            'foo2' => $childForm2,
+            'foo' => $childForm,
+        ];
+
+        $this->rolesBuilder->method('getRoles')->willReturn([
+            'ROLE' => [
+                'role' => 'ROLE',
+                'role_translated' => 'Role translated',
+                'is_granted' => true,
+            ],
+            'ROLE_ADMIN' => [
+                'role' => 'ROLE_ADMIN',
+                'role_translated' => 'Role admin translated',
+                'admin_label' => 'Role admin label',
+                'is_granted' => true,
+            ],
+        ]);
+        $this->rolesBuilder->method('getPermissionLabels')->willReturn(['ROLE' => 'ROLE']);
+
+        $this->twig->expects(static::once())->method('render')->with(
+            '@RunroomUser/admin/roles_matrix.html.twig',
+            [
+                'grouped_roles' => [
+                    'Role admin label' => [
+                        'ROLE_ADMIN' => [
+                            'role' => 'ROLE_ADMIN',
+                            'role_translated' => 'Role admin translated',
+                            'admin_label' => 'Role admin label',
+                            'is_granted' => true,
+                            'form' => $childForm2,
+                        ],
+                    ],
+                ],
+                'permission_labels' => ['ROLE' => 'ROLE'],
+            ]
+        )->willReturn('rendered string');
+
+        $rolesList = $this->runtime->renderMatrix($form);
+
+        static::assertSame('rendered string', $rolesList);
     }
 }
