@@ -33,6 +33,9 @@ class UserAuthenticatorTest extends TestCase
     private MockObject $urlGenerator;
     private UserAuthenticator $userAuthenticator;
     private Session $session;
+    private string $username;
+    private string $secret;
+    private string $firewallName;
 
     protected function setUp(): void
     {
@@ -44,15 +47,20 @@ class UserAuthenticatorTest extends TestCase
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->userAuthenticator = new UserAuthenticator($this->urlGenerator);
         $this->session = new Session(new MockArraySessionStorage());
+
+        $this->username = 'username';
+        $this->secret = 'secret';
+        $this->firewallName = 'fireWallName';
     }
 
     /** @test */
     public function itCanAuthenticateWithRequest(): void
     {
         $request = new Request([], [
-            '_username' => 'username',
-            '_password' => 'secret',
+            '_username' => $this->username,
+            '_password' => $this->secret,
         ]);
+
         $request->setSession($this->session);
 
         $passport = $this->userAuthenticator->authenticate($request);
@@ -72,12 +80,28 @@ class UserAuthenticatorTest extends TestCase
     {
         $request = new Request();
         $request->setSession($this->session);
-        $token = new UsernamePasswordToken('username', 'secret', 'firewallName');
+        $token = new UsernamePasswordToken($this->username, $this->secret, $this->firewallName);
         $this->urlGenerator->method('generate')->willReturn('sonata_admin_dashboard');
 
-        $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, 'firewallName');
+        $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
 
         static::assertNotNull($response);
         static::assertInstanceOf(RedirectResponse::class, $response);
+    }
+
+    /** @test */
+    public function itRedirectsWhenAuthenticationIsNotSuccess(): void
+    {
+        $targetPath = '_security.' . $this->firewallName . '.target_path';
+        $this->session->set($targetPath, 'targetValue');
+        $request = new Request();
+        $request->setSession($this->session);
+
+        $token = new UsernamePasswordToken($this->username, $this->secret, $this->firewallName);
+
+        $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
+        static::assertNotNull($response);
+        static::assertInstanceOf(RedirectResponse::class, $response);
+        static::assertSame('targetValue', $response->getTargetUrl());
     }
 }
