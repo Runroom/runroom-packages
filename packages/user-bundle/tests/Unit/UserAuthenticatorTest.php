@@ -36,6 +36,9 @@ class UserAuthenticatorTest extends TestCase
 
     protected function setUp(): void
     {
+        if (!class_exists(AbstractLoginFormAuthenticator::class)) {
+            static::markTestSkipped('Only works with SF 5.1 or higher');
+        }
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->userAuthenticator = new UserAuthenticator($this->urlGenerator);
         $this->session = new Session(new MockArraySessionStorage());
@@ -44,9 +47,6 @@ class UserAuthenticatorTest extends TestCase
     /** @test */
     public function itCanAuthenticateWithRequest(): void
     {
-        if (class_exists(AbstractLoginFormAuthenticator::class)) {
-            static::markTestSkipped('Only works with SF 5.1 or higher');
-        }
         $request = new Request([], [
             '_username' => 'username',
             '_password' => 'secret',
@@ -68,9 +68,6 @@ class UserAuthenticatorTest extends TestCase
     /** @test */
     public function itRedirectsWhenAuthenticationIsSuccess(): void
     {
-        if (class_exists(AbstractLoginFormAuthenticator::class)) {
-            static::markTestSkipped('Only works with SF 5.1 or higher');
-        }
         $request = new Request();
         $request->setSession($this->session);
         $token = new UsernamePasswordToken('username', 'secret', 'firewallName');
