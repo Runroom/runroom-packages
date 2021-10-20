@@ -18,6 +18,7 @@ use Runroom\UserBundle\Form\RolesMatrixType;
 use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class RolesMatrixTypeTest extends TypeTestCase
@@ -87,6 +88,7 @@ class RolesMatrixTypeTest extends TypeTestCase
         static::assertSame(ChoiceType::class, $this->rolesMatrixType->getParent());
     }
 
+    /** @return FormTypeInterface[] */
     protected function getTypes(): array
     {
         return [$this->rolesMatrixType];
