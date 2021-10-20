@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Form;
 
-use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilder;
+use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
@@ -21,9 +21,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class RolesMatrixType extends AbstractType
 {
-    private MatrixRolesBuilder $rolesBuilder;
+    private MatrixRolesBuilderInterface $rolesBuilder;
 
-    public function __construct(MatrixRolesBuilder $rolesBuilder)
+    public function __construct(MatrixRolesBuilderInterface $rolesBuilder)
     {
         $this->rolesBuilder = $rolesBuilder;
     }
@@ -32,11 +32,7 @@ final class RolesMatrixType extends AbstractType
     {
         $resolver->setDefaults([
             'expanded' => true,
-            'choices' => function (Options $options, $parentChoices): array {
-                if ([] !== $parentChoices) {
-                    return [];
-                }
-
+            'choices' => function (Options $options): array {
                 $roles = $this->rolesBuilder->getRoles($options['choice_translation_domain']);
                 $roles = array_keys($roles);
 
