@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Twig;
 
-use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilder;
+use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
@@ -21,11 +21,11 @@ use Twig\Extension\RuntimeExtensionInterface;
 final class RolesMatrixRuntime implements RuntimeExtensionInterface
 {
     private Environment $twig;
-    private MatrixRolesBuilder $rolesBuilder;
+    private MatrixRolesBuilderInterface $rolesBuilder;
 
     public function __construct(
         Environment $twig,
-        MatrixRolesBuilder $rolesBuilder
+        MatrixRolesBuilderInterface $rolesBuilder
     ) {
         $this->twig = $twig;
         $this->rolesBuilder = $rolesBuilder;

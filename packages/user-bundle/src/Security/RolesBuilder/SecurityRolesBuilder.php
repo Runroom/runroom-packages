@@ -17,8 +17,8 @@ use Sonata\AdminBundle\SonataConfiguration;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/** @phpstan-import-type Role from MatrixRolesBuilder */
-final class SecurityRolesBuilder
+/** @phpstan-import-type Role from RolesBuilderInterface */
+final class SecurityRolesBuilder implements ExpandableRolesBuilderInterface
 {
     private AuthorizationCheckerInterface $authorizationChecker;
     private SonataConfiguration $configuration;
@@ -40,11 +40,6 @@ final class SecurityRolesBuilder
         $this->rolesHierarchy = $rolesHierarchy;
     }
 
-    /**
-     * @return array<string, array<string, string|bool>>
-     *
-     * @phpstan-return array<string, Role>
-     */
     public function getExpandedRoles(?string $domain = null): array
     {
         $securityRoles = [];
@@ -73,11 +68,6 @@ final class SecurityRolesBuilder
         return $securityRoles;
     }
 
-    /**
-     * @return array<string, array<string, string|bool>>
-     *
-     * @phpstan-return array<string, Role>
-     */
     public function getRoles(?string $domain = null): array
     {
         $securityRoles = [];

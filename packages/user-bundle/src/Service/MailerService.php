@@ -21,7 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use Twig\Environment;
 
-final class MailerService
+final class MailerService implements MailerServiceInterface
 {
     private MailerInterface $mailer;
     private TranslatorInterface $translator;

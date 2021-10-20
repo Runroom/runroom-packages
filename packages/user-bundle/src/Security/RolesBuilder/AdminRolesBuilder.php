@@ -19,8 +19,7 @@ use Sonata\AdminBundle\SonataConfiguration;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/** @phpstan-import-type Role from MatrixRolesBuilder */
-final class AdminRolesBuilder
+final class AdminRolesBuilder implements AdminRolesBuilderInterface
 {
     private AuthorizationCheckerInterface $authorizationChecker;
     private Pool $pool;
@@ -39,24 +38,6 @@ final class AdminRolesBuilder
         $this->translator = $translator;
     }
 
-    /** @return array<string, string> */
-    public function getPermissionLabels(): array
-    {
-        $permissionLabels = [];
-        foreach ($this->getRoles() as $attributes) {
-            if (isset($attributes['label'])) {
-                $permissionLabels[$attributes['label']] = $attributes['label'];
-            }
-        }
-
-        return $permissionLabels;
-    }
-
-    /**
-     * @return array<string, array<string, string|bool>>
-     *
-     * @phpstan-return array<string, Role>
-     */
     public function getRoles(?string $domain = null): array
     {
         $adminRoles = [];
@@ -77,6 +58,18 @@ final class AdminRolesBuilder
         }
 
         return $adminRoles;
+    }
+
+    public function getPermissionLabels(): array
+    {
+        $permissionLabels = [];
+        foreach ($this->getRoles() as $attributes) {
+            if (isset($attributes['label'])) {
+                $permissionLabels[$attributes['label']] = $attributes['label'];
+            }
+        }
+
+        return $permissionLabels;
     }
 
     /** @phpstan-param AdminInterface<object> $admin */
