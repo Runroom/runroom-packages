@@ -16,8 +16,9 @@ namespace Runroom\UserBundle\Repository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Runroom\UserBundle\Model\UserInterface;
+use Runroom\UserBundle\Repository\UserRepositoryInterface;
 
-final class UserRepository
+final class UserRepository implements UserRepositoryInterface
 {
     private EntityManagerInterface $entityManager;
 

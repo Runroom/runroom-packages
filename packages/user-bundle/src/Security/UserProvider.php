@@ -15,6 +15,7 @@ namespace Runroom\UserBundle\Security;
 
 use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepository;
+use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -25,9 +26,9 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 final class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
-    private UserRepository $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
