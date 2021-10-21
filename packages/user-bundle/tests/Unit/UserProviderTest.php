@@ -20,6 +20,7 @@ use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Runroom\UserBundle\Security\UserProvider;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
@@ -44,7 +45,15 @@ class UserProviderTest extends TestCase
     /** @test */
     public function itDoesntLoadsNullUserByIdentifier(): void
     {
-        $this->expectException(UserNotFoundException::class);
+        /** @todo: Simplify when dropping support for Symfony 4 */
+        if (!class_exists(UserNotFoundException::class)) {
+            $this->expectException(UsernameNotFoundException::class);
+            $this->expectExceptionMessage('User "user@localhost" not found.');
+        } else {
+            $this->expectException(UserNotFoundException::class);
+            $this->expectExceptionMessage('User "user@localhost" not found.');
+        }
+
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
@@ -53,8 +62,16 @@ class UserProviderTest extends TestCase
     public function itDoesntLoadsDisabledUserByIdentifier(): void
     {
         $this->expectedUser->setEnabled(false);
-        $this->expectException(UserNotFoundException::class);
-        $this->expectExceptionMessage(sprintf('User "%s" not found.', 'user@localhost'));
+
+        /** @todo: Simplify when dropping support for Symfony 4 */
+        if (!class_exists(UserNotFoundException::class)) {
+            $this->expectException(UsernameNotFoundException::class);
+            $this->expectExceptionMessage('User "user@localhost" not found.');
+        } else {
+            $this->expectException(UserNotFoundException::class);
+            $this->expectExceptionMessage('User "user@localhost" not found.');
+        }
+
         $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
@@ -63,6 +80,7 @@ class UserProviderTest extends TestCase
     public function itLoadsUserByIdentifier(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
+
         $user = $this->userProvider->loadUserByIdentifier('user@localhost');
 
         static::assertInstanceOf(UserInterface::class, $user);
@@ -99,7 +117,15 @@ class UserProviderTest extends TestCase
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
 
         $this->expectException(UserNotFoundException::class);
-        $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
+
+        /** @todo: Simplify when dropping support for Symfony 4 */
+        if (!class_exists(UserNotFoundException::class)) {
+            $this->expectException(UsernameNotFoundException::class);
+            $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
+        } else {
+            $this->expectException(UserNotFoundException::class);
+            $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
+        }
 
         $this->userProvider->refreshUser($this->expectedUser);
     }
@@ -109,6 +135,7 @@ class UserProviderTest extends TestCase
     {
         $newPassword = 'new_password';
         $this->repository->expects(static::once())->method('save')->with($this->expectedUser);
+
         $this->userProvider->upgradePassword($this->expectedUser, $newPassword);
 
         static::assertSame($this->expectedUser->getPassword(), $newPassword);
