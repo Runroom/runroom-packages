@@ -45,6 +45,8 @@ class UserProviderTest extends TestCase
     /** @test */
     public function itDoesntLoadsNullUserByIdentifier(): void
     {
+        $this->repository->method('loadUserByIdentifier')->willReturn(null);
+
         /* @todo: Simplify when dropping support for Symfony 4 */
         if (!class_exists(UserNotFoundException::class)) {
             $this->expectException(UsernameNotFoundException::class);
@@ -54,7 +56,6 @@ class UserProviderTest extends TestCase
             $this->expectExceptionMessage('User "user@localhost" not found.');
         }
 
-        $this->repository->method('loadUserByIdentifier')->willReturn(null);
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 
@@ -62,6 +63,7 @@ class UserProviderTest extends TestCase
     public function itDoesntLoadsDisabledUserByIdentifier(): void
     {
         $this->expectedUser->setEnabled(false);
+        $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
 
         /* @todo: Simplify when dropping support for Symfony 4 */
         if (!class_exists(UserNotFoundException::class)) {
@@ -72,7 +74,6 @@ class UserProviderTest extends TestCase
             $this->expectExceptionMessage('User "user@localhost" not found.');
         }
 
-        $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 
@@ -102,7 +103,6 @@ class UserProviderTest extends TestCase
     public function itRefreshesUser(): void
     {
         $user = new User();
-
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
 
         $refreshedUser = $this->userProvider->refreshUser($this->expectedUser);
@@ -115,8 +115,6 @@ class UserProviderTest extends TestCase
     public function itDoesntRefreshesNullUser(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
-
-        $this->expectException(UserNotFoundException::class);
 
         /* @todo: Simplify when dropping support for Symfony 4 */
         if (!class_exists(UserNotFoundException::class)) {
