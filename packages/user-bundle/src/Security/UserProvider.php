@@ -77,7 +77,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     public function upgradePassword(object $user, string $newHashedPassword): void
     {
         if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
         $user->setPassword($newHashedPassword);
