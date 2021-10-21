@@ -21,6 +21,7 @@ use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Runroom\UserBundle\Security\UserProvider;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 class UserProviderTest extends TestCase
 {
@@ -72,6 +73,7 @@ class UserProviderTest extends TestCase
     public function itLoadsUserByUsername(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
+
         $user = $this->userProvider->loadUserByUsername('user');
 
         static::assertInstanceOf(UserInterface::class, $user);
@@ -81,19 +83,45 @@ class UserProviderTest extends TestCase
     /** @test */
     public function itRefreshesUser(): void
     {
-        $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
+        $user = new User();
+
+        $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
+
         $refreshedUser = $this->userProvider->refreshUser($this->expectedUser);
 
         static::assertInstanceOf(UserInterface::class, $refreshedUser);
-        static::assertSame($this->expectedUser, $refreshedUser);
+        static::assertSame($user, $refreshedUser);
     }
 
     /** @test */
     public function itDoesntRefreshesNullUser(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
+
         $this->expectException(UserNotFoundException::class);
-        $this->expectExceptionMessage(sprintf('User with id "%s" not found.', $this->expectedUser->getId()));
+        $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
+
         $this->userProvider->refreshUser($this->expectedUser);
+    }
+
+    /** @test */
+    public function itUpgradesPassword(): void
+    {
+        $newPassword = 'new_password';
+        $this->repository->expects(static::once())->method('save')->with($this->expectedUser);
+        $this->userProvider->upgradePassword($this->expectedUser, $newPassword);
+
+        static::assertSame($this->expectedUser->getPassword(), $newPassword);
+    }
+
+    /** @test */
+    public function itDoesntUpgradesPassword(): void
+    {
+        $user = $this->createStub(SymfonyUserInterface::class);
+
+        $this->expectException(UnsupportedUserException::class);
+        $this->expectExceptionMessage(sprintf('Instances of "%s" are not supported.', get_class($user)));
+
+        $this->userProvider->upgradePassword($user, 'new_password');
     }
 }

@@ -19,6 +19,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -55,10 +56,12 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_debug_type($user)));
         }
 
-        $refreshedUser = $this->userRepository->loadUserByIdentifier($user->getUserIdentifier());
+        $userIdentifier = $user->getUserIdentifier();
+
+        $refreshedUser = $this->userRepository->loadUserByIdentifier($userIdentifier);
 
         if (null === $refreshedUser) {
-            throw $this->buildUserNotFoundException(sprintf('User with id "%s" not found.', $user->getId()), $user->getUserIdentifier());
+            throw $this->buildUserNotFoundException(sprintf('User with identifier "%s" not found.', $userIdentifier), $userIdentifier);
         }
 
         return $refreshedUser;
@@ -70,11 +73,11 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         return UserInterface::class === $class || is_subclass_of($class, UserInterface::class);
     }
 
-    /** @param UserInterface $user */
-    public function upgradePassword($user, string $newHashedPassword): void
+    /** @param PasswordAuthenticatedUserInterface|SymfonyUserInterface $user */
+    public function upgradePassword(object $user, string $newHashedPassword): void
     {
         if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_debug_type($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
         $user->setPassword($newHashedPassword);
