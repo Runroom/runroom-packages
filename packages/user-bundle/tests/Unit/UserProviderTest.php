@@ -19,6 +19,7 @@ use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Runroom\UserBundle\Security\UserProvider;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class UserProviderTest extends TestCase
@@ -28,13 +29,13 @@ class UserProviderTest extends TestCase
 
     private UserProvider $userProvider;
 
-    private UserInterface $user;
+    private UserInterface $expectedUser;
 
     protected function setUp(): void
     {
-        $this->user = new User();
-        $this->user->setEmail('user@localhost');
-        $this->user->setEnabled(true);
+        $this->expectedUser = new User();
+        $this->expectedUser->setEmail('user@localhost');
+        $this->expectedUser->setEnabled(true);
         $this->repository = $this->createMock(UserRepositoryInterface::class);
         $this->userProvider = new UserProvider($this->repository);
     }
@@ -50,29 +51,49 @@ class UserProviderTest extends TestCase
     /** @test */
     public function itDoesntLoadsDisabledUserByIdentifier(): void
     {
-        $this->user->setEnabled(false);
+        $this->expectedUser->setEnabled(false);
         $this->expectException(UserNotFoundException::class);
-        $this->repository->method('loadUserByIdentifier')->willReturn($this->user);
+        $this->expectExceptionMessage(sprintf('User "%s" not found.', 'user@localhost'));
+        $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 
     /** @test */
     public function itLoadsUserByIdentifier(): void
     {
-        $this->repository->method('loadUserByIdentifier')->willReturn($this->user);
-        $result = $this->userProvider->loadUserByIdentifier('user@localhost');
+        $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
+        $user = $this->userProvider->loadUserByIdentifier('user@localhost');
 
-        static::assertInstanceOf(UserInterface::class, $result);
-        static::assertSame($this->user, $result);
+        static::assertInstanceOf(UserInterface::class, $user);
+        static::assertSame($this->expectedUser, $user);
     }
 
     /** @test */
     public function itLoadsUserByUsername(): void
     {
-        $this->repository->method('loadUserByIdentifier')->willReturn($this->user);
-        $result = $this->userProvider->loadUserByUsername('user');
+        $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
+        $user = $this->userProvider->loadUserByUsername('user');
 
-        static::assertInstanceOf(UserInterface::class, $result);
-        static::assertSame($this->user, $result);
+        static::assertInstanceOf(UserInterface::class, $user);
+        static::assertSame($this->expectedUser, $user);
+    }
+
+    /** @test */
+    public function itRefreshesUser(): void
+    {
+        $this->repository->method('loadUserByIdentifier')->willReturn($this->expectedUser);
+        $refreshedUser = $this->userProvider->refreshUser($this->expectedUser);
+
+        static::assertInstanceOf(UserInterface::class, $refreshedUser);
+        static::assertSame($this->expectedUser, $refreshedUser);
+    }
+
+    /** @test */
+    public function itDoesntRefreshesNullUser(): void
+    {
+        $this->repository->method('loadUserByIdentifier')->willReturn(null);
+        $this->expectException(UserNotFoundException::class);
+        $this->expectExceptionMessage(sprintf('User with id "%s" not found.', $this->expectedUser->getId()));
+        $this->userProvider->refreshUser($this->expectedUser);
     }
 }
