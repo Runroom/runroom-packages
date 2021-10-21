@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Util;
 
 use Runroom\UserBundle\Model\UserInterface;
-use Runroom\UserBundle\Repository\UserRepository;
+use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserManipulator
 {
-    private UserRepository $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     /**
      * @todo: Simplify this when dropping support for Symfony 4
@@ -35,7 +35,7 @@ final class UserManipulator
      * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
      */
     public function __construct(
-        UserRepository $userRepository,
+        UserRepositoryInterface $userRepository,
         object $passwordHasher
     ) {
         $this->userRepository = $userRepository;
