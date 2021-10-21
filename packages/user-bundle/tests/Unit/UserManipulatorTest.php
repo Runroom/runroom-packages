@@ -78,4 +78,38 @@ class UserManipulatorTest extends TestCase
         static::assertSame($user->getPassword(), $hashedPassword);
         static::assertSame($user->getEnabled(), true);
     }
+
+    /** @test */
+    public function itDoesntActivatesDeactivatesUser(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('User identified by "user@localhost" username does not exist.');
+
+        $this->userManipulator->activate($this->identifier);
+        $this->userManipulator->deactivate($this->identifier);
+    }
+
+    /** @test */
+    public function itActivatesUser(): void
+    {
+        $user = new User();
+        $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
+        $this->repository->expects(static::once())->method('save');
+
+        $this->userManipulator->activate($this->identifier);
+
+        static::assertSame($user->getEnabled(), true);
+    }
+
+    /** @test */
+    public function itDeactivatesUser(): void
+    {
+        $user = new User();
+        $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
+        $this->repository->expects(static::once())->method('save');
+
+        $this->userManipulator->deactivate($this->identifier);
+
+        static::assertSame($user->getEnabled(), false);
+    }
 }
