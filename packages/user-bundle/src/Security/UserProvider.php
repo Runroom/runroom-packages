@@ -53,7 +53,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     public function refreshUser(SymfonyUserInterface $user): SymfonyUserInterface
     {
         if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_debug_type($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
         $userIdentifier = $user->getUserIdentifier();
