@@ -40,10 +40,19 @@ class UserProviderTest extends TestCase
     }
 
     /** @test */
-    public function itDoestLoadsUserByIdentifier(): void
+    public function itDoestLoadsUserByIdentifierWithNull(): void
     {
         $this->expectException(UserNotFoundException::class);
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
+        $this->userProvider->loadUserByIdentifier('user@localhost');
+    }
+
+    /** @test */
+    public function itDoesntLoadDisabledUserByIdentifier(): void
+    {
+        $this->user->setEnabled(false);
+        $this->expectException(UserNotFoundException::class);
+        $this->repository->method('loadUserByIdentifier')->willReturn($this->user);
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 

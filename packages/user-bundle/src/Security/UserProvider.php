@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Security;
 
 use Runroom\UserBundle\Model\UserInterface;
-use Runroom\UserBundle\Repository\UserRepository;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
