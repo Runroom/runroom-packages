@@ -45,7 +45,7 @@ class UserProviderTest extends TestCase
     /** @test */
     public function itDoesntLoadsNullUserByIdentifier(): void
     {
-        /** @todo: Simplify when dropping support for Symfony 4 */
+        /* @todo: Simplify when dropping support for Symfony 4 */
         if (!class_exists(UserNotFoundException::class)) {
             $this->expectException(UsernameNotFoundException::class);
             $this->expectExceptionMessage('User "user@localhost" not found.');
@@ -63,7 +63,7 @@ class UserProviderTest extends TestCase
     {
         $this->expectedUser->setEnabled(false);
 
-        /** @todo: Simplify when dropping support for Symfony 4 */
+        /* @todo: Simplify when dropping support for Symfony 4 */
         if (!class_exists(UserNotFoundException::class)) {
             $this->expectException(UsernameNotFoundException::class);
             $this->expectExceptionMessage('User "user@localhost" not found.');
@@ -118,7 +118,7 @@ class UserProviderTest extends TestCase
 
         $this->expectException(UserNotFoundException::class);
 
-        /** @todo: Simplify when dropping support for Symfony 4 */
+        /* @todo: Simplify when dropping support for Symfony 4 */
         if (!class_exists(UserNotFoundException::class)) {
             $this->expectException(UsernameNotFoundException::class);
             $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
