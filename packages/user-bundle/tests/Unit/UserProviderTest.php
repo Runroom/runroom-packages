@@ -40,7 +40,7 @@ class UserProviderTest extends TestCase
     }
 
     /** @test */
-    public function itDoestLoadsUserByIdentifierWithNull(): void
+    public function itDoesntLoadsNullUserByIdentifier(): void
     {
         $this->expectException(UserNotFoundException::class);
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
@@ -48,7 +48,7 @@ class UserProviderTest extends TestCase
     }
 
     /** @test */
-    public function itDoesntLoadDisabledUserByIdentifier(): void
+    public function itDoesntLoadsDisabledUserByIdentifier(): void
     {
         $this->user->setEnabled(false);
         $this->expectException(UserNotFoundException::class);
@@ -60,7 +60,17 @@ class UserProviderTest extends TestCase
     public function itLoadsUserByIdentifier(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn($this->user);
-        $result = $this->userProvider->loadUserByIdentifier('email@localhost');
+        $result = $this->userProvider->loadUserByIdentifier('user@localhost');
+
+        static::assertInstanceOf(UserInterface::class, $result);
+        static::assertSame($this->user, $result);
+    }
+
+    /** @test */
+    public function itLoadsUserByUsername(): void
+    {
+        $this->repository->method('loadUserByIdentifier')->willReturn($this->user);
+        $result = $this->userProvider->loadUserByUsername('user');
 
         static::assertInstanceOf(UserInterface::class, $result);
         static::assertSame($this->user, $result);
