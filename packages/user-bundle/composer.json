@@ -63,6 +63,11 @@
         "symfonycasts/reset-password-bundle": "^1.9",
         "zenstruck/foundry": "^1.13.2"
     },
+    "suggest": {
+        "sonata-project/admin-bundle": "To use within SonataAdminBundle",
+        "symfony/mailer": "To be able to send user reset password email",
+        "symfonycasts/reset-password-bundle": "To provide user reset password"
+    },
     "config": {
         "sort-packages": true
     },
