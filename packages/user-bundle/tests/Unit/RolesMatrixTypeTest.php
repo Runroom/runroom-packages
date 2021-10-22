@@ -25,6 +25,7 @@ class RolesMatrixTypeTest extends TypeTestCase
 {
     /** @var Stub&MatrixRolesBuilderInterface */
     private Stub $rolesBuilder;
+
     private RolesMatrixType $rolesMatrixType;
     private FormInterface $form;
 

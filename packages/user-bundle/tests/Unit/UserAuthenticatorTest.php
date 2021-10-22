@@ -29,13 +29,12 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 
 class UserAuthenticatorTest extends TestCase
 {
-    /* @var MockObject&UrlGeneratorInterface **/
+    /** @var MockObject&UrlGeneratorInterface */
     private MockObject $urlGenerator;
-    private UserAuthenticator $userAuthenticator;
+
     private Session $session;
-    private string $username;
-    private string $secret;
     private string $firewallName;
+    private UserAuthenticator $userAuthenticator;
 
     protected function setUp(): void
     {
@@ -45,20 +44,18 @@ class UserAuthenticatorTest extends TestCase
         }
 
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $this->userAuthenticator = new UserAuthenticator($this->urlGenerator);
         $this->session = new Session(new MockArraySessionStorage());
-
-        $this->username = 'username';
-        $this->secret = 'secret';
         $this->firewallName = 'fireWallName';
+
+        $this->userAuthenticator = new UserAuthenticator($this->urlGenerator);
     }
 
     /** @test */
     public function itCanAuthenticateWithRequest(): void
     {
         $request = new Request([], [
-            '_username' => $this->username,
-            '_password' => $this->secret,
+            '_username' => 'username',
+            '_password' => 'password',
         ]);
 
         $request->setSession($this->session);
@@ -71,7 +68,7 @@ class UserAuthenticatorTest extends TestCase
         static::assertInstanceOf(UserBadge::class, $userBadge);
         static::assertInstanceOf(PasswordCredentials::class, $passwordCredential);
         static::assertSame('username', $userBadge->getUserIdentifier());
-        static::assertSame('secret', $passwordCredential->getPassword());
+        static::assertSame('password', $passwordCredential->getPassword());
         static::assertSame('username', $request->getSession()->get(Security::LAST_USERNAME));
     }
 
@@ -80,7 +77,7 @@ class UserAuthenticatorTest extends TestCase
     {
         $request = new Request();
         $request->setSession($this->session);
-        $token = new UsernamePasswordToken($this->username, $this->secret, $this->firewallName);
+        $token = new UsernamePasswordToken('username', 'password', $this->firewallName);
         $this->urlGenerator->method('generate')->willReturn('sonata_admin_dashboard');
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
@@ -92,14 +89,14 @@ class UserAuthenticatorTest extends TestCase
     /** @test */
     public function itRedirectsWhenAuthenticationIsNotSuccess(): void
     {
-        $targetPath = '_security.' . $this->firewallName . '.target_path';
-        $this->session->set($targetPath, 'targetValue');
+        $this->session->set('_security.' . $this->firewallName . '.target_path', 'targetValue');
         $request = new Request();
         $request->setSession($this->session);
 
-        $token = new UsernamePasswordToken($this->username, $this->secret, $this->firewallName);
+        $token = new UsernamePasswordToken('username', 'password', $this->firewallName);
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
+
         static::assertNotNull($response);
         static::assertInstanceOf(RedirectResponse::class, $response);
         static::assertSame('targetValue', $response->getTargetUrl());

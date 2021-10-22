@@ -28,10 +28,10 @@ class GlobalVariablesTest extends TestCase
         $container->set('runroom_user.admin.user', $this->createStub(AdminInterface::class));
 
         $pool = new Pool($container, ['runroom_user.admin.user']);
-
         $globalVariables = new GlobalVariables($pool);
 
         $admin = $globalVariables->getUserAdmin();
+
         static::assertInstanceOf(AdminInterface::class, $admin);
     }
 }

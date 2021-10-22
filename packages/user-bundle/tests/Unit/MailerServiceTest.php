@@ -33,21 +33,17 @@ class MailerServiceTest extends TestCase
     /** @var MockObject&TranslatorInterface */
     private MockObject $translator;
 
-    /** @var MockObject&Environment */
-    private MockObject $twig;
-
     private MailerService $service;
 
     protected function setUp(): void
     {
         $this->mailer = $this->createMock(MailerInterface::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
-        $this->twig = $this->createMock(Environment::class);
 
         $this->service = new MailerService(
             $this->mailer,
             $this->translator,
-            $this->twig,
+            $this->createStub(Environment::class),
             'user@email.com',
             'userName'
         );

@@ -15,16 +15,16 @@ namespace Runroom\UserBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\UserBundle\Entity\User;
+use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Runroom\UserBundle\Util\UserManipulator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Zenstruck\Foundry\Test\Factories;
 
 class UserManipulatorTest extends TestCase
 {
-    /** @var MockObject&UserRepositoryInterface */
-    private MockObject $repository;
+    use Factories;
 
     /** @var (MockObject&UserPasswordHasherInterface)|null */
     private ?MockObject $passwordHasher = null;
@@ -32,38 +32,39 @@ class UserManipulatorTest extends TestCase
     /** @var (MockObject&UserPasswordEncoderInterface)|null */
     private ?MockObject $passwordEncoder = null;
 
-    private UserManipulator $userManipulator;
+    /** @var MockObject&UserRepositoryInterface */
+    private MockObject $repository;
 
     private string $identifier;
 
+    private UserManipulator $userManipulator;
+
     protected function setUp(): void
     {
-        $this->identifier = 'user@localhost';
-        $this->repository = $this->createMock(UserRepositoryInterface::class);
-
         /* @todo: Simplify this when dropping support for Symfony 4 */
-        if (class_exists(UserPasswordHasherInterface::class)) {
-            $this->passwordHasher = $this->createMock(UserPasswordHasherInterface::class);
-            $this->userManipulator = new UserManipulator(
-                $this->repository,
-                $this->passwordHasher
-            );
+        if (interface_exists(UserPasswordHasherInterface::class)) {
+            $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)
+                ->addMethods(['hashPassword'])->getMock();
         } else {
             $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
-            $this->userManipulator = new UserManipulator(
-                $this->repository,
-                $this->passwordEncoder
-            );
         }
+        $passwordHasher = $this->passwordHasher;
+        $passwordEncoder = $this->passwordEncoder;
+        \assert(null !== $passwordHasher || null !== $passwordEncoder);
+
+        $this->repository = $this->createMock(UserRepositoryInterface::class);
+        $this->identifier = 'user@localhost';
+
+        $this->userManipulator = new UserManipulator(
+            $this->repository,
+            $passwordHasher ?? $passwordEncoder
+        );
     }
 
     /** @test */
     public function itCreatesUser(): void
     {
-        $user = new User();
-        $identifier = 'user@localhost';
-        $newPassword = 'new_password';
-        $hashedPassword = 'hashed_password';
+        $user = UserFactory::createOne()->object();
 
         $this->repository->expects(static::once())->method('create')->willReturn($user);
         $this->repository->expects(static::once())->method('save')->with($user);
@@ -72,64 +73,71 @@ class UserManipulatorTest extends TestCase
         if (null !== $this->passwordHasher) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')
-                ->with($user, $newPassword)
-                ->willReturn($hashedPassword);
+                ->with($user, 'new_password')
+                ->willReturn('hashed_password');
         } elseif (null !== $this->passwordEncoder) {
             $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
-                ->with($user, $newPassword)
-                ->willReturn($hashedPassword);
+                ->with($user, 'new_password')
+                ->willReturn('hashed_password');
         }
 
-        $this->userManipulator->create($identifier, $newPassword, true);
+        $this->userManipulator->create('user@localhost', 'new_password', true);
 
-        static::assertSame($user->getUserIdentifier(), $identifier);
-        static::assertSame($user->getPassword(), $hashedPassword);
-        static::assertSame($user->getEnabled(), true);
+        static::assertSame('user@localhost', $user->getUserIdentifier());
+        static::assertSame('hashed_password', $user->getPassword());
+        static::assertTrue($user->getEnabled());
         static::assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
     }
 
     /** @test */
-    public function itDoesntActivatesDeactivatesUser(): void
+    public function itThrowsWhenActivatingANonExistentUser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('User identified by "user@localhost" username does not exist.');
 
-        $this->userManipulator->activate($this->identifier);
-        $this->userManipulator->deactivate($this->identifier);
+        $this->userManipulator->activate('user@localhost');
+    }
+
+    /** @test */
+    public function itThrowsWhenDeactivatingANonExistentUser(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('User identified by "user@localhost" username does not exist.');
+
+        $this->userManipulator->deactivate('user@localhost');
     }
 
     /** @test */
     public function itActivatesUser(): void
     {
-        $user = new User();
+        $user = UserFactory::createOne()->object();
+
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
 
         $this->userManipulator->activate($this->identifier);
 
-        static::assertSame($user->getEnabled(), true);
+        static::assertTrue($user->getEnabled());
     }
 
     /** @test */
     public function itDeactivatesUser(): void
     {
-        $user = new User();
+        $user = UserFactory::createOne()->object();
+
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
 
         $this->userManipulator->deactivate($this->identifier);
 
-        static::assertSame($user->getEnabled(), false);
+        static::assertFalse($user->getEnabled());
     }
 
     /** @test */
     public function itChangesPassword(): void
     {
-        $user = new User();
-        $identifier = 'user@localhost';
-        $newPassword = 'new_password';
-        $hashedPassword = 'hashed_password';
+        $user = UserFactory::createOne()->object();
 
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
@@ -138,17 +146,17 @@ class UserManipulatorTest extends TestCase
         if (null !== $this->passwordHasher) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')
-                ->with($user, $newPassword)
-                ->willReturn($hashedPassword);
+                ->with($user, 'new_password')
+                ->willReturn('hashed_password');
         } elseif (null !== $this->passwordEncoder) {
             $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
-                ->with($user, $newPassword)
-                ->willReturn($hashedPassword);
+                ->with($user, 'new_password')
+                ->willReturn('hashed_password');
         }
 
-        $this->userManipulator->changePassword($identifier, $newPassword);
+        $this->userManipulator->changePassword('user@localhost', 'new_password');
 
-        static::assertSame($user->getPassword(), $hashedPassword);
+        static::assertSame('hashed_password', $user->getPassword());
     }
 }

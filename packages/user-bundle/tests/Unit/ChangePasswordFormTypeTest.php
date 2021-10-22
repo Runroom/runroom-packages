@@ -65,8 +65,6 @@ class ChangePasswordFormTypeTest extends TypeTestCase
     /** @return FormExtensionInterface[] */
     protected function getExtensions(): array
     {
-        return [
-            new ValidatorExtension(Validation::createValidator()),
-        ];
+        return [new ValidatorExtension(Validation::createValidator())];
     }
 }

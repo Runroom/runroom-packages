@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Unit;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument\Token\TokenInterface;
 use Runroom\UserBundle\Security\RolesBuilder\AdminRolesBuilderInterface;
@@ -23,16 +23,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class MatrixRolesBuilderTest extends TestCase
 {
-    /** @var MockObject&TokenStorageInterface */
-    private MockObject $tokenStorage;
+    /** @var Stub&TokenStorageInterface */
+    private Stub $tokenStorage;
 
-    /** @var MockObject&AdminRolesBuilderInterface */
-    private MockObject $adminRolesBuilder;
+    /** @var Stub&AdminRolesBuilderInterface */
+    private Stub $adminRolesBuilder;
 
-    /** @var MockObject&ExpandableRolesBuilderInterface */
-    private MockObject $expandableRolesBuilderInterface;
-
-    private MatrixRolesBuilder $matrixRolesBuilder;
+    /** @var Stub&ExpandableRolesBuilderInterface */
+    private Stub $expandableRolesBuilder;
 
     /** @var array<string, array<string, string|bool>> */
     private array $adminRole;
@@ -40,32 +38,34 @@ class MatrixRolesBuilderTest extends TestCase
     /** @var array<string, array<string, string|bool>> */
     private array $guestRole;
 
+    private MatrixRolesBuilder $matrixRolesBuilder;
+
     protected function setUp(): void
     {
-        $this->tokenStorage = $this->createMock(TokenStorageInterface::class);
-        $this->adminRolesBuilder = $this->createMock(AdminRolesBuilderInterface::class);
-        $this->expandableRolesBuilderInterface = $this->createMock(ExpandableRolesBuilderInterface::class);
-
-        $this->matrixRolesBuilder = new MatrixRolesBuilder(
-            $this->tokenStorage,
-            $this->adminRolesBuilder,
-            $this->expandableRolesBuilderInterface
-        );
+        $this->tokenStorage = $this->createStub(TokenStorageInterface::class);
+        $this->adminRolesBuilder = $this->createStub(AdminRolesBuilderInterface::class);
+        $this->expandableRolesBuilder = $this->createStub(ExpandableRolesBuilderInterface::class);
 
         $this->adminRole = ['ROLE_SONATA_FOO_ADMIN' => [
             'role' => 'ROLE_SONATA_FOO_ADMIN',
             'label' => 'ADMIN',
             'role_translated' => 'ROLE_SONATA_FOO_ADMIN',
             'is_granted' => false,
-            'admin_label' => '', ],
-        ];
+            'admin_label' => '',
+        ]];
         $this->guestRole = ['ROLE_SONATA_FOO_GUEST' => [
             'role' => 'ROLE_SONATA_FOO_GUEST',
             'label' => 'GUEST',
             'role_translated' => 'ROLE_SONATA_FOO_GUEST',
             'is_granted' => false,
-            'admin_label' => '', ],
-        ];
+            'admin_label' => '',
+        ]];
+
+        $this->matrixRolesBuilder = new MatrixRolesBuilder(
+            $this->tokenStorage,
+            $this->adminRolesBuilder,
+            $this->expandableRolesBuilder
+        );
     }
 
     /** @test */
@@ -82,7 +82,7 @@ class MatrixRolesBuilderTest extends TestCase
     {
         $this->tokenStorage->method('getToken')->willReturn(TokenInterface::class);
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
-        $this->expandableRolesBuilderInterface->method('getRoles')->willReturn($this->guestRole);
+        $this->expandableRolesBuilder->method('getRoles')->willReturn($this->guestRole);
         $result = $this->matrixRolesBuilder->getRoles('domain');
 
         static::assertSame(array_merge($this->guestRole, $this->adminRole), $result);
@@ -103,7 +103,7 @@ class MatrixRolesBuilderTest extends TestCase
     {
         $this->tokenStorage->method('getToken')->willReturn(TokenInterface::class);
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
-        $this->expandableRolesBuilderInterface->method('getExpandedRoles')->willReturn($this->guestRole);
+        $this->expandableRolesBuilder->method('getExpandedRoles')->willReturn($this->guestRole);
         $result = $this->matrixRolesBuilder->getExpandedRoles('domain');
 
         static::assertSame(array_merge($this->guestRole, $this->adminRole), $result);

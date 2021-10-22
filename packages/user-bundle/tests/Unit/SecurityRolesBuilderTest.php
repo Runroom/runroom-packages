@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Unit;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Runroom\UserBundle\Security\RolesBuilder\SecurityRolesBuilder;
 use Sonata\AdminBundle\SonataConfiguration;
@@ -22,14 +22,14 @@ use Symfony\Component\Translation\Translator;
 
 class SecurityRolesBuilderTest extends TestCase
 {
-    /** @var MockObject&AuthorizationCheckerInterface */
-    private MockObject $authorizationChecker;
+    /** @var Stub&AuthorizationCheckerInterface */
+    private Stub $authorizationChecker;
 
     private SecurityRolesBuilder $securityRolesBuilder;
 
     protected function setUp(): void
     {
-        $this->authorizationChecker = $this->createMock(AuthorizationCheckerInterface::class);
+        $this->authorizationChecker = $this->createStub(AuthorizationCheckerInterface::class);
 
         $sonataConfiguration = new SonataConfiguration('title', 'logo', [
             'confirm_exit' => true,

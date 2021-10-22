@@ -28,6 +28,7 @@ class RolesMatrixRuntimeTest extends TestCase
 
     /** @var Stub&MatrixRolesBuilderInterface */
     private Stub $rolesBuilder;
+
     private RolesMatrixRuntime $runtime;
 
     protected function setUp(): void
