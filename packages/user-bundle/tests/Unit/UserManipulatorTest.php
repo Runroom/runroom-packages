@@ -38,7 +38,7 @@ class UserManipulatorTest extends TestCase
         $this->identifier = 'user@localhost';
         $this->repository = $this->createMock(UserRepositoryInterface::class);
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /* @todo: Simplify this when dropping support for Symfony 4 */
         if (class_exists(UserPasswordHasherInterface::class)) {
             $this->passwordHasher = $this->createMock(UserPasswordHasherInterface::class);
         } else {
@@ -62,7 +62,7 @@ class UserManipulatorTest extends TestCase
         $this->repository->expects(static::once())->method('create')->willReturn($user);
         $this->repository->expects(static::once())->method('save')->with($user);
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /* @todo: Simplify this when dropping support for Symfony 4 */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')
@@ -128,7 +128,7 @@ class UserManipulatorTest extends TestCase
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /* @todo: Simplify this when dropping support for Symfony 4 */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')
