@@ -26,8 +26,11 @@ class UserManipulatorTest extends TestCase
     /** @var MockObject&UserRepositoryInterface */
     private MockObject $repository;
 
-    /** @var (MockObject&UserPasswordHasherInterface)|(MockObject&UserPasswordEncoderInterface) */
-    private MockObject $passwordHasher;
+    /** @var (MockObject&UserPasswordHasherInterface)|null */
+    private ?MockObject $passwordHasher = null;
+
+    /** @var (MockObject&UserPasswordEncoderInterface)|null */
+    private ?MockObject $passwordEncoder = null;
 
     private UserManipulator $userManipulator;
 
@@ -41,14 +44,17 @@ class UserManipulatorTest extends TestCase
         /* @todo: Simplify this when dropping support for Symfony 4 */
         if (class_exists(UserPasswordHasherInterface::class)) {
             $this->passwordHasher = $this->createMock(UserPasswordHasherInterface::class);
+            $this->userManipulator = new UserManipulator(
+                $this->repository,
+                $this->passwordHasher
+            );
         } else {
-            $this->passwordHasher = $this->createMock(UserPasswordEncoderInterface::class);
+            $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
+            $this->userManipulator = new UserManipulator(
+                $this->repository,
+                $this->passwordEncoder
+            );
         }
-
-        $this->userManipulator = new UserManipulator(
-            $this->repository,
-            $this->passwordHasher
-        );
     }
 
     /** @test */
@@ -63,13 +69,13 @@ class UserManipulatorTest extends TestCase
         $this->repository->expects(static::once())->method('save')->with($user);
 
         /* @todo: Simplify this when dropping support for Symfony 4 */
-        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
+        if (null !== $this->passwordHasher) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')
                 ->with($user, $newPassword)
                 ->willReturn($hashedPassword);
-        } else {
-            $this->passwordHasher->expects(static::once())
+        } elseif (null !== $this->passwordEncoder) {
+            $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
                 ->with($user, $newPassword)
                 ->willReturn($hashedPassword);
@@ -129,13 +135,13 @@ class UserManipulatorTest extends TestCase
         $this->repository->expects(static::once())->method('save');
 
         /* @todo: Simplify this when dropping support for Symfony 4 */
-        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
+        if (null !== $this->passwordHasher) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')
                 ->with($user, $newPassword)
                 ->willReturn($hashedPassword);
-        } else {
-            $this->passwordHasher->expects(static::once())
+        } elseif (null !== $this->passwordEncoder) {
+            $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
                 ->with($user, $newPassword)
                 ->willReturn($hashedPassword);
