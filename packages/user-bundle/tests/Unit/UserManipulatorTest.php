@@ -26,7 +26,7 @@ class UserManipulatorTest extends TestCase
     /** @var MockObject&UserRepositoryInterface */
     private MockObject $repository;
 
-    /** @var MockObject&Object */
+    /** @var (MockObject&UserPasswordHasherInterface)|(MockObject&UserPasswordEncoderInterface) */
     private MockObject $passwordHasher;
 
     private UserManipulator $userManipulator;
