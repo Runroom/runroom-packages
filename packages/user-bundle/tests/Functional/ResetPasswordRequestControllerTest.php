@@ -103,7 +103,10 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $tokenGenerator = static::$container->get('symfonycasts.reset_password.token_generator');
+        /** @todo: Simplify this when dropping support for Symfony 4 */
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
+
+        $tokenGenerator = $container->get('symfonycasts.reset_password.token_generator');
 
         /** @phpstan-var Proxy<UserInterface> */
         $user = UserFactory::createOne([

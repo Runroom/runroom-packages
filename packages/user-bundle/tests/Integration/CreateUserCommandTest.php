@@ -43,7 +43,8 @@ class CreateUserCommandTest extends KernelTestCase
     public function itCreatesAnActiveUser(): void
     {
         /** @todo: Simplify this when dropping support for Symfony 4 */
-        $passwordHasher = static::$container->get(class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder');
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
+        $passwordHasher = $container->get(class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder');
         \assert($passwordHasher instanceof UserPasswordHasherInterface || $passwordHasher instanceof UserPasswordEncoderInterface);
 
         $this->commandTester->execute([
