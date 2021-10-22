@@ -24,6 +24,7 @@
         "doctrine/orm": "^2.9",
         "doctrine/persistence": "^2.0",
         "psr/container": "^1.1 || ^2.0",
+        "sonata-project/admin-bundle": "^3.103 || ^4.0",
         "symfony/asset": "^4.4 || ^5.3",
         "symfony/config": "^4.4 || ^5.3",
         "symfony/dependency-injection": "^4.4 || ^5.3",
@@ -42,15 +43,11 @@
         "symfony/validator": "^4.4 || ^5.3",
         "twig/twig": "^2.12 || ^3.0"
     },
-    "conflict": {
-        "sonata-project/admin-bundle": "<3.103"
-    },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
         "runroom-packages/testing": "^0.13@dev",
-        "sonata-project/admin-bundle": "^3.103 || ^4.0",
         "sonata-project/block-bundle": "^3.23 || ^4.7",
         "sonata-project/doctrine-extensions": "^1.13",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
@@ -64,7 +61,7 @@
         "zenstruck/foundry": "^1.13.2"
     },
     "suggest": {
-        "sonata-project/admin-bundle": "To use within SonataAdminBundle",
+        "sonata-project/doctrine-orm-admin-bundle": "To use Doctrine ORM as persistence of SonataAdminBundle",
         "symfony/mailer": "To be able to send user reset password email",
         "symfonycasts/reset-password-bundle": "To provide user reset password"
     },
