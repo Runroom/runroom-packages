@@ -32,12 +32,16 @@ use Runroom\RenderEventBundle\RunroomRenderEventBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SortableBehaviorBundle\RunroomSortableBehaviorBundle;
 use Runroom\TranslationBundle\RunroomTranslationBundle;
+use Runroom\UserBundle\Entity\User;
+use Runroom\UserBundle\RunroomUserBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
+use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
+use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -49,6 +53,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
+use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Tests\App\Entity\Gallery;
 use Tests\App\Entity\GalleryItem;
 use Tests\App\Entity\Media;
@@ -72,10 +77,13 @@ final class Kernel extends BaseKernel
             new NelmioAliceBundle(),
             new SecurityBundle(),
             new TwigBundle(),
-            new SonataMediaBundle(),
+            new SonataAdminBundle(),
+            new SonataBlockBundle(),
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
-            new SonataAdminBundle(),
+            new SonataMediaBundle(),
+            new SonataTwigBundle(),
+            new SymfonyCastsResetPasswordBundle(),
             new ZenstruckFoundryBundle(),
 
             new RunroomBasicPageBundle(),
@@ -87,6 +95,7 @@ final class Kernel extends BaseKernel
             new RunroomSeoBundle(),
             new RunroomSortableBehaviorBundle(),
             new RunroomTranslationBundle(),
+            new RunroomUserBundle(),
         ];
     }
 
@@ -109,6 +118,10 @@ final class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'mailer' => [
+                'enabled' => true,
+                'dsn' => 'null://null',
+            ],
         ];
 
         if (class_exists(NativeSessionStorageFactory::class)) {
@@ -120,13 +133,44 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('framework', $frameworkConfig);
 
         $securityConfig = [
-            'firewalls' => ['main' => []],
+            'access_decision_manager' => ['strategy' => 'unanimous'],
+            'access_control' => [
+                ['path' => '^/dashboard$', 'role' => 'ROLE_USER'],
+            ],
+            'providers' => [
+                'admin_user_provider' => [
+                    'id' => 'runroom_user.provider.user',
+                ],
+            ],
+            'firewalls' => ['main' => [
+                'pattern' => '/(.*)',
+                'provider' => 'admin_user_provider',
+                'context' => 'user',
+                'logout' => [
+                    'path' => 'runroom_user_logout',
+                    'target' => 'runroom_user_login',
+                ],
+                'remember_me' => [
+                    'secret' => 'secret',
+                    'lifetime' => 2629746,
+                    'path' => '/',
+                ],
+            ]],
         ];
 
         if (class_exists(AuthenticatorManager::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
+            $securityConfig['firewalls']['main']['custom_authenticator'] = 'runroom_user.security.user_authenticator';
+            $securityConfig['firewalls']['main']['lazy'] = true;
+            $securityConfig['password_hashers'] = [User::class => ['algorithm' => 'plaintext']];
         } else {
             $securityConfig['firewalls']['main']['anonymous'] = true;
+            $securityConfig['firewalls']['main']['form_login'] = [
+                'login_path' => 'runroom_user_login',
+                'check_path' => 'runroom_user_login',
+                'default_target_path' => 'sonata_admin_dashboard',
+            ];
+            $securityConfig['encoders'] = [User::class => 'plaintext'];
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -175,6 +219,10 @@ final class Kernel extends BaseKernel
 
         $container->loadFromExtension('a2lix_translation_form', [
             'locales' => ['es', 'en', 'ca'],
+        ]);
+
+        $container->loadFromExtension('symfonycasts_reset_password', [
+            'request_password_repository' => 'symfonycasts.reset_password.fake_request_repository',
         ]);
 
         if (class_exists(DeprecatedTextExtension::class)) {
@@ -235,6 +283,10 @@ final class Kernel extends BaseKernel
                     'routeParameters' => ['slug' => 'slug'],
                 ],
             ],
+        ]);
+
+        $container->loadFromExtension('runroom_user', [
+            'reset_password' => ['enabled' => true],
         ]);
     }
 

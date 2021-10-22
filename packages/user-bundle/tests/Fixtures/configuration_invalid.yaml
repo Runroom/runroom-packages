@@ -1,0 +1,4 @@
+runroom_user:
+    reset_password:
+        email:
+            address: null

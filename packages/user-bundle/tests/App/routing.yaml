@@ -1,0 +1,8 @@
+sonata_admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+
+user_security:
+    resource: '@RunroomUserBundle/Resources/config/routing/security.yaml'
+
+user_reset_password:
+    resource: '@RunroomUserBundle/Resources/config/routing/reset_password.yaml'

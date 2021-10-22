@@ -26,4 +26,10 @@
         </pluginClass>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
     </plugins>
+
+    <issueHandlers>
+        <!-- Psalm equivalent of PHPStan config `treatPhpDocTypesAsCertain: false` -->
+        <DocblockTypeContradiction errorLevel="suppress"/>
+        <RedundantConditionGivenDocblockType errorLevel="suppress"/>
+    </issueHandlers>
 </psalm>
