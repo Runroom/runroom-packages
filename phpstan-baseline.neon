@@ -4,6 +4,10 @@ parameters:
             message: "#^Call to an undefined method Knp\\\\DoctrineBehaviors\\\\Contract\\\\Entity\\\\TranslationInterface\\:\\:#"
             path: .
 
+        - # Ids are managed by doctrine
+            message: '#^Property Runroom\\.*::\$id is never read, only written\.$#'
+            path: .
+
         - # https://github.com/phpstan/phpstan-strict-rules/issues/130
             message: '#^Call to static method PHPUnit\\Framework\\Assert::.* will always evaluate to true\.$#'
             path: .
