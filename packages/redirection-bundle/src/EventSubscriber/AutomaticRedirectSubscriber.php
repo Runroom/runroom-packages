@@ -86,6 +86,13 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
         return null;
     }
 
+    /**
+     * @psalm-suppress MissingDependency
+     *
+     * Psalm is trying to load Collection class from Doctrine\ORM namespace, this class is
+     * located on Doctrine\Common\Collection so it will never work. It is a problem on
+     * Doctrine Psalm plugin.
+     */
     private function generateUrl(object $entity, int $state = self::PREVIOUS_VALUE): ?string
     {
         $redirectConfiguration = $this->configuration[\get_class($entity)];

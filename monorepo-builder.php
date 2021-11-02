@@ -31,16 +31,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ComposerJsonSection::REQUIRE_DEV => [
             'ergebnis/composer-normalize' => '^2.2',
             'friendsofphp/php-cs-fixer' => '^3.0',
-            'phpstan/phpstan' => '^0.12',
-            'phpstan/phpstan-doctrine' => '^0.12',
-            'phpstan/phpstan-phpunit' => '^0.12',
-            'phpstan/phpstan-symfony' => '^0.12',
-            'phpstan/phpstan-strict-rules' => '^0.12',
+            'phpstan/phpstan' => '^1.0',
+            'phpstan/phpstan-doctrine' => '^1.0',
+            'phpstan/phpstan-phpunit' => '^1.0',
+            'phpstan/phpstan-symfony' => '^1.0',
+            'phpstan/phpstan-strict-rules' => '^1.0',
             'psalm/plugin-phpunit' => '^0.16',
             'psalm/plugin-symfony' => '^3.0',
             'symplify/monorepo-builder' => '^9.3',
             'vimeo/psalm' => '^4.0',
-            'weirdan/doctrine-psalm-plugin' => '^1.0',
+            'weirdan/doctrine-psalm-plugin' => '^2.0',
         ],
     ]);
 

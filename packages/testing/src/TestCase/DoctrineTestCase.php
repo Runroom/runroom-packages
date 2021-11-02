@@ -29,7 +29,6 @@ abstract class DoctrineTestCase extends KernelTestCase
     protected static EntityManagerInterface $entityManager;
     protected static Connection $connection;
     protected static ContainerBagInterface $containerBag;
-    protected static bool $schemaCreated = false;
 
     protected function setUp(): void
     {
@@ -65,10 +64,6 @@ abstract class DoctrineTestCase extends KernelTestCase
     /* @todo: Simplify when dropping support for Symfony 4 */
     private function ensureSchemaIsCreated(): void
     {
-        if (static::$schemaCreated) {
-            return;
-        }
-
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         static::$entityManager = $container->get(EntityManagerInterface::class);
@@ -80,10 +75,10 @@ abstract class DoctrineTestCase extends KernelTestCase
 
         if (!class_exists(DatabaseResetter::class)) {
             $schemaTool = new SchemaTool(static::$entityManager);
-            $schemaTool->dropDatabase();
-            $schemaTool->createSchema(static::$entityManager->getMetadataFactory()->getAllMetadata());
-        }
+            $classes = static::$entityManager->getMetadataFactory()->getAllMetadata();
 
-        static::$schemaCreated = true;
+            $schemaTool->dropSchema($classes);
+            $schemaTool->createSchema($classes);
+        }
     }
 }

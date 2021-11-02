@@ -12,7 +12,7 @@ parameters:
         - packages
         - src
         - tests
-    excludes_analyse:
+    excludePaths:
         - */vendor/*
         - tests/App/var/*
     symfony:
