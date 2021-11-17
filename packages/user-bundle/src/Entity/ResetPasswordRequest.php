@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Runroom\UserBundle\Model\ResetPasswordRequestInterface;
 use Runroom\UserBundle\Model\UserInterface;
-use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
-use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestTrait;
 
 /** @ORM\Entity */
 class ResetPasswordRequest implements ResetPasswordRequestInterface
 {
-    use ResetPasswordRequestTrait;
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -36,10 +33,25 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
      */
     private UserInterface $user;
 
+    /** @ORM\Column(type="string", length=20) */
+    private string $selector;
+
+    /** @ORM\Column(type="string", length=100) */
+    private string $hashedToken;
+
+    /** @ORM\Column(type="datetime_immutable") */
+    private \DateTimeImmutable $requestedAt;
+
+    /** @ORM\Column(type="datetime_immutable") */
+    private \DateTimeInterface $expiresAt;
+
     public function __construct(UserInterface $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken)
     {
         $this->user = $user;
-        $this->initialize($expiresAt, $selector, $hashedToken);
+        $this->requestedAt = new \DateTimeImmutable('now');
+        $this->expiresAt = $expiresAt;
+        $this->selector = $selector;
+        $this->hashedToken = $hashedToken;
     }
 
     public function getId(): ?int
@@ -50,5 +62,30 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
     public function getUser(): object
     {
         return $this->user;
+    }
+
+    public function getSelector(): string
+    {
+        return $this->selector;
+    }
+
+    public function getHashedToken(): string
+    {
+        return $this->hashedToken;
+    }
+
+    public function getRequestedAt(): \DateTimeInterface
+    {
+        return $this->requestedAt;
+    }
+
+    public function getExpiresAt(): \DateTimeInterface
+    {
+        return $this->expiresAt;
+    }
+
+    public function isExpired(): bool
+    {
+        return $this->expiresAt->getTimestamp() <= time();
     }
 }
