@@ -43,9 +43,10 @@ final class MediaAdminController extends CRUDController
         $this->admin->checkAccess('list');
 
         $datagrid = $this->admin->getDatagrid();
-        $filters = $request->get('filter');
+        // @todo: Change to $request->query->all('filter') when support for Symfony < 5.1 is dropped.
+        $filters = $request->query->all()['filter'] ?? [];
 
-        if (null === $filters || !\array_key_exists('context', $filters)) {
+        if (!\is_array($filters) || !\array_key_exists('context', $filters)) {
             $context = $this->getPersistentParameter('context');
         } else {
             $context = $filters['context']['value'];
@@ -70,7 +71,7 @@ final class MediaAdminController extends CRUDController
 
         $formView = $datagrid->getForm()->createView();
 
-        $formRenderer = $this->get('twig')->getRuntime(FormRenderer::class);
+        $formRenderer = $this->container->get('twig')->getRuntime(FormRenderer::class);
         \assert($formRenderer instanceof FormRenderer);
 
         $formRenderer->setTheme($formView, $this->admin->getFilterTheme());
@@ -87,14 +88,14 @@ final class MediaAdminController extends CRUDController
     {
         $this->admin->checkAccess('create');
 
-        $provider = $request->get('provider');
+        $provider = $request->query->get('provider');
         $file = $request->files->get('upload');
 
         if (!$request->isMethod('POST') || null === $provider || null === $file) {
             throw new NotFoundHttpException();
         }
 
-        $context = $request->get('context', $this->mediaPool->getDefaultContext());
+        $context = $request->query->get('context', $this->mediaPool->getDefaultContext());
 
         /** @var MediaInterface */
         $media = $this->mediaManager->create();
@@ -110,7 +111,7 @@ final class MediaAdminController extends CRUDController
             'object' => $media,
             'format' => $this->mediaPool->getProvider($provider)->getFormatName(
                 $media,
-                $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
+                $request->query->get('format', MediaProviderInterface::FORMAT_REFERENCE)
             ),
         ]);
     }

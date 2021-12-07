@@ -64,7 +64,10 @@ final class RunroomSeoExtension extends Extension
         $this->mapMediaField('image', MetaInformation::class, $config);
     }
 
-    /** @phpstan-param SeoBundleConfiguration $config */
+    /**
+     * @phpstan-param class-string $entityName
+     * @phpstan-param SeoBundleConfiguration $config
+     */
     protected function mapMediaField(string $fieldName, string $entityName, array $config): void
     {
         $options = OptionsBuilder::createManyToOne($fieldName, $config['class']['media'])

@@ -21,50 +21,31 @@
         "psr/container": "^1.1 || ^2.0",
         "sonata-project/admin-bundle": "^3.103 || ^4.0",
         "sonata-project/doctrine-extensions": "^1.13",
-        "sonata-project/media-bundle": "^3.34.2 || ^4.0@alpha",
-        "symfony/asset": "^4.4 || ^5.3",
-        "symfony/config": "^4.4 || ^5.3",
-        "symfony/dependency-injection": "^4.4 || ^5.3",
-        "symfony/doctrine-bridge": "^4.4 || ^5.3",
-        "symfony/error-handler": "^4.4 || ^5.3",
-        "symfony/event-dispatcher": "^4.4 || ^5.3",
-        "symfony/event-dispatcher-contracts": "^1.1 || ^2.0",
-        "symfony/form": "^4.4 || ^5.3",
-        "symfony/framework-bundle": "^4.4 || ^5.3",
-        "symfony/http-foundation": "^4.4.7 || ^5.3",
-        "symfony/http-kernel": "^4.4.13 || ^5.3",
-        "symfony/options-resolver": "^4.4 || ^5.3",
-        "symfony/property-access": "^4.4 || ^5.3",
-        "symfony/routing": "^4.4 || ^5.3",
-        "symfony/security-bundle": "^4.4 || ^5.3",
-        "symfony/security-core": "^4.4 || ^5.3",
-        "symfony/security-http": "^4.4 || ^5.3",
-        "symfony/string": "^5.3",
-        "symfony/translation": "^4.4 || ^5.3",
-        "symfony/twig-bundle": "^4.4 || ^5.3",
-        "symfony/validator": "^4.4 || ^5.3",
-        "symfony/yaml": "^4.4 || ^5.3",
+        "sonata-project/media-bundle": "^3.34.2 || ^4.0@rc",
+        "symfony/asset": "^4.4 || ^5.4 || ^6.0",
+        "symfony/config": "^4.4 || ^5.4 || ^6.0",
+        "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+        "symfony/doctrine-bridge": "^4.4 || ^5.4 || ^6.0",
+        "symfony/error-handler": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher-contracts": "^1.1 || ^2.0 || ^3.0",
+        "symfony/form": "^4.4 || ^5.4 || ^6.0",
+        "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-foundation": "^4.4.7 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4.13 || ^5.4 || ^6.0",
+        "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
+        "symfony/property-access": "^4.4 || ^5.4 || ^6.0",
+        "symfony/routing": "^4.4 || ^5.4 || ^6.0",
+        "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/security-core": "^4.4 || ^5.4 || ^6.0",
+        "symfony/security-http": "^4.4 || ^5.4 || ^6.0",
+        "symfony/string": "^5.4 || ^6.0",
+        "symfony/translation": "^4.4 || ^5.4 || ^6.0",
+        "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/validator": "^4.4 || ^5.4 || ^6.0",
+        "symfony/yaml": "^4.4 || ^5.4 || ^6.0",
         "twig/string-extra": "^3.0",
         "twig/twig": "^2.12 || ^3.0"
-    },
-    "replace": {
-        "runroom-packages/basic-page-bundle": "0.14.1",
-        "runroom-packages/ckeditor-sonata-media-bundle": "0.14.1",
-        "runroom-packages/cookies-bundle": "0.14.1",
-        "runroom-packages/form-handler-bundle": "0.14.1",
-        "runroom-packages/redirection-bundle": "0.14.1",
-        "runroom-packages/render-event-bundle": "0.14.1",
-        "runroom-packages/seo-bundle": "0.14.1",
-        "runroom-packages/sortable-behavior-bundle": "0.14.1",
-        "runroom-packages/testing": "0.14.1",
-        "runroom-packages/translation-bundle": "0.14.1",
-        "runroom-packages/user-bundle": "0.14.1"
-    },
-    "conflict": {
-        "a2lix/translation-form-bundle": "<3.0.4",
-        "friendsofsymfony/ckeditor-bundle": "<2.2",
-        "sonata-project/doctrine-orm-admin-bundle": "<3.34",
-        "symplify/monorepo-builder": ">=9.4"
     },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.3.1",
@@ -89,10 +70,10 @@
         "sonata-project/block-bundle": "^3.23 || ^4.7",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
         "sonata-project/twig-extensions": "^1.9",
-        "symfony/browser-kit": "^5.3",
-        "symfony/mailer": "^4.4 || ^5.3",
-        "symfony/mime": "^4.4 || ^5.3",
-        "symfony/phpunit-bridge": "^5.3",
+        "symfony/browser-kit": "^5.4 || ^6.0",
+        "symfony/mailer": "^4.4 || ^5.4 || ^6.0",
+        "symfony/mime": "^4.4 || ^5.4 || ^6.0",
+        "symfony/phpunit-bridge": "^6.0",
         "symfonycasts/reset-password-bundle": "^1.9",
         "symplify/monorepo-builder": "^9.3",
         "theofidry/alice-data-fixtures": "^1.3",
@@ -100,8 +81,24 @@
         "weirdan/doctrine-psalm-plugin": "^2.0",
         "zenstruck/foundry": "^1.13.2"
     },
-    "config": {
-        "sort-packages": true
+    "replace": {
+        "runroom-packages/basic-page-bundle": "0.14.1",
+        "runroom-packages/ckeditor-sonata-media-bundle": "0.14.1",
+        "runroom-packages/cookies-bundle": "0.14.1",
+        "runroom-packages/form-handler-bundle": "0.14.1",
+        "runroom-packages/redirection-bundle": "0.14.1",
+        "runroom-packages/render-event-bundle": "0.14.1",
+        "runroom-packages/seo-bundle": "0.14.1",
+        "runroom-packages/sortable-behavior-bundle": "0.14.1",
+        "runroom-packages/testing": "0.14.1",
+        "runroom-packages/translation-bundle": "0.14.1",
+        "runroom-packages/user-bundle": "0.14.1"
+    },
+    "conflict": {
+        "a2lix/translation-form-bundle": "<3.0.4",
+        "friendsofsymfony/ckeditor-bundle": "<2.2",
+        "sonata-project/doctrine-orm-admin-bundle": "<3.34",
+        "symplify/monorepo-builder": ">=9.4"
     },
     "autoload": {
         "psr-4": {
@@ -134,6 +131,9 @@
             "Runroom\\UserBundle\\Tests\\": "packages/user-bundle/tests/",
             "Tests\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "scripts": {
         "normalize-run": [

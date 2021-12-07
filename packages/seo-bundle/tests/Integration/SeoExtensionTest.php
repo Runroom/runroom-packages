@@ -23,19 +23,19 @@ use Twig\Test\IntegrationTestCase;
 
 class SeoExtensionTest extends IntegrationTestCase
 {
-    public function getFixturesDir()
+    public function getFixturesDir(): string
     {
         return __DIR__ . '/../Fixtures/Twig/';
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return [
             new SeoExtension(),
         ];
     }
 
-    protected function getRuntimeLoaders()
+    protected function getRuntimeLoaders(): array
     {
         $alternateLinksService = $this->createStub(AlternateLinksServiceInterface::class);
         $metaInformationService = $this->createStub(MetaInformationServiceInterface::class);

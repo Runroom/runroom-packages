@@ -51,7 +51,7 @@ final class MetaInformationService implements MetaInformationServiceInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        return null !== $request ? $request->get('_route', '') : '';
+        return null !== $request ? $request->attributes->get('_route', '') : '';
     }
 
     private function selectProvider(string $route): MetaInformationProviderInterface

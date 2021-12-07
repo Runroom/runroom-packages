@@ -1,7 +1,8 @@
 {
     "name": "runroom-packages/redirection-bundle",
-    "type": "symfony-bundle",
     "description": "Manage redirections on the Sonata Admin interface",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "redirection",
         "symfony",
@@ -9,8 +10,6 @@
         "admin",
         "sonata"
     ],
-    "homepage": "https://github.com/runroom/RunroomRedirectionBundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Runroom",
@@ -18,25 +17,23 @@
             "homepage": "https://www.runroom.com"
         }
     ],
+    "homepage": "https://github.com/runroom/RunroomRedirectionBundle",
     "require": {
         "php": "^7.4 || ^8.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/orm": "^2.9",
         "doctrine/persistence": "^2.0",
-        "symfony/config": "^4.4 || ^5.3",
-        "symfony/dependency-injection": "^4.4 || ^5.3",
-        "symfony/doctrine-bridge": "^4.4 || ^5.3",
-        "symfony/event-dispatcher": "^4.4 || ^5.3",
-        "symfony/form": "^4.4 || ^5.3",
-        "symfony/http-foundation": "^4.4.7 || ^5.3",
-        "symfony/http-kernel": "^4.4.13 || ^5.3",
-        "symfony/property-access": "^4.4 || ^5.3",
-        "symfony/routing": "^4.4 || ^5.3",
-        "symfony/validator": "^4.4 || ^5.3",
-        "symfony/yaml": "^4.4 || ^5.3"
-    },
-    "conflict": {
-        "sonata-project/admin-bundle": "<3.103"
+        "symfony/config": "^4.4 || ^5.4 || ^6.0",
+        "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+        "symfony/doctrine-bridge": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
+        "symfony/form": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-foundation": "^4.4.7 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4.13 || ^5.4 || ^6.0",
+        "symfony/property-access": "^4.4 || ^5.4 || ^6.0",
+        "symfony/routing": "^4.4 || ^5.4 || ^6.0",
+        "symfony/validator": "^4.4 || ^5.4 || ^6.0",
+        "symfony/yaml": "^4.4 || ^5.4 || ^6.0"
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "^3.1",
@@ -46,19 +43,14 @@
         "runroom-packages/testing": "^0.14@dev",
         "sonata-project/admin-bundle": "^3.103 || ^4.0",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
-        "symfony/framework-bundle": "^4.4 || ^5.3",
-        "symfony/phpunit-bridge": "^5.3",
-        "symfony/security-bundle": "^4.4 || ^5.3",
-        "symfony/twig-bundle": "^4.4 || ^5.3",
+        "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
         "zenstruck/foundry": "^1.13.2"
     },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.14-dev"
-        }
+    "conflict": {
+        "sonata-project/admin-bundle": "<3.103"
     },
     "autoload": {
         "psr-4": {
@@ -68,6 +60,14 @@
     "autoload-dev": {
         "psr-4": {
             "Runroom\\RedirectionBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
         }
     }
 }
