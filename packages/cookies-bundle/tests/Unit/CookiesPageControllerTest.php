@@ -31,7 +31,6 @@ class CookiesPageControllerTest extends TestCase
 
     private CookiesPageController $controller;
 
-    /** @psalm-suppress InternalMethod setContainer is internal on Symfony 5.x */
     protected function setUp(): void
     {
         $this->service = $this->createMock(CookiesPageService::class);
