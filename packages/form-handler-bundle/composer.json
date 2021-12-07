@@ -29,7 +29,7 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
-        "runroom-packages/render-event-bundle": "^0.15",
+        "runroom-packages/render-event-bundle": "^0.15@dev",
         "symfony/phpunit-bridge": "^6.0"
     },
     "autoload": {
@@ -47,7 +47,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.15-dev"
         }
     }
 }
