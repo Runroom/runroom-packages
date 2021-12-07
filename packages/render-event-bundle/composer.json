@@ -1,15 +1,14 @@
 {
     "name": "runroom-packages/render-event-bundle",
-    "type": "symfony-bundle",
     "description": "Add a render event before rendering templates",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "render",
         "event",
         "twig",
         "symfony"
     ],
-    "homepage": "https://github.com/runroom/RunroomRenderEventBundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Runroom",
@@ -17,18 +16,19 @@
             "homepage": "https://www.runroom.com"
         }
     ],
+    "homepage": "https://github.com/runroom/RunroomRenderEventBundle",
     "require": {
         "php": "^7.4 || ^8.0",
-        "symfony/config": "^4.4 || ^5.3",
-        "symfony/dependency-injection": "^4.4 || ^5.3",
-        "symfony/error-handler": "^4.4 || ^5.3",
-        "symfony/event-dispatcher": "^4.4 || ^5.3",
-        "symfony/event-dispatcher-contracts": "^1.1 || ^2.0",
-        "symfony/http-foundation": "^4.4.7 || ^5.3",
-        "symfony/http-kernel": "^4.4.13 || ^5.3",
-        "symfony/translation": "^4.4 || ^5.3",
-        "symfony/validator": "^4.4 || ^5.3",
-        "symfony/yaml": "^4.4 || ^5.3",
+        "symfony/config": "^4.4 || ^5.4 || ^6.0",
+        "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+        "symfony/error-handler": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher-contracts": "^1.1 || ^2.0 || ^3.0",
+        "symfony/http-foundation": "^4.4.7 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4.13 || ^5.4 || ^6.0",
+        "symfony/translation": "^4.4 || ^5.4 || ^6.0",
+        "symfony/validator": "^4.4 || ^5.4 || ^6.0",
+        "symfony/yaml": "^4.4 || ^5.4 || ^6.0",
         "twig/twig": "^2.12 || ^3.0"
     },
     "require-dev": {
@@ -36,15 +36,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
         "psr/event-dispatcher": "^1.0",
-        "symfony/phpunit-bridge": "^5.3"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.14-dev"
-        }
+        "symfony/phpunit-bridge": "^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -54,6 +46,14 @@
     "autoload-dev": {
         "psr-4": {
             "Runroom\\RenderEventBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
         }
     }
 }

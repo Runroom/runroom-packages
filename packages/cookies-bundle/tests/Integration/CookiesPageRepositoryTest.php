@@ -30,7 +30,10 @@ class CookiesPageRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->repository = static::$container->get(CookiesPageRepository::class);
+        /** @todo: Simplify this when dropping support for Symfony 4 */
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
+
+        $this->repository = $container->get(CookiesPageRepository::class);
     }
 
     /** @test */

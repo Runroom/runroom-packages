@@ -1,13 +1,12 @@
 {
     "name": "runroom-packages/seo-bundle",
-    "type": "symfony-bundle",
     "description": "Improve SEO on your Symfony projects using SonataAdminBundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "seo",
         "symfony"
     ],
-    "homepage": "https://github.com/runroom/RunroomSeoBundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Runroom",
@@ -15,6 +14,7 @@
             "homepage": "https://www.runroom.com"
         }
     ],
+    "homepage": "https://github.com/runroom/RunroomSeoBundle",
     "require": {
         "php": "^7.4 || ^8.0",
         "doctrine/doctrine-bundle": "^2.4",
@@ -22,22 +22,18 @@
         "doctrine/persistence": "^2.0",
         "knplabs/doctrine-behaviors": "^2.0.6",
         "sonata-project/doctrine-extensions": "^1.13",
-        "sonata-project/media-bundle": "^3.34.2 || ^4.0@alpha",
-        "symfony/config": "^4.4 || ^5.3",
-        "symfony/dependency-injection": "^4.4 || ^5.3",
-        "symfony/event-dispatcher": "^4.4 || ^5.3",
-        "symfony/http-foundation": "^4.4.7 || ^5.3",
-        "symfony/http-kernel": "^4.4.13 || ^5.3",
-        "symfony/property-access": "^4.4 || ^5.3",
-        "symfony/routing": "^4.4 || ^5.3",
-        "symfony/string": "^5.3",
-        "symfony/validator": "^4.4 || ^5.3",
+        "sonata-project/media-bundle": "^3.34.2 || ^4.0@rc",
+        "symfony/config": "^4.4 || ^5.4 || ^6.0",
+        "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-foundation": "^4.4.7 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4.13 || ^5.4 || ^6.0",
+        "symfony/property-access": "^4.4 || ^5.4 || ^6.0",
+        "symfony/routing": "^4.4 || ^5.4 || ^6.0",
+        "symfony/string": "^5.4 || ^6.0",
+        "symfony/validator": "^4.4 || ^5.4 || ^6.0",
         "twig/string-extra": "^3.0",
         "twig/twig": "^2.12 || ^3.0"
-    },
-    "conflict": {
-        "a2lix/translation-form-bundle": "<3.0.4",
-        "sonata-project/admin-bundle": "<3.103"
     },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.3.1",
@@ -49,18 +45,14 @@
         "runroom-packages/testing": "^0.14@dev",
         "sonata-project/admin-bundle": "^3.103 || ^4.0",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
-        "symfony/phpunit-bridge": "^5.3",
-        "symfony/security-bundle": "^4.4 || ^5.3",
-        "symfony/twig-bundle": "^4.4 || ^5.3",
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
+        "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
         "zenstruck/foundry": "^1.13.2"
     },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.14-dev"
-        }
+    "conflict": {
+        "a2lix/translation-form-bundle": "<3.0.4",
+        "sonata-project/admin-bundle": "<3.103"
     },
     "autoload": {
         "psr-4": {
@@ -70,6 +62,14 @@
     "autoload-dev": {
         "psr-4": {
             "Runroom\\SeoBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
         }
     }
 }

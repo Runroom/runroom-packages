@@ -20,19 +20,19 @@ use Twig\Test\IntegrationTestCase;
 
 class CookiesExtensionTest extends IntegrationTestCase
 {
-    public function getFixturesDir()
+    public function getFixturesDir(): string
     {
         return __DIR__ . '/../Fixtures/Twig/';
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return [
             new CookiesExtension(),
         ];
     }
 
-    protected function getRuntimeLoaders()
+    protected function getRuntimeLoaders(): array
     {
         $cookies = [
             'performance_cookies' => [

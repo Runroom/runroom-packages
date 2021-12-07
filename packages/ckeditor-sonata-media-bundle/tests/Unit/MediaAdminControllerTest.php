@@ -58,7 +58,6 @@ class MediaAdminControllerTest extends TestCase
 
     private MediaAdminController $controller;
 
-    /** @psalm-suppress InternalMethod setContainer is internal on Symfony 5.x */
     protected function setUp(): void
     {
         $this->container = new Container();

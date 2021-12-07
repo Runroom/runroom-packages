@@ -31,7 +31,10 @@ class MetaInformationRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->repository = static::$container->get(MetaInformationRepository::class);
+        /** @todo: Simplify this when dropping support for Symfony 4 */
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
+
+        $this->repository = $container->get(MetaInformationRepository::class);
     }
 
     /** @test */

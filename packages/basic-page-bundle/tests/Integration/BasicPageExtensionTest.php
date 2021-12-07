@@ -26,19 +26,19 @@ class BasicPageExtensionTest extends IntegrationTestCase
 {
     use Factories;
 
-    public function getFixturesDir()
+    public function getFixturesDir(): string
     {
         return __DIR__ . '/../Fixtures/Twig/';
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return [
             new BasicPageExtension(),
         ];
     }
 
-    protected function getRuntimeLoaders()
+    protected function getRuntimeLoaders(): array
     {
         $basicPages = BasicPageFactory::createMany(2, [
             'publish' => true,

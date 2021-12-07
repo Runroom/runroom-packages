@@ -34,9 +34,12 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->repository = static::$container->get(RedirectRepository::class);
-        $this->subscriber = static::$container->get(AutomaticRedirectSubscriber::class);
-        $this->entityManager = static::$container->get(EntityManagerInterface::class);
+        /** @todo: Simplify this when dropping support for Symfony 4 */
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
+
+        $this->repository = $container->get(RedirectRepository::class);
+        $this->subscriber = $container->get(AutomaticRedirectSubscriber::class);
+        $this->entityManager = $container->get(EntityManagerInterface::class);
     }
 
     /** @test */

@@ -15,6 +15,7 @@ namespace Runroom\UserBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Security\UserAuthenticator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authorization\Voter\CacheableVoterInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
@@ -77,7 +79,21 @@ class UserAuthenticatorTest extends TestCase
     {
         $request = new Request();
         $request->setSession($this->session);
-        $token = new UsernamePasswordToken('username', 'password', $this->firewallName);
+
+        $user = new User();
+        $user->setEmail('username@localhost.com');
+        $user->setPassword('password');
+
+        /**
+         * @todo: Simplfiy this when dropping support for Symfony < 5.4.
+         *
+         * @psalm-suppress InvalidArgument
+         */
+        $token = interface_exists(CacheableVoterInterface::class)
+            ? new UsernamePasswordToken($user, $this->firewallName) :
+            // @phpstan-ignore-next-line
+            new UsernamePasswordToken($user->getEmail(), $user->getPassword(), $this->firewallName);
+
         $this->urlGenerator->method('generate')->willReturn('sonata_admin_dashboard');
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
@@ -93,7 +109,19 @@ class UserAuthenticatorTest extends TestCase
         $request = new Request();
         $request->setSession($this->session);
 
-        $token = new UsernamePasswordToken('username', 'password', $this->firewallName);
+        $user = new User();
+        $user->setEmail('username@localhost.com');
+        $user->setPassword('password');
+
+        /**
+         * @todo: Simplfiy this when dropping support for Symfony < 5.4.
+         *
+         * @psalm-suppress InvalidArgument
+         */
+        $token = interface_exists(CacheableVoterInterface::class)
+            ? new UsernamePasswordToken($user, $this->firewallName) :
+            // @phpstan-ignore-next-line
+            new UsernamePasswordToken($user->getEmail(), $user->getPassword(), $this->firewallName);
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
 
