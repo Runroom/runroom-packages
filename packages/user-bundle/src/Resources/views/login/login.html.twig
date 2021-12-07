@@ -60,7 +60,10 @@
                     </div>
                 </div>
             </form>
-            <a href="{{ path('runroom_user_forgot_password_request') }}">{{ 'forgotten_password'|trans({}, 'RunroomUserBundle') }}</a>
+
+            {% if runroom_user.hasRequestPasswordEnabled %}
+                <a href="{{ path('runroom_user_forgot_password_request') }}">{{ 'forgotten_password'|trans({}, 'RunroomUserBundle') }}</a>
+            {% endif %}
         </div>
     </div>
 {% endblock sonata_wrapper %}

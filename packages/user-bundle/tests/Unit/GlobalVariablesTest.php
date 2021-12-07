@@ -28,10 +28,23 @@ class GlobalVariablesTest extends TestCase
         $container->set('runroom_user.admin.user', $this->createStub(AdminInterface::class));
 
         $pool = new Pool($container, ['runroom_user.admin.user']);
-        $globalVariables = new GlobalVariables($pool);
+        $globalVariables = new GlobalVariables($pool, false);
 
         $admin = $globalVariables->getUserAdmin();
 
         static::assertInstanceOf(AdminInterface::class, $admin);
+    }
+
+    /** @test */
+    public function itHasRequestPasswordEnabled(): void
+    {
+        $container = new Container();
+        $container->set('runroom_user.admin.user', $this->createStub(AdminInterface::class));
+
+        $pool = new Pool($container, ['runroom_user.admin.user']);
+
+        $globalVariables = new GlobalVariables($pool, true);
+
+        static::assertTrue($globalVariables->getHasRequestPasswordEnabled());
     }
 }

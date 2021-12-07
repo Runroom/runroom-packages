@@ -20,14 +20,22 @@ final class GlobalVariables
 {
     private Pool $pool;
 
-    public function __construct(Pool $pool)
+    private bool $hasRequestPasswordEnabled;
+
+    public function __construct(Pool $pool, bool $hasRequestPasswordEnabled)
     {
         $this->pool = $pool;
+        $this->hasRequestPasswordEnabled = $hasRequestPasswordEnabled;
     }
 
     /** @phpstan-return AdminInterface<object> */
     public function getUserAdmin(): AdminInterface
     {
         return $this->pool->getAdminByAdminCode('runroom_user.admin.user');
+    }
+
+    public function getHasRequestPasswordEnabled(): bool
+    {
+        return $this->hasRequestPasswordEnabled;
     }
 }

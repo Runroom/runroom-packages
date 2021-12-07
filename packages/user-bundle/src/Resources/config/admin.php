@@ -34,5 +34,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'User']);
 
     $services->set('runroom_user.twig.global_variables', GlobalVariables::class)
-        ->arg('$pool', new ReferenceConfigurator('sonata.admin.pool'));
+        ->arg('$pool', new ReferenceConfigurator('sonata.admin.pool'))
+        ->arg('$hasRequestPasswordEnabled', null);
 };

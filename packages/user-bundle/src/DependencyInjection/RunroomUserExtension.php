@@ -60,6 +60,9 @@ final class RunroomUserExtension extends Extension
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.php');
+
+            $container->getDefinition('runroom_user.twig.global_variables')
+                ->setArgument('$hasRequestPasswordEnabled', $config['reset_password']['enabled']);
         }
 
         if ($this->isConfigEnabled($container, $config['reset_password'])) {
