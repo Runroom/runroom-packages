@@ -25,8 +25,8 @@ final class BasicPageTranslationFactory extends ModelFactory
         return [
             'title' => self::faker()->words(3, true),
             'content' => self::faker()->paragraph(),
-            'slug' => self::faker()->unique()->slug(),
-            'locale' => self::faker()->unique()->languageCode(),
+            'slug' => self::faker()->unique(true)->slug(),
+            'locale' => self::faker()->unique(true)->languageCode(),
         ];
     }
 

@@ -24,7 +24,7 @@ final class TranslationTranslationFactory extends ModelFactory
     {
         return [
             'value' => self::faker()->words(3, true),
-            'locale' => self::faker()->unique()->languageCode(),
+            'locale' => self::faker()->unique(true)->languageCode(),
         ];
     }
 
