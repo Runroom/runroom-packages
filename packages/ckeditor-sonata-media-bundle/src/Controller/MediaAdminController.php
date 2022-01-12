@@ -72,8 +72,6 @@ final class MediaAdminController extends CRUDController
         $formView = $datagrid->getForm()->createView();
 
         $formRenderer = $this->container->get('twig')->getRuntime(FormRenderer::class);
-        \assert($formRenderer instanceof FormRenderer);
-
         $formRenderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->renderWithExtraParams('@RunroomCkeditorSonataMedia/browser.html.twig', [

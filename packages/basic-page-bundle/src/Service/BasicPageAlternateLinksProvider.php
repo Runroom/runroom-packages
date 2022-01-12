@@ -18,7 +18,6 @@ use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 
 final class BasicPageAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
-    /** @psalm-suppress MissingTemplateParam, InvalidTemplateParam, InvalidArgument getTranslations misses the correct template parameters */
     public function canGenerateAlternateLink(array $context, string $locale): bool
     {
         if (!isset($context['model']) || !$context['model'] instanceof BasicPageViewModel) {
