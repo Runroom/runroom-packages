@@ -18,7 +18,10 @@ use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @see https://github.com/doctrine/dbal/issues/1222
+ *
  * @ORM\Entity
+ * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface

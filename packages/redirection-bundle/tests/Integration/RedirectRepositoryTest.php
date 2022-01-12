@@ -89,9 +89,8 @@ class RedirectRepositoryTest extends KernelTestCase
 
         $redirect = $this->repository->findRedirect('/redirect');
 
-        static::assertSame([
-            'destination' => '/target',
-            'httpCode' => (string) Redirect::PERMANENT,
-        ], $redirect);
+        static::assertNotNull($redirect);
+        static::assertSame('/target', $redirect['destination']);
+        static::assertSame(Redirect::PERMANENT, (int) $redirect['httpCode']);
     }
 }

@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.0']
+        php: ['8.1']
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
@@ -21,7 +21,7 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: zip, pdo_sqlite, gd
           coverage: none
-      - uses: ramsey/composer-install@v1
+      - uses: ramsey/composer-install@v2
       - id: output_data
         run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --tests)"
     outputs:
@@ -31,7 +31,7 @@ jobs:
     needs: provide_packages_json
     strategy:
       matrix:
-        php: ['8.0']
+        php: ['8.1']
         packages: ${{ fromJson(needs.provide_packages_json.outputs.matrix ) }}
         dependencies: [lowest, highest]
     steps:
@@ -43,9 +43,9 @@ jobs:
           coverage: none
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - run: cd packages/${{ matrix.packages }} && composer validate --strict
-      - uses: ramsey/composer-install@v1
+      - uses: ramsey/composer-install@v2
       - run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.packages }}/composer.json --ansi
-      - uses: ramsey/composer-install@v1
+      - uses: ramsey/composer-install@v2
         with:
           dependency-versions: ${{ matrix.dependencies }}
           composer-options: --working-dir=packages/${{ matrix.packages }}
