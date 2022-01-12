@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.4', '8.0']
+        php: ['7.4', '8.0', '8.1']
         dependencies: [highest]
         include:
           - php: '7.4'
@@ -24,7 +24,7 @@ jobs:
           ini-values: pcov.directory=packages
           coverage: pcov
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-      - uses: ramsey/composer-install@v1
+      - uses: ramsey/composer-install@v2
         with:
           dependency-versions: ${{ matrix.dependencies }}
       - run: vendor/bin/phpunit --coverage-clover=clover.xml
