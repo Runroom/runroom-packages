@@ -97,7 +97,9 @@ final class UserManipulator
         $this->userRepository->save($user);
     }
 
-    /** @throws \InvalidArgumentException When user does not exist */
+    /**
+     * @throws \InvalidArgumentException When user does not exist
+     */
     private function findUserByIdentifierOrThrowException(string $identifier): UserInterface
     {
         $user = $this->userRepository->loadUserByIdentifier($identifier);

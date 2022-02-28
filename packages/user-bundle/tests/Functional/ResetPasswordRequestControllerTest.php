@@ -26,7 +26,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itSubmitsResetPasswordRequestWithNonExistentUser(): void
     {
         $client = static::createClient();
@@ -50,7 +52,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_check_email');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itSubmitsResetPasswordRequest(): void
     {
         $client = static::createClient();
@@ -79,7 +83,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_check_email');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrows404IfTryToResetPasswordWithoutToken(): void
     {
         $client = static::createClient();
@@ -89,7 +95,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertResponseStatusCodeSame(404);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRedirectsToResetPasswordRequestOnInvalidToken(): void
     {
         $client = static::createClient();

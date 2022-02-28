@@ -38,7 +38,9 @@ class CookiesPageRepositoryTest extends KernelTestCase
         $this->repository = $container->get(CookiesPageRepository::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function ifFindsCookiesPageById(): void
     {
         CookiesPageFactory::new()->withTranslations(['en'])->create();

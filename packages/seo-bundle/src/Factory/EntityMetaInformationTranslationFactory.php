@@ -19,7 +19,9 @@ use Zenstruck\Foundry\ModelFactory;
 /** @extends ModelFactory<EntityMetaInformationTranslation> */
 final class EntityMetaInformationTranslationFactory extends ModelFactory
 {
-    /** @return array<string, mixed> */
+    /**
+     * @return array<string, mixed>
+     */
     protected function getDefaults(): array
     {
         return [

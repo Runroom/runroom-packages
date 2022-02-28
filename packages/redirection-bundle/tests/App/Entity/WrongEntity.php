@@ -25,7 +25,9 @@ class WrongEntity
      */
     private ?int $id = null;
 
-    /** @ORM\Column(type="string") */
+    /**
+     * @ORM\Column(type="string")
+     */
     private ?string $slug = null;
 
     public function getId(): ?int

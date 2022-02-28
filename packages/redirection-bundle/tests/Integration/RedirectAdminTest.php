@@ -20,7 +20,9 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /** @extends SonataAdminTestCase<Redirect> */
 class RedirectAdminTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllListFields(): void
     {
         $this->assertAdminListContainsField('source');
@@ -31,7 +33,9 @@ class RedirectAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField('_action');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('source');
@@ -41,7 +45,9 @@ class RedirectAdminTest extends SonataAdminTestCase
         $this->assertAdminFormContainsField('automatic');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('source');

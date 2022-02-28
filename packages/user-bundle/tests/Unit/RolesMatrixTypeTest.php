@@ -23,7 +23,9 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class RolesMatrixTypeTest extends TypeTestCase
 {
-    /** @var Stub&MatrixRolesBuilderInterface */
+    /**
+     * @var Stub&MatrixRolesBuilderInterface
+     */
     private Stub $rolesBuilder;
 
     private RolesMatrixType $rolesMatrixType;
@@ -53,7 +55,9 @@ class RolesMatrixTypeTest extends TypeTestCase
         $this->form = $this->factory->create(RolesMatrixType::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itSubmits(): void
     {
         $this->form->submit(['ROLE', 'ROLE_ADMIN']);
@@ -62,7 +66,9 @@ class RolesMatrixTypeTest extends TypeTestCase
         static::assertTrue($this->form->isSynchronized());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itSubmitsInvalidRoles(): void
     {
         $this->form->submit(['ROLE_RANDOM']);
@@ -70,26 +76,34 @@ class RolesMatrixTypeTest extends TypeTestCase
         static::assertFalse($this->form->isValid());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsFormDefaultOptions(): void
     {
         static::assertTrue($this->form->getConfig()->getOption('expanded'));
         static::assertNull($this->form->getConfig()->getOption('data_class'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsBlockPrefix(): void
     {
         static::assertSame('sonata_roles_matrix', $this->rolesMatrixType->getBlockPrefix());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsParent(): void
     {
         static::assertSame(ChoiceType::class, $this->rolesMatrixType->getParent());
     }
 
-    /** @return FormTypeInterface[] */
+    /**
+     * @return FormTypeInterface[]
+     */
     protected function getTypes(): array
     {
         return [$this->rolesMatrixType];

@@ -26,13 +26,19 @@ class UserManipulatorTest extends TestCase
 {
     use Factories;
 
-    /** @var (MockObject&UserPasswordHasherInterface)|null */
+    /**
+     * @var (MockObject&UserPasswordHasherInterface)|null
+     */
     private ?MockObject $passwordHasher = null;
 
-    /** @var (MockObject&UserPasswordEncoderInterface)|null */
+    /**
+     * @var (MockObject&UserPasswordEncoderInterface)|null
+     */
     private ?MockObject $passwordEncoder = null;
 
-    /** @var MockObject&UserRepositoryInterface */
+    /**
+     * @var MockObject&UserRepositoryInterface
+     */
     private MockObject $repository;
 
     private string $identifier;
@@ -65,7 +71,9 @@ class UserManipulatorTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCreatesUser(): void
     {
         $user = UserFactory::createOne()->object();
@@ -94,7 +102,9 @@ class UserManipulatorTest extends TestCase
         static::assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsWhenActivatingANonExistentUser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -103,7 +113,9 @@ class UserManipulatorTest extends TestCase
         $this->userManipulator->activate('user@localhost');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsWhenDeactivatingANonExistentUser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -112,7 +124,9 @@ class UserManipulatorTest extends TestCase
         $this->userManipulator->deactivate('user@localhost');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itActivatesUser(): void
     {
         $user = UserFactory::createOne()->object();
@@ -125,7 +139,9 @@ class UserManipulatorTest extends TestCase
         static::assertTrue($user->getEnabled());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDeactivatesUser(): void
     {
         $user = UserFactory::createOne()->object();
@@ -138,7 +154,9 @@ class UserManipulatorTest extends TestCase
         static::assertFalse($user->getEnabled());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itChangesPassword(): void
     {
         $user = UserFactory::createOne()->object();

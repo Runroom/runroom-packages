@@ -28,7 +28,9 @@ class MetaInformationBuilderTest extends TestCase
 {
     use Factories;
 
-    /** @var Stub&MetaInformationRepository */
+    /**
+     * @var Stub&MetaInformationRepository
+     */
     private $repository;
 
     private MetaInformationBuilder $builder;
@@ -43,7 +45,9 @@ class MetaInformationBuilderTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itBuildsMetaInformationViewModel(): void
     {
         $media = new Media();

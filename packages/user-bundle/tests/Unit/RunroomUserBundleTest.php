@@ -20,7 +20,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class RunroomUserBundleTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itBuilds(): void
     {
         $containerBuilder = $this->createMock(ContainerBuilder::class);

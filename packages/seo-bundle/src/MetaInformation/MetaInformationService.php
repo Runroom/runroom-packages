@@ -20,12 +20,16 @@ final class MetaInformationService implements MetaInformationServiceInterface
 {
     private RequestStack $requestStack;
 
-    /** @var iterable<MetaInformationProviderInterface> */
+    /**
+     * @var iterable<MetaInformationProviderInterface>
+     */
     private iterable $providers;
 
     private MetaInformationBuilder $builder;
 
-    /** @param iterable<MetaInformationProviderInterface> $providers */
+    /**
+     * @param iterable<MetaInformationProviderInterface> $providers
+     */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,

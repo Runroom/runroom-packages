@@ -45,10 +45,14 @@ abstract class DoctrineTestCase extends KernelTestCase
         static::$connection->rollBack();
     }
 
-    /** @return string[] */
+    /**
+     * @return string[]
+     */
     abstract protected function getDataFixtures(): array;
 
-    /** @return string[] */
+    /**
+     * @return string[]
+     */
     private function processDataFixtures(): array
     {
         $testClass = new \ReflectionClass(static::class);

@@ -18,7 +18,9 @@ use Runroom\Testing\Tests\App\Entity\Test;
 
 class DoctrineTestCaseTest extends DoctrineTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesInitializeTheDatabase(): void
     {
         static::assertNotNull(self::$entityManager->find(Test::class, 1));

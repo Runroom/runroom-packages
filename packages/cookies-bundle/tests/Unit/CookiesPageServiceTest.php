@@ -28,10 +28,14 @@ class CookiesPageServiceTest extends TestCase
 {
     use Factories;
 
-    /** @var MockObject&CookiesPageRepository */
+    /**
+     * @var MockObject&CookiesPageRepository
+     */
     private $repository;
 
-    /** @var MockObject&FormFactoryInterface */
+    /**
+     * @var MockObject&FormFactoryInterface
+     */
     private $formFactory;
 
     private CookiesPageService $service;
@@ -48,7 +52,9 @@ class CookiesPageServiceTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsExceptionIfCoookiesPageNotFound(): void
     {
         $this->expectException(\RuntimeException::class);
@@ -57,7 +63,9 @@ class CookiesPageServiceTest extends TestCase
         $this->service->getCookiesPageViewModel();
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsCookiesPage(): void
     {
         $cookiesPage = CookiesPageFactory::createOne()->object();

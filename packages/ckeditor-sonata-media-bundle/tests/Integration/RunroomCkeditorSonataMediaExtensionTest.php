@@ -27,7 +27,9 @@ class RunroomCkeditorSonataMediaExtensionTest extends AbstractExtensionTestCase
         $this->load();
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService(MediaAdminController::class);

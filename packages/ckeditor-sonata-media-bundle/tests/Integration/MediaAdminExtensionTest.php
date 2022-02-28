@@ -19,7 +19,9 @@ use Sonata\MediaBundle\Model\MediaInterface;
 /** @extends SonataAdminTestCase<MediaInterface> */
 class MediaAdminExtensionTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesContainRoute('ckeditor_browser');

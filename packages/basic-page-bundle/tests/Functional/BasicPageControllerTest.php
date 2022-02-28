@@ -23,7 +23,9 @@ class BasicPageControllerTest extends WebTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersStatic(): void
     {
         $client = static::createClient();

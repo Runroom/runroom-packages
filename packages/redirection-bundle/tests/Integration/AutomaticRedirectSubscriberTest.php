@@ -44,7 +44,9 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
         $this->entityManager = $container->get(EntityManagerInterface::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesSubscribeToOnFlushEvent(): void
     {
         $events = $this->subscriber->getSubscribedEvents();
@@ -52,7 +54,9 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
         static::assertSame([Events::onFlush], $events);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itTestAutomaticRedirectCreation(): void
     {
         $entity = new Entity();
@@ -91,7 +95,9 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotGenerateRedirectsIfThereIsAConfigurationMistake(): void
     {
         $entity = new WrongEntity();

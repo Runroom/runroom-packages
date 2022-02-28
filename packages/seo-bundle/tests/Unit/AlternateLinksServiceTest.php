@@ -27,17 +27,23 @@ class AlternateLinksServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    /** @phpstan-var MockObject&AlternateLinksProviderInterface */
+    /**
+     * @phpstan-var MockObject&AlternateLinksProviderInterface
+     */
     private $provider;
 
     private DefaultAlternateLinksProvider $defaultProvider;
 
-    /** @var MockObject&AlternateLinksBuilder */
+    /**
+     * @var MockObject&AlternateLinksBuilder
+     */
     private $builder;
 
     private AlternateLinksService $service;
 
-    /** @var array<string, mixed> */
+    /**
+     * @var array<string, mixed>
+     */
     private array $context;
 
     protected function setUp(): void
@@ -56,7 +62,9 @@ class AlternateLinksServiceTest extends TestCase
         $this->context = ['model' => new DummyViewModel()];
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsAlternateLinksForRoute(): void
     {
         $this->configureCurrentRequest();
@@ -69,7 +77,9 @@ class AlternateLinksServiceTest extends TestCase
         static::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsAlternateLinksForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
@@ -82,7 +92,9 @@ class AlternateLinksServiceTest extends TestCase
         static::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsIfNoProviderIsFound(): void
     {
         $service = new AlternateLinksService($this->requestStack, [], $this->builder);
@@ -102,7 +114,9 @@ class AlternateLinksServiceTest extends TestCase
         $request->attributes->set('_route', 'route');
     }
 
-    /** @return iterable<AlternateLinksProviderInterface> */
+    /**
+     * @return iterable<AlternateLinksProviderInterface>
+     */
     private function getProviders(): iterable
     {
         yield $this->provider;

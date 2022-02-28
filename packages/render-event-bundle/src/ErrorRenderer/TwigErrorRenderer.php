@@ -26,10 +26,14 @@ final class TwigErrorRenderer implements ErrorRendererInterface
     private HtmlErrorRenderer $fallbackErrorRenderer;
     private PageRenderer $renderer;
 
-    /** @var bool|callable */
+    /**
+     * @var bool|callable
+     */
     private $debug;
 
-    /** @param bool|callable $debug */
+    /**
+     * @param bool|callable $debug
+     */
     public function __construct(
         Environment $twig,
         HtmlErrorRenderer $fallbackErrorRenderer = null,

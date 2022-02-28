@@ -26,7 +26,9 @@ class BasicPageRuntime implements RuntimeExtensionInterface
         $this->repository = $repository;
     }
 
-    /** @return BasicPage[] */
+    /**
+     * @return BasicPage[]
+     */
     public function getBasicPages(?string $location = null): array
     {
         $criteria = ['publish' => true];

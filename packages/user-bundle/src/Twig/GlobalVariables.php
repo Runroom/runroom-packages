@@ -28,7 +28,9 @@ final class GlobalVariables
         $this->hasRequestPasswordEnabled = $hasRequestPasswordEnabled;
     }
 
-    /** @phpstan-return AdminInterface<object> */
+    /**
+     * @phpstan-return AdminInterface<object>
+     */
     public function getUserAdmin(): AdminInterface
     {
         return $this->pool->getAdminByAdminCode('runroom_user.admin.user');

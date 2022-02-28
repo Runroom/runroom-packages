@@ -44,7 +44,9 @@ use SymfonyCasts\Bundle\ResetPassword\Util\ResetPasswordCleaner;
 
 class RunroomUserExtensionTest extends AbstractExtensionTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasCoreServicesAlias(): void
     {
         $this->container->setParameter('kernel.bundles', []);
@@ -72,7 +74,9 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCanEnableResetPassword(): void
     {
         $this->container->setParameter('kernel.bundles', ['SymfonyCastsResetPasswordBundle' => true]);
@@ -88,7 +92,9 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom_user.reset_password.helper', ResetPasswordHelper::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCanEnableAdmin(): void
     {
         $this->container->setParameter('kernel.bundles', ['SonataAdminBundle' => true]);
@@ -98,7 +104,9 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom_user.twig.global_variables', GlobalVariables::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCanEnableBoth(): void
     {
         $this->container->setParameter('kernel.bundles', [
@@ -140,7 +148,9 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsWhenTryingToEnableResetPasswordWithoutBeingInstalled(): void
     {
         $this->container->setParameter('kernel.bundles', []);

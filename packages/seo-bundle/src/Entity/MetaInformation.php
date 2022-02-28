@@ -36,13 +36,19 @@ class MetaInformation implements TranslatableInterface
      */
     private ?int $id = null;
 
-    /** @ORM\Column(type="string", unique=true) */
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
     private ?string $route = null;
 
-    /** @ORM\Column(type="string") */
+    /**
+     * @ORM\Column(type="string")
+     */
     private ?string $routeName = null;
 
-    /** @Assert\Valid */
+    /**
+     * @Assert\Valid
+     */
     private ?MediaInterface $image = null;
 
     public function __toString(): string

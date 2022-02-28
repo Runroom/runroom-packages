@@ -42,18 +42,26 @@ class MediaAdminControllerTest extends TestCase
 {
     private Container $container;
 
-    /** @var MockObject&AdminInterface<object> */
+    /**
+     * @var MockObject&AdminInterface<object>
+     */
     private $admin;
 
     private Request $request;
 
-    /** @var MockObject&MediaManagerInterface */
+    /**
+     * @var MockObject&MediaManagerInterface
+     */
     private $mediaManager;
 
-    /** @var MediaPool */
+    /**
+     * @var MediaPool
+     */
     private $mediaPool;
 
-    /** @var MockObject&Environment */
+    /**
+     * @var MockObject&Environment
+     */
     private $twig;
 
     private MediaAdminController $controller;
@@ -79,7 +87,9 @@ class MediaAdminControllerTest extends TestCase
         $this->controller->configureAdmin($this->request);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function browserAction(): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
@@ -122,7 +132,9 @@ class MediaAdminControllerTest extends TestCase
         static::assertSame('renderResponse', $response->getContent());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function browserActionWithFilters(): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
@@ -151,7 +163,9 @@ class MediaAdminControllerTest extends TestCase
         static::assertSame('renderResponse', $response->getContent());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function uploadAction(): void
     {
         $media = $this->createStub(MediaInterface::class);
@@ -171,7 +185,9 @@ class MediaAdminControllerTest extends TestCase
         static::assertSame('renderResponse', $response->getContent());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function uploadActionThrowsWhenNoPostMethod(): void
     {
         $this->request->setMethod('GET');
@@ -208,7 +224,9 @@ class MediaAdminControllerTest extends TestCase
         $this->request->setMethod('POST');
     }
 
-    /** @param string[] $formTheme */
+    /**
+     * @param string[] $formTheme
+     */
     private function configureSetFormTheme(FormView $formView, array $formTheme): void
     {
         $twigRenderer = $this->createMock(FormRenderer::class);

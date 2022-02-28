@@ -25,7 +25,9 @@ use Twig\Environment;
 
 class PageRendererTest extends TestCase
 {
-    /** @var MockObject&Environment */
+    /**
+     * @var MockObject&Environment
+     */
     private $twig;
 
     private EventDispatcher $eventDispatcher;
@@ -45,7 +47,9 @@ class PageRendererTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDispatchEventsOnRender(): void
     {
         $this->twig->method('render')->with('test.html.twig', static::isType('array'))
@@ -56,7 +60,9 @@ class PageRendererTest extends TestCase
         static::assertSame('Rendered test', $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDispatchEventsOnRenderResponse(): void
     {
         $response = new Response();
@@ -77,7 +83,9 @@ class PageRendererTest extends TestCase
         static::assertSame($response, $resultResponse);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsRedirectResponse(): void
     {
         $response = new Response();

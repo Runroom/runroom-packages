@@ -26,7 +26,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class RedirectSubscriberTest extends TestCase
 {
-    /** @var MockObject&RedirectRepository */
+    /**
+     * @var MockObject&RedirectRepository
+     */
     private $repository;
 
     private RedirectSubscriber $subscriber;
@@ -38,13 +40,17 @@ class RedirectSubscriberTest extends TestCase
         $this->subscriber = new RedirectSubscriber($this->repository);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itSubscribesToKernelRequestEvent(): void
     {
         static::assertArrayHasKey(KernelEvents::REQUEST, RedirectSubscriber::getSubscribedEvents());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotDoAnythingIfTheRequestIsNotTheMasterOne(): void
     {
         $event = $this->getResponseEvent(HttpKernelInterface::SUB_REQUEST);
@@ -54,7 +60,9 @@ class RedirectSubscriberTest extends TestCase
         static::assertNull($event->getResponse());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotDOAnythingIfTheRouteIsNotFoundOnTheRepository(): void
     {
         $this->repository->expects(static::once())->method('findRedirect')->with('/');
@@ -66,7 +74,9 @@ class RedirectSubscriberTest extends TestCase
         static::assertNull($event->getResponse());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesARedirectToDestinationUrl(): void
     {
         $this->repository->expects(static::once())->method('findRedirect')->with('/')->willReturn([
@@ -85,7 +95,9 @@ class RedirectSubscriberTest extends TestCase
         static::assertSame(301, $response->getStatusCode());
     }
 
-    /** @todo: Change to MAIN_REQUEST when dropping support for Symfony 4 */
+    /**
+     * @todo: Change to MAIN_REQUEST when dropping support for Symfony 4
+     */
     private function getResponseEvent(int $requestType = HttpKernelInterface::MASTER_REQUEST): RequestEvent
     {
         return new RequestEvent($this->createStub(Kernel::class), new Request(), $requestType);

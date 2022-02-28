@@ -39,7 +39,9 @@ class CreateUserCommandTest extends KernelTestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCreatesAnActiveUser(): void
     {
         /**
@@ -62,7 +64,9 @@ class CreateUserCommandTest extends KernelTestCase
         static::assertNotNull($createdUser->getCreatedAt());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCreatesAnInactiveUser(): void
     {
         $this->commandTester->execute([

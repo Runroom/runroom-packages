@@ -40,7 +40,9 @@ class EntityMetaInformationTranslation implements TranslationInterface
      */
     private ?string $title = null;
 
-    /** @ORM\Column(type="text", nullable=true) */
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     private ?string $description = null;
 
     public function setTitle(?string $title): self

@@ -33,7 +33,9 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $this->userRepository = $userRepository;
     }
 
-    /** @param string $username */
+    /**
+     * @param string $username
+     */
     public function loadUserByUsername($username): SymfonyUserInterface
     {
         return $this->loadUserByIdentifier($username);
@@ -67,13 +69,17 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         return $refreshedUser;
     }
 
-    /** @param string $class */
+    /**
+     * @param string $class
+     */
     public function supportsClass($class): bool
     {
         return UserInterface::class === $class || is_subclass_of($class, UserInterface::class);
     }
 
-    /** @param PasswordAuthenticatedUserInterface|SymfonyUserInterface $user */
+    /**
+     * @param PasswordAuthenticatedUserInterface|SymfonyUserInterface $user
+     */
     public function upgradePassword(object $user, string $newHashedPassword): void
     {
         if (!$user instanceof UserInterface) {
@@ -85,7 +91,9 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $this->userRepository->save($user);
     }
 
-    /** @todo: Simplify when dropping support for Symfony 4 */
+    /**
+     * @todo: Simplify when dropping support for Symfony 4
+     */
     private function buildUserNotFoundException(string $message, string $identifier): AuthenticationException
     {
         if (!class_exists(UserNotFoundException::class)) {

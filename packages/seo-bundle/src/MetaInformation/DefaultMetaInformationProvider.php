@@ -20,7 +20,9 @@ final class DefaultMetaInformationProvider extends AbstractMetaInformationProvid
         return true;
     }
 
-    /** @return string[] */
+    /**
+     * @return string[]
+     */
     protected function getRoutes(): array
     {
         return [];

@@ -39,7 +39,9 @@ class BasicPageRepositoryTest extends KernelTestCase
         $this->repository = $container->get(BasicPageRepository::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsBasicPageGivenItsSlug(): void
     {
         BasicPageFactory::new(['publish' => true])->withTranslations(['en'], [
@@ -56,7 +58,9 @@ class BasicPageRepositoryTest extends KernelTestCase
         static::assertIsBool($basicPage->getPublish());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotFindUnPublishedStatigPage(): void
     {
         $this->expectException(NoResultException::class);

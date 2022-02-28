@@ -33,16 +33,24 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
      */
     private UserInterface $user;
 
-    /** @ORM\Column(type="string", length=20) */
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
     private string $selector;
 
-    /** @ORM\Column(type="string", length=100) */
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
     private string $hashedToken;
 
-    /** @ORM\Column(type="datetime_immutable") */
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
     private \DateTimeImmutable $requestedAt;
 
-    /** @ORM\Column(type="datetime_immutable") */
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
     private \DateTimeInterface $expiresAt;
 
     public function __construct(UserInterface $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken)

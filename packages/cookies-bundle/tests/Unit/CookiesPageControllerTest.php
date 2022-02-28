@@ -23,10 +23,14 @@ use Twig\Environment;
 
 class CookiesPageControllerTest extends TestCase
 {
-    /** @var MockObject&CookiesPageService */
+    /**
+     * @var MockObject&CookiesPageService
+     */
     private $service;
 
-    /** @var MockObject&Environment */
+    /**
+     * @var MockObject&Environment
+     */
     private $twig;
 
     private CookiesPageController $controller;
@@ -43,7 +47,9 @@ class CookiesPageControllerTest extends TestCase
         $this->controller->setContainer($container);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersCookiesPage(): void
     {
         $model = new CookiesPageViewModel();

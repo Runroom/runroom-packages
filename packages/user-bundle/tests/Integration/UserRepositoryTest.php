@@ -39,7 +39,9 @@ class UserRepositoryTest extends KernelTestCase
         $this->repository = $container->get('runroom_user.repository.user');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsUserGivenItsSlug(): void
     {
         UserFactory::createOne([
@@ -62,7 +64,9 @@ class UserRepositoryTest extends KernelTestCase
         static::assertNull($user->getSalt());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCreatesAnUser(): void
     {
         $user = $this->repository->create();
@@ -70,7 +74,9 @@ class UserRepositoryTest extends KernelTestCase
         static::assertInstanceOf(User::class, $user);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itPersistAnUser(): void
     {
         $user = $this->repository->create();

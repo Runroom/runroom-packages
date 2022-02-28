@@ -25,10 +25,14 @@ class TranslationServiceTest extends TestCase
 {
     use Factories;
 
-    /** @var MockObject&TranslationRepository */
+    /**
+     * @var MockObject&TranslationRepository
+     */
     private $repository;
 
-    /** @var MockObject&TranslatorInterface */
+    /**
+     * @var MockObject&TranslatorInterface
+     */
     private $translator;
 
     private TranslationService $service;
@@ -44,7 +48,9 @@ class TranslationServiceTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsAStringTranslatedByTheRepository(): void
     {
         $translation = TranslationFactory::new(['key' => 'key'])->withTranslations(['en'])->create();
@@ -57,7 +63,9 @@ class TranslationServiceTest extends TestCase
         static::assertSame($translation->getValue(), $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsAStringTranslatedByTheTranslatorComponent(): void
     {
         $this->repository->method('findOneBy')->with(['key' => 'key'])->willReturn(null);

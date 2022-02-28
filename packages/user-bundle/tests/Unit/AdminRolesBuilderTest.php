@@ -80,7 +80,9 @@ class AdminRolesBuilderTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsPermissionLabels(): void
     {
         $securityHandler = $this->createMock(SecurityHandlerInterface::class);
@@ -104,7 +106,9 @@ class AdminRolesBuilderTest extends TestCase
         ], $permissionLabels);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsRoles(): void
     {
         $securityHandler = $this->createMock(SecurityHandlerInterface::class);

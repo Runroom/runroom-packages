@@ -32,7 +32,9 @@ final class EntityMetaInformationFactory extends ModelFactory
         ]);
     }
 
-    /** @return array<string, mixed> */
+    /**
+     * @return array<string, mixed>
+     */
     protected function getDefaults(): array
     {
         return [];

@@ -28,17 +28,23 @@ class MetaInformationServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
-    /** @phpstan-var MockObject&MetaInformationProviderInterface */
+    /**
+     * @phpstan-var MockObject&MetaInformationProviderInterface
+     */
     private $provider;
 
     private DefaultMetaInformationProvider $defaultProvider;
 
-    /** @var MockObject&MetaInformationBuilder */
+    /**
+     * @var MockObject&MetaInformationBuilder
+     */
     private $builder;
 
     private MetaInformationService $service;
 
-    /** @var array<string, mixed> */
+    /**
+     * @var array<string, mixed>
+     */
     private array $context;
 
     private MetaInformationViewModel $expectedMetas;
@@ -60,7 +66,9 @@ class MetaInformationServiceTest extends TestCase
         $this->expectedMetas = new MetaInformationViewModel();
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsMetasForRoute(): void
     {
         $this->configureCurrentRequest();
@@ -73,7 +81,9 @@ class MetaInformationServiceTest extends TestCase
         static::assertSame($this->expectedMetas, $generatedMetas);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsMetasForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
@@ -86,7 +96,9 @@ class MetaInformationServiceTest extends TestCase
         static::assertSame($this->expectedMetas, $generatedMetas);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsIfNoProviderIsFound(): void
     {
         $service = new MetaInformationService($this->requestStack, [], $this->builder);
@@ -106,7 +118,9 @@ class MetaInformationServiceTest extends TestCase
         $request->attributes->set('_route', 'route');
     }
 
-    /** @return iterable<MetaInformationProviderInterface> */
+    /**
+     * @return iterable<MetaInformationProviderInterface>
+     */
     private function getProviders(): iterable
     {
         yield $this->provider;

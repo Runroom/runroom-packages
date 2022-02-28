@@ -23,7 +23,9 @@ class UserAdminTest extends SonataAdminTestCase
 {
     use Factories;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllListFields(): void
     {
         $this->assertAdminListContainsField('createdAt');
@@ -31,7 +33,9 @@ class UserAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField('enabled');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('email');
@@ -40,20 +44,26 @@ class UserAdminTest extends SonataAdminTestCase
         $this->assertAdminFormContainsField('roles');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('email');
         $this->assertAdminFilterContainsField('enabled');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesNotContainRoute('show');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllExportFields(): void
     {
         $this->assertAdminExportDoesContainField('id');
@@ -65,7 +75,9 @@ class UserAdminTest extends SonataAdminTestCase
         $this->assertAdminExportDoesNotContainField('salt');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itUpdatesPasswordOnCreate(): void
     {
         $user = UserFactory::createOne([
@@ -78,7 +90,9 @@ class UserAdminTest extends SonataAdminTestCase
         static::assertNull($createdUser->getPlainPassword());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotChangePasswordIfNoNewPasswordIsProvided(): void
     {
         $user = UserFactory::createOne(['password' => 'testing'])->object();

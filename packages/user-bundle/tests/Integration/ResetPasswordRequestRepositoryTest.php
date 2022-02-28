@@ -40,7 +40,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         $this->repository = $container->get('runroom_user.repository.reset_password_request');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCreatesResetPasswordRequest(): void
     {
         $user = UserFactory::createOne()->object();
@@ -53,7 +55,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertSame($userPasswordRequest->getExpiresAt(), $date);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsUserIdentifier(): void
     {
         $user = UserFactory::createOne()->object();
@@ -62,7 +66,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertSame('1', $identifier);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itPersistsResetPasswordRequest(): void
     {
         $user = UserFactory::createOne()->object();
@@ -77,7 +83,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertSame($userPasswordRequest->getUser(), $foundResetPasswordRequest->getUser());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsResetPasswordRequestBySelector(): void
     {
         ResetPasswordRequestFactory::createOne([
@@ -91,7 +99,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertSame('token', $resetPasswordRequest->getHashedToken());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsNullWhenThereIsNoMostRecentExpiredRequestPassword(): void
     {
         $user = UserFactory::createOne()->object();
@@ -100,7 +110,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertNull($requestDate);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsNullWhenThereIsAExpiredMostRecentRequestPassword(): void
     {
         $user = UserFactory::createOne()->object();
@@ -111,7 +123,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertNull($requestDate);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsTheMostNonExpiredRequestDate(): void
     {
         $user = UserFactory::createOne()->object();
@@ -127,7 +141,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertNotNull($requestDate);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsTheMostNonExpiredRequestDateWithTwoResetPasswords(): void
     {
         $user = UserFactory::createOne()->object();
@@ -153,7 +169,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertSame($secondResetPasswordRequest->getRequestedAt(), $requestDate);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCanRemoveExpiredResetPasswordByObject(): void
     {
         $user = UserFactory::createOne()->object();
@@ -168,7 +186,9 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         static::assertNull($resetPasswordRequestResult);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCanRemoveExpiredResetPasswords(): void
     {
         $user = UserFactory::createOne()->object();

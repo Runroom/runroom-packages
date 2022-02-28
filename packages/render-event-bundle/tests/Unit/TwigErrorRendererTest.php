@@ -27,22 +27,34 @@ use Twig\Loader\LoaderInterface;
 
 class TwigErrorRendererTest extends TestCase
 {
-    /** @var Stub&Environment */
+    /**
+     * @var Stub&Environment
+     */
     private $twig;
 
-    /** @var MockObject&HtmlErrorRenderer */
+    /**
+     * @var MockObject&HtmlErrorRenderer
+     */
     private $fallbackErrorRenderer;
 
-    /** @var MockObject&PageRenderer */
+    /**
+     * @var MockObject&PageRenderer
+     */
     private $renderer;
 
-    /** @var Stub&\Throwable */
+    /**
+     * @var Stub&\Throwable
+     */
     private $exception;
 
-    /** @var MockObject&FlattenException */
+    /**
+     * @var MockObject&FlattenException
+     */
     private $flattenException;
 
-    /** @var MockObject&LoaderInterface */
+    /**
+     * @var MockObject&LoaderInterface
+     */
     private $twigLoader;
 
     private RequestStack $requestStack;
@@ -67,7 +79,9 @@ class TwigErrorRendererTest extends TestCase
             ->willReturn($this->flattenException);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersException(): void
     {
         $controller = $this->configureController(true);
@@ -77,7 +91,9 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersGenericErrorPage(): void
     {
         $this->renderer->method('render')->with('@Twig/Exception/error.html.twig', [
@@ -97,7 +113,9 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRenders404ErrorPage(): void
     {
         $this->renderer->method('render')->with('@Twig/Exception/error404.html.twig', [
@@ -114,7 +132,9 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsExceptionIfNoTemplateIsAvailable(): void
     {
         $this->twigLoader->method('exists')->willReturnMap([
@@ -129,7 +149,9 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsSecondParameterIfRequestStackDoesNotHaveRequest(): void
     {
         static::assertTrue(TwigErrorRenderer::isDebug(new RequestStack(), true)());

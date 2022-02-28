@@ -26,7 +26,9 @@ class DefaultAlternateLinksProviderTest extends TestCase
         $this->provider = new DefaultAlternateLinksProvider();
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itProvidesMetasForAnyRoute(): void
     {
         foreach (['default', 'home'] as $route) {
@@ -34,13 +36,17 @@ class DefaultAlternateLinksProviderTest extends TestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotDefineRouteParameters(): void
     {
         static::assertNull($this->provider->getParameters(['model' => new DummyViewModel()], 'es'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotDefineAvailableLocales(): void
     {
         $context = ['model' => new DummyViewModel()];
@@ -49,7 +55,9 @@ class DefaultAlternateLinksProviderTest extends TestCase
         static::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotDefineAssociatedRoutes(): void
     {
         $method = new \ReflectionMethod($this->provider, 'getRoutes');

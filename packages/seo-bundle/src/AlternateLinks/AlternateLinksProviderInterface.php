@@ -17,7 +17,9 @@ interface AlternateLinksProviderInterface
 {
     public function providesAlternateLinks(string $route): bool;
 
-    /** @param array<string, mixed> $context */
+    /**
+     * @param array<string, mixed> $context
+     */
     public function canGenerateAlternateLink(array $context, string $locale): bool;
 
     /**

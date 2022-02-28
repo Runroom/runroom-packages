@@ -33,7 +33,9 @@ class TranslationTranslation implements TranslationInterface
      */
     private ?int $id = null;
 
-    /** @ORM\Column(type="text", nullable=true) */
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     private ?string $value = null;
 
     public function setValue(?string $value): self

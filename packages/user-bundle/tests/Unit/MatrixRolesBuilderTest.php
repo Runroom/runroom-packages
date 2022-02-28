@@ -23,19 +23,29 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class MatrixRolesBuilderTest extends TestCase
 {
-    /** @var Stub&TokenStorageInterface */
+    /**
+     * @var Stub&TokenStorageInterface
+     */
     private Stub $tokenStorage;
 
-    /** @var Stub&AdminRolesBuilderInterface */
+    /**
+     * @var Stub&AdminRolesBuilderInterface
+     */
     private Stub $adminRolesBuilder;
 
-    /** @var Stub&ExpandableRolesBuilderInterface */
+    /**
+     * @var Stub&ExpandableRolesBuilderInterface
+     */
     private Stub $expandableRolesBuilder;
 
-    /** @var array<string, array<string, string|bool>> */
+    /**
+     * @var array<string, array<string, string|bool>>
+     */
     private array $adminRole;
 
-    /** @var array<string, array<string, string|bool>> */
+    /**
+     * @var array<string, array<string, string|bool>>
+     */
     private array $guestRole;
 
     private MatrixRolesBuilder $matrixRolesBuilder;
@@ -68,7 +78,9 @@ class MatrixRolesBuilderTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsEmptyArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn(null);
@@ -77,7 +89,9 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame([], $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
@@ -88,7 +102,9 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame(array_merge($this->guestRole, $this->adminRole), $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsEmptyExpandedArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn(null);
@@ -98,7 +114,9 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame([], $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsExpandedArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
@@ -109,7 +127,9 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame(array_merge($this->guestRole, $this->adminRole), $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetPermissions(): void
     {
         $this->adminRolesBuilder->method('getPermissionLabels')->willReturn(['label' => 'permission']);

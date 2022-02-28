@@ -22,7 +22,9 @@ use Symfony\Component\Translation\Translator;
 
 class SecurityRolesBuilderTest extends TestCase
 {
-    /** @var Stub&AuthorizationCheckerInterface */
+    /**
+     * @var Stub&AuthorizationCheckerInterface
+     */
     private Stub $authorizationChecker;
 
     private SecurityRolesBuilder $securityRolesBuilder;
@@ -70,7 +72,9 @@ class SecurityRolesBuilderTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsExpandedRoles(): void
     {
         $this->authorizationChecker->method('isGranted')->willReturnMap([
@@ -108,7 +112,9 @@ class SecurityRolesBuilderTest extends TestCase
         static::assertSame($expectedExpandedRoles, $expandedRoles);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsRoles(): void
     {
         $this->authorizationChecker->method('isGranted')->willReturnMap([

@@ -36,7 +36,9 @@ class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
         $this->load();
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService(BasicPageAdmin::class);

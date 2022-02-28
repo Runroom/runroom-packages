@@ -22,7 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 abstract class SonataAdminTestCase extends KernelTestCase
 {
-    /** @var AdminInterface<T> */
+    /**
+     * @var AdminInterface<T>
+     */
     protected AdminInterface $admin;
 
     protected function setUp(): void
@@ -72,7 +74,9 @@ abstract class SonataAdminTestCase extends KernelTestCase
         static::assertTrue($this->admin->hasFilterFieldDescription($field), 'It does not contain filter field: ' . $field);
     }
 
-    /** @param mixed $value */
+    /**
+     * @param mixed $value
+     */
     final protected function assertAdminFilterParametersContainsFilter(string $filter, $value = null): void
     {
         $filterParameters = $this->admin->getFilterParameters();
@@ -94,6 +98,8 @@ abstract class SonataAdminTestCase extends KernelTestCase
         static::assertCount(0, array_filter($exportFields, function (string $exportField) use ($field): bool { return $exportField === $field; }), 'It does contain export field: ' . $field);
     }
 
-    /** @return class-string<AdminInterface>|string  */
+    /**
+     * @return class-string<AdminInterface>|string
+     */
     abstract protected function getAdminClass(): string;
 }

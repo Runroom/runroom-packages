@@ -72,7 +72,9 @@ final class AdminRolesBuilder implements AdminRolesBuilderInterface
         return $permissionLabels;
     }
 
-    /** @phpstan-param AdminInterface<object> $admin */
+    /**
+     * @phpstan-param AdminInterface<object> $admin
+     */
     private function isMaster(AdminInterface $admin): bool
     {
         return $admin->isGranted('MASTER') || $admin->isGranted('OPERATOR')
