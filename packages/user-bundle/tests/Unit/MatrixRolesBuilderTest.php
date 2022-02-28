@@ -15,11 +15,11 @@ namespace Runroom\UserBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument\Token\TokenInterface;
 use Runroom\UserBundle\Security\RolesBuilder\AdminRolesBuilderInterface;
 use Runroom\UserBundle\Security\RolesBuilder\ExpandableRolesBuilderInterface;
 use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilder;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class MatrixRolesBuilderTest extends TestCase
 {
