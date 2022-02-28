@@ -79,6 +79,7 @@ final class MediaAdminController extends CRUDController
             'form' => $formView,
             'datagrid' => $datagrid,
             'formats' => $formats,
+            'export_formats' => [],
         ]);
     }
 
