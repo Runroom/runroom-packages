@@ -119,7 +119,9 @@ final class ResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->resetPasswordHelper->removeResetRequest($token);
 
-            /* @todo: Simplify this when dropping support for Symfony 4 */
+            /*
+             * @todo: Simplify this when dropping support for Symfony 4
+             */
             if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
                 $password = $this->passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
             } else {

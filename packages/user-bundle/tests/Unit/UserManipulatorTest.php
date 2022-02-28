@@ -41,10 +41,8 @@ class UserManipulatorTest extends TestCase
 
     protected function setUp(): void
     {
-        /**
+        /*
          * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
          */
         if (interface_exists(UserPasswordHasherInterface::class) && !method_exists(UserPasswordHasherInterface::class, 'hashPassword')) {
             $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)

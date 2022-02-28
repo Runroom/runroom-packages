@@ -47,7 +47,9 @@ final class UserManipulator
 
         $user->setEmail($identifier);
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
             $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         } else {
@@ -81,7 +83,9 @@ final class UserManipulator
     {
         $user = $this->findUserByIdentifierOrThrowException($identifier);
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
             $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         } else {

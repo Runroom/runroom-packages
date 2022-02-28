@@ -102,15 +102,15 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     /**
      * @test
      *
-     * @psalm-suppress InternalMethod
-     *
      * @see We need to use the internal token generator to generate a valid token for testing purposes
      */
     public function itResetsPassword(): void
     {
         $client = static::createClient();
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $tokenGenerator = $container->get('symfonycasts.reset_password.token_generator');

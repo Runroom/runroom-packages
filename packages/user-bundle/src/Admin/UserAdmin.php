@@ -141,7 +141,9 @@ final class UserAdmin extends AbstractAdmin
             return;
         }
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
             $password = $this->passwordHasher->hashPassword($user, $plainPassword);
         } else {

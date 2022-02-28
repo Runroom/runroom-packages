@@ -25,11 +25,13 @@ abstract class SonataAdminTestCase extends KernelTestCase
     /** @var AdminInterface<T> */
     protected AdminInterface $admin;
 
-    /* @todo: Simplify when dropping support for Symfony 4 */
     protected function setUp(): void
     {
         self::bootKernel();
 
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         /** @var AdminInterface<T> */

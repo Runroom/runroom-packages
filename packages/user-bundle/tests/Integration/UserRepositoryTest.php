@@ -31,7 +31,9 @@ class UserRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get('runroom_user.repository.user');

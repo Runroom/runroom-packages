@@ -53,7 +53,9 @@ class UserProviderTest extends TestCase
     {
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
 
-        /* @todo: Simplify when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify when dropping support for Symfony 4
+         */
         $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
         $this->expectExceptionMessage('User "user@localhost" not found.');
 
@@ -66,7 +68,9 @@ class UserProviderTest extends TestCase
         $this->expectedUser->setEnabled(false);
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
 
-        /* @todo: Simplify when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify when dropping support for Symfony 4
+         */
         $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
         $this->expectExceptionMessage('User "user@localhost" not found.');
 
@@ -112,7 +116,9 @@ class UserProviderTest extends TestCase
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn(null);
 
-        /* @todo: Simplify when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify when dropping support for Symfony 4
+         */
         $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
         $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
 
