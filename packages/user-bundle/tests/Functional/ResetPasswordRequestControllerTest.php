@@ -30,6 +30,10 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     public function itSubmitsResetPasswordRequestWithNonExistentUser(): void
     {
         $client = static::createClient();
+
+        // @todo: Simplify when this gets solved: https://github.com/symfony/symfony/issues/45580
+        $client->disableReboot();
+
         $client->request('GET', '/reset-password');
 
         static::assertResponseIsSuccessful();
@@ -50,6 +54,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     public function itSubmitsResetPasswordRequest(): void
     {
         $client = static::createClient();
+
+        // @todo: Simplify when this gets solved: https://github.com/symfony/symfony/issues/45580
+        $client->disableReboot();
 
         UserFactory::createOne([
             'email' => 'email@localhost',
