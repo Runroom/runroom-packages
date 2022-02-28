@@ -80,7 +80,7 @@ class MatrixRolesBuilderTest extends TestCase
     /** @test */
     public function itGetsArrayRoles(): void
     {
-        $this->tokenStorage->method('getToken')->willReturn(TokenInterface::class);
+        $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
         $this->expandableRolesBuilder->method('getRoles')->willReturn($this->guestRole);
         $result = $this->matrixRolesBuilder->getRoles('domain');
@@ -101,7 +101,7 @@ class MatrixRolesBuilderTest extends TestCase
     /** @test */
     public function itGetsExpandedArrayRoles(): void
     {
-        $this->tokenStorage->method('getToken')->willReturn(TokenInterface::class);
+        $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
         $this->expandableRolesBuilder->method('getExpandedRoles')->willReturn($this->guestRole);
         $result = $this->matrixRolesBuilder->getExpandedRoles('domain');
