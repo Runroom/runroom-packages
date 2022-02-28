@@ -67,3 +67,83 @@ parameters:
             message: "#^Parameter \\#1 \\$exception of method PHPUnit\\\\Framework\\\\TestCase\\:\\:expectException\\(\\) expects class\\-string\\<Throwable\\>, string given\\.$#"
             count: 3
             path: packages/user-bundle/tests/Unit/UserProviderTest.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 1
+            path: packages/basic-page-bundle/src/DependencyInjection/RunroomBasicPageExtension.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 1
+            path: packages/cookies-bundle/src/DependencyInjection/RunroomCookiesExtension.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 1
+            path: packages/form-handler-bundle/src/DependencyInjection/RunroomFormHandlerExtension.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 1
+            path: packages/redirection-bundle/src/DependencyInjection/RunroomRedirectionExtension.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 1
+            path: packages/seo-bundle/src/DependencyInjection/RunroomSeoExtension.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 1
+            path: packages/sortable-behavior-bundle/src/DependencyInjection/RunroomSortableBehaviorExtension.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 1
+            path: packages/translation-bundle/src/DependencyInjection/RunroomTranslationExtension.php
+
+        -
+            message: "#^Call to function is_array\\(\\) with array\\<string, string\\> will always evaluate to true\\.$#"
+            count: 2
+            path: packages/user-bundle/src/DependencyInjection/RunroomUserExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 1
+            path: packages/basic-page-bundle/src/DependencyInjection/RunroomBasicPageExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 1
+            path: packages/cookies-bundle/src/DependencyInjection/RunroomCookiesExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 1
+            path: packages/form-handler-bundle/src/DependencyInjection/RunroomFormHandlerExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 1
+            path: packages/redirection-bundle/src/DependencyInjection/RunroomRedirectionExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 1
+            path: packages/seo-bundle/src/DependencyInjection/RunroomSeoExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 1
+            path: packages/sortable-behavior-bundle/src/DependencyInjection/RunroomSortableBehaviorExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 1
+            path: packages/translation-bundle/src/DependencyInjection/RunroomTranslationExtension.php
+
+        -
+            message: "#^Call to function assert\\(\\) with true will always evaluate to true\\.$#"
+            count: 2
+            path: packages/user-bundle/src/DependencyInjection/RunroomUserExtension.php
