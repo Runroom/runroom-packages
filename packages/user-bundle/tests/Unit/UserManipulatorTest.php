@@ -32,6 +32,8 @@ class UserManipulatorTest extends TestCase
     private ?MockObject $passwordHasher = null;
 
     /**
+     * @psalm-suppress InvalidPropertyAssignmentValue UndefinedDocblockClass
+     *
      * @var (MockObject&UserPasswordEncoderInterface)|null
      */
     private ?MockObject $passwordEncoder = null;
