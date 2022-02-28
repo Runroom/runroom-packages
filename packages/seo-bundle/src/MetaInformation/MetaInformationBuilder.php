@@ -38,7 +38,9 @@ class MetaInformationBuilder
         $this->propertyAccessor = $propertyAccessor;
     }
 
-    /** @param array<string, mixed> $context */
+    /**
+     * @param array<string, mixed> $context
+     */
     public function build(
         MetaInformationProviderInterface $provider,
         array $context,
@@ -76,7 +78,9 @@ class MetaInformationBuilder
         return (string) ($description ?? $routeMetas->getDescription());
     }
 
-    /** @param array<string, mixed> $context */
+    /**
+     * @param array<string, mixed> $context
+     */
     private function replacePlaceholders(array $context, string $text): string
     {
         $contextObject = (object) $context;

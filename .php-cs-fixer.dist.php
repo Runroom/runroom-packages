@@ -34,11 +34,6 @@ $config->setRules([
     'ordered_class_elements' => true,
     'ordered_imports' => true,
     'phpdoc_align' => ['align' => 'left'],
-    'phpdoc_line_span' => [
-        'const' => 'single',
-        'property' => 'single',
-        'method' => 'single',
-    ],
     'phpdoc_order' => true,
     'phpdoc_to_comment' => ['ignored_tags' => ['psalm-suppress', 'phpstan-ignore-next-line']],
     'compact_nullable_typehint' => true,

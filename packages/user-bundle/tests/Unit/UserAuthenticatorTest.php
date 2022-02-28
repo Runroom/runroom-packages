@@ -31,7 +31,9 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 
 class UserAuthenticatorTest extends TestCase
 {
-    /** @var MockObject&UrlGeneratorInterface */
+    /**
+     * @var MockObject&UrlGeneratorInterface
+     */
     private MockObject $urlGenerator;
 
     private Session $session;
@@ -52,7 +54,9 @@ class UserAuthenticatorTest extends TestCase
         $this->userAuthenticator = new UserAuthenticator($this->urlGenerator);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCanAuthenticateWithRequest(): void
     {
         $request = new Request([], [
@@ -74,7 +78,9 @@ class UserAuthenticatorTest extends TestCase
         static::assertSame('username', $request->getSession()->get(Security::LAST_USERNAME));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRedirectsWhenAuthenticationIsSuccess(): void
     {
         $request = new Request();
@@ -102,7 +108,9 @@ class UserAuthenticatorTest extends TestCase
         static::assertInstanceOf(RedirectResponse::class, $response);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRedirectsWhenAuthenticationIsNotSuccess(): void
     {
         $this->session->set('_security.' . $this->firewallName . '.target_path', 'targetValue');

@@ -22,10 +22,14 @@ class AlternateLinksBuilder
 {
     private UrlGeneratorInterface $urlGenerator;
 
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     private array $locales;
 
-    /** @param string[] $locales */
+    /**
+     * @param string[] $locales
+     */
     public function __construct(UrlGeneratorInterface $urlGenerator, array $locales)
     {
         $this->urlGenerator = $urlGenerator;

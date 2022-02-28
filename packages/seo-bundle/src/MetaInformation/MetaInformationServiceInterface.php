@@ -17,6 +17,8 @@ use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 
 interface MetaInformationServiceInterface
 {
-    /** @param array<string, mixed> $context */
+    /**
+     * @param array<string, mixed> $context
+     */
     public function build(array $context): MetaInformationViewModel;
 }

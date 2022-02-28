@@ -19,7 +19,9 @@ use Zenstruck\Foundry\ModelFactory;
 /** @extends ModelFactory<User> */
 final class UserFactory extends ModelFactory
 {
-    /** @return array<string, mixed> */
+    /**
+     * @return array<string, mixed>
+     */
     protected function getDefaults(): array
     {
         return [

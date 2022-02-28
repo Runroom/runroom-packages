@@ -37,7 +37,9 @@ class PageRenderer
         $this->pageViewModel = $pageViewModel;
     }
 
-    /** @param mixed $model */
+    /**
+     * @param mixed $model
+     */
     public function render(string $view, $model = null): string
     {
         $this->pageViewModel->setContent($model);
@@ -51,7 +53,9 @@ class PageRenderer
         return $this->twig->render($event->getView(), ['page' => $event->getPageViewModel()]);
     }
 
-    /** @param mixed $model */
+    /**
+     * @param mixed $model
+     */
     public function renderResponse(string $view, $model = null, Response $response = null): Response
     {
         $this->pageViewModel->setContent($model);

@@ -46,7 +46,9 @@ class RunroomCookiesExtensionTest extends AbstractExtensionTestCase
         ]]);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService(CookiesPageAdmin::class);

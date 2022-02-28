@@ -22,10 +22,14 @@ class CookiesRuntime implements RuntimeExtensionInterface
     private const TYPE_PERFORMANCE = 'performance_cookies';
     private const TYPE_TARGETING = 'targeting_cookies';
 
-    /** @phpstan-var CookiesData */
+    /**
+     * @phpstan-var CookiesData
+     */
     private array $cookies;
 
-    /** @phpstan-param CookiesData $cookies */
+    /**
+     * @phpstan-param CookiesData $cookies
+     */
     public function __construct(array $cookies)
     {
         $this->cookies = $cookies;
@@ -40,7 +44,9 @@ class CookiesRuntime implements RuntimeExtensionInterface
         return $model;
     }
 
-    /** @return string[] */
+    /**
+     * @return string[]
+     */
     private function getCookies(string $type): array
     {
         $cookies = [];

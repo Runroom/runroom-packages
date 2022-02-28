@@ -21,7 +21,9 @@ use Twig\Environment;
 
 final class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itAddsGlobalVariableToTwig(): void
     {
         $this->container->register('twig', Environment::class);

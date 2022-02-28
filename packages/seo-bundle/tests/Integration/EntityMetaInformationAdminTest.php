@@ -20,7 +20,9 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /** @extends SonataAdminTestCase<EntityMetaInformation> */
 class EntityMetaInformationAdminTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('translations');

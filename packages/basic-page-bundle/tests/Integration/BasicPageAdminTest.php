@@ -20,7 +20,9 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /** @extends SonataAdminTestCase<BasicPage> */
 class BasicPageAdminTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllListFields(): void
     {
         $this->assertAdminListContainsField('title');
@@ -29,7 +31,9 @@ class BasicPageAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField('_action');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('translations');
@@ -38,7 +42,9 @@ class BasicPageAdminTest extends SonataAdminTestCase
         $this->assertAdminFormContainsField('metaInformation');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('translations.title');

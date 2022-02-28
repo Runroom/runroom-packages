@@ -16,23 +16,22 @@ namespace Runroom\UserBundle\Util;
 use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserManipulator
 {
     private UserRepositoryInterface $userRepository;
 
     /**
-     * @todo: Simplify this when dropping support for Symfony 4
+     * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
+     * @var UserPasswordHasherInterface
      */
     private object $passwordHasher;
 
     /**
-     * @todo: Simplify this when dropping support for Symfony 4
+     * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     * @param UserPasswordHasherInterface $passwordHasher
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -48,7 +47,9 @@ final class UserManipulator
 
         $user->setEmail($identifier);
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
             $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         } else {
@@ -82,7 +83,9 @@ final class UserManipulator
     {
         $user = $this->findUserByIdentifierOrThrowException($identifier);
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
             $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         } else {
@@ -94,7 +97,9 @@ final class UserManipulator
         $this->userRepository->save($user);
     }
 
-    /** @throws \InvalidArgumentException When user does not exist */
+    /**
+     * @throws \InvalidArgumentException When user does not exist
+     */
     private function findUserByIdentifierOrThrowException(string $identifier): UserInterface
     {
         $user = $this->userRepository->loadUserByIdentifier($identifier);

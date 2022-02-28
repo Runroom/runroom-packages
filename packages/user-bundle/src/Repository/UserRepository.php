@@ -21,10 +21,14 @@ final class UserRepository implements UserRepositoryInterface
 {
     private EntityManagerInterface $entityManager;
 
-    /** @phpstan-var class-string<UserInterface> */
+    /**
+     * @phpstan-var class-string<UserInterface>
+     */
     private string $class;
 
-    /** @phpstan-param class-string<UserInterface> $class */
+    /**
+     * @phpstan-param class-string<UserInterface> $class
+     */
     public function __construct(EntityManagerInterface $entityManager, string $class)
     {
         $this->entityManager = $entityManager;
@@ -47,7 +51,9 @@ final class UserRepository implements UserRepositoryInterface
         $this->entityManager->flush();
     }
 
-    /** @phpstan-return EntityRepository<UserInterface> */
+    /**
+     * @phpstan-return EntityRepository<UserInterface>
+     */
     private function getRepository(): EntityRepository
     {
         return $this->entityManager->getRepository($this->class);

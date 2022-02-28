@@ -43,7 +43,9 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
         static::assertTrue($this->form->isSynchronized());
     }
 
-    /** @return iterable<array{string, bool}> */
+    /**
+     * @return iterable<array{string, bool}>
+     */
     public function submitValuesProvider(): iterable
     {
         yield ['', false];
@@ -51,13 +53,17 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
         yield ['email@localhost.com', true];
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsFormDefaultOptions(): void
     {
         static::assertSame('RunroomUserBundle', $this->form->getConfig()->getOption('translation_domain'));
     }
 
-    /** @return FormExtensionInterface[] */
+    /**
+     * @return FormExtensionInterface[]
+     */
     protected function getExtensions(): array
     {
         return [new ValidatorExtension(Validation::createValidator())];

@@ -15,6 +15,8 @@ namespace Runroom\UserBundle\Security\RolesBuilder;
 
 interface PermissionLabelsBuilderInterface
 {
-    /** @return array<string, string> */
+    /**
+     * @return array<string, string>
+     */
     public function getPermissionLabels(): array;
 }

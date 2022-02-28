@@ -33,7 +33,9 @@ class User implements UserInterface
      */
     private ?int $id = null;
 
-    /** @ORM\Column(type="string", length=180, unique=true) */
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
     private ?string $email = null;
 
     /**
@@ -43,14 +45,20 @@ class User implements UserInterface
      */
     private array $roles = [];
 
-    /** @ORM\Column(type="string") */
+    /**
+     * @ORM\Column(type="string")
+     */
     private ?string $password = null;
     private ?string $plainPassword = null;
 
-    /** @ORM\Column(type="boolean") */
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private bool $enabled = true;
 
-    /** @ORM\Column(type="datetime") */
+    /**
+     * @ORM\Column(type="datetime")
+     */
     private ?\DateTimeInterface $createdAt = null;
 
     public function __toString(): string

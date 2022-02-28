@@ -31,7 +31,9 @@ class UserProviderTest extends TestCase
 
     private UserInterface $expectedUser;
 
-    /** @var MockObject&UserRepositoryInterface */
+    /**
+     * @var MockObject&UserRepositoryInterface
+     */
     private MockObject $repository;
 
     private UserProvider $userProvider;
@@ -48,32 +50,42 @@ class UserProviderTest extends TestCase
         $this->userProvider = new UserProvider($this->repository);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesntLoadsNullUserByIdentifier(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
 
-        /* @todo: Simplify when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify when dropping support for Symfony 4
+         */
         $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
         $this->expectExceptionMessage('User "user@localhost" not found.');
 
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesntLoadsDisabledUserByIdentifier(): void
     {
         $this->expectedUser->setEnabled(false);
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
 
-        /* @todo: Simplify when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify when dropping support for Symfony 4
+         */
         $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
         $this->expectExceptionMessage('User "user@localhost" not found.');
 
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itLoadsUserByIdentifier(): void
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
@@ -84,7 +96,9 @@ class UserProviderTest extends TestCase
         static::assertSame($this->expectedUser, $user);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itLoadsUserByUsername(): void
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
@@ -95,7 +109,9 @@ class UserProviderTest extends TestCase
         static::assertSame($this->expectedUser, $user);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRefreshesUser(): void
     {
         $user = UserFactory::createOne()->object();
@@ -107,19 +123,25 @@ class UserProviderTest extends TestCase
         static::assertSame($user, $refreshedUser);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesntRefreshesNullUser(): void
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn(null);
 
-        /* @todo: Simplify when dropping support for Symfony 4 */
+        /*
+         * @todo: Simplify when dropping support for Symfony 4
+         */
         $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
         $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
 
         $this->userProvider->refreshUser($this->expectedUser);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesntRefreshesWrongUserInstance(): void
     {
         $user = $this->createStub(SymfonyUserInterface::class);
@@ -130,7 +152,9 @@ class UserProviderTest extends TestCase
         $this->userProvider->refreshUser($user);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itUpgradesPassword(): void
     {
         $this->repository->expects(static::once())->method('save')->with($this->expectedUser);
@@ -140,7 +164,9 @@ class UserProviderTest extends TestCase
         static::assertSame('new_password', $this->expectedUser->getPassword());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesntUpgradePasswordForWrongUserInstance(): void
     {
         $user = $this->createStub(SymfonyUserInterface::class);

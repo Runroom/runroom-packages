@@ -19,7 +19,9 @@ use Runroom\UserBundle\Entity\ResetPasswordRequest;
 /** @extends SonataAdminTestCase<ResetPasswordRequest> */
 class ResetPasswordRequestAdminTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllListFields(): void
     {
         $this->assertAdminListContainsField('hashedToken');
@@ -28,13 +30,17 @@ class ResetPasswordRequestAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField('user');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('user');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesNotContainRoute('create');

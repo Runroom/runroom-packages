@@ -27,7 +27,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /** @extends AbstractAdmin<MetaInformation> */
 final class MetaInformationAdmin extends AbstractAdmin
 {
-    /** @param mixed[] $sortValues */
+    /**
+     * @param mixed[] $sortValues
+     */
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues['_sort_by'] = 'routeName';

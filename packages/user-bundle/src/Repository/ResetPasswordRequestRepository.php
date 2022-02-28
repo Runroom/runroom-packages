@@ -25,10 +25,14 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
 {
     private EntityManagerInterface $entityManager;
 
-    /** @phpstan-var class-string<ResetPasswordRequestInterface> */
+    /**
+     * @phpstan-var class-string<ResetPasswordRequestInterface>
+     */
     private string $class;
 
-    /** @phpstan-param class-string<ResetPasswordRequestInterface> $class */
+    /**
+     * @phpstan-param class-string<ResetPasswordRequestInterface> $class
+     */
     public function __construct(EntityManagerInterface $entityManager, string $class)
     {
         $this->entityManager = $entityManager;
@@ -102,7 +106,9 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
         return $query->execute();
     }
 
-    /** @phpstan-return EntityRepository<ResetPasswordRequestInterface> */
+    /**
+     * @phpstan-return EntityRepository<ResetPasswordRequestInterface>
+     */
     private function getRepository(): EntityRepository
     {
         return $this->entityManager->getRepository($this->class);

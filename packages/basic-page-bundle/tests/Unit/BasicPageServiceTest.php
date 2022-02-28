@@ -21,7 +21,9 @@ use Runroom\BasicPageBundle\Service\BasicPageService;
 
 class BasicPageServiceTest extends TestCase
 {
-    /** @var MockObject&BasicPageRepository */
+    /**
+     * @var MockObject&BasicPageRepository
+     */
     private $repository;
 
     private BasicPageService $service;
@@ -33,7 +35,9 @@ class BasicPageServiceTest extends TestCase
         $this->service = new BasicPageService($this->repository);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsBasicPage(): void
     {
         $basicPage = new BasicPage();

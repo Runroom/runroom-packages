@@ -31,10 +31,14 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
     private PropertyAccessorInterface $propertyAccessor;
     private EntityManagerInterface $entityManager;
 
-    /** @var array<class-string, array{ route: string, routeParameters: array<string, string> }> */
+    /**
+     * @var array<class-string, array{ route: string, routeParameters: array<string, string> }>
+     */
     private array $configuration = [];
 
-    /** @param array<class-string, array{ route: string, routeParameters: array<string, string> }> $configuration */
+    /**
+     * @param array<class-string, array{ route: string, routeParameters: array<string, string> }> $configuration
+     */
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
         PropertyAccessorInterface $propertyAccessor,

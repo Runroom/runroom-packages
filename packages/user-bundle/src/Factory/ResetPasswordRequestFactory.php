@@ -20,7 +20,9 @@ use Zenstruck\Foundry\ModelFactory;
 /** @extends ModelFactory<ResetPasswordRequest> */
 final class ResetPasswordRequestFactory extends ModelFactory
 {
-    /** @return array<string, mixed> */
+    /**
+     * @return array<string, mixed>
+     */
     protected function getDefaults(): array
     {
         return [
@@ -36,7 +38,9 @@ final class ResetPasswordRequestFactory extends ModelFactory
         return ResetPasswordRequest::class;
     }
 
-    /** @return static */
+    /**
+     * @return static
+     */
     protected function initialize()
     {
         return $this->instantiateWith((new Instantiator())->alwaysForceProperties());

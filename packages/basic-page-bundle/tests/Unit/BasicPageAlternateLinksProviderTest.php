@@ -30,7 +30,9 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         $this->provider = new BasicPageAlternateLinksProvider();
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCanGenerateAlternateLinksIfValidContext(): void
     {
         $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
@@ -42,7 +44,9 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         static::assertFalse($this->provider->canGenerateAlternateLink(['model' => new \stdClass()], 'es'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsRouteParameters(): void
     {
         $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
@@ -56,14 +60,18 @@ class BasicPageAlternateLinksProviderTest extends TestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsNullParametersForAnInvalidContext(): void
     {
         static::assertNull($this->provider->getParameters([], 'es'));
         static::assertNull($this->provider->getParameters(['model' => new \stdClass()], 'es'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itProvidesAlternateLinks(): void
     {
         static::assertTrue($this->provider->providesAlternateLinks('runroom.basic_page.route.show'));

@@ -23,10 +23,14 @@ use Twig\Environment;
 
 class RolesMatrixRuntimeTest extends TestCase
 {
-    /** @var MockObject&Environment */
+    /**
+     * @var MockObject&Environment
+     */
     private MockObject $twig;
 
-    /** @var Stub&MatrixRolesBuilderInterface */
+    /**
+     * @var Stub&MatrixRolesBuilderInterface
+     */
     private Stub $rolesBuilder;
 
     private RolesMatrixRuntime $runtime;
@@ -39,7 +43,9 @@ class RolesMatrixRuntimeTest extends TestCase
         $this->runtime = new RolesMatrixRuntime($this->twig, $this->rolesBuilder);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersRolesList(): void
     {
         $childForm = new FormView();
@@ -84,7 +90,9 @@ class RolesMatrixRuntimeTest extends TestCase
         static::assertSame('rendered string', $rolesList);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersRolesMatrix(): void
     {
         $childForm = new FormView();

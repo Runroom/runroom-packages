@@ -31,13 +31,17 @@ class RedirectRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get(RedirectRepository::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsRedirect(): void
     {
         RedirectFactory::createOne(['source' => '/redirect', 'publish' => true]);
@@ -56,7 +60,9 @@ class RedirectRepositoryTest extends KernelTestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsNullIfItDoesNotFindARedirect(): void
     {
         $redirect = $this->repository->findRedirect('/it-is-not-there');
@@ -64,7 +70,9 @@ class RedirectRepositoryTest extends KernelTestCase
         static::assertNull($redirect);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsNullIfTheRedirectIsUnpublish(): void
     {
         RedirectFactory::createOne([
@@ -77,7 +85,9 @@ class RedirectRepositoryTest extends KernelTestCase
         static::assertNull($redirect);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsTheRedirect(): void
     {
         RedirectFactory::createOne([

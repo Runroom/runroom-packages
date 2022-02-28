@@ -30,7 +30,9 @@ class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
         ];
     }
 
-    /** @return string[] */
+    /**
+     * @return string[]
+     */
     protected function getRoutes(): array
     {
         return ['dummy_route'];

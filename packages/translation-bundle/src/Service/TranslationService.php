@@ -20,19 +20,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /** @final */
 class TranslationService
 {
-    /** @var EntityRepository<Translation> */
+    /**
+     * @var EntityRepository<Translation>
+     */
     private EntityRepository $repository;
 
     private TranslatorInterface $translator;
 
-    /** @param EntityRepository<Translation> $repository */
+    /**
+     * @param EntityRepository<Translation> $repository
+     */
     public function __construct(EntityRepository $repository, TranslatorInterface $translator)
     {
         $this->repository = $repository;
         $this->translator = $translator;
     }
 
-    /** @param array<string, string> $parameters */
+    /**
+     * @param array<string, string> $parameters
+     */
     public function translate(string $key, array $parameters = [], string $locale = null): string
     {
         $translation = $this->repository->findOneBy(['key' => $key]);

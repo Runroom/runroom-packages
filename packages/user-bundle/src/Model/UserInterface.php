@@ -19,7 +19,9 @@ interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUse
 {
     public const ROLE_DEFAULT = 'ROLE_USER';
 
-    /** @return mixed */
+    /**
+     * @return mixed
+     */
     public function getId();
 
     public function getUserIdentifier(): string;
@@ -28,10 +30,14 @@ interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUse
 
     public function setEmail(?string $email): self;
 
-    /** @param string[] $roles */
+    /**
+     * @param string[] $roles
+     */
     public function setRoles(array $roles): self;
 
-    /** @todo: Remove this method when dropping support for Symfony 4. */
+    /**
+     * @todo: Remove this method when dropping support for Symfony 4.
+     */
     public function getPassword(): ?string;
 
     public function setPassword(?string $password): self;

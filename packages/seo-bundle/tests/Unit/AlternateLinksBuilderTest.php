@@ -23,10 +23,14 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AlternateLinksBuilderTest extends TestCase
 {
-    /** @var MockObject&UrlGeneratorInterface */
+    /**
+     * @var MockObject&UrlGeneratorInterface
+     */
     private $urlGenerator;
 
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     private array $locales;
 
     private DummyAlternateLinksProvider $provider;
@@ -44,13 +48,17 @@ class AlternateLinksBuilderTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotProvideAnyAlternateLinks(): void
     {
         static::assertFalse($this->provider->providesAlternateLinks('default'));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsAlternateLinksForRoute(): void
     {
         $route = 'dummy_route';
@@ -71,7 +79,9 @@ class AlternateLinksBuilderTest extends TestCase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itReturnsEmptyAlternateLinksIfRouteDoesNotExist(): void
     {
         $this->urlGenerator->method('generate')->willThrowException(new RouteNotFoundException());

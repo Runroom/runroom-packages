@@ -16,7 +16,11 @@ namespace Runroom\SeoBundle\Tests\App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseGallery;
 
-/** @ORM\Entity */
+/**
+ * @phpstan-extends BaseGallery<GalleryItem>
+ *
+ * @ORM\Entity
+ */
 class Gallery extends BaseGallery
 {
     /**

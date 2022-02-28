@@ -21,12 +21,16 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
 
     private RequestStack $requestStack;
 
-    /** @var iterable<AlternateLinksProviderInterface> */
+    /**
+     * @var iterable<AlternateLinksProviderInterface>
+     */
     private iterable $providers;
 
     private AlternateLinksBuilder $builder;
 
-    /** @param iterable<AlternateLinksProviderInterface> $providers */
+    /**
+     * @param iterable<AlternateLinksProviderInterface> $providers
+     */
     public function __construct(
         RequestStack $requestStack,
         iterable $providers,
@@ -56,7 +60,9 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
         return null !== $request ? $request->attributes->get('_route', '') : '';
     }
 
-    /** @return array<string, string> */
+    /**
+     * @return array<string, string>
+     */
     private function getCurrentRouteParameters(): array
     {
         $request = $this->requestStack->getCurrentRequest();

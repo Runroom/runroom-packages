@@ -21,7 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TemplateControllerTest extends TestCase
 {
-    /** @var MockObject&PageRenderer */
+    /**
+     * @var MockObject&PageRenderer
+     */
     private $renderer;
 
     private TemplateController $controller;
@@ -33,7 +35,9 @@ class TemplateControllerTest extends TestCase
         $this->controller = new TemplateController($this->renderer);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersTemplate(): void
     {
         $controller = $this->controller;

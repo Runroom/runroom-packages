@@ -52,7 +52,9 @@ class BasicPage implements TranslatableInterface
      */
     private ?string $location = self::LOCATION_NONE;
 
-    /** @ORM\Column(type="boolean") */
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private ?bool $publish = null;
 
     public function __toString(): string

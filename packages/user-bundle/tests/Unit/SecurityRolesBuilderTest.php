@@ -22,7 +22,9 @@ use Symfony\Component\Translation\Translator;
 
 class SecurityRolesBuilderTest extends TestCase
 {
-    /** @var Stub&AuthorizationCheckerInterface */
+    /**
+     * @var Stub&AuthorizationCheckerInterface
+     */
     private Stub $authorizationChecker;
 
     private SecurityRolesBuilder $securityRolesBuilder;
@@ -33,9 +35,10 @@ class SecurityRolesBuilderTest extends TestCase
 
         $sonataConfiguration = new SonataConfiguration('title', 'logo', [
             'confirm_exit' => true,
+            'default_admin_route' => 'edit',
             'default_group' => 'group',
             'default_icon' => 'icon',
-            'default_label_catalogue' => 'label_catalogue',
+            'default_translation_domain' => 'label_catalogue',
             'dropdown_number_groups_per_colums' => 1,
             'form_type' => 'standard',
             'html5_validate' => true,
@@ -49,7 +52,7 @@ class SecurityRolesBuilderTest extends TestCase
             'role_admin' => 'ROLE_ADMIN',
             'role_super_admin' => 'ROLE_SUPER_ADMIN',
             'search' => true,
-            'skin' => 'blue',
+            'skin' => 'skin-blue',
             'sort_admins' => true,
             'stylesheets' => [],
             'use_bootlint' => true,
@@ -69,7 +72,9 @@ class SecurityRolesBuilderTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsExpandedRoles(): void
     {
         $this->authorizationChecker->method('isGranted')->willReturnMap([
@@ -107,7 +112,9 @@ class SecurityRolesBuilderTest extends TestCase
         static::assertSame($expectedExpandedRoles, $expandedRoles);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsRoles(): void
     {
         $this->authorizationChecker->method('isGranted')->willReturnMap([

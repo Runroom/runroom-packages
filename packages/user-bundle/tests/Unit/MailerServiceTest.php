@@ -27,10 +27,14 @@ class MailerServiceTest extends TestCase
 {
     use Factories;
 
-    /** @var MockObject&MailerInterface */
+    /**
+     * @var MockObject&MailerInterface
+     */
     private MockObject $mailer;
 
-    /** @var MockObject&TranslatorInterface */
+    /**
+     * @var MockObject&TranslatorInterface
+     */
     private MockObject $translator;
 
     private MailerService $service;
@@ -49,7 +53,9 @@ class MailerServiceTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCallsMailerWhenUserHasEmail(): void
     {
         $user = UserFactory::createOne(['email' => 'user@email.com'])->object();
@@ -61,7 +67,9 @@ class MailerServiceTest extends TestCase
         $this->service->sendResetPasswordEmail($user, $resetPasswordToken);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesntCallMailerWhenUserDoesntHaveEmail(): void
     {
         $user = UserFactory::createOne(['email' => null])->object();

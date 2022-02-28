@@ -21,7 +21,9 @@ final class CookiesPageViewModel
 {
     private ?CookiesPage $cookiesPage = null;
 
-    /** @phpstan-var CookiesData */
+    /**
+     * @phpstan-var CookiesData
+     */
     private array $cookies = [];
 
     private ?FormView $formView = null;
@@ -38,7 +40,9 @@ final class CookiesPageViewModel
         return $this->cookiesPage;
     }
 
-    /** @phpstan-param CookiesData $cookies */
+    /**
+     * @phpstan-param CookiesData $cookies
+     */
     public function setCookies(array $cookies): self
     {
         $this->cookies = $cookies;
@@ -46,7 +50,9 @@ final class CookiesPageViewModel
         return $this;
     }
 
-    /** @phpstan-return CookiesData */
+    /**
+     * @phpstan-return CookiesData
+     */
     public function getCookies(): array
     {
         return $this->cookies;

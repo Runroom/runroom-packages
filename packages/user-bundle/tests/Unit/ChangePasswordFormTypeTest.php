@@ -47,7 +47,9 @@ class ChangePasswordFormTypeTest extends TypeTestCase
         static::assertSame($expectedData, $this->form->get('plainPassword')->getData());
     }
 
-    /** @return iterable<array{string, string, bool, string|null}> */
+    /**
+     * @return iterable<array{string, string, bool, string|null}>
+     */
     public function submitValuesProvider(): iterable
     {
         yield ['newPassword', 'oldPassword', false, null];
@@ -56,13 +58,17 @@ class ChangePasswordFormTypeTest extends TypeTestCase
         yield 'Password length shorter than 6 characters' => ['new', 'new', false, 'new'];
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itGetsFormDefaultOptions(): void
     {
         static::assertSame('RunroomUserBundle', $this->form->getConfig()->getOption('translation_domain'));
     }
 
-    /** @return FormExtensionInterface[] */
+    /**
+     * @return FormExtensionInterface[]
+     */
     protected function getExtensions(): array
     {
         return [new ValidatorExtension(Validation::createValidator())];

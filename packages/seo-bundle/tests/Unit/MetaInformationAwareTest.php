@@ -19,7 +19,9 @@ use Runroom\SeoBundle\Tests\App\Entity\MetaInformationAwareEntity;
 
 class MetaInformationAwareTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itSetsAndGetsMetaInformation(): void
     {
         $entityMetaInformation = $this->createStub(EntityMetaInformation::class);

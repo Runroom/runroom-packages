@@ -20,35 +20,45 @@ use Runroom\TranslationBundle\Entity\Translation;
 /** @extends SonataAdminTestCase<Translation> */
 class TranslationAdminTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllListFields(): void
     {
         $this->assertAdminListContainsField('key');
         $this->assertAdminListContainsField('value');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('key');
         $this->assertAdminFormContainsField('translations');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('key');
         $this->assertAdminFilterContainsField('translations.value');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesNotContainRoute('create');
         $this->assertAdminRoutesDoesNotContainRoute('delete');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesDefineDefaultFilterParameters(): void
     {
         $this->assertAdminFilterParametersContainsFilter('_sort_by', 'key');

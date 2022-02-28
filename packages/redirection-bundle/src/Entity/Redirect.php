@@ -62,10 +62,14 @@ class Redirect
      */
     private ?int $httpCode = self::PERMANENT;
 
-    /** @ORM\Column(type="boolean") */
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private ?bool $automatic = false;
 
-    /** @ORM\Column(type="boolean") */
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private ?bool $publish = null;
 
     public function __toString(): string

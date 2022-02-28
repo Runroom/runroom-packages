@@ -30,10 +30,14 @@ class CookiesPageService
     private CookiesPageRepository $repository;
     private FormFactoryInterface $formFactory;
 
-    /** @phpstan-var CookiesData */
+    /**
+     * @phpstan-var CookiesData
+     */
     private array $cookies;
 
-    /** @phpstan-param CookiesData $cookies */
+    /**
+     * @phpstan-param CookiesData $cookies
+     */
     public function __construct(
         CookiesPageRepository $repository,
         FormFactoryInterface $formFactory,

@@ -30,7 +30,9 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class FormHandlerTest extends TestCase
 {
-    /** @var MockObject&FormFactoryInterface */
+    /**
+     * @var MockObject&FormFactoryInterface
+     */
     private $formFactory;
 
     private EventDispatcher $eventDispatcher;
@@ -56,7 +58,9 @@ class FormHandlerTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsWhenThereIsNoRequest(): void
     {
         $this->requestStack->pop();
@@ -67,7 +71,9 @@ class FormHandlerTest extends TestCase
         $this->formHandler->handleForm(FormType::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHandlesFormsWithoutBeingSubmitted(): void
     {
         $this->configureForm(false);
@@ -81,7 +87,9 @@ class FormHandlerTest extends TestCase
         static::assertInstanceOf(BasicFormViewModel::class, $model);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHandlesSubmittedForms(): void
     {
         $form = $this->configureForm();
@@ -98,7 +106,9 @@ class FormHandlerTest extends TestCase
         static::assertSame(['success'], $this->session->getFlashBag()->get('form_types'));
     }
 
-    /** @return MockObject&FormInterface */
+    /**
+     * @return MockObject&FormInterface
+     */
     private function configureForm(bool $submitted = true, bool $valid = true): MockObject
     {
         $form = $this->createMock(FormInterface::class);

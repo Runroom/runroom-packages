@@ -22,7 +22,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
@@ -36,9 +35,9 @@ final class ResetPasswordController extends AbstractController
     private ResetPasswordHelperInterface $resetPasswordHelper;
 
     /**
-     * @todo: Simplify this when dropping support for Symfony 4
+     * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
+     * @var UserPasswordHasherInterface
      */
     private object $passwordHasher;
 
@@ -46,9 +45,9 @@ final class ResetPasswordController extends AbstractController
     private UserProvider $userProvider;
 
     /**
-     * @todo: Simplify this when dropping support for Symfony 4
+     * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     * @param UserPasswordHasherInterface $passwordHasher
      */
     public function __construct(
         ResetPasswordHelperInterface $resetPasswordHelper,
@@ -120,7 +119,9 @@ final class ResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->resetPasswordHelper->removeResetRequest($token);
 
-            /* @todo: Simplify this when dropping support for Symfony 4 */
+            /*
+             * @todo: Simplify this when dropping support for Symfony 4
+             */
             if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
                 $password = $this->passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
             } else {

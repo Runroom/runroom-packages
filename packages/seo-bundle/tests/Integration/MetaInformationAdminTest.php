@@ -20,7 +20,9 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /** @extends SonataAdminTestCase<MetaInformation> */
 class MetaInformationAdminTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllListFields(): void
     {
         $this->assertAdminListContainsField('routeName');
@@ -28,27 +30,35 @@ class MetaInformationAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField('description');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('translations');
         $this->assertAdminFormContainsField('image');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('routeName');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesNotContainRoute('create');
         $this->assertAdminRoutesDoesNotContainRoute('delete');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesDefineDefaultFilterParameters(): void
     {
         $this->assertAdminFilterParametersContainsFilter('_sort_by', 'routeName');

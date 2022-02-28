@@ -23,7 +23,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class ChangePasswordFormType extends AbstractType
 {
-    /** @param array<string, mixed> $options */
+    /**
+     * @param array<string, mixed> $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

@@ -34,7 +34,9 @@ class Translation implements TranslatableInterface
      */
     private ?int $id = null;
 
-    /** @ORM\Column(name="translation_key", type="string", unique=true) */
+    /**
+     * @ORM\Column(name="translation_key", type="string", unique=true)
+     */
     private ?string $key = null;
 
     public function __toString(): string

@@ -24,10 +24,14 @@ use Twig\Environment;
 
 class BasicPageControllerTest extends TestCase
 {
-    /** @var MockObject&BasicPageService */
+    /**
+     * @var MockObject&BasicPageService
+     */
     private $service;
 
-    /** @var MockObject&Environment */
+    /**
+     * @var MockObject&Environment
+     */
     private $twig;
 
     private BasicPageController $controller;
@@ -44,7 +48,9 @@ class BasicPageControllerTest extends TestCase
         $this->controller->setContainer($container);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRendersStatic(): void
     {
         $model = new BasicPageViewModel(new BasicPage());

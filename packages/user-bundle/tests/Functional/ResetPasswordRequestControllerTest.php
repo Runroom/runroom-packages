@@ -26,10 +26,16 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     use Factories;
     use ResetDatabase;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itSubmitsResetPasswordRequestWithNonExistentUser(): void
     {
         $client = static::createClient();
+
+        // @todo: Simplify when this gets solved: https://github.com/symfony/symfony/issues/45580
+        $client->disableReboot();
+
         $client->request('GET', '/reset-password');
 
         static::assertResponseIsSuccessful();
@@ -46,10 +52,15 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_check_email');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itSubmitsResetPasswordRequest(): void
     {
         $client = static::createClient();
+
+        // @todo: Simplify when this gets solved: https://github.com/symfony/symfony/issues/45580
+        $client->disableReboot();
 
         UserFactory::createOne([
             'email' => 'email@localhost',
@@ -72,7 +83,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_check_email');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrows404IfTryToResetPasswordWithoutToken(): void
     {
         $client = static::createClient();
@@ -82,7 +95,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertResponseStatusCodeSame(404);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itRedirectsToResetPasswordRequestOnInvalidToken(): void
     {
         $client = static::createClient();
@@ -95,15 +110,15 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     /**
      * @test
      *
-     * @psalm-suppress InternalMethod
-     *
      * @see We need to use the internal token generator to generate a valid token for testing purposes
      */
     public function itResetsPassword(): void
     {
         $client = static::createClient();
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $tokenGenerator = $container->get('symfonycasts.reset_password.token_generator');

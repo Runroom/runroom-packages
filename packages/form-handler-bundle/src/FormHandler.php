@@ -20,7 +20,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class FormHandler
 {
@@ -62,10 +61,7 @@ class FormHandler
                 'form.' . $form->getName() . '.event.success'
             );
 
-            $session = $request->getSession();
-            \assert($session instanceof Session);
-
-            $session->getFlashBag()->add($form->getName(), 'success');
+            $request->getSession()->getFlashBag()->add($form->getName(), 'success');
         }
 
         return $model;

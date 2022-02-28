@@ -31,13 +31,17 @@ class UserRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        /** @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get('runroom_user.repository.user');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itFindsUserGivenItsSlug(): void
     {
         UserFactory::createOne([
@@ -60,7 +64,9 @@ class UserRepositoryTest extends KernelTestCase
         static::assertNull($user->getSalt());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCreatesAnUser(): void
     {
         $user = $this->repository->create();
@@ -68,7 +74,9 @@ class UserRepositoryTest extends KernelTestCase
         static::assertInstanceOf(User::class, $user);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itPersistAnUser(): void
     {
         $user = $this->repository->create();

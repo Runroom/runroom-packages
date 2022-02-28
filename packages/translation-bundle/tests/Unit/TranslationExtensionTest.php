@@ -20,7 +20,9 @@ use Runroom\TranslationBundle\Twig\TranslationExtension;
 
 class TranslationExtensionTest extends TestCase
 {
-    /** @var MockObject&TranslationService */
+    /**
+     * @var MockObject&TranslationService
+     */
     private $service;
 
     private TranslationExtension $extension;
@@ -32,7 +34,9 @@ class TranslationExtensionTest extends TestCase
         $this->extension = new TranslationExtension($this->service);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itTranslates(): void
     {
         $this->service->method('translate')->with('key', [], null)->willReturn('value');
@@ -42,7 +46,9 @@ class TranslationExtensionTest extends TestCase
         static::assertSame('value', $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDefinesAFilter(): void
     {
         $filters = $this->extension->getFilters();

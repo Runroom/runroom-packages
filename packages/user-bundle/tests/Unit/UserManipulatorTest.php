@@ -26,13 +26,21 @@ class UserManipulatorTest extends TestCase
 {
     use Factories;
 
-    /** @var (MockObject&UserPasswordHasherInterface)|null */
+    /**
+     * @var (MockObject&UserPasswordHasherInterface)|null
+     */
     private ?MockObject $passwordHasher = null;
 
-    /** @var (MockObject&UserPasswordEncoderInterface)|null */
+    /**
+     * @psalm-suppress UndefinedDocblockClass
+     *
+     * @var (MockObject&UserPasswordEncoderInterface)|null
+     */
     private ?MockObject $passwordEncoder = null;
 
-    /** @var MockObject&UserRepositoryInterface */
+    /**
+     * @var MockObject&UserRepositoryInterface
+     */
     private MockObject $repository;
 
     private string $identifier;
@@ -41,10 +49,8 @@ class UserManipulatorTest extends TestCase
 
     protected function setUp(): void
     {
-        /**
+        /*
          * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
          */
         if (interface_exists(UserPasswordHasherInterface::class) && !method_exists(UserPasswordHasherInterface::class, 'hashPassword')) {
             $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)
@@ -52,6 +58,9 @@ class UserManipulatorTest extends TestCase
         } elseif (interface_exists(UserPasswordHasherInterface::class)) {
             $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)->getMock();
         } else {
+            /**
+             * @psalm-suppress InvalidPropertyAssignmentValue
+             */
             $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         }
         $passwordHasher = $this->passwordHasher;
@@ -67,7 +76,9 @@ class UserManipulatorTest extends TestCase
         );
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itCreatesUser(): void
     {
         $user = UserFactory::createOne()->object();
@@ -96,7 +107,9 @@ class UserManipulatorTest extends TestCase
         static::assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsWhenActivatingANonExistentUser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -105,7 +118,9 @@ class UserManipulatorTest extends TestCase
         $this->userManipulator->activate('user@localhost');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itThrowsWhenDeactivatingANonExistentUser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -114,7 +129,9 @@ class UserManipulatorTest extends TestCase
         $this->userManipulator->deactivate('user@localhost');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itActivatesUser(): void
     {
         $user = UserFactory::createOne()->object();
@@ -127,7 +144,9 @@ class UserManipulatorTest extends TestCase
         static::assertTrue($user->getEnabled());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDeactivatesUser(): void
     {
         $user = UserFactory::createOne()->object();
@@ -140,7 +159,9 @@ class UserManipulatorTest extends TestCase
         static::assertFalse($user->getEnabled());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itChangesPassword(): void
     {
         $user = UserFactory::createOne()->object();

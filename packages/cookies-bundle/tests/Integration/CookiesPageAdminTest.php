@@ -20,13 +20,17 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /** @extends SonataAdminTestCase<CookiesPage> */
 class CookiesPageAdminTest extends SonataAdminTestCase
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function itHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('translations');
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function itDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesContainRoute('edit');
