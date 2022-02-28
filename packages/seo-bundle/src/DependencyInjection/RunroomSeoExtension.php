@@ -35,10 +35,12 @@ final class RunroomSeoExtension extends Extension
 {
     public const XDEFAULT_LOCALE = 'runroom_seo.xdefault_locale';
 
+    /**
+     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
-        \assert(\is_array($bundles));
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');

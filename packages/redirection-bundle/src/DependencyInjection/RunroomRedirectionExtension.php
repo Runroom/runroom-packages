@@ -21,10 +21,12 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class RunroomRedirectionExtension extends Extension
 {
+    /**
+     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
-        \assert(\is_array($bundles));
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);

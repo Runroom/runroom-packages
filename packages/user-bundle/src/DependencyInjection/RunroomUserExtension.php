@@ -36,10 +36,12 @@ use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
  */
 final class RunroomUserExtension extends Extension
 {
+    /**
+     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
-        \assert(\is_array($bundles));
 
         $configuration = new Configuration();
         /** @phpstan-var UserBundleConfiguration */
@@ -84,11 +86,12 @@ final class RunroomUserExtension extends Extension
      *     throttle_limit: int,
      *     enable_garbage_collection: bool,
      * } $config
+     *
+     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
      */
     private function registerReserPasswordConfiguration(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
     {
         $bundles = $container->getParameter('kernel.bundles');
-        \assert(\is_array($bundles));
 
         if (!class_exists(SymfonyCastsResetPasswordBundle::class) || !isset($bundles['SymfonyCastsResetPasswordBundle'])) {
             throw new \LogicException('Reset password support cannot be enabled as the SymfonyCastsResetPasswordBundle is not installed or not registered. Try running "composer require symfonycasts/reset-password-bundle".');

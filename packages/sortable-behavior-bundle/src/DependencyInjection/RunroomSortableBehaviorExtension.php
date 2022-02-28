@@ -22,13 +22,15 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class RunroomSortableBehaviorExtension extends Extension
 {
+    /**
+     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
         $bundles = $container->getParameter('kernel.bundles');
-        \assert(\is_array($bundles));
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
