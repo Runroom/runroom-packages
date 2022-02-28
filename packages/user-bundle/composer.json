@@ -60,6 +60,9 @@
         "symfonycasts/reset-password-bundle": "^1.9",
         "zenstruck/foundry": "^1.13.2"
     },
+    "conflict": {
+        "symfony/framework-bundle": "6.0.5"
+    },
     "autoload": {
         "psr-4": {
             "Runroom\\UserBundle\\": "src/"
