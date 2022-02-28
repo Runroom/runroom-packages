@@ -138,6 +138,8 @@ class Kernel extends BaseKernel
     /**
      * @todo: Add typehint when dropping support for Symfony 4
      *
+     * @psalm-suppress TooManyArguments
+     *
      * @param RoutingConfigurator $routes
      */
     protected function configureRoutes($routes): void

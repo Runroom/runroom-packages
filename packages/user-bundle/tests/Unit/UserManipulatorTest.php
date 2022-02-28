@@ -32,7 +32,7 @@ class UserManipulatorTest extends TestCase
     private ?MockObject $passwordHasher = null;
 
     /**
-     * @psalm-suppress InvalidPropertyAssignmentValue UndefinedDocblockClass
+     * @psalm-suppress UndefinedDocblockClass
      *
      * @var (MockObject&UserPasswordEncoderInterface)|null
      */
@@ -58,6 +58,9 @@ class UserManipulatorTest extends TestCase
         } elseif (interface_exists(UserPasswordHasherInterface::class)) {
             $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)->getMock();
         } else {
+            /**
+             * @psalm-suppress InvalidPropertyAssignmentValue
+             */
             $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         }
         $passwordHasher = $this->passwordHasher;
