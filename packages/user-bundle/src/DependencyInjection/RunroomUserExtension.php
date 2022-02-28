@@ -39,6 +39,7 @@ final class RunroomUserExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
 
         $configuration = new Configuration();
         /** @phpstan-var UserBundleConfiguration */
@@ -87,6 +88,7 @@ final class RunroomUserExtension extends Extension
     private function registerReserPasswordConfiguration(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
     {
         $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
 
         if (!class_exists(SymfonyCastsResetPasswordBundle::class) || !isset($bundles['SymfonyCastsResetPasswordBundle'])) {
             throw new \LogicException('Reset password support cannot be enabled as the SymfonyCastsResetPasswordBundle is not installed or not registered. Try running "composer require symfonycasts/reset-password-bundle".');

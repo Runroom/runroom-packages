@@ -24,6 +24,7 @@ final class RunroomRedirectionExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
