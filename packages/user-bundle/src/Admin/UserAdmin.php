@@ -22,22 +22,21 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /** @extends AbstractAdmin<UserInterface> */
 final class UserAdmin extends AbstractAdmin
 {
     /**
-     * @todo: Simplify this when dropping support for Symfony 4
+     * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
+     * @var UserPasswordHasherInterface
      */
     private object $passwordHasher;
 
     /**
-     * @todo: Simplify this when dropping support for Symfony 4
+     * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface $passwordHasher
+     * @param UserPasswordHasherInterface $passwordHasher
      *
      * @phpstan-param class-string<UserInterface> $class
      */
