@@ -11,25 +11,26 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\UserBundle\Admin\ResetPasswordRequestAdmin;
-use Runroom\UserBundle\Entity\ResetPasswordRequest;
+use Runroom\Testing\Tests\App\Admin\TestAdmin;
+use Runroom\Testing\Tests\App\Entity\Test;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $resetPasswordRequestAdmin = $services->set('runroom_user.admin.reset_password_request', ResetPasswordRequestAdmin::class)
+    $testAdmin = $services->set(TestAdmin::class)
         ->public()
         ->tag('sonata.admin', [
-            'model_class' => ResetPasswordRequest::class,
+            'model_class' => Test::class,
             'manager_type' => 'orm',
-            'label' => 'Reset password request',
+            'label' => 'Test Entity',
         ]);
 
     /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
-        $resetPasswordRequestAdmin->args([null, ResetPasswordRequest::class, null]);
+        $testAdmin->args([null, Test::class, null]);
     }
 };

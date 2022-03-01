@@ -36,15 +36,24 @@ final class UserAdmin extends AbstractAdmin
     /**
      * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @param UserPasswordHasherInterface $passwordHasher
+     * @param UserPasswordHasherInterface|null $deprecatedPasswordHasher
+     * @param UserPasswordHasherInterface|string $passwordHasher
      *
-     * @phpstan-param class-string<UserInterface> $class
+     * @phpstan-param class-string<UserInterface>|null $deprecatedClass
      */
-    public function __construct(string $code, string $class, string $baseControllerName, object $passwordHasher)
+    public function __construct($passwordHasher, ?string $deprecatedClass = null, ?string $deprecatedBaseControllerName = null, ?object $deprecatedPasswordHasher = null)
     {
-        parent::__construct($code, $class, $baseControllerName);
+        /* @todo: Simplify this when dropping support for Sonata 3 */
+        if ($passwordHasher instanceof UserPasswordHasherInterface) {
+            parent::__construct();
 
-        $this->passwordHasher = $passwordHasher;
+            $this->passwordHasher = $passwordHasher;
+        } else {
+            parent::__construct($passwordHasher, $deprecatedClass, $deprecatedBaseControllerName);
+            \assert($deprecatedPasswordHasher instanceof UserPasswordHasherInterface);
+
+            $this->passwordHasher = $deprecatedPasswordHasher;
+        }
     }
 
     public function configureExportFields(): array

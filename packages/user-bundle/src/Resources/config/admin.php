@@ -14,6 +14,8 @@ declare(strict_types=1);
 use Runroom\UserBundle\Admin\UserAdmin;
 use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Twig\GlobalVariables;
+use Sonata\AdminBundle\Controller\CRUDController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
@@ -25,13 +27,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     /** @todo: Simplify this when dropping support for Symfony 4 */
     $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
 
-    $services->set('runroom_user.admin.user', UserAdmin::class)
+    $userAdmin = $services->set('runroom_user.admin.user', UserAdmin::class)
         ->public()
-        ->arg(0, null)
-        ->arg(1, User::class)
-        ->arg(2, null)
-        ->arg('$passwordHasher', new ReferenceConfigurator($passwordHasherId))
-        ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'User']);
+        ->tag('sonata.admin', [
+            'model_class' => User::class,
+            'manager_type' => 'orm',
+            'label' => 'User',
+        ]);
+
+    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    if (!is_a(CRUDController::class, AbstractController::class, true)) {
+        $userAdmin->args([null, User::class, null, new ReferenceConfigurator($passwordHasherId)]);
+    } else {
+        $userAdmin->arg('$passwordHasher', new ReferenceConfigurator($passwordHasherId));
+    }
 
     $services->set('runroom_user.twig.global_variables', GlobalVariables::class)
         ->arg('$pool', new ReferenceConfigurator('sonata.admin.pool'))

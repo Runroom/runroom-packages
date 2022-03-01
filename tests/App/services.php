@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\SeoBundle\Admin\EntityMetaInformationAdmin;
-use Runroom\SeoBundle\Admin\MetaInformationAdmin;
-use Runroom\SeoBundle\Entity\EntityMetaInformation;
-use Runroom\SeoBundle\Entity\MetaInformation;
+use Runroom\SortableBehaviorBundle\Tests\App\Admin\SortableEntityAdmin;
+use Runroom\SortableBehaviorBundle\Tests\App\Entity\SortableEntity;
+use Runroom\Testing\Tests\App\Admin\TestAdmin;
+use Runroom\Testing\Tests\App\Entity\Test;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -22,29 +22,29 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $metaInformationAdmin = $services->set(MetaInformationAdmin::class)
+    $sortableEntityAdmin = $services->set(SortableEntityAdmin::class)
         ->public()
         ->tag('sonata.admin', [
-            'model_class' => MetaInformation::class,
+            'model_class' => SortableEntity::class,
             'manager_type' => 'orm',
-            'label' => 'SEO',
+            'label' => 'Sortable Entity',
         ]);
 
     /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
-        $metaInformationAdmin->args([null, MetaInformation::class, null]);
+        $sortableEntityAdmin->args([null, SortableEntity::class, null]);
     }
 
-    $entityMetaInformationAdmin = $services->set(EntityMetaInformationAdmin::class)
+    $testAdmin = $services->set(TestAdmin::class)
         ->public()
         ->tag('sonata.admin', [
-            'model_class' => EntityMetaInformation::class,
+            'model_class' => Test::class,
             'manager_type' => 'orm',
-            'label' => 'Entity SEO',
+            'label' => 'Test Entity',
         ]);
 
     /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
-        $entityMetaInformationAdmin->args([null, EntityMetaInformation::class, null]);
+        $testAdmin->args([null, Test::class, null]);
     }
 };
