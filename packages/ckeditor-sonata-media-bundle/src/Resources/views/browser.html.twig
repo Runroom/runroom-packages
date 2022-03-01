@@ -48,13 +48,22 @@ file that was distributed with this source code.
     </tbody>
 {% endblock %}
 
+{% block no_result_content %}
+    <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="fas fa-arrow-circle-right" aria-hidden="true"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">{{ 'no_result'|trans({}, 'SonataAdminBundle') }}</span>
+            <div class="progress">
+                <div class="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
 
     <style>
-        .content {
-            padding: 20px 15px;
-        }
         .wrapper {
             background: #ecf0f5 !important;
         }

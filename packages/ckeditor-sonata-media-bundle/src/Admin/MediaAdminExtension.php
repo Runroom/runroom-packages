@@ -30,12 +30,21 @@ final class MediaAdminExtension extends AbstractAdminExtension
      */
     public function configureRoutes(AdminInterface $admin, object $collection): void
     {
-        $collection->add('ckeditor_browser', 'ckeditor_browser', [
+        $collection->add('browser', 'browser', [
             '_controller' => MediaAdminController::class . '::browserAction',
         ]);
 
-        $collection->add('ckeditor_upload', 'ckeditor_upload', [
+        $collection->add('upload', 'upload', [
             '_controller' => MediaAdminController::class . '::uploadAction',
         ]);
+    }
+
+    public function configureBatchActions(AdminInterface $admin, array $actions): array
+    {
+        if ($admin->isCurrentRoute('browser')) {
+            return [];
+        }
+
+        return $actions;
     }
 }

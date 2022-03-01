@@ -24,8 +24,8 @@ class MediaAdminExtensionTest extends SonataAdminTestCase
      */
     public function itDoesNotHaveDisabledRoutes(): void
     {
-        $this->assertAdminRoutesDoesContainRoute('ckeditor_browser');
-        $this->assertAdminRoutesDoesContainRoute('ckeditor_upload');
+        $this->assertAdminRoutesDoesContainRoute('browser');
+        $this->assertAdminRoutesDoesContainRoute('upload');
     }
 
     protected function getAdminClass(): string
