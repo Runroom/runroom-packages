@@ -11,8 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\UserBundle\Admin\ResetPasswordRequestAdmin;
-use Runroom\UserBundle\Entity\ResetPasswordRequest;
+use Runroom\SortableBehaviorBundle\Tests\App\Admin\SortableEntityAdmin;
+use Runroom\SortableBehaviorBundle\Tests\App\Entity\SortableEntity;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -20,16 +20,16 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $resetPasswordRequestAdmin = $services->set('runroom_user.admin.reset_password_request', ResetPasswordRequestAdmin::class)
+    $sortableEntityAdmin = $services->set(SortableEntityAdmin::class)
         ->public()
         ->tag('sonata.admin', [
-            'model_class' => ResetPasswordRequest::class,
+            'model_class' => SortableEntity::class,
             'manager_type' => 'orm',
-            'label' => 'Reset password request',
+            'label' => 'Sortable Entity',
         ]);
 
     /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
-        $resetPasswordRequestAdmin->args([null, ResetPasswordRequest::class, null]);
+        $sortableEntityAdmin->args([null, SortableEntity::class, null]);
     }
 };

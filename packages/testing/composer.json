@@ -32,7 +32,7 @@
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/orm": "^2.9",
         "knplabs/knp-menu-bundle": "^3.1",
-        "sonata-project/admin-bundle": "^3.103 || ^4.0",
+        "sonata-project/admin-bundle": "^3.103 || ^4.9",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",

@@ -13,13 +13,23 @@ declare(strict_types=1);
 
 use Runroom\BasicPageBundle\Admin\BasicPageAdmin;
 use Runroom\BasicPageBundle\Entity\BasicPage;
+use Sonata\AdminBundle\Controller\CRUDController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set(BasicPageAdmin::class)
+    $basicPageAdmin = $services->set(BasicPageAdmin::class)
         ->public()
-        ->args([null, BasicPage::class, null])
-        ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Basic pages']);
+        ->tag('sonata.admin', [
+            'model_class' => BasicPage::class,
+            'manager_type' => 'orm',
+            'label' => 'Basic pages',
+        ]);
+
+    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    if (!is_a(CRUDController::class, AbstractController::class, true)) {
+        $basicPageAdmin->args([null, BasicPage::class, null]);
+    }
 };
