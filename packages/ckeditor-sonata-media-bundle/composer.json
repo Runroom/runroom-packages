@@ -34,7 +34,7 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
-        "runroom-packages/testing": "^0.15.4",
+        "runroom-packages/testing": "^0.15@dev",
         "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
