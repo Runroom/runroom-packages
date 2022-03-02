@@ -84,9 +84,14 @@ final class MetaInformationAdmin extends AbstractAdmin
             ])
                 ->add('translations', TranslationsType::class, [
                     'label' => false,
+                    'default_locale' => null,
                     'fields' => [
-                        'title' => [],
-                        'description' => [],
+                        'title' => [
+                            'label' => 'Title*',
+                        ],
+                        'description' => [
+                            'label' => 'Description*',
+                        ],
                     ],
                     'constraints' => [
                         new Assert\Valid(),
@@ -97,6 +102,7 @@ final class MetaInformationAdmin extends AbstractAdmin
                 'box_class' => 'box box-solid box-primary',
             ])
                 ->add('image', MediaType::class, [
+                    'required' => false,
                     'context' => 'default',
                     'provider' => 'sonata.media.provider.image',
                 ])

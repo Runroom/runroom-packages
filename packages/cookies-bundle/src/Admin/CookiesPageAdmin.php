@@ -47,9 +47,11 @@ final class CookiesPageAdmin extends AbstractAdmin
             ])
                 ->add('translations', TranslationsType::class, [
                     'label' => false,
-                    'required' => false,
+                    'default_locale' => null,
                     'fields' => [
-                        'title' => [],
+                        'title' => [
+                            'label' => 'Title*',
+                        ],
                         'content' => [
                             'field_type' => CKEditorType::class,
                         ],

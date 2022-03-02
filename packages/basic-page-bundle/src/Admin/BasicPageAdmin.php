@@ -22,6 +22,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /** @extends AbstractAdmin<BasicPage> */
@@ -76,13 +77,17 @@ final class BasicPageAdmin extends AbstractAdmin
             ])
                 ->add('translations', TranslationsType::class, [
                     'label' => false,
+                    'default_locale' => null,
                     'fields' => [
-                        'title' => [],
+                        'title' => [
+                            'label' => 'Title*',
+                        ],
                         'content' => [
+                            'label' => 'Content*',
                             'field_type' => CKEditorType::class,
                         ],
                         'slug' => [
-                            'display' => false,
+                            'field_type' => HiddenType::class,
                         ],
                     ],
                     'constraints' => [

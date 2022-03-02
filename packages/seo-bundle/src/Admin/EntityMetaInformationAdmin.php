@@ -30,7 +30,7 @@ final class EntityMetaInformationAdmin extends AbstractAdmin
             ])
                 ->add('translations', TranslationsType::class, [
                     'label' => false,
-                    'required' => false,
+                    'default_locale' => null,
                     'fields' => [
                         'title' => [],
                         'description' => [],
