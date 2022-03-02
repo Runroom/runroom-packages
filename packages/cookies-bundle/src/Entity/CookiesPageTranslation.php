@@ -35,6 +35,7 @@ class CookiesPageTranslation implements TranslationInterface
     private ?int $id = null;
 
     /**
+     * @Assert\NotNull
      * @Assert\Length(max=255)
      * @ORM\Column(type="string")
      */

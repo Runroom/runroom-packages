@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @final
@@ -35,6 +36,8 @@ class Translation implements TranslatableInterface
     private ?int $id = null;
 
     /**
+     * @Assert\NotNull
+     * @Assert\Length(max=255)
      * @ORM\Column(name="translation_key", type="string", unique=true)
      */
     private ?string $key = null;

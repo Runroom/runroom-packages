@@ -70,7 +70,7 @@ final class TranslationAdmin extends AbstractAdmin
             ->add('key')
             ->add('translations', TranslationsType::class, [
                 'label' => false,
-                'required' => false,
+                'default_locale' => null,
                 'fields' => [
                     'value' => [
                         'field_type' => CKEditorType::class,
