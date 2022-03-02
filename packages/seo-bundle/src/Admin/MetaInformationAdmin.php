@@ -19,9 +19,9 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /** @extends AbstractAdmin<MetaInformation> */
@@ -101,10 +101,13 @@ final class MetaInformationAdmin extends AbstractAdmin
             ->with('Image', [
                 'box_class' => 'box box-solid box-primary',
             ])
-                ->add('image', MediaType::class, [
+                ->add('image', ModelListType::class, [
                     'required' => false,
-                    'context' => 'default',
-                    'provider' => 'sonata.media.provider.image',
+                ], [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ])
             ->end();
     }
