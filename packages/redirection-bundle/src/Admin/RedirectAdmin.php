@@ -17,7 +17,10 @@ use Runroom\RedirectionBundle\Entity\Redirect;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /** @extends AbstractAdmin<Redirect> */
@@ -30,6 +33,16 @@ final class RedirectAdmin extends AbstractAdmin
         'redirect.httpCode.permanent' => Redirect::PERMANENT,
         'redirect.httpCode.temporal' => Redirect::TEMPORAL,
     ];
+
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
+    protected function configureRoutes(object $collection): void
+    {
+        $collection->remove('show');
+    }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
@@ -49,19 +62,19 @@ final class RedirectAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->add('source', 'url', [
+            ->add('source', FieldDescriptionInterface::TYPE_URL, [
                 'hide_protocol' => true,
                 'attributes' => [
                     'target' => '_blank',
                 ],
             ])
-            ->add('destination', 'url', [
+            ->add('destination', FieldDescriptionInterface::TYPE_URL, [
                 'hide_protocol' => true,
                 'attributes' => [
                     'target' => '_blank',
                 ],
             ])
-            ->add('httpCode', 'choice', [
+            ->add('httpCode', FieldDescriptionInterface::TYPE_CHOICE, [
                 'choices' => array_flip(self::$typeChoices),
                 'editable' => true,
                 'catalogue' => 'messages',
@@ -70,7 +83,7 @@ final class RedirectAdmin extends AbstractAdmin
                 'editable' => true,
             ])
             ->add('automatic')
-            ->add('_action', 'actions', [
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
                 'actions' => [
                     'edit' => [],
                     'delete' => [],
@@ -92,9 +105,6 @@ final class RedirectAdmin extends AbstractAdmin
                 'label' => false,
                 'expanded' => true,
             ])
-            ->add('publish')
-            ->add('automatic', null, [
-                'disabled' => true,
-            ]);
+            ->add('publish');
     }
 }

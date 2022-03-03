@@ -19,8 +19,11 @@ use Runroom\BasicPageBundle\Entity\BasicPage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\AdminType;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -37,10 +40,20 @@ final class BasicPageAdmin extends AbstractAdmin
             ->add('publish');
     }
 
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
+    protected function configureRoutes(object $collection): void
+    {
+        $collection->remove('show');
+    }
+
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->addIdentifier('title', null, [
+            ->add('title', null, [
                 'sortable' => true,
                 'sort_field_mapping' => [
                     'fieldName' => 'title',
@@ -49,21 +62,22 @@ final class BasicPageAdmin extends AbstractAdmin
                     'fieldName' => 'translations',
                 ]],
             ])
-            ->add('location', 'choice', [
+            ->add('location', FieldDescriptionInterface::TYPE_CHOICE, [
                 'editable' => true,
                 'choices' => [
                     BasicPage::LOCATION_NONE => 'None',
                     BasicPage::LOCATION_FOOTER => 'Footer',
                 ],
             ])
-            ->add('publish', 'boolean', [
+            ->add('publish', FieldDescriptionInterface::TYPE_BOOLEAN, [
                 'editable' => true,
             ])
-            ->add('_action', 'actions', [
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
                 'actions' => [
                     'open' => [
                         'template' => '@RunroomBasicPage/open.html.twig',
                     ],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ]);

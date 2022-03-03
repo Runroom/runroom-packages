@@ -44,6 +44,8 @@ final class MetaInformationAdmin extends AbstractAdmin
     {
         $collection->remove('create');
         $collection->remove('delete');
+        $collection->remove('show');
+        $collection->remove('batch');
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
@@ -55,7 +57,7 @@ final class MetaInformationAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->addIdentifier('routeName')
+            ->add('routeName')
             ->add('title', null, [
                 'sortable' => true,
                 'sort_field_mapping' => [
@@ -73,6 +75,11 @@ final class MetaInformationAdmin extends AbstractAdmin
                 'sort_parent_association_mappings' => [[
                     'fieldName' => 'translations',
                 ]],
+            ])
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 

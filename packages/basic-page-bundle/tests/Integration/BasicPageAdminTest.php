@@ -16,6 +16,7 @@ namespace Runroom\BasicPageBundle\Tests\Integration;
 use Runroom\BasicPageBundle\Admin\BasicPageAdmin;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 
 /** @extends SonataAdminTestCase<BasicPage> */
 class BasicPageAdminTest extends SonataAdminTestCase
@@ -28,7 +29,7 @@ class BasicPageAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField('title');
         $this->assertAdminListContainsField('location');
         $this->assertAdminListContainsField('publish');
-        $this->assertAdminListContainsField('_action');
+        $this->assertAdminListContainsField(ListMapper::NAME_ACTIONS);
     }
 
     /**

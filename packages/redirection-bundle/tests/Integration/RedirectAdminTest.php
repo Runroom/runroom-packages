@@ -16,6 +16,7 @@ namespace Runroom\RedirectionBundle\Tests\Integration;
 use Runroom\RedirectionBundle\Admin\RedirectAdmin;
 use Runroom\RedirectionBundle\Entity\Redirect;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 
 /** @extends SonataAdminTestCase<Redirect> */
 class RedirectAdminTest extends SonataAdminTestCase
@@ -30,7 +31,7 @@ class RedirectAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField('httpCode');
         $this->assertAdminListContainsField('publish');
         $this->assertAdminListContainsField('automatic');
-        $this->assertAdminListContainsField('_action');
+        $this->assertAdminListContainsField(ListMapper::NAME_ACTIONS);
     }
 
     /**
@@ -42,7 +43,6 @@ class RedirectAdminTest extends SonataAdminTestCase
         $this->assertAdminFormContainsField('destination');
         $this->assertAdminFormContainsField('httpCode');
         $this->assertAdminFormContainsField('publish');
-        $this->assertAdminFormContainsField('automatic');
     }
 
     /**

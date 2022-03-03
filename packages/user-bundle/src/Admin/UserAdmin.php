@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -85,7 +86,12 @@ final class UserAdmin extends AbstractAdmin
         $this->updatePassword($object);
     }
 
-    protected function configureRoutes(RouteCollectionInterface $collection): void
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
+    protected function configureRoutes(object $collection): void
     {
         $collection->remove('show');
     }
@@ -101,13 +107,14 @@ final class UserAdmin extends AbstractAdmin
     {
         $list
             ->add('createdAt')
-            ->addIdentifier('email')
+            ->add('email')
             ->add('enabled', null, [
                 'editable' => true,
             ])
-            ->add('_action', 'actions', [
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
                 'translation_domain' => 'messages',
                 'actions' => [
+                    'edit' => [],
                     'delete' => [],
                     'impersonate' => [
                         'template' => '@RunroomUser/impersonate_user.html.twig',

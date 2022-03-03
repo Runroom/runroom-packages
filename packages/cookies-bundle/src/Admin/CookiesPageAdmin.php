@@ -32,9 +32,10 @@ final class CookiesPageAdmin extends AbstractAdmin
      */
     protected function configureRoutes(object $collection): void
     {
+        $collection->remove('create');
+        $collection->remove('list');
         $collection->remove('show');
         $collection->remove('delete');
-        $collection->remove('list');
         $collection->remove('batch');
         $collection->remove('export');
     }
@@ -42,24 +43,20 @@ final class CookiesPageAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            ->with('Translations', [
-                'box_class' => 'box box-solid box-primary',
-            ])
-                ->add('translations', TranslationsType::class, [
-                    'label' => false,
-                    'default_locale' => null,
-                    'fields' => [
-                        'title' => [
-                            'label' => 'Title*',
-                        ],
-                        'content' => [
-                            'field_type' => CKEditorType::class,
-                        ],
+            ->add('translations', TranslationsType::class, [
+                'label' => false,
+                'default_locale' => null,
+                'fields' => [
+                    'title' => [
+                        'label' => 'Title*',
                     ],
-                    'constraints' => [
-                        new Assert\Valid(),
+                    'content' => [
+                        'field_type' => CKEditorType::class,
                     ],
-                ])
-            ->end();
+                ],
+                'constraints' => [
+                    new Assert\Valid(),
+                ],
+            ]);
     }
 }

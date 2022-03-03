@@ -16,6 +16,7 @@ namespace Runroom\UserBundle\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 
@@ -28,7 +29,12 @@ final class ResetPasswordRequestAdmin extends AbstractAdmin
         $sortValues['_sort_order'] = 'DESC';
     }
 
-    protected function configureRoutes(RouteCollectionInterface $collection): void
+    /**
+     * @todo: Simplify this when dropping support for Sonata 3
+     *
+     * @param RouteCollection|RouteCollectionInterface $collection
+     */
+    protected function configureRoutes(object $collection): void
     {
         $collection
             ->remove('create')
@@ -48,6 +54,11 @@ final class ResetPasswordRequestAdmin extends AbstractAdmin
             ->add('hashedToken')
             ->add('requestedAt')
             ->add('expiresAt')
-            ->add('user');
+            ->add('user')
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
+                'actions' => [
+                    'delete' => [],
+                ],
+            ]);
     }
 }
