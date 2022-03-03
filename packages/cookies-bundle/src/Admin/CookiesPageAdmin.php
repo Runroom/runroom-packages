@@ -22,7 +22,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** @extends AbstractAdmin<CookiesPage> */
+/**
+ * @extends AbstractAdmin<CookiesPage>
+ */
 final class CookiesPageAdmin extends AbstractAdmin
 {
     /**

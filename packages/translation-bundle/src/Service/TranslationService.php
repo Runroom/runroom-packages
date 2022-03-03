@@ -17,7 +17,9 @@ use Doctrine\ORM\EntityRepository;
 use Runroom\TranslationBundle\Entity\Translation;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/** @final */
+/**
+ * @final
+ */
 class TranslationService
 {
     /**

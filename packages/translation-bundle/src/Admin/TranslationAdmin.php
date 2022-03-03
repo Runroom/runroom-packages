@@ -25,7 +25,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** @extends AbstractAdmin<Translation> */
+/**
+ * @extends AbstractAdmin<Translation>
+ */
 final class TranslationAdmin extends AbstractAdmin
 {
     /**

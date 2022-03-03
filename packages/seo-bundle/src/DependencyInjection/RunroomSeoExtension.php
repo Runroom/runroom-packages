@@ -50,7 +50,9 @@ final class RunroomSeoExtension extends Extension
         }
 
         $configuration = new Configuration();
-        /** @phpstan-var SeoBundleConfiguration */
+        /**
+         * @phpstan-var SeoBundleConfiguration
+         */
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->registerForAutoconfiguration(AlternateLinksProviderInterface::class)

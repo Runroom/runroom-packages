@@ -20,7 +20,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 
-/** @extends AbstractAdmin<ResetPasswordRequestInterface> */
+/**
+ * @extends AbstractAdmin<ResetPasswordRequestInterface>
+ */
 final class ResetPasswordRequestAdmin extends AbstractAdmin
 {
     protected function configureDefaultSortValues(array &$sortValues): void

@@ -16,7 +16,9 @@ namespace Runroom\CookiesBundle\ViewModel;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Symfony\Component\Form\FormView;
 
-/** @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration */
+/**
+ * @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration
+ */
 final class CookiesPageViewModel
 {
     private ?CookiesPage $cookiesPage = null;

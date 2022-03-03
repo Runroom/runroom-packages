@@ -16,7 +16,9 @@ namespace Runroom\CookiesBundle\Factory;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<CookiesPage> */
+/**
+ * @extends ModelFactory<CookiesPage>
+ */
 final class CookiesPageFactory extends ModelFactory
 {
     /**

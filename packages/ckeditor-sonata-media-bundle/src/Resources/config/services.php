@@ -28,7 +28,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$mediaManager', new ReferenceConfigurator('sonata.media.manager.media'))
         ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'));
 
-    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    /**
+     * @todo: Simplify this when dropping support for SonataAdminBundle 3
+     */
     if (is_a(CRUDController::class, AbstractController::class, true)) {
         $mediaAdminController
             ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])

@@ -23,7 +23,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-/** @extends AbstractAdmin<Redirect> */
+/**
+ * @extends AbstractAdmin<Redirect>
+ */
 final class RedirectAdmin extends AbstractAdmin
 {
     /**

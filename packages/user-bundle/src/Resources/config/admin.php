@@ -24,7 +24,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    /** @todo: Simplify this when dropping support for Symfony 4 */
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     */
     $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
 
     $userAdmin = $services->set('runroom_user.admin.user', UserAdmin::class)
@@ -35,7 +37,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'label' => 'User',
         ]);
 
-    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    /**
+     * @todo: Simplify this when dropping support for SonataAdminBundle 3
+     */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
         $userAdmin->args([null, User::class, null, new ReferenceConfigurator($passwordHasherId)]);
     } else {

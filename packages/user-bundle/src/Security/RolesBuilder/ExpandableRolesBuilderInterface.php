@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Security\RolesBuilder;
 
-/** @phpstan-import-type Role from RolesBuilderInterface */
+/**
+ * @phpstan-import-type Role from RolesBuilderInterface
+ */
 interface ExpandableRolesBuilderInterface extends RolesBuilderInterface
 {
     /**

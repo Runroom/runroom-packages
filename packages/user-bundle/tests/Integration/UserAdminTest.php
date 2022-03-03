@@ -18,7 +18,9 @@ use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\Test\Factories;
 
-/** @extends SonataAdminTestCase<UserInterface> */
+/**
+ * @extends SonataAdminTestCase<UserInterface>
+ */
 class UserAdminTest extends SonataAdminTestCase
 {
     use Factories;

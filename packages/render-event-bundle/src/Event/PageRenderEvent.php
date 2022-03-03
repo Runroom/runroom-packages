@@ -17,7 +17,9 @@ use Runroom\RenderEventBundle\ViewModel\PageViewModelInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/** @final */
+/**
+ * @final
+ */
 class PageRenderEvent extends Event
 {
     public const EVENT_NAME = 'runroom.event.page.render';

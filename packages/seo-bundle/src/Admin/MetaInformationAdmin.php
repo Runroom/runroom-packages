@@ -24,7 +24,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** @extends AbstractAdmin<MetaInformation> */
+/**
+ * @extends AbstractAdmin<MetaInformation>
+ */
 final class MetaInformationAdmin extends AbstractAdmin
 {
     /**

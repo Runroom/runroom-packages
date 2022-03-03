@@ -18,7 +18,9 @@ use Runroom\RedirectionBundle\Entity\Redirect;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-/** @extends SonataAdminTestCase<Redirect> */
+/**
+ * @extends SonataAdminTestCase<Redirect>
+ */
 class RedirectAdminTest extends SonataAdminTestCase
 {
     /**

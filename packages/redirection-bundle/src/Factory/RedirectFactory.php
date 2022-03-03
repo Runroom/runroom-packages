@@ -16,7 +16,9 @@ namespace Runroom\RedirectionBundle\Factory;
 use Runroom\RedirectionBundle\Entity\Redirect;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<Redirect> */
+/**
+ * @extends ModelFactory<Redirect>
+ */
 final class RedirectFactory extends ModelFactory
 {
     /**

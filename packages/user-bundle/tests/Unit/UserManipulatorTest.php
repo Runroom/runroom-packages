@@ -49,7 +49,7 @@ class UserManipulatorTest extends TestCase
 
     protected function setUp(): void
     {
-        /*
+        /**
          * @todo: Simplify this when dropping support for Symfony 4
          */
         if (interface_exists(UserPasswordHasherInterface::class) && !method_exists(UserPasswordHasherInterface::class, 'hashPassword')) {
@@ -86,7 +86,9 @@ class UserManipulatorTest extends TestCase
         $this->repository->expects(static::once())->method('create')->willReturn($user);
         $this->repository->expects(static::once())->method('save')->with($user);
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if (null !== $this->passwordHasher) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')
@@ -169,7 +171,9 @@ class UserManipulatorTest extends TestCase
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if (null !== $this->passwordHasher) {
             $this->passwordHasher->expects(static::once())
                 ->method('hashPassword')

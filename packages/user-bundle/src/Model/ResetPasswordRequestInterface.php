@@ -16,12 +16,16 @@ namespace Runroom\UserBundle\Model;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface as SymfonyCastsResetPasswordRequestInterface;
 
 if (interface_exists(SymfonyCastsResetPasswordRequestInterface::class)) {
-    /** @psalm-suppress UnrecognizedStatement */
+    /**
+     * @psalm-suppress UnrecognizedStatement
+     */
     interface ResetPasswordRequestInterface extends SymfonyCastsResetPasswordRequestInterface
     {
     }
 } else {
-    /** @psalm-suppress UnrecognizedStatement */
+    /**
+     * @psalm-suppress UnrecognizedStatement
+     */
     interface ResetPasswordRequestInterface
     {
     }

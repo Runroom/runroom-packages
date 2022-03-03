@@ -16,7 +16,9 @@ namespace Runroom\UserBundle\Factory;
 use Runroom\UserBundle\Entity\User;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<User> */
+/**
+ * @extends ModelFactory<User>
+ */
 final class UserFactory extends ModelFactory
 {
     /**

@@ -197,14 +197,18 @@ class MediaAdminControllerTest extends TestCase
         $this->controller->uploadAction($this->request);
     }
 
-    /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */
+    /**
+     * @todo: Simplify when dropping support for sonata-project/admin-bundle 3
+     */
     private function configureAdmin(): void
     {
         if (method_exists(AdminInterface::class, 'getTemplate')) {
             $this->admin->method('getTemplate')->with('layout')->willReturn('layout.html.twig');
         }
 
-        /* @phpstan-ignore-next-line */
+        /**
+         * @phpstan-ignore-next-line
+         */
         if (method_exists(TemplateRegistryAwareInterface::class, 'hasTemplateRegistry')) {
             $this->admin->method('hasTemplateRegistry')->willReturn(true);
         }
@@ -236,7 +240,9 @@ class MediaAdminControllerTest extends TestCase
         $twigRenderer->expects(static::once())->method('setTheme')->with($formView, $formTheme);
     }
 
-    /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */
+    /**
+     * @todo: Simplify when dropping support for sonata-project/admin-bundle 3
+     */
     private function configureRender(string $template, string $rendered): void
     {
         $this->admin->method('getPersistentParameters')->willReturn([
@@ -246,7 +252,9 @@ class MediaAdminControllerTest extends TestCase
         $this->twig->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 
-    /* @todo: Simplify when dropping support for sonata-project/admin-bundle 3 */
+    /**
+     * @todo: Simplify when dropping support for sonata-project/admin-bundle 3
+     */
     private function configureContainer(): void
     {
         $pool = new AdminPool($this->container, [

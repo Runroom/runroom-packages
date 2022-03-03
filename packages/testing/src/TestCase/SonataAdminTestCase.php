@@ -36,7 +36,9 @@ abstract class SonataAdminTestCase extends KernelTestCase
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
-        /** @var AdminInterface<T> */
+        /**
+         * @var AdminInterface<T>
+         */
         $admin = $container->get($this->getAdminClass());
 
         $this->admin = $admin;

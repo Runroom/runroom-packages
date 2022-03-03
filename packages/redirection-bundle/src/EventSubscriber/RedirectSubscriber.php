@@ -28,10 +28,14 @@ final class RedirectSubscriber implements EventSubscriberInterface
         $this->repository = $repository;
     }
 
-    /* @todo: Simplify when dropping support for Symfony 4 */
+    /**
+     * @todo: Simplify when dropping support for Symfony 4
+     */
     public function onKernelRequest(RequestEvent $event): void
     {
-        /* @phpstan-ignore-next-line */
+        /**
+         * @phpstan-ignore-next-line
+         */
         $isMainRequest = method_exists($event, 'isMainRequest') ? $event->isMainRequest() : $event->isMasterRequest();
 
         if (!$isMainRequest) {

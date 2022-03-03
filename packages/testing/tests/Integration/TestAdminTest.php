@@ -17,7 +17,9 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Runroom\Testing\Tests\App\Admin\TestAdmin;
 use Runroom\Testing\Tests\App\Entity\Test;
 
-/** @extends SonataAdminTestCase<Test> */
+/**
+ * @extends SonataAdminTestCase<Test>
+ */
 class TestAdminTest extends SonataAdminTestCase
 {
     /**

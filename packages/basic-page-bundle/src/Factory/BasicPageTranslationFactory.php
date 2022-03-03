@@ -16,7 +16,9 @@ namespace Runroom\BasicPageBundle\Factory;
 use Runroom\BasicPageBundle\Entity\BasicPageTranslation;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<BasicPageTranslation> */
+/**
+ * @extends ModelFactory<BasicPageTranslation>
+ */
 final class BasicPageTranslationFactory extends ModelFactory
 {
     /**

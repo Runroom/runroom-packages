@@ -17,7 +17,9 @@ use Runroom\UserBundle\Entity\ResetPasswordRequest;
 use Zenstruck\Foundry\Instantiator;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<ResetPasswordRequest> */
+/**
+ * @extends ModelFactory<ResetPasswordRequest>
+ */
 final class ResetPasswordRequestFactory extends ModelFactory
 {
     /**

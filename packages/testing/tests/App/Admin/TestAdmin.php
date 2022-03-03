@@ -21,7 +21,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-/** @extends AbstractAdmin<Test> */
+/**
+ * @extends AbstractAdmin<Test>
+ */
 final class TestAdmin extends AbstractAdmin
 {
     protected function configureRoutes(RouteCollectionInterface $collection): void

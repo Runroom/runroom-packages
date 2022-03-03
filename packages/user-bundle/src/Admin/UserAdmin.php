@@ -24,7 +24,9 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-/** @extends AbstractAdmin<UserInterface> */
+/**
+ * @extends AbstractAdmin<UserInterface>
+ */
 final class UserAdmin extends AbstractAdmin
 {
     /**
@@ -44,7 +46,9 @@ final class UserAdmin extends AbstractAdmin
      */
     public function __construct($passwordHasher, ?string $deprecatedClass = null, ?string $deprecatedBaseControllerName = null, ?object $deprecatedPasswordHasher = null)
     {
-        /* @todo: Simplify this when dropping support for Sonata 3 */
+        /**
+         * @todo: Simplify this when dropping support for Sonata 3
+         */
         if ($passwordHasher instanceof UserPasswordHasherInterface) {
             parent::__construct();
 
@@ -157,7 +161,7 @@ final class UserAdmin extends AbstractAdmin
             return;
         }
 
-        /*
+        /**
          * @todo: Simplify this when dropping support for Symfony 4
          */
         if ($this->passwordHasher instanceof UserPasswordHasherInterface) {

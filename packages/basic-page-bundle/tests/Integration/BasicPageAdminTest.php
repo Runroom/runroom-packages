@@ -18,7 +18,9 @@ use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-/** @extends SonataAdminTestCase<BasicPage> */
+/**
+ * @extends SonataAdminTestCase<BasicPage>
+ */
 class BasicPageAdminTest extends SonataAdminTestCase
 {
     /**

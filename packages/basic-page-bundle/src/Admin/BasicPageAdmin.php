@@ -28,7 +28,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** @extends AbstractAdmin<BasicPage> */
+/**
+ * @extends AbstractAdmin<BasicPage>
+ */
 final class BasicPageAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter): void
