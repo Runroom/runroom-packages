@@ -15,14 +15,12 @@ namespace Runroom\BasicPageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\SeoBundle\Behaviors\MetaInformationAware;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @final
- *
  * @ORM\Entity(repositoryClass=BasicPageRepository::class)
  * @ORM\Table(indexes={
  *     @ORM\Index(columns={"publish"}),
@@ -31,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class BasicPage implements TranslatableInterface
 {
     use MetaInformationAware;
-    use ORMBehaviors\Translatable\TranslatableTrait;
+    use TranslatableTrait;
 
     public const LOCATION_NONE = 'none';
     public const LOCATION_FOOTER = 'footer';

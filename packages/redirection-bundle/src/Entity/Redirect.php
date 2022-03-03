@@ -19,8 +19,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @final
- *
  * @ORM\Entity(repositoryClass=RedirectRepository::class)
  * @DoctrineAssert\UniqueEntity("source")
  */

@@ -15,17 +15,15 @@ namespace Runroom\CookiesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @final
- *
  * @ORM\Entity
  */
 class CookiesPageTranslation implements TranslationInterface
 {
-    use ORMBehaviors\Translatable\TranslationTrait;
+    use TranslationTrait;
 
     /**
      * @ORM\Id
