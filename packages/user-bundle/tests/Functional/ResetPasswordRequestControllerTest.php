@@ -123,7 +123,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
 
         $tokenGenerator = $container->get('symfonycasts.reset_password.token_generator');
 
-        /** @phpstan-var Proxy<UserInterface> */
+        /**
+         * @phpstan-var Proxy<UserInterface>
+         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,

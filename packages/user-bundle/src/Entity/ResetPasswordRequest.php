@@ -17,7 +17,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Runroom\UserBundle\Model\ResetPasswordRequestInterface;
 use Runroom\UserBundle\Model\UserInterface;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ */
 class ResetPasswordRequest implements ResetPasswordRequestInterface
 {
     /**

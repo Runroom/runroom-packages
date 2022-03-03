@@ -16,7 +16,9 @@ namespace Runroom\TranslationBundle\Factory;
 use Runroom\TranslationBundle\Entity\Translation;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<Translation> */
+/**
+ * @extends ModelFactory<Translation>
+ */
 final class TranslationFactory extends ModelFactory
 {
     /**

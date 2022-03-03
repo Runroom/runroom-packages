@@ -66,7 +66,9 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom_user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
         $this->assertContainerBuilderHasService('runroom_user.util.user_manipulator', UserManipulator::class);
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if (class_exists(AuthenticatorManager::class)) {
             $this->assertContainerBuilderHasService('runroom_user.security.user_authenticator', UserAuthenticator::class);
         } else {
@@ -140,7 +142,9 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom_user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
         $this->assertContainerBuilderHasService('runroom_user.util.user_manipulator', UserManipulator::class);
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if (class_exists(AuthenticatorManager::class)) {
             $this->assertContainerBuilderHasService('runroom_user.security.user_authenticator', UserAuthenticator::class);
         } else {

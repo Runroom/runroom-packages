@@ -16,12 +16,16 @@ namespace Runroom\CkeditorSonataMediaBundle\Tests\App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseGalleryItem;
 
-/* @todo: Keep only the if part when dropping support for sonata-project/media-bundle 3 */
+/**
+ * @todo: Keep only the if part when dropping support for sonata-project/media-bundle 3
+ */
 if (!class_exists(BaseGalleryItem::class)) {
     class_alias('Sonata\MediaBundle\Entity\BaseGalleryHasMedia', BaseGalleryItem::class);
 }
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ */
 class GalleryItem extends BaseGalleryItem
 {
     /**

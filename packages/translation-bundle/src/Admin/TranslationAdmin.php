@@ -19,12 +19,15 @@ use Runroom\TranslationBundle\Entity\Translation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** @extends AbstractAdmin<Translation> */
+/**
+ * @extends AbstractAdmin<Translation>
+ */
 final class TranslationAdmin extends AbstractAdmin
 {
     /**
@@ -43,6 +46,8 @@ final class TranslationAdmin extends AbstractAdmin
     protected function configureRoutes(object $collection): void
     {
         $collection->remove('create');
+        $collection->remove('show');
+        $collection->remove('batch');
         $collection->remove('delete');
     }
 
@@ -56,11 +61,16 @@ final class TranslationAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->addIdentifier('key')
-            ->add('value', 'html', [
+            ->add('key')
+            ->add('value', FieldDescriptionInterface::TYPE_HTML, [
                 'sortable' => true,
                 'sort_field_mapping' => ['fieldName' => 'value'],
                 'sort_parent_association_mappings' => [['fieldName' => 'translations']],
+            ])
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 

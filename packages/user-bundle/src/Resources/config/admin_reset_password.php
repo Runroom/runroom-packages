@@ -28,7 +28,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'label' => 'Reset password request',
         ]);
 
-    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    /**
+     * @todo: Simplify this when dropping support for SonataAdminBundle 3
+     */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
         $resetPasswordRequestAdmin->args([null, ResetPasswordRequest::class, null]);
     }

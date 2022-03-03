@@ -42,7 +42,9 @@ class UserAuthenticatorTest extends TestCase
 
     protected function setUp(): void
     {
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if (!class_exists(AbstractLoginFormAuthenticator::class)) {
             static::markTestSkipped('Only works with SF 5.1 or higher');
         }
@@ -97,7 +99,9 @@ class UserAuthenticatorTest extends TestCase
          */
         $token = interface_exists(CacheableVoterInterface::class)
             ? new UsernamePasswordToken($user, $this->firewallName) :
-            // @phpstan-ignore-next-line
+            /**
+             * @phpstan-ignore-next-line
+             */
             new UsernamePasswordToken($user->getEmail(), $user->getPassword(), $this->firewallName);
 
         $this->urlGenerator->method('generate')->willReturn('sonata_admin_dashboard');
@@ -128,7 +132,9 @@ class UserAuthenticatorTest extends TestCase
          */
         $token = interface_exists(CacheableVoterInterface::class)
             ? new UsernamePasswordToken($user, $this->firewallName) :
-            // @phpstan-ignore-next-line
+            /**
+             * @phpstan-ignore-next-line
+             */
             new UsernamePasswordToken($user->getEmail(), $user->getPassword(), $this->firewallName);
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);

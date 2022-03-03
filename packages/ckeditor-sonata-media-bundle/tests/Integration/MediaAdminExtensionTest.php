@@ -16,7 +16,9 @@ namespace Runroom\CkeditorSonataMediaBundle\Tests\Integration;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Sonata\MediaBundle\Model\MediaInterface;
 
-/** @extends SonataAdminTestCase<MediaInterface> */
+/**
+ * @extends SonataAdminTestCase<MediaInterface>
+ */
 class MediaAdminExtensionTest extends SonataAdminTestCase
 {
     /**

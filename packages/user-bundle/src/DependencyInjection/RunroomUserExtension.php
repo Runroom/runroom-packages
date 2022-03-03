@@ -44,7 +44,9 @@ final class RunroomUserExtension extends Extension
         $bundles = $container->getParameter('kernel.bundles');
 
         $configuration = new Configuration();
-        /** @phpstan-var UserBundleConfiguration */
+        /**
+         * @phpstan-var UserBundleConfiguration
+         */
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -56,7 +58,9 @@ final class RunroomUserExtension extends Extension
         $loader->load('twig.php');
         $loader->load('util.php');
 
-        /* @todo: Simplify this when dropping support for Symfony 4 */
+        /**
+         * @todo: Simplify this when dropping support for Symfony 4
+         */
         if (class_exists(AuthenticatorManager::class)) {
             $loader->load('security_sf5.php');
         }

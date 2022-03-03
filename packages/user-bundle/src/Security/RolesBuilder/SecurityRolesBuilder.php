@@ -17,7 +17,9 @@ use Sonata\AdminBundle\SonataConfiguration;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/** @phpstan-import-type Role from RolesBuilderInterface */
+/**
+ * @phpstan-import-type Role from RolesBuilderInterface
+ */
 final class SecurityRolesBuilder implements ExpandableRolesBuilderInterface
 {
     private AuthorizationCheckerInterface $authorizationChecker;

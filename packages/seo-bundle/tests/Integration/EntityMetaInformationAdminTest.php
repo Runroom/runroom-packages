@@ -17,7 +17,9 @@ use Runroom\SeoBundle\Admin\EntityMetaInformationAdmin;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 
-/** @extends SonataAdminTestCase<EntityMetaInformation> */
+/**
+ * @extends SonataAdminTestCase<EntityMetaInformation>
+ */
 class EntityMetaInformationAdminTest extends SonataAdminTestCase
 {
     /**

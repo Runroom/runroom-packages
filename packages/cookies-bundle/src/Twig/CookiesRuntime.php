@@ -16,7 +16,9 @@ namespace Runroom\CookiesBundle\Twig;
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
 use Twig\Extension\RuntimeExtensionInterface;
 
-/** @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration */
+/**
+ * @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration
+ */
 class CookiesRuntime implements RuntimeExtensionInterface
 {
     private const TYPE_PERFORMANCE = 'performance_cookies';

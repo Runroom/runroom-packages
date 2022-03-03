@@ -28,7 +28,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'label' => 'Basic pages',
         ]);
 
-    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    /**
+     * @todo: Simplify this when dropping support for SonataAdminBundle 3
+     */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
         $basicPageAdmin->args([null, BasicPage::class, null]);
     }

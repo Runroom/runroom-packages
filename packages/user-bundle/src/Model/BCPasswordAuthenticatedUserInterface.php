@@ -15,14 +15,20 @@ namespace Runroom\UserBundle\Model;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-/* @todo: Simplify this when dropping support for Symfony 4 */
+/**
+ * @todo: Simplify this when dropping support for Symfony 4
+ */
 if (interface_exists(PasswordAuthenticatedUserInterface::class)) {
-    /** @psalm-suppress UnrecognizedStatement */
+    /**
+     * @psalm-suppress UnrecognizedStatement
+     */
     interface BCPasswordAuthenticatedUserInterface extends PasswordAuthenticatedUserInterface
     {
     }
 } else {
-    /** @psalm-suppress UnrecognizedStatement */
+    /**
+     * @psalm-suppress UnrecognizedStatement
+     */
     interface BCPasswordAuthenticatedUserInterface
     {
     }

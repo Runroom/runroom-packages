@@ -22,7 +22,9 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 use function Symfony\Component\String\s;
 
-/** @final */
+/**
+ * @final
+ */
 class MetaInformationBuilder
 {
     public const DEFAULT_ROUTE = 'default';

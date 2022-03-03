@@ -88,7 +88,9 @@ class RedirectSubscriberTest extends TestCase
 
         $this->subscriber->onKernelRequest($event);
 
-        /** @var RedirectResponse */
+        /**
+         * @var RedirectResponse
+         */
         $response = $event->getResponse();
 
         static::assertSame('/redirect', $response->getTargetUrl());

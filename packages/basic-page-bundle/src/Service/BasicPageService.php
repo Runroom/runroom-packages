@@ -16,7 +16,9 @@ namespace Runroom\BasicPageBundle\Service;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 
-/** @final */
+/**
+ * @final
+ */
 class BasicPageService
 {
     private BasicPageRepository $repository;

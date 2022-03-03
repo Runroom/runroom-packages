@@ -30,7 +30,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "abstract_arg" function for referencing parameters that will be replaced when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    /** @todo: Simplify this when dropping support for Symfony 4 */
+    /**
+     * @todo: Simplify this when dropping support for Symfony 4
+     */
     $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
 
     $services->set('runroom_user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class)

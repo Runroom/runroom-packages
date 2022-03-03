@@ -16,7 +16,9 @@ namespace Runroom\UserBundle\Tests\Integration;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Runroom\UserBundle\Entity\ResetPasswordRequest;
 
-/** @extends SonataAdminTestCase<ResetPasswordRequest> */
+/**
+ * @extends SonataAdminTestCase<ResetPasswordRequest>
+ */
 class ResetPasswordRequestAdminTest extends SonataAdminTestCase
 {
     /**

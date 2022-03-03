@@ -17,7 +17,9 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/** @final */
+/**
+ * @final
+ */
 class AlternateLinksBuilder
 {
     private UrlGeneratorInterface $urlGenerator;

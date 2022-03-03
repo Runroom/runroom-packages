@@ -53,7 +53,9 @@ class DeactivateUserCommandTest extends KernelTestCase
      */
     public function itDoesNothingToAnAlreadyInactiveUser(): void
     {
-        /** @phpstan-var Proxy<UserInterface> */
+        /**
+         * @phpstan-var Proxy<UserInterface>
+         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => false,
@@ -69,7 +71,9 @@ class DeactivateUserCommandTest extends KernelTestCase
      */
     public function itDeactivatesUser(): void
     {
-        /** @phpstan-var Proxy<UserInterface> */
+        /**
+         * @phpstan-var Proxy<UserInterface>
+         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,

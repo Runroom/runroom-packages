@@ -23,7 +23,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/** @extends CRUDController<MediaInterface> */
+/**
+ * @extends CRUDController<MediaInterface>
+ */
 final class MediaAdminController extends CRUDController
 {
     private MediaManagerInterface $mediaManager;
@@ -37,7 +39,9 @@ final class MediaAdminController extends CRUDController
         $this->mediaPool = $mediaPool;
     }
 
-    /* @todo: Simplify this when dropping support for sonata-project/admin-bundle 3 */
+    /**
+     * @todo: Simplify this when dropping support for sonata-project/admin-bundle 3
+     */
     public function browserAction(Request $request): Response
     {
         $this->admin->checkAccess('list');
@@ -57,7 +61,9 @@ final class MediaAdminController extends CRUDController
 
         $formats = [];
 
-        /** @var MediaInterface $media */
+        /**
+         * @var MediaInterface $media
+         */
         foreach ($datagrid->getResults() as $media) {
             $id = $media->getId();
             $context = $media->getContext();
@@ -96,7 +102,9 @@ final class MediaAdminController extends CRUDController
 
         $context = $request->query->get('context', $this->mediaPool->getDefaultContext());
 
-        /** @var MediaInterface */
+        /**
+         * @var MediaInterface
+         */
         $media = $this->mediaManager->create();
         $media->setBinaryContent($file);
         $media->setContext($context);

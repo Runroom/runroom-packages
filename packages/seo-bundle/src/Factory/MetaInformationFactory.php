@@ -16,7 +16,9 @@ namespace Runroom\SeoBundle\Factory;
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Zenstruck\Foundry\ModelFactory;
 
-/** @extends ModelFactory<MetaInformation> */
+/**
+ * @extends ModelFactory<MetaInformation>
+ */
 final class MetaInformationFactory extends ModelFactory
 {
     /**

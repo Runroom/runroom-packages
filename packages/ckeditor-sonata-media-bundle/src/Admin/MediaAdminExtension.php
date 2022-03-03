@@ -20,7 +20,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 
-/** @extends AbstractAdminExtension<MediaInterface> */
+/**
+ * @extends AbstractAdminExtension<MediaInterface>
+ */
 final class MediaAdminExtension extends AbstractAdminExtension
 {
     /**

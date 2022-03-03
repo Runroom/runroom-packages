@@ -30,7 +30,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'label' => 'SEO',
         ]);
 
-    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    /**
+     * @todo: Simplify this when dropping support for SonataAdminBundle 3
+     */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
         $metaInformationAdmin->args([null, MetaInformation::class, null]);
     }
@@ -43,7 +45,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'label' => 'Entity SEO',
         ]);
 
-    /* @todo: Simplify this when dropping support for SonataAdminBundle 3 */
+    /**
+     * @todo: Simplify this when dropping support for SonataAdminBundle 3
+     */
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
         $entityMetaInformationAdmin->args([null, EntityMetaInformation::class, null]);
     }

@@ -56,7 +56,9 @@ class ChangePasswordCommandTest extends KernelTestCase
      */
     public function itChangesUserPassword(): void
     {
-        /** @phpstan-var Proxy<UserInterface> */
+        /**
+         * @phpstan-var Proxy<UserInterface>
+         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'password' => 'old_password',

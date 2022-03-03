@@ -20,7 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 
-/** @final */
+/**
+ * @final
+ */
 class PageRenderer
 {
     private Environment $twig;
@@ -44,7 +46,9 @@ class PageRenderer
     {
         $this->pageViewModel->setContent($model);
 
-        /** @var PageRenderEvent */
+        /**
+         * @var PageRenderEvent
+         */
         $event = $this->eventDispatcher->dispatch(
             new PageRenderEvent($view, $this->pageViewModel),
             PageRenderEvent::EVENT_NAME
@@ -60,7 +64,9 @@ class PageRenderer
     {
         $this->pageViewModel->setContent($model);
 
-        /** @var PageRenderEvent */
+        /**
+         * @var PageRenderEvent
+         */
         $event = $this->eventDispatcher->dispatch(
             new PageRenderEvent($view, $this->pageViewModel, $response),
             PageRenderEvent::EVENT_NAME
