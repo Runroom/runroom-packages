@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\App;
 
+use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
+use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
@@ -123,11 +125,11 @@ class Kernel extends BaseKernel
         $container->loadFromExtension('runroom_redirection', [
             'enable_automatic_redirections' => true,
             'automatic_redirections' => [
-                Entity\Entity::class => [
+                Entity::class => [
                     'route' => 'route.entity',
                     'routeParameters' => ['slug' => 'slug'],
                 ],
-                Entity\WrongEntity::class => [
+                WrongEntity::class => [
                     'route' => 'route.missing',
                     'routeParameters' => ['slug' => 'slug'],
                 ],

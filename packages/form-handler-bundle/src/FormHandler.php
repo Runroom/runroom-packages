@@ -52,7 +52,7 @@ class FormHandler
         $form = $this->formFactory->create($type, null, $options);
         $form->handleRequest($request);
 
-        $model = $model ?? new BasicFormViewModel();
+        $model ??= new BasicFormViewModel();
         $model->setForm($form);
 
         if ($model->formIsValid()) {

@@ -46,9 +46,7 @@ final class Configuration implements ConfigurationInterface
                         ->isRequired()
                         ->cannotBeEmpty()
                         ->validate()
-                            ->ifTrue(function (string $config): bool {
-                                return !is_a($config, Media::class, true);
-                            })
+                            ->ifTrue(fn(string $config): bool => !is_a($config, Media::class, true))
                             ->thenInvalid('%s must extend ' . Media::class)
                         ->end()
                     ->end()

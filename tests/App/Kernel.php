@@ -151,7 +151,7 @@ final class Kernel extends BaseKernel
                 ],
                 'remember_me' => [
                     'secret' => 'secret',
-                    'lifetime' => 2629746,
+                    'lifetime' => 2_629_746,
                     'path' => '/',
                 ],
             ]],

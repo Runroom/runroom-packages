@@ -64,12 +64,10 @@ class AlternateLinksBuilderTest extends TestCase
         $route = 'dummy_route';
 
         $this->urlGenerator->expects(static::exactly(2))->method('generate')->willReturnMap(
-            array_map(function (string $locale) use ($route): array {
-                return [$route . '.' . $locale, [
-                    'dummy_param' => 'dummy_value',
-                    'dummy_query' => 'dummy_value',
-                ], UrlGeneratorInterface::ABSOLUTE_URL, $locale];
-            }, $this->locales)
+            array_map(fn(string $locale): array => [$route . '.' . $locale, [
+                'dummy_param' => 'dummy_value',
+                'dummy_query' => 'dummy_value',
+            ], UrlGeneratorInterface::ABSOLUTE_URL, $locale], $this->locales)
         );
 
         $alternateLinks = $this->builder->build($this->provider, ['model' => new DummyViewModel()], $route);
