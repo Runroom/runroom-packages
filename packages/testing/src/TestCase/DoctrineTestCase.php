@@ -60,7 +60,10 @@ abstract class DoctrineTestCase extends KernelTestCase
 
         \assert(false !== $filename);
 
-        return array_map(fn ($value): string => \dirname($filename, 2) . '/Fixtures/' . $value, $this->getDataFixtures());
+        return array_map(
+            fn ($value): string => \dirname($filename, 2) . '/Fixtures/' . $value,
+            $this->getDataFixtures()
+        );
     }
 
     private function ensureSchemaIsCreated(): void

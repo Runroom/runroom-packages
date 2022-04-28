@@ -99,7 +99,10 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
         try {
             return $this->urlGenerator->generate(
                 $redirectConfiguration['route'],
-                array_map(fn ($field) => $changeset[$field][$state] ?? $this->propertyAccessor->getValue($entity, $field), $redirectConfiguration['routeParameters'])
+                array_map(
+                    fn ($field) => $changeset[$field][$state] ?? $this->propertyAccessor->getValue($entity, $field),
+                    $redirectConfiguration['routeParameters']
+                )
             );
         } catch (ExceptionInterface $exception) {
             return null;
