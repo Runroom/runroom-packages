@@ -16,6 +16,8 @@ namespace Runroom\RedirectionBundle\Tests\App;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
+use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
+use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
@@ -123,11 +125,11 @@ class Kernel extends BaseKernel
         $container->loadFromExtension('runroom_redirection', [
             'enable_automatic_redirections' => true,
             'automatic_redirections' => [
-                Entity\Entity::class => [
+                Entity::class => [
                     'route' => 'route.entity',
                     'routeParameters' => ['slug' => 'slug'],
                 ],
-                Entity\WrongEntity::class => [
+                WrongEntity::class => [
                     'route' => 'route.missing',
                     'routeParameters' => ['slug' => 'slug'],
                 ],

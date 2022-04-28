@@ -11,10 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\AdminBundle\Tests\DependencyInjection\Compiler;
+namespace Runroom\UserBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Runroom\UserBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
+use Runroom\UserBundle\Twig\GlobalVariables;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Twig\Environment;
@@ -27,6 +28,7 @@ final class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
     public function itAddsGlobalVariableToTwig(): void
     {
         $this->container->register('twig', Environment::class);
+        $this->container->register('runroom_user.twig.global_variables', GlobalVariables::class);
 
         $this->compile();
 

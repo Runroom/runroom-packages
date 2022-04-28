@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\ViewModel;
 
+use Runroom\CookiesBundle\DependencyInjection\Configuration;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Symfony\Component\Form\FormView;
 
 /**
- * @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration
+ * @phpstan-import-type CookiesData from Configuration
  */
 final class CookiesPageViewModel
 {

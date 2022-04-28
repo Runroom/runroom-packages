@@ -63,9 +63,10 @@ final class UserAdmin extends AbstractAdmin
 
     public function configureExportFields(): array
     {
-        return array_filter(parent::configureExportFields(), static function ($field): bool {
-            return !\in_array($field, ['password', 'salt'], true);
-        });
+        return array_filter(
+            parent::configureExportFields(),
+            static fn ($field): bool => !\in_array($field, ['password', 'salt'], true)
+        );
     }
 
     /**

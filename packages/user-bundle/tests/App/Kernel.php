@@ -119,7 +119,7 @@ class Kernel extends BaseKernel
                 ],
                 'remember_me' => [
                     'secret' => 'secret',
-                    'lifetime' => 2629746,
+                    'lifetime' => 2_629_746,
                     'path' => '/',
                 ],
             ]],
@@ -165,6 +165,10 @@ class Kernel extends BaseKernel
                 'options' => [
                     'legacy_twig_text_extension' => false,
                 ],
+            ]);
+        } else {
+            $container->loadFromExtension('sonata_block', [
+                'http_cache' => false,
             ]);
         }
 

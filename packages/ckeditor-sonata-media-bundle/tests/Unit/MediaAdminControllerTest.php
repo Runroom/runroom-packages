@@ -54,10 +54,7 @@ class MediaAdminControllerTest extends TestCase
      */
     private $mediaManager;
 
-    /**
-     * @var MediaPool
-     */
-    private $mediaPool;
+    private MediaPool $mediaPool;
 
     /**
      * @var MockObject&Environment

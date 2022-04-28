@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Twig;
 
+use Runroom\CookiesBundle\DependencyInjection\Configuration;
 use Runroom\CookiesBundle\ViewModel\CookiesViewModel;
 use Twig\Extension\RuntimeExtensionInterface;
 
 /**
- * @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration
+ * @phpstan-import-type CookiesData from Configuration
  */
 class CookiesRuntime implements RuntimeExtensionInterface
 {

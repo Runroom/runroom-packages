@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Service;
 
+use Runroom\CookiesBundle\DependencyInjection\Configuration;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
@@ -21,7 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @final
  *
- * @phpstan-import-type CookiesData from \Runroom\CookiesBundle\DependencyInjection\Configuration
+ * @phpstan-import-type CookiesData from Configuration
  */
 class CookiesPageService
 {
