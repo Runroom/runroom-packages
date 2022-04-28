@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\App;
 
-use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
-use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
+use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
+use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
