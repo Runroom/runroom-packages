@@ -158,6 +158,6 @@
         "php-cs-fixer": "@php php-cs-fixer fix --ansi --verbose",
         "phpstan": "@php phpstan analyse --no-progress",
         "psalm": "@php psalm --stats",
-        "rector": "@php rector --no-progress-bar --dry-run"
+        "rector": "@php rector --no-progress-bar"
     }
 }
