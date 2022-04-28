@@ -10,7 +10,7 @@ parameters:
     level: 8
     paths:
         - packages
-        - src
+        # - src
         - tests
     excludePaths:
         - */vendor/*
