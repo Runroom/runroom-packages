@@ -30,6 +30,8 @@ final class RedirectSubscriber implements EventSubscriberInterface
 
     /**
      * @todo: Simplify when dropping support for Symfony 4
+     *
+     * @psalm-suppress UndefinedMethod
      */
     public function onKernelRequest(RequestEvent $event): void
     {
