@@ -166,6 +166,10 @@ class Kernel extends BaseKernel
                     'legacy_twig_text_extension' => false,
                 ],
             ]);
+        } else {
+            $container->loadFromExtension('sonata_block', [
+                'http_cache' => false,
+            ]);
         }
 
         $container->loadFromExtension('runroom_user', [

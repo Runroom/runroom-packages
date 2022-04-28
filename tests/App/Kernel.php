@@ -230,6 +230,10 @@ final class Kernel extends BaseKernel
                     'legacy_twig_text_extension' => false,
                 ],
             ]);
+        } else {
+            $container->loadFromExtension('sonata_block', [
+                'http_cache' => false,
+            ]);
         }
 
         $galleryItemKey = interface_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
