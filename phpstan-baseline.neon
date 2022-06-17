@@ -29,6 +29,10 @@ parameters:
             path: .
 
         -
+            message: "#^Offset '.*' on array\\{.*, \\.\\.\\.\\} in isset\\(\\) always exists and is not nullable\\.$#"
+            path: .
+
+        -
             message: "#^Caught class Symfony\\\\Component\\\\Security\\\\Core\\\\Exception\\\\UsernameNotFoundException not found\\.$#"
             count: 1
             path: packages/user-bundle/src/Controller/ResetPasswordController.php
