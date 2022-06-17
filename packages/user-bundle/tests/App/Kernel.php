@@ -22,6 +22,7 @@ use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\Form\Bridge\Symfony\SonataFormBundle;
 use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -51,6 +52,7 @@ class Kernel extends BaseKernel
             new SonataBlockBundle(),
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
+            new SonataFormBundle(),
             new SonataTwigBundle(),
             new TwigBundle(),
             new ZenstruckFoundryBundle(),

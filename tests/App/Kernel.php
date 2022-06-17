@@ -39,6 +39,7 @@ use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\Form\Bridge\Symfony\SonataFormBundle;
 use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
@@ -81,6 +82,7 @@ final class Kernel extends BaseKernel
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataMediaBundle(),
+            new SonataFormBundle(),
             new SonataTwigBundle(),
             new SymfonyCastsResetPasswordBundle(),
             new ZenstruckFoundryBundle(),
