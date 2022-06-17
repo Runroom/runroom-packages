@@ -33,11 +33,6 @@ parameters:
             path: .
 
         -
-            message: "#^Caught class Symfony\\\\Component\\\\Security\\\\Core\\\\Exception\\\\UsernameNotFoundException not found\\.$#"
-            count: 1
-            path: packages/user-bundle/src/Controller/ResetPasswordController.php
-
-        -
             message: "#^Instantiated class Symfony\\\\Component\\\\Security\\\\Core\\\\Exception\\\\UsernameNotFoundException not found\\.$#"
             count: 1
             path: packages/user-bundle/src/Security/UserProvider.php
