@@ -93,6 +93,7 @@ class Kernel extends BaseKernel
             ],
         ];
 
+        // @phpstan-ignore-next-line
         if (class_exists(NativeSessionStorageFactory::class)) {
             $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
         } else {
