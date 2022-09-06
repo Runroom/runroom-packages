@@ -1,10 +1,6 @@
 <?php
+
 declare(strict_types=1);
-
-namespace Runroom\SortableBehaviorBundle\Admin;
-
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 /*
  * This file is part of the Runroom package.
@@ -15,8 +11,15 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
  * file that was distributed with this source code.
  */
 
+namespace Runroom\SortableBehaviorBundle\Admin;
+
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
+
 trait SortableAdminTrait
 {
+    abstract public function getRouterIdParameter(): string;
+
     /**
      * @param mixed[] $sortValues
      */
@@ -34,6 +37,4 @@ trait SortableAdminTrait
     {
         $collection->add('move', $this->getRouterIdParameter() . '/move/{position}');
     }
-
-    abstract public function getRouterIdParameter(): string;
 }
