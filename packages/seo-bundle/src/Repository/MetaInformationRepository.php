@@ -19,6 +19,7 @@ use Runroom\SeoBundle\Entity\MetaInformation;
 
 /**
  * @final
+ *
  * @extends ServiceEntityRepository<MetaInformation>
  */
 class MetaInformationRepository extends ServiceEntityRepository

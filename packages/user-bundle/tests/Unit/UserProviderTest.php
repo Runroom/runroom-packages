@@ -52,6 +52,10 @@ class UserProviderTest extends TestCase
 
     /**
      * @test
+     *
+     * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
+     *
+     * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
      */
     public function itDoesntLoadsNullUserByIdentifier(): void
     {
@@ -68,6 +72,10 @@ class UserProviderTest extends TestCase
 
     /**
      * @test
+     *
+     * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
+     *
+     * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
      */
     public function itDoesntLoadsDisabledUserByIdentifier(): void
     {
@@ -125,6 +133,10 @@ class UserProviderTest extends TestCase
 
     /**
      * @test
+     *
+     * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
+     *
+     * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
      */
     public function itDoesntRefreshesNullUser(): void
     {

@@ -19,6 +19,7 @@ use Runroom\TranslationBundle\Entity\Translation;
 
 /**
  * @final
+ *
  * @extends ServiceEntityRepository<Translation>
  */
 class TranslationRepository extends ServiceEntityRepository
