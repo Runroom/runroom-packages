@@ -18,8 +18,8 @@
     "homepage": "https://github.com/runroom/RunroomCookiesBundle",
     "require": {
         "php": "^7.4 || ^8.0",
-        "doctrine/doctrine-bundle": "^2.4",
-        "doctrine/orm": "^2.9",
+        "doctrine/doctrine-bundle": "^2.3",
+        "doctrine/orm": "^2.8",
         "doctrine/persistence": "^2.0 || ^3.0",
         "knplabs/doctrine-behaviors": "^2.0.6",
         "psr/container": "^1.1 || ^2.0",
