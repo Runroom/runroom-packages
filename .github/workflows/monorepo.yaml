@@ -31,11 +31,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
-          package-directory: packages/${{ matrix.package.folder }}
-          split-repository-organization: runroom
-          split-repository-name: ${{ matrix.package.repository }}
-          user-name: Runroom
-          user-email: software@runroom.com
+          package_directory: packages/${{ matrix.package.folder }}
+          repository_organization: runroom
+          repository_name: ${{ matrix.package.repository }}
+          user_name: Runroom
+          user_email: software@runroom.com
           branch: master
       - if: "startsWith(github.ref, 'refs/tags/')"
         id: tag
@@ -46,9 +46,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           tag: ${{ steps.tag.outputs.CURRENT_TAG }}
-          package-directory: packages/${{ matrix.package.folder }}
-          split-repository-organization: runroom
-          split-repository-name: ${{ matrix.package.repository }}
-          user-name: Runroom
-          user-email: software@runroom.com
+          package_directory: packages/${{ matrix.package.folder }}
+          repository_organization: runroom
+          repository_name: ${{ matrix.package.repository }}
+          user_name: Runroom
+          user_email: software@runroom.com
           branch: master
