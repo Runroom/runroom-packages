@@ -18,7 +18,12 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 trait SortableAdminTrait
 {
-    abstract public function getRouterIdParameter(): string;
+    /**
+     * @todo: Add return typehint when dropping support for Sonata 3
+     *
+     * @return string
+     */
+    abstract public function getRouterIdParameter();
 
     /**
      * @param mixed[] $sortValues
