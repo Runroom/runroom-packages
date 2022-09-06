@@ -125,6 +125,7 @@ final class Kernel extends BaseKernel
             ],
         ];
 
+        // @phpstan-ignore-next-line
         if (method_exists(AbstractController::class, 'renderForm')) {
             $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
         } else {
