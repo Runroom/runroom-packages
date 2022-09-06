@@ -14,14 +14,17 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Command;
 
 use Runroom\UserBundle\Util\UserManipulator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'runroom:user:create', description: 'Create a user.')]
 final class CreateUserCommand extends Command
 {
+    // @todo: Remove static properties when support for Symfony < 5.4 is dropped.
     protected static $defaultName = 'runroom:user:create';
     protected static $defaultDescription = 'Create a user.';
 
@@ -39,6 +42,7 @@ final class CreateUserCommand extends Command
         \assert(null !== static::$defaultDescription);
 
         $this
+            // @todo: Remove setDescription when support for Symfony < 5.4 is dropped.
             ->setDescription(static::$defaultDescription)
             ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->addArgument('password', InputArgument::REQUIRED, 'The password')

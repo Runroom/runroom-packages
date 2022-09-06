@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @final
+ *
  * @extends ServiceEntityRepository<BasicPage>
  */
 class BasicPageRepository extends ServiceEntityRepository

@@ -22,8 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
@@ -147,7 +146,7 @@ final class ResetPasswordController extends AbstractController
             \assert($user instanceof UserInterface);
 
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
-        } catch (UserNotFoundException|UsernameNotFoundException|ResetPasswordExceptionInterface $exception) {
+        } catch (AuthenticationException|ResetPasswordExceptionInterface $exception) {
             return;
         }
 

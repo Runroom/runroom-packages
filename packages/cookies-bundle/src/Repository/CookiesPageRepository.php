@@ -19,6 +19,7 @@ use Runroom\CookiesBundle\Entity\CookiesPage;
 
 /**
  * @final
+ *
  * @extends ServiceEntityRepository<CookiesPage>
  */
 class CookiesPageRepository extends ServiceEntityRepository

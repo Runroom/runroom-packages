@@ -46,7 +46,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $user = $this->userRepository->loadUserByIdentifier($identifier);
 
         if (null === $user || !$user->getEnabled()) {
-            throw $this->buildUserNotFoundException(sprintf('User "%s" not found.', $identifier), $identifier);
+            throw $this->buildUserNotFoundException(sprintf('User "%s" not found.', $identifier));
         }
 
         return $user;
@@ -63,7 +63,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $refreshedUser = $this->userRepository->loadUserByIdentifier($userIdentifier);
 
         if (null === $refreshedUser) {
-            throw $this->buildUserNotFoundException(sprintf('User with identifier "%s" not found.', $userIdentifier), $userIdentifier);
+            throw $this->buildUserNotFoundException(sprintf('User with identifier "%s" not found.', $userIdentifier));
         }
 
         return $refreshedUser;
@@ -92,17 +92,16 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     }
 
     /**
-     * @todo: Simplify when dropping support for Symfony 4
+     * @todo: Simplify when dropping support for Symfony 4.
+     *
+     * @psalm-suppress UndefinedClass, InvalidReturnType, InvalidReturnStatement
      */
-    private function buildUserNotFoundException(string $message, string $identifier): AuthenticationException
+    private function buildUserNotFoundException(string $message): AuthenticationException
     {
         if (!class_exists(UserNotFoundException::class)) {
             return new UsernameNotFoundException($message);
         }
 
-        $exception = new UserNotFoundException($message);
-        $exception->setUserIdentifier($identifier);
-
-        return $exception;
+        return new UserNotFoundException($message);
     }
 }

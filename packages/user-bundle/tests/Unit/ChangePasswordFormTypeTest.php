@@ -33,6 +33,7 @@ class ChangePasswordFormTypeTest extends TypeTestCase
 
     /**
      * @test
+     *
      * @dataProvider submitValuesProvider
      */
     public function itSubmitsWithDifferentValues(string $fistPassword, string $secondPassword, bool $isValid, ?string $expectedData): void

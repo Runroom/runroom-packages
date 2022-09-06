@@ -20,6 +20,7 @@ use Runroom\RedirectionBundle\Entity\Redirect;
 
 /**
  * @final
+ *
  * @extends ServiceEntityRepository<Redirect>
  */
 class RedirectRepository extends ServiceEntityRepository

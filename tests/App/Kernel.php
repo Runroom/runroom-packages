@@ -39,16 +39,17 @@ use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\Form\Bridge\Symfony\SonataFormBundle;
 use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorageFactory;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
@@ -81,6 +82,7 @@ final class Kernel extends BaseKernel
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataMediaBundle(),
+            new SonataFormBundle(),
             new SonataTwigBundle(),
             new SymfonyCastsResetPasswordBundle(),
             new ZenstruckFoundryBundle(),
@@ -117,13 +119,15 @@ final class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'http_method_override' => false,
             'mailer' => [
                 'enabled' => true,
                 'dsn' => 'null://null',
             ],
         ];
 
-        if (class_exists(NativeSessionStorageFactory::class)) {
+        // @phpstan-ignore-next-line
+        if (method_exists(AbstractController::class, 'renderForm')) {
             $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
         } else {
             $frameworkConfig['session'] = ['storage_id' => 'session.storage.mock_file'];

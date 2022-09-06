@@ -33,6 +33,7 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
 
     /**
      * @test
+     *
      * @dataProvider submitValuesProvider
      */
     public function itSubmitsWithDifferentValues(string $email, bool $isValid): void

@@ -11,6 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Psr\Log\NullLogger;
 use Runroom\SortableBehaviorBundle\Tests\App\Admin\SortableEntityAdmin;
 use Runroom\SortableBehaviorBundle\Tests\App\Entity\SortableEntity;
 use Runroom\Testing\Tests\App\Admin\TestAdmin;
@@ -51,4 +52,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     if (!is_a(CRUDController::class, AbstractController::class, true)) {
         $testAdmin->args([null, Test::class, null]);
     }
+
+    $services->set('logger', NullLogger::class);
 };
