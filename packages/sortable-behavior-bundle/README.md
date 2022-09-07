@@ -39,7 +39,6 @@ This bundle checks if you are using [Gedmo Sortable](https://github.com/doctrine
 We provide a trait, so you can easily add the position field with the Gedmo configuration on each entity you want to be able to sort:
 
 ```php
-
 namespace App\Entity;
 
 use Runroom\SortableBehaviorBundle\Behaviors\Sortable;
@@ -54,7 +53,6 @@ class Example
 And then, on your admin class, you can add the `SortableAdminTrait` trait to be able to sort the entities on the list view:
 
 ```php
-
 namespace App\Admin;
 
 use Runroom\SortableBehaviorBundle\Admin\SortableAdminTrait;
@@ -107,22 +105,20 @@ runroom_sortable_behavior:
 In order to use a draggable list instead of up/down buttons, change the template in the `move` action to `@RunroomSortableBehavior/sort_drag_drop.html.twig`.
 
 ```php
-<?php
-
-    // ClientAdmin.php
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        $listMapper
-            ->add('_action', null, array(
-                'actions' => array(
-                    'move' => array(
-                        'template' => '@RunroomSortableBehavior/sort_drag_drop.html.twig',
-                        'enable_top_bottom_buttons' => true, //optional
-                    ),
-                ),
-            ))
-        ;
-    }
+protected function configureListFields(ListMapper $list): void
+{
+    $list
+        // ... rest of your list fields
+        ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
+            'actions' => [
+                // ... rest of your actions
+                'move'   => [
+                    'template' => '@RunroomSortableBehavior/sort_drag_drop.html.twig',
+                    'enable_top_bottom_buttons' => true, // optional
+                ],
+            ],
+        ]);
+}
 ```
 
 ## Contribute
