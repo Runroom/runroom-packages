@@ -76,7 +76,7 @@ runroom_sortable_behavior:
 
 ### Use a draggable list instead of up/down buttons
 
-In order to use a draggable list instead of up/down buttons, change the template in the `move` action to `@RunroomSortableBehavior/sort.html.twig`.
+In order to use a draggable list instead of up/down buttons, change the template in the `move` action to `@RunroomSortableBehavior/sort_drag_drop.html.twig`.
 
 ```php
 <?php
