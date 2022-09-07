@@ -100,7 +100,6 @@ runroom_sortable_behavior:
     sortable_groups:
         entities:
             App\Entity\Baz: [group]
-            
 ```
 
 ### Use a draggable list instead of up/down buttons
