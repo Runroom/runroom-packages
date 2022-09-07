@@ -74,7 +74,7 @@ class ExampleAdmin extends AbstractAdmin
             ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
                 'actions' => [
                     // ... rest of your actions
-                    'move'   => [
+                    'move' => [
                         'template' => '@RunroomSortableBehavior/sort.html.twig',
                     ],
                 ],
