@@ -54,7 +54,7 @@ In order to use a draggable list instead of up/down buttons, change the template
             ->add('_action', null, array(
                 'actions' => array(
                     'move' => array(
-                        'template' => '@RunroomSortableBehavior/sort.html.twig',
+                        'template' => '@RunroomSortableBehavior/sort_drag_drop.html.twig',
                         'enable_top_bottom_buttons' => true, //optional
                     ),
                 ),
