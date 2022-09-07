@@ -32,6 +32,31 @@ return [
 ];
 ```
 
+### Use a draggable list instead of up/down buttons
+
+In order to use a draggable list instead of up/down buttons, change the template in the `move` action to `@RunroomSortableBehavior/sort.html.twig`.
+
+```php
+<?php
+
+    // ClientAdmin.php
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->add('_action', null, array(
+                'actions' => array(
+                    'move' => array(
+                        'template' => '@RunroomSortableBehavior/sort.html.twig',
+                        'enable_top_bottom_buttons' => true, //optional
+                    ),
+                ),
+            ))
+        ;
+    }
+```
+### Submitting a Pull Request
+The package is a part of a mono repository: https://github.com/Runroom/runroom-packages. Please create awesome pull requests there.
+
 ## License
 
 This bundle is under the [MIT license](LICENSE).
