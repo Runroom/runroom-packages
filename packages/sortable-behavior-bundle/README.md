@@ -39,6 +39,8 @@ This bundle checks if you are using [Gedmo Sortable](https://github.com/doctrine
 We provide a trait, so you can easily add the position field with the Gedmo configuration on each entity you want to be able to sort:
 
 ```php
+# src/Entity/Example.php
+
 namespace App\Entity;
 
 use Runroom\SortableBehaviorBundle\Behaviors\Sortable;
@@ -53,6 +55,8 @@ class Example
 And then, on your admin class, you can add the `SortableAdminTrait` trait to be able to sort the entities on the list view:
 
 ```php
+# src/Admin/ExampleAdmin.php
+
 namespace App\Admin;
 
 use Runroom\SortableBehaviorBundle\Admin\SortableAdminTrait;
@@ -79,12 +83,26 @@ class ExampleAdmin extends AbstractAdmin
 }
 ```
 
+Finally, you should configure your admin to use the the `SortableAdminController` controller:
+
+```yaml
+# config/services.yaml
+
+services:
+    # ... rest of your services definition
+    App\Admin\ExampleAdmin:
+        public: true
+        tags:
+            - { name: sonata.admin, manager_type: orm, model_class: App\Entity\Example, controller: Runroom\SortableBehaviorBundle\Controller\SortableAdminController }
+```
+
 And that's all, you should now see the sort buttons on the list view of your admin class.
 
 ### Configuration
 
 ```yaml
 # config/packages/runroom_sortable_behavior.yaml
+
 runroom_sortable_behavior:
     # position_handler can be any service id that implements the PositionHandlerInterface
     position_handler: Runroom\SortableBehaviorBundle\Service\GedmoPositionHandler # or Runroom\SortableBehaviorBundle\Service\ORMPositionHandler if gedmo is not found
