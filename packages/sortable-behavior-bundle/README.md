@@ -34,9 +34,9 @@ return [
 
 ## Usage
 
-By default this bundle assumes you are using [Gedmo Sortable](https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/sortable.md) to handle the sort order of your entities, so unless you are using another method or want to change the default field name `position`, you don't need to configure anything for the bundle.
+By default, this bundle assumes you are using [Gedmo Sortable](https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/sortable.md) to handle the sort order of your entities, so unless you are using another method or want to change the default field name `position`, you don't need to configure anything for the bundle.
 
-We provide a trait so you can easily add the position field with the Gedmo configuration on each entity you want to be able to sort:
+We provide a trait, so you can easily add the position field with the Gedmo configuration on each entity you want to be able to sort:
 
 ```php
 
@@ -54,11 +54,12 @@ class MyEntity
 
 namespace App\Admin;
 
-use Runroom\SortableBehaviorBundle\Admin\AbstractSortableAdmin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Runroom\SortableBehaviorBundle\Admin\SortableAdminTrait;
 
-class ExampleAdmin extends AbstractSortableAdmin
+class ExampleAdmin extends AbstractAdmin
 {
-    // you can use SortableAdminTrait instead AbstractSortableAdmin
+    use SortableAdminTrait;
 
     protected function configureListFields(ListMapper $list): void
     {
