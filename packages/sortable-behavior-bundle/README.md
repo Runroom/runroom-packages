@@ -34,7 +34,6 @@ return [
 
 ## Usage
 
-### Basic usage
 ```php
 
 namespace App\Admin;
