@@ -19,6 +19,9 @@ Open a command console, enter your project directory and execute the following c
 composer require runroom-packages/testing --dev
 ```
 
+## Contribute
+The sources of this package are contained in the Runroom monorepo. We welcome contributions for this package on [runroom/runroom-packages](https://github.com/Runroom/runroom-packages).
+
 ## License
 
 This bundle is under the [MIT license](LICENSE).

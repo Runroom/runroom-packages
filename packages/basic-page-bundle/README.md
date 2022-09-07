@@ -31,6 +31,8 @@ return [
     Runroom\RenderEventBundle\RunroomBasicPageBundle::class => ['all' => true],
 ];
 ```
+## Contribute
+The sources of this package are contained in the Runroom monorepo. We welcome contributions for this package on [runroom/runroom-packages](https://github.com/Runroom/runroom-packages).
 
 ## License
 

@@ -34,11 +34,46 @@ return [
 
 ## Usage
 
-...(Here we should explain how to use the bundle with default options)
+### Basic usage
+```php
 
-...(Show full config options)
+namespace App\Admin;
 
-...(Show alternative like the drag and drop)
+use Runroom\SortableBehaviorBundle\Admin\AbstractSortableAdmin;
+
+class ExampleAdmin extends AbstractSortableAdmin
+{
+    // you can use SortableAdminTrait instead AbstractSortableAdmin
+
+    protected function configureListFields(ListMapper $list): void
+    {
+        $list
+        // ... some fields
+            ->add('_action', null, [
+                'actions' => [
+                    // ... some actions 
+                    'move'   => ['template' => '@RunroomSortableBehavior/sort.html.twig'],
+                ],
+            ]);
+    }
+}
+```
+
+### Configuration
+```yaml
+# app/config/config.yml
+runroom_sortable_behavior:
+    db_driver: orm # possible values: orm, mongodb 
+    position_field:
+        default: position
+        entities:
+            AppBundle\Entity\Foobar: order
+            AppBundle\Entity\Baz: rang
+    sortable_groups:
+        entities:
+            AppBundle\Entity\Baz: [ group ]
+            
+```
 
 ### Use a draggable list instead of up/down buttons
 
@@ -62,8 +97,8 @@ In order to use a draggable list instead of up/down buttons, change the template
         ;
     }
 ```
-### Submitting a Pull Request or an Issue
-The package is a part of a mono repository: https://github.com/Runroom/runroom-packages. Please create pull requests or issues there.
+## Contribute
+The sources of this package are contained in the Runroom monorepo. We welcome contributions for this package on [runroom/runroom-packages](https://github.com/Runroom/runroom-packages).
 
 ## License
 
