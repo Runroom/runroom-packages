@@ -32,6 +32,14 @@ return [
 ];
 ```
 
+## Usage
+
+...(Here we should explain how to use the bundle with default options)
+
+...(Show full config options)
+
+...(Show alternative like the drag and drop)
+
 ### Use a draggable list instead of up/down buttons
 
 In order to use a draggable list instead of up/down buttons, change the template in the `move` action to `@RunroomSortableBehavior/sort.html.twig`.
