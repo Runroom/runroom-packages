@@ -54,8 +54,8 @@ In order to use a draggable list instead of up/down buttons, change the template
         ;
     }
 ```
-### Submitting a Pull Request
-The package is a part of a mono repository: https://github.com/Runroom/runroom-packages. Please create awesome pull requests there.
+### Submitting a Pull Request or an Issue
+The package is a part of a mono repository: https://github.com/Runroom/runroom-packages. Please create pull requests or issues there.
 
 ## License
 
