@@ -47,7 +47,7 @@ class ExampleAdmin extends AbstractSortableAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
-        // ... some fields
+            // ... some fields
             ->add('_action', null, [
                 'actions' => [
                     // ... some actions 
