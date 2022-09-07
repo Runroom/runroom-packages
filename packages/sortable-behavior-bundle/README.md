@@ -96,6 +96,7 @@ In order to use a draggable list instead of up/down buttons, change the template
         ;
     }
 ```
+
 ## Contribute
 
 The sources of this package are contained in the Runroom monorepo. We welcome contributions for this package on [runroom/runroom-packages](https://github.com/Runroom/runroom-packages).
