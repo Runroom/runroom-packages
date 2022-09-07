@@ -32,6 +32,8 @@
         "runroom-packages/render-event-bundle": "^0.16",
         "symfony/phpunit-bridge": "^6.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Runroom\\FormHandlerBundle\\": "src/"
