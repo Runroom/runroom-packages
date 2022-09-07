@@ -15,7 +15,7 @@ This bundle allows you to generate pages on your website with just a title and a
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/basic-page-bundle
 ```
 
@@ -31,6 +31,10 @@ return [
     Runroom\RenderEventBundle\RunroomBasicPageBundle::class => ['all' => true],
 ];
 ```
+
+## Contribute
+
+The sources of this package are contained in the Runroom monorepo. We welcome contributions for this package on [runroom/runroom-packages](https://github.com/Runroom/runroom-packages).
 
 ## License
 

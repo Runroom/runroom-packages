@@ -15,7 +15,7 @@ This bundle gives a tool to handle with Forms on Symfony without having to rewri
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/form-handler-bundle
 ```
 
@@ -31,6 +31,10 @@ return [
     Runroom\RenderEventBundle\RunroomFormHandlerBundle::class => ['all' => true],
 ];
 ```
+
+## Contribute
+
+The sources of this package are contained in the Runroom monorepo. We welcome contributions for this package on [runroom/runroom-packages](https://github.com/Runroom/runroom-packages).
 
 ## License
 
