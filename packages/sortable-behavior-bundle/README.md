@@ -1,5 +1,5 @@
 RunroomSortableBehaviorBundle
-========================
+=============================
 
 [![Latest Stable Version](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/v/stable)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/runroom-packages/sortable-behavior-bundle/v/unstable)](https://packagist.org/packages/runroom-packages/sortable-behavior-bundle)
@@ -15,7 +15,7 @@ This bundle gives the ability to define sortable entities and to be able to sort
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/sortable-behavior-bundle
 ```
 
@@ -34,7 +34,7 @@ return [
 
 ## Usage
 
-By default, this bundle assumes you are using [Gedmo Sortable](https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/sortable.md) to handle the sort order of your entities, so unless you are using another method or want to change the default field name `position`, you don't need to configure anything for the bundle.
+This bundle checks if you are using [Gedmo Sortable](https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/sortable.md) to handle the sort order of your entities, if not, it will use the default ORM implementation, where you will need to add entities on the configuration of the bundle manually. If you are using Gedmo, and don't want to change the default field name `position`, you don't need to configure anything for the bundle.
 
 We provide a trait, so you can easily add the position field with the Gedmo configuration on each entity you want to be able to sort:
 
@@ -44,18 +44,22 @@ namespace App\Entity;
 
 use Runroom\SortableBehaviorBundle\Behaviors\Sortable;
 
-class MyEntity
+class Example
 {
     use Sortable;
     // ... rest of your class
 }
+```
+
+And then, on your admin class, you can add the `SortableAdminTrait` trait to be able to sort the entities on the list view:
 
 ```php
 
 namespace App\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Runroom\SortableBehaviorBundle\Admin\SortableAdminTrait;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class ExampleAdmin extends AbstractAdmin
 {
@@ -64,30 +68,38 @@ class ExampleAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            // ... some fields
-            ->add('_action', null, [
+            // ... rest of your list fields
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
                 'actions' => [
-                    // ... some actions 
-                    'move'   => ['template' => '@RunroomSortableBehavior/sort.html.twig'],
+                    // ... rest of your actions
+                    'move'   => [
+                        'template' => '@RunroomSortableBehavior/sort.html.twig',
+                    ],
                 ],
             ]);
     }
 }
 ```
 
+And that's all, you should now see the sort buttons on the list view of your admin class.
+
 ### Configuration
+
 ```yaml
-# app/config/config.yml
+# config/packages/runroom_sortable_behavior.yaml
 runroom_sortable_behavior:
-    db_driver: orm # possible values: orm, mongodb 
+    # position_handler can be any service id that implements the PositionHandlerInterface
+    position_handler: Runroom\SortableBehaviorBundle\Service\GedmoPositionHandler # or Runroom\SortableBehaviorBundle\Service\ORMPositionHandler if gedmo is not found
     position_field:
-        default: position
+        default: position # Default field name for the position
+        # Only needed when not using Gedmo
         entities:
-            AppBundle\Entity\Foobar: order
-            AppBundle\Entity\Baz: rang
+            App\Entity\Foobar: order
+            App\Entity\Baz: rang
+    # Only needed when not using Gedmo
     sortable_groups:
         entities:
-            AppBundle\Entity\Baz: [ group ]
+            App\Entity\Baz: [group]
             
 ```
 

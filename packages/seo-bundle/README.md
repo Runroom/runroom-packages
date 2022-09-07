@@ -1,5 +1,5 @@
 RunroomSeoBundle
-========================
+================
 
 [![Latest Stable Version](https://poser.pugx.org/runroom-packages/seo-bundle/v/stable)](https://packagist.org/packages/runroom-packages/seo-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/runroom-packages/seo-bundle/v/unstable)](https://packagist.org/packages/runroom-packages/seo-bundle)
@@ -15,7 +15,7 @@ This bundle allows you to manage some basic SEO meta tags directly on the Sonata
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/seo-bundle
 ```
 

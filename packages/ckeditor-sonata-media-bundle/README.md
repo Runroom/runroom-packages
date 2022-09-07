@@ -15,7 +15,7 @@ This bundle allows you to configure [SonataMediaBundle](https://github.com/sonat
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/ckeditor-sonata-media-bundle
 ```
 

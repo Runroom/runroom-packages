@@ -15,7 +15,7 @@ This bundle gives the ability to define and use translations directly on the Son
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/translation-bundle
 ```
 

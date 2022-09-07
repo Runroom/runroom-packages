@@ -15,7 +15,7 @@ This bundle wraps the twig render to allow modifications of the parameters passe
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/render-event-bundle
 ```
 

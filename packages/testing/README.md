@@ -15,7 +15,7 @@ This library provides tools to help testing our bundles and projects
 
 Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
-```
+```bash
 composer require runroom-packages/testing --dev
 ```
 
