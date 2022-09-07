@@ -56,6 +56,8 @@
         "friendsofsymfony/ckeditor-bundle": "<2.2",
         "sonata-project/admin-bundle": "<3.103"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Runroom\\TranslationBundle\\": "src/"

@@ -40,6 +40,8 @@
         "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
         "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Runroom\\CkeditorSonataMediaBundle\\": "src/"
