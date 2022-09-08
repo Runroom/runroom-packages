@@ -29,7 +29,6 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
 
     private UrlGeneratorInterface $urlGenerator;
     private PropertyAccessorInterface $propertyAccessor;
-    private EntityManagerInterface $entityManager;
 
     /**
      * @var array<class-string, array{ route: string, routeParameters: array<string, string> }>
@@ -54,27 +53,33 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
         return [Events::onFlush];
     }
 
+    /**
+     * @todo: Simplify when dropping support for doctrine/orm < 2.13
+     *
+     * @psalm-suppress DeprecatedMethod
+     */
     public function onFlush(OnFlushEventArgs $args): void
     {
-        $this->entityManager = $args->getEntityManager();
-        $unitOfWork = $this->entityManager->getUnitOfWork();
+        // @phpstan-ignore-next-line
+        $entityManager = method_exists($args, 'getObjectManager') ? $args->getObjectManager() : $args->getEntityManager();
+        $unitOfWork = $entityManager->getUnitOfWork();
 
         foreach ($unitOfWork->getScheduledEntityUpdates() as $entity) {
-            if (null !== ($redirect = $this->createRedirectFromEntityChanges($entity))) {
-                $this->entityManager->persist($redirect);
-                $unitOfWork->computeChangeSet($this->entityManager->getClassMetadata(Redirect::class), $redirect);
+            if (null !== ($redirect = $this->createRedirectFromEntityChanges($entityManager, $entity))) {
+                $entityManager->persist($redirect);
+                $unitOfWork->computeChangeSet($entityManager->getClassMetadata(Redirect::class), $redirect);
 
-                $this->modifyRelatedRedirects($redirect);
-                $this->removeLoopRedirects($redirect);
+                $this->modifyRelatedRedirects($entityManager, $redirect);
+                $this->removeLoopRedirects($entityManager, $redirect);
             }
         }
     }
 
-    private function createRedirectFromEntityChanges(object $entity): ?Redirect
+    private function createRedirectFromEntityChanges(EntityManagerInterface $entityManager, object $entity): ?Redirect
     {
         if (isset($this->configuration[\get_class($entity)])) {
-            $source = $this->generateUrl($entity);
-            $destination = $this->generateUrl($entity, self::NEXT_VALUE);
+            $source = $this->generateUrl($entityManager, $entity);
+            $destination = $this->generateUrl($entityManager, $entity, self::NEXT_VALUE);
 
             if ($source !== $destination) {
                 $redirect = new Redirect();
@@ -90,17 +95,20 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
         return null;
     }
 
-    private function generateUrl(object $entity, int $state = self::PREVIOUS_VALUE): ?string
+    private function generateUrl(EntityManagerInterface $entityManager, object $entity, int $state = self::PREVIOUS_VALUE): ?string
     {
         $redirectConfiguration = $this->configuration[\get_class($entity)];
-        $uow = $this->entityManager->getUnitOfWork();
+        $uow = $entityManager->getUnitOfWork();
         $changeset = $uow->getEntityChangeSet($entity);
 
         try {
             return $this->urlGenerator->generate(
                 $redirectConfiguration['route'],
                 array_map(
-                    fn ($field) => $changeset[$field][$state] ?? $this->propertyAccessor->getValue($entity, $field),
+                    /**
+                     * @return mixed
+                     */
+                    fn (string $field) => $changeset[$field][$state] ?? $this->propertyAccessor->getValue($entity, $field),
                     $redirectConfiguration['routeParameters']
                 )
             );
@@ -109,11 +117,11 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
         }
     }
 
-    private function modifyRelatedRedirects(Redirect $redirect): void
+    private function modifyRelatedRedirects(EntityManagerInterface $entityManager, Redirect $redirect): void
     {
-        $repository = $this->entityManager->getRepository(Redirect::class);
-        $metadata = $this->entityManager->getClassMetadata(Redirect::class);
-        $unitOfWork = $this->entityManager->getUnitOfWork();
+        $repository = $entityManager->getRepository(Redirect::class);
+        $metadata = $entityManager->getClassMetadata(Redirect::class);
+        $unitOfWork = $entityManager->getUnitOfWork();
 
         $relatedRedirects = $repository->findBy([
             'destination' => $redirect->getSource(),
@@ -122,16 +130,16 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
 
         foreach ($relatedRedirects as $relatedRedirect) {
             $relatedRedirect->setDestination($redirect->getDestination());
-            $this->entityManager->persist($relatedRedirect);
+            $entityManager->persist($relatedRedirect);
             $unitOfWork->computeChangeSet($metadata, $relatedRedirect);
         }
     }
 
-    private function removeLoopRedirects(Redirect $redirect): void
+    private function removeLoopRedirects(EntityManagerInterface $entityManager, Redirect $redirect): void
     {
-        $repository = $this->entityManager->getRepository(Redirect::class);
-        $metadata = $this->entityManager->getClassMetadata(Redirect::class);
-        $unitOfWork = $this->entityManager->getUnitOfWork();
+        $repository = $entityManager->getRepository(Redirect::class);
+        $metadata = $entityManager->getClassMetadata(Redirect::class);
+        $unitOfWork = $entityManager->getUnitOfWork();
 
         $loopRedirects = $repository->findBy([
             'source' => $redirect->getDestination(),
@@ -139,7 +147,7 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
         ]);
 
         foreach ($loopRedirects as $loopRedirect) {
-            $this->entityManager->remove($loopRedirect);
+            $entityManager->remove($loopRedirect);
             $unitOfWork->computeChangeSet($metadata, $loopRedirect);
         }
     }
