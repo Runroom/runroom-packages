@@ -37,7 +37,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
-        $this->repository = $container->get('runroom_user.repository.reset_password_request');
+        $this->repository = $container->get('runroom.user.repository.reset_password_request');
     }
 
     /**

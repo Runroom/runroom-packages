@@ -142,7 +142,7 @@ final class Kernel extends BaseKernel
             ],
             'providers' => [
                 'admin_user_provider' => [
-                    'id' => 'runroom_user.provider.user',
+                    'id' => 'runroom.user.provider.user',
                 ],
             ],
             'firewalls' => ['main' => [
@@ -163,7 +163,7 @@ final class Kernel extends BaseKernel
 
         if (class_exists(AuthenticatorManager::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
-            $securityConfig['firewalls']['main']['custom_authenticator'] = 'runroom_user.security.user_authenticator';
+            $securityConfig['firewalls']['main']['custom_authenticator'] = 'runroom.user.security.user_authenticator';
             $securityConfig['firewalls']['main']['lazy'] = true;
             $securityConfig['password_hashers'] = [User::class => ['algorithm' => 'plaintext']];
         } else {

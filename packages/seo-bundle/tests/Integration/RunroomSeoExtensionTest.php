@@ -50,17 +50,17 @@ class RunroomSeoExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService(EntityMetaInformationAdmin::class);
-        $this->assertContainerBuilderHasService(MetaInformationAdmin::class);
-        $this->assertContainerBuilderHasService(AlternateLinksBuilder::class);
-        $this->assertContainerBuilderHasService(AlternateLinksService::class);
-        $this->assertContainerBuilderHasService(DefaultAlternateLinksProvider::class);
-        $this->assertContainerBuilderHasService(MetaInformationBuilder::class);
-        $this->assertContainerBuilderHasService(MetaInformationService::class);
-        $this->assertContainerBuilderHasService(DefaultMetaInformationProvider::class);
+        $this->assertContainerBuilderHasService('runroom.seo.admin.entity_meta_information', EntityMetaInformationAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.seo.admin.meta_information', MetaInformationAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.seo.alternate_links.builder', AlternateLinksBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.seo.alternate_links.service', AlternateLinksService::class);
+        $this->assertContainerBuilderHasService('runroom.seo.alternate_links.default_provider', DefaultAlternateLinksProvider::class);
+        $this->assertContainerBuilderHasService('runroom.seo.meta_information.builder', MetaInformationBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.seo.meta_information.service', MetaInformationService::class);
+        $this->assertContainerBuilderHasService('runroom.seo.meta_information.default_provider', DefaultMetaInformationProvider::class);
         $this->assertContainerBuilderHasService(MetaInformationRepository::class);
-        $this->assertContainerBuilderHasService(SeoExtension::class);
-        $this->assertContainerBuilderHasService(SeoRuntime::class);
+        $this->assertContainerBuilderHasService('runroom.seo.twig.seo', SeoExtension::class);
+        $this->assertContainerBuilderHasService('runroom.seo.twig.seo_runtime', SeoRuntime::class);
         $this->assertContainerBuilderHasParameter(RunroomSeoExtension::XDEFAULT_LOCALE, 'es');
     }
 

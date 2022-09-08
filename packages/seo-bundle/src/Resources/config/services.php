@@ -30,39 +30,39 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "abstract_arg" function for creating references to arguments without value when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set(AlternateLinksBuilder::class)
+    $services->set('runroom.seo.alternate_links.builder', AlternateLinksBuilder::class)
         ->arg('$urlGenerator', new ReferenceConfigurator('router'))
         ->arg('$locales', null);
 
-    $services->set(AlternateLinksService::class)
+    $services->set('runroom.seo.alternate_links.service', AlternateLinksService::class)
         ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->arg('$providers', tagged_iterator('runroom.seo.alternate_links'))
-        ->arg('$builder', new ReferenceConfigurator(AlternateLinksBuilder::class));
+        ->arg('$builder', new ReferenceConfigurator('runroom.seo.alternate_links.builder'));
 
-    $services->set(DefaultAlternateLinksProvider::class)
+    $services->set('runroom.seo.alternate_links.default_provider', DefaultAlternateLinksProvider::class)
         ->tag('runroom.seo.alternate_links', ['priority' => -1]);
 
-    $services->set(MetaInformationBuilder::class)
+    $services->set('runroom.seo.meta_information.builder', MetaInformationBuilder::class)
         ->arg('$repository', new ReferenceConfigurator(MetaInformationRepository::class))
         ->arg('$propertyAccessor', new ReferenceConfigurator('property_accessor'));
 
-    $services->set(MetaInformationService::class)
+    $services->set('runroom.seo.meta_information.service', MetaInformationService::class)
         ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->arg('$providers', tagged_iterator('runroom.seo.meta_information'))
-        ->arg('$builder', new ReferenceConfigurator(MetaInformationBuilder::class));
+        ->arg('$builder', new ReferenceConfigurator('runroom.seo.meta_information.builder'));
 
-    $services->set(DefaultMetaInformationProvider::class)
+    $services->set('runroom.seo.meta_information.default_provider', DefaultMetaInformationProvider::class)
         ->tag('runroom.seo.meta_information', ['priority' => -1]);
 
     $services->set(MetaInformationRepository::class)
         ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->tag('doctrine.repository_service');
 
-    $services->set(SeoExtension::class)
+    $services->set('runroom.seo.twig.seo', SeoExtension::class)
         ->tag('twig.extension');
 
-    $services->set(SeoRuntime::class)
-        ->arg('$alternateLinks', new ReferenceConfigurator(AlternateLinksService::class))
-        ->arg('$metaInformation', new ReferenceConfigurator(MetaInformationService::class))
+    $services->set('runroom.seo.twig.seo_runtime', SeoRuntime::class)
+        ->arg('$alternateLinks', new ReferenceConfigurator('runroom.seo.alternate_links.service'))
+        ->arg('$metaInformation', new ReferenceConfigurator('runroom.seo.meta_information.service'))
         ->tag('twig.runtime');
 };

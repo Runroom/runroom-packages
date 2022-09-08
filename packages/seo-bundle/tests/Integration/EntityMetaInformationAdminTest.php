@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\Integration;
 
-use Runroom\SeoBundle\Admin\EntityMetaInformationAdmin;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 
@@ -32,6 +31,6 @@ class EntityMetaInformationAdminTest extends SonataAdminTestCase
 
     protected function getAdminClass(): string
     {
-        return EntityMetaInformationAdmin::class;
+        return 'runroom.seo.admin.entity_meta_information';
     }
 }

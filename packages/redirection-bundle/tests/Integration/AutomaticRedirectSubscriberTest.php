@@ -40,7 +40,7 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get(RedirectRepository::class);
-        $this->subscriber = $container->get(AutomaticRedirectSubscriber::class);
+        $this->subscriber = $container->get('runroom.redirection.event_subscriber.automatic_redirect');
         $this->entityManager = $container->get(EntityManagerInterface::class);
     }
 

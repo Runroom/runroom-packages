@@ -51,12 +51,12 @@ class RunroomCookiesExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService(CookiesPageAdmin::class);
-        $this->assertContainerBuilderHasService(CookiesPageController::class);
-        $this->assertContainerBuilderHasService(CookiesPageService::class);
+        $this->assertContainerBuilderHasService('runroom.cookies.admin.cookies_page', CookiesPageAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.cookies.controller.cookies_page', CookiesPageController::class);
+        $this->assertContainerBuilderHasService('runroom.cookies.service.cookies_page', CookiesPageService::class);
         $this->assertContainerBuilderHasService(CookiesPageRepository::class);
-        $this->assertContainerBuilderHasService(CookiesExtension::class);
-        $this->assertContainerBuilderHasService(CookiesRuntime::class);
+        $this->assertContainerBuilderHasService('runroom.cookies.twig.cookies', CookiesExtension::class);
+        $this->assertContainerBuilderHasService('runroom.cookies.twig.cookies_runtime', CookiesRuntime::class);
     }
 
     protected function getContainerExtensions(): array

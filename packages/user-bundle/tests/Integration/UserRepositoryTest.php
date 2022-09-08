@@ -36,7 +36,7 @@ class UserRepositoryTest extends KernelTestCase
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
-        $this->repository = $container->get('runroom_user.repository.user');
+        $this->repository = $container->get('runroom.user.repository.user');
     }
 
     /**

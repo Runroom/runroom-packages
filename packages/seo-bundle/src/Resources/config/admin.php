@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $metaInformationAdmin = $services->set(MetaInformationAdmin::class)
+    $metaInformationAdmin = $services->set('runroom.seo.admin.meta_information', MetaInformationAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => MetaInformation::class,
@@ -37,7 +37,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         $metaInformationAdmin->args([null, MetaInformation::class, null]);
     }
 
-    $entityMetaInformationAdmin = $services->set(EntityMetaInformationAdmin::class)
+    $entityMetaInformationAdmin = $services->set('runroom.seo.admin.entity_meta_information', EntityMetaInformationAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => EntityMetaInformation::class,

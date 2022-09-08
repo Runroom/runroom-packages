@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $redirectAdmin = $services->set(RedirectAdmin::class)
+    $redirectAdmin = $services->set('runroom.redirection.admin.redirect', RedirectAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => Redirect::class,

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\Integration;
 
-use Runroom\RedirectionBundle\Admin\RedirectAdmin;
 use Runroom\RedirectionBundle\Entity\Redirect;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -61,6 +60,6 @@ class RedirectAdminTest extends SonataAdminTestCase
 
     protected function getAdminClass(): string
     {
-        return RedirectAdmin::class;
+        return 'runroom.redirection.admin.redirect';
     }
 }

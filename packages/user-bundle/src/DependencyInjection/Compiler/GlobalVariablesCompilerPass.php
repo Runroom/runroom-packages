@@ -23,7 +23,7 @@ final class GlobalVariablesCompilerPass implements CompilerPassInterface
     {
         if ($container->hasDefinition('twig')) {
             $container->getDefinition('twig')
-                ->addMethodCall('addGlobal', ['runroom_user', new Reference('runroom_user.twig.global_variables')]);
+                ->addMethodCall('addGlobal', ['runroom_user', new Reference('runroom.user.twig.global_variables')]);
         }
     }
 }

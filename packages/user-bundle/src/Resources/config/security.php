@@ -23,21 +23,21 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
     $services = $containerConfigurator->services();
 
-    $services->set('runroom_user.provider.user', UserProvider::class)
-        ->arg('$userRepository', new ReferenceConfigurator('runroom_user.repository.user'));
+    $services->set('runroom.user.provider.user', UserProvider::class)
+        ->arg('$userRepository', new ReferenceConfigurator('runroom.user.repository.user'));
 
-    $services->set('runroom_user.security.roles_builder.admin', AdminRolesBuilder::class)
+    $services->set('runroom.user.security.roles_builder.admin', AdminRolesBuilder::class)
         ->arg('$authorizationChecker', new ReferenceConfigurator('security.authorization_checker'))
         ->arg('$pool', new ReferenceConfigurator('sonata.admin.pool'))
         ->arg('$configuration', new ReferenceConfigurator('sonata.admin.configuration'))
         ->arg('$translator', new ReferenceConfigurator('translator'));
 
-    $services->set('runroom_user.security.roles_builder.matrix', MatrixRolesBuilder::class)
+    $services->set('runroom.user.security.roles_builder.matrix', MatrixRolesBuilder::class)
         ->arg('$tokenStorage', new ReferenceConfigurator('security.token_storage'))
-        ->arg('$adminRolesBuilder', new ReferenceConfigurator('runroom_user.security.roles_builder.admin'))
-        ->arg('$securityRolesBuilder', new ReferenceConfigurator('runroom_user.security.roles_builder.security'));
+        ->arg('$adminRolesBuilder', new ReferenceConfigurator('runroom.user.security.roles_builder.admin'))
+        ->arg('$securityRolesBuilder', new ReferenceConfigurator('runroom.user.security.roles_builder.security'));
 
-    $services->set('runroom_user.security.roles_builder.security', SecurityRolesBuilder::class)
+    $services->set('runroom.user.security.roles_builder.security', SecurityRolesBuilder::class)
         ->arg('$authorizationChecker', new ReferenceConfigurator('security.authorization_checker'))
         ->arg('$configuration', new ReferenceConfigurator('sonata.admin.configuration'))
         ->arg('$translator', new ReferenceConfigurator('translator'))

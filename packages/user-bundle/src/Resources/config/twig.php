@@ -20,11 +20,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set('runroom_user.twig.extension.roles_matrix', RolesMatrixExtension::class)
+    $services->set('runroom.user.twig.extension.roles_matrix', RolesMatrixExtension::class)
         ->tag('twig.extension');
 
-    $services->set('runroom_user.twig.runtime.roles_matrix', RolesMatrixRuntime::class)
+    $services->set('runroom.user.twig.runtime.roles_matrix', RolesMatrixRuntime::class)
         ->arg('$twig', new ReferenceConfigurator('twig'))
-        ->arg('$rolesBuilder', new ReferenceConfigurator('runroom_user.security.roles_builder.matrix'))
+        ->arg('$rolesBuilder', new ReferenceConfigurator('runroom.user.security.roles_builder.matrix'))
         ->tag('twig.runtime');
 };

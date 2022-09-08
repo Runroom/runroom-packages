@@ -106,6 +106,6 @@ class UserAdminTest extends SonataAdminTestCase
 
     protected function getAdminClass(): string
     {
-        return 'runroom_user.admin.user';
+        return 'runroom.user.admin.user';
     }
 }

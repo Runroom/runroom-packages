@@ -28,11 +28,11 @@ final class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
     public function itAddsGlobalVariableToTwig(): void
     {
         $this->container->register('twig', Environment::class);
-        $this->container->register('runroom_user.twig.global_variables', GlobalVariables::class);
+        $this->container->register('runroom.user.twig.global_variables', GlobalVariables::class);
 
         $this->compile();
 
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('twig', 'addGlobal', ['runroom_user', new Reference('runroom_user.twig.global_variables')]);
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('twig', 'addGlobal', ['runroom_user', new Reference('runroom.user.twig.global_variables')]);
     }
 
     protected function registerCompilerPass(ContainerBuilder $container): void

@@ -1,5 +1,5 @@
 runroom.basic_page.route.show:
     path: /{slug}
-    controller: Runroom\BasicPageBundle\Controller\BasicPageController::show
+    controller: runroom.basic_page.controller.basic_page::show
     requirements:
         slug: ^(?!backoffice).*

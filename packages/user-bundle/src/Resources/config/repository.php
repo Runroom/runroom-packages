@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set('runroom_user.repository.user', UserRepository::class)
+    $services->set('runroom.user.repository.user', UserRepository::class)
         ->arg('$entityManager', new ReferenceConfigurator('doctrine.orm.entity_manager'))
         ->arg('$class', User::class);
 };

@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $resetPasswordRequestAdmin = $services->set('runroom_user.admin.reset_password_request', ResetPasswordRequestAdmin::class)
+    $resetPasswordRequestAdmin = $services->set('runroom.user.admin.reset_password_request', ResetPasswordRequestAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => ResetPasswordRequest::class,

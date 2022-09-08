@@ -25,7 +25,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      */
     $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
 
-    $services->set('runroom_user.util.user_manipulator', UserManipulator::class)
-        ->arg('$userRepository', new ReferenceConfigurator('runroom_user.repository.user'))
+    $services->set('runroom.user.util.user_manipulator', UserManipulator::class)
+        ->arg('$userRepository', new ReferenceConfigurator('runroom.user.repository.user'))
         ->arg('$passwordHasher', new ReferenceConfigurator($passwordHasherId));
 };

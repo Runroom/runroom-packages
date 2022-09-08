@@ -35,9 +35,9 @@ class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService(RedirectAdmin::class);
-        $this->assertContainerBuilderHasService(RedirectSubscriber::class);
-        $this->assertContainerBuilderHasService(AutomaticRedirectSubscriber::class);
+        $this->assertContainerBuilderHasService('runroom.redirection.admin.redirect', RedirectAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.redirection.event_subscriber.redirect', RedirectSubscriber::class);
+        $this->assertContainerBuilderHasService('runroom.redirection.event_subscriber.automatic_redirect', AutomaticRedirectSubscriber::class);
         $this->assertContainerBuilderHasService(RedirectRepository::class);
     }
 

@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $mediaAdminController = $services->set(MediaAdminController::class)
+    $mediaAdminController = $services->set('runroom.ckeditor_sonata_media.controller.media_admin', MediaAdminController::class)
         ->public()
         ->arg('$mediaManager', new ReferenceConfigurator('sonata.media.manager.media'))
         ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'));
@@ -38,6 +38,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ->tag('controller.service_arguments');
     }
 
-    $services->set(MediaAdminExtension::class)
+    $services->set('runroom.ckeditor_sonata_media.admin.media_admin', MediaAdminExtension::class)
         ->tag('sonata.admin.extension', ['target' => 'sonata.media.admin.media']);
 };

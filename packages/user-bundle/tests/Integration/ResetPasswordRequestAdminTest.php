@@ -52,6 +52,6 @@ class ResetPasswordRequestAdminTest extends SonataAdminTestCase
 
     protected function getAdminClass(): string
     {
-        return 'runroom_user.admin.reset_password_request';
+        return 'runroom.user.admin.reset_password_request';
     }
 }

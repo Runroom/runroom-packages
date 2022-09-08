@@ -33,7 +33,7 @@ final class GlobalVariables
      */
     public function getUserAdmin(): AdminInterface
     {
-        return $this->pool->getAdminByAdminCode('runroom_user.admin.user');
+        return $this->pool->getAdminByAdminCode('runroom.user.admin.user');
     }
 
     public function getHasRequestPasswordEnabled(): bool

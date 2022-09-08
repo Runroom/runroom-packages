@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $translationAdmin = $services->set(TranslationAdmin::class)
+    $translationAdmin = $services->set('runroom.translation.admin.translation', TranslationAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => Translation::class,

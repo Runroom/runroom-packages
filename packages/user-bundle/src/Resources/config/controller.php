@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set('runroom_user.controller.security', SecurityController::class)
+    $services->set('runroom.user.controller.security', SecurityController::class)
         ->public()
         ->arg('$authenticationUtils', new ReferenceConfigurator('security.authentication_utils'))
         ->tag('container.service_subscriber')

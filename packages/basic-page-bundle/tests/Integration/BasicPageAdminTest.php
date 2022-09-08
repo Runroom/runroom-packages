@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Tests\Integration;
 
-use Runroom\BasicPageBundle\Admin\BasicPageAdmin;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -56,6 +55,6 @@ class BasicPageAdminTest extends SonataAdminTestCase
 
     protected function getAdminClass(): string
     {
-        return BasicPageAdmin::class;
+        return 'runroom.basic_page.admin.basic_page';
     }
 }
