@@ -16,6 +16,7 @@ namespace Runroom\RenderEventBundle\Tests\Integration;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Runroom\RenderEventBundle\Controller\TemplateController;
 use Runroom\RenderEventBundle\DependencyInjection\RunroomRenderEventExtension;
+use Runroom\RenderEventBundle\ErrorRenderer\TwigErrorRenderer;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 
 class RunroomRenderEventExtensionTest extends AbstractExtensionTestCase
@@ -32,8 +33,10 @@ class RunroomRenderEventExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService(PageRenderer::class);
-        $this->assertContainerBuilderHasService(TemplateController::class);
+        $this->assertContainerBuilderHasService('runroom.render_event.controller.template', TemplateController::class);
+        $this->assertContainerBuilderHasService('runroom.render_event.renderer.page', PageRenderer::class);
+        $this->assertContainerBuilderHasService('runroom.render_event.error_renderer.twig_error', TwigErrorRenderer::class);
+        $this->assertContainerBuilderHasService('runroom.render_event.page_view_model');
     }
 
     protected function getContainerExtensions(): array

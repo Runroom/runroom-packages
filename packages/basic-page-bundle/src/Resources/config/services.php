@@ -26,20 +26,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set(BasicPageController::class)
+    $services->set('runroom.basic_page.controller.basic_page', BasicPageController::class)
         ->public()
-        ->arg('$service', new ReferenceConfigurator(BasicPageService::class))
+        ->arg('$service', new ReferenceConfigurator('runroom.basic_page.service.basic_page'))
         ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
         ->tag('container.service_subscriber')
         ->tag('controller.service_arguments');
 
-    $services->set(BasicPageService::class)
+    $services->set('runroom.basic_page.service.basic_page', BasicPageService::class)
         ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class));
 
-    $services->set(BasicPageAlternateLinksProvider::class)
+    $services->set('runroom.basic_page.service.basic_page_alternate_links', BasicPageAlternateLinksProvider::class)
         ->tag('runroom.seo.alternate_links');
 
-    $services->set(BasicPageMetaInformationProvider::class)
+    $services->set('runroom.basic_page.service.basic_page_meta_information', BasicPageMetaInformationProvider::class)
         ->tag('runroom.seo.meta_information');
 
     $services->set(BasicPageRepository::class)
@@ -47,10 +47,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
         ->tag('doctrine.repository_service');
 
-    $services->set(BasicPageExtension::class)
+    $services->set('runroom.basic_page.twig.basic_page', BasicPageExtension::class)
         ->tag('twig.extension');
 
-    $services->set(BasicPageRuntime::class)
+    $services->set('runroom.basic_page.twig.basic_page.runtime', BasicPageRuntime::class)
         ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class))
         ->tag('twig.runtime');
 };

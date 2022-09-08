@@ -18,7 +18,7 @@ use Runroom\TranslationBundle\Admin\TranslationAdmin;
 use Runroom\TranslationBundle\DependencyInjection\RunroomTranslationExtension;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
-use Runroom\TranslationBundle\Twig\TranslationExtension as TwigTranslationExtension;
+use Runroom\TranslationBundle\Twig\TranslationExtension;
 
 class RunroomTranslationExtensionTest extends AbstractExtensionTestCase
 {
@@ -38,10 +38,10 @@ class RunroomTranslationExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService(TranslationAdmin::class);
-        $this->assertContainerBuilderHasService(TranslationService::class);
+        $this->assertContainerBuilderHasService('runroom.translation.admin.translation', TranslationAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.translation.service.translation', TranslationService::class);
         $this->assertContainerBuilderHasService(TranslationRepository::class);
-        $this->assertContainerBuilderHasService(TwigTranslationExtension::class);
+        $this->assertContainerBuilderHasService('runroom.translation.twig.translation', TranslationExtension::class);
     }
 
     protected function getContainerExtensions(): array

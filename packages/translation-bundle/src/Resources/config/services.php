@@ -21,7 +21,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set(TranslationService::class)
+    $services->set('runroom.translation.service.translation', TranslationService::class)
         ->arg('$repository', new ReferenceConfigurator(TranslationRepository::class))
         ->arg('$translator', new ReferenceConfigurator('translator'));
 
@@ -29,7 +29,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$registry', new ReferenceConfigurator('doctrine'))
         ->tag('doctrine.repository_service');
 
-    $services->set(TranslationExtension::class)
-        ->arg('$service', new ReferenceConfigurator(TranslationService::class))
+    $services->set('runroom.translation.twig.translation', TranslationExtension::class)
+        ->arg('$service', new ReferenceConfigurator('runroom.translation.service.translation'))
         ->tag('twig.extension');
 };

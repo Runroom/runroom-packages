@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\DependencyInjection;
 
-use Runroom\RedirectionBundle\EventSubscriber\AutomaticRedirectSubscriber;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
@@ -39,7 +38,7 @@ final class RunroomRedirectionExtension extends Extension
         }
 
         if ($config['enable_automatic_redirections']) {
-            $definition = $container->getDefinition(AutomaticRedirectSubscriber::class);
+            $definition = $container->getDefinition('runroom.redirection.event_subscriber.automatic_redirect');
 
             $definition->replaceArgument('$configuration', $config['automatic_redirections']);
             $definition->addTag('doctrine.event_subscriber');

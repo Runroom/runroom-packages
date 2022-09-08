@@ -52,27 +52,27 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->container->setParameter('kernel.bundles', []);
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('runroom_user.command.activate_user', ActivateUserCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.change_password', ChangePasswordCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.create_user', CreateUserCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.deactivate_user', DeactivateUserCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.controller.security', SecurityController::class);
-        $this->assertContainerBuilderHasService('runroom_user.form.type.roles_matrix', RolesMatrixType::class);
-        $this->assertContainerBuilderHasService('runroom_user.repository.user', UserRepository::class);
-        $this->assertContainerBuilderHasService('runroom_user.security.roles_builder.admin', AdminRolesBuilder::class);
-        $this->assertContainerBuilderHasService('runroom_user.security.roles_builder.matrix', MatrixRolesBuilder::class);
-        $this->assertContainerBuilderHasService('runroom_user.security.roles_builder.security', SecurityRolesBuilder::class);
-        $this->assertContainerBuilderHasService('runroom_user.twig.extension.roles_matrix', RolesMatrixExtension::class);
-        $this->assertContainerBuilderHasService('runroom_user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
-        $this->assertContainerBuilderHasService('runroom_user.util.user_manipulator', UserManipulator::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.activate_user', ActivateUserCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.change_password', ChangePasswordCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.create_user', CreateUserCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.deactivate_user', DeactivateUserCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.controller.security', SecurityController::class);
+        $this->assertContainerBuilderHasService('runroom.user.form.type.roles_matrix', RolesMatrixType::class);
+        $this->assertContainerBuilderHasService('runroom.user.repository.user', UserRepository::class);
+        $this->assertContainerBuilderHasService('runroom.user.security.roles_builder.admin', AdminRolesBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.user.security.roles_builder.matrix', MatrixRolesBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.user.security.roles_builder.security', SecurityRolesBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.user.twig.extension.roles_matrix', RolesMatrixExtension::class);
+        $this->assertContainerBuilderHasService('runroom.user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
+        $this->assertContainerBuilderHasService('runroom.user.util.user_manipulator', UserManipulator::class);
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
          */
         if (class_exists(AuthenticatorManager::class)) {
-            $this->assertContainerBuilderHasService('runroom_user.security.user_authenticator', UserAuthenticator::class);
+            $this->assertContainerBuilderHasService('runroom.user.security.user_authenticator', UserAuthenticator::class);
         } else {
-            $this->assertContainerBuilderNotHasService('runroom_user.security.user_authenticator');
+            $this->assertContainerBuilderNotHasService('runroom.user.security.user_authenticator');
         }
     }
 
@@ -84,14 +84,14 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->container->setParameter('kernel.bundles', ['SymfonyCastsResetPasswordBundle' => true]);
         $this->load(['reset_password' => ['enabled' => true]]);
 
-        $this->assertContainerBuilderHasService('runroom_user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.controller.reset_password', ResetPasswordController::class);
-        $this->assertContainerBuilderHasService('runroom_user.form.type.change_password', ChangePasswordFormType::class);
-        $this->assertContainerBuilderHasService('runroom_user.form.type.reset_password_request', ResetPasswordRequestFormType::class);
-        $this->assertContainerBuilderHasService('runroom_user.service.mailer', MailerService::class);
-        $this->assertContainerBuilderHasService('runroom_user.repository.reset_password_request', ResetPasswordRequestRepository::class);
-        $this->assertContainerBuilderHasService('runroom_user.reset_password.cleaner', ResetPasswordCleaner::class);
-        $this->assertContainerBuilderHasService('runroom_user.reset_password.helper', ResetPasswordHelper::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.controller.reset_password', ResetPasswordController::class);
+        $this->assertContainerBuilderHasService('runroom.user.form.type.change_password', ChangePasswordFormType::class);
+        $this->assertContainerBuilderHasService('runroom.user.form.type.reset_password_request', ResetPasswordRequestFormType::class);
+        $this->assertContainerBuilderHasService('runroom.user.service.mailer', MailerService::class);
+        $this->assertContainerBuilderHasService('runroom.user.repository.reset_password_request', ResetPasswordRequestRepository::class);
+        $this->assertContainerBuilderHasService('runroom.user.reset_password.cleaner', ResetPasswordCleaner::class);
+        $this->assertContainerBuilderHasService('runroom.user.reset_password.helper', ResetPasswordHelper::class);
     }
 
     /**
@@ -102,8 +102,8 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->container->setParameter('kernel.bundles', ['SonataAdminBundle' => true]);
         $this->load([]);
 
-        $this->assertContainerBuilderHasService('runroom_user.admin.user', UserAdmin::class);
-        $this->assertContainerBuilderHasService('runroom_user.twig.global_variables', GlobalVariables::class);
+        $this->assertContainerBuilderHasService('runroom.user.admin.user', UserAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.user.twig.global_variables', GlobalVariables::class);
     }
 
     /**
@@ -117,38 +117,38 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         ]);
         $this->load(['reset_password' => ['enabled' => true]]);
 
-        $this->assertContainerBuilderHasService('runroom_user.admin.reset_password_request', ResetPasswordRequestAdmin::class);
-        $this->assertContainerBuilderHasService('runroom_user.admin.user', UserAdmin::class);
-        $this->assertContainerBuilderHasService('runroom_user.twig.global_variables', GlobalVariables::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.activate_user', ActivateUserCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.change_password', ChangePasswordCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.create_user', CreateUserCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.deactivate_user', DeactivateUserCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.controller.security', SecurityController::class);
-        $this->assertContainerBuilderHasService('runroom_user.form.type.roles_matrix', RolesMatrixType::class);
-        $this->assertContainerBuilderHasService('runroom_user.repository.user', UserRepository::class);
-        $this->assertContainerBuilderHasService('runroom_user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class);
-        $this->assertContainerBuilderHasService('runroom_user.controller.reset_password', ResetPasswordController::class);
-        $this->assertContainerBuilderHasService('runroom_user.form.type.change_password', ChangePasswordFormType::class);
-        $this->assertContainerBuilderHasService('runroom_user.form.type.reset_password_request', ResetPasswordRequestFormType::class);
-        $this->assertContainerBuilderHasService('runroom_user.service.mailer', MailerService::class);
-        $this->assertContainerBuilderHasService('runroom_user.repository.reset_password_request', ResetPasswordRequestRepository::class);
-        $this->assertContainerBuilderHasService('runroom_user.reset_password.cleaner', ResetPasswordCleaner::class);
-        $this->assertContainerBuilderHasService('runroom_user.reset_password.helper', ResetPasswordHelper::class);
-        $this->assertContainerBuilderHasService('runroom_user.security.roles_builder.admin', AdminRolesBuilder::class);
-        $this->assertContainerBuilderHasService('runroom_user.security.roles_builder.matrix', MatrixRolesBuilder::class);
-        $this->assertContainerBuilderHasService('runroom_user.security.roles_builder.security', SecurityRolesBuilder::class);
-        $this->assertContainerBuilderHasService('runroom_user.twig.extension.roles_matrix', RolesMatrixExtension::class);
-        $this->assertContainerBuilderHasService('runroom_user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
-        $this->assertContainerBuilderHasService('runroom_user.util.user_manipulator', UserManipulator::class);
+        $this->assertContainerBuilderHasService('runroom.user.admin.reset_password_request', ResetPasswordRequestAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.user.admin.user', UserAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.user.twig.global_variables', GlobalVariables::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.activate_user', ActivateUserCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.change_password', ChangePasswordCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.create_user', CreateUserCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.deactivate_user', DeactivateUserCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.controller.security', SecurityController::class);
+        $this->assertContainerBuilderHasService('runroom.user.form.type.roles_matrix', RolesMatrixType::class);
+        $this->assertContainerBuilderHasService('runroom.user.repository.user', UserRepository::class);
+        $this->assertContainerBuilderHasService('runroom.user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class);
+        $this->assertContainerBuilderHasService('runroom.user.controller.reset_password', ResetPasswordController::class);
+        $this->assertContainerBuilderHasService('runroom.user.form.type.change_password', ChangePasswordFormType::class);
+        $this->assertContainerBuilderHasService('runroom.user.form.type.reset_password_request', ResetPasswordRequestFormType::class);
+        $this->assertContainerBuilderHasService('runroom.user.service.mailer', MailerService::class);
+        $this->assertContainerBuilderHasService('runroom.user.repository.reset_password_request', ResetPasswordRequestRepository::class);
+        $this->assertContainerBuilderHasService('runroom.user.reset_password.cleaner', ResetPasswordCleaner::class);
+        $this->assertContainerBuilderHasService('runroom.user.reset_password.helper', ResetPasswordHelper::class);
+        $this->assertContainerBuilderHasService('runroom.user.security.roles_builder.admin', AdminRolesBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.user.security.roles_builder.matrix', MatrixRolesBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.user.security.roles_builder.security', SecurityRolesBuilder::class);
+        $this->assertContainerBuilderHasService('runroom.user.twig.extension.roles_matrix', RolesMatrixExtension::class);
+        $this->assertContainerBuilderHasService('runroom.user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
+        $this->assertContainerBuilderHasService('runroom.user.util.user_manipulator', UserManipulator::class);
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
          */
         if (class_exists(AuthenticatorManager::class)) {
-            $this->assertContainerBuilderHasService('runroom_user.security.user_authenticator', UserAuthenticator::class);
+            $this->assertContainerBuilderHasService('runroom.user.security.user_authenticator', UserAuthenticator::class);
         } else {
-            $this->assertContainerBuilderNotHasService('runroom_user.security.user_authenticator');
+            $this->assertContainerBuilderNotHasService('runroom.user.security.user_authenticator');
         }
     }
 

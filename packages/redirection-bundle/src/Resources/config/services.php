@@ -21,11 +21,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set(RedirectSubscriber::class)
+    $services->set('runroom.redirection.event_subscriber.redirect', RedirectSubscriber::class)
         ->arg('$repository', new ReferenceConfigurator(RedirectRepository::class))
         ->tag('kernel.event_subscriber');
 
-    $services->set(AutomaticRedirectSubscriber::class)
+    $services->set('runroom.redirection.event_subscriber.automatic_redirect', AutomaticRedirectSubscriber::class)
         ->arg('$urlGenerator', new ReferenceConfigurator('router'))
         ->arg('$propertyAccessor', new ReferenceConfigurator('property_accessor'))
         ->arg('$configuration', []);

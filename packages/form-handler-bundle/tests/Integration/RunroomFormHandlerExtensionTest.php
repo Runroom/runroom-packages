@@ -33,8 +33,8 @@ class RunroomFormHandlerExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService(FormHandler::class);
-        $this->assertContainerBuilderHasService(FormRenderSubscriber::class);
+        $this->assertContainerBuilderHasService('runroom.form_handler.form_handler', FormHandler::class);
+        $this->assertContainerBuilderHasService('runroom.form_handler.event_subscriber.form_render', FormRenderSubscriber::class);
     }
 
     protected function getContainerExtensions(): array

@@ -17,6 +17,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set(FormRenderSubscriber::class)
+    $services->set('runroom.form_handler.event_subscriber.form_render', FormRenderSubscriber::class)
         ->tag('kernel.event_subscriber');
 };

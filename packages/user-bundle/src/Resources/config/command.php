@@ -22,19 +22,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
-    $services->set('runroom_user.command.activate_user', ActivateUserCommand::class)
+    $services->set('runroom.user.command.activate_user', ActivateUserCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom_user.util.user_manipulator'));
+        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
 
-    $services->set('runroom_user.command.change_password', ChangePasswordCommand::class)
+    $services->set('runroom.user.command.change_password', ChangePasswordCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom_user.util.user_manipulator'));
+        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
 
-    $services->set('runroom_user.command.create_user', CreateUserCommand::class)
+    $services->set('runroom.user.command.create_user', CreateUserCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom_user.util.user_manipulator'));
+        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
 
-    $services->set('runroom_user.command.deactivate_user', DeactivateUserCommand::class)
+    $services->set('runroom.user.command.deactivate_user', DeactivateUserCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom_user.util.user_manipulator'));
+        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
 };

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\DependencyInjection;
 
-use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksProviderInterface;
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
@@ -61,7 +60,7 @@ final class RunroomSeoExtension extends Extension
         $container->registerForAutoconfiguration(MetaInformationProviderInterface::class)
             ->addTag('runroom.seo.meta_information');
 
-        $container->getDefinition(AlternateLinksBuilder::class)
+        $container->getDefinition('runroom.seo.alternate_links.builder')
             ->setArgument(1, $config['locales']);
 
         $container->setParameter(self::XDEFAULT_LOCALE, $config['xdefault_locale']);

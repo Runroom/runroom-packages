@@ -29,7 +29,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      */
     $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
 
-    $userAdmin = $services->set('runroom_user.admin.user', UserAdmin::class)
+    $userAdmin = $services->set('runroom.user.admin.user', UserAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => User::class,
@@ -46,7 +46,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         $userAdmin->arg('$passwordHasher', new ReferenceConfigurator($passwordHasherId));
     }
 
-    $services->set('runroom_user.twig.global_variables', GlobalVariables::class)
+    $services->set('runroom.user.twig.global_variables', GlobalVariables::class)
         ->arg('$pool', new ReferenceConfigurator('sonata.admin.pool'))
         ->arg('$hasRequestPasswordEnabled', null);
 };

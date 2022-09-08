@@ -21,6 +21,8 @@ use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider;
 use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
 use Runroom\BasicPageBundle\Service\BasicPageService;
+use Runroom\BasicPageBundle\Twig\BasicPageExtension;
+use Runroom\BasicPageBundle\Twig\BasicPageRuntime;
 
 class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
 {
@@ -41,12 +43,14 @@ class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService(BasicPageAdmin::class);
-        $this->assertContainerBuilderHasService(BasicPageController::class);
-        $this->assertContainerBuilderHasService(BasicPageService::class);
-        $this->assertContainerBuilderHasService(BasicPageAlternateLinksProvider::class);
-        $this->assertContainerBuilderHasService(BasicPageMetaInformationProvider::class);
+        $this->assertContainerBuilderHasService('runroom.basic_page.admin.basic_page', BasicPageAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.basic_page.controller.basic_page', BasicPageController::class);
+        $this->assertContainerBuilderHasService('runroom.basic_page.service.basic_page', BasicPageService::class);
+        $this->assertContainerBuilderHasService('runroom.basic_page.service.basic_page_alternate_links', BasicPageAlternateLinksProvider::class);
+        $this->assertContainerBuilderHasService('runroom.basic_page.service.basic_page_meta_information', BasicPageMetaInformationProvider::class);
         $this->assertContainerBuilderHasService(BasicPageRepository::class);
+        $this->assertContainerBuilderHasService('runroom.basic_page.twig.basic_page', BasicPageExtension::class);
+        $this->assertContainerBuilderHasService('runroom.basic_page.twig.basic_page.runtime', BasicPageRuntime::class);
     }
 
     protected function getContainerExtensions(): array

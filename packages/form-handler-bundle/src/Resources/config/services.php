@@ -19,7 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set(FormHandler::class)
+    $services->set('runroom.form_handler.form_handler', FormHandler::class)
         ->arg('$formFactory', new ReferenceConfigurator('form.factory'))
         ->arg('$eventDispatcher', new ReferenceConfigurator('event_dispatcher'))
         ->arg('$requestStack', new ReferenceConfigurator('request_stack'));

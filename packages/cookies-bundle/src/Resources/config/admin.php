@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $cookiesPageAdmin = $services->set(CookiesPageAdmin::class)
+    $cookiesPageAdmin = $services->set('runroom.cookies.admin.cookies_page', CookiesPageAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => CookiesPage::class,

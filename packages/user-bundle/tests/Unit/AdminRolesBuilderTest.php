@@ -70,11 +70,11 @@ class AdminRolesBuilderTest extends TestCase
         $this->admin->method('getTranslator')->willReturn($translator);
 
         $container = new Container();
-        $container->set('runroom_user.admin.user', $this->admin);
+        $container->set('runroom.user.admin.user', $this->admin);
 
         $this->rolesBuilder = new AdminRolesBuilder(
             $this->createStub(AuthorizationCheckerInterface::class),
-            new Pool($container, ['runroom_user.admin.user']),
+            new Pool($container, ['runroom.user.admin.user']),
             $sonataConfiguration,
             new Translator('en')
         );

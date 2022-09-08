@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $basicPageAdmin = $services->set(BasicPageAdmin::class)
+    $basicPageAdmin = $services->set('runroom.basic_page.admin.basic_page', BasicPageAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => BasicPage::class,

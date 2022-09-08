@@ -19,7 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $services->set('runroom_user.form.type.roles_matrix', RolesMatrixType::class)
-        ->arg('$rolesBuilder', new ReferenceConfigurator('runroom_user.security.roles_builder.matrix'))
+    $services->set('runroom.user.form.type.roles_matrix', RolesMatrixType::class)
+        ->arg('$rolesBuilder', new ReferenceConfigurator('runroom.user.security.roles_builder.matrix'))
         ->tag('form.type');
 };

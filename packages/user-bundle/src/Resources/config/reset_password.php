@@ -35,45 +35,45 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      */
     $passwordHasherId = class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder';
 
-    $services->set('runroom_user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class)
-        ->arg('$cleaner', new ReferenceConfigurator('runroom_user.reset_password.cleaner'))
+    $services->set('runroom.user.command.reset_password_remove_expired', ResetPasswordRemoveExpiredCommand::class)
+        ->arg('$cleaner', new ReferenceConfigurator('runroom.user.reset_password.cleaner'))
         ->tag('console.command', ['command' => 'runroom:user:remove-expired-password-request']);
 
-    $services->set('runroom_user.controller.reset_password', ResetPasswordController::class)
+    $services->set('runroom.user.controller.reset_password', ResetPasswordController::class)
         ->public()
-        ->arg('$resetPasswordHelper', new ReferenceConfigurator('runroom_user.reset_password.helper'))
+        ->arg('$resetPasswordHelper', new ReferenceConfigurator('runroom.user.reset_password.helper'))
         ->arg('$passwordHasher', new ReferenceConfigurator($passwordHasherId))
-        ->arg('$mailerService', new ReferenceConfigurator('runroom_user.service.mailer'))
-        ->arg('$userProvider', new ReferenceConfigurator('runroom_user.provider.user'))
+        ->arg('$mailerService', new ReferenceConfigurator('runroom.user.service.mailer'))
+        ->arg('$userProvider', new ReferenceConfigurator('runroom.user.provider.user'))
         ->tag('container.service_subscriber')
         ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
 
-    $services->set('runroom_user.form.type.change_password', ChangePasswordFormType::class)
+    $services->set('runroom.user.form.type.change_password', ChangePasswordFormType::class)
         ->tag('form.type');
 
-    $services->set('runroom_user.form.type.reset_password_request', ResetPasswordRequestFormType::class)
+    $services->set('runroom.user.form.type.reset_password_request', ResetPasswordRequestFormType::class)
         ->tag('form.type');
 
-    $services->set('runroom_user.service.mailer', MailerService::class)
+    $services->set('runroom.user.service.mailer', MailerService::class)
         ->arg('$mailer', new ReferenceConfigurator('mailer'))
         ->arg('$translator', new ReferenceConfigurator('translator'))
         ->arg('$twig', new ReferenceConfigurator('twig'))
         ->arg('$fromEmail', null)
         ->arg('$fromName', null);
 
-    $services->set('runroom_user.repository.reset_password_request', ResetPasswordRequestRepository::class)
+    $services->set('runroom.user.repository.reset_password_request', ResetPasswordRequestRepository::class)
         ->arg('$entityManager', new ReferenceConfigurator('doctrine.orm.entity_manager'))
         ->arg('$class', ResetPasswordRequest::class);
 
     // Services from SymfonyCasts Reset Password Bundle
-    $services->set('runroom_user.reset_password.cleaner', ResetPasswordCleaner::class)
-        ->arg('$repository', new ReferenceConfigurator('runroom_user.repository.reset_password_request'))
+    $services->set('runroom.user.reset_password.cleaner', ResetPasswordCleaner::class)
+        ->arg('$repository', new ReferenceConfigurator('runroom.user.repository.reset_password_request'))
         ->arg('$enabled', null);
 
-    $services->set('runroom_user.reset_password.helper', ResetPasswordHelper::class)
+    $services->set('runroom.user.reset_password.helper', ResetPasswordHelper::class)
         ->arg('$generator', new ReferenceConfigurator('symfonycasts.reset_password.token_generator'))
-        ->arg('$cleaner', new ReferenceConfigurator('runroom_user.reset_password.cleaner'))
-        ->arg('$repository', new ReferenceConfigurator('runroom_user.repository.reset_password_request'))
+        ->arg('$cleaner', new ReferenceConfigurator('runroom.user.reset_password.cleaner'))
+        ->arg('$repository', new ReferenceConfigurator('runroom.user.repository.reset_password_request'))
         ->arg('$resetRequestLifetime', null)
         ->arg('$requestThrottleTime', null);
 };

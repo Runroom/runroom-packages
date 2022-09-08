@@ -68,7 +68,7 @@ final class RunroomUserExtension extends Extension
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.php');
 
-            $container->getDefinition('runroom_user.twig.global_variables')
+            $container->getDefinition('runroom.user.twig.global_variables')
                 ->setArgument('$hasRequestPasswordEnabled', $config['reset_password']['enabled']);
         }
 
@@ -107,14 +107,14 @@ final class RunroomUserExtension extends Extension
             $loader->load('admin_reset_password.php');
         }
 
-        $container->getDefinition('runroom_user.reset_password.helper')
+        $container->getDefinition('runroom.user.reset_password.helper')
             ->setArgument('$resetRequestLifetime', $config['lifetime'])
             ->setArgument('$requestThrottleTime', $config['throttle_limit']);
 
-        $container->getDefinition('runroom_user.reset_password.cleaner')
+        $container->getDefinition('runroom.user.reset_password.cleaner')
             ->setArgument('$enabled', $config['enable_garbage_collection']);
 
-        $container->getDefinition('runroom_user.service.mailer')
+        $container->getDefinition('runroom.user.service.mailer')
             ->setArgument('$fromEmail', $config['email']['address'])
             ->setArgument('$fromName', $config['email']['sender_name']);
     }

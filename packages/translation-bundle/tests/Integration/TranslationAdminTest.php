@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Tests\Integration;
 
 use Runroom\Testing\TestCase\SonataAdminTestCase;
-use Runroom\TranslationBundle\Admin\TranslationAdmin;
 use Runroom\TranslationBundle\Entity\Translation;
 
 /**
@@ -68,6 +67,6 @@ class TranslationAdminTest extends SonataAdminTestCase
 
     protected function getAdminClass(): string
     {
-        return TranslationAdmin::class;
+        return 'runroom.translation.admin.translation';
     }
 }
