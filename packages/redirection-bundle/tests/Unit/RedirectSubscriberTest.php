@@ -98,9 +98,9 @@ class RedirectSubscriberTest extends TestCase
     }
 
     /**
-     * @todo: Change to MAIN_REQUEST when dropping support for Symfony 4
+     * @todo: Change to HttpKernelInterface::MAIN_REQUEST when dropping support for Symfony 4
      */
-    private function getResponseEvent(int $requestType = HttpKernelInterface::MASTER_REQUEST): RequestEvent
+    private function getResponseEvent(int $requestType = 1): RequestEvent
     {
         return new RequestEvent($this->createStub(Kernel::class), new Request(), $requestType);
     }
