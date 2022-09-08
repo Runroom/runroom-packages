@@ -77,6 +77,9 @@ final class MediaAdminController extends CRUDController
 
         $formView = $datagrid->getForm()->createView();
 
+        /**
+         * @psalm-suppress PrivateService
+         */
         $formRenderer = $this->container->get('twig')->getRuntime(FormRenderer::class);
         $formRenderer->setTheme($formView, $this->admin->getFilterTheme());
 
