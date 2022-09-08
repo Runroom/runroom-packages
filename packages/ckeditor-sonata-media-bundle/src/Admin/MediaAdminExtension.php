@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\CkeditorSonataMediaBundle\Admin;
 
-use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -33,11 +32,11 @@ final class MediaAdminExtension extends AbstractAdminExtension
     public function configureRoutes(AdminInterface $admin, object $collection): void
     {
         $collection->add('browser', 'browser', [
-            '_controller' => MediaAdminController::class . '::browserAction',
+            '_controller' => 'runroom.ckeditor_sonata_media.action.browser',
         ]);
 
         $collection->add('upload', 'upload', [
-            '_controller' => MediaAdminController::class . '::uploadAction',
+            '_controller' => 'runroom.ckeditor_sonata_media.action.upload',
         ]);
     }
 

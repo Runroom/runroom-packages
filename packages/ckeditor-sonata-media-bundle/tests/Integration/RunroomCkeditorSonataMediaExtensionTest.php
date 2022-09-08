@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Runroom\CkeditorSonataMediaBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Runroom\CkeditorSonataMediaBundle\Action\BrowserAction;
+use Runroom\CkeditorSonataMediaBundle\Action\UploadAction;
 use Runroom\CkeditorSonataMediaBundle\Admin\MediaAdminExtension;
-use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
 use Runroom\CkeditorSonataMediaBundle\DependencyInjection\RunroomCkeditorSonataMediaExtension;
 
 class RunroomCkeditorSonataMediaExtensionTest extends AbstractExtensionTestCase
@@ -32,7 +33,8 @@ class RunroomCkeditorSonataMediaExtensionTest extends AbstractExtensionTestCase
      */
     public function itHasCoreServicesAlias(): void
     {
-        $this->assertContainerBuilderHasService('runroom.ckeditor_sonata_media.controller.media_admin', MediaAdminController::class);
+        $this->assertContainerBuilderHasService('runroom.ckeditor_sonata_media.action.browser', BrowserAction::class);
+        $this->assertContainerBuilderHasService('runroom.ckeditor_sonata_media.action.upload', UploadAction::class);
         $this->assertContainerBuilderHasService('runroom.ckeditor_sonata_media.admin.media_admin', MediaAdminExtension::class);
     }
 

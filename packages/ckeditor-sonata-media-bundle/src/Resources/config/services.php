@@ -12,10 +12,9 @@ declare(strict_types=1);
  */
 
 use Psr\Container\ContainerInterface;
+use Runroom\CkeditorSonataMediaBundle\Action\BrowserAction;
+use Runroom\CkeditorSonataMediaBundle\Action\UploadAction;
 use Runroom\CkeditorSonataMediaBundle\Admin\MediaAdminExtension;
-use Runroom\CkeditorSonataMediaBundle\Controller\MediaAdminController;
-use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -23,20 +22,23 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
-    $mediaAdminController = $services->set('runroom.ckeditor_sonata_media.controller.media_admin', MediaAdminController::class)
+    $services->set('runroom.ckeditor_sonata_media.action.browser', BrowserAction::class)
         ->public()
-        ->arg('$mediaManager', new ReferenceConfigurator('sonata.media.manager.media'))
-        ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'));
+        ->tag('container.service_subscriber')
+        ->tag('controller.service_arguments')
+        ->arg('$twig', new ReferenceConfigurator('twig'))
+        ->arg('$adminFetcher', new ReferenceConfigurator('sonata.admin.request.fetcher'))
+        ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'))
+        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
 
-    /**
-     * @todo: Simplify this when dropping support for SonataAdminBundle 3
-     */
-    if (is_a(CRUDController::class, AbstractController::class, true)) {
-        $mediaAdminController
-            ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
-            ->tag('container.service_subscriber')
-            ->tag('controller.service_arguments');
-    }
+    $services->set('runroom.ckeditor_sonata_media.action.upload', UploadAction::class)
+        ->public()
+        ->tag('container.service_subscriber')
+        ->tag('controller.service_arguments')
+        ->arg('$adminFetcher', new ReferenceConfigurator('sonata.admin.request.fetcher'))
+        ->arg('$mediaManager', new ReferenceConfigurator('sonata.media.manager.media'))
+        ->arg('$mediaPool', new ReferenceConfigurator('sonata.media.pool'))
+        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
 
     $services->set('runroom.ckeditor_sonata_media.admin.media_admin', MediaAdminExtension::class)
         ->tag('sonata.admin.extension', ['target' => 'sonata.media.admin.media']);
