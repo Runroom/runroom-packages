@@ -51,7 +51,7 @@
         "a2lix/auto-form-bundle": "^0.4",
         "a2lix/translation-form-bundle": "^3.0.4",
         "doctrine/data-fixtures": "^1.5.1",
-        "doctrine/dbal": "^2.10 <2.10.3 || ^3.0",
+        "doctrine/dbal": "^2.10 <2.10.3 || ^3.1.4",
         "ergebnis/composer-normalize": "^2.2",
         "fakerphp/faker": "^1.13",
         "friendsofphp/php-cs-fixer": "^3.0",
