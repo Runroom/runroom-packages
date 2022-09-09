@@ -42,10 +42,6 @@ final class MediaAdminExtension extends AbstractAdminExtension
 
     public function configureBatchActions(AdminInterface $admin, array $actions): array
     {
-        if ($admin->isCurrentRoute('browser')) {
-            return [];
-        }
-
-        return $actions;
+        return $admin->isCurrentRoute('browser') ? [] : $actions;
     }
 }

@@ -21,10 +21,14 @@ use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\GalleryItem;
 use Runroom\CkeditorSonataMediaBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
+use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\Form\Bridge\Symfony\SonataFormBundle;
 use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
+use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -47,9 +51,12 @@ class Kernel extends BaseKernel
             new KnpMenuBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
+            new SonataBlockBundle(),
             new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataMediaBundle(),
+            new SonataFormBundle(),
+            new SonataTwigBundle(),
             new TwigBundle(),
 
             new RunroomCkeditorSonataMediaBundle(),
@@ -77,11 +84,21 @@ class Kernel extends BaseKernel
      */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-        $container->loadFromExtension('framework', [
+        $frameworkConfig = [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-        ]);
+            'http_method_override' => false,
+        ];
+
+        // @phpstan-ignore-next-line
+        if (method_exists(AbstractController::class, 'renderForm')) {
+            $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
+        } else {
+            $frameworkConfig['session'] = ['storage_id' => 'session.storage.mock_file'];
+        }
+
+        $container->loadFromExtension('framework', $frameworkConfig);
 
         $securityConfig = [
             'firewalls' => ['main' => []],
@@ -97,7 +114,17 @@ class Kernel extends BaseKernel
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
-            'orm' => ['auto_mapping' => true],
+            'orm' => [
+                'auto_mapping' => true,
+                'mappings' => [
+                    'ckeditor_sonata_media' => [
+                        'type' => 'annotation',
+                        'dir' => '%kernel.project_dir%/Entity',
+                        'prefix' => 'Runroom\CkeditorSonataMediaBundle\Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
+                ],
+            ],
         ]);
 
         $container->loadFromExtension('twig', [
@@ -110,6 +137,10 @@ class Kernel extends BaseKernel
                 'options' => [
                     'legacy_twig_text_extension' => false,
                 ],
+            ]);
+        } else {
+            $container->loadFromExtension('sonata_block', [
+                'http_cache' => false,
             ]);
         }
 
@@ -125,7 +156,10 @@ class Kernel extends BaseKernel
                 $galleryItemKey => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
-            'filesystem' => ['local' => null],
+            'filesystem' => ['local' => [
+                'directory' => '%kernel.project_dir%/uploads',
+                'create' => true,
+            ]],
         ]);
     }
 
@@ -136,6 +170,7 @@ class Kernel extends BaseKernel
      */
     protected function configureRoutes($routes): void
     {
+        $routes->import($this->getProjectDir() . '/routing.yaml');
     }
 
     private function getBaseDir(): string

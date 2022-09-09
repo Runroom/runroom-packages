@@ -16,6 +16,7 @@ namespace Runroom\CkeditorSonataMediaBundle\Action;
 use Sonata\AdminBundle\Request\AdminFetcherInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
+use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,6 +67,10 @@ final class UploadAction extends AbstractController
 
         return $this->render('@RunroomCkeditorSonataMedia/upload.html.twig', [
             'object' => $media,
+            'format' => $this->mediaPool->getProvider($provider)->getFormatName(
+                $media,
+                $request->query->get('format', MediaProviderInterface::FORMAT_REFERENCE)
+            ),
         ]);
     }
 }
