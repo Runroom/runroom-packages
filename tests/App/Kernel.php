@@ -252,7 +252,10 @@ final class Kernel extends BaseKernel
                 $galleryItemKey => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
-            'filesystem' => ['local' => null],
+            'filesystem' => ['local' => [
+                'directory' => '%kernel.project_dir%/uploads',
+                'create' => true,
+            ]],
         ]);
 
         $container->loadFromExtension('runroom_cookies', [

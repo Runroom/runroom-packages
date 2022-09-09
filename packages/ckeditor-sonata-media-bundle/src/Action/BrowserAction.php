@@ -90,7 +90,7 @@ final class BrowserAction extends AbstractController
             'export_formats' => [],
 
             // extra parameters
-            'base_template' => $this->getBaseTemplate($request, $admin),
+            'base_template' => $this->getBaseTemplate($admin),
             'admin' => $admin,
         ]);
     }
@@ -102,13 +102,8 @@ final class BrowserAction extends AbstractController
      *
      * @psalm-suppress UndefinedMethod
      */
-    private function getBaseTemplate(Request $request, AdminInterface $admin): string
+    private function getBaseTemplate(AdminInterface $admin): string
     {
-        if ($request->isXmlHttpRequest()) {
-            // @phpstan-ignore-next-line
-            return method_exists($admin, 'getTemplateRegistry') ? $admin->getTemplateRegistry()->getTemplate('ajax') : $admin->getTemplate('ajax');
-        }
-
         // @phpstan-ignore-next-line
         return method_exists($admin, 'getTemplateRegistry') ? $admin->getTemplateRegistry()->getTemplate('layout') : $admin->getTemplate('layout');
     }
