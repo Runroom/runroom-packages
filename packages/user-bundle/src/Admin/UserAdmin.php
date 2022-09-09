@@ -23,33 +23,44 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @extends AbstractAdmin<UserInterface>
+ *
+ * @psalm-suppress UndefinedDocblockClass
  */
 final class UserAdmin extends AbstractAdmin
 {
     /**
      * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @var UserPasswordHasherInterface
+     * @phpstan-ignore-next-line
+     *
+     * @psalm-suppress PropertyNotSetInConstructor
+     *
+     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
      */
     private object $passwordHasher;
 
     /**
      * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @param UserPasswordHasherInterface|null $deprecatedPasswordHasher
-     * @param UserPasswordHasherInterface|string $passwordHasher
+     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface|null $deprecatedPasswordHasher
+     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface|string|null $passwordHasher
      *
      * @phpstan-param class-string<UserInterface>|null $deprecatedClass
+     *
+     * @psalm-suppress UndefinedClass
+     *
+     * @phpstan-ignore-next-line
      */
     public function __construct($passwordHasher, ?string $deprecatedClass = null, ?string $deprecatedBaseControllerName = null, ?object $deprecatedPasswordHasher = null)
     {
         /**
          * @todo: Simplify this when dropping support for Sonata 3
          */
-        if ($passwordHasher instanceof UserPasswordHasherInterface) {
+        if ($passwordHasher instanceof UserPasswordHasherInterface || $passwordHasher instanceof UserPasswordEncoderInterface) {
             parent::__construct();
 
             $this->passwordHasher = $passwordHasher;

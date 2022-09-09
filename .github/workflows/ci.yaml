@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: PHP ${{ matrix.php }} + ${{ matrix.dependencies }} + Symfony ${{ matrix.symfony-require }}
+    name: PHP ${{ matrix.php }} + ${{ matrix.dependencies }} + symfony ${{ matrix.symfony-require }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
