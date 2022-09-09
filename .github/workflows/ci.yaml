@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   push:
@@ -7,14 +7,30 @@ on:
 
 jobs:
   build:
+    name: PHP ${{ matrix.php }} + ${{ matrix.dependencies }} + Symfony ${{ matrix.symfony-require }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php: ['7.4', '8.0', '8.1']
         dependencies: [highest]
+        symfony-require: ['']
         include:
           - php: '7.4'
             dependencies: lowest
+          - php: '8.1'
+            dependencies: highest
+            symfony-require: 4.4.*
+          - php: '8.1'
+            dependencies: highest
+            symfony-require: 5.4.*
+          - php: '8.1'
+            dependencies: highest
+            symfony-require: 6.0.*
+          - php: '8.1'
+            dependencies: highest
+            symfony-require: 6.1.*
+    env:
+      SYMFONY_REQUIRE: ${{matrix.symfony-require}}
     steps:
       - uses: actions/checkout@v3
       - uses: shivammathur/setup-php@v2
@@ -24,6 +40,10 @@ jobs:
           ini-values: pcov.directory=packages
           coverage: pcov
       - run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - if: matrix.symfony-require != ''
+        run: |
+            composer global config --no-plugins allow-plugins.symfony/flex true
+            composer global require --no-progress --no-scripts --no-plugins symfony/flex
       - uses: ramsey/composer-install@v2
         with:
           dependency-versions: ${{ matrix.dependencies }}

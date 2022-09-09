@@ -1,4 +1,4 @@
-name: split-ci
+name: Split CI
 
 on:
   push:
@@ -27,6 +27,7 @@ jobs:
     outputs:
       matrix: ${{ steps.output_data.outputs.matrix }}
   build:
+    name: PHP ${{ matrix.php }} + ${{ matrix.dependencies }} +  ${{ matrix.packages }}
     runs-on: ubuntu-latest
     needs: provide_packages_json
     strategy:

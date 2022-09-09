@@ -1,4 +1,4 @@
-name: monorepo
+name: Monorepo
 
 on:
   push:
