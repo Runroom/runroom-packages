@@ -89,7 +89,13 @@ class MetaInformationBuilder
 
         return (string) s($text)->replaceMatches('/\[(.*)\]/', function (array $match) use ($contextObject): string {
             try {
-                return $this->propertyAccessor->getValue($contextObject, $match[1]);
+                $value = $this->propertyAccessor->getValue($contextObject, $match[1]);
+
+                if (!\is_string($value)) {
+                    return '';
+                }
+
+                return $value;
             } catch (NoSuchPropertyException $e) {
             }
 

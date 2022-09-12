@@ -95,7 +95,10 @@ class FormHandlerTest extends TestCase
         $form = $this->configureForm();
 
         $this->eventDispatcher->addListener('form.form_types.event.success', function (GenericEvent $event): void {
-            self::assertTrue($event->getSubject()->formIsValid());
+            $subject = $event->getSubject();
+
+            self::assertInstanceOf(BasicFormViewModel::class, $subject);
+            self::assertTrue($subject->formIsValid());
         });
 
         $model = $this->formHandler->handleForm(FormType::class);

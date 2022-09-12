@@ -57,7 +57,14 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        return null !== $request ? $request->attributes->get('_route', '') : '';
+        if (null === $request) {
+            return '';
+        }
+
+        $route = $request->attributes->get('_route', '');
+        \assert(\is_string($route));
+
+        return $route;
     }
 
     /**
@@ -68,6 +75,7 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
         $request = $this->requestStack->getCurrentRequest();
 
         $routeParameters = null !== $request ? $request->attributes->get('_route_params', []) : [];
+        /** @var array<string, string> $routeParameters */
 
         return array_diff_key($routeParameters, array_flip(self::EXCLUDED_PARAMETERS));
     }
@@ -80,6 +88,6 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
             }
         }
 
-        throw new \RuntimeException('There is no provided selected to build alternate links');
+        throw new \RuntimeException('There is no provided selected to build alternate links.');
     }
 }

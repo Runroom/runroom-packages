@@ -20,7 +20,7 @@ interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUse
     public const ROLE_DEFAULT = 'ROLE_USER';
 
     /**
-     * @return mixed
+     * @return int|string|null
      */
     public function getId();
 
