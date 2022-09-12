@@ -28,7 +28,11 @@ final class BasicPageController extends AbstractController
 
     public function show(string $slug): Response
     {
-        $model = $this->service->getBasicPageViewModel($slug);
+        try {
+            $model = $this->service->getBasicPageViewModel($slug);
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException();
+        }
 
         return $this->render('@RunroomBasicPage/show.html.twig', [
             'model' => $model,

@@ -44,7 +44,9 @@ final class RedirectSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (null !== ($redirect = $this->repository->findRedirect($event->getRequest()->getPathInfo()))) {
+        $redirect = $this->repository->findRedirect($event->getRequest()->getPathInfo());
+
+        if (null !== $redirect) {
             $event->setResponse(
                 new RedirectResponse($redirect['destination'], (int) $redirect['httpCode'])
             );
@@ -54,7 +56,7 @@ final class RedirectSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => 'onKernelRequest',
+            KernelEvents::REQUEST => [['onKernelRequest', 33]],
         ];
     }
 }

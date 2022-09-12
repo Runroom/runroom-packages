@@ -76,6 +76,7 @@ class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'http_method_override' => false,
         ]);
 
         $securityConfig = [

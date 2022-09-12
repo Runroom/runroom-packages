@@ -76,6 +76,7 @@ class Kernel extends BaseKernel
             'property_access' => null,
             'translator' => null,
             'form' => null,
+            'http_method_override' => false,
         ]);
 
         $securityConfig = [

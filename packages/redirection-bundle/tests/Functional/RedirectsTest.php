@@ -11,14 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\BasicPageBundle\Tests\Functional;
+namespace Runroom\RedirectionBundle\Tests\Functional;
 
-use Runroom\BasicPageBundle\Factory\BasicPageFactory;
+use Runroom\RedirectionBundle\Entity\Redirect;
+use Runroom\RedirectionBundle\Factory\RedirectFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class BasicPageControllerTest extends WebTestCase
+class RedirectsTest extends WebTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -26,18 +27,21 @@ class BasicPageControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function itRendersStatic(): void
+    public function itRedirects(): void
     {
         $client = static::createClient();
 
-        $client->request('GET', '/basic-page');
+        $client->request('GET', '/redirects');
         self::assertResponseStatusCodeSame(404);
 
-        BasicPageFactory::new(['publish' => true])->withTranslations(['en'], [
-            'slug' => 'basic-page',
+        RedirectFactory::new([
+            'source' => '/redirects',
+            'destination' => '/destination',
+            'publish' => true,
+            'httpCode' => Redirect::PERMANENT,
         ])->create()->object();
 
-        $client->request('GET', '/basic-page');
-        self::assertResponseIsSuccessful();
+        $client->request('GET', '/redirects');
+        self::assertResponseRedirects('/destination', Redirect::PERMANENT);
     }
 }
