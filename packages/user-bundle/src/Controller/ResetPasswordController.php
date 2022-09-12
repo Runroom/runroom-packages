@@ -66,7 +66,10 @@ final class ResetPasswordController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->processSendingPasswordResetEmail($form->get('identifier')->getData());
+            $identifier = $form->get('identifier')->getData();
+            \assert(\is_string($identifier));
+
+            $this->processSendingPasswordResetEmail($identifier);
 
             return $this->redirectToRoute('runroom_user_check_email');
         }
@@ -118,13 +121,16 @@ final class ResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->resetPasswordHelper->removeResetRequest($token);
 
+            $plainPassword = $form->get('plainPassword')->getData();
+            \assert(\is_string($plainPassword));
+
             /*
              * @todo: Simplify this when dropping support for Symfony 4
              */
             if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
-                $password = $this->passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
+                $password = $this->passwordHasher->hashPassword($user, $plainPassword);
             } else {
-                $password = $this->passwordHasher->encodePassword($user, $form->get('plainPassword')->getData());
+                $password = $this->passwordHasher->encodePassword($user, $plainPassword);
             }
 
             $this->userProvider->upgradePassword($user, $password);

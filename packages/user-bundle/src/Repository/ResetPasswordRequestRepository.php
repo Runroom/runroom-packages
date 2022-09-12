@@ -26,12 +26,12 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
     private EntityManagerInterface $entityManager;
 
     /**
-     * @phpstan-var class-string<ResetPasswordRequestInterface>
+     * @phpstan-var class-string<ResetPasswordRequest>
      */
     private string $class;
 
     /**
-     * @phpstan-param class-string<ResetPasswordRequestInterface> $class
+     * @phpstan-param class-string<ResetPasswordRequest> $class
      */
     public function __construct(EntityManagerInterface $entityManager, string $class)
     {
@@ -48,7 +48,10 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
 
     public function getUserIdentifier(object $user): string
     {
-        return (string) $this->entityManager->getUnitOfWork()->getSingleIdentifierValue($user);
+        $identifier = $this->entityManager->getUnitOfWork()->getSingleIdentifierValue($user);
+        \assert(\is_string($identifier) || \is_int($identifier));
+
+        return (string) $identifier;
     }
 
     public function persistResetPasswordRequest(ResetPasswordRequestInterface $resetPasswordRequest): void
@@ -73,6 +76,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+        \assert(null === $resetPasswordRequest || $resetPasswordRequest instanceof ResetPasswordRequestInterface);
 
         if (null !== $resetPasswordRequest && !$resetPasswordRequest->isExpired()) {
             return $resetPasswordRequest->getRequestedAt();
@@ -107,7 +111,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
     }
 
     /**
-     * @phpstan-return EntityRepository<ResetPasswordRequestInterface>
+     * @phpstan-return EntityRepository<ResetPasswordRequest>
      */
     private function getRepository(): EntityRepository
     {

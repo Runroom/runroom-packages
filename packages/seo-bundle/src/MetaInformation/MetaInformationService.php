@@ -55,7 +55,14 @@ final class MetaInformationService implements MetaInformationServiceInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        return null !== $request ? $request->attributes->get('_route', '') : '';
+        if (null === $request) {
+            return '';
+        }
+
+        $route = $request->attributes->get('_route', '');
+        \assert(\is_string($route));
+
+        return $route;
     }
 
     private function selectProvider(string $route): MetaInformationProviderInterface
@@ -66,6 +73,6 @@ final class MetaInformationService implements MetaInformationServiceInterface
             }
         }
 
-        throw new \RuntimeException('There is no provided selected to build meta information');
+        throw new \RuntimeException('There is no provided selected to build meta information.');
     }
 }

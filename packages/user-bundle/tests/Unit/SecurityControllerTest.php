@@ -30,7 +30,7 @@ class SecurityControllerTest extends TestCase
         $controller = new SecurityController($this->createStub(AuthenticationUtils::class));
 
         $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        $this->expectExceptionMessage('This method can be blank. It will be intercepted by the logout key on your firewall.');
 
         $controller->logout();
     }

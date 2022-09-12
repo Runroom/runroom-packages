@@ -35,7 +35,7 @@ $config->setRules([
     'ordered_imports' => true,
     'phpdoc_align' => ['align' => 'left'],
     'phpdoc_order' => true,
-    'phpdoc_to_comment' => ['ignored_tags' => ['psalm-suppress', 'phpstan-ignore-next-line', 'todo', 'return']],
+    'phpdoc_to_comment' => ['ignored_tags' => ['psalm-suppress', 'phpstan-ignore-next-line', 'todo', 'return', 'var']],
     'compact_nullable_typehint' => true,
     'void_return' => false,
     'strict_comparison' => true,

@@ -48,6 +48,9 @@ class BasicPageRepository extends ServiceEntityRepository
             ->setParameter('locale', $request->getLocale())
             ->getQuery();
 
-        return $query->getSingleResult();
+        $basicPage = $query->getSingleResult();
+        \assert($basicPage instanceof BasicPage);
+
+        return $basicPage;
     }
 }
