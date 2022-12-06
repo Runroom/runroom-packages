@@ -22,6 +22,8 @@ trait Sortable
      * @Gedmo\SortablePosition
      * @ORM\Column(type="integer")
      */
+    #[Gedmo\SortablePosition]
+    #[ORM\Column(type: 'integer')]
     private ?int $position = null;
 
     public function setPosition(?int $position): self
