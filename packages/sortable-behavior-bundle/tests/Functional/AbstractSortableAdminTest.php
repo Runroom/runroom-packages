@@ -57,5 +57,17 @@ class AbstractSortableAdminTest extends WebTestCase
         static::assertSame(3, $sortableEntity2->getPosition());
         static::assertSame(1, $sortableEntity3->getPosition());
         static::assertSame(0, $sortableEntity4->getPosition());
+
+        $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity3->getId() . '/move/3');
+
+        $sortableEntity1->refresh();
+        $sortableEntity2->refresh();
+        $sortableEntity3->refresh();
+        $sortableEntity4->refresh();
+
+        static::assertSame(1, $sortableEntity1->getPosition());
+        static::assertSame(2, $sortableEntity2->getPosition());
+        static::assertSame(3, $sortableEntity3->getPosition());
+        static::assertSame(0, $sortableEntity4->getPosition());
     }
 }
