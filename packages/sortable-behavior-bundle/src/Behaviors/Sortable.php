@@ -23,7 +23,7 @@ trait Sortable
      * @ORM\Column(type="integer")
      */
     #[Gedmo\SortablePosition]
-    #[ORM\Column('position', 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $position = null;
 
     public function setPosition(?int $position): self
