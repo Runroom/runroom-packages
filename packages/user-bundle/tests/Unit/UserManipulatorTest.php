@@ -95,6 +95,9 @@ class UserManipulatorTest extends TestCase
                 ->with($user, 'new_password')
                 ->willReturn('hashed_password');
         } elseif (null !== $this->passwordEncoder) {
+            /**
+             * @psalm-suppress UndefinedDocblockClass
+             */
             $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
                 ->with($user, 'new_password')
@@ -180,6 +183,9 @@ class UserManipulatorTest extends TestCase
                 ->with($user, 'new_password')
                 ->willReturn('hashed_password');
         } elseif (null !== $this->passwordEncoder) {
+            /**
+             * @psalm-suppress UndefinedDocblockClass
+             */
             $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
                 ->with($user, 'new_password')

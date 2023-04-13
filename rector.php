@@ -28,7 +28,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->importNames();
-    $rectorConfig->disableImportShortClasses();
+    $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         __DIR__ . '/tests/App/var',
         CountOnNullRector::class,

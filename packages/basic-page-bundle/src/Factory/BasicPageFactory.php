@@ -16,11 +16,13 @@ namespace Runroom\BasicPageBundle\Factory;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\SeoBundle\Factory\EntityMetaInformationFactory;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Proxy;
 
 /**
  * @extends ModelFactory<BasicPage>
  *
  * @method BasicPageFactory addState(array|callable $attributes = [])
+ * @method static Proxy<BasicPage> createOne(array $attributes = [])
  */
 final class BasicPageFactory extends ModelFactory
 {

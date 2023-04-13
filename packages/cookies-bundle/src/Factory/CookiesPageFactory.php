@@ -15,11 +15,13 @@ namespace Runroom\CookiesBundle\Factory;
 
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Proxy;
 
 /**
  * @extends ModelFactory<CookiesPage>
  *
  * @method CookiesPageFactory addState(array|callable $attributes = [])
+ * @method static Proxy<CookiesPage> createOne(array $attributes = [])
  */
 final class CookiesPageFactory extends ModelFactory
 {

@@ -16,9 +16,12 @@ namespace Runroom\UserBundle\Factory;
 use Runroom\UserBundle\Entity\ResetPasswordRequest;
 use Zenstruck\Foundry\Instantiator;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Proxy;
 
 /**
  * @extends ModelFactory<ResetPasswordRequest>
+ *
+ * @method static Proxy<ResetPasswordRequest> createOne(array $attributes = [])
  */
 final class ResetPasswordRequestFactory extends ModelFactory
 {

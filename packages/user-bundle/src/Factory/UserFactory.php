@@ -15,9 +15,13 @@ namespace Runroom\UserBundle\Factory;
 
 use Runroom\UserBundle\Entity\User;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Proxy;
 
 /**
  * @extends ModelFactory<User>
+ *
+ * @method static Proxy<User> createOne(array $attributes = [])
+ * @method static Proxy<User> find($criteria)
  */
 final class UserFactory extends ModelFactory
 {
