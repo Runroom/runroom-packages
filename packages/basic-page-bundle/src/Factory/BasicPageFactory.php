@@ -19,6 +19,8 @@ use Zenstruck\Foundry\ModelFactory;
 
 /**
  * @extends ModelFactory<BasicPage>
+ *
+ * @method BasicPageFactory addState(array|callable $attributes = [])
  */
 final class BasicPageFactory extends ModelFactory
 {

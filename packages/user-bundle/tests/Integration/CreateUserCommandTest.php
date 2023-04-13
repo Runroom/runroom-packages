@@ -46,6 +46,8 @@ class CreateUserCommandTest extends KernelTestCase
     {
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
         $passwordHasher = $container->get(class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder');

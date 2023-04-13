@@ -18,6 +18,8 @@ use Zenstruck\Foundry\ModelFactory;
 
 /**
  * @extends ModelFactory<CookiesPage>
+ *
+ * @method CookiesPageFactory addState(array|callable $attributes = [])
  */
 final class CookiesPageFactory extends ModelFactory
 {

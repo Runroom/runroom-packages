@@ -17,6 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Security\UserAuthenticator;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -24,7 +25,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authorization\Voter\CacheableVoterInterface;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Security as DeprecatedSecurity;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
@@ -77,7 +78,14 @@ class UserAuthenticatorTest extends TestCase
         static::assertInstanceOf(PasswordCredentials::class, $passwordCredential);
         static::assertSame('username', $userBadge->getUserIdentifier());
         static::assertSame('password', $passwordCredential->getPassword());
-        static::assertSame('username', $request->getSession()->get(Security::LAST_USERNAME));
+
+        /**
+         * @psalm-suppress DeprecatedClass
+         */
+        static::assertSame('username', $request->getSession()->get(class_exists(Security::class) ?
+            Security::LAST_USERNAME :
+            DeprecatedSecurity::LAST_USERNAME
+        ));
     }
 
     /**

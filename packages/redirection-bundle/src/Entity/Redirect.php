@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RedirectRepository::class)
+ *
  * @DoctrineAssert\UniqueEntity("source")
  */
 class Redirect
@@ -29,24 +30,33 @@ class Redirect
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
     /**
      * @Assert\NotNull
+     *
      * @Assert\Length(max=500)
+     *
      * @Assert\Regex("/^\/.*$/")
+     *
      * @ORM\Column(type="string", length=500, unique=true)
      */
     private ?string $source = null;
 
     /**
      * @Assert\NotNull
+     *
      * @Assert\Length(max=500)
+     *
      * @Assert\Regex("/^(\/|https?:\/\/).*$/")
+     *
      * @Assert\NotEqualTo(propertyPath="source")
+     *
      * @ORM\Column(type="string", length=500)
      */
     private ?string $destination = null;
@@ -56,6 +66,7 @@ class Redirect
      *     Redirect::PERMANENT,
      *     Redirect::TEMPORAL,
      * })
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $httpCode = self::PERMANENT;

@@ -28,14 +28,18 @@ class Translation implements TranslatableInterface
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
     /**
      * @Assert\NotNull
+     *
      * @Assert\Length(max=255)
+     *
      * @ORM\Column(name="translation_key", type="string", unique=true)
      */
     private ?string $key = null;

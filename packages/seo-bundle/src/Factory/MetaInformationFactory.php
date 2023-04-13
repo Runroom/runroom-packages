@@ -18,6 +18,8 @@ use Zenstruck\Foundry\ModelFactory;
 
 /**
  * @extends ModelFactory<MetaInformation>
+ *
+ * @method MetaInformationFactory addState(array|callable $attributes = [])
  */
 final class MetaInformationFactory extends ModelFactory
 {

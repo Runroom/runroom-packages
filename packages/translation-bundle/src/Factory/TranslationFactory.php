@@ -18,6 +18,8 @@ use Zenstruck\Foundry\ModelFactory;
 
 /**
  * @extends ModelFactory<Translation>
+ *
+ * @method TranslationFactory addState(array|callable $attributes = [])
  */
 final class TranslationFactory extends ModelFactory
 {

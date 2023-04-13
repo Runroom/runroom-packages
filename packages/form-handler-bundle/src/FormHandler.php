@@ -61,6 +61,13 @@ class FormHandler
                 'form.' . $form->getName() . '.event.success'
             );
 
+            /**
+             * @todo: Use instanceof FlashBagAwareSessionInterface when dropping Symfony 5 support.
+             *
+             * @phpstan-ignore-next-line
+             *
+             * @psalm-suppress UndefinedInterfaceMethod
+             */
             $request->getSession()->getFlashBag()->add($form->getName(), 'success');
         }
 

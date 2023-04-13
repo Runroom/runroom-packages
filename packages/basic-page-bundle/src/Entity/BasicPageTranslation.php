@@ -21,7 +21,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(indexes={
+ *
  *     @ORM\Index(columns={"slug"}),
  * })
  */
@@ -40,26 +42,32 @@ class BasicPageTranslation implements TranslationInterface
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
     /**
      * @Assert\NotNull
+     *
      * @Assert\Length(max=255)
+     *
      * @ORM\Column(type="string")
      */
     private ?string $title = null;
 
     /**
      * @Gedmo\Slug(fields={"title"}, unique_base="locale")
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $slug = null;
 
     /**
      * @Assert\NotNull
+     *
      * @ORM\Column(type="text")
      */
     private ?string $content = null;

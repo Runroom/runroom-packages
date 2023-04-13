@@ -38,10 +38,23 @@ final class AdminRolesBuilder implements AdminRolesBuilderInterface
         $this->translator = $translator;
     }
 
+    /**
+     * @todo: Simplify this method when dropping support for SonataAdmin 3
+     */
     public function getRoles(?string $domain = null): array
     {
         $adminRoles = [];
-        foreach ($this->pool->getAdminServiceIds() as $id) {
+
+        /**
+         * @psalm-suppress DeprecatedMethod
+         *
+         * @phpstan-ignore-next-line
+         */
+        $adminServiceCodes = method_exists($this->pool, 'getAdminServiceCodes')
+            ? $this->pool->getAdminServiceCodes()
+            : $this->pool->getAdminServiceIds();
+
+        foreach ($adminServiceCodes as $id) {
             $admin = $this->pool->getInstance($id);
             $baseRole = $admin->getSecurityHandler()->getBaseRole($admin);
 

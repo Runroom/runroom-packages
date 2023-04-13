@@ -19,6 +19,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @psalm-suppress MissingTemplateParam
+ */
 final class RolesMatrixType extends AbstractType
 {
     private MatrixRolesBuilderInterface $rolesBuilder;

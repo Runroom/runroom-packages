@@ -26,7 +26,9 @@ class EntityMetaInformation implements TranslatableInterface
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;

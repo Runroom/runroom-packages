@@ -59,7 +59,7 @@ class UserManipulatorTest extends TestCase
             $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)->getMock();
         } else {
             /**
-             * @psalm-suppress InvalidPropertyAssignmentValue
+             * @psalm-suppress PropertyTypeCoercion
              */
             $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         }

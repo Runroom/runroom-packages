@@ -24,6 +24,7 @@ trait Sortable
 {
     /**
      * @Gedmo\SortablePosition
+     *
      * @ORM\Column(type="integer")
      */
     #[Gedmo\SortablePosition]

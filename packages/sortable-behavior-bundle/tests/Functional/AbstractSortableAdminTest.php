@@ -15,7 +15,9 @@ namespace Runroom\SortableBehaviorBundle\Tests\Functional;
 
 use Runroom\SortableBehaviorBundle\Tests\App\Entity\SortableEntity;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Zenstruck\Foundry\AnonymousFactory;
+
+use function Zenstruck\Foundry\anonymous;
+
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -31,11 +33,11 @@ class AbstractSortableAdminTest extends WebTestCase
     {
         $client = static::createClient();
 
-        /**
-         * @phpstan-var AnonymousFactory<SortableEntity>
-         */
-        $factory = AnonymousFactory::new(SortableEntity::class);
+        $factory = anonymous(SortableEntity::class);
 
+        /**
+         * @psalm-suppress PossiblyUndefinedArrayOffset
+         */
         [$sortableEntity1, $sortableEntity2, $sortableEntity3, $sortableEntity4] = $factory->many(4)->create();
 
         static::assertSame(0, $sortableEntity1->getPosition());

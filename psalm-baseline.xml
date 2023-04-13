@@ -50,11 +50,6 @@
       <code>static::$container</code>
     </UndefinedPropertyFetch>
   </file>
-  <file src="packages/sortable-behavior-bundle/tests/Functional/AbstractSortableAdminTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
   <file src="packages/testing/src/TestCase/DoctrineTestCase.php">
     <UndefinedPropertyFetch occurrences="1">
       <code>static::$container</code>
@@ -79,11 +74,6 @@
     <UndefinedPropertyFetch occurrences="1">
       <code>static::$container</code>
     </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/user-bundle/src/Admin/UserAdmin.php">
-    <UndefinedInterfaceMethod occurrences="1">
-      <code>encodePassword</code>
-    </UndefinedInterfaceMethod>
   </file>
   <file src="packages/user-bundle/src/Controller/ResetPasswordController.php">
     <UndefinedInterfaceMethod occurrences="1">
@@ -127,10 +117,5 @@
     <UndefinedClass occurrences="1">
       <code>UserPasswordEncoderInterface</code>
     </UndefinedClass>
-    <UndefinedDocblockClass occurrences="3">
-      <code>$this-&gt;passwordEncoder</code>
-      <code>$this-&gt;passwordEncoder</code>
-      <code>?MockObject</code>
-    </UndefinedDocblockClass>
   </file>
 </files>

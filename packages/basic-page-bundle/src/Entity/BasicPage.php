@@ -22,7 +22,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BasicPageRepository::class)
+ *
  * @ORM\Table(indexes={
+ *
  *     @ORM\Index(columns={"publish"}),
  * })
  */
@@ -36,7 +38,9 @@ class BasicPage implements TranslatableInterface
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
@@ -46,6 +50,7 @@ class BasicPage implements TranslatableInterface
      *     BasicPage::LOCATION_NONE,
      *     BasicPage::LOCATION_FOOTER,
      * })
+     *
      * @ORM\Column(type="string")
      */
     private ?string $location = self::LOCATION_NONE;

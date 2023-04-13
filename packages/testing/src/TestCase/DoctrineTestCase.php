@@ -70,6 +70,8 @@ abstract class DoctrineTestCase extends KernelTestCase
     {
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 

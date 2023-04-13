@@ -26,19 +26,23 @@ class SortableEntity extends AbstractSortableEntity
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $simpleGroup = null;
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\OneToOne(targetEntity="SortableGroup")
      */
     private ?SortableGroup $sortableGroup = null;

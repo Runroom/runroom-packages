@@ -21,14 +21,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @see https://github.com/doctrine/dbal/issues/1222
  *
  * @ORM\Entity
+ *
  * @ORM\Table(name="`user`")
+ *
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
