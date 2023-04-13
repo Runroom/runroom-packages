@@ -17,6 +17,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+/**
+ * Keep annotations and attributes since this class is mean to be used by end user entities.
+ */
 trait Sortable
 {
     /**
