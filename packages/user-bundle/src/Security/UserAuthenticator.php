@@ -46,6 +46,8 @@ final class UserAuthenticator extends AbstractLoginFormAuthenticator
 
         /**
          * @psalm-suppress DeprecatedClass
+         *
+         * @todo: Remove this conditional when dropping support for Symfony <6.2
          */
         $request->getSession()->set(
             class_exists(Security::class) ? Security::LAST_USERNAME : DeprecatedSecurity::LAST_USERNAME,

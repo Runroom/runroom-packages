@@ -59,7 +59,7 @@ class UserManipulatorTest extends TestCase
             $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)->getMock();
         } else {
             /**
-             * @psalm-suppress PropertyTypeCoercion
+             * @psalm-suppress PropertyTypeCoercion UndefinedDocblockClass
              */
             $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         }
@@ -95,9 +95,6 @@ class UserManipulatorTest extends TestCase
                 ->with($user, 'new_password')
                 ->willReturn('hashed_password');
         } elseif (null !== $this->passwordEncoder) {
-            /**
-             * @psalm-suppress UndefinedDocblockClass
-             */
             $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
                 ->with($user, 'new_password')

@@ -20,6 +20,7 @@
     "homepage": "https://github.com/runroom/RunroomUserBundle",
     "require": {
         "php": "^7.4 || ^8.0",
+        "doctrine/annotations": "^1.13 || ^2.0",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/orm": "^2.8",
         "doctrine/persistence": "^2.0 || ^3.0",
@@ -44,7 +45,6 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "require-dev": {
-        "doctrine/annotations": "^1.13 || ^2.0",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",

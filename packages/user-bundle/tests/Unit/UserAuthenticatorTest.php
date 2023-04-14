@@ -81,6 +81,8 @@ class UserAuthenticatorTest extends TestCase
 
         /**
          * @psalm-suppress DeprecatedClass
+         *
+         * @todo: Remove this conditional when dropping support for Symfony <6.2
          */
         static::assertSame('username', $request->getSession()->get(class_exists(Security::class) ?
             Security::LAST_USERNAME :

@@ -19,9 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use function Zenstruck\Foundry\anonymous;
 
 use Zenstruck\Foundry\AnonymousFactory;
-
 use Zenstruck\Foundry\Proxy;
-
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -42,13 +40,13 @@ class AbstractSortableAdminTest extends WebTestCase
          *
          * @todo: simplify when dropping support for ZenstruckFoundryBundle < 1.10
          */
-        if (class_exists(AnonymousFactory::class)) {
+        if (\function_exists('anonymous')) {
+            $factory = anonymous(SortableEntity::class);
+        } else {
             /**
              * @psalm-suppress InvalidArgument
              */
             $factory = AnonymousFactory::new(SortableEntity::class);
-        } else {
-            $factory = anonymous(SortableEntity::class);
         }
 
         /**
