@@ -26,6 +26,7 @@ $config->setRules([
     'combine_consecutive_issets' => true,
     'combine_consecutive_unsets' => true,
     'concat_space' => ['spacing' => 'one'],
+    'declare_strict_types' => true,
     'global_namespace_import' => ['import_classes' => false, 'import_constants' => false, 'import_functions' => false],
     'header_comment' => ['header' => $header],
     'list_syntax' => ['syntax' => 'short'],
