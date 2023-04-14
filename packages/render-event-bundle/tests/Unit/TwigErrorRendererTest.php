@@ -147,8 +147,8 @@ class TwigErrorRendererTest extends TestCase
     {
         return new TwigErrorRenderer(
             $this->twig,
-            $this->fallbackErrorRenderer,
             $this->renderer,
+            $this->fallbackErrorRenderer,
             TwigErrorRenderer::isDebug($this->requestStack, $debug)
         );
     }
