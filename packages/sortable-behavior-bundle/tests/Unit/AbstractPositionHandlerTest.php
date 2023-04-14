@@ -50,6 +50,10 @@ class AbstractPositionHandlerTest extends TestCase
         $this->entity->setPosition($this->positionHandler->getPosition($this->entity, 'random', $lastPosition));
 
         static::assertSame(0, $this->entity->getPosition());
+
+        $this->entity->setPosition($this->positionHandler->getPosition($this->entity, '5', $lastPosition));
+
+        static::assertSame(5, $this->entity->getPosition());
     }
 }
 
