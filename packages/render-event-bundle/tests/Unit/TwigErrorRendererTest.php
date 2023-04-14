@@ -79,10 +79,7 @@ class TwigErrorRendererTest extends TestCase
             ->willReturn($this->flattenException);
     }
 
-    /**
-     * @test
-     */
-    public function itRendersException(): void
+    public function testItRendersException(): void
     {
         $controller = $this->configureController(true);
 
@@ -91,10 +88,7 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /**
-     * @test
-     */
-    public function itRendersGenericErrorPage(): void
+    public function testItRendersGenericErrorPage(): void
     {
         $this->renderer->method('render')->with('@Twig/Exception/error.html.twig', [
             'exception' => $this->flattenException,
@@ -113,10 +107,7 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /**
-     * @test
-     */
-    public function itRenders404ErrorPage(): void
+    public function testItRenders404ErrorPage(): void
     {
         $this->renderer->method('render')->with('@Twig/Exception/error404.html.twig', [
             'exception' => $this->flattenException,
@@ -132,10 +123,7 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsExceptionIfNoTemplateIsAvailable(): void
+    public function testItReturnsExceptionIfNoTemplateIsAvailable(): void
     {
         $this->twigLoader->method('exists')->willReturnMap([
             ['@Twig/Exception/error404.html.twig', false],
@@ -149,10 +137,7 @@ class TwigErrorRendererTest extends TestCase
         static::assertSame(404, $response->getStatusCode());
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsSecondParameterIfRequestStackDoesNotHaveRequest(): void
+    public function testItReturnsSecondParameterIfRequestStackDoesNotHaveRequest(): void
     {
         static::assertTrue(TwigErrorRenderer::isDebug(new RequestStack(), true)());
         static::assertFalse(TwigErrorRenderer::isDebug(new RequestStack(), false)());

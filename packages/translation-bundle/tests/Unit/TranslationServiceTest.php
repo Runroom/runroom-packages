@@ -48,10 +48,7 @@ class TranslationServiceTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsAStringTranslatedByTheRepository(): void
+    public function testItReturnsAStringTranslatedByTheRepository(): void
     {
         $translation = TranslationFactory::new(['key' => 'key'])->withTranslations(['en'])->create();
 
@@ -63,10 +60,7 @@ class TranslationServiceTest extends TestCase
         static::assertSame($translation->getValue(), $result);
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsAStringTranslatedByTheTranslatorComponent(): void
+    public function testItReturnsAStringTranslatedByTheTranslatorComponent(): void
     {
         $this->repository->method('findOneBy')->with(['key' => 'key'])->willReturn(null);
         $this->translator->method('trans')->with('key', [], null, 'en')

@@ -57,10 +57,7 @@ class UserAuthenticatorTest extends TestCase
         $this->userAuthenticator = new UserAuthenticator($this->urlGenerator);
     }
 
-    /**
-     * @test
-     */
-    public function itCanAuthenticateWithRequest(): void
+    public function testItCanAuthenticateWithRequest(): void
     {
         $request = new Request([], [
             '_username' => 'username',
@@ -84,16 +81,14 @@ class UserAuthenticatorTest extends TestCase
          *
          * @todo: Remove this conditional when dropping support for Symfony <6.2
          */
-        static::assertSame('username', $request->getSession()->get(class_exists(Security::class) ?
+        static::assertSame('username', $request->getSession()->get(
+            class_exists(Security::class) ?
             Security::LAST_USERNAME :
             DeprecatedSecurity::LAST_USERNAME
         ));
     }
 
-    /**
-     * @test
-     */
-    public function itRedirectsWhenAuthenticationIsSuccess(): void
+    public function testItRedirectsWhenAuthenticationIsSuccess(): void
     {
         $request = new Request();
         $request->setSession($this->session);
@@ -122,10 +117,7 @@ class UserAuthenticatorTest extends TestCase
         static::assertInstanceOf(RedirectResponse::class, $response);
     }
 
-    /**
-     * @test
-     */
-    public function itRedirectsWhenAuthenticationIsNotSuccess(): void
+    public function testItRedirectsWhenAuthenticationIsNotSuccess(): void
     {
         $this->session->set('_security.' . $this->firewallName . '.target_path', 'targetValue');
         $request = new Request();

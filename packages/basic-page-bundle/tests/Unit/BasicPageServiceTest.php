@@ -35,10 +35,7 @@ class BasicPageServiceTest extends TestCase
         $this->service = new BasicPageService($this->repository);
     }
 
-    /**
-     * @test
-     */
-    public function itGetsBasicPage(): void
+    public function testItGetsBasicPage(): void
     {
         $basicPage = new BasicPage();
 

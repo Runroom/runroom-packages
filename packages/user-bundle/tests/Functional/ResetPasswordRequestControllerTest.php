@@ -26,10 +26,7 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     use Factories;
     use ResetDatabase;
 
-    /**
-     * @test
-     */
-    public function itSubmitsResetPasswordRequestWithNonExistentUser(): void
+    public function testItSubmitsResetPasswordRequestWithNonExistentUser(): void
     {
         $client = static::createClient();
 
@@ -52,10 +49,7 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_check_email');
     }
 
-    /**
-     * @test
-     */
-    public function itSubmitsResetPasswordRequest(): void
+    public function testItSubmitsResetPasswordRequest(): void
     {
         $client = static::createClient();
 
@@ -83,10 +77,7 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_check_email');
     }
 
-    /**
-     * @test
-     */
-    public function itThrows404IfTryToResetPasswordWithoutToken(): void
+    public function testItThrows404IfTryToResetPasswordWithoutToken(): void
     {
         $client = static::createClient();
         $client->catchExceptions(true);
@@ -95,10 +86,7 @@ class ResetPasswordRequestControllerTest extends WebTestCase
         static::assertResponseStatusCodeSame(404);
     }
 
-    /**
-     * @test
-     */
-    public function itRedirectsToResetPasswordRequestOnInvalidToken(): void
+    public function testItRedirectsToResetPasswordRequestOnInvalidToken(): void
     {
         $client = static::createClient();
         $client->followRedirects(true);
@@ -108,11 +96,9 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     }
 
     /**
-     * @test
-     *
      * @see We need to use the internal token generator to generate a valid token for testing purposes
      */
-    public function itResetsPassword(): void
+    public function testItResetsPassword(): void
     {
         $client = static::createClient();
 

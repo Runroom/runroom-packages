@@ -51,13 +51,11 @@ class UserProviderTest extends TestCase
     }
 
     /**
-     * @test
-     *
      * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
      *
      * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
      */
-    public function itDoesntLoadsNullUserByIdentifier(): void
+    public function testItDoesntLoadsNullUserByIdentifier(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
 
@@ -71,13 +69,11 @@ class UserProviderTest extends TestCase
     }
 
     /**
-     * @test
-     *
      * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
      *
      * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
      */
-    public function itDoesntLoadsDisabledUserByIdentifier(): void
+    public function testItDoesntLoadsDisabledUserByIdentifier(): void
     {
         $this->expectedUser->setEnabled(false);
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
@@ -91,10 +87,7 @@ class UserProviderTest extends TestCase
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 
-    /**
-     * @test
-     */
-    public function itLoadsUserByIdentifier(): void
+    public function testItLoadsUserByIdentifier(): void
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
 
@@ -104,10 +97,7 @@ class UserProviderTest extends TestCase
         static::assertSame($this->expectedUser, $user);
     }
 
-    /**
-     * @test
-     */
-    public function itLoadsUserByUsername(): void
+    public function testItLoadsUserByUsername(): void
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
 
@@ -117,10 +107,7 @@ class UserProviderTest extends TestCase
         static::assertSame($this->expectedUser, $user);
     }
 
-    /**
-     * @test
-     */
-    public function itRefreshesUser(): void
+    public function testItRefreshesUser(): void
     {
         $user = UserFactory::createOne()->object();
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
@@ -132,13 +119,11 @@ class UserProviderTest extends TestCase
     }
 
     /**
-     * @test
-     *
      * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
      *
      * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
      */
-    public function itDoesntRefreshesNullUser(): void
+    public function testItDoesntRefreshesNullUser(): void
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn(null);
 
@@ -151,10 +136,7 @@ class UserProviderTest extends TestCase
         $this->userProvider->refreshUser($this->expectedUser);
     }
 
-    /**
-     * @test
-     */
-    public function itDoesntRefreshesWrongUserInstance(): void
+    public function testItDoesntRefreshesWrongUserInstance(): void
     {
         $user = $this->createStub(SymfonyUserInterface::class);
 
@@ -164,10 +146,7 @@ class UserProviderTest extends TestCase
         $this->userProvider->refreshUser($user);
     }
 
-    /**
-     * @test
-     */
-    public function itUpgradesPassword(): void
+    public function testItUpgradesPassword(): void
     {
         $this->repository->expects(static::once())->method('save')->with($this->expectedUser);
 
@@ -176,10 +155,7 @@ class UserProviderTest extends TestCase
         static::assertSame('new_password', $this->expectedUser->getPassword());
     }
 
-    /**
-     * @test
-     */
-    public function itDoesntUpgradePasswordForWrongUserInstance(): void
+    public function testItDoesntUpgradePasswordForWrongUserInstance(): void
     {
         $user = $this->createStub(SymfonyUserInterface::class);
 

@@ -28,7 +28,7 @@ final class TemplateController
     /**
      * @param array<string, mixed>|null $context
      */
-    public function __invoke(string $template, array $context = null): Response
+    public function __invoke(string $template, ?array $context = null): Response
     {
         return $this->renderer->renderResponse($template, $context);
     }

@@ -39,7 +39,7 @@ class AlternateLinksBuilder
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param array<string, mixed>  $context
      * @param array<string, string> $routeParameters
      *
      * @return array<string, string>

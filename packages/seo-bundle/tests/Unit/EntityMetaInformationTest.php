@@ -21,10 +21,7 @@ class EntityMetaInformationTest extends TestCase
 {
     use Factories;
 
-    /**
-     * @test
-     */
-    public function itGetsProperties(): void
+    public function testItGetsProperties(): void
     {
         $metaInformation = EntityMetaInformationFactory::new()->withTranslations(['en'])->create();
 

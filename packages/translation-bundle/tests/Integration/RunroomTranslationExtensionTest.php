@@ -33,10 +33,7 @@ class RunroomTranslationExtensionTest extends AbstractExtensionTestCase
         $this->load();
     }
 
-    /**
-     * @test
-     */
-    public function itHasCoreServicesAlias(): void
+    public function testItHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService('runroom.translation.admin.translation', TranslationAdmin::class);
         $this->assertContainerBuilderHasService('runroom.translation.service.translation', TranslationService::class);

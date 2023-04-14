@@ -22,9 +22,7 @@ class Entity
 {
     /**
      * @ORM\Id
-     *
      * @ORM\GeneratedValue
-     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;

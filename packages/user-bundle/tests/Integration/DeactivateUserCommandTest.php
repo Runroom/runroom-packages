@@ -38,20 +38,14 @@ class DeactivateUserCommandTest extends KernelTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function isThrowsWhenUserDoesNotExist(): void
+    public function testIsThrowsWhenUserDoesNotExist(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNothingToAnAlreadyInactiveUser(): void
+    public function testItDoesNothingToAnAlreadyInactiveUser(): void
     {
         /**
          * @phpstan-var Proxy<UserInterface>
@@ -66,10 +60,7 @@ class DeactivateUserCommandTest extends KernelTestCase
         static::assertFalse($user->getEnabled());
     }
 
-    /**
-     * @test
-     */
-    public function itDeactivatesUser(): void
+    public function testItDeactivatesUser(): void
     {
         /**
          * @phpstan-var Proxy<UserInterface>

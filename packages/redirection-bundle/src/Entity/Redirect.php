@@ -30,18 +30,14 @@ class Redirect
 
     /**
      * @ORM\Id
-     *
      * @ORM\GeneratedValue
-     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
     /**
      * @Assert\NotNull
-     *
      * @Assert\Length(max=500)
-     *
      * @Assert\Regex("/^\/.*$/")
      *
      * @ORM\Column(type="string", length=500, unique=true)
@@ -50,11 +46,8 @@ class Redirect
 
     /**
      * @Assert\NotNull
-     *
      * @Assert\Length(max=500)
-     *
      * @Assert\Regex("/^(\/|https?:\/\/).*$/")
-     *
      * @Assert\NotEqualTo(propertyPath="source")
      *
      * @ORM\Column(type="string", length=500)

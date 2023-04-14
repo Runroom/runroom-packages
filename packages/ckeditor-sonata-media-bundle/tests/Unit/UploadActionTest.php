@@ -77,10 +77,7 @@ class UploadActionTest extends TestCase
         $this->action->setContainer($this->container);
     }
 
-    /**
-     * @test
-     */
-    public function uploadAction(): void
+    public function testUploadAction(): void
     {
         $media = $this->createStub(MediaInterface::class);
         $provider = $this->createStub(MediaProviderInterface::class);
@@ -99,10 +96,7 @@ class UploadActionTest extends TestCase
         static::assertSame('renderResponse', $response->getContent());
     }
 
-    /**
-     * @test
-     */
-    public function uploadActionThrowsWhenNoPostMethod(): void
+    public function testUploadActionThrowsWhenNoPostMethod(): void
     {
         $this->request->setMethod('GET');
 

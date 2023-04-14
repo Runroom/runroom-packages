@@ -36,7 +36,7 @@ final class TwigErrorRenderer implements ErrorRendererInterface
      */
     public function __construct(
         Environment $twig,
-        HtmlErrorRenderer $fallbackErrorRenderer = null,
+        ?HtmlErrorRenderer $fallbackErrorRenderer = null,
         PageRenderer $renderer,
         $debug = false
     ) {

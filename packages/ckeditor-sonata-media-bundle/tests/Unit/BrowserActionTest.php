@@ -71,10 +71,7 @@ class BrowserActionTest extends TestCase
         $this->action->setContainer($this->container);
     }
 
-    /**
-     * @test
-     */
-    public function browserAction(): void
+    public function testBrowserAction(): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
         $form = $this->createMock(Form::class);
@@ -113,10 +110,7 @@ class BrowserActionTest extends TestCase
         static::assertSame('renderResponse', $response->getContent());
     }
 
-    /**
-     * @test
-     */
-    public function browserActionWithFilters(): void
+    public function testBrowserActionWithFilters(): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
         $form = $this->createMock(Form::class);

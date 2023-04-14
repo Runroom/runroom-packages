@@ -74,8 +74,10 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
+        /**
+         * @var array<string, string>
+         */
         $routeParameters = null !== $request ? $request->attributes->get('_route_params', []) : [];
-        /** @var array<string, string> $routeParameters */
 
         return array_diff_key($routeParameters, array_flip(self::EXCLUDED_PARAMETERS));
     }

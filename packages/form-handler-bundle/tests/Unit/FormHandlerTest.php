@@ -58,10 +58,7 @@ class FormHandlerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itThrowsWhenThereIsNoRequest(): void
+    public function testItThrowsWhenThereIsNoRequest(): void
     {
         $this->requestStack->pop();
 
@@ -71,14 +68,11 @@ class FormHandlerTest extends TestCase
         $this->formHandler->handleForm(FormType::class);
     }
 
-    /**
-     * @test
-     */
-    public function itHandlesFormsWithoutBeingSubmitted(): void
+    public function testItHandlesFormsWithoutBeingSubmitted(): void
     {
         $this->configureForm(false);
 
-        $this->eventDispatcher->addListener('form.form_types.event.success', function (): void {
+        $this->eventDispatcher->addListener('form.form_types.event.success', static function (): void {
             self::fail("This shouldn't be called");
         });
 
@@ -87,14 +81,11 @@ class FormHandlerTest extends TestCase
         static::assertInstanceOf(BasicFormViewModel::class, $model);
     }
 
-    /**
-     * @test
-     */
-    public function itHandlesSubmittedForms(): void
+    public function testItHandlesSubmittedForms(): void
     {
         $form = $this->configureForm();
 
-        $this->eventDispatcher->addListener('form.form_types.event.success', function (GenericEvent $event): void {
+        $this->eventDispatcher->addListener('form.form_types.event.success', static function (GenericEvent $event): void {
             $subject = $event->getSubject();
 
             self::assertInstanceOf(BasicFormViewModel::class, $subject);

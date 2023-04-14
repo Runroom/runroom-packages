@@ -26,9 +26,7 @@ class EntityMetaInformation implements TranslatableInterface
 
     /**
      * @ORM\Id
-     *
      * @ORM\GeneratedValue
-     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
@@ -43,12 +41,12 @@ class EntityMetaInformation implements TranslatableInterface
         return $this->id;
     }
 
-    public function getTitle(string $locale = null): ?string
+    public function getTitle(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getTitle();
     }
 
-    public function getDescription(string $locale = null): ?string
+    public function getDescription(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getDescription();
     }

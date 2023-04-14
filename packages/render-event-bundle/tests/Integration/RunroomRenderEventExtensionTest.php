@@ -28,10 +28,7 @@ class RunroomRenderEventExtensionTest extends AbstractExtensionTestCase
         $this->load();
     }
 
-    /**
-     * @test
-     */
-    public function itHasCoreServicesAlias(): void
+    public function testItHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService('runroom.render_event.controller.template', TemplateController::class);
         $this->assertContainerBuilderHasService('runroom.render_event.renderer.page', PageRenderer::class);

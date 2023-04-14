@@ -21,10 +21,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
  */
 class MediaAdminExtensionTest extends SonataAdminTestCase
 {
-    /**
-     * @test
-     */
-    public function itDoesNotHaveDisabledRoutes(): void
+    public function testItDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesContainRoute('browser');
         $this->assertAdminRoutesDoesContainRoute('upload');

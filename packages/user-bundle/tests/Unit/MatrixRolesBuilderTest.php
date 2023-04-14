@@ -78,10 +78,7 @@ class MatrixRolesBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itGetsEmptyArrayRoles(): void
+    public function testItGetsEmptyArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn(null);
         $result = $this->matrixRolesBuilder->getRoles('domain');
@@ -89,10 +86,7 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame([], $result);
     }
 
-    /**
-     * @test
-     */
-    public function itGetsArrayRoles(): void
+    public function testItGetsArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
@@ -102,10 +96,7 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame(array_merge($this->guestRole, $this->adminRole), $result);
     }
 
-    /**
-     * @test
-     */
-    public function itGetsEmptyExpandedArrayRoles(): void
+    public function testItGetsEmptyExpandedArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn(null);
 
@@ -114,10 +105,7 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame([], $result);
     }
 
-    /**
-     * @test
-     */
-    public function itGetsExpandedArrayRoles(): void
+    public function testItGetsExpandedArrayRoles(): void
     {
         $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
@@ -127,10 +115,7 @@ class MatrixRolesBuilderTest extends TestCase
         static::assertSame(array_merge($this->guestRole, $this->adminRole), $result);
     }
 
-    /**
-     * @test
-     */
-    public function itGetPermissions(): void
+    public function testItGetPermissions(): void
     {
         $this->adminRolesBuilder->method('getPermissionLabels')->willReturn(['label' => 'permission']);
         $result = $this->matrixRolesBuilder->getPermissionLabels();

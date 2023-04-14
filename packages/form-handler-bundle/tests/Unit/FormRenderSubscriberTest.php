@@ -23,18 +23,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FormRenderSubscriberTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function itDoesSubscribeToOnFlushEvent(): void
+    public function testItDoesSubscribeToOnFlushEvent(): void
     {
         static::assertArrayHasKey(PageRenderEvent::EVENT_NAME, FormRenderSubscriber::getSubscribedEvents());
     }
 
-    /**
-     * @test
-     */
-    public function itSets422OnResponseIfFormIsInvalidSubmitted(): void
+    public function testItSets422OnResponseIfFormIsInvalidSubmitted(): void
     {
         $form = $this->createStub(FormInterface::class);
         $form->method('isSubmitted')->willReturn(true);

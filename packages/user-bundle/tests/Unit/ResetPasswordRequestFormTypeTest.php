@@ -32,11 +32,9 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
     }
 
     /**
-     * @test
-     *
      * @dataProvider submitValuesProvider
      */
-    public function itSubmitsWithDifferentValues(string $email, bool $isValid): void
+    public function testItSubmitsWithDifferentValues(string $email, bool $isValid): void
     {
         $this->form->submit(['identifier' => $email]);
 
@@ -54,10 +52,7 @@ class ResetPasswordRequestFormTypeTest extends TypeTestCase
         yield ['email@localhost.com', true];
     }
 
-    /**
-     * @test
-     */
-    public function itGetsFormDefaultOptions(): void
+    public function testItGetsFormDefaultOptions(): void
     {
         static::assertSame('RunroomUserBundle', $this->form->getConfig()->getOption('translation_domain'));
     }

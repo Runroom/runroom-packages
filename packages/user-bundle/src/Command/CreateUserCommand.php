@@ -47,7 +47,8 @@ final class CreateUserCommand extends Command
             ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->addArgument('password', InputArgument::REQUIRED, 'The password')
             ->addOption('inactive', null, InputOption::VALUE_NONE, 'Set the user as inactive')
-            ->setHelp(<<<'EOT'
+            ->setHelp(
+                <<<'EOT'
 The <info>%command.full_name%</info> command creates a user:
 
   <info>php %command.full_name% my@email.com password</info>

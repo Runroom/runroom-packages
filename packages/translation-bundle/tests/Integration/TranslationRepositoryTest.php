@@ -40,10 +40,7 @@ class TranslationRepositoryTest extends KernelTestCase
         $this->repository = $container->get(TranslationRepository::class);
     }
 
-    /**
-     * @test
-     */
-    public function itFindsTranslationsByKey(): void
+    public function testItFindsTranslationsByKey(): void
     {
         TranslationFactory::new(['key' => 'test'])->withTranslations(['en'])->create();
 

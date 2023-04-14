@@ -21,46 +21,31 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
  */
 class MetaInformationAdminTest extends SonataAdminTestCase
 {
-    /**
-     * @test
-     */
-    public function itHasAllListFields(): void
+    public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('routeName');
         $this->assertAdminListContainsField('title');
         $this->assertAdminListContainsField('description');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFormFields(): void
+    public function testItHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('translations');
         $this->assertAdminFormContainsField('image');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFilterFields(): void
+    public function testItHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('routeName');
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotHaveDisabledRoutes(): void
+    public function testItDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesNotContainRoute('create');
         $this->assertAdminRoutesDoesNotContainRoute('delete');
     }
 
-    /**
-     * @test
-     */
-    public function itDoesDefineDefaultFilterParameters(): void
+    public function testItDoesDefineDefaultFilterParameters(): void
     {
         $this->assertAdminFilterParametersContainsFilter('_sort_by', 'routeName');
     }

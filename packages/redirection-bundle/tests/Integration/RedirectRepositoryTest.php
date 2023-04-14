@@ -41,10 +41,7 @@ class RedirectRepositoryTest extends KernelTestCase
         $this->repository = $container->get(RedirectRepository::class);
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsRedirect(): void
+    public function testItReturnsRedirect(): void
     {
         RedirectFactory::createOne(['source' => '/redirect', 'publish' => true]);
 
@@ -62,20 +59,14 @@ class RedirectRepositoryTest extends KernelTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsNullIfItDoesNotFindARedirect(): void
+    public function testItReturnsNullIfItDoesNotFindARedirect(): void
     {
         $redirect = $this->repository->findRedirect('/it-is-not-there');
 
         static::assertNull($redirect);
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsNullIfTheRedirectIsUnpublish(): void
+    public function testItReturnsNullIfTheRedirectIsUnpublish(): void
     {
         RedirectFactory::createOne([
             'source' => '/it-is-unpublish',
@@ -87,10 +78,7 @@ class RedirectRepositoryTest extends KernelTestCase
         static::assertNull($redirect);
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsTheRedirect(): void
+    public function testItReturnsTheRedirect(): void
     {
         RedirectFactory::createOne([
             'source' => '/redirect',

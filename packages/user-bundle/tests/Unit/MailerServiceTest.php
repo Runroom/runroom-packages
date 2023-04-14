@@ -53,10 +53,7 @@ class MailerServiceTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itCallsMailerWhenUserHasEmail(): void
+    public function testItCallsMailerWhenUserHasEmail(): void
     {
         $user = UserFactory::createOne(['email' => 'user@email.com'])->object();
         $resetPasswordToken = new ResetPasswordToken('token', new \DateTimeImmutable(), 0);
@@ -67,10 +64,7 @@ class MailerServiceTest extends TestCase
         $this->service->sendResetPasswordEmail($user, $resetPasswordToken);
     }
 
-    /**
-     * @test
-     */
-    public function itDoesntCallMailerWhenUserDoesntHaveEmail(): void
+    public function testItDoesntCallMailerWhenUserDoesntHaveEmail(): void
     {
         $user = UserFactory::createOne(['email' => null])->object();
         $resetPasswordToken = new ResetPasswordToken('token', new \DateTimeImmutable(), 0);

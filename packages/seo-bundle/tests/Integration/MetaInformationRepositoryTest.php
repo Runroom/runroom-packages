@@ -41,10 +41,7 @@ class MetaInformationRepositoryTest extends KernelTestCase
         $this->repository = $container->get(MetaInformationRepository::class);
     }
 
-    /**
-     * @test
-     */
-    public function itFindsDefaultMetaInformation(): void
+    public function testItFindsDefaultMetaInformation(): void
     {
         MetaInformationFactory::new(['route' => MetaInformationBuilder::DEFAULT_ROUTE])->withTranslations(['en'])->create();
 
@@ -62,10 +59,7 @@ class MetaInformationRepositoryTest extends KernelTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function itFindsRouteMetaInformation(): void
+    public function testItFindsRouteMetaInformation(): void
     {
         MetaInformationFactory::createOne(['route' => 'test']);
 

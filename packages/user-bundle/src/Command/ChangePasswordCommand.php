@@ -45,7 +45,8 @@ final class ChangePasswordCommand extends Command
             ->setDescription(static::$defaultDescription)
             ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->addArgument('password', InputArgument::REQUIRED, 'The password')
-            ->setHelp(<<<'EOT'
+            ->setHelp(
+                <<<'EOT'
 The <info>%command.full_name%</info> command changes the password of a user:
 
   <info>php %command.full_name% my@email.com new-password</info>

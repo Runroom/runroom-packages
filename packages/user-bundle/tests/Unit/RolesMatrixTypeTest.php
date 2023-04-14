@@ -55,10 +55,7 @@ class RolesMatrixTypeTest extends TypeTestCase
         $this->form = $this->factory->create(RolesMatrixType::class);
     }
 
-    /**
-     * @test
-     */
-    public function itSubmits(): void
+    public function testItSubmits(): void
     {
         $this->form->submit(['ROLE', 'ROLE_ADMIN']);
 
@@ -66,37 +63,25 @@ class RolesMatrixTypeTest extends TypeTestCase
         static::assertTrue($this->form->isSynchronized());
     }
 
-    /**
-     * @test
-     */
-    public function itSubmitsInvalidRoles(): void
+    public function testItSubmitsInvalidRoles(): void
     {
         $this->form->submit(['ROLE_RANDOM']);
 
         static::assertFalse($this->form->isValid());
     }
 
-    /**
-     * @test
-     */
-    public function itGetsFormDefaultOptions(): void
+    public function testItGetsFormDefaultOptions(): void
     {
         static::assertTrue($this->form->getConfig()->getOption('expanded'));
         static::assertNull($this->form->getConfig()->getOption('data_class'));
     }
 
-    /**
-     * @test
-     */
-    public function itGetsBlockPrefix(): void
+    public function testItGetsBlockPrefix(): void
     {
         static::assertSame('sonata_roles_matrix', $this->rolesMatrixType->getBlockPrefix());
     }
 
-    /**
-     * @test
-     */
-    public function itGetsParent(): void
+    public function testItGetsParent(): void
     {
         static::assertSame(ChoiceType::class, $this->rolesMatrixType->getParent());
     }

@@ -21,10 +21,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * @test
-     */
-    public function itAddsGlobalXDefaultLocaleToTwig(): void
+    public function testItAddsGlobalXDefaultLocaleToTwig(): void
     {
         $this->setDefinition('twig', new Definition());
         $this->setParameter(RunroomSeoExtension::XDEFAULT_LOCALE, 'es');

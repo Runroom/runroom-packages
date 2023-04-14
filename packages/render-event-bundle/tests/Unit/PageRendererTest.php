@@ -47,10 +47,7 @@ class PageRendererTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itDispatchEventsOnRender(): void
+    public function testItDispatchEventsOnRender(): void
     {
         $this->twig->method('render')->with('test.html.twig', static::isType('array'))
             ->willReturn('Rendered test');
@@ -60,17 +57,14 @@ class PageRendererTest extends TestCase
         static::assertSame('Rendered test', $result);
     }
 
-    /**
-     * @test
-     */
-    public function itDispatchEventsOnRenderResponse(): void
+    public function testItDispatchEventsOnRenderResponse(): void
     {
         $response = new Response();
 
         $this->twig->method('render')->with('different.html.twig', static::isType('array'))
             ->willReturn('Rendered test');
 
-        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {
+        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, static function (PageRenderEvent $event): void {
             $pageViewModel = $event->getPageViewModel();
             $pageViewModel->addContext('test', 'test');
 
@@ -83,17 +77,14 @@ class PageRendererTest extends TestCase
         static::assertSame($response, $resultResponse);
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsRedirectResponse(): void
+    public function testItReturnsRedirectResponse(): void
     {
         $response = new Response();
 
         $this->twig->method('render')->with('test.html.twig', static::isType('array'), null)
             ->willReturn('Rendered test');
 
-        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, function (PageRenderEvent $event): void {
+        $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, static function (PageRenderEvent $event): void {
             $event->setResponse(new RedirectResponse('https://localhost'));
         });
 

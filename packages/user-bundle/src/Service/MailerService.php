@@ -51,18 +51,19 @@ final class MailerService implements MailerServiceInterface
             return;
         }
 
-        $this->mailer->send((new Email())
-            ->from(new Address($this->fromEmail, $this->fromName))
-            ->to($email)
-            ->subject($this->translator->trans('email.subject'))
-            ->html($this->twig->render('@RunroomUser/email/reset.html.twig', [
-                'userEmail' => $email,
-                'resetToken' => $resetToken,
-            ]))
-            ->text($this->twig->render('@RunroomUser/email/reset.txt.twig', [
-                'userEmail' => $email,
-                'resetToken' => $resetToken,
-            ]))
+        $this->mailer->send(
+            (new Email())
+                ->from(new Address($this->fromEmail, $this->fromName))
+                ->to($email)
+                ->subject($this->translator->trans('email.subject'))
+                ->html($this->twig->render('@RunroomUser/email/reset.html.twig', [
+                    'userEmail' => $email,
+                    'resetToken' => $resetToken,
+                ]))
+                ->text($this->twig->render('@RunroomUser/email/reset.txt.twig', [
+                    'userEmail' => $email,
+                    'resetToken' => $resetToken,
+                ]))
         );
     }
 }

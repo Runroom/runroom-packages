@@ -45,10 +45,7 @@ class MetaInformationBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itBuildsMetaInformationViewModel(): void
+    public function testItBuildsMetaInformationViewModel(): void
     {
         $media = new Media();
 

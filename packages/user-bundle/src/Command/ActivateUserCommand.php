@@ -44,7 +44,8 @@ final class ActivateUserCommand extends Command
             // @todo: Remove setDescription when support for Symfony < 5.4 is dropped.
             ->setDescription(static::$defaultDescription)
             ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
-            ->setHelp(<<<'EOT'
+            ->setHelp(
+                <<<'EOT'
 The <info>%command.full_name%</info> command activates a user (so they will be able to log in):
 
   <info>php %command.full_name% my@email.com</info>

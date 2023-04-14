@@ -39,10 +39,7 @@ class CreateUserCommandTest extends KernelTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itCreatesAnActiveUser(): void
+    public function testItCreatesAnActiveUser(): void
     {
         /**
          * @todo: Simplify this when dropping support for Symfony 4
@@ -66,10 +63,7 @@ class CreateUserCommandTest extends KernelTestCase
         static::assertNotNull($createdUser->getCreatedAt());
     }
 
-    /**
-     * @test
-     */
-    public function itCreatesAnInactiveUser(): void
+    public function testItCreatesAnInactiveUser(): void
     {
         $this->commandTester->execute([
             'identifier' => 'email@localhost',

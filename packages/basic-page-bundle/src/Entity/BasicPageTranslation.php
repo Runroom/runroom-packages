@@ -21,9 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- *
  * @ORM\Table(indexes={
- *
  *     @ORM\Index(columns={"slug"}),
  * })
  */
@@ -42,16 +40,13 @@ class BasicPageTranslation implements TranslationInterface
 
     /**
      * @ORM\Id
-     *
      * @ORM\GeneratedValue
-     *
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
 
     /**
      * @Assert\NotNull
-     *
      * @Assert\Length(max=255)
      *
      * @ORM\Column(type="string")

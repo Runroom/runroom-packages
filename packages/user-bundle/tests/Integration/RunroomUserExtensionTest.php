@@ -44,10 +44,7 @@ use SymfonyCasts\Bundle\ResetPassword\Util\ResetPasswordCleaner;
 
 class RunroomUserExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * @test
-     */
-    public function itHasCoreServicesAlias(): void
+    public function testItHasCoreServicesAlias(): void
     {
         $this->container->setParameter('kernel.bundles', []);
         $this->load([]);
@@ -76,10 +73,7 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function itCanEnableResetPassword(): void
+    public function testItCanEnableResetPassword(): void
     {
         $this->container->setParameter('kernel.bundles', ['SymfonyCastsResetPasswordBundle' => true]);
         $this->load(['reset_password' => ['enabled' => true]]);
@@ -94,10 +88,7 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom.user.reset_password.helper', ResetPasswordHelper::class);
     }
 
-    /**
-     * @test
-     */
-    public function itCanEnableAdmin(): void
+    public function testItCanEnableAdmin(): void
     {
         $this->container->setParameter('kernel.bundles', ['SonataAdminBundle' => true]);
         $this->load([]);
@@ -106,10 +97,7 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom.user.twig.global_variables', GlobalVariables::class);
     }
 
-    /**
-     * @test
-     */
-    public function itCanEnableBoth(): void
+    public function testItCanEnableBoth(): void
     {
         $this->container->setParameter('kernel.bundles', [
             'SonataAdminBundle' => true,
@@ -152,10 +140,7 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function itThrowsWhenTryingToEnableResetPasswordWithoutBeingInstalled(): void
+    public function testItThrowsWhenTryingToEnableResetPasswordWithoutBeingInstalled(): void
     {
         $this->container->setParameter('kernel.bundles', []);
 

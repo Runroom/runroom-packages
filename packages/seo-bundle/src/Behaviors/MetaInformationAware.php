@@ -20,7 +20,6 @@ trait MetaInformationAware
 {
     /**
      * @ORM\OneToOne(targetEntity="Runroom\SeoBundle\Entity\EntityMetaInformation", cascade={"all"})
-     *
      * @ORM\JoinColumn(referencedColumnName="id")
      */
     private ?EntityMetaInformation $metaInformation = null;

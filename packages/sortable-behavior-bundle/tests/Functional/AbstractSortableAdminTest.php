@@ -15,23 +15,19 @@ namespace Runroom\SortableBehaviorBundle\Tests\Functional;
 
 use Runroom\SortableBehaviorBundle\Tests\App\Entity\SortableEntity;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-use function Zenstruck\Foundry\anonymous;
-
 use Zenstruck\Foundry\AnonymousFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+
+use function Zenstruck\Foundry\anonymous;
 
 class AbstractSortableAdminTest extends WebTestCase
 {
     use Factories;
     use ResetDatabase;
 
-    /**
-     * @test
-     */
-    public function itUpdatesPosition(): void
+    public function testItUpdatesPosition(): void
     {
         $client = static::createClient();
 
@@ -49,18 +45,20 @@ class AbstractSortableAdminTest extends WebTestCase
             $factory = AnonymousFactory::new(SortableEntity::class);
         }
 
-        /**
-         * @psalm-suppress PossiblyUndefinedArrayOffset
-         */
-        [$sortableEntity1, $sortableEntity2, $sortableEntity3, $sortableEntity4] = $factory->many(4)->create();
+        $sortableEntities = $factory->many(4)->create();
 
-        /** @var Proxy<SortableEntity> $sortableEntity1 */
+        /** @var Proxy<SortableEntity> */
+        $sortableEntity1 = $sortableEntities[0];
+        /** @var Proxy<SortableEntity> */
+        $sortableEntity2 = $sortableEntities[1];
+        /** @var Proxy<SortableEntity> */
+        $sortableEntity3 = $sortableEntities[2];
+        /** @var Proxy<SortableEntity> */
+        $sortableEntity4 = $sortableEntities[3];
+
         static::assertSame(0, $sortableEntity1->getPosition());
-        /** @var Proxy<SortableEntity> $sortableEntity2 */
         static::assertSame(1, $sortableEntity2->getPosition());
-        /** @var Proxy<SortableEntity> $sortableEntity3 */
         static::assertSame(2, $sortableEntity3->getPosition());
-        /** @var Proxy<SortableEntity> $sortableEntity4 */
         static::assertSame(3, $sortableEntity4->getPosition());
 
         $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity1->getId() . '/move/down');

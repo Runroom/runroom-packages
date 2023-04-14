@@ -66,10 +66,7 @@ class MetaInformationServiceTest extends TestCase
         $this->expectedMetas = new MetaInformationViewModel();
     }
 
-    /**
-     * @test
-     */
-    public function itFindsMetasForRoute(): void
+    public function testItFindsMetasForRoute(): void
     {
         $this->configureCurrentRequest();
         $this->provider->method('providesMetas')->with('route')->willReturn(true);
@@ -81,10 +78,7 @@ class MetaInformationServiceTest extends TestCase
         static::assertSame($this->expectedMetas, $generatedMetas);
     }
 
-    /**
-     * @test
-     */
-    public function itFindsMetasForRouteWithTheDefaultProvider(): void
+    public function testItFindsMetasForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
         $this->provider->method('providesMetas')->with('route')->willReturn(false);
@@ -96,10 +90,7 @@ class MetaInformationServiceTest extends TestCase
         static::assertSame($this->expectedMetas, $generatedMetas);
     }
 
-    /**
-     * @test
-     */
-    public function itThrowsIfNoProviderIsFound(): void
+    public function testItThrowsIfNoProviderIsFound(): void
     {
         $service = new MetaInformationService($this->requestStack, [], $this->builder);
 

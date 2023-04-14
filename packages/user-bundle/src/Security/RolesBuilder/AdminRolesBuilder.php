@@ -47,7 +47,6 @@ final class AdminRolesBuilder implements AdminRolesBuilderInterface
 
         /**
          * @psalm-suppress DeprecatedMethod
-         *
          * @phpstan-ignore-next-line
          */
         $adminServiceCodes = method_exists($this->pool, 'getAdminServiceCodes')

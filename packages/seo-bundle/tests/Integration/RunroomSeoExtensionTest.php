@@ -45,10 +45,7 @@ class RunroomSeoExtensionTest extends AbstractExtensionTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function itHasCoreServicesAlias(): void
+    public function testItHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService('runroom.seo.admin.entity_meta_information', EntityMetaInformationAdmin::class);
         $this->assertContainerBuilderHasService('runroom.seo.admin.meta_information', MetaInformationAdmin::class);

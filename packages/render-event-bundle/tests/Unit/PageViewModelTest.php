@@ -25,20 +25,14 @@ class PageViewModelTest extends TestCase
         $this->viewModel = new PageViewModel();
     }
 
-    /**
-     * @test
-     */
-    public function itSetContent(): void
+    public function testItSetContent(): void
     {
         $this->viewModel->setContent('content');
 
         static::assertSame('content', $this->viewModel->getContent());
     }
 
-    /**
-     * @test
-     */
-    public function itAddsContext(): void
+    public function testItAddsContext(): void
     {
         $this->viewModel->addContext('test', 'content');
 
