@@ -73,7 +73,7 @@ rector:
 
 lint-qa:
 	$(call docker-exec,composer php-cs-fixer)
-	$(call docker-exec,phpunit --coverage-html /usr/app/coverage)
+	$(call docker-exec,phpunit)
 	$(call docker-exec,composer phpstan)
 	$(call docker-exec,composer psalm -- --php-version=$(PHP_VERSION))
 	$(call docker-exec,composer rector)

@@ -18,6 +18,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 use function Zenstruck\Foundry\anonymous;
 
+use Zenstruck\Foundry\AnonymousFactory;
+
+use Zenstruck\Foundry\Proxy;
+
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -33,16 +37,32 @@ class AbstractSortableAdminTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $factory = anonymous(SortableEntity::class);
+        /**
+         * @psalm-suppress DeprecatedClass
+         *
+         * @todo: simplify when dropping support for ZenstruckFoundryBundle < 1.10
+         */
+        if (class_exists(AnonymousFactory::class)) {
+            /**
+             * @psalm-suppress InvalidArgument
+             */
+            $factory = AnonymousFactory::new(SortableEntity::class);
+        } else {
+            $factory = anonymous(SortableEntity::class);
+        }
 
         /**
          * @psalm-suppress PossiblyUndefinedArrayOffset
          */
         [$sortableEntity1, $sortableEntity2, $sortableEntity3, $sortableEntity4] = $factory->many(4)->create();
 
+        /** @var Proxy<SortableEntity> $sortableEntity1 */
         static::assertSame(0, $sortableEntity1->getPosition());
+        /** @var Proxy<SortableEntity> $sortableEntity2 */
         static::assertSame(1, $sortableEntity2->getPosition());
+        /** @var Proxy<SortableEntity> $sortableEntity3 */
         static::assertSame(2, $sortableEntity3->getPosition());
+        /** @var Proxy<SortableEntity> $sortableEntity4 */
         static::assertSame(3, $sortableEntity4->getPosition());
 
         $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity1->getId() . '/move/down');
