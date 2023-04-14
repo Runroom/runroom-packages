@@ -23,10 +23,7 @@ class CookiesPageControllerTest extends WebTestCase
     use Factories;
     use ResetDatabase;
 
-    /**
-     * @test
-     */
-    public function itRendersCookiesPage(): void
+    public function testItRendersCookiesPage(): void
     {
         $client = static::createClient();
 

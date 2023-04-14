@@ -46,6 +46,7 @@ class BasicPage implements TranslatableInterface
      *     BasicPage::LOCATION_NONE,
      *     BasicPage::LOCATION_FOOTER,
      * })
+     *
      * @ORM\Column(type="string")
      */
     private ?string $location = self::LOCATION_NONE;
@@ -89,17 +90,17 @@ class BasicPage implements TranslatableInterface
         return $this->publish;
     }
 
-    public function getTitle(string $locale = null): ?string
+    public function getTitle(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getTitle();
     }
 
-    public function getSlug(string $locale = null): ?string
+    public function getSlug(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getSlug();
     }
 
-    public function getContent(string $locale = null): ?string
+    public function getContent(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getContent();
     }

@@ -80,10 +80,7 @@ class AdminRolesBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itGetsPermissionLabels(): void
+    public function testItGetsPermissionLabels(): void
     {
         $securityHandler = $this->createMock(SecurityHandlerInterface::class);
         $securityHandler->method('getBaseRole')->willReturn('ROLE_SONATA_FOO_%s');
@@ -106,10 +103,7 @@ class AdminRolesBuilderTest extends TestCase
         ], $permissionLabels);
     }
 
-    /**
-     * @test
-     */
-    public function itGetsRoles(): void
+    public function testItGetsRoles(): void
     {
         $securityHandler = $this->createMock(SecurityHandlerInterface::class);
         $securityHandler->method('getBaseRole')->willReturn('ROLE_SONATA_FOO_%s');

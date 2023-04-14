@@ -30,6 +30,7 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "require-dev": {
+        "doctrine/annotations": "^1.13 || ^2.0",
         "gedmo/doctrine-extensions": "^3.0",
         "knplabs/knp-menu-bundle": "^3.1",
         "matthiasnoback/symfony-config-test": "^4.2",

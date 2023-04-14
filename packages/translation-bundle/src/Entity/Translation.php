@@ -36,6 +36,7 @@ class Translation implements TranslatableInterface
     /**
      * @Assert\NotNull
      * @Assert\Length(max=255)
+     *
      * @ORM\Column(name="translation_key", type="string", unique=true)
      */
     private ?string $key = null;
@@ -62,7 +63,7 @@ class Translation implements TranslatableInterface
         return $this->key;
     }
 
-    public function getValue(string $locale = null): ?string
+    public function getValue(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getValue();
     }

@@ -21,10 +21,7 @@ use Symfony\Component\DependencyInjection\Container;
 
 class GlobalVariablesTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function itGetsAdminByClass(): void
+    public function testItGetsAdminByClass(): void
     {
         $container = new Container();
         $container->set('runroom.user.admin.user', $this->createStub(AdminInterface::class));
@@ -37,10 +34,7 @@ class GlobalVariablesTest extends TestCase
         static::assertInstanceOf(AdminInterface::class, $admin);
     }
 
-    /**
-     * @test
-     */
-    public function itHasRequestPasswordEnabled(): void
+    public function testItHasRequestPasswordEnabled(): void
     {
         $container = new Container();
         $container->set('runroom.user.admin.user', $this->createStub(AdminInterface::class));

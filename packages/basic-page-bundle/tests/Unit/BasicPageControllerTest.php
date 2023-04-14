@@ -48,10 +48,7 @@ class BasicPageControllerTest extends TestCase
         $this->controller->setContainer($container);
     }
 
-    /**
-     * @test
-     */
-    public function itRendersStatic(): void
+    public function testItRendersStatic(): void
     {
         $model = new BasicPageViewModel(new BasicPage());
 

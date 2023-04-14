@@ -24,10 +24,7 @@ class RedirectsTest extends WebTestCase
     use Factories;
     use ResetDatabase;
 
-    /**
-     * @test
-     */
-    public function itRedirects(): void
+    public function testItRedirects(): void
     {
         $client = static::createClient();
 

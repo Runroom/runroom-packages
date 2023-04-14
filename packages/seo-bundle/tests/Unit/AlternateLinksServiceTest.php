@@ -62,10 +62,7 @@ class AlternateLinksServiceTest extends TestCase
         $this->context = ['model' => new DummyViewModel()];
     }
 
-    /**
-     * @test
-     */
-    public function itFindsAlternateLinksForRoute(): void
+    public function testItFindsAlternateLinksForRoute(): void
     {
         $this->configureCurrentRequest();
 
@@ -77,10 +74,7 @@ class AlternateLinksServiceTest extends TestCase
         static::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
-    /**
-     * @test
-     */
-    public function itFindsAlternateLinksForRouteWithTheDefaultProvider(): void
+    public function testItFindsAlternateLinksForRouteWithTheDefaultProvider(): void
     {
         $this->configureCurrentRequest();
 
@@ -92,10 +86,7 @@ class AlternateLinksServiceTest extends TestCase
         static::assertSame(['es' => 'alternate_link'], $alternateLinks);
     }
 
-    /**
-     * @test
-     */
-    public function itThrowsIfNoProviderIsFound(): void
+    public function testItThrowsIfNoProviderIsFound(): void
     {
         $service = new AlternateLinksService($this->requestStack, [], $this->builder);
 

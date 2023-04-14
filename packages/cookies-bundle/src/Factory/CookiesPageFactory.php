@@ -15,20 +15,24 @@ namespace Runroom\CookiesBundle\Factory;
 
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Proxy;
 
 /**
  * @extends ModelFactory<CookiesPage>
+ *
+ * @method        CookiesPageFactory addState(array|callable $attributes = [])
+ * @method static Proxy<CookiesPage> createOne(array $attributes = [])
  */
 final class CookiesPageFactory extends ModelFactory
 {
     /**
-     * @param string[] $locales
+     * @param string[]             $locales
      * @param array<string, mixed> $defaultAttributes
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
         return $this->addState([
-            'translations' => CookiesPageTranslationFactory::new(function () use (&$locales, $defaultAttributes): array {
+            'translations' => CookiesPageTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
             })->many(\count($locales)),
         ]);

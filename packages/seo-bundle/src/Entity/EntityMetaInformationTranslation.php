@@ -34,6 +34,7 @@ class EntityMetaInformationTranslation implements TranslationInterface
 
     /**
      * @Assert\Length(max=255)
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $title = null;

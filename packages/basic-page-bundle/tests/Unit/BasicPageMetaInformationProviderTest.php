@@ -36,18 +36,12 @@ class BasicPageMetaInformationProviderTest extends TestCase
         $this->model = new BasicPageViewModel($this->basicPage);
     }
 
-    /**
-     * @test
-     */
-    public function itProvidesMetasForBasicPageRoutes(): void
+    public function testItProvidesMetasForBasicPageRoutes(): void
     {
         static::assertTrue($this->provider->providesMetas('runroom.basic_page.route.show'));
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsEntityMetaInformationWhenValidContextIsGiven(): void
+    public function testItReturnsEntityMetaInformationWhenValidContextIsGiven(): void
     {
         static::assertInstanceOf(EntityMetaInformation::class, $this->provider->getEntityMetaInformation(['model' => $this->model]));
         static::assertNull($this->provider->getEntityMetaInformation([]));

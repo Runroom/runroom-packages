@@ -35,6 +35,7 @@ class CookiesPageTranslation implements TranslationInterface
     /**
      * @Assert\NotNull
      * @Assert\Length(max=255)
+     *
      * @ORM\Column(type="string")
      */
     private ?string $title = null;

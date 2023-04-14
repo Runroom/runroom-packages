@@ -60,7 +60,7 @@ class PageRenderer
     /**
      * @param mixed $model
      */
-    public function renderResponse(string $view, $model = null, Response $response = null): Response
+    public function renderResponse(string $view, $model = null, ?Response $response = null): Response
     {
         $this->pageViewModel->setContent($model);
 

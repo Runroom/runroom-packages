@@ -34,10 +34,7 @@ class TranslationExtensionTest extends TestCase
         $this->extension = new TranslationExtension($this->service);
     }
 
-    /**
-     * @test
-     */
-    public function itTranslates(): void
+    public function testItTranslates(): void
     {
         $this->service->method('translate')->with('key', [], null)->willReturn('value');
 
@@ -46,10 +43,7 @@ class TranslationExtensionTest extends TestCase
         static::assertSame('value', $result);
     }
 
-    /**
-     * @test
-     */
-    public function itDefinesAFilter(): void
+    public function testItDefinesAFilter(): void
     {
         $filters = $this->extension->getFilters();
 

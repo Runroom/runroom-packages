@@ -36,7 +36,7 @@ final class TranslationExtension extends AbstractExtension
     /**
      * @param array<string, string> $parameters
      */
-    public function translate(string $key, array $parameters = [], string $locale = null): string
+    public function translate(string $key, array $parameters = [], ?string $locale = null): string
     {
         return $this->service->translate($key, $parameters, $locale);
     }

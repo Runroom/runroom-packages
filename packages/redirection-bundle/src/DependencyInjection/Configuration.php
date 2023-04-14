@@ -19,7 +19,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * @psalm-suppress PossiblyNullReference, PossiblyUndefinedMethod
+     * @psalm-suppress PossiblyNullReference, UndefinedInterfaceMethod
      *
      * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
      */
@@ -32,7 +32,7 @@ final class Configuration implements ConfigurationInterface
             ->booleanNode('enable_automatic_redirections')->defaultFalse()->end()
             ->arrayNode('automatic_redirections')
                 ->validate()
-                    ->ifTrue(function (array $config): bool {
+                    ->ifTrue(static function (array $config): bool {
                         foreach (array_keys($config) as $entity) {
                             if (\is_string($entity) && !class_exists($entity)) {
                                 return true;

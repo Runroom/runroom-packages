@@ -20,10 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class RunroomUserBundleTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function itBuilds(): void
+    public function testItBuilds(): void
     {
         $containerBuilder = $this->createMock(ContainerBuilder::class);
         $containerBuilder->expects(static::once())->method('addCompilerPass')

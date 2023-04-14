@@ -39,9 +39,9 @@ class FormHandler
 
     /**
      * @param class-string<FormTypeInterface> $type
-     * @param array<string, mixed> $options
+     * @param array<string, mixed>            $options
      */
-    public function handleForm(string $type, array $options = [], FormAwareInterface $model = null): FormAwareInterface
+    public function handleForm(string $type, array $options = [], ?FormAwareInterface $model = null): FormAwareInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
@@ -61,6 +61,12 @@ class FormHandler
                 'form.' . $form->getName() . '.event.success'
             );
 
+            /**
+             * @todo: Use instanceof FlashBagAwareSessionInterface when dropping Symfony 5 support.
+             *
+             * @phpstan-ignore-next-line
+             * @psalm-suppress UndefinedInterfaceMethod
+             */
             $request->getSession()->getFlashBag()->add($form->getName(), 'success');
         }
 

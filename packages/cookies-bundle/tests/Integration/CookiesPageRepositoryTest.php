@@ -32,16 +32,15 @@ class CookiesPageRepositoryTest extends KernelTestCase
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get(CookiesPageRepository::class);
     }
 
-    /**
-     * @test
-     */
-    public function ifFindsCookiesPageById(): void
+    public function testIfFindsCookiesPageById(): void
     {
         CookiesPageFactory::new()->withTranslations(['en'])->create();
 

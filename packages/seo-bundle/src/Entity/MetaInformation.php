@@ -83,12 +83,12 @@ class MetaInformation implements TranslatableInterface
         return $this->routeName;
     }
 
-    public function getTitle(string $locale = null): ?string
+    public function getTitle(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getTitle();
     }
 
-    public function getDescription(string $locale = null): ?string
+    public function getDescription(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getDescription();
     }

@@ -38,10 +38,7 @@ class ChangePasswordCommandTest extends KernelTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function isThrowsWhenUserDoesNotExist(): void
+    public function testIsThrowsWhenUserDoesNotExist(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -51,10 +48,7 @@ class ChangePasswordCommandTest extends KernelTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function itChangesUserPassword(): void
+    public function testItChangesUserPassword(): void
     {
         /**
          * @phpstan-var Proxy<UserInterface>

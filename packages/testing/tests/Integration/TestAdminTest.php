@@ -22,51 +22,33 @@ use Runroom\Testing\Tests\App\Entity\Test;
  */
 class TestAdminTest extends SonataAdminTestCase
 {
-    /**
-     * @test
-     */
-    public function itDoesNotHaveDeleteRoute(): void
+    public function testItDoesNotHaveDeleteRoute(): void
     {
         $this->assertAdminRoutesDoesContainRoute('create');
         $this->assertAdminRoutesDoesNotContainRoute('delete');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFilterFields(): void
+    public function testItHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('id');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllListFields(): void
+    public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('id');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllShowFields(): void
+    public function testItHasAllShowFields(): void
     {
         $this->assertAdminShowContainsField('id');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFormFields(): void
+    public function testItHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('id');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllExportFields(): void
+    public function testItHasAllExportFields(): void
     {
         $this->assertAdminExportDoesContainField('id');
         $this->assertAdminExportDoesNotContainField('random_field');

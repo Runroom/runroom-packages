@@ -33,16 +33,15 @@ class BasicPageRepositoryTest extends KernelTestCase
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get(BasicPageRepository::class);
     }
 
-    /**
-     * @test
-     */
-    public function itFindsBasicPageGivenItsSlug(): void
+    public function testItFindsBasicPageGivenItsSlug(): void
     {
         BasicPageFactory::new(['publish' => true])->withTranslations(['en'], [
             'slug' => 'slug',
@@ -58,10 +57,7 @@ class BasicPageRepositoryTest extends KernelTestCase
         static::assertIsBool($basicPage->getPublish());
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotFindUnPublishedStatigPage(): void
+    public function testItDoesNotFindUnPublishedStatigPage(): void
     {
         $this->expectException(NoResultException::class);
 

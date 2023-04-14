@@ -22,10 +22,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
-    /**
-     * @test
-     */
-    public function itExposesConfiguration(): void
+    public function testItExposesConfiguration(): void
     {
         $this->assertProcessedConfigurationEquals([
             'cookies' => [
@@ -51,10 +48,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ], [__DIR__ . '/../Fixtures/configuration.yaml']);
     }
 
-    /**
-     * @test
-     */
-    public function itFailsOnInvalidConfiguration(): void
+    public function testItFailsOnInvalidConfiguration(): void
     {
         $this->expectException(InvalidConfigurationException::class);
 

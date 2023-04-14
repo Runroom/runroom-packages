@@ -33,16 +33,15 @@ class MetaInformationRepositoryTest extends KernelTestCase
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get(MetaInformationRepository::class);
     }
 
-    /**
-     * @test
-     */
-    public function itFindsDefaultMetaInformation(): void
+    public function testItFindsDefaultMetaInformation(): void
     {
         MetaInformationFactory::new(['route' => MetaInformationBuilder::DEFAULT_ROUTE])->withTranslations(['en'])->create();
 
@@ -60,10 +59,7 @@ class MetaInformationRepositoryTest extends KernelTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function itFindsRouteMetaInformation(): void
+    public function testItFindsRouteMetaInformation(): void
     {
         MetaInformationFactory::createOne(['route' => 'test']);
 

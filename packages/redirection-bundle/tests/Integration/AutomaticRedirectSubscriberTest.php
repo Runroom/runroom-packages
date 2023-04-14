@@ -36,6 +36,8 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
@@ -44,20 +46,14 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
         $this->entityManager = $container->get(EntityManagerInterface::class);
     }
 
-    /**
-     * @test
-     */
-    public function itDoesSubscribeToOnFlushEvent(): void
+    public function testItDoesSubscribeToOnFlushEvent(): void
     {
         $events = $this->subscriber->getSubscribedEvents();
 
         static::assertSame([Events::onFlush], $events);
     }
 
-    /**
-     * @test
-     */
-    public function itTestAutomaticRedirectCreation(): void
+    public function testItTestAutomaticRedirectCreation(): void
     {
         $entity = new Entity();
         $entity->setTitle('Test');
@@ -95,10 +91,7 @@ class AutomaticRedirectSubscriberTest extends KernelTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotGenerateRedirectsIfThereIsAConfigurationMistake(): void
+    public function testItDoesNotGenerateRedirectsIfThereIsAConfigurationMistake(): void
     {
         $entity = new WrongEntity();
         $entity->setSlug('test');

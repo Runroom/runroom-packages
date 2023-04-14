@@ -23,10 +23,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
-    /**
-     * @test
-     */
-    public function itExposesConfiguration(): void
+    public function testItExposesConfiguration(): void
     {
         $this->assertProcessedConfigurationEquals([
             'page_view_model' => PageViewModel::class,
@@ -35,10 +32,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function itFailsOnInvalidConfiguration(): void
+    public function testItFailsOnInvalidConfiguration(): void
     {
         $this->expectException(InvalidConfigurationException::class);
 

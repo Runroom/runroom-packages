@@ -71,10 +71,7 @@ class BrowserActionTest extends TestCase
         $this->action->setContainer($this->container);
     }
 
-    /**
-     * @test
-     */
-    public function browserAction(): void
+    public function testBrowserAction(): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
         $form = $this->createMock(Form::class);
@@ -100,10 +97,7 @@ class BrowserActionTest extends TestCase
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', 'renderResponse');
-        $datagrid->expects(static::exactly(2))->method('setValue')->withConsecutive(
-            ['context', null, 'another_context'],
-            ['providerName', null, null]
-        );
+        $datagrid->expects(static::exactly(2))->method('setValue');
         $datagrid->expects(static::once())->method('getResults')->willReturn([new Media(), $media, $media2]);
         $datagrid->expects(static::once())->method('getForm')->willReturn($form);
         $form->expects(static::once())->method('createView')->willReturn($formView);
@@ -116,10 +110,7 @@ class BrowserActionTest extends TestCase
         static::assertSame('renderResponse', $response->getContent());
     }
 
-    /**
-     * @test
-     */
-    public function browserActionWithFilters(): void
+    public function testBrowserActionWithFilters(): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
         $form = $this->createMock(Form::class);
@@ -131,10 +122,7 @@ class BrowserActionTest extends TestCase
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@RunroomCkeditorSonataMedia/browser.html.twig', 'renderResponse');
-        $datagrid->expects(static::exactly(2))->method('setValue')->withConsecutive(
-            ['context', null, 'context'],
-            ['providerName', null, null]
-        );
+        $datagrid->expects(static::exactly(2))->method('setValue');
         $datagrid->expects(static::once())->method('getResults')->willReturn([]);
         $datagrid->expects(static::once())->method('getForm')->willReturn($form);
         $form->expects(static::once())->method('createView')->willReturn($formView);

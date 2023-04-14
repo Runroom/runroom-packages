@@ -20,12 +20,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityControllerTest extends TestCase
 {
     /**
-     * @test
-     *
      * This test is only for coverage purpose, this method is not really called
      * because it is intercepted by Symfony Security.
      */
-    public function itThrowsOnLogoutBecauseItShouldNotBeExecuted(): void
+    public function testItThrowsOnLogoutBecauseItShouldNotBeExecuted(): void
     {
         $controller = new SecurityController($this->createStub(AuthenticationUtils::class));
 

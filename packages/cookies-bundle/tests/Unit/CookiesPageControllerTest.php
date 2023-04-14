@@ -47,10 +47,7 @@ class CookiesPageControllerTest extends TestCase
         $this->controller->setContainer($container);
     }
 
-    /**
-     * @test
-     */
-    public function itRendersCookiesPage(): void
+    public function testItRendersCookiesPage(): void
     {
         $model = new CookiesPageViewModel();
 

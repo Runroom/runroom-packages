@@ -20,7 +20,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * @psalm-suppress PossiblyNullReference, PossiblyUndefinedMethod
+     * @psalm-suppress PossiblyNullReference, UndefinedInterfaceMethod
      *
      * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
      */
@@ -46,7 +46,7 @@ final class Configuration implements ConfigurationInterface
                         ->isRequired()
                         ->cannotBeEmpty()
                         ->validate()
-                            ->ifTrue(fn (string $config): bool => !is_a($config, Media::class, true))
+                            ->ifTrue(static fn (string $config): bool => !is_a($config, Media::class, true))
                             ->thenInvalid('%s must extend ' . Media::class)
                         ->end()
                     ->end()

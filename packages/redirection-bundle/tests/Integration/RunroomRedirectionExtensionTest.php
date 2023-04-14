@@ -30,10 +30,7 @@ class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
         $this->load(['enable_automatic_redirections' => true]);
     }
 
-    /**
-     * @test
-     */
-    public function itHasCoreServicesAlias(): void
+    public function testItHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService('runroom.redirection.admin.redirect', RedirectAdmin::class);
         $this->assertContainerBuilderHasService('runroom.redirection.event_subscriber.redirect', RedirectSubscriber::class);

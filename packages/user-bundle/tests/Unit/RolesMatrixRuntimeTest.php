@@ -43,10 +43,7 @@ class RolesMatrixRuntimeTest extends TestCase
         $this->runtime = new RolesMatrixRuntime($this->twig, $this->rolesBuilder);
     }
 
-    /**
-     * @test
-     */
-    public function itRendersRolesList(): void
+    public function testItRendersRolesList(): void
     {
         $childForm = new FormView();
         $childForm->vars['value'] = 'ROLE';
@@ -90,10 +87,7 @@ class RolesMatrixRuntimeTest extends TestCase
         static::assertSame('rendered string', $rolesList);
     }
 
-    /**
-     * @test
-     */
-    public function itRendersRolesMatrix(): void
+    public function testItRendersRolesMatrix(): void
     {
         $childForm = new FormView();
         $childForm->vars['value'] = 'ROLE';

@@ -21,10 +21,7 @@ class ActionsTest extends WebTestCase
 {
     use ResetDatabase;
 
-    /**
-     * @test
-     */
-    public function itAllowsBrowser(): void
+    public function testItAllowsBrowser(): void
     {
         $client = static::createClient();
 
@@ -33,10 +30,7 @@ class ActionsTest extends WebTestCase
         self::assertResponseIsSuccessful();
     }
 
-    /**
-     * @test
-     */
-    public function itAllowsUploads(): void
+    public function testItAllowsUploads(): void
     {
         $client = static::createClient();
 

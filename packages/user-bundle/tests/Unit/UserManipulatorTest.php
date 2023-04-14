@@ -59,7 +59,7 @@ class UserManipulatorTest extends TestCase
             $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)->getMock();
         } else {
             /**
-             * @psalm-suppress InvalidPropertyAssignmentValue
+             * @psalm-suppress PropertyTypeCoercion
              */
             $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         }
@@ -76,10 +76,7 @@ class UserManipulatorTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itCreatesUser(): void
+    public function testItCreatesUser(): void
     {
         $user = UserFactory::createOne()->object();
 
@@ -95,6 +92,9 @@ class UserManipulatorTest extends TestCase
                 ->with($user, 'new_password')
                 ->willReturn('hashed_password');
         } elseif (null !== $this->passwordEncoder) {
+            /**
+             * @psalm-suppress UndefinedDocblockClass
+             */
             $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
                 ->with($user, 'new_password')
@@ -109,10 +109,7 @@ class UserManipulatorTest extends TestCase
         static::assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
     }
 
-    /**
-     * @test
-     */
-    public function itThrowsWhenActivatingANonExistentUser(): void
+    public function testItThrowsWhenActivatingANonExistentUser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('User identified by "user@localhost" username does not exist.');
@@ -120,10 +117,7 @@ class UserManipulatorTest extends TestCase
         $this->userManipulator->activate('user@localhost');
     }
 
-    /**
-     * @test
-     */
-    public function itThrowsWhenDeactivatingANonExistentUser(): void
+    public function testItThrowsWhenDeactivatingANonExistentUser(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('User identified by "user@localhost" username does not exist.');
@@ -131,10 +125,7 @@ class UserManipulatorTest extends TestCase
         $this->userManipulator->deactivate('user@localhost');
     }
 
-    /**
-     * @test
-     */
-    public function itActivatesUser(): void
+    public function testItActivatesUser(): void
     {
         $user = UserFactory::createOne()->object();
 
@@ -146,10 +137,7 @@ class UserManipulatorTest extends TestCase
         static::assertTrue($user->getEnabled());
     }
 
-    /**
-     * @test
-     */
-    public function itDeactivatesUser(): void
+    public function testItDeactivatesUser(): void
     {
         $user = UserFactory::createOne()->object();
 
@@ -161,10 +149,7 @@ class UserManipulatorTest extends TestCase
         static::assertFalse($user->getEnabled());
     }
 
-    /**
-     * @test
-     */
-    public function itChangesPassword(): void
+    public function testItChangesPassword(): void
     {
         $user = UserFactory::createOne()->object();
 
@@ -180,6 +165,9 @@ class UserManipulatorTest extends TestCase
                 ->with($user, 'new_password')
                 ->willReturn('hashed_password');
         } elseif (null !== $this->passwordEncoder) {
+            /**
+             * @psalm-suppress UndefinedDocblockClass
+             */
             $this->passwordEncoder->expects(static::once())
                 ->method('encodePassword')
                 ->with($user, 'new_password')

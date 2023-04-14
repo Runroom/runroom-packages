@@ -35,10 +35,7 @@ class TemplateControllerTest extends TestCase
         $this->controller = new TemplateController($this->renderer);
     }
 
-    /**
-     * @test
-     */
-    public function itRendersTemplate(): void
+    public function testItRendersTemplate(): void
     {
         $controller = $this->controller;
         $expectedResponse = new Response();

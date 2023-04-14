@@ -33,6 +33,8 @@ abstract class SonataAdminTestCase extends KernelTestCase
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
@@ -90,14 +92,14 @@ abstract class SonataAdminTestCase extends KernelTestCase
     {
         $exportFields = $this->admin->getExportFields();
 
-        static::assertCount(1, array_filter($exportFields, fn (string $exportField): bool => $exportField === $field), 'It does not contain export field: ' . $field);
+        static::assertCount(1, array_filter($exportFields, static fn (string $exportField): bool => $exportField === $field), 'It does not contain export field: ' . $field);
     }
 
     final protected function assertAdminExportDoesNotContainField(string $field): void
     {
         $exportFields = $this->admin->getExportFields();
 
-        static::assertCount(0, array_filter($exportFields, fn (string $exportField): bool => $exportField === $field), 'It does contain export field: ' . $field);
+        static::assertCount(0, array_filter($exportFields, static fn (string $exportField): bool => $exportField === $field), 'It does contain export field: ' . $field);
     }
 
     /**

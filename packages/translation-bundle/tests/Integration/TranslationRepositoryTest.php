@@ -32,16 +32,15 @@ class TranslationRepositoryTest extends KernelTestCase
 
         /**
          * @todo: Simplify this when dropping support for Symfony 4
+         *
+         * @phpstan-ignore-next-line
          */
         $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
 
         $this->repository = $container->get(TranslationRepository::class);
     }
 
-    /**
-     * @test
-     */
-    public function itFindsTranslationsByKey(): void
+    public function testItFindsTranslationsByKey(): void
     {
         TranslationFactory::new(['key' => 'test'])->withTranslations(['en'])->create();
 

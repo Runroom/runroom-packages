@@ -42,12 +42,12 @@ class CookiesPage implements TranslatableInterface
         return $this->id;
     }
 
-    public function getTitle(string $locale = null): ?string
+    public function getTitle(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getTitle();
     }
 
-    public function getContent(string $locale = null): ?string
+    public function getContent(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getContent();
     }

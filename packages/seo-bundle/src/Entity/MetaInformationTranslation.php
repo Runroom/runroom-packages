@@ -35,12 +35,14 @@ class MetaInformationTranslation implements TranslationInterface
     /**
      * @Assert\NotNull
      * @Assert\Length(max=255)
+     *
      * @ORM\Column(type="string")
      */
     private ?string $title = null;
 
     /**
      * @Assert\NotNull
+     *
      * @ORM\Column(type="text")
      */
     private ?string $description = null;

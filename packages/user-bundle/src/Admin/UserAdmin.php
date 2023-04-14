@@ -36,7 +36,6 @@ final class UserAdmin extends AbstractAdmin
      * @todo: Add typehint when dropping support for Symfony 4
      *
      * @phpstan-ignore-next-line
-     *
      * @psalm-suppress PropertyNotSetInConstructor
      *
      * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
@@ -46,13 +45,12 @@ final class UserAdmin extends AbstractAdmin
     /**
      * @todo: Add typehint when dropping support for Symfony 4
      *
-     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface|null $deprecatedPasswordHasher
+     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface|null        $deprecatedPasswordHasher
      * @param UserPasswordHasherInterface|UserPasswordEncoderInterface|string|null $passwordHasher
      *
      * @phpstan-param class-string<UserInterface>|null $deprecatedClass
      *
      * @psalm-suppress UndefinedClass
-     *
      * @phpstan-ignore-next-line
      */
     public function __construct($passwordHasher, ?string $deprecatedClass = null, ?string $deprecatedBaseControllerName = null, ?object $deprecatedPasswordHasher = null)

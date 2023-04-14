@@ -25,20 +25,14 @@ class UserAdminTest extends SonataAdminTestCase
 {
     use Factories;
 
-    /**
-     * @test
-     */
-    public function itHasAllListFields(): void
+    public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('createdAt');
         $this->assertAdminListContainsField('email');
         $this->assertAdminListContainsField('enabled');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFormFields(): void
+    public function testItHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('email');
         $this->assertAdminFormContainsField('plainPassword');
@@ -46,27 +40,18 @@ class UserAdminTest extends SonataAdminTestCase
         $this->assertAdminFormContainsField('roles');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFilterFields(): void
+    public function testItHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('email');
         $this->assertAdminFilterContainsField('enabled');
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotHaveDisabledRoutes(): void
+    public function testItDoesNotHaveDisabledRoutes(): void
     {
         $this->assertAdminRoutesDoesNotContainRoute('show');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllExportFields(): void
+    public function testItHasAllExportFields(): void
     {
         $this->assertAdminExportDoesContainField('id');
         $this->assertAdminExportDoesContainField('email');
@@ -77,10 +62,7 @@ class UserAdminTest extends SonataAdminTestCase
         $this->assertAdminExportDoesNotContainField('salt');
     }
 
-    /**
-     * @test
-     */
-    public function itUpdatesPasswordOnCreate(): void
+    public function testItUpdatesPasswordOnCreate(): void
     {
         $user = UserFactory::createOne([
             'plainPassword' => 'new_password',
@@ -92,10 +74,7 @@ class UserAdminTest extends SonataAdminTestCase
         static::assertNull($createdUser->getPlainPassword());
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotChangePasswordIfNoNewPasswordIsProvided(): void
+    public function testItDoesNotChangePasswordIfNoNewPasswordIsProvided(): void
     {
         $user = UserFactory::createOne(['password' => 'testing'])->object();
 

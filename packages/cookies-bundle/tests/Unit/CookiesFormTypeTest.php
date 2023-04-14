@@ -18,10 +18,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class CookiesFormTypeTest extends TypeTestCase
 {
-    /**
-     * @test
-     */
-    public function itSubmitsValidData(): void
+    public function testItSubmitsValidData(): void
     {
         $form = $this->factory->create(CookiesFormType::class);
 

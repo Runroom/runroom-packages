@@ -18,17 +18,19 @@ use Zenstruck\Foundry\ModelFactory;
 
 /**
  * @extends ModelFactory<EntityMetaInformation>
+ *
+ * @method EntityMetaInformationFactory addState(array|callable $attributes = [])
  */
 final class EntityMetaInformationFactory extends ModelFactory
 {
     /**
-     * @param string[] $locales
+     * @param string[]             $locales
      * @param array<string, mixed> $defaultAttributes
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
         return $this->addState([
-            'translations' => EntityMetaInformationTranslationFactory::new(function () use (&$locales, $defaultAttributes): array {
+            'translations' => EntityMetaInformationTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
             })->many(\count($locales)),
         ]);

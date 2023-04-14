@@ -43,8 +43,10 @@ class RedirectRepository extends ServiceEntityRepository
             ->setParameter('publish', true)
             ->getQuery();
 
+        /**
+         * @var array{ destination: string, httpCode: string }|null
+         */
         $rawRedirect = $query->getOneOrNullResult(Query::HYDRATE_SCALAR);
-        /** @var array{ destination: string, httpCode: string }|null $rawRedirect */
 
         return $rawRedirect;
     }

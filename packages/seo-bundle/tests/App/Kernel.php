@@ -82,6 +82,7 @@ class Kernel extends BaseKernel
 
     /**
      * @todo: Simplify security configuration when dropping support for Symfony 4
+     *
      * @todo: Simplify media configuration when dropping support for Sonata 3
      */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void

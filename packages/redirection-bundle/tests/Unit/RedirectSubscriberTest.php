@@ -40,18 +40,12 @@ class RedirectSubscriberTest extends TestCase
         $this->subscriber = new RedirectSubscriber($this->repository);
     }
 
-    /**
-     * @test
-     */
-    public function itSubscribesToKernelRequestEvent(): void
+    public function testItSubscribesToKernelRequestEvent(): void
     {
         static::assertArrayHasKey(KernelEvents::REQUEST, RedirectSubscriber::getSubscribedEvents());
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotDoAnythingIfTheRequestIsNotTheMasterOne(): void
+    public function testItDoesNotDoAnythingIfTheRequestIsNotTheMasterOne(): void
     {
         $event = $this->getResponseEvent(HttpKernelInterface::SUB_REQUEST);
 
@@ -60,10 +54,7 @@ class RedirectSubscriberTest extends TestCase
         static::assertNull($event->getResponse());
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotDOAnythingIfTheRouteIsNotFoundOnTheRepository(): void
+    public function testItDoesNotDOAnythingIfTheRouteIsNotFoundOnTheRepository(): void
     {
         $this->repository->expects(static::once())->method('findRedirect')->with('/');
 
@@ -74,10 +65,7 @@ class RedirectSubscriberTest extends TestCase
         static::assertNull($event->getResponse());
     }
 
-    /**
-     * @test
-     */
-    public function itDoesARedirectToDestinationUrl(): void
+    public function testItDoesARedirectToDestinationUrl(): void
     {
         $this->repository->expects(static::once())->method('findRedirect')->with('/')->willReturn([
             'destination' => '/redirect',

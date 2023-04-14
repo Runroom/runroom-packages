@@ -119,7 +119,7 @@ final class SecurityRolesBuilder implements ExpandableRolesBuilderInterface
 
     /**
      * @param string[][] $hierarchy
-     * @param string[] $roles
+     * @param string[]   $roles
      *
      * @return array<string, array<string, string|bool>>
      *

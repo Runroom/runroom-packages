@@ -16,20 +16,24 @@ namespace Runroom\BasicPageBundle\Factory;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\SeoBundle\Factory\EntityMetaInformationFactory;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Proxy;
 
 /**
  * @extends ModelFactory<BasicPage>
+ *
+ * @method        BasicPageFactory addState(array|callable $attributes = [])
+ * @method static Proxy<BasicPage> createOne(array $attributes = [])
  */
 final class BasicPageFactory extends ModelFactory
 {
     /**
-     * @param string[] $locales
+     * @param string[]             $locales
      * @param array<string, mixed> $defaultAttributes
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
         return $this->addState([
-            'translations' => BasicPageTranslationFactory::new(function () use (&$locales, $defaultAttributes): array {
+            'translations' => BasicPageTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
             })->many(\count($locales)),
         ]);

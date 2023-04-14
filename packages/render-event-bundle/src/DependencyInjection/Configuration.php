@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * @psalm-suppress PossiblyNullReference, PossiblyUndefinedMethod
+     * @psalm-suppress PossiblyNullReference, UndefinedInterfaceMethod
      *
      * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
      */
@@ -35,7 +35,7 @@ final class Configuration implements ConfigurationInterface
                 ->cannotBeEmpty()
                 ->defaultValue(PageViewModel::class)
                 ->validate()
-                    ->ifTrue(fn (string $config): bool => !is_a($config, PageViewModelInterface::class, true))
+                    ->ifTrue(static fn (string $config): bool => !is_a($config, PageViewModelInterface::class, true))
                     ->thenInvalid('%s must implement ' . PageViewModelInterface::class)
                 ->end()
             ->end()

@@ -28,10 +28,7 @@ class RunroomCkeditorSonataMediaExtensionTest extends AbstractExtensionTestCase
         $this->load();
     }
 
-    /**
-     * @test
-     */
-    public function itHasCoreServicesAlias(): void
+    public function testItHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService('runroom.ckeditor_sonata_media.action.browser', BrowserAction::class);
         $this->assertContainerBuilderHasService('runroom.ckeditor_sonata_media.action.upload', UploadAction::class);

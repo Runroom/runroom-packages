@@ -19,6 +19,7 @@
     "homepage": "https://github.com/runroom/RunroomBasicPageBundle",
     "require": {
         "php": "^7.4 || ^8.0",
+        "doctrine/annotations": "^1.13 || ^2.0",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/orm": "^2.8",
         "doctrine/persistence": "^2.0 || ^3.0",

@@ -72,10 +72,7 @@ class SecurityRolesBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itGetsExpandedRoles(): void
+    public function testItGetsExpandedRoles(): void
     {
         $this->authorizationChecker->method('isGranted')->willReturnMap([
             ['ROLE_SUPER_ADMIN', null, true],
@@ -112,10 +109,7 @@ class SecurityRolesBuilderTest extends TestCase
         static::assertSame($expectedExpandedRoles, $expandedRoles);
     }
 
-    /**
-     * @test
-     */
-    public function itGetsRoles(): void
+    public function testItGetsRoles(): void
     {
         $this->authorizationChecker->method('isGranted')->willReturnMap([
             ['ROLE_SUPER_ADMIN', null, true],

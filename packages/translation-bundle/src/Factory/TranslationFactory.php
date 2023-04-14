@@ -18,17 +18,19 @@ use Zenstruck\Foundry\ModelFactory;
 
 /**
  * @extends ModelFactory<Translation>
+ *
+ * @method TranslationFactory addState(array|callable $attributes = [])
  */
 final class TranslationFactory extends ModelFactory
 {
     /**
-     * @param string[] $locales
+     * @param string[]             $locales
      * @param array<string, mixed> $defaultAttributes
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
         return $this->addState([
-            'translations' => TranslationTranslationFactory::new(function () use (&$locales, $defaultAttributes): array {
+            'translations' => TranslationTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
             })->many(\count($locales)),
         ]);

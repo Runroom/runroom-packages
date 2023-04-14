@@ -23,10 +23,7 @@ class SecurityControllerTest extends WebTestCase
     use Factories;
     use ResetDatabase;
 
-    /**
-     * @test
-     */
-    public function itSubmitsLoginForm(): void
+    public function testItSubmitsLoginForm(): void
     {
         $client = static::createClient();
 
@@ -54,10 +51,7 @@ class SecurityControllerTest extends WebTestCase
         static::assertRouteSame('sonata_admin_dashboard');
     }
 
-    /**
-     * @test
-     */
-    public function itSubmitsLoginFormWithDisabledUser(): void
+    public function testItSubmitsLoginFormWithDisabledUser(): void
     {
         $client = static::createClient();
 
@@ -80,10 +74,7 @@ class SecurityControllerTest extends WebTestCase
         static::assertRouteSame('runroom_user_login');
     }
 
-    /**
-     * @test
-     */
-    public function itLogouts(): void
+    public function testItLogouts(): void
     {
         $client = static::createClient();
         $client->request('GET', '/logout');

@@ -48,24 +48,18 @@ class AlternateLinksBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itDoesNotProvideAnyAlternateLinks(): void
+    public function testItDoesNotProvideAnyAlternateLinks(): void
     {
         static::assertFalse($this->provider->providesAlternateLinks('default'));
     }
 
-    /**
-     * @test
-     */
-    public function itFindsAlternateLinksForRoute(): void
+    public function testItFindsAlternateLinksForRoute(): void
     {
         $route = 'dummy_route';
 
         $this->urlGenerator->expects(static::exactly(2))->method('generate')->willReturnMap(
             array_map(
-                fn (string $locale): array => [
+                static fn (string $locale): array => [
                     $route . '.' . $locale,
                     [
                         'dummy_param' => 'dummy_value',
@@ -85,10 +79,7 @@ class AlternateLinksBuilderTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function itReturnsEmptyAlternateLinksIfRouteDoesNotExist(): void
+    public function testItReturnsEmptyAlternateLinksIfRouteDoesNotExist(): void
     {
         $this->urlGenerator->method('generate')->willThrowException(new RouteNotFoundException());
 

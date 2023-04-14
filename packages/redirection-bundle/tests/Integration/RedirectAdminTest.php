@@ -22,10 +22,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
  */
 class RedirectAdminTest extends SonataAdminTestCase
 {
-    /**
-     * @test
-     */
-    public function itHasAllListFields(): void
+    public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('source');
         $this->assertAdminListContainsField('destination');
@@ -35,10 +32,7 @@ class RedirectAdminTest extends SonataAdminTestCase
         $this->assertAdminListContainsField(ListMapper::NAME_ACTIONS);
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFormFields(): void
+    public function testItHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('source');
         $this->assertAdminFormContainsField('destination');
@@ -46,10 +40,7 @@ class RedirectAdminTest extends SonataAdminTestCase
         $this->assertAdminFormContainsField('publish');
     }
 
-    /**
-     * @test
-     */
-    public function itHasAllFilterFields(): void
+    public function testItHasAllFilterFields(): void
     {
         $this->assertAdminFilterContainsField('source');
         $this->assertAdminFilterContainsField('destination');

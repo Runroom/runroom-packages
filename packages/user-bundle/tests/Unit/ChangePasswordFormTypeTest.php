@@ -32,11 +32,9 @@ class ChangePasswordFormTypeTest extends TypeTestCase
     }
 
     /**
-     * @test
-     *
      * @dataProvider submitValuesProvider
      */
-    public function itSubmitsWithDifferentValues(string $fistPassword, string $secondPassword, bool $isValid, ?string $expectedData): void
+    public function testItSubmitsWithDifferentValues(string $fistPassword, string $secondPassword, bool $isValid, ?string $expectedData): void
     {
         $this->form->submit(['plainPassword' => [
             'first' => $fistPassword,
@@ -59,10 +57,7 @@ class ChangePasswordFormTypeTest extends TypeTestCase
         yield 'Password length shorter than 6 characters' => ['new', 'new', false, 'new'];
     }
 
-    /**
-     * @test
-     */
-    public function itGetsFormDefaultOptions(): void
+    public function testItGetsFormDefaultOptions(): void
     {
         static::assertSame('RunroomUserBundle', $this->form->getConfig()->getOption('translation_domain'));
     }
