@@ -38,6 +38,7 @@
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.4",
         "a2lix/translation-form-bundle": "^3.0.4",
+        "doctrine/annotations": "^1.13 || ^2.0",
         "knplabs/knp-menu-bundle": "^3.1",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",

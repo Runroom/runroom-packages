@@ -44,6 +44,7 @@
         "twig/twig": "^2.12 || ^3.0"
     },
     "require-dev": {
+        "doctrine/annotations": "^1.13 || ^2.0",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.5",
