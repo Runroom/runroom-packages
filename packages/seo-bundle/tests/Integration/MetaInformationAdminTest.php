@@ -19,7 +19,7 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /**
  * @extends SonataAdminTestCase<MetaInformation>
  */
-class MetaInformationAdminTest extends SonataAdminTestCase
+final class MetaInformationAdminTest extends SonataAdminTestCase
 {
     public function testItHasAllListFields(): void
     {

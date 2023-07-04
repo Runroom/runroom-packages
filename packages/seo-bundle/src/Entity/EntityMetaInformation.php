@@ -13,22 +13,19 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 
-/**
- * @ORM\Entity
- */
-class EntityMetaInformation implements TranslatableInterface
+#[ORM\Entity]
+class EntityMetaInformation implements TranslatableInterface, \Stringable
 {
     use TranslatableTrait;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
     public function __toString(): string

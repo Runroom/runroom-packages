@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class CookiesPageRepositoryTest extends KernelTestCase
+final class CookiesPageRepositoryTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -28,16 +28,7 @@ class CookiesPageRepositoryTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $this->repository = $container->get(CookiesPageRepository::class);
+        $this->repository = static::getContainer()->get(CookiesPageRepository::class);
     }
 
     public function testIfFindsCookiesPageById(): void

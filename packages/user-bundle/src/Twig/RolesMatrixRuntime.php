@@ -20,15 +20,10 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 final class RolesMatrixRuntime implements RuntimeExtensionInterface
 {
-    private Environment $twig;
-    private MatrixRolesBuilderInterface $rolesBuilder;
-
     public function __construct(
-        Environment $twig,
-        MatrixRolesBuilderInterface $rolesBuilder
+        private readonly Environment $twig,
+        private readonly MatrixRolesBuilderInterface $rolesBuilder
     ) {
-        $this->twig = $twig;
-        $this->rolesBuilder = $rolesBuilder;
     }
 
     public function renderRolesList(FormView $form): string

@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
 
-class ChangePasswordFormTypeTest extends TypeTestCase
+final class ChangePasswordFormTypeTest extends TypeTestCase
 {
     private FormInterface $form;
 

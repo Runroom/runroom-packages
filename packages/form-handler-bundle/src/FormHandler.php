@@ -21,20 +21,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class FormHandler
+final class FormHandler
 {
-    private FormFactoryInterface $formFactory;
-    private EventDispatcherInterface $eventDispatcher;
-    private RequestStack $requestStack;
-
     public function __construct(
-        FormFactoryInterface $formFactory,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly RequestStack $requestStack
     ) {
-        $this->formFactory = $formFactory;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
     }
 
     /**

@@ -11,6 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Psr\Container\ContainerInterface;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
 use Runroom\BasicPageBundle\Repository\BasicPageRepository;
@@ -19,22 +21,19 @@ use Runroom\BasicPageBundle\Service\BasicPageMetaInformationProvider;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\BasicPageBundle\Twig\BasicPageExtension;
 use Runroom\BasicPageBundle\Twig\BasicPageRuntime;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.basic_page.controller.basic_page', BasicPageController::class)
         ->public()
-        ->arg('$service', new ReferenceConfigurator('runroom.basic_page.service.basic_page'))
-        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
+        ->arg('$service', service('runroom.basic_page.service.basic_page'))
+        ->call('setContainer', [service(ContainerInterface::class)])
         ->tag('container.service_subscriber')
         ->tag('controller.service_arguments');
 
     $services->set('runroom.basic_page.service.basic_page', BasicPageService::class)
-        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class));
+        ->arg('$repository', service(BasicPageRepository::class));
 
     $services->set('runroom.basic_page.service.basic_page_alternate_links', BasicPageAlternateLinksProvider::class)
         ->tag('runroom.seo.alternate_links');
@@ -43,14 +42,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('runroom.seo.meta_information');
 
     $services->set(BasicPageRepository::class)
-        ->arg('$registry', new ReferenceConfigurator('doctrine'))
-        ->arg('$requestStack', new ReferenceConfigurator('request_stack'))
+        ->arg('$registry', service('doctrine'))
+        ->arg('$requestStack', service('request_stack'))
         ->tag('doctrine.repository_service');
 
     $services->set('runroom.basic_page.twig.basic_page', BasicPageExtension::class)
         ->tag('twig.extension');
 
     $services->set('runroom.basic_page.twig.basic_page.runtime', BasicPageRuntime::class)
-        ->arg('$repository', new ReferenceConfigurator(BasicPageRepository::class))
+        ->arg('$repository', service(BasicPageRepository::class))
         ->tag('twig.runtime');
 };

@@ -19,7 +19,7 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /**
  * @extends SonataAdminTestCase<CookiesPage>
  */
-class CookiesPageAdminTest extends SonataAdminTestCase
+final class CookiesPageAdminTest extends SonataAdminTestCase
 {
     public function testItHasAllFormFields(): void
     {

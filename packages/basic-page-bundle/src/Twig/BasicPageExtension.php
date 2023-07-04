@@ -16,7 +16,7 @@ namespace Runroom\BasicPageBundle\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class BasicPageExtension extends AbstractExtension
+final class BasicPageExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {

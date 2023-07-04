@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
@@ -20,33 +21,23 @@ use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=MetaInformationRepository::class)
- */
-class MetaInformation implements TranslatableInterface
+#[ORM\Entity(repositoryClass: MetaInformationRepository::class)]
+class MetaInformation implements TranslatableInterface, \Stringable
 {
     use TranslatableTrait;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", unique=true)
-     */
+    #[ORM\Column(type: Types::STRING, unique: true)]
     private ?string $route = null;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: Types::STRING)]
     private ?string $routeName = null;
 
-    /**
-     * @Assert\Valid
-     */
+    #[Assert\Valid]
     private ?MediaInterface $image = null;
 
     public function __toString(): string

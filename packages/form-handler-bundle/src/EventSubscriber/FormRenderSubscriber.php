@@ -18,7 +18,7 @@ use Runroom\RenderEventBundle\Event\PageRenderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class FormRenderSubscriber implements EventSubscriberInterface
+final class FormRenderSubscriber implements EventSubscriberInterface
 {
     public function pageRenderEvent(PageRenderEvent $event): void
     {

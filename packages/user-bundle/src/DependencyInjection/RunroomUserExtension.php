@@ -17,7 +17,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 
 /**
@@ -57,13 +56,6 @@ final class RunroomUserExtension extends Extension
         $loader->load('security.php');
         $loader->load('twig.php');
         $loader->load('util.php');
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if (class_exists(AuthenticatorManager::class)) {
-            $loader->load('security_sf5.php');
-        }
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.php');

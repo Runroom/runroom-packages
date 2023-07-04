@@ -18,7 +18,7 @@ use Runroom\UserBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
 use Runroom\UserBundle\RunroomUserBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class RunroomUserBundleTest extends TestCase
+final class RunroomUserBundleTest extends TestCase
 {
     public function testItBuilds(): void
     {

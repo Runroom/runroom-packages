@@ -19,7 +19,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
 /**
  * @extends SonataAdminTestCase<MediaInterface>
  */
-class MediaAdminExtensionTest extends SonataAdminTestCase
+final class MediaAdminExtensionTest extends SonataAdminTestCase
 {
     public function testItDoesNotHaveDisabledRoutes(): void
     {

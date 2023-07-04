@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\Translator;
 
-class AdminRolesBuilderTest extends TestCase
+final class AdminRolesBuilderTest extends TestCase
 {
     /**
      * @var MockObject&AdminInterface

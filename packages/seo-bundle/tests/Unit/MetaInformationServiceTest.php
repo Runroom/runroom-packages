@@ -16,7 +16,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
-use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
+use Runroom\SeoBundle\MetaInformation\MetaInformationBuilderInterface;
 use Runroom\SeoBundle\MetaInformation\MetaInformationProviderInterface;
 use Runroom\SeoBundle\MetaInformation\MetaInformationService;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
@@ -24,22 +24,17 @@ use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class MetaInformationServiceTest extends TestCase
+final class MetaInformationServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
     /**
      * @phpstan-var MockObject&MetaInformationProviderInterface
      */
-    private $provider;
+    private MockObject&MetaInformationProviderInterface $provider;
 
     private DefaultMetaInformationProvider $defaultProvider;
-
-    /**
-     * @var MockObject&MetaInformationBuilder
-     */
-    private $builder;
-
+    private MockObject&MetaInformationBuilderInterface $builder;
     private MetaInformationService $service;
 
     /**
@@ -54,7 +49,7 @@ class MetaInformationServiceTest extends TestCase
         $this->requestStack = new RequestStack();
         $this->provider = $this->createMock(MetaInformationProviderInterface::class);
         $this->defaultProvider = new DefaultMetaInformationProvider();
-        $this->builder = $this->createMock(MetaInformationBuilder::class);
+        $this->builder = $this->createMock(MetaInformationBuilderInterface::class);
 
         $this->service = new MetaInformationService(
             $this->requestStack,

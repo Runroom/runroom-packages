@@ -13,55 +13,34 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Runroom\UserBundle\Model\ResetPasswordRequestInterface;
 use Runroom\UserBundle\Model\UserInterface;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class ResetPasswordRequest implements ResetPasswordRequestInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private UserInterface $user;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private readonly \DateTimeImmutable $requestedAt;
 
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private string $selector;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private string $hashedToken;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private \DateTimeImmutable $requestedAt;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private \DateTimeInterface $expiresAt;
-
-    public function __construct(UserInterface $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken)
-    {
-        $this->user = $user;
+    public function __construct(
+        #[ORM\ManyToOne(targetEntity: User::class)]
+        #[ORM\JoinColumn(nullable: false)]
+        private readonly UserInterface $user,
+        #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+        private readonly \DateTimeInterface $expiresAt,
+        #[ORM\Column(type: Types::STRING, length: 20)]
+        private readonly string $selector,
+        #[ORM\Column(type: Types::STRING, length: 100)]
+        private readonly string $hashedToken
+    ) {
         $this->requestedAt = new \DateTimeImmutable('now');
-        $this->expiresAt = $expiresAt;
-        $this->selector = $selector;
-        $this->hashedToken = $hashedToken;
     }
 
     public function getId(): ?int

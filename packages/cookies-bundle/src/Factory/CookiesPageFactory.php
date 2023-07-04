@@ -33,7 +33,7 @@ final class CookiesPageFactory extends ModelFactory
     {
         return $this->addState([
             'translations' => CookiesPageTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
-                return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
+                return [...$defaultAttributes, 'locale' => array_pop($locales)];
             })->many(\count($locales)),
         ]);
     }

@@ -23,24 +23,13 @@ use Twig\Environment;
 
 final class MailerService implements MailerServiceInterface
 {
-    private MailerInterface $mailer;
-    private TranslatorInterface $translator;
-    private Environment $twig;
-    private string $fromEmail;
-    private string $fromName;
-
     public function __construct(
-        MailerInterface $mailer,
-        TranslatorInterface $translator,
-        Environment $twig,
-        string $fromEmail,
-        string $fromName
+        private readonly MailerInterface $mailer,
+        private readonly TranslatorInterface $translator,
+        private readonly Environment $twig,
+        private readonly string $fromEmail,
+        private readonly string $fromName
     ) {
-        $this->mailer = $mailer;
-        $this->translator = $translator;
-        $this->twig = $twig;
-        $this->fromEmail = $fromEmail;
-        $this->fromName = $fromName;
     }
 
     public function sendResetPasswordEmail(UserInterface $user, ResetPasswordToken $resetToken): void

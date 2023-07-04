@@ -18,7 +18,7 @@ use Runroom\CookiesBundle\Twig\CookiesRuntime;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\Test\IntegrationTestCase;
 
-class CookiesExtensionTest extends IntegrationTestCase
+final class CookiesExtensionTest extends IntegrationTestCase
 {
     public function getFixturesDir(): string
     {

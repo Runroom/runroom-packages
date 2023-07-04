@@ -19,7 +19,7 @@ use Runroom\UserBundle\Entity\ResetPasswordRequest;
 /**
  * @extends SonataAdminTestCase<ResetPasswordRequest>
  */
-class ResetPasswordRequestAdminTest extends SonataAdminTestCase
+final class ResetPasswordRequestAdminTest extends SonataAdminTestCase
 {
     public function testItHasAllListFields(): void
     {

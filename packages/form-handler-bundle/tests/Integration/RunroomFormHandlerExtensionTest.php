@@ -18,7 +18,7 @@ use Runroom\FormHandlerBundle\DependencyInjection\RunroomFormHandlerExtension;
 use Runroom\FormHandlerBundle\EventSubscriber\FormRenderSubscriber;
 use Runroom\FormHandlerBundle\FormHandler;
 
-class RunroomFormHandlerExtensionTest extends AbstractExtensionTestCase
+final class RunroomFormHandlerExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {

@@ -21,7 +21,7 @@ use Runroom\UserBundle\Twig\RolesMatrixRuntime;
 use Symfony\Component\Form\FormView;
 use Twig\Environment;
 
-class RolesMatrixRuntimeTest extends TestCase
+final class RolesMatrixRuntimeTest extends TestCase
 {
     /**
      * @var MockObject&Environment

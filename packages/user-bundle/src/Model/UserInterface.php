@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Model;
 
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
-interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUserInterface
+interface UserInterface extends SymfonyUserInterface, PasswordAuthenticatedUserInterface
 {
     public const ROLE_DEFAULT = 'ROLE_USER';
 
@@ -36,7 +37,7 @@ interface UserInterface extends SymfonyUserInterface, BCPasswordAuthenticatedUse
     public function setRoles(array $roles): self;
 
     /**
-     * @todo: Remove this method when dropping support for Symfony 4.
+     * @todo: Remove this when dropping support for Symfony 5.4
      */
     public function getPassword(): ?string;
 

@@ -19,26 +19,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class UserManipulator
 {
-    private UserRepositoryInterface $userRepository;
-
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @var UserPasswordHasherInterface
-     */
-    private object $passwordHasher;
-
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @param UserPasswordHasherInterface $passwordHasher
-     */
     public function __construct(
-        UserRepositoryInterface $userRepository,
-        object $passwordHasher
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly UserPasswordHasherInterface $passwordHasher
     ) {
-        $this->userRepository = $userRepository;
-        $this->passwordHasher = $passwordHasher;
     }
 
     public function create(string $identifier, string $password, bool $active): void
@@ -47,14 +31,7 @@ final class UserManipulator
 
         $user->setEmail($identifier);
 
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
-            $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
-        } else {
-            $hashedPassword = $this->passwordHasher->encodePassword($user, $password);
-        }
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
 
         $user->setPassword($hashedPassword);
         $user->setEnabled($active);
@@ -83,14 +60,7 @@ final class UserManipulator
     {
         $user = $this->findUserByIdentifierOrThrowException($identifier);
 
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
-            $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
-        } else {
-            $hashedPassword = $this->passwordHasher->encodePassword($user, $password);
-        }
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
 
         $user->setPassword($hashedPassword);
 

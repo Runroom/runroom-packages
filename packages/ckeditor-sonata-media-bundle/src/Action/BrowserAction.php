@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\CkeditorSonataMediaBundle\Action;
 
-use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Request\AdminFetcherInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Provider\Pool;
@@ -25,23 +24,13 @@ use Twig\Environment;
 
 final class BrowserAction extends AbstractController
 {
-    private Environment $twig;
-    private AdminFetcherInterface $adminFetcher;
-    private Pool $mediaPool;
-
     public function __construct(
-        Environment $twig,
-        AdminFetcherInterface $adminFetcher,
-        Pool $mediaPool
+        private readonly Environment $twig,
+        private readonly AdminFetcherInterface $adminFetcher,
+        private readonly Pool $mediaPool
     ) {
-        $this->twig = $twig;
-        $this->adminFetcher = $adminFetcher;
-        $this->mediaPool = $mediaPool;
     }
 
-    /**
-     * @todo: Simplify this when dropping support for sonata-project/admin-bundle 3
-     */
     public function __invoke(Request $request): Response
     {
         $admin = $this->adminFetcher->get($request);
@@ -49,17 +38,16 @@ final class BrowserAction extends AbstractController
         $admin->checkAccess('list');
 
         $datagrid = $admin->getDatagrid();
-        // @todo: Change to $request->query->all('filter') when support for Symfony < 5.1 is dropped.
-        $filters = $request->query->all()['filter'] ?? [];
+        $filters = $request->query->all('filter');
 
         if (!\is_array($filters) || !\array_key_exists('context', $filters)) {
-            $context = $this->getPersistentParameter($admin, 'context');
+            $context = $admin->getPersistentParameter('context');
         } else {
             $context = $filters['context']['value'];
         }
 
         $datagrid->setValue('context', null, $context ?? $this->mediaPool->getDefaultContext());
-        $datagrid->setValue('providerName', null, $this->getPersistentParameter($admin, 'provider'));
+        $datagrid->setValue('providerName', null, $admin->getPersistentParameter('provider'));
 
         $formats = [];
 
@@ -90,35 +78,8 @@ final class BrowserAction extends AbstractController
             'export_formats' => [],
 
             // extra parameters
-            'base_template' => $this->getBaseTemplate($admin),
+            'base_template' => $admin->getTemplateRegistry()->getTemplate('layout'),
             'admin' => $admin,
         ]);
-    }
-
-    /**
-     * @todo: Simplify this when dropping support for sonata-project/admin-bundle 3
-     *
-     * @param AdminInterface<object> $admin
-     *
-     * @psalm-suppress UndefinedMethod
-     */
-    private function getBaseTemplate(AdminInterface $admin): string
-    {
-        // @phpstan-ignore-next-line
-        return method_exists($admin, 'getTemplateRegistry') ? $admin->getTemplateRegistry()->getTemplate('layout') : $admin->getTemplate('layout');
-    }
-
-    /**
-     * @todo: Simplify this when dropping support for sonata-project/admin-bundle 3
-     *
-     * @param AdminInterface<object> $admin
-     *
-     * @return mixed
-     */
-    private function getPersistentParameter(AdminInterface $admin, string $name)
-    {
-        $parameters = $admin->getPersistentParameters();
-
-        return $parameters[$name] ?? null;
     }
 }

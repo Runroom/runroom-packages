@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\Factory\EntityMetaInformationFactory;
 use Zenstruck\Foundry\Test\Factories;
 
-class EntityMetaInformationTest extends TestCase
+final class EntityMetaInformationTest extends TestCase
 {
     use Factories;
 

@@ -15,21 +15,17 @@ namespace Runroom\TranslationBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\TranslationBundle\Service\TranslationService;
+use Runroom\TranslationBundle\Service\TranslationServiceInterface;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
 
-class TranslationExtensionTest extends TestCase
+final class TranslationExtensionTest extends TestCase
 {
-    /**
-     * @var MockObject&TranslationService
-     */
-    private $service;
-
+    private MockObject&TranslationServiceInterface $service;
     private TranslationExtension $extension;
 
     protected function setUp(): void
     {
-        $this->service = $this->createMock(TranslationService::class);
+        $this->service = $this->createMock(TranslationServiceInterface::class);
 
         $this->extension = new TranslationExtension($this->service);
     }

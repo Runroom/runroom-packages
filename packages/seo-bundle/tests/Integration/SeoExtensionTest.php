@@ -21,7 +21,7 @@ use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\Test\IntegrationTestCase;
 
-class SeoExtensionTest extends IntegrationTestCase
+final class SeoExtensionTest extends IntegrationTestCase
 {
     public function getFixturesDir(): string
     {

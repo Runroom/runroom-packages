@@ -37,12 +37,11 @@ use Runroom\UserBundle\Twig\GlobalVariables;
 use Runroom\UserBundle\Twig\RolesMatrixExtension;
 use Runroom\UserBundle\Twig\RolesMatrixRuntime;
 use Runroom\UserBundle\Util\UserManipulator;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use SymfonyCasts\Bundle\ResetPassword\Command\ResetPasswordRemoveExpiredCommand;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelper;
 use SymfonyCasts\Bundle\ResetPassword\Util\ResetPasswordCleaner;
 
-class RunroomUserExtensionTest extends AbstractExtensionTestCase
+final class RunroomUserExtensionTest extends AbstractExtensionTestCase
 {
     public function testItHasCoreServicesAlias(): void
     {
@@ -62,15 +61,7 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom.user.twig.extension.roles_matrix', RolesMatrixExtension::class);
         $this->assertContainerBuilderHasService('runroom.user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
         $this->assertContainerBuilderHasService('runroom.user.util.user_manipulator', UserManipulator::class);
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if (class_exists(AuthenticatorManager::class)) {
-            $this->assertContainerBuilderHasService('runroom.user.security.user_authenticator', UserAuthenticator::class);
-        } else {
-            $this->assertContainerBuilderNotHasService('runroom.user.security.user_authenticator');
-        }
+        $this->assertContainerBuilderHasService('runroom.user.security.user_authenticator', UserAuthenticator::class);
     }
 
     public function testItCanEnableResetPassword(): void
@@ -129,15 +120,7 @@ class RunroomUserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('runroom.user.twig.extension.roles_matrix', RolesMatrixExtension::class);
         $this->assertContainerBuilderHasService('runroom.user.twig.runtime.roles_matrix', RolesMatrixRuntime::class);
         $this->assertContainerBuilderHasService('runroom.user.util.user_manipulator', UserManipulator::class);
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if (class_exists(AuthenticatorManager::class)) {
-            $this->assertContainerBuilderHasService('runroom.user.security.user_authenticator', UserAuthenticator::class);
-        } else {
-            $this->assertContainerBuilderNotHasService('runroom.user.security.user_authenticator');
-        }
+        $this->assertContainerBuilderHasService('runroom.user.security.user_authenticator', UserAuthenticator::class);
     }
 
     public function testItThrowsWhenTryingToEnableResetPasswordWithoutBeingInstalled(): void

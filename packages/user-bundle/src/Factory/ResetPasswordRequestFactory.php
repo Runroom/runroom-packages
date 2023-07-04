@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Factory;
 
 use Runroom\UserBundle\Entity\ResetPasswordRequest;
-use Zenstruck\Foundry\Instantiator;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -41,13 +40,5 @@ final class ResetPasswordRequestFactory extends ModelFactory
     protected static function getClass(): string
     {
         return ResetPasswordRequest::class;
-    }
-
-    /**
-     * @return static
-     */
-    protected function initialize()
-    {
-        return $this->instantiateWith((new Instantiator())->alwaysForceProperties());
     }
 }

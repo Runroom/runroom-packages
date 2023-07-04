@@ -20,29 +20,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 
-/**
- * @final
- */
-class PageRenderer
+final class PageRenderer implements PageRendererInterface
 {
-    private Environment $twig;
-    private EventDispatcherInterface $eventDispatcher;
-    private PageViewModelInterface $pageViewModel;
-
     public function __construct(
-        Environment $twig,
-        EventDispatcherInterface $eventDispatcher,
-        PageViewModelInterface $pageViewModel
+        private readonly Environment $twig,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly PageViewModelInterface $pageViewModel
     ) {
-        $this->twig = $twig;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->pageViewModel = $pageViewModel;
     }
 
-    /**
-     * @param mixed $model
-     */
-    public function render(string $view, $model = null): string
+    public function render(string $view, mixed $model = null): string
     {
         $this->pageViewModel->setContent($model);
 
@@ -57,10 +44,7 @@ class PageRenderer
         return $this->twig->render($event->getView(), ['page' => $event->getPageViewModel()]);
     }
 
-    /**
-     * @param mixed $model
-     */
-    public function renderResponse(string $view, $model = null, ?Response $response = null): Response
+    public function renderResponse(string $view, mixed $model = null, ?Response $response = null): Response
     {
         $this->pageViewModel->setContent($model);
 

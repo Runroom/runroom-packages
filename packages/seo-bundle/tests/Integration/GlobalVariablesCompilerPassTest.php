@@ -19,7 +19,7 @@ use Runroom\SeoBundle\DependencyInjection\RunroomSeoExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
+final class GlobalVariablesCompilerPassTest extends AbstractCompilerPassTestCase
 {
     public function testItAddsGlobalXDefaultLocaleToTwig(): void
     {

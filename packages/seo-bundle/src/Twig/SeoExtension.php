@@ -16,7 +16,7 @@ namespace Runroom\SeoBundle\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class SeoExtension extends AbstractExtension
+final class SeoExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {

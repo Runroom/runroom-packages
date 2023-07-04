@@ -13,23 +13,20 @@ declare(strict_types=1);
 
 namespace Runroom\TranslationBundle\Twig;
 
-use Runroom\TranslationBundle\Service\TranslationService;
+use Runroom\TranslationBundle\Service\TranslationServiceInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 final class TranslationExtension extends AbstractExtension
 {
-    private TranslationService $service;
-
-    public function __construct(TranslationService $service)
+    public function __construct(private readonly TranslationServiceInterface $service)
     {
-        $this->service = $service;
     }
 
     public function getFilters(): array
     {
         return [
-            new TwigFilter('translate', [$this, 'translate'], ['is_safe' => ['html']]),
+            new TwigFilter('translate', $this->translate(...), ['is_safe' => ['html']]),
         ];
     }
 

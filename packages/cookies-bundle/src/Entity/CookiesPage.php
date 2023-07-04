@@ -13,23 +13,20 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 
-/**
- * @ORM\Entity(repositoryClass=CookiesPageRepository::class)
- */
-class CookiesPage implements TranslatableInterface
+#[ORM\Entity(repositoryClass: CookiesPageRepository::class)]
+class CookiesPage implements TranslatableInterface, \Stringable
 {
     use TranslatableTrait;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
     public function __toString(): string

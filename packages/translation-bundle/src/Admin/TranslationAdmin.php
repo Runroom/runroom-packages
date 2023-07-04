@@ -21,7 +21,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -38,12 +37,7 @@ final class TranslationAdmin extends AbstractAdmin
         $sortValues['_sort_by'] = 'key';
     }
 
-    /**
-     * @todo: Simplify this when dropping support for Sonata 3
-     *
-     * @param RouteCollection|RouteCollectionInterface $collection
-     */
-    protected function configureRoutes(object $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
         $collection->remove('show');

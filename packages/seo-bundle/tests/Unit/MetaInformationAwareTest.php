@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\Tests\App\Entity\MetaInformationAwareEntity;
 
-class MetaInformationAwareTest extends TestCase
+final class MetaInformationAwareTest extends TestCase
 {
     public function testItSetsAndGetsMetaInformation(): void
     {

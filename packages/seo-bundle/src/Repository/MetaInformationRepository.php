@@ -18,11 +18,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Runroom\SeoBundle\Entity\MetaInformation;
 
 /**
- * @final
- *
  * @extends ServiceEntityRepository<MetaInformation>
  */
-class MetaInformationRepository extends ServiceEntityRepository
+final class MetaInformationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -18,12 +18,10 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class CreateUserCommandTest extends KernelTestCase
+final class CreateUserCommandTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -32,8 +30,6 @@ class CreateUserCommandTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        static::bootKernel();
-
         $this->commandTester = new CommandTester(
             (new Application(static::createKernel()))->find('runroom:user:create')
         );
@@ -41,14 +37,8 @@ class CreateUserCommandTest extends KernelTestCase
 
     public function testItCreatesAnActiveUser(): void
     {
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-        $passwordHasher = $container->get(class_exists(AuthenticatorManager::class) ? 'security.password_hasher' : 'security.password_encoder');
-        \assert($passwordHasher instanceof UserPasswordHasherInterface || $passwordHasher instanceof UserPasswordEncoderInterface);
+        $passwordHasher = static::getContainer()->get('security.password_hasher');
+        \assert($passwordHasher instanceof UserPasswordHasherInterface);
 
         $this->commandTester->execute([
             'identifier' => 'email@localhost',

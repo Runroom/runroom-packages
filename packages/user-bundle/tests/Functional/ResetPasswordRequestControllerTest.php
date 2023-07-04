@@ -21,7 +21,7 @@ use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ResetPasswordRequestControllerTest extends WebTestCase
+final class ResetPasswordRequestControllerTest extends WebTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -29,9 +29,6 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     public function testItSubmitsResetPasswordRequestWithNonExistentUser(): void
     {
         $client = static::createClient();
-
-        // @todo: Simplify when this gets solved: https://github.com/symfony/symfony/issues/45580
-        $client->disableReboot();
 
         $client->request('GET', '/reset-password');
 
@@ -52,9 +49,6 @@ class ResetPasswordRequestControllerTest extends WebTestCase
     public function testItSubmitsResetPasswordRequest(): void
     {
         $client = static::createClient();
-
-        // @todo: Simplify when this gets solved: https://github.com/symfony/symfony/issues/45580
-        $client->disableReboot();
 
         UserFactory::createOne([
             'email' => 'email@localhost',
@@ -97,19 +91,14 @@ class ResetPasswordRequestControllerTest extends WebTestCase
 
     /**
      * @see We need to use the internal token generator to generate a valid token for testing purposes
+     *
+     * @psalm-suppress InternalMethod
      */
     public function testItResetsPassword(): void
     {
         $client = static::createClient();
 
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $tokenGenerator = $container->get('symfonycasts.reset_password.token_generator');
+        $tokenGenerator = static::getContainer()->get('symfonycasts.reset_password.token_generator');
 
         /**
          * @phpstan-var Proxy<UserInterface>

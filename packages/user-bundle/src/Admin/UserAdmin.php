@@ -19,55 +19,18 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @extends AbstractAdmin<UserInterface>
- *
- * @psalm-suppress UndefinedDocblockClass
  */
 final class UserAdmin extends AbstractAdmin
 {
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @phpstan-ignore-next-line
-     * @psalm-suppress PropertyNotSetInConstructor
-     *
-     * @var UserPasswordHasherInterface|UserPasswordEncoderInterface
-     */
-    private object $passwordHasher;
-
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface|null        $deprecatedPasswordHasher
-     * @param UserPasswordHasherInterface|UserPasswordEncoderInterface|string|null $passwordHasher
-     *
-     * @phpstan-param class-string<UserInterface>|null $deprecatedClass
-     *
-     * @psalm-suppress UndefinedClass
-     * @phpstan-ignore-next-line
-     */
-    public function __construct($passwordHasher, ?string $deprecatedClass = null, ?string $deprecatedBaseControllerName = null, ?object $deprecatedPasswordHasher = null)
+    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher)
     {
-        /**
-         * @todo: Simplify this when dropping support for Sonata 3
-         */
-        if ($passwordHasher instanceof UserPasswordHasherInterface || $passwordHasher instanceof UserPasswordEncoderInterface) {
-            parent::__construct();
-
-            $this->passwordHasher = $passwordHasher;
-        } else {
-            parent::__construct($passwordHasher, $deprecatedClass, $deprecatedBaseControllerName);
-            \assert($deprecatedPasswordHasher instanceof UserPasswordHasherInterface);
-
-            $this->passwordHasher = $deprecatedPasswordHasher;
-        }
+        parent::__construct();
     }
 
     public function configureExportFields(): array
@@ -79,11 +42,9 @@ final class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @todo: Add typehint when dropping support for Sonata 3 and make it protected
-     *
      * @param UserInterface $object
      */
-    public function prePersist($object): void
+    protected function prePersist(object $object): void
     {
         $this->updatePassword($object);
 
@@ -91,21 +52,14 @@ final class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @todo: Add typehint when dropping support for Sonata 3 and make it protected
-     *
      * @param UserInterface $object
      */
-    public function preUpdate($object): void
+    protected function preUpdate(object $object): void
     {
         $this->updatePassword($object);
     }
 
-    /**
-     * @todo: Simplify this when dropping support for Sonata 3
-     *
-     * @param RouteCollection|RouteCollectionInterface $collection
-     */
-    protected function configureRoutes(object $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('show');
     }
@@ -171,14 +125,7 @@ final class UserAdmin extends AbstractAdmin
             return;
         }
 
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
-            $password = $this->passwordHasher->hashPassword($user, $plainPassword);
-        } else {
-            $password = $this->passwordHasher->encodePassword($user, $plainPassword);
-        }
+        $password = $this->passwordHasher->hashPassword($user, $plainPassword);
 
         $user->eraseCredentials();
         $user->setPassword($password);

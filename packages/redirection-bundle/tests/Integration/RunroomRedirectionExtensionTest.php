@@ -16,11 +16,11 @@ namespace Runroom\RedirectionBundle\Tests\Integration;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Runroom\RedirectionBundle\Admin\RedirectAdmin;
 use Runroom\RedirectionBundle\DependencyInjection\RunroomRedirectionExtension;
-use Runroom\RedirectionBundle\EventSubscriber\AutomaticRedirectSubscriber;
+use Runroom\RedirectionBundle\EventListener\AutomaticRedirectListener;
 use Runroom\RedirectionBundle\EventSubscriber\RedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 
-class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
+final class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {
@@ -33,8 +33,8 @@ class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
     public function testItHasCoreServicesAlias(): void
     {
         $this->assertContainerBuilderHasService('runroom.redirection.admin.redirect', RedirectAdmin::class);
+        $this->assertContainerBuilderHasService('runroom.redirection.event_listener.automatic_redirect', AutomaticRedirectListener::class);
         $this->assertContainerBuilderHasService('runroom.redirection.event_subscriber.redirect', RedirectSubscriber::class);
-        $this->assertContainerBuilderHasService('runroom.redirection.event_subscriber.automatic_redirect', AutomaticRedirectSubscriber::class);
         $this->assertContainerBuilderHasService(RedirectRepository::class);
     }
 

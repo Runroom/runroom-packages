@@ -19,7 +19,7 @@ use Runroom\TranslationBundle\Entity\Translation;
 /**
  * @extends SonataAdminTestCase<Translation>
  */
-class TranslationAdminTest extends SonataAdminTestCase
+final class TranslationAdminTest extends SonataAdminTestCase
 {
     public function testItHasAllListFields(): void
     {

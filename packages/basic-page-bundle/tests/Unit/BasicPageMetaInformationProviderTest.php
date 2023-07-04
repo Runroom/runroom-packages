@@ -21,7 +21,7 @@ use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Zenstruck\Foundry\Test\Factories;
 
-class BasicPageMetaInformationProviderTest extends TestCase
+final class BasicPageMetaInformationProviderTest extends TestCase
 {
     use Factories;
 

@@ -17,28 +17,20 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Controller\BasicPageController;
 use Runroom\BasicPageBundle\Entity\BasicPage;
-use Runroom\BasicPageBundle\Service\BasicPageService;
+use Runroom\BasicPageBundle\Service\BasicPageServiceInterface;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Symfony\Component\DependencyInjection\Container;
 use Twig\Environment;
 
-class BasicPageControllerTest extends TestCase
+final class BasicPageControllerTest extends TestCase
 {
-    /**
-     * @var MockObject&BasicPageService
-     */
-    private $service;
-
-    /**
-     * @var MockObject&Environment
-     */
-    private $twig;
-
+    private MockObject&BasicPageServiceInterface $service;
+    private MockObject&Environment $twig;
     private BasicPageController $controller;
 
     protected function setUp(): void
     {
-        $this->service = $this->createMock(BasicPageService::class);
+        $this->service = $this->createMock(BasicPageServiceInterface::class);
         $this->twig = $this->createMock(Environment::class);
 
         $container = new Container();

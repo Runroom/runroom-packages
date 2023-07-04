@@ -15,7 +15,7 @@ namespace Runroom\SeoBundle\Tests\Unit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilder;
+use Runroom\SeoBundle\AlternateLinks\AlternateLinksBuilderInterface;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksProviderInterface;
 use Runroom\SeoBundle\AlternateLinks\AlternateLinksService;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
@@ -23,22 +23,17 @@ use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class AlternateLinksServiceTest extends TestCase
+final class AlternateLinksServiceTest extends TestCase
 {
     private RequestStack $requestStack;
 
     /**
      * @phpstan-var MockObject&AlternateLinksProviderInterface
      */
-    private $provider;
+    private MockObject&AlternateLinksProviderInterface $provider;
 
     private DefaultAlternateLinksProvider $defaultProvider;
-
-    /**
-     * @var MockObject&AlternateLinksBuilder
-     */
-    private $builder;
-
+    private MockObject&AlternateLinksBuilderInterface $builder;
     private AlternateLinksService $service;
 
     /**
@@ -51,7 +46,7 @@ class AlternateLinksServiceTest extends TestCase
         $this->requestStack = new RequestStack();
         $this->provider = $this->createMock(AlternateLinksProviderInterface::class);
         $this->defaultProvider = new DefaultAlternateLinksProvider();
-        $this->builder = $this->createMock(AlternateLinksBuilder::class);
+        $this->builder = $this->createMock(AlternateLinksBuilderInterface::class);
 
         $this->service = new AlternateLinksService(
             $this->requestStack,

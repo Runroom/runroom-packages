@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\AlternateLinks\DefaultAlternateLinksProvider;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
-class DefaultAlternateLinksProviderTest extends TestCase
+final class DefaultAlternateLinksProviderTest extends TestCase
 {
     private DefaultAlternateLinksProvider $provider;
 

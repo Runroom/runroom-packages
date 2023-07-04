@@ -13,31 +13,32 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Tests\Unit;
 
+use Doctrine\Persistence\ObjectRepository;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
+use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\SeoBundle\Factory\MetaInformationFactory;
 use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
-use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\Tests\App\Entity\Media;
 use Runroom\SeoBundle\Tests\App\MetaInformation\TestMetaInformationProvider;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Zenstruck\Foundry\Test\Factories;
 
-class MetaInformationBuilderTest extends TestCase
+final class MetaInformationBuilderTest extends TestCase
 {
     use Factories;
 
     /**
-     * @var Stub&MetaInformationRepository
+     * @var Stub&ObjectRepository<MetaInformation>
      */
-    private $repository;
+    private Stub&ObjectRepository $repository;
 
     private MetaInformationBuilder $builder;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createStub(MetaInformationRepository::class);
+        $this->repository = $this->createStub(ObjectRepository::class);
 
         $this->builder = new MetaInformationBuilder(
             $this->repository,

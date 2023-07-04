@@ -16,28 +16,20 @@ namespace Runroom\CookiesBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\CookiesBundle\Controller\CookiesPageController;
-use Runroom\CookiesBundle\Service\CookiesPageService;
+use Runroom\CookiesBundle\Service\CookiesPageServiceInterface;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
 use Symfony\Component\DependencyInjection\Container;
 use Twig\Environment;
 
-class CookiesPageControllerTest extends TestCase
+final class CookiesPageControllerTest extends TestCase
 {
-    /**
-     * @var MockObject&CookiesPageService
-     */
-    private $service;
-
-    /**
-     * @var MockObject&Environment
-     */
-    private $twig;
-
+    private MockObject&CookiesPageServiceInterface $service;
+    private MockObject&Environment $twig;
     private CookiesPageController $controller;
 
     protected function setUp(): void
     {
-        $this->service = $this->createMock(CookiesPageService::class);
+        $this->service = $this->createMock(CookiesPageServiceInterface::class);
         $this->twig = $this->createMock(Environment::class);
 
         $container = new Container();

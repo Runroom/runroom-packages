@@ -16,21 +16,17 @@ namespace Runroom\BasicPageBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\BasicPageBundle\Entity\BasicPage;
-use Runroom\BasicPageBundle\Repository\BasicPageRepository;
+use Runroom\BasicPageBundle\Repository\BasicPageRepositoryInterface;
 use Runroom\BasicPageBundle\Service\BasicPageService;
 
-class BasicPageServiceTest extends TestCase
+final class BasicPageServiceTest extends TestCase
 {
-    /**
-     * @var MockObject&BasicPageRepository
-     */
-    private $repository;
-
+    private MockObject&BasicPageRepositoryInterface $repository;
     private BasicPageService $service;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(BasicPageRepository::class);
+        $this->repository = $this->createMock(BasicPageRepositoryInterface::class);
 
         $this->service = new BasicPageService($this->repository);
     }

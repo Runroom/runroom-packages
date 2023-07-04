@@ -23,7 +23,7 @@ use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use Twig\Environment;
 use Zenstruck\Foundry\Test\Factories;
 
-class MailerServiceTest extends TestCase
+final class MailerServiceTest extends TestCase
 {
     use Factories;
 

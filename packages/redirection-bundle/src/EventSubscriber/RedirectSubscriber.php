@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\EventSubscriber;
 
-use Runroom\RedirectionBundle\Repository\RedirectRepository;
+use Runroom\RedirectionBundle\Repository\RedirectRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -21,26 +21,13 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class RedirectSubscriber implements EventSubscriberInterface
 {
-    private RedirectRepository $repository;
-
-    public function __construct(RedirectRepository $repository)
+    public function __construct(private readonly RedirectRepositoryInterface $repository)
     {
-        $this->repository = $repository;
     }
 
-    /**
-     * @todo: Simplify when dropping support for Symfony 4
-     *
-     * @psalm-suppress UndefinedMethod
-     */
     public function onKernelRequest(RequestEvent $event): void
     {
-        /**
-         * @phpstan-ignore-next-line
-         */
-        $isMainRequest = method_exists($event, 'isMainRequest') ? $event->isMainRequest() : $event->isMasterRequest();
-
-        if (!$isMainRequest) {
+        if (!$event->isMainRequest()) {
             return;
         }
 

@@ -19,7 +19,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -36,12 +35,7 @@ final class RedirectAdmin extends AbstractAdmin
         'redirect.httpCode.temporal' => Redirect::TEMPORAL,
     ];
 
-    /**
-     * @todo: Simplify this when dropping support for Sonata 3
-     *
-     * @param RouteCollection|RouteCollectionInterface $collection
-     */
-    protected function configureRoutes(object $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('show');
     }

@@ -11,26 +11,26 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Runroom\RedirectionBundle\EventSubscriber\AutomaticRedirectSubscriber;
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Runroom\RedirectionBundle\EventListener\AutomaticRedirectListener;
 use Runroom\RedirectionBundle\EventSubscriber\RedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.redirection.event_subscriber.redirect', RedirectSubscriber::class)
-        ->arg('$repository', new ReferenceConfigurator(RedirectRepository::class))
+        ->arg('$repository', service(RedirectRepository::class))
         ->tag('kernel.event_subscriber');
 
-    $services->set('runroom.redirection.event_subscriber.automatic_redirect', AutomaticRedirectSubscriber::class)
-        ->arg('$urlGenerator', new ReferenceConfigurator('router'))
-        ->arg('$propertyAccessor', new ReferenceConfigurator('property_accessor'))
-        ->arg('$configuration', []);
+    $services->set('runroom.redirection.event_listener.automatic_redirect', AutomaticRedirectListener::class)
+        ->arg('$urlGenerator', service('router'))
+        ->arg('$propertyAccessor', service('property_accessor'))
+        ->arg('$configuration', [])
+        ->tag('doctrine.event_listener', ['event' => 'onFlush']);
 
     $services->set(RedirectRepository::class)
-        ->arg('$registry', new ReferenceConfigurator('doctrine'))
+        ->arg('$registry', service('doctrine'))
         ->tag('doctrine.repository_service');
 };

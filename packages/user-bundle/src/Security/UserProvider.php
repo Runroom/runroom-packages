@@ -15,22 +15,20 @@ namespace Runroom\UserBundle\Security;
 
 use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * @phpstan-implements PasswordUpgraderInterface<UserInterface>
+ */
 final class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
-    private UserRepositoryInterface $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -46,7 +44,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $user = $this->userRepository->loadUserByIdentifier($identifier);
 
         if (null === $user || !$user->getEnabled()) {
-            throw $this->buildUserNotFoundException(sprintf('User "%s" not found.', $identifier));
+            throw new UserNotFoundException(sprintf('User "%s" not found.', $identifier));
         }
 
         return $user;
@@ -55,7 +53,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     public function refreshUser(SymfonyUserInterface $user): SymfonyUserInterface
     {
         if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
         $userIdentifier = $user->getUserIdentifier();
@@ -63,7 +61,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $refreshedUser = $this->userRepository->loadUserByIdentifier($userIdentifier);
 
         if (null === $refreshedUser) {
-            throw $this->buildUserNotFoundException(sprintf('User with identifier "%s" not found.', $userIdentifier));
+            throw new UserNotFoundException(sprintf('User with identifier "%s" not found.', $userIdentifier));
         }
 
         return $refreshedUser;
@@ -83,25 +81,11 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     public function upgradePassword(object $user, string $newHashedPassword): void
     {
         if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
         $user->setPassword($newHashedPassword);
 
         $this->userRepository->save($user);
-    }
-
-    /**
-     * @todo: Simplify when dropping support for Symfony 4.
-     *
-     * @psalm-suppress UndefinedClass, InvalidReturnType, InvalidReturnStatement
-     */
-    private function buildUserNotFoundException(string $message): AuthenticationException
-    {
-        if (!class_exists(UserNotFoundException::class)) {
-            return new UsernameNotFoundException($message);
-        }
-
-        return new UserNotFoundException($message);
     }
 }

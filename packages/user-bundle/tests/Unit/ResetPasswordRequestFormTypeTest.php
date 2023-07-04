@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
 
-class ResetPasswordRequestFormTypeTest extends TypeTestCase
+final class ResetPasswordRequestFormTypeTest extends TypeTestCase
 {
     private FormInterface $form;
 

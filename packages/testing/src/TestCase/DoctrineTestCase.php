@@ -68,19 +68,12 @@ abstract class DoctrineTestCase extends KernelTestCase
 
     private function ensureSchemaIsCreated(): void
     {
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
+        static::$entityManager = static::getContainer()->get(EntityManagerInterface::class);
+        static::$loader = static::getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
+        static::$connection = static::getContainer()->get(Connection::class);
+        static::$containerBag = static::getContainer()->get(ContainerBagInterface::class);
 
-        static::$entityManager = $container->get(EntityManagerInterface::class);
-        static::$loader = $container->get('fidry_alice_data_fixtures.loader.doctrine');
-        static::$connection = $container->get(Connection::class);
-        static::$containerBag = $container->get(ContainerBagInterface::class);
-
-        $container->get(RequestStack::class)->push(new Request());
+        static::getContainer()->get(RequestStack::class)->push(new Request());
 
         if (!class_exists(DatabaseResetter::class)) {
             $schemaTool = new SchemaTool(static::$entityManager);

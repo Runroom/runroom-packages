@@ -13,24 +13,21 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Controller;
 
-use Runroom\BasicPageBundle\Service\BasicPageService;
+use Runroom\BasicPageBundle\Service\BasicPageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 final class BasicPageController extends AbstractController
 {
-    private BasicPageService $service;
-
-    public function __construct(BasicPageService $service)
+    public function __construct(private readonly BasicPageServiceInterface $service)
     {
-        $this->service = $service;
     }
 
     public function show(string $slug): Response
     {
         try {
             $model = $this->service->getBasicPageViewModel($slug);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             throw $this->createNotFoundException();
         }
 

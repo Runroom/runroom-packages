@@ -17,13 +17,13 @@ use PHPUnit\Framework\TestCase;
 use Runroom\UserBundle\Controller\SecurityController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityControllerTest extends TestCase
+final class SecurityControllerTest extends TestCase
 {
     /**
      * This test is only for coverage purpose, this method is not really called
      * because it is intercepted by Symfony Security.
      */
-    public function testItThrowsOnLogoutBecauseItShouldNotBeExecuted(): void
+    public function testItThrowsOnLogoutBecauseItShouldNotBeExecuted(): never
     {
         $controller = new SecurityController($this->createStub(AuthenticationUtils::class));
 

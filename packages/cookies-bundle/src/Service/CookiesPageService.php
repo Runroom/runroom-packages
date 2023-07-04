@@ -13,40 +13,30 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Service;
 
+use Doctrine\Persistence\ObjectRepository;
 use Runroom\CookiesBundle\DependencyInjection\Configuration;
+use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
-use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\ViewModel\CookiesPageViewModel;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * @final
- *
  * @phpstan-import-type CookiesData from Configuration
  */
-class CookiesPageService
+final class CookiesPageService implements CookiesPageServiceInterface
 {
     private const COOKIES_PAGE_ID = 1;
 
-    private CookiesPageRepository $repository;
-    private FormFactoryInterface $formFactory;
-
     /**
-     * @phpstan-var CookiesData
-     */
-    private array $cookies;
-
-    /**
+     * @param ObjectRepository<CookiesPage> $repository
+     *
      * @phpstan-param CookiesData $cookies
      */
     public function __construct(
-        CookiesPageRepository $repository,
-        FormFactoryInterface $formFactory,
-        array $cookies
+        private readonly ObjectRepository $repository,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly array $cookies
     ) {
-        $this->repository = $repository;
-        $this->formFactory = $formFactory;
-        $this->cookies = $cookies;
     }
 
     public function getCookiesPageViewModel(): CookiesPageViewModel

@@ -15,6 +15,7 @@ namespace Runroom\BasicPageBundle\Tests\App;
 
 use A2lix\AutoFormBundle\A2lixAutoFormBundle;
 use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
@@ -23,7 +24,6 @@ use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\BasicPageBundle\Tests\App\Entity\Media;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
-use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -33,10 +33,10 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
@@ -45,6 +45,7 @@ class Kernel extends BaseKernel
         return [
             new A2lixAutoFormBundle(),
             new A2lixTranslationFormBundle(),
+            new DAMADoctrineTestBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FOSCKEditorBundle(),
@@ -76,9 +77,6 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    /**
-     * @todo: Simplify security configuration when dropping support for Symfony 4
-     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->setParameter('kernel.default_locale', 'en');
@@ -94,10 +92,9 @@ class Kernel extends BaseKernel
             'firewalls' => ['main' => []],
         ];
 
-        if (class_exists(AuthenticatorManager::class)) {
+        // @todo: Remove if when dropping support of Symfony 5.4
+        if (!class_exists(IsGranted::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
-        } else {
-            $securityConfig['firewalls']['main']['anonymous'] = true;
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -120,14 +117,6 @@ class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
-        if (class_exists(DeprecatedTextExtension::class)) {
-            $container->loadFromExtension('sonata_admin', [
-                'options' => [
-                    'legacy_twig_text_extension' => false,
-                ],
-            ]);
-        }
-
         $container->loadFromExtension('runroom_seo', [
             'locales' => ['es', 'en', 'ca'],
             'xdefault_locale' => 'es',
@@ -135,12 +124,7 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @param RoutingConfigurator $routes
-     */
-    protected function configureRoutes($routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $routes->import($this->getProjectDir() . '/routing.yaml');
     }

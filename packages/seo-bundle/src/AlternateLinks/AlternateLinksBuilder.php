@@ -17,33 +17,17 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @final
- */
-class AlternateLinksBuilder
+final class AlternateLinksBuilder implements AlternateLinksBuilderInterface
 {
-    private UrlGeneratorInterface $urlGenerator;
-
-    /**
-     * @var string[]
-     */
-    private array $locales;
-
     /**
      * @param string[] $locales
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator, array $locales)
-    {
-        $this->urlGenerator = $urlGenerator;
-        $this->locales = $locales;
+    public function __construct(
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly array $locales
+    ) {
     }
 
-    /**
-     * @param array<string, mixed>  $context
-     * @param array<string, string> $routeParameters
-     *
-     * @return array<string, string>
-     */
     public function build(
         AlternateLinksProviderInterface $provider,
         array $context,
@@ -61,7 +45,7 @@ class AlternateLinksBuilder
                         UrlGeneratorInterface::ABSOLUTE_URL
                     );
                 }
-            } catch (RouteNotFoundException|InvalidParameterException $exception) {
+            } catch (RouteNotFoundException|InvalidParameterException) {
             }
         }
 

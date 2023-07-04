@@ -16,7 +16,7 @@ namespace Runroom\CookiesBundle\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class CookiesExtension extends AbstractExtension
+final class CookiesExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {

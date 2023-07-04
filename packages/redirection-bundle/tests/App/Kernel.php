@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\App;
 
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
 use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
 use Sonata\AdminBundle\SonataAdminBundle;
-use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -29,16 +29,16 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
     public function registerBundles(): iterable
     {
         return [
+            new DAMADoctrineTestBundle(),
             new DoctrineBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
@@ -67,9 +67,6 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    /**
-     * @todo: Simplify security configuration when dropping support for Symfony 4
-     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->loadFromExtension('framework', [
@@ -83,10 +80,9 @@ class Kernel extends BaseKernel
             'firewalls' => ['main' => []],
         ];
 
-        if (class_exists(AuthenticatorManager::class)) {
+        // @todo: Remove if when dropping support of Symfony 5.4
+        if (!class_exists(IsGranted::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
-        } else {
-            $securityConfig['firewalls']['main']['anonymous'] = true;
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -97,7 +93,7 @@ class Kernel extends BaseKernel
                 'auto_mapping' => true,
                 'mappings' => [
                     'redirection' => [
-                        'type' => 'annotation',
+                        'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',
                         'is_bundle' => false,
@@ -115,14 +111,6 @@ class Kernel extends BaseKernel
             'auto_refresh_proxies' => false,
         ]);
 
-        if (class_exists(DeprecatedTextExtension::class)) {
-            $container->loadFromExtension('sonata_admin', [
-                'options' => [
-                    'legacy_twig_text_extension' => false,
-                ],
-            ]);
-        }
-
         $container->loadFromExtension('runroom_redirection', [
             'enable_automatic_redirections' => true,
             'automatic_redirections' => [
@@ -138,23 +126,10 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @psalm-suppress TooManyArguments
-     *
-     * @param RoutingConfigurator $routes
-     */
-    protected function configureRoutes($routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        if ($routes instanceof RoutingConfigurator) {
-            $routes->add('route.entity', '/entity/{slug}')
-                ->controller('controller');
-
-            return;
-        }
-
-        $routes->add('/entity/{slug}', 'controller', 'route.entity');
+        $routes->add('route.entity', '/entity/{slug}')
+            ->controller('controller');
     }
 
     private function getBaseDir(): string

@@ -13,26 +13,16 @@ declare(strict_types=1);
 
 namespace Runroom\CkeditorSonataMediaBundle\Tests\App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseGalleryItem;
 
-/**
- * @todo: Keep only the if part when dropping support for sonata-project/media-bundle 3
- */
-if (!class_exists(BaseGalleryItem::class)) {
-    class_alias('Sonata\MediaBundle\Entity\BaseGalleryHasMedia', BaseGalleryItem::class);
-}
-
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class GalleryItem extends BaseGalleryItem
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
     public function getId(): ?int

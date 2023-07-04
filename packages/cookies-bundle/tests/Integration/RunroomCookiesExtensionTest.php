@@ -22,7 +22,7 @@ use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\Twig\CookiesExtension;
 use Runroom\CookiesBundle\Twig\CookiesRuntime;
 
-class RunroomCookiesExtensionTest extends AbstractExtensionTestCase
+final class RunroomCookiesExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {

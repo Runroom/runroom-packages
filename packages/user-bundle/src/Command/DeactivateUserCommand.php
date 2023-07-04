@@ -23,26 +23,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'runroom:user:deactivate', description: 'Deactivate a user.')]
 final class DeactivateUserCommand extends Command
 {
-    // @todo: Remove static properties when support for Symfony < 5.4 is dropped.
-    protected static $defaultName = 'runroom:user:deactivate';
-    protected static $defaultDescription = 'Deactivate a user.';
-
-    private UserManipulator $userManipulator;
-
-    public function __construct(UserManipulator $userManipulator)
+    public function __construct(private readonly UserManipulator $userManipulator)
     {
         parent::__construct();
-
-        $this->userManipulator = $userManipulator;
     }
 
     protected function configure(): void
     {
-        \assert(null !== static::$defaultDescription);
-
         $this
-            // @todo: Remove setDescription when support for Symfony < 5.4 is dropped.
-            ->setDescription(static::$defaultDescription)
             ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->setHelp(
                 <<<'EOT'

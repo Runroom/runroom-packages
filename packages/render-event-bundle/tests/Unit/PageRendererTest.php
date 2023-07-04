@@ -23,13 +23,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class PageRendererTest extends TestCase
+final class PageRendererTest extends TestCase
 {
-    /**
-     * @var MockObject&Environment
-     */
-    private $twig;
-
+    private MockObject&Environment $twig;
     private EventDispatcher $eventDispatcher;
     private PageViewModel $pageViewModel;
     private PageRenderer $service;

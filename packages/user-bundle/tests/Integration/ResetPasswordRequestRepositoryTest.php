@@ -21,7 +21,7 @@ use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ResetPasswordRequestRepositoryTest extends KernelTestCase
+final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -30,16 +30,7 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $this->repository = $container->get('runroom.user.repository.reset_password_request');
+        $this->repository = static::getContainer()->get('runroom.user.repository.reset_password_request');
     }
 
     public function testItCreatesResetPasswordRequest(): void
@@ -127,18 +118,17 @@ class ResetPasswordRequestRepositoryTest extends KernelTestCase
         $user = UserFactory::createOne()->object();
         $date = new \DateTimeImmutable();
         $oneHour = $date->add(new \DateInterval('PT1H'));
-        $twoHours = $date->add(new \DateInterval('PT2H'));
 
         ResetPasswordRequestFactory::createOne([
             'user' => $user,
             'expiresAt' => $oneHour,
-            'requestedAt' => $oneHour,
         ]);
+
+        sleep(1);
 
         $secondResetPasswordRequest = ResetPasswordRequestFactory::createOne([
             'user' => $user,
             'expiresAt' => $oneHour,
-            'requestedAt' => $twoHours,
         ])->object();
 
         $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);

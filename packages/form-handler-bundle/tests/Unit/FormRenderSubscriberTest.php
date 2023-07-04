@@ -21,7 +21,7 @@ use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class FormRenderSubscriberTest extends TestCase
+final class FormRenderSubscriberTest extends TestCase
 {
     public function testItDoesSubscribeToOnFlushEvent(): void
     {

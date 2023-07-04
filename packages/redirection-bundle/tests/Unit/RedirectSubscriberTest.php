@@ -16,7 +16,7 @@ namespace Runroom\RedirectionBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\RedirectionBundle\EventSubscriber\RedirectSubscriber;
-use Runroom\RedirectionBundle\Repository\RedirectRepository;
+use Runroom\RedirectionBundle\Repository\RedirectRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -24,18 +24,14 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class RedirectSubscriberTest extends TestCase
+final class RedirectSubscriberTest extends TestCase
 {
-    /**
-     * @var MockObject&RedirectRepository
-     */
-    private $repository;
-
+    private MockObject&RedirectRepositoryInterface $repository;
     private RedirectSubscriber $subscriber;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(RedirectRepository::class);
+        $this->repository = $this->createMock(RedirectRepositoryInterface::class);
 
         $this->subscriber = new RedirectSubscriber($this->repository);
     }
@@ -85,10 +81,7 @@ class RedirectSubscriberTest extends TestCase
         static::assertSame(301, $response->getStatusCode());
     }
 
-    /**
-     * @todo: Change to HttpKernelInterface::MAIN_REQUEST when dropping support for Symfony 4
-     */
-    private function getResponseEvent(int $requestType = 1): RequestEvent
+    private function getResponseEvent(int $requestType = HttpKernelInterface::MAIN_REQUEST): RequestEvent
     {
         return new RequestEvent($this->createStub(Kernel::class), new Request(), $requestType);
     }

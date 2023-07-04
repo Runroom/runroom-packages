@@ -16,7 +16,7 @@ namespace Runroom\RenderEventBundle\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Runroom\RenderEventBundle\ViewModel\PageViewModel;
 
-class PageViewModelTest extends TestCase
+final class PageViewModelTest extends TestCase
 {
     private PageViewModel $viewModel;
 

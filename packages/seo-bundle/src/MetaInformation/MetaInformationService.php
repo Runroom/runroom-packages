@@ -18,26 +18,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class MetaInformationService implements MetaInformationServiceInterface
 {
-    private RequestStack $requestStack;
-
-    /**
-     * @var iterable<MetaInformationProviderInterface>
-     */
-    private iterable $providers;
-
-    private MetaInformationBuilder $builder;
-
     /**
      * @param iterable<MetaInformationProviderInterface> $providers
      */
     public function __construct(
-        RequestStack $requestStack,
-        iterable $providers,
-        MetaInformationBuilder $builder
+        private readonly RequestStack $requestStack,
+        private readonly iterable $providers,
+        private readonly MetaInformationBuilderInterface $builder
     ) {
-        $this->requestStack = $requestStack;
-        $this->providers = $providers;
-        $this->builder = $builder;
     }
 
     public function build(array $context): MetaInformationViewModel

@@ -13,33 +13,30 @@ declare(strict_types=1);
 
 namespace Runroom\TranslationBundle\Tests\Unit;
 
+use Doctrine\Persistence\ObjectRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Runroom\TranslationBundle\Entity\Translation;
 use Runroom\TranslationBundle\Factory\TranslationFactory;
-use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Zenstruck\Foundry\Test\Factories;
 
-class TranslationServiceTest extends TestCase
+final class TranslationServiceTest extends TestCase
 {
     use Factories;
 
     /**
-     * @var MockObject&TranslationRepository
+     * @var MockObject&ObjectRepository<Translation>
      */
-    private $repository;
+    private MockObject&ObjectRepository $repository;
 
-    /**
-     * @var MockObject&TranslatorInterface
-     */
-    private $translator;
-
+    private MockObject&TranslatorInterface $translator;
     private TranslationService $service;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(TranslationRepository::class);
+        $this->repository = $this->createMock(ObjectRepository::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
 
         $this->service = new TranslationService(

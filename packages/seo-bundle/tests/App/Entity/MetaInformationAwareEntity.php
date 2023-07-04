@@ -15,7 +15,7 @@ namespace Runroom\SeoBundle\Tests\App\Entity;
 
 use Runroom\SeoBundle\Behaviors\MetaInformationAware;
 
-class MetaInformationAwareEntity
+final class MetaInformationAwareEntity
 {
     use MetaInformationAware;
 }

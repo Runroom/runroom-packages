@@ -21,7 +21,7 @@ use Zenstruck\Foundry\Test\Factories;
 /**
  * @extends SonataAdminTestCase<UserInterface>
  */
-class UserAdminTest extends SonataAdminTestCase
+final class UserAdminTest extends SonataAdminTestCase
 {
     use Factories;
 

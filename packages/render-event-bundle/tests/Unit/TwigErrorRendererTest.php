@@ -17,7 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Runroom\RenderEventBundle\ErrorRenderer\TwigErrorRenderer;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
+use Runroom\RenderEventBundle\Renderer\PageRendererInterface;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,45 +25,21 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 
-class TwigErrorRendererTest extends TestCase
+final class TwigErrorRendererTest extends TestCase
 {
-    /**
-     * @var Stub&Environment
-     */
-    private $twig;
-
-    /**
-     * @var MockObject&HtmlErrorRenderer
-     */
-    private $fallbackErrorRenderer;
-
-    /**
-     * @var MockObject&PageRenderer
-     */
-    private $renderer;
-
-    /**
-     * @var Stub&\Throwable
-     */
-    private $exception;
-
-    /**
-     * @var MockObject&FlattenException
-     */
-    private $flattenException;
-
-    /**
-     * @var MockObject&LoaderInterface
-     */
-    private $twigLoader;
-
+    private Stub&Environment $twig;
+    private MockObject&HtmlErrorRenderer $fallbackErrorRenderer;
+    private MockObject&PageRendererInterface $renderer;
+    private Stub&\Throwable $exception;
+    private MockObject&FlattenException $flattenException;
+    private MockObject&LoaderInterface $twigLoader;
     private RequestStack $requestStack;
 
     protected function setUp(): void
     {
         $this->twig = $this->createStub(Environment::class);
         $this->fallbackErrorRenderer = $this->createMock(HtmlErrorRenderer::class);
-        $this->renderer = $this->createMock(PageRenderer::class);
+        $this->renderer = $this->createMock(PageRendererInterface::class);
         $this->exception = $this->createStub(\Throwable::class);
         $this->flattenException = $this->createMock(FlattenException::class);
         $this->twigLoader = $this->createMock(LoaderInterface::class);

@@ -17,25 +17,15 @@ use Runroom\RenderEventBundle\ViewModel\PageViewModelInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * @final
- */
-class PageRenderEvent extends Event
+final class PageRenderEvent extends Event
 {
-    public const EVENT_NAME = 'runroom.event.page.render';
-
-    private string $view;
-    private PageViewModelInterface $pageViewModel;
-    private ?Response $response = null;
+    final public const EVENT_NAME = 'runroom.event.page.render';
 
     public function __construct(
-        string $view,
-        PageViewModelInterface $pageViewModel,
-        ?Response $response = null
+        private string $view,
+        private PageViewModelInterface $pageViewModel,
+        private ?Response $response = null
     ) {
-        $this->view = $view;
-        $this->pageViewModel = $pageViewModel;
-        $this->response = $response;
     }
 
     public function setView(string $view): self

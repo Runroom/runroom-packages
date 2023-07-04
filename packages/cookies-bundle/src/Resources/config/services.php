@@ -11,34 +11,33 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Psr\Container\ContainerInterface;
 use Runroom\CookiesBundle\Controller\CookiesPageController;
 use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Runroom\CookiesBundle\Twig\CookiesExtension;
 use Runroom\CookiesBundle\Twig\CookiesRuntime;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     // Use "abstract_arg" function for creating references to arguments without value when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.cookies.controller.cookies_page', CookiesPageController::class)
         ->public()
-        ->arg('$service', new ReferenceConfigurator('runroom.cookies.service.cookies_page'))
-        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
+        ->arg('$service', service('runroom.cookies.service.cookies_page'))
+        ->call('setContainer', [service(ContainerInterface::class)])
         ->tag('container.service_subscriber')
         ->tag('controller.service_arguments');
 
     $services->set('runroom.cookies.service.cookies_page', CookiesPageService::class)
-        ->arg('$repository', new ReferenceConfigurator(CookiesPageRepository::class))
-        ->arg('$formFactory', new ReferenceConfigurator('form.factory'))
+        ->arg('$repository', service(CookiesPageRepository::class))
+        ->arg('$formFactory', service('form.factory'))
         ->arg('$cookies', null);
 
     $services->set(CookiesPageRepository::class)
-        ->arg('$registry', new ReferenceConfigurator('doctrine'))
+        ->arg('$registry', service('doctrine'))
         ->tag('doctrine.repository_service');
 
     $services->set('runroom.cookies.twig.cookies', CookiesExtension::class)

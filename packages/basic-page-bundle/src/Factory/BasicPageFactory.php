@@ -34,7 +34,7 @@ final class BasicPageFactory extends ModelFactory
     {
         return $this->addState([
             'translations' => BasicPageTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
-                return array_merge($defaultAttributes, ['locale' => array_pop($locales)]);
+                return [...$defaultAttributes, 'locale' => array_pop($locales)];
             })->many(\count($locales)),
         ]);
     }
