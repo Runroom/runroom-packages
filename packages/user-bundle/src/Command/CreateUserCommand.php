@@ -24,26 +24,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'runroom:user:create', description: 'Create a user.')]
 final class CreateUserCommand extends Command
 {
-    // @todo: Remove static properties when support for Symfony < 5.4 is dropped.
-    protected static $defaultName = 'runroom:user:create';
-    protected static $defaultDescription = 'Create a user.';
-
-    private UserManipulator $userManipulator;
-
-    public function __construct(UserManipulator $userManipulator)
+    public function __construct(private readonly UserManipulator $userManipulator)
     {
         parent::__construct();
-
-        $this->userManipulator = $userManipulator;
     }
 
     protected function configure(): void
     {
-        \assert(null !== static::$defaultDescription);
-
         $this
-            // @todo: Remove setDescription when support for Symfony < 5.4 is dropped.
-            ->setDescription(static::$defaultDescription)
             ->addArgument('identifier', InputArgument::REQUIRED, 'The identifier')
             ->addArgument('password', InputArgument::REQUIRED, 'The password')
             ->addOption('inactive', null, InputOption::VALUE_NONE, 'Set the user as inactive')

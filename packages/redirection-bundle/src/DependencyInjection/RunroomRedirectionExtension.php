@@ -38,10 +38,9 @@ final class RunroomRedirectionExtension extends Extension
         }
 
         if ($config['enable_automatic_redirections']) {
-            $definition = $container->getDefinition('runroom.redirection.event_subscriber.automatic_redirect');
+            $definition = $container->getDefinition('runroom.redirection.event_listener.automatic_redirect');
 
             $definition->replaceArgument('$configuration', $config['automatic_redirections']);
-            $definition->addTag('doctrine.event_subscriber');
         }
     }
 }

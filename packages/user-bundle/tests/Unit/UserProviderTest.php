@@ -20,12 +20,11 @@ use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Runroom\UserBundle\Security\UserProvider;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Zenstruck\Foundry\Test\Factories;
 
-class UserProviderTest extends TestCase
+final class UserProviderTest extends TestCase
 {
     use Factories;
 
@@ -50,38 +49,22 @@ class UserProviderTest extends TestCase
         $this->userProvider = new UserProvider($this->repository);
     }
 
-    /**
-     * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
-     *
-     * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
-     */
     public function testItDoesntLoadsNullUserByIdentifier(): void
     {
         $this->repository->method('loadUserByIdentifier')->willReturn(null);
 
-        /**
-         * @todo: Simplify when dropping support for Symfony 4
-         */
-        $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
+        $this->expectException(UserNotFoundException::class);
         $this->expectExceptionMessage('User "user@localhost" not found.');
 
         $this->userProvider->loadUserByIdentifier('user@localhost');
     }
 
-    /**
-     * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
-     *
-     * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
-     */
     public function testItDoesntLoadsDisabledUserByIdentifier(): void
     {
         $this->expectedUser->setEnabled(false);
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn($this->expectedUser);
 
-        /**
-         * @todo: Simplify when dropping support for Symfony 4
-         */
-        $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
+        $this->expectException(UserNotFoundException::class);
         $this->expectExceptionMessage('User "user@localhost" not found.');
 
         $this->userProvider->loadUserByIdentifier('user@localhost');
@@ -118,19 +101,11 @@ class UserProviderTest extends TestCase
         static::assertSame($user, $refreshedUser);
     }
 
-    /**
-     * @todo: Simplify exception expectation when dropping support for Symfony 4.4.
-     *
-     * @psalm-suppress UndefinedClass, PossiblyInvalidArgument
-     */
     public function testItDoesntRefreshesNullUser(): void
     {
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->willReturn(null);
 
-        /**
-         * @todo: Simplify when dropping support for Symfony 4
-         */
-        $this->expectException(class_exists(UserNotFoundException::class) ? UserNotFoundException::class : UsernameNotFoundException::class);
+        $this->expectException(UserNotFoundException::class);
         $this->expectExceptionMessage('User with identifier "user@localhost" not found.');
 
         $this->userProvider->refreshUser($this->expectedUser);
@@ -141,7 +116,7 @@ class UserProviderTest extends TestCase
         $user = $this->createStub(SymfonyUserInterface::class);
 
         $this->expectException(UnsupportedUserException::class);
-        $this->expectExceptionMessage(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        $this->expectExceptionMessage(sprintf('Instances of "%s" are not supported.', $user::class));
 
         $this->userProvider->refreshUser($user);
     }
@@ -160,7 +135,7 @@ class UserProviderTest extends TestCase
         $user = $this->createStub(SymfonyUserInterface::class);
 
         $this->expectException(UnsupportedUserException::class);
-        $this->expectExceptionMessage(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        $this->expectExceptionMessage(sprintf('Instances of "%s" are not supported.', $user::class));
 
         $this->userProvider->upgradePassword($user, 'new_password');
     }

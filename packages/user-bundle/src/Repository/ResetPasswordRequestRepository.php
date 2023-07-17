@@ -23,20 +23,13 @@ use SymfonyCasts\Bundle\ResetPassword\Persistence\ResetPasswordRequestRepository
 
 final class ResetPasswordRequestRepository implements ResetPasswordRequestRepositoryInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    /**
-     * @phpstan-var class-string<ResetPasswordRequest>
-     */
-    private string $class;
-
     /**
      * @phpstan-param class-string<ResetPasswordRequest> $class
      */
-    public function __construct(EntityManagerInterface $entityManager, string $class)
-    {
-        $this->entityManager = $entityManager;
-        $this->class = $class;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly string $class
+    ) {
     }
 
     public function createResetPasswordRequest(object $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken): ResetPasswordRequestInterface

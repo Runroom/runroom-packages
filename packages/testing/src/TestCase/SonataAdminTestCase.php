@@ -29,19 +29,10 @@ abstract class SonataAdminTestCase extends KernelTestCase
 
     protected function setUp(): void
     {
-        self::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
         /**
          * @var AdminInterface<T>
          */
-        $admin = $container->get($this->getAdminClass());
+        $admin = static::getContainer()->get($this->getAdminClass());
 
         $this->admin = $admin;
         $this->admin->setSubject($this->admin->getNewInstance());
@@ -78,10 +69,7 @@ abstract class SonataAdminTestCase extends KernelTestCase
         static::assertTrue($this->admin->hasFilterFieldDescription($field), 'It does not contain filter field: ' . $field);
     }
 
-    /**
-     * @param mixed $value
-     */
-    final protected function assertAdminFilterParametersContainsFilter(string $filter, $value = null): void
+    final protected function assertAdminFilterParametersContainsFilter(string $filter, mixed $value = null): void
     {
         $filterParameters = $this->admin->getFilterParameters();
 

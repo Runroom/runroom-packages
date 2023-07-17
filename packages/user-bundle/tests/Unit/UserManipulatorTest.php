@@ -19,24 +19,16 @@ use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Runroom\UserBundle\Util\UserManipulator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Zenstruck\Foundry\Test\Factories;
 
-class UserManipulatorTest extends TestCase
+final class UserManipulatorTest extends TestCase
 {
     use Factories;
 
     /**
-     * @var (MockObject&UserPasswordHasherInterface)|null
+     * @var MockObject&UserPasswordHasherInterface
      */
-    private ?MockObject $passwordHasher = null;
-
-    /**
-     * @psalm-suppress UndefinedDocblockClass
-     *
-     * @var (MockObject&UserPasswordEncoderInterface)|null
-     */
-    private ?MockObject $passwordEncoder = null;
+    private MockObject $passwordHasher;
 
     /**
      * @var MockObject&UserRepositoryInterface
@@ -50,29 +42,19 @@ class UserManipulatorTest extends TestCase
     protected function setUp(): void
     {
         /**
-         * @todo: Simplify this when dropping support for Symfony 4
+         * @todo: Simplify this when dropping support for Symfony 5
+         *
+         * @phpstan-ignore-next-line
          */
-        if (interface_exists(UserPasswordHasherInterface::class) && !method_exists(UserPasswordHasherInterface::class, 'hashPassword')) {
-            $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)
-                ->addMethods(['hashPassword'])->getMock();
-        } elseif (interface_exists(UserPasswordHasherInterface::class)) {
-            $this->passwordHasher = $this->getMockBuilder(UserPasswordHasherInterface::class)->getMock();
-        } else {
-            /**
-             * @psalm-suppress PropertyTypeCoercion
-             */
-            $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
-        }
-        $passwordHasher = $this->passwordHasher;
-        $passwordEncoder = $this->passwordEncoder;
-        \assert(null !== $passwordHasher || null !== $passwordEncoder);
-
+        $this->passwordHasher = !method_exists(UserPasswordHasherInterface::class, 'hashPassword') ?
+            $this->getMockBuilder(UserPasswordHasherInterface::class)->addMethods(['hashPassword'])->getMock() :
+            $this->createMock(UserPasswordHasherInterface::class);
         $this->repository = $this->createMock(UserRepositoryInterface::class);
         $this->identifier = 'user@localhost';
 
         $this->userManipulator = new UserManipulator(
             $this->repository,
-            $passwordHasher ?? $passwordEncoder
+            $this->passwordHasher
         );
     }
 
@@ -83,23 +65,10 @@ class UserManipulatorTest extends TestCase
         $this->repository->expects(static::once())->method('create')->willReturn($user);
         $this->repository->expects(static::once())->method('save')->with($user);
 
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if (null !== $this->passwordHasher) {
-            $this->passwordHasher->expects(static::once())
-                ->method('hashPassword')
-                ->with($user, 'new_password')
-                ->willReturn('hashed_password');
-        } elseif (null !== $this->passwordEncoder) {
-            /**
-             * @psalm-suppress UndefinedDocblockClass
-             */
-            $this->passwordEncoder->expects(static::once())
-                ->method('encodePassword')
-                ->with($user, 'new_password')
-                ->willReturn('hashed_password');
-        }
+        $this->passwordHasher->expects(static::once())
+            ->method('hashPassword')
+            ->with($user, 'new_password')
+            ->willReturn('hashed_password');
 
         $this->userManipulator->create('user@localhost', 'new_password', true);
 
@@ -156,23 +125,10 @@ class UserManipulatorTest extends TestCase
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
 
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if (null !== $this->passwordHasher) {
-            $this->passwordHasher->expects(static::once())
-                ->method('hashPassword')
-                ->with($user, 'new_password')
-                ->willReturn('hashed_password');
-        } elseif (null !== $this->passwordEncoder) {
-            /**
-             * @psalm-suppress UndefinedDocblockClass
-             */
-            $this->passwordEncoder->expects(static::once())
-                ->method('encodePassword')
-                ->with($user, 'new_password')
-                ->willReturn('hashed_password');
-        }
+        $this->passwordHasher->expects(static::once())
+            ->method('hashPassword')
+            ->with($user, 'new_password')
+            ->willReturn('hashed_password');
 
         $this->userManipulator->changePassword('user@localhost', 'new_password');
 

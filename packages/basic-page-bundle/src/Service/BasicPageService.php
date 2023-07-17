@@ -13,19 +13,13 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Service;
 
-use Runroom\BasicPageBundle\Repository\BasicPageRepository;
+use Runroom\BasicPageBundle\Repository\BasicPageRepositoryInterface;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 
-/**
- * @final
- */
-class BasicPageService
+final class BasicPageService implements BasicPageServiceInterface
 {
-    private BasicPageRepository $repository;
-
-    public function __construct(BasicPageRepository $repository)
+    public function __construct(private readonly BasicPageRepositoryInterface $repository)
     {
-        $this->repository = $repository;
     }
 
     public function getBasicPageViewModel(string $slug): BasicPageViewModel

@@ -16,7 +16,7 @@ namespace Runroom\Testing\Tests\Integration;
 use Runroom\Testing\TestCase\DoctrineTestCase;
 use Runroom\Testing\Tests\App\Entity\Test;
 
-class DoctrineTestCaseTest extends DoctrineTestCase
+final class DoctrineTestCaseTest extends DoctrineTestCase
 {
     public function testItDoesInitializeTheDatabase(): void
     {

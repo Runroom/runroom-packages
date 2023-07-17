@@ -11,18 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Psr\Container\ContainerInterface;
 use Runroom\UserBundle\Controller\SecurityController;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.user.controller.security', SecurityController::class)
         ->public()
-        ->arg('$authenticationUtils', new ReferenceConfigurator('security.authentication_utils'))
+        ->arg('$authenticationUtils', service('security.authentication_utils'))
         ->tag('container.service_subscriber')
-        ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
+        ->call('setContainer', [service(ContainerInterface::class)]);
 };

@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class TranslationRepositoryTest extends KernelTestCase
+final class TranslationRepositoryTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -28,16 +28,7 @@ class TranslationRepositoryTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $this->repository = $container->get(TranslationRepository::class);
+        $this->repository = static::getContainer()->get(TranslationRepository::class);
     }
 
     public function testItFindsTranslationsByKey(): void

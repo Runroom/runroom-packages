@@ -17,7 +17,6 @@ use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,12 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 final class EntityMetaInformationAdmin extends AbstractAdmin
 {
-    /**
-     * @todo: Simplify this when dropping support for Sonata 3
-     *
-     * @param RouteCollection|RouteCollectionInterface $collection
-     */
-    protected function configureRoutes(object $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
         $collection->remove('edit');

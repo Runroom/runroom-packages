@@ -21,7 +21,7 @@ use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilder;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class MatrixRolesBuilderTest extends TestCase
+final class MatrixRolesBuilderTest extends TestCase
 {
     /**
      * @var Stub&TokenStorageInterface

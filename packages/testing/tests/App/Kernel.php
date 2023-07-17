@@ -18,7 +18,6 @@ use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
-use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -28,9 +27,8 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
@@ -72,7 +70,6 @@ class Kernel extends BaseKernel
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'annotations' => ['enabled' => true],
             'property_access' => null,
             'translator' => null,
             'form' => null,
@@ -83,21 +80,12 @@ class Kernel extends BaseKernel
             'firewalls' => ['main' => []],
         ];
 
-        if (class_exists(AuthenticatorManager::class)) {
+        // @todo: Remove if when dropping support of Symfony 5.4
+        if (!class_exists(IsGranted::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
-        } else {
-            $securityConfig['firewalls']['main']['anonymous'] = true;
         }
 
         $container->loadFromExtension('security', $securityConfig);
-
-        if (class_exists(DeprecatedTextExtension::class)) {
-            $container->loadFromExtension('sonata_admin', [
-                'options' => [
-                    'legacy_twig_text_extension' => false,
-                ],
-            ]);
-        }
 
         $container->loadFromExtension('doctrine', [
             'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
@@ -105,7 +93,7 @@ class Kernel extends BaseKernel
                 'auto_mapping' => true,
                 'mappings' => [
                     'redirection' => [
-                        'type' => 'annotation',
+                        'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\Testing\Tests\App\Entity',
                         'is_bundle' => false,
@@ -115,12 +103,7 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @param RoutingConfigurator $routes
-     */
-    protected function configureRoutes($routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
     }
 

@@ -11,16 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Runroom\FormHandlerBundle\FormHandler;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.form_handler.form_handler', FormHandler::class)
-        ->arg('$formFactory', new ReferenceConfigurator('form.factory'))
-        ->arg('$eventDispatcher', new ReferenceConfigurator('event_dispatcher'))
-        ->arg('$requestStack', new ReferenceConfigurator('request_stack'));
+        ->arg('$formFactory', service('form.factory'))
+        ->arg('$eventDispatcher', service('event_dispatcher'))
+        ->arg('$requestStack', service('request_stack'));
 };

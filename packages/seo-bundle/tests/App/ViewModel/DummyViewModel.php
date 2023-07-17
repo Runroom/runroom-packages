@@ -15,7 +15,7 @@ namespace Runroom\SeoBundle\Tests\App\ViewModel;
 
 use Runroom\SeoBundle\Model\SeoModelInterface;
 
-class DummyViewModel implements SeoModelInterface
+final class DummyViewModel implements SeoModelInterface
 {
     public function getPlaceholder(): string
     {

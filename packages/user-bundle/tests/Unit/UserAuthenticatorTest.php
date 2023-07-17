@@ -24,13 +24,11 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Authorization\Voter\CacheableVoterInterface;
 use Symfony\Component\Security\Core\Security as DeprecatedSecurity;
-use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 
-class UserAuthenticatorTest extends TestCase
+final class UserAuthenticatorTest extends TestCase
 {
     /**
      * @var MockObject&UrlGeneratorInterface
@@ -43,13 +41,6 @@ class UserAuthenticatorTest extends TestCase
 
     protected function setUp(): void
     {
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         */
-        if (!class_exists(AbstractLoginFormAuthenticator::class)) {
-            static::markTestSkipped('Only works with SF 5.1 or higher');
-        }
-
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->session = new Session(new MockArraySessionStorage());
         $this->firewallName = 'fireWallName';
@@ -75,11 +66,10 @@ class UserAuthenticatorTest extends TestCase
         static::assertInstanceOf(PasswordCredentials::class, $passwordCredential);
         static::assertSame('username', $userBadge->getUserIdentifier());
         static::assertSame('password', $passwordCredential->getPassword());
-
         /**
          * @psalm-suppress DeprecatedClass
          *
-         * @todo: Remove this conditional when dropping support for Symfony <6.2
+         * @todo: Remove this conditional when dropping support for Symfony <5.4
          */
         static::assertSame('username', $request->getSession()->get(
             class_exists(Security::class) ?
@@ -97,17 +87,7 @@ class UserAuthenticatorTest extends TestCase
         $user->setEmail('username@localhost.com');
         $user->setPassword('password');
 
-        /**
-         * @todo: Simplfiy this when dropping support for Symfony < 5.4.
-         *
-         * @psalm-suppress InvalidArgument
-         */
-        $token = interface_exists(CacheableVoterInterface::class)
-            ? new UsernamePasswordToken($user, $this->firewallName) :
-            /**
-             * @phpstan-ignore-next-line
-             */
-            new UsernamePasswordToken($user->getEmail(), $user->getPassword(), $this->firewallName);
+        $token = new UsernamePasswordToken($user, $this->firewallName);
 
         $this->urlGenerator->method('generate')->willReturn('sonata_admin_dashboard');
 
@@ -127,17 +107,7 @@ class UserAuthenticatorTest extends TestCase
         $user->setEmail('username@localhost.com');
         $user->setPassword('password');
 
-        /**
-         * @todo: Simplfiy this when dropping support for Symfony < 5.4.
-         *
-         * @psalm-suppress InvalidArgument
-         */
-        $token = interface_exists(CacheableVoterInterface::class)
-            ? new UsernamePasswordToken($user, $this->firewallName) :
-            /**
-             * @phpstan-ignore-next-line
-             */
-            new UsernamePasswordToken($user->getEmail(), $user->getPassword(), $this->firewallName);
+        $token = new UsernamePasswordToken($user, $this->firewallName);
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
 

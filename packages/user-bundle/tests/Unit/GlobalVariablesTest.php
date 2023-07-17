@@ -19,7 +19,7 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Symfony\Component\DependencyInjection\Container;
 
-class GlobalVariablesTest extends TestCase
+final class GlobalVariablesTest extends TestCase
 {
     public function testItGetsAdminByClass(): void
     {

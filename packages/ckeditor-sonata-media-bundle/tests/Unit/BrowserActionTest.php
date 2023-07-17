@@ -29,24 +29,18 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
-class BrowserActionTest extends TestCase
+final class BrowserActionTest extends TestCase
 {
     private Container $container;
 
     /**
      * @var MockObject&AdminInterface<object>
      */
-    private $admin;
+    private MockObject&AdminInterface $admin;
 
     private Request $request;
-
     private MediaPool $mediaPool;
-
-    /**
-     * @var MockObject&Environment
-     */
-    private $twig;
-
+    private MockObject&Environment $twig;
     private BrowserAction $action;
 
     protected function setUp(): void
@@ -135,18 +129,10 @@ class BrowserActionTest extends TestCase
         static::assertSame('renderResponse', $response->getContent());
     }
 
-    /**
-     * @todo: Simplify when dropping support for sonata-project/admin-bundle 3
-     */
     private function configureAdmin(): void
     {
         $this->admin->expects(static::once())->method('isChild')->willReturn(false);
         $this->admin->expects(static::once())->method('setRequest')->with($this->request);
-
-        // @phpstan-ignore-next-line
-        if (!method_exists(AdminInterface::class, 'getTemplateRegistry')) {
-            $this->admin->expects(static::once())->method('getTemplate')->willReturn('template.html.twig');
-        }
     }
 
     private function configureRequest(): void
@@ -170,10 +156,10 @@ class BrowserActionTest extends TestCase
      */
     private function configureRender(string $template, string $rendered): void
     {
-        $this->admin->method('getPersistentParameters')->willReturn([
-            'param' => 'param',
-            'context' => 'another_context',
-        ]);
+        // $this->admin->method('getPersistentParameters')->willReturn([
+        //     'param' => 'param',
+        //     'context' => 'another_context',
+        // ]);
         $this->twig->expects(static::once())->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 

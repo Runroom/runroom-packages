@@ -11,35 +11,37 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Runroom\UserBundle\Security\RolesBuilder\AdminRolesBuilder;
 use Runroom\UserBundle\Security\RolesBuilder\MatrixRolesBuilder;
 use Runroom\UserBundle\Security\RolesBuilder\SecurityRolesBuilder;
+use Runroom\UserBundle\Security\UserAuthenticator;
 use Runroom\UserBundle\Security\UserProvider;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
-    // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
     $services = $containerConfigurator->services();
 
     $services->set('runroom.user.provider.user', UserProvider::class)
-        ->arg('$userRepository', new ReferenceConfigurator('runroom.user.repository.user'));
+        ->arg('$userRepository', service('runroom.user.repository.user'));
 
     $services->set('runroom.user.security.roles_builder.admin', AdminRolesBuilder::class)
-        ->arg('$authorizationChecker', new ReferenceConfigurator('security.authorization_checker'))
-        ->arg('$pool', new ReferenceConfigurator('sonata.admin.pool'))
-        ->arg('$configuration', new ReferenceConfigurator('sonata.admin.configuration'))
-        ->arg('$translator', new ReferenceConfigurator('translator'));
+        ->arg('$authorizationChecker', service('security.authorization_checker'))
+        ->arg('$pool', service('sonata.admin.pool'))
+        ->arg('$configuration', service('sonata.admin.configuration'))
+        ->arg('$translator', service('translator'));
 
     $services->set('runroom.user.security.roles_builder.matrix', MatrixRolesBuilder::class)
-        ->arg('$tokenStorage', new ReferenceConfigurator('security.token_storage'))
-        ->arg('$adminRolesBuilder', new ReferenceConfigurator('runroom.user.security.roles_builder.admin'))
-        ->arg('$securityRolesBuilder', new ReferenceConfigurator('runroom.user.security.roles_builder.security'));
+        ->arg('$tokenStorage', service('security.token_storage'))
+        ->arg('$adminRolesBuilder', service('runroom.user.security.roles_builder.admin'))
+        ->arg('$securityRolesBuilder', service('runroom.user.security.roles_builder.security'));
 
     $services->set('runroom.user.security.roles_builder.security', SecurityRolesBuilder::class)
-        ->arg('$authorizationChecker', new ReferenceConfigurator('security.authorization_checker'))
-        ->arg('$configuration', new ReferenceConfigurator('sonata.admin.configuration'))
-        ->arg('$translator', new ReferenceConfigurator('translator'))
-        ->arg('$rolesHierarchy', '%security.role_hierarchy.roles%');
+        ->arg('$authorizationChecker', service('security.authorization_checker'))
+        ->arg('$configuration', service('sonata.admin.configuration'))
+        ->arg('$translator', service('translator'))
+        ->arg('$rolesHierarchy', param('security.role_hierarchy.roles'));
+
+    $services->set('runroom.user.security.user_authenticator', UserAuthenticator::class)
+        ->arg('$urlGenerator', service('router'));
 };

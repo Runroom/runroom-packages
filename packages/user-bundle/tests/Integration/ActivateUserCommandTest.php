@@ -22,7 +22,7 @@ use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ActivateUserCommandTest extends KernelTestCase
+final class ActivateUserCommandTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -31,8 +31,6 @@ class ActivateUserCommandTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        static::bootKernel();
-
         $this->commandTester = new CommandTester(
             (new Application(static::createKernel()))->find('runroom:user:activate')
         );

@@ -7,31 +7,11 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/basic-page-bundle/tests/Integration/BasicPageRepositoryTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
   <file src="packages/cookies-bundle/src/Entity/CookiesPage.php">
     <UndefinedInterfaceMethod occurrences="2">
       <code>getContent</code>
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/cookies-bundle/tests/Integration/CookiesPageRepositoryTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/redirection-bundle/tests/Integration/AutomaticRedirectSubscriberTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/redirection-bundle/tests/Integration/RedirectRepositoryTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
   </file>
   <file src="packages/seo-bundle/src/Entity/EntityMetaInformation.php">
     <UndefinedInterfaceMethod occurrences="2">
@@ -45,21 +25,6 @@
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="packages/seo-bundle/tests/Integration/MetaInformationRepositoryTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/testing/src/TestCase/DoctrineTestCase.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/testing/src/TestCase/SonataAdminTestCase.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
   <file src="packages/translation-bundle/src/Entity/Translation.php">
     <UndefinedInterfaceMethod occurrences="1">
       <code>getValue</code>
@@ -69,53 +34,5 @@
     <UndefinedInterfaceMethod occurrences="1">
       <code>getValue</code>
     </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/translation-bundle/tests/Integration/TranslationRepositoryTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/user-bundle/src/Controller/ResetPasswordController.php">
-    <UndefinedInterfaceMethod occurrences="1">
-      <code>encodePassword</code>
-    </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/user-bundle/src/Util/UserManipulator.php">
-    <UndefinedInterfaceMethod occurrences="2">
-      <code>encodePassword</code>
-      <code>encodePassword</code>
-    </UndefinedInterfaceMethod>
-  </file>
-  <file src="packages/user-bundle/tests/Functional/ResetPasswordRequestControllerTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/user-bundle/tests/Integration/CreateUserCommandTest.php">
-    <UndefinedClass occurrences="2">
-      <code>$passwordHasher</code>
-      <code>UserPasswordEncoderInterface</code>
-    </UndefinedClass>
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/user-bundle/tests/Integration/ResetPasswordRequestRepositoryTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/user-bundle/tests/Integration/UserRepositoryTest.php">
-    <UndefinedPropertyFetch occurrences="1">
-      <code>static::$container</code>
-    </UndefinedPropertyFetch>
-  </file>
-  <file src="packages/user-bundle/tests/Unit/UserManipulatorTest.php">
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$passwordHasher ?? $passwordEncoder</code>
-    </PossiblyInvalidArgument>
-    <UndefinedClass occurrences="1">
-      <code>UserPasswordEncoderInterface</code>
-    </UndefinedClass>
   </file>
 </files>

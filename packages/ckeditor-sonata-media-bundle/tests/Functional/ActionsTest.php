@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ActionsTest extends WebTestCase
+final class ActionsTest extends WebTestCase
 {
     use ResetDatabase;
 

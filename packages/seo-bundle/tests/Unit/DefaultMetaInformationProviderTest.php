@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Runroom\SeoBundle\MetaInformation\DefaultMetaInformationProvider;
 use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 
-class DefaultMetaInformationProviderTest extends TestCase
+final class DefaultMetaInformationProviderTest extends TestCase
 {
     private DefaultMetaInformationProvider $provider;
 

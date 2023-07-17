@@ -15,23 +15,11 @@ namespace Runroom\RenderEventBundle\ViewModel;
 
 interface PageViewModelInterface
 {
-    /**
-     * @param mixed $content
-     */
-    public function setContent($content): void;
+    public function setContent(mixed $content): void;
 
-    /**
-     * @return mixed
-     */
-    public function getContent();
+    public function getContent(): mixed;
 
-    /**
-     * @param mixed $value
-     */
-    public function addContext(string $key, $value): void;
+    public function addContext(string $key, mixed $value): void;
 
-    /**
-     * @return mixed
-     */
-    public function getContext(string $key);
+    public function getContext(string $key): mixed;
 }

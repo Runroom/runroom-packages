@@ -11,30 +11,29 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Runroom\UserBundle\Command\ActivateUserCommand;
 use Runroom\UserBundle\Command\ChangePasswordCommand;
 use Runroom\UserBundle\Command\CreateUserCommand;
 use Runroom\UserBundle\Command\DeactivateUserCommand;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.user.command.activate_user', ActivateUserCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
+        ->arg('$userManipulator', service('runroom.user.util.user_manipulator'));
 
     $services->set('runroom.user.command.change_password', ChangePasswordCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
+        ->arg('$userManipulator', service('runroom.user.util.user_manipulator'));
 
     $services->set('runroom.user.command.create_user', CreateUserCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
+        ->arg('$userManipulator', service('runroom.user.util.user_manipulator'));
 
     $services->set('runroom.user.command.deactivate_user', DeactivateUserCommand::class)
         ->tag('console.command')
-        ->arg('$userManipulator', new ReferenceConfigurator('runroom.user.util.user_manipulator'));
+        ->arg('$userManipulator', service('runroom.user.util.user_manipulator'));
 };

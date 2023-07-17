@@ -16,21 +16,17 @@ namespace Runroom\RenderEventBundle\Tests\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\RenderEventBundle\Controller\TemplateController;
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
+use Runroom\RenderEventBundle\Renderer\PageRendererInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class TemplateControllerTest extends TestCase
+final class TemplateControllerTest extends TestCase
 {
-    /**
-     * @var MockObject&PageRenderer
-     */
-    private $renderer;
-
+    private MockObject&PageRendererInterface $renderer;
     private TemplateController $controller;
 
     protected function setUp(): void
     {
-        $this->renderer = $this->createMock(PageRenderer::class);
+        $this->renderer = $this->createMock(PageRendererInterface::class);
 
         $this->controller = new TemplateController($this->renderer);
     }

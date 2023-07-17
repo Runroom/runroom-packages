@@ -13,34 +13,21 @@ declare(strict_types=1);
 
 namespace Runroom\TranslationBundle\Service;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Runroom\TranslationBundle\Entity\Translation;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @final
- */
-class TranslationService
+final class TranslationService implements TranslationServiceInterface
 {
     /**
-     * @var EntityRepository<Translation>
+     * @param ObjectRepository<Translation> $repository
      */
-    private EntityRepository $repository;
-
-    private TranslatorInterface $translator;
-
-    /**
-     * @param EntityRepository<Translation> $repository
-     */
-    public function __construct(EntityRepository $repository, TranslatorInterface $translator)
-    {
-        $this->repository = $repository;
-        $this->translator = $translator;
+    public function __construct(
+        private readonly ObjectRepository $repository,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
-    /**
-     * @param array<string, string> $parameters
-     */
     public function translate(string $key, array $parameters = [], ?string $locale = null): string
     {
         $translation = $this->repository->findOneBy(['key' => $key]);

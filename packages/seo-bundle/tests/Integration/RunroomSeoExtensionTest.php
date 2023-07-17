@@ -28,7 +28,7 @@ use Runroom\SeoBundle\Tests\App\Entity\Media;
 use Runroom\SeoBundle\Twig\SeoExtension;
 use Runroom\SeoBundle\Twig\SeoRuntime;
 
-class RunroomSeoExtensionTest extends AbstractExtensionTestCase
+final class RunroomSeoExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {

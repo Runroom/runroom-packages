@@ -13,18 +13,17 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\App;
 
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\RunroomUserBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
-use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\Form\Bridge\Symfony\SonataFormBundle;
 use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -33,17 +32,17 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
     public function registerBundles(): iterable
     {
         return [
+            new DAMADoctrineTestBundle(),
             new DoctrineBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
@@ -77,33 +76,23 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    /**
-     * @todo: Simplify security configuration when dropping support for Symfony 4
-     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-        $frameworkConfig = [
+        $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
             'http_method_override' => false,
             'assets' => ['enabled' => true],
             'mailer' => [
                 'enabled' => true,
                 'dsn' => 'null://null',
             ],
-        ];
-
-        // @phpstan-ignore-next-line
-        if (method_exists(AbstractController::class, 'renderForm')) {
-            $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
-        } else {
-            $frameworkConfig['session'] = ['storage_id' => 'session.storage.mock_file'];
-        }
-
-        $container->loadFromExtension('framework', $frameworkConfig);
+        ]);
 
         $securityConfig = [
+            'password_hashers' => [User::class => ['algorithm' => 'plaintext']],
             'access_decision_manager' => ['strategy' => 'unanimous'],
             'access_control' => [
                 ['path' => '^/dashboard$', 'role' => 'ROLE_USER'],
@@ -114,9 +103,11 @@ class Kernel extends BaseKernel
                 ],
             ],
             'firewalls' => ['main' => [
+                'lazy' => true,
                 'pattern' => '/(.*)',
                 'provider' => 'admin_user_provider',
                 'context' => 'user',
+                'custom_authenticator' => 'runroom.user.security.user_authenticator',
                 'logout' => [
                     'path' => 'runroom_user_logout',
                     'target' => 'runroom_user_login',
@@ -129,19 +120,9 @@ class Kernel extends BaseKernel
             ]],
         ];
 
-        if (class_exists(AuthenticatorManager::class)) {
+        // @todo: Remove if when dropping support of Symfony 5.4
+        if (!class_exists(IsGranted::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
-            $securityConfig['firewalls']['main']['custom_authenticator'] = 'runroom.user.security.user_authenticator';
-            $securityConfig['firewalls']['main']['lazy'] = true;
-            $securityConfig['password_hashers'] = [User::class => ['algorithm' => 'plaintext']];
-        } else {
-            $securityConfig['firewalls']['main']['anonymous'] = true;
-            $securityConfig['firewalls']['main']['form_login'] = [
-                'login_path' => 'runroom_user_login',
-                'check_path' => 'runroom_user_login',
-                'default_target_path' => 'sonata_admin_dashboard',
-            ];
-            $securityConfig['encoders'] = [User::class => 'plaintext'];
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -164,29 +145,16 @@ class Kernel extends BaseKernel
             'request_password_repository' => 'symfonycasts.reset_password.fake_request_repository',
         ]);
 
-        if (class_exists(DeprecatedTextExtension::class)) {
-            $container->loadFromExtension('sonata_admin', [
-                'options' => [
-                    'legacy_twig_text_extension' => false,
-                ],
-            ]);
-        } else {
-            $container->loadFromExtension('sonata_block', [
-                'http_cache' => false,
-            ]);
-        }
+        $container->loadFromExtension('sonata_block', [
+            'http_cache' => false,
+        ]);
 
         $container->loadFromExtension('runroom_user', [
             'reset_password' => ['enabled' => true],
         ]);
     }
 
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @param RoutingConfigurator $routes
-     */
-    protected function configureRoutes($routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $routes->import($this->getProjectDir() . '/routing.yaml');
     }

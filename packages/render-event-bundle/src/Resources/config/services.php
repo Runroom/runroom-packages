@@ -11,38 +11,33 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Runroom\RenderEventBundle\Controller\TemplateController;
 use Runroom\RenderEventBundle\ErrorRenderer\TwigErrorRenderer;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "inline_service" function for creating inline services when dropping support for Symfony 4
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.render_event.controller.template', TemplateController::class)
-        ->arg('$renderer', new ReferenceConfigurator('runroom.render_event.renderer.page'))
+        ->arg('$renderer', service('runroom.render_event.renderer.page'))
         ->tag('controller.service_arguments');
 
     $services->set('runroom.render_event.renderer.page', PageRenderer::class)
-        ->arg('$twig', new ReferenceConfigurator('twig'))
-        ->arg('$eventDispatcher', new ReferenceConfigurator('event_dispatcher'))
-        ->arg('$pageViewModel', new ReferenceConfigurator('runroom.render_event.page_view_model'));
+        ->arg('$twig', service('twig'))
+        ->arg('$eventDispatcher', service('event_dispatcher'))
+        ->arg('$pageViewModel', service('runroom.render_event.page_view_model'));
 
     $services->set('runroom.render_event.error_renderer.twig_error', TwigErrorRenderer::class)
         ->decorate('twig.error_renderer.html')
-        ->arg('$twig', new ReferenceConfigurator('twig'))
-        ->arg('$renderer', new ReferenceConfigurator('runroom.render_event.renderer.page'))
-        ->arg('$fallbackErrorRenderer', new ReferenceConfigurator('error_handler.error_renderer.html'))
+        ->arg('$twig', service('twig'))
+        ->arg('$renderer', service('runroom.render_event.renderer.page'))
+        ->arg('$fallbackErrorRenderer', service('error_handler.error_renderer.html'))
         ->arg(
             '$debug',
-            (new InlineServiceConfigurator(new Definition(TwigErrorRenderer::class)))
-                ->factory([TwigErrorRenderer::class, 'isDebug'])
-                ->args([new ReferenceConfigurator('request_stack'), '%kernel.debug%'])
+            inline_service(TwigErrorRenderer::class)->factory([TwigErrorRenderer::class, 'isDebug'])
+                ->args([service('request_stack'), param('kernel.debug')])
         );
 
     $services->set('runroom.render_event.page_view_model');

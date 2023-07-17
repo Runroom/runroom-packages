@@ -15,6 +15,7 @@ namespace Tests\App;
 
 use A2lix\AutoFormBundle\A2lixAutoFormBundle;
 use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
@@ -35,15 +36,12 @@ use Runroom\TranslationBundle\RunroomTranslationBundle;
 use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\RunroomUserBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
-use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Sonata\Form\Bridge\Symfony\SonataFormBundle;
-use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
 use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -52,7 +50,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Tests\App\Entity\Gallery;
 use Tests\App\Entity\GalleryItem;
@@ -68,6 +66,7 @@ final class Kernel extends BaseKernel
         return [
             new A2lixAutoFormBundle(),
             new A2lixTranslationFormBundle(),
+            new DAMADoctrineTestBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FidryAliceDataFixturesBundle(),
@@ -105,36 +104,23 @@ final class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    /**
-     * @todo: Simplify security configuration when dropping support for Symfony 4
-     *
-     * @todo: Simplify media configuration when dropping support for Sonata 3
-     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $loader->load($this->getProjectDir() . '/services.php');
 
         $container->setParameter('kernel.default_locale', 'en');
 
-        $frameworkConfig = [
+        $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
+            'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
             'secret' => 'secret',
             'http_method_override' => false,
             'mailer' => [
                 'enabled' => true,
                 'dsn' => 'null://null',
             ],
-        ];
-
-        // @phpstan-ignore-next-line
-        if (method_exists(AbstractController::class, 'renderForm')) {
-            $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
-        } else {
-            $frameworkConfig['session'] = ['storage_id' => 'session.storage.mock_file'];
-        }
-
-        $container->loadFromExtension('framework', $frameworkConfig);
+        ]);
 
         $securityConfig = [
             'access_decision_manager' => ['strategy' => 'unanimous'],
@@ -146,10 +132,13 @@ final class Kernel extends BaseKernel
                     'id' => 'runroom.user.provider.user',
                 ],
             ],
+            'password_hashers' => [User::class => ['algorithm' => 'plaintext']],
             'firewalls' => ['main' => [
+                'lazy' => true,
                 'pattern' => '/(.*)',
                 'provider' => 'admin_user_provider',
                 'context' => 'user',
+                'custom_authenticator' => 'runroom.user.security.user_authenticator',
                 'logout' => [
                     'path' => 'runroom_user_logout',
                     'target' => 'runroom_user_login',
@@ -162,19 +151,9 @@ final class Kernel extends BaseKernel
             ]],
         ];
 
-        if (class_exists(AuthenticatorManager::class)) {
+        // @todo: Remove if when dropping support of Symfony 5.4
+        if (!class_exists(IsGranted::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
-            $securityConfig['firewalls']['main']['custom_authenticator'] = 'runroom.user.security.user_authenticator';
-            $securityConfig['firewalls']['main']['lazy'] = true;
-            $securityConfig['password_hashers'] = [User::class => ['algorithm' => 'plaintext']];
-        } else {
-            $securityConfig['firewalls']['main']['anonymous'] = true;
-            $securityConfig['firewalls']['main']['form_login'] = [
-                'login_path' => 'runroom_user_login',
-                'check_path' => 'runroom_user_login',
-                'default_target_path' => 'sonata_admin_dashboard',
-            ];
-            $securityConfig['encoders'] = [User::class => 'plaintext'];
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -189,25 +168,25 @@ final class Kernel extends BaseKernel
                 'auto_mapping' => true,
                 'mappings' => [
                     'entity' => [
-                        'type' => 'annotation',
+                        'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Tests\App\Entity',
                         'is_bundle' => false,
                     ],
                     'redirection' => [
-                        'type' => 'annotation',
+                        'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/../../packages/redirection-bundle/tests/App/Entity',
                         'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',
                         'is_bundle' => false,
                     ],
                     'sortable_behavior' => [
-                        'type' => 'annotation',
+                        'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/../../packages/sortable-behavior-bundle/tests/App/Entity',
                         'prefix' => 'Runroom\SortableBehaviorBundle\Tests\App\Entity',
                         'is_bundle' => false,
                     ],
                     'testing' => [
-                        'type' => 'annotation',
+                        'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/../../packages/testing/tests/App/Entity',
                         'prefix' => 'Runroom\Testing\Tests\App\Entity',
                         'is_bundle' => false,
@@ -229,19 +208,9 @@ final class Kernel extends BaseKernel
             'request_password_repository' => 'symfonycasts.reset_password.fake_request_repository',
         ]);
 
-        if (class_exists(DeprecatedTextExtension::class)) {
-            $container->loadFromExtension('sonata_admin', [
-                'options' => [
-                    'legacy_twig_text_extension' => false,
-                ],
-            ]);
-        } else {
-            $container->loadFromExtension('sonata_block', [
-                'http_cache' => false,
-            ]);
-        }
-
-        $galleryItemKey = interface_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
+        $container->loadFromExtension('sonata_block', [
+            'http_cache' => false,
+        ]);
 
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
@@ -250,7 +219,7 @@ final class Kernel extends BaseKernel
             'db_driver' => 'doctrine_orm',
             'class' => [
                 'media' => Media::class,
-                $galleryItemKey => GalleryItem::class,
+                'gallery_item' => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
             'filesystem' => ['local' => [
@@ -301,26 +270,11 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @psalm-suppress TooManyArguments
-     *
-     * @param RoutingConfigurator $routes
-     */
-    protected function configureRoutes($routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        if ($routes instanceof RoutingConfigurator) {
-            $routes->import($this->getProjectDir() . '/routing.yaml');
-
-            $routes->add('route.entity', '/entity/{slug}')
-                ->controller('controller');
-
-            return;
-        }
-
         $routes->import($this->getProjectDir() . '/routing.yaml');
 
-        $routes->add('/entity/{slug}', 'controller', 'route.entity');
+        $routes->add('route.entity', '/entity/{slug}')
+            ->controller('controller');
     }
 }

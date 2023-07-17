@@ -20,7 +20,7 @@ use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Runroom\TranslationBundle\Service\TranslationService;
 use Runroom\TranslationBundle\Twig\TranslationExtension;
 
-class RunroomTranslationExtensionTest extends AbstractExtensionTestCase
+final class RunroomTranslationExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {

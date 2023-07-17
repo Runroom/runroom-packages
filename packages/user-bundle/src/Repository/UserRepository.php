@@ -19,20 +19,13 @@ use Runroom\UserBundle\Model\UserInterface;
 
 final class UserRepository implements UserRepositoryInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    /**
-     * @phpstan-var class-string<UserInterface>
-     */
-    private string $class;
-
     /**
      * @phpstan-param class-string<UserInterface> $class
      */
-    public function __construct(EntityManagerInterface $entityManager, string $class)
-    {
-        $this->entityManager = $entityManager;
-        $this->class = $class;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly string $class
+    ) {
     }
 
     public function loadUserByIdentifier(string $identifier): ?UserInterface

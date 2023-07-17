@@ -21,12 +21,9 @@ use Runroom\SeoBundle\Tests\App\ViewModel\DummyViewModel;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class AlternateLinksBuilderTest extends TestCase
+final class AlternateLinksBuilderTest extends TestCase
 {
-    /**
-     * @var MockObject&UrlGeneratorInterface
-     */
-    private $urlGenerator;
+    private MockObject&UrlGeneratorInterface $urlGenerator;
 
     /**
      * @var string[]

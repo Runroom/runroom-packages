@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
@@ -20,40 +21,26 @@ use Runroom\BasicPageBundle\Repository\BasicPageRepository;
 use Runroom\SeoBundle\Behaviors\MetaInformationAware;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=BasicPageRepository::class)
- * @ORM\Table(indexes={
- *     @ORM\Index(columns={"publish"}),
- * })
- */
-class BasicPage implements TranslatableInterface
+#[ORM\Entity(repositoryClass: BasicPageRepository::class)]
+#[ORM\Index(columns: ['publish'])]
+class BasicPage implements TranslatableInterface, \Stringable
 {
     use MetaInformationAware;
     use TranslatableTrait;
 
-    public const LOCATION_NONE = 'none';
-    public const LOCATION_FOOTER = 'footer';
+    final public const LOCATION_NONE = 'none';
+    final public const LOCATION_FOOTER = 'footer';
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @Assert\Choice(choices = {
-     *     BasicPage::LOCATION_NONE,
-     *     BasicPage::LOCATION_FOOTER,
-     * })
-     *
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\Choice(choices: [self::LOCATION_NONE, self::LOCATION_FOOTER])]
     private ?string $location = self::LOCATION_NONE;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: Types::BOOLEAN)]
     private ?bool $publish = null;
 
     public function __toString(): string

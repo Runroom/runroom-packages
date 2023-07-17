@@ -29,29 +29,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment;
 
-class UploadActionTest extends TestCase
+final class UploadActionTest extends TestCase
 {
     private Container $container;
 
     /**
      * @var MockObject&AdminInterface<object>
      */
-    private $admin;
+    private MockObject&AdminInterface $admin;
 
     private Request $request;
-
-    /**
-     * @var MockObject&MediaManagerInterface
-     */
-    private $mediaManager;
-
+    private MockObject&MediaManagerInterface $mediaManager;
     private MediaPool $mediaPool;
-
-    /**
-     * @var MockObject&Environment
-     */
-    private $twig;
-
+    private MockObject&Environment $twig;
     private UploadAction $action;
 
     protected function setUp(): void
@@ -126,10 +116,10 @@ class UploadActionTest extends TestCase
      */
     private function configureRender(string $template, string $rendered): void
     {
-        $this->admin->method('getPersistentParameters')->willReturn([
-            'param' => 'param',
-            'context' => 'another_context',
-        ]);
+        // $this->admin->method('getPersistentParameters')->willReturn([
+        //     'param' => 'param',
+        //     'context' => 'another_context',
+        // ]);
         $this->twig->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 

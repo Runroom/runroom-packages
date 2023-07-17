@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 /**
  * @extends SonataAdminTestCase<Redirect>
  */
-class RedirectAdminTest extends SonataAdminTestCase
+final class RedirectAdminTest extends SonataAdminTestCase
 {
     public function testItHasAllListFields(): void
     {

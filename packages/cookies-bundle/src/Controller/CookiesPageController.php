@@ -13,17 +13,14 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Controller;
 
-use Runroom\CookiesBundle\Service\CookiesPageService;
+use Runroom\CookiesBundle\Service\CookiesPageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CookiesPageController extends AbstractController
 {
-    private CookiesPageService $service;
-
-    public function __construct(CookiesPageService $service)
+    public function __construct(private readonly CookiesPageServiceInterface $service)
     {
-        $this->service = $service;
     }
 
     public function index(): Response

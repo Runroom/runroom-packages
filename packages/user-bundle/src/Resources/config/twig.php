@@ -11,20 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Runroom\UserBundle\Twig\RolesMatrixExtension;
 use Runroom\UserBundle\Twig\RolesMatrixRuntime;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.user.twig.extension.roles_matrix', RolesMatrixExtension::class)
         ->tag('twig.extension');
 
     $services->set('runroom.user.twig.runtime.roles_matrix', RolesMatrixRuntime::class)
-        ->arg('$twig', new ReferenceConfigurator('twig'))
-        ->arg('$rolesBuilder', new ReferenceConfigurator('runroom.user.security.roles_builder.matrix'))
+        ->arg('$twig', service('twig'))
+        ->arg('$rolesBuilder', service('runroom.user.security.roles_builder.matrix'))
         ->tag('twig.runtime');
 };

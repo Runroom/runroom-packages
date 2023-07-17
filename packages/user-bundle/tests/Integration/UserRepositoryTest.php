@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class UserRepositoryTest extends KernelTestCase
+final class UserRepositoryTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -29,16 +29,7 @@ class UserRepositoryTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $this->repository = $container->get('runroom.user.repository.user');
+        $this->repository = static::getContainer()->get('runroom.user.repository.user');
     }
 
     public function testItFindsUserGivenItsSlug(): void

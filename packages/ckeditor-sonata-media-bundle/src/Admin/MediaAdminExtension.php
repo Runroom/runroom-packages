@@ -15,7 +15,6 @@ namespace Runroom\CkeditorSonataMediaBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 
@@ -24,12 +23,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
  */
 final class MediaAdminExtension extends AbstractAdminExtension
 {
-    /**
-     * @todo: Simplify this when dropping support for Sonata 3
-     *
-     * @param RouteCollection|RouteCollectionInterface $collection
-     */
-    public function configureRoutes(AdminInterface $admin, object $collection): void
+    public function configureRoutes(AdminInterface $admin, RouteCollectionInterface $collection): void
     {
         $collection->add('browser', 'browser', [
             '_controller' => 'runroom.ckeditor_sonata_media.action.browser',

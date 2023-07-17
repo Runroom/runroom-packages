@@ -28,13 +28,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
-class FormHandlerTest extends TestCase
+final class FormHandlerTest extends TestCase
 {
-    /**
-     * @var MockObject&FormFactoryInterface
-     */
-    private $formFactory;
-
+    private MockObject&FormFactoryInterface $formFactory;
     private EventDispatcher $eventDispatcher;
     private RequestStack $requestStack;
     private Request $request;
@@ -72,7 +68,7 @@ class FormHandlerTest extends TestCase
     {
         $this->configureForm(false);
 
-        $this->eventDispatcher->addListener('form.form_types.event.success', static function (): void {
+        $this->eventDispatcher->addListener('form.form_types.event.success', static function (): never {
             self::fail("This shouldn't be called");
         });
 

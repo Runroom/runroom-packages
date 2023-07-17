@@ -1,6 +1,6 @@
-FROM alpine:3.17
+FROM alpine:3.18
 
-ARG PHP_VERSION=81
+ARG PHP_VERSION=82
 ARG UID=1000
 ARG USER=app
 
@@ -25,6 +25,8 @@ RUN apk add --no-cache \
     php${PHP_VERSION}-pdo_sqlite \
     php${PHP_VERSION}-fileinfo \
     php${PHP_VERSION}-pecl-pcov --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
+
+RUN ln -snf /usr/bin/php${PHP_VERSION} /usr/bin/php
 
 RUN adduser -u $UID -D $USER
 

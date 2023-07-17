@@ -24,7 +24,7 @@ use Runroom\BasicPageBundle\Service\BasicPageService;
 use Runroom\BasicPageBundle\Twig\BasicPageExtension;
 use Runroom\BasicPageBundle\Twig\BasicPageRuntime;
 
-class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
+final class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {

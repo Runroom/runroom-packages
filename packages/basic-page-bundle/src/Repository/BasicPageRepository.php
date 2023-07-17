@@ -21,19 +21,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @final
- *
  * @extends ServiceEntityRepository<BasicPage>
  */
-class BasicPageRepository extends ServiceEntityRepository
+final class BasicPageRepository extends ServiceEntityRepository implements BasicPageRepositoryInterface
 {
-    private RequestStack $requestStack;
-
-    public function __construct(ManagerRegistry $registry, RequestStack $requestStack)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly RequestStack $requestStack
+    ) {
         parent::__construct($registry, BasicPage::class);
-
-        $this->requestStack = $requestStack;
     }
 
     public function findBySlug(string $slug): BasicPage
@@ -52,5 +48,16 @@ class BasicPageRepository extends ServiceEntityRepository
         \assert($basicPage instanceof BasicPage);
 
         return $basicPage;
+    }
+
+    public function findPublished(?string $location = null): array
+    {
+        $criteria = ['publish' => true];
+
+        if (null !== $location) {
+            $criteria['location'] = $location;
+        }
+
+        return $this->findBy($criteria);
     }
 }

@@ -19,20 +19,15 @@ use Doctrine\Persistence\ManagerRegistry;
 use Runroom\RedirectionBundle\Entity\Redirect;
 
 /**
- * @final
- *
  * @extends ServiceEntityRepository<Redirect>
  */
-class RedirectRepository extends ServiceEntityRepository
+final class RedirectRepository extends ServiceEntityRepository implements RedirectRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Redirect::class);
     }
 
-    /**
-     * @return array{ destination: string, httpCode: string }|null
-     */
     public function findRedirect(string $source): ?array
     {
         $query = $this->createQueryBuilder('redirect')

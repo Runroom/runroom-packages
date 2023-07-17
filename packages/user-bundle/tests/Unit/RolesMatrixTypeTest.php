@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class RolesMatrixTypeTest extends TypeTestCase
+final class RolesMatrixTypeTest extends TypeTestCase
 {
     /**
      * @var Stub&MatrixRolesBuilderInterface

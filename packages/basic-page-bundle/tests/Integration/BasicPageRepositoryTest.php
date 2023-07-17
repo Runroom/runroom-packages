@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class BasicPageRepositoryTest extends KernelTestCase
+final class BasicPageRepositoryTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -29,16 +29,7 @@ class BasicPageRepositoryTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $this->repository = $container->get(BasicPageRepository::class);
+        $this->repository = static::getContainer()->get(BasicPageRepository::class);
     }
 
     public function testItFindsBasicPageGivenItsSlug(): void

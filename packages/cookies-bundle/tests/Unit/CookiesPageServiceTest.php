@@ -13,36 +13,33 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Tests\Unit;
 
+use Doctrine\Persistence\ObjectRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\CookiesBundle\Factory\CookiesPageFactory;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
-use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\CookiesBundle\Service\CookiesPageService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Zenstruck\Foundry\Test\Factories;
 
-class CookiesPageServiceTest extends TestCase
+final class CookiesPageServiceTest extends TestCase
 {
     use Factories;
 
     /**
-     * @var MockObject&CookiesPageRepository
+     * @var MockObject&ObjectRepository<CookiesPage>
      */
-    private $repository;
+    private MockObject&ObjectRepository $repository;
 
-    /**
-     * @var MockObject&FormFactoryInterface
-     */
-    private $formFactory;
-
+    private MockObject&FormFactoryInterface $formFactory;
     private CookiesPageService $service;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(CookiesPageRepository::class);
+        $this->repository = $this->createMock(ObjectRepository::class);
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
 
         $this->service = new CookiesPageService(

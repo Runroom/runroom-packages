@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace Runroom\RenderEventBundle\Controller;
 
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
+use Runroom\RenderEventBundle\Renderer\PageRendererInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 final class TemplateController
 {
-    private PageRenderer $renderer;
-
-    public function __construct(PageRenderer $renderer)
+    public function __construct(private readonly PageRendererInterface $renderer)
     {
-        $this->renderer = $renderer;
     }
 
     /**

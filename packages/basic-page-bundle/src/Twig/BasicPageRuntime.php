@@ -14,16 +14,13 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Twig;
 
 use Runroom\BasicPageBundle\Entity\BasicPage;
-use Runroom\BasicPageBundle\Repository\BasicPageRepository;
+use Runroom\BasicPageBundle\Repository\BasicPageRepositoryInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
-class BasicPageRuntime implements RuntimeExtensionInterface
+final class BasicPageRuntime implements RuntimeExtensionInterface
 {
-    private BasicPageRepository $repository;
-
-    public function __construct(BasicPageRepository $repository)
+    public function __construct(private readonly BasicPageRepositoryInterface $repository)
     {
-        $this->repository = $repository;
     }
 
     /**
@@ -31,12 +28,6 @@ class BasicPageRuntime implements RuntimeExtensionInterface
      */
     public function getBasicPages(?string $location = null): array
     {
-        $criteria = ['publish' => true];
-
-        if (null !== $location) {
-            $criteria['location'] = $location;
-        }
-
-        return $this->repository->findBy($criteria);
+        return $this->repository->findPublished($location);
     }
 }

@@ -15,14 +15,14 @@ namespace Runroom\BasicPageBundle\Tests\Integration;
 
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Factory\BasicPageFactory;
-use Runroom\BasicPageBundle\Repository\BasicPageRepository;
+use Runroom\BasicPageBundle\Repository\BasicPageRepositoryInterface;
 use Runroom\BasicPageBundle\Twig\BasicPageExtension;
 use Runroom\BasicPageBundle\Twig\BasicPageRuntime;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\Test\IntegrationTestCase;
 use Zenstruck\Foundry\Test\Factories;
 
-class BasicPageExtensionTest extends IntegrationTestCase
+final class BasicPageExtensionTest extends IntegrationTestCase
 {
     use Factories;
 
@@ -45,8 +45,8 @@ class BasicPageExtensionTest extends IntegrationTestCase
             'location' => BasicPage::LOCATION_FOOTER,
         ]);
 
-        $basicPageRepository = $this->createStub(BasicPageRepository::class);
-        $basicPageRepository->method('findBy')->willReturn($basicPages);
+        $basicPageRepository = $this->createStub(BasicPageRepositoryInterface::class);
+        $basicPageRepository->method('findPublished')->willReturn($basicPages);
 
         $basicPageRuntime = new BasicPageRuntime($basicPageRepository);
 

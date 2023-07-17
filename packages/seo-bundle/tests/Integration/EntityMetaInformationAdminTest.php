@@ -19,7 +19,7 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 /**
  * @extends SonataAdminTestCase<EntityMetaInformation>
  */
-class EntityMetaInformationAdminTest extends SonataAdminTestCase
+final class EntityMetaInformationAdminTest extends SonataAdminTestCase
 {
     public function testItHasAllFormFields(): void
     {

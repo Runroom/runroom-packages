@@ -11,27 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Runroom\CookiesBundle\Admin\CookiesPageAdmin;
 use Runroom\CookiesBundle\Entity\CookiesPage;
-use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $cookiesPageAdmin = $services->set('runroom.cookies.admin.cookies_page', CookiesPageAdmin::class)
+    $services->set('runroom.cookies.admin.cookies_page', CookiesPageAdmin::class)
         ->public()
         ->tag('sonata.admin', [
             'model_class' => CookiesPage::class,
             'manager_type' => 'orm',
             'label' => 'Cookies',
         ]);
-
-    /**
-     * @todo: Simplify this when dropping support for SonataAdminBundle 3
-     */
-    if (!is_a(CRUDController::class, AbstractController::class, true)) {
-        $cookiesPageAdmin->args([null, CookiesPage::class, null]);
-    }
 };

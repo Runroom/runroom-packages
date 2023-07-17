@@ -14,43 +14,23 @@ declare(strict_types=1);
 namespace Runroom\RedirectionBundle\Tests\Integration;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Events;
-use Runroom\RedirectionBundle\EventSubscriber\AutomaticRedirectSubscriber;
 use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
 use Runroom\RedirectionBundle\Tests\App\Entity\WrongEntity;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class AutomaticRedirectSubscriberTest extends KernelTestCase
+final class AutomaticRedirectListenerTest extends KernelTestCase
 {
     use ResetDatabase;
 
     private RedirectRepository $repository;
-    private AutomaticRedirectSubscriber $subscriber;
     private EntityManagerInterface $entityManager;
 
     protected function setUp(): void
     {
-        parent::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $this->repository = $container->get(RedirectRepository::class);
-        $this->subscriber = $container->get('runroom.redirection.event_subscriber.automatic_redirect');
-        $this->entityManager = $container->get(EntityManagerInterface::class);
-    }
-
-    public function testItDoesSubscribeToOnFlushEvent(): void
-    {
-        $events = $this->subscriber->getSubscribedEvents();
-
-        static::assertSame([Events::onFlush], $events);
+        $this->repository = static::getContainer()->get(RedirectRepository::class);
+        $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
     }
 
     public function testItTestAutomaticRedirectCreation(): void

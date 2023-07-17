@@ -13,36 +13,26 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\MetaInformation;
 
+use Doctrine\Persistence\ObjectRepository;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\SeoBundle\Entity\MetaInformation;
-use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 use function Symfony\Component\String\s;
 
-/**
- * @final
- */
-class MetaInformationBuilder
+final class MetaInformationBuilder implements MetaInformationBuilderInterface
 {
-    public const DEFAULT_ROUTE = 'default';
-
-    private MetaInformationRepository $repository;
-    private PropertyAccessorInterface $propertyAccessor;
-
+    /**
+     * @param ObjectRepository<MetaInformation> $repository
+     */
     public function __construct(
-        MetaInformationRepository $repository,
-        PropertyAccessorInterface $propertyAccessor
+        private readonly ObjectRepository $repository,
+        private readonly PropertyAccessorInterface $propertyAccessor
     ) {
-        $this->repository = $repository;
-        $this->propertyAccessor = $propertyAccessor;
     }
 
-    /**
-     * @param array<string, mixed> $context
-     */
     public function build(
         MetaInformationProviderInterface $provider,
         array $context,
@@ -96,7 +86,7 @@ class MetaInformationBuilder
                 }
 
                 return $value;
-            } catch (NoSuchPropertyException $e) {
+            } catch (NoSuchPropertyException) {
             }
 
             return '';

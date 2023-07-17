@@ -25,18 +25,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class UploadAction extends AbstractController
 {
-    private AdminFetcherInterface $adminFetcher;
-    private MediaManagerInterface $mediaManager;
-    private Pool $mediaPool;
-
     public function __construct(
-        AdminFetcherInterface $adminFetcher,
-        MediaManagerInterface $mediaManager,
-        Pool $mediaPool
+        private readonly AdminFetcherInterface $adminFetcher,
+        private readonly MediaManagerInterface $mediaManager,
+        private readonly Pool $mediaPool
     ) {
-        $this->adminFetcher = $adminFetcher;
-        $this->mediaManager = $mediaManager;
-        $this->mediaPool = $mediaPool;
     }
 
     public function __invoke(Request $request): Response

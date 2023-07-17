@@ -18,11 +18,8 @@ use Runroom\SeoBundle\Model\SeoModelInterface;
 
 final class BasicPageViewModel implements SeoModelInterface
 {
-    private BasicPage $basicPage;
-
-    public function __construct(BasicPage $basicPage)
+    public function __construct(private readonly BasicPage $basicPage)
     {
-        $this->basicPage = $basicPage;
     }
 
     public function getBasicPage(): BasicPage

@@ -15,7 +15,7 @@ namespace Runroom\SeoBundle\Tests\App\MetaInformation;
 
 use Runroom\SeoBundle\MetaInformation\AbstractMetaInformationProvider;
 
-class TestMetaInformationProvider extends AbstractMetaInformationProvider
+final class TestMetaInformationProvider extends AbstractMetaInformationProvider
 {
     protected function getRoutes(): array
     {

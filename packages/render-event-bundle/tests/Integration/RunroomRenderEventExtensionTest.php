@@ -19,7 +19,7 @@ use Runroom\RenderEventBundle\DependencyInjection\RunroomRenderEventExtension;
 use Runroom\RenderEventBundle\ErrorRenderer\TwigErrorRenderer;
 use Runroom\RenderEventBundle\Renderer\PageRenderer;
 
-class RunroomRenderEventExtensionTest extends AbstractExtensionTestCase
+final class RunroomRenderEventExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {

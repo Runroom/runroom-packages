@@ -13,40 +13,31 @@ declare(strict_types=1);
 
 namespace Runroom\RenderEventBundle\ViewModel;
 
-class PageViewModel implements PageViewModelInterface
+final class PageViewModel implements PageViewModelInterface
 {
-    /**
-     * @var mixed
-     */
-    private $content;
+    private mixed $content = null;
 
     /**
      * @var array<string, mixed>
      */
     private array $context = [];
 
-    public function setContent($content): void
+    public function setContent(mixed $content): void
     {
         $this->content = $content;
     }
 
-    public function getContent()
+    public function getContent(): mixed
     {
         return $this->content;
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function addContext(string $key, $value): void
+    public function addContext(string $key, mixed $value): void
     {
         $this->context[$key] = $value;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContext(string $key)
+    public function getContext(string $key): mixed
     {
         return $this->context[$key] ?? null;
     }

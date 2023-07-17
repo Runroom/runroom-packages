@@ -20,7 +20,7 @@ use Sonata\AdminBundle\SonataConfiguration;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\Translator;
 
-class SecurityRolesBuilderTest extends TestCase
+final class SecurityRolesBuilderTest extends TestCase
 {
     /**
      * @var Stub&AuthorizationCheckerInterface

@@ -16,12 +16,17 @@ namespace Runroom\SeoBundle\Behaviors;
 use Doctrine\ORM\Mapping as ORM;
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 
+/**
+ * Keep annotations and attributes since this class is mean to be used by end user entities.
+ */
 trait MetaInformationAware
 {
     /**
      * @ORM\OneToOne(targetEntity="Runroom\SeoBundle\Entity\EntityMetaInformation", cascade={"all"})
      * @ORM\JoinColumn(referencedColumnName="id")
      */
+    #[ORM\OneToOne(targetEntity: EntityMetaInformation::class, cascade: ['all'])]
+    #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?EntityMetaInformation $metaInformation = null;
 
     public function setMetaInformation(?EntityMetaInformation $metaInformation): self

@@ -15,7 +15,7 @@ namespace Runroom\SeoBundle\Tests\App\AlternateLinks;
 
 use Runroom\SeoBundle\AlternateLinks\AbstractAlternateLinksProvider;
 
-class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
+final class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
     public function canGenerateAlternateLink(array $context, string $locale): bool
     {

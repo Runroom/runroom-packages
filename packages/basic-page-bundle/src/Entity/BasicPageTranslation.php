@@ -13,18 +13,15 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table(indexes={
- *     @ORM\Index(columns={"slug"}),
- * })
- */
+#[ORM\Entity]
+#[ORM\Index(columns: ['slug'])]
 class BasicPageTranslation implements TranslationInterface
 {
     use TranslationTrait;
@@ -33,38 +30,26 @@ class BasicPageTranslation implements TranslationInterface
      * @var string|null
      *
      * This property is needed to do the Join::WITH on the BasicPageRepository
-     *
-     * @ORM\Column(type="string", length=5)
      */
+    #[ORM\Column(type: Types::STRING, length: 5)]
     protected $locale;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @Assert\NotNull
-     * @Assert\Length(max=255)
-     *
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotNull]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
-    /**
-     * @Gedmo\Slug(fields={"title"}, unique_base="locale")
-     *
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Gedmo\Slug(fields: ['title'], unique_base: 'locale')]
     private ?string $slug = null;
 
-    /**
-     * @Assert\NotNull
-     *
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotNull]
     private ?string $content = null;
 
     public function setTitle(?string $title): self

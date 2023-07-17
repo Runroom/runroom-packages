@@ -19,7 +19,7 @@ use Runroom\CkeditorSonataMediaBundle\Action\UploadAction;
 use Runroom\CkeditorSonataMediaBundle\Admin\MediaAdminExtension;
 use Runroom\CkeditorSonataMediaBundle\DependencyInjection\RunroomCkeditorSonataMediaExtension;
 
-class RunroomCkeditorSonataMediaExtensionTest extends AbstractExtensionTestCase
+final class RunroomCkeditorSonataMediaExtensionTest extends AbstractExtensionTestCase
 {
     protected function setUp(): void
     {

@@ -15,6 +15,7 @@ namespace Runroom\SeoBundle\Tests\App;
 
 use A2lix\AutoFormBundle\A2lixAutoFormBundle;
 use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
@@ -23,12 +24,9 @@ use Runroom\SeoBundle\Tests\App\Entity\Gallery;
 use Runroom\SeoBundle\Tests\App\Entity\GalleryItem;
 use Runroom\SeoBundle\Tests\App\Entity\Media;
 use Sonata\AdminBundle\SonataAdminBundle;
-use Sonata\AdminBundle\Twig\Extension\DeprecatedTextExtension;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
-use Sonata\MediaBundle\Model\GalleryItemInterface;
 use Sonata\MediaBundle\SonataMediaBundle;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -37,10 +35,9 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
@@ -49,6 +46,7 @@ class Kernel extends BaseKernel
         return [
             new A2lixAutoFormBundle(),
             new A2lixTranslationFormBundle(),
+            new DAMADoctrineTestBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FrameworkBundle(),
@@ -80,39 +78,25 @@ class Kernel extends BaseKernel
         return __DIR__;
     }
 
-    /**
-     * @todo: Simplify security configuration when dropping support for Symfony 4
-     *
-     * @todo: Simplify media configuration when dropping support for Sonata 3
-     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->setParameter('kernel.default_locale', 'en');
 
-        $frameworkConfig = [
+        $container->loadFromExtension('framework', [
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
+            'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
             'http_method_override' => false,
-        ];
-
-        // @phpstan-ignore-next-line
-        if (method_exists(AbstractController::class, 'renderForm')) {
-            $frameworkConfig['session'] = ['storage_factory_id' => 'session.storage.factory.mock_file'];
-        } else {
-            $frameworkConfig['session'] = ['storage_id' => 'session.storage.mock_file'];
-        }
-
-        $container->loadFromExtension('framework', $frameworkConfig);
+        ]);
 
         $securityConfig = [
             'firewalls' => ['main' => []],
         ];
 
-        if (class_exists(AuthenticatorManager::class)) {
+        // @todo: Remove if when dropping support of Symfony 5.4
+        if (!class_exists(IsGranted::class)) {
             $securityConfig['enable_authenticator_manager'] = true;
-        } else {
-            $securityConfig['firewalls']['main']['anonymous'] = true;
         }
 
         $container->loadFromExtension('security', $securityConfig);
@@ -123,7 +107,7 @@ class Kernel extends BaseKernel
                 'auto_mapping' => true,
                 'mappings' => [
                     'redirection' => [
-                        'type' => 'annotation',
+                        'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\SeoBundle\Tests\App\Entity',
                         'is_bundle' => false,
@@ -145,16 +129,6 @@ class Kernel extends BaseKernel
             'auto_refresh_proxies' => false,
         ]);
 
-        if (class_exists(DeprecatedTextExtension::class)) {
-            $container->loadFromExtension('sonata_admin', [
-                'options' => [
-                    'legacy_twig_text_extension' => false,
-                ],
-            ]);
-        }
-
-        $galleryItemKey = interface_exists(GalleryItemInterface::class) ? 'gallery_item' : 'gallery_has_media';
-
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
             'contexts' => ['default' => []],
@@ -162,7 +136,7 @@ class Kernel extends BaseKernel
             'db_driver' => 'doctrine_orm',
             'class' => [
                 'media' => Media::class,
-                $galleryItemKey => GalleryItem::class,
+                'gallery_item' => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
             'filesystem' => ['local' => null],
@@ -175,12 +149,7 @@ class Kernel extends BaseKernel
         ]);
     }
 
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @param RoutingConfigurator $routes
-     */
-    protected function configureRoutes($routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
     }
 

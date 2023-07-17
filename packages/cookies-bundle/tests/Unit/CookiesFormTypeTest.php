@@ -16,7 +16,7 @@ namespace Runroom\CookiesBundle\Tests\Unit;
 use Runroom\CookiesBundle\Form\Type\CookiesFormType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class CookiesFormTypeTest extends TypeTestCase
+final class CookiesFormTypeTest extends TypeTestCase
 {
     public function testItSubmitsValidData(): void
     {

@@ -19,26 +19,14 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
 {
     private const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
 
-    private RequestStack $requestStack;
-
-    /**
-     * @var iterable<AlternateLinksProviderInterface>
-     */
-    private iterable $providers;
-
-    private AlternateLinksBuilder $builder;
-
     /**
      * @param iterable<AlternateLinksProviderInterface> $providers
      */
     public function __construct(
-        RequestStack $requestStack,
-        iterable $providers,
-        AlternateLinksBuilder $builder
+        private readonly RequestStack $requestStack,
+        private readonly iterable $providers,
+        private readonly AlternateLinksBuilderInterface $builder
     ) {
-        $this->requestStack = $requestStack;
-        $this->providers = $providers;
-        $this->builder = $builder;
     }
 
     public function build(array $context): array

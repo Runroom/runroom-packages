@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class CookiesPageControllerTest extends WebTestCase
+final class CookiesPageControllerTest extends WebTestCase
 {
     use Factories;
     use ResetDatabase;

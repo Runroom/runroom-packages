@@ -11,16 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Repository\UserRepository;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4
     $services = $containerConfigurator->services();
 
     $services->set('runroom.user.repository.user', UserRepository::class)
-        ->arg('$entityManager', new ReferenceConfigurator('doctrine.orm.entity_manager'))
+        ->arg('$entityManager', service('doctrine.orm.entity_manager'))
         ->arg('$class', User::class);
 };

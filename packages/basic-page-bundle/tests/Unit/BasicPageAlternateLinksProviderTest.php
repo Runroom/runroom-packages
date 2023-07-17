@@ -19,7 +19,7 @@ use Runroom\BasicPageBundle\Service\BasicPageAlternateLinksProvider;
 use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 use Zenstruck\Foundry\Test\Factories;
 
-class BasicPageAlternateLinksProviderTest extends TestCase
+final class BasicPageAlternateLinksProviderTest extends TestCase
 {
     use Factories;
 

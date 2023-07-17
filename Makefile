@@ -1,8 +1,8 @@
 UID = $(shell id -u)
 GID = $(shell id -g)
-PHP_VERSION="8.1"
+PHP_VERSION="8.2"
 CONTAINER_NAME = runroom_packages
-docker-exec = docker run --rm -v $(PWD):/usr/app -w /usr/app $(CONTAINER_NAME) $(1)
+DOCKER_RUN = docker run --rm --volume $(PWD):/usr/app -w /usr/app $(CONTAINER_NAME)
 
 up:
 	docker build -t $(CONTAINER_NAME) .
@@ -36,50 +36,50 @@ ssh:
 .PHONY: ssh
 
 composer-update:
-	$(call docker-exec,composer update --optimize-autoloader)
+	$(DOCKER_RUN) composer update --optimize-autoloader
 .PHONY: composer-update
 
 composer-install:
-	$(call docker-exec,composer install --optimize-autoloader)
+	$(DOCKER_RUN) composer install --optimize-autoloader
 .PHONY: composer-install
 
 composer-normalize:
-	$(call docker-exec,composer normalize)
+	$(DOCKER_RUN) composer normalize
 .PHONY: composer-normalize
 
 phpstan:
-	$(call docker-exec,composer phpstan)
+	$(DOCKER_RUN) composer phpstan
 .PHONY: phpstan
 
 psalm:
-	$(call docker-exec,composer psalm -- --php-version=$(PHP_VERSION))
+	$(DOCKER_RUN) composer psalm -- --php-version=$(PHP_VERSION)
 .PHONY: psalm
 
 php-cs-fixer:
-	$(call docker-exec,composer php-cs-fixer)
+	$(DOCKER_RUN) composer php-cs-fixer
 .PHONY: php-cs-fixer
 
 phpunit:
-	$(call docker-exec,phpunit)
+	$(DOCKER_RUN) phpunit
 .PHONY: phpunit
 
 phpunit-coverage:
-	$(call docker-exec,phpunit --coverage-html /usr/app/coverage)
+	$(DOCKER_RUN) phpunit --coverage-html /usr/app/coverage
 .PHONY: phpunit-coverage
 
 rector:
-	$(call docker-exec,composer rector)
+	$(DOCKER_RUN) composer rector
 .PHONY: rector
 
 lint-qa:
-	$(call docker-exec,composer php-cs-fixer)
-	$(call docker-exec,phpunit)
-	$(call docker-exec,composer phpstan)
-	$(call docker-exec,composer psalm -- --php-version=$(PHP_VERSION))
-	$(call docker-exec,composer rector)
-	$(call docker-exec,composer normalize)
-	$(call docker-exec,bin/console lint:container)
-	$(call docker-exec,bin/console lint:twig src)
-	$(call docker-exec,bin/console lint:xliff src)
-	$(call docker-exec,bin/console lint:yaml src)
+	$(DOCKER_RUN) composer php-cs-fixer
+	$(DOCKER_RUN) phpunit
+	$(DOCKER_RUN) composer phpstan
+	$(DOCKER_RUN) composer psalm -- --php-version=$(PHP_VERSION)
+	$(DOCKER_RUN) composer rector
+	$(DOCKER_RUN) composer normalize
+	$(DOCKER_RUN) bin/console lint:container
+	$(DOCKER_RUN) bin/console lint:twig src
+	$(DOCKER_RUN) bin/console lint:xliff src
+	$(DOCKER_RUN) bin/console lint:yaml src
 .PHONY: lint-qa

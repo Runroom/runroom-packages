@@ -31,33 +31,12 @@ final class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    private ResetPasswordHelperInterface $resetPasswordHelper;
-
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @var UserPasswordHasherInterface
-     */
-    private object $passwordHasher;
-
-    private MailerServiceInterface $mailerService;
-    private UserProvider $userProvider;
-
-    /**
-     * @todo: Add typehint when dropping support for Symfony 4
-     *
-     * @param UserPasswordHasherInterface $passwordHasher
-     */
     public function __construct(
-        ResetPasswordHelperInterface $resetPasswordHelper,
-        object $passwordHasher,
-        MailerServiceInterface $mailerService,
-        UserProvider $userProvider
+        private readonly ResetPasswordHelperInterface $resetPasswordHelper,
+        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly MailerServiceInterface $mailerService,
+        private readonly UserProvider $userProvider
     ) {
-        $this->resetPasswordHelper = $resetPasswordHelper;
-        $this->passwordHasher = $passwordHasher;
-        $this->mailerService = $mailerService;
-        $this->userProvider = $userProvider;
     }
 
     public function request(Request $request): Response
@@ -124,14 +103,7 @@ final class ResetPasswordController extends AbstractController
             $plainPassword = $form->get('plainPassword')->getData();
             \assert(\is_string($plainPassword));
 
-            /*
-             * @todo: Simplify this when dropping support for Symfony 4
-             */
-            if ($this->passwordHasher instanceof UserPasswordHasherInterface) {
-                $password = $this->passwordHasher->hashPassword($user, $plainPassword);
-            } else {
-                $password = $this->passwordHasher->encodePassword($user, $plainPassword);
-            }
+            $password = $this->passwordHasher->hashPassword($user, $plainPassword);
 
             $this->userProvider->upgradePassword($user, $password);
 
@@ -152,7 +124,7 @@ final class ResetPasswordController extends AbstractController
             \assert($user instanceof UserInterface);
 
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
-        } catch (AuthenticationException|ResetPasswordExceptionInterface $exception) {
+        } catch (AuthenticationException|ResetPasswordExceptionInterface) {
             return;
         }
 

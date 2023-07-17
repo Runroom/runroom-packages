@@ -21,40 +21,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class AdminRolesBuilder implements AdminRolesBuilderInterface
 {
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private Pool $pool;
-    private SonataConfiguration $configuration;
-    private TranslatorInterface $translator;
-
     public function __construct(
-        AuthorizationCheckerInterface $authorizationChecker,
-        Pool $pool,
-        SonataConfiguration $configuration,
-        TranslatorInterface $translator
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly Pool $pool,
+        private readonly SonataConfiguration $configuration,
+        private readonly TranslatorInterface $translator
     ) {
-        $this->authorizationChecker = $authorizationChecker;
-        $this->pool = $pool;
-        $this->configuration = $configuration;
-        $this->translator = $translator;
     }
 
-    /**
-     * @todo: Simplify this method when dropping support for SonataAdmin 3
-     */
     public function getRoles(?string $domain = null): array
     {
         $adminRoles = [];
 
-        /**
-         * @psalm-suppress DeprecatedMethod
-         * @phpstan-ignore-next-line
-         */
-        $adminServiceCodes = method_exists($this->pool, 'getAdminServiceCodes')
-            ? $this->pool->getAdminServiceCodes()
-            : $this->pool->getAdminServiceIds();
+        $adminServiceCodes = $this->pool->getAdminServiceCodes();
 
-        foreach ($adminServiceCodes as $id) {
-            $admin = $this->pool->getInstance($id);
+        foreach ($adminServiceCodes as $code) {
+            $admin = $this->pool->getInstance($code);
             $baseRole = $admin->getSecurityHandler()->getBaseRole($admin);
 
             foreach (array_keys($admin->getSecurityInformation()) as $key) {

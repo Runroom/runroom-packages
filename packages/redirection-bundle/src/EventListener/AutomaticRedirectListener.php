@@ -11,57 +11,33 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\RedirectionBundle\EventSubscriber;
+namespace Runroom\RedirectionBundle\EventListener;
 
-use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
-use Doctrine\ORM\Events;
 use Runroom\RedirectionBundle\Entity\Redirect;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Routing\Exception\ExceptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class AutomaticRedirectSubscriber implements EventSubscriber
+final class AutomaticRedirectListener
 {
     private const PREVIOUS_VALUE = 0;
     private const NEXT_VALUE = 1;
-
-    private UrlGeneratorInterface $urlGenerator;
-    private PropertyAccessorInterface $propertyAccessor;
-
-    /**
-     * @var array<class-string, array{ route: string, routeParameters: array<string, string> }>
-     */
-    private array $configuration = [];
 
     /**
      * @param array<class-string, array{ route: string, routeParameters: array<string, string> }> $configuration
      */
     public function __construct(
-        UrlGeneratorInterface $urlGenerator,
-        PropertyAccessorInterface $propertyAccessor,
-        array $configuration
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly PropertyAccessorInterface $propertyAccessor,
+        private array $configuration
     ) {
-        $this->urlGenerator = $urlGenerator;
-        $this->propertyAccessor = $propertyAccessor;
-        $this->configuration = $configuration;
     }
 
-    public function getSubscribedEvents(): array
-    {
-        return [Events::onFlush];
-    }
-
-    /**
-     * @todo: Simplify when dropping support for doctrine/orm < 2.13
-     *
-     * @psalm-suppress DeprecatedMethod
-     */
     public function onFlush(OnFlushEventArgs $args): void
     {
-        // @phpstan-ignore-next-line
-        $entityManager = method_exists($args, 'getObjectManager') ? $args->getObjectManager() : $args->getEntityManager();
+        $entityManager = $args->getObjectManager();
         $unitOfWork = $entityManager->getUnitOfWork();
 
         foreach ($unitOfWork->getScheduledEntityUpdates() as $entity) {
@@ -77,7 +53,7 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
 
     private function createRedirectFromEntityChanges(EntityManagerInterface $entityManager, object $entity): ?Redirect
     {
-        if (isset($this->configuration[\get_class($entity)])) {
+        if (isset($this->configuration[$entity::class])) {
             $source = $this->generateUrl($entityManager, $entity);
             $destination = $this->generateUrl($entityManager, $entity, self::NEXT_VALUE);
 
@@ -97,7 +73,7 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
 
     private function generateUrl(EntityManagerInterface $entityManager, object $entity, int $state = self::PREVIOUS_VALUE): ?string
     {
-        $redirectConfiguration = $this->configuration[\get_class($entity)];
+        $redirectConfiguration = $this->configuration[$entity::class];
         $uow = $entityManager->getUnitOfWork();
         $changeset = $uow->getEntityChangeSet($entity);
 
@@ -112,7 +88,7 @@ final class AutomaticRedirectSubscriber implements EventSubscriber
                     $redirectConfiguration['routeParameters']
                 )
             );
-        } catch (ExceptionInterface $exception) {
+        } catch (ExceptionInterface) {
             return null;
         }
     }

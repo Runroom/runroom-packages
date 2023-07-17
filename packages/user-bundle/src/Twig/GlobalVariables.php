@@ -18,14 +18,10 @@ use Sonata\AdminBundle\Admin\Pool;
 
 final class GlobalVariables
 {
-    private Pool $pool;
-
-    private bool $hasRequestPasswordEnabled;
-
-    public function __construct(Pool $pool, bool $hasRequestPasswordEnabled)
-    {
-        $this->pool = $pool;
-        $this->hasRequestPasswordEnabled = $hasRequestPasswordEnabled;
+    public function __construct(
+        private readonly Pool $pool,
+        private readonly bool $hasRequestPasswordEnabled
+    ) {
     }
 
     /**

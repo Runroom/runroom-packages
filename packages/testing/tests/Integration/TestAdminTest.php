@@ -20,7 +20,7 @@ use Runroom\Testing\Tests\App\Entity\Test;
 /**
  * @extends SonataAdminTestCase<Test>
  */
-class TestAdminTest extends SonataAdminTestCase
+final class TestAdminTest extends SonataAdminTestCase
 {
     public function testItDoesNotHaveDeleteRoute(): void
     {

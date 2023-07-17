@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Tests\Integration;
 
 use Runroom\SeoBundle\Factory\MetaInformationFactory;
-use Runroom\SeoBundle\MetaInformation\MetaInformationBuilder;
+use Runroom\SeoBundle\MetaInformation\MetaInformationBuilderInterface;
 use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class MetaInformationRepositoryTest extends KernelTestCase
+final class MetaInformationRepositoryTest extends KernelTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -29,28 +29,19 @@ class MetaInformationRepositoryTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        parent::bootKernel();
-
-        /**
-         * @todo: Simplify this when dropping support for Symfony 4
-         *
-         * @phpstan-ignore-next-line
-         */
-        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
-
-        $this->repository = $container->get(MetaInformationRepository::class);
+        $this->repository = static::getContainer()->get(MetaInformationRepository::class);
     }
 
     public function testItFindsDefaultMetaInformation(): void
     {
-        MetaInformationFactory::new(['route' => MetaInformationBuilder::DEFAULT_ROUTE])->withTranslations(['en'])->create();
+        MetaInformationFactory::new(['route' => MetaInformationBuilderInterface::DEFAULT_ROUTE])->withTranslations(['en'])->create();
 
-        $metaInformation = $this->repository->findOneBy(['route' => MetaInformationBuilder::DEFAULT_ROUTE]);
+        $metaInformation = $this->repository->findOneBy(['route' => MetaInformationBuilderInterface::DEFAULT_ROUTE]);
 
         if (null !== $metaInformation) {
             static::assertSame(1, $metaInformation->getId());
             static::assertNotEmpty((string) $metaInformation);
-            static::assertSame(MetaInformationBuilder::DEFAULT_ROUTE, $metaInformation->getRoute());
+            static::assertSame(MetaInformationBuilderInterface::DEFAULT_ROUTE, $metaInformation->getRoute());
             static::assertNull($metaInformation->getImage());
             static::assertNotNull($metaInformation->getRouteName());
             static::assertNotNull($metaInformation->getDescription());

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\RenderEventBundle\ErrorRenderer;
 
-use Runroom\RenderEventBundle\Renderer\PageRenderer;
+use Runroom\RenderEventBundle\Renderer\PageRendererInterface;
 use Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
 use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
@@ -22,10 +22,6 @@ use Twig\Environment;
 
 final class TwigErrorRenderer implements ErrorRendererInterface
 {
-    private Environment $twig;
-    private HtmlErrorRenderer $fallbackErrorRenderer;
-    private PageRenderer $renderer;
-
     /**
      * @var bool|callable
      */
@@ -35,14 +31,11 @@ final class TwigErrorRenderer implements ErrorRendererInterface
      * @param bool|callable $debug
      */
     public function __construct(
-        Environment $twig,
-        PageRenderer $renderer,
-        ?HtmlErrorRenderer $fallbackErrorRenderer = null,
+        private readonly Environment $twig,
+        private readonly PageRendererInterface $renderer,
+        private readonly HtmlErrorRenderer $fallbackErrorRenderer = new HtmlErrorRenderer(),
         $debug = false
     ) {
-        $this->twig = $twig;
-        $this->renderer = $renderer;
-        $this->fallbackErrorRenderer = $fallbackErrorRenderer ?? new HtmlErrorRenderer();
         $this->debug = $debug;
     }
 

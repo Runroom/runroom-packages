@@ -13,38 +13,29 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class MetaInformationTranslation implements TranslationInterface
 {
     use TranslationTrait;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    /**
-     * @Assert\NotNull
-     * @Assert\Length(max=255)
-     *
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotNull]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
-    /**
-     * @Assert\NotNull
-     *
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotNull]
     private ?string $description = null;
 
     public function setTitle(?string $title): self

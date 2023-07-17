@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\FormHandlerBundle\ViewModel;
 
-class BasicFormViewModel implements FormAwareInterface
+final class BasicFormViewModel implements FormAwareInterface
 {
     use FormAware;
 }
