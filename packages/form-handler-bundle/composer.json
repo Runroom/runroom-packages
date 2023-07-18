@@ -29,7 +29,7 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpunit/phpunit": "^9.6",
-        "runroom-packages/render-event-bundle": "^0.18",
+        "runroom-packages/render-event-bundle": "^0.17.1",
         "symfony/phpunit-bridge": "^6.3"
     },
     "minimum-stability": "dev",
