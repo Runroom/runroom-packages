@@ -18,10 +18,9 @@ use Runroom\FormHandlerBundle\ViewModel\FormAwareInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class FormHandler
+final class FormHandler implements FormHandlerInterface
 {
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
@@ -30,10 +29,6 @@ final class FormHandler
     ) {
     }
 
-    /**
-     * @param class-string<FormTypeInterface> $type
-     * @param array<string, mixed>            $options
-     */
     public function handleForm(string $type, array $options = [], ?FormAwareInterface $model = null): FormAwareInterface
     {
         $request = $this->requestStack->getCurrentRequest();
