@@ -5,9 +5,9 @@ Runroom Packages
 [![Latest Unstable Version](https://poser.pugx.org/runroom-packages/runroom-packages/v/unstable)](https://packagist.org/packages/runroom-packages/runroom-packages)
 [![License](https://poser.pugx.org/runroom-packages/runroom-packages/license)](https://packagist.org/packages/runroom-packages/runroom-packages)
 
-![ci](https://github.com/Runroom/runroom-packages/workflows/ci/badge.svg)
-![split-ci](https://github.com/Runroom/runroom-packages/workflows/split-ci/badge.svg)
-![qa](https://github.com/Runroom/runroom-packages/workflows/qa/badge.svg)
+[![CI](https://github.com/Runroom/runroom-packages/actions/workflows/ci.yaml/badge.svg)](https://github.com/Runroom/runroom-packages/actions/workflows/ci.yaml)
+[![Split CI](https://github.com/Runroom/runroom-packages/actions/workflows/split_ci.yaml/badge.svg)](https://github.com/Runroom/runroom-packages/actions/workflows/split_ci.yaml)
+[![QA](https://github.com/Runroom/runroom-packages/actions/workflows/qa.yaml/badge.svg)](https://github.com/Runroom/runroom-packages/actions/workflows/qa.yaml)
 [![codecov](https://codecov.io/gh/Runroom/runroom-packages/branch/master/graph/badge.svg)](https://codecov.io/gh/Runroom/runroom-packages)
 [![shepherd](https://shepherd.dev/github/Runroom/runroom-packages/coverage.svg)](https://shepherd.dev/github/Runroom/runroom-packages)
 
