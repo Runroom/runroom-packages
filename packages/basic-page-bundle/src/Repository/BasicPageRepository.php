@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,8 +36,9 @@ final class BasicPageRepository extends ServiceEntityRepository implements Basic
         $request = $this->requestStack->getCurrentRequest() ?? new Request();
 
         $query = $this->createQueryBuilder('basic_page')
-            ->leftJoin('basic_page.translations', 'translations', Join::WITH, 'translations.locale = :locale')
-            ->where('translations.slug = :slug')
+            ->leftJoin('basic_page.translations', 'translations')
+            ->where('translations.locale = :locale')
+            ->andWhere('translations.slug = :slug')
             ->andWhere('basic_page.publish = true')
             ->setParameter('slug', $slug)
             ->setParameter('locale', $request->getLocale())
