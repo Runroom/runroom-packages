@@ -35,9 +35,6 @@ use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
  */
 final class RunroomUserExtension extends Extension
 {
-    /**
-     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
@@ -82,8 +79,6 @@ final class RunroomUserExtension extends Extension
      *     throttle_limit: int,
      *     enable_garbage_collection: bool,
      * } $config
-     *
-     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
      */
     private function registerReserPasswordConfiguration(ContainerBuilder $container, array $config, PhpFileLoader $loader): void
     {

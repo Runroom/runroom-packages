@@ -20,9 +20,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class RunroomBasicPageExtension extends Extension
 {
-    /**
-     * @psalm-suppress UndefinedInterfaceMethod $bundles is an array
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
