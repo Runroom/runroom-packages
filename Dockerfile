@@ -1,6 +1,6 @@
-FROM alpine:3.18
+FROM alpine:3.19
 
-ARG PHP_VERSION=82
+ARG PHP_VERSION=83
 ARG UID=1000
 ARG USER=app
 
@@ -32,7 +32,7 @@ RUN adduser -u $UID -D $USER
 
 ENV PATH="/usr/app/vendor/bin:/usr/app/bin:${PATH}"
 
-COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
 USER ${USER}
 

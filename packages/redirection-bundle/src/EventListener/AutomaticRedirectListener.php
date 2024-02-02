@@ -81,6 +81,9 @@ final class AutomaticRedirectListener
             return $this->urlGenerator->generate(
                 $redirectConfiguration['route'],
                 array_map(
+                    /**
+                     * @psalm-return mixed
+                     */
                     fn (string $field) => $changeset[$field][$state] ?? $this->propertyAccessor->getValue($entity, $field),
                     $redirectConfiguration['routeParameters']
                 )
