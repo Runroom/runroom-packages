@@ -111,6 +111,7 @@ final class Kernel extends BaseKernel
         $container->setParameter('kernel.default_locale', 'en');
 
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],

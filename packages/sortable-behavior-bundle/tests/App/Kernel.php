@@ -70,6 +70,7 @@ final class Kernel extends BaseKernel
         $loader->load($this->getProjectDir() . '/services.php');
 
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
