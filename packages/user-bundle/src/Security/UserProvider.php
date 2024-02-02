@@ -23,6 +23,7 @@ use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
+ * @phpstan-implements UserProviderInterface<UserInterface>
  * @phpstan-implements PasswordUpgraderInterface<UserInterface>
  */
 final class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
