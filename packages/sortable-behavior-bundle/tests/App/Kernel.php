@@ -91,7 +91,11 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
