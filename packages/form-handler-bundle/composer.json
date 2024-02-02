@@ -26,8 +26,8 @@
         "symfony/http-kernel": "^5.4 || ^6.2"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "matthiasnoback/symfony-config-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
         "runroom-packages/render-event-bundle": "^0.18",
         "symfony/phpunit-bridge": "^6.3"

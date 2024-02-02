@@ -29,11 +29,11 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "^7.2",
+        "dama/doctrine-test-bundle": "^8.0",
         "gedmo/doctrine-extensions": "^3.11",
         "knplabs/knp-menu-bundle": "^3.1",
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "matthiasnoback/symfony-config-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
         "psr/container": "^1.1 || ^2.0",
         "runroom-packages/testing": "^0.18",

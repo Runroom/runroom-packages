@@ -38,10 +38,10 @@
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.4",
         "a2lix/translation-form-bundle": "^3.2",
-        "dama/doctrine-test-bundle": "^7.2",
+        "dama/doctrine-test-bundle": "^8.0",
         "knplabs/knp-menu-bundle": "^3.1",
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "matthiasnoback/symfony-config-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
         "runroom-packages/testing": "^0.18",
         "sonata-project/admin-bundle": "^4.20",
