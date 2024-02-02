@@ -21,8 +21,7 @@ final class GlobalVariables
     public function __construct(
         private readonly Pool $pool,
         private readonly bool $hasRequestPasswordEnabled
-    ) {
-    }
+    ) {}
 
     /**
      * @phpstan-return AdminInterface<object>

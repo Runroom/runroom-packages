@@ -18,9 +18,7 @@ use Runroom\BasicPageBundle\ViewModel\BasicPageViewModel;
 
 final class BasicPageService implements BasicPageServiceInterface
 {
-    public function __construct(private readonly BasicPageRepositoryInterface $repository)
-    {
-    }
+    public function __construct(private readonly BasicPageRepositoryInterface $repository) {}
 
     public function getBasicPageViewModel(string $slug): BasicPageViewModel
     {

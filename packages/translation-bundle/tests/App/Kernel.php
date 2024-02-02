@@ -120,9 +120,7 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void
-    {
-    }
+    protected function configureRoutes(RoutingConfigurator $routes): void {}
 
     private function getBaseDir(): string
     {

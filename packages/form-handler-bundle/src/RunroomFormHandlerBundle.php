@@ -15,6 +15,4 @@ namespace Runroom\FormHandlerBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class RunroomFormHandlerBundle extends Bundle
-{
-}
+final class RunroomFormHandlerBundle extends Bundle {}

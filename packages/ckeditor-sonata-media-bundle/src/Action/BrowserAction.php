@@ -28,8 +28,7 @@ final class BrowserAction extends AbstractController
         private readonly Environment $twig,
         private readonly AdminFetcherInterface $adminFetcher,
         private readonly Pool $mediaPool
-    ) {
-    }
+    ) {}
 
     public function __invoke(Request $request): Response
     {

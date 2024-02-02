@@ -19,9 +19,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 final class BasicPageRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly BasicPageRepositoryInterface $repository)
-    {
-    }
+    public function __construct(private readonly BasicPageRepositoryInterface $repository) {}
 
     /**
      * @return BasicPage[]

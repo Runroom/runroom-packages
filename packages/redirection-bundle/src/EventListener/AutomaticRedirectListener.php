@@ -32,8 +32,7 @@ final class AutomaticRedirectListener
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly PropertyAccessorInterface $propertyAccessor,
         private array $configuration
-    ) {
-    }
+    ) {}
 
     public function onFlush(OnFlushEventArgs $args): void
     {

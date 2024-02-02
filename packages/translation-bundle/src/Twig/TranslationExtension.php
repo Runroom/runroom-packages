@@ -19,9 +19,7 @@ use Twig\TwigFilter;
 
 final class TranslationExtension extends AbstractExtension
 {
-    public function __construct(private readonly TranslationServiceInterface $service)
-    {
-    }
+    public function __construct(private readonly TranslationServiceInterface $service) {}
 
     public function getFilters(): array
     {
