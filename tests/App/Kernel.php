@@ -134,22 +134,24 @@ final class Kernel extends BaseKernel
                 ],
             ],
             'password_hashers' => [User::class => ['algorithm' => 'plaintext']],
-            'firewalls' => ['main' => [
-                'lazy' => true,
-                'pattern' => '/(.*)',
-                'provider' => 'admin_user_provider',
-                'context' => 'user',
-                'custom_authenticator' => 'runroom.user.security.user_authenticator',
-                'logout' => [
-                    'path' => 'runroom_user_logout',
-                    'target' => 'runroom_user_login',
-                ],
-                'remember_me' => [
-                    'secret' => 'secret',
-                    'lifetime' => 2_629_746,
-                    'path' => '/',
-                ],
-            ]],
+            'firewalls' => [
+                'main' => [
+                    'lazy' => true,
+                    'pattern' => '/(.*)',
+                    'provider' => 'admin_user_provider',
+                    'context' => 'user',
+                    'custom_authenticator' => 'runroom.user.security.user_authenticator',
+                    'logout' => [
+                        'path' => 'runroom_user_logout',
+                        'target' => 'runroom_user_login',
+                    ],
+                    'remember_me' => [
+                        'secret' => 'secret',
+                        'lifetime' => 2_629_746,
+                        'path' => '/',
+                    ],
+                ]
+            ],
         ];
 
         // @todo: Remove if when dropping support of Symfony 5.4
@@ -171,7 +173,6 @@ final class Kernel extends BaseKernel
             ],
             'orm' => [
                 'auto_mapping' => true,
-                'enable_lazy_ghost_objects' => true,
                 'mappings' => [
                     'entity' => [
                         'type' => 'attribute',
@@ -228,26 +229,34 @@ final class Kernel extends BaseKernel
                 'gallery_item' => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
-            'filesystem' => ['local' => [
-                'directory' => '%kernel.project_dir%/uploads',
-                'create' => true,
-            ]],
+            'filesystem' => [
+                'local' => [
+                    'directory' => '%kernel.project_dir%/uploads',
+                    'create' => true,
+                ]
+            ],
         ]);
 
         $container->loadFromExtension('runroom_cookies', [
             'cookies' => [
-                'mandatory_cookies' => [[
-                    'name' => 'test',
-                    'cookies' => [['name' => 'test']],
-                ]],
-                'performance_cookies' => [[
-                    'name' => 'test',
-                    'cookies' => [['name' => 'test']],
-                ]],
-                'targeting_cookies' => [[
-                    'name' => 'test',
-                    'cookies' => [['name' => 'test']],
-                ]],
+                'mandatory_cookies' => [
+                    [
+                        'name' => 'test',
+                        'cookies' => [['name' => 'test']],
+                    ]
+                ],
+                'performance_cookies' => [
+                    [
+                        'name' => 'test',
+                        'cookies' => [['name' => 'test']],
+                    ]
+                ],
+                'targeting_cookies' => [
+                    [
+                        'name' => 'test',
+                        'cookies' => [['name' => 'test']],
+                    ]
+                ],
             ],
         ]);
 
