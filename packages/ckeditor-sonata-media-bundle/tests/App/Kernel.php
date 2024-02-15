@@ -35,6 +35,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class Kernel extends BaseKernel
 {
@@ -106,6 +107,7 @@ final class Kernel extends BaseKernel
             ],
             'orm' => [
                 'auto_mapping' => true,
+                'enable_lazy_ghost_objects' => true,
                 'mappings' => [
                     'ckeditor_sonata_media' => [
                         'type' => 'attribute',

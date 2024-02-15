@@ -110,7 +110,10 @@ final class Kernel extends BaseKernel
                 'logging' => false,
                 'use_savepoints' => true,
             ],
-            'orm' => ['auto_mapping' => true],
+            'orm' => [
+                'auto_mapping' => true,
+                'enable_lazy_ghost_objects' => true,
+            ],
         ]);
 
         $container->loadFromExtension('twig', [
