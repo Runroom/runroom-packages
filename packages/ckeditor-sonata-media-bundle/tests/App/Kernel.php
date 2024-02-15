@@ -107,7 +107,6 @@ final class Kernel extends BaseKernel
             ],
             'orm' => [
                 'auto_mapping' => true,
-                'enable_lazy_ghost_objects' => true,
                 'mappings' => [
                     'ckeditor_sonata_media' => [
                         'type' => 'attribute',

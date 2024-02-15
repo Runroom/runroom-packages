@@ -99,7 +99,6 @@ final class Kernel extends BaseKernel
             ],
             'orm' => [
                 'auto_mapping' => true,
-                'enable_lazy_ghost_objects' => true,
                 'mappings' => [
                     'sortable_behavior' => [
                         'type' => 'attribute',
