@@ -60,7 +60,8 @@
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
         "friendsofsymfony/ckeditor-bundle": "<2.2",
-        "sonata-project/admin-bundle": "<4.0"
+        "sonata-project/admin-bundle": "<4.0",
+        "symfony/doctrine-bridge": ">=7.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
