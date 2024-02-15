@@ -53,7 +53,9 @@
     },
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
-        "sonata-project/admin-bundle": "<4.0"
+        "sonata-project/admin-bundle": "<4.0",
+        "symfony/doctrine-bridge": ">=7.0",
+        "symfony/twig-bridge": ">=7.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
