@@ -21,8 +21,7 @@ final class MatrixRolesBuilder implements MatrixRolesBuilderInterface
         private readonly TokenStorageInterface $tokenStorage,
         private readonly AdminRolesBuilderInterface $adminRolesBuilder,
         private readonly ExpandableRolesBuilderInterface $securityRolesBuilder
-    ) {
-    }
+    ) {}
 
     public function getRoles(?string $domain = null): array
     {

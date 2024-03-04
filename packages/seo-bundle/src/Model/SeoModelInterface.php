@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Runroom\SeoBundle\Model;
 
-interface SeoModelInterface
-{
-}
+interface SeoModelInterface {}

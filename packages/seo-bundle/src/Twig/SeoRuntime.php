@@ -23,8 +23,7 @@ final class SeoRuntime implements RuntimeExtensionInterface
     public function __construct(
         private readonly AlternateLinksServiceInterface $alternateLinks,
         private readonly MetaInformationServiceInterface $metaInformation
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, mixed> $context

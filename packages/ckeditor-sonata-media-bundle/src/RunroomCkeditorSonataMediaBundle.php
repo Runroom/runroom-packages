@@ -15,6 +15,4 @@ namespace Runroom\CkeditorSonataMediaBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class RunroomCkeditorSonataMediaBundle extends Bundle
-{
-}
+final class RunroomCkeditorSonataMediaBundle extends Bundle {}

@@ -82,6 +82,7 @@ final class Kernel extends BaseKernel
         $container->setParameter('kernel.default_locale', 'en');
 
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
@@ -104,8 +105,14 @@ final class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
-            'orm' => ['auto_mapping' => true],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
+            'orm' => [
+                'auto_mapping' => true,
+            ],
         ]);
 
         $container->loadFromExtension('twig', [

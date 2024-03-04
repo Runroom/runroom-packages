@@ -35,6 +35,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class Kernel extends BaseKernel
 {
@@ -79,6 +80,7 @@ final class Kernel extends BaseKernel
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
@@ -98,7 +100,11 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [

@@ -67,6 +67,7 @@ final class Kernel extends BaseKernel
         $loader->load($this->getProjectDir() . '/services.php');
 
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
@@ -88,11 +89,15 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
-                    'redirection' => [
+                    'entity' => [
                         'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\Testing\Tests\App\Entity',
@@ -103,9 +108,7 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void
-    {
-    }
+    protected function configureRoutes(RoutingConfigurator $routes): void {}
 
     private function getBaseDir(): string
     {

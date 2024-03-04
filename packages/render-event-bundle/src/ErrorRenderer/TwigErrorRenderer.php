@@ -23,21 +23,14 @@ use Twig\Environment;
 final class TwigErrorRenderer implements ErrorRendererInterface
 {
     /**
-     * @var bool|callable
-     */
-    private $debug;
-
-    /**
-     * @param bool|callable $debug
+     * @param bool|callable(FlattenException):bool $debug
      */
     public function __construct(
         private readonly Environment $twig,
         private readonly PageRendererInterface $renderer,
         private readonly HtmlErrorRenderer $fallbackErrorRenderer = new HtmlErrorRenderer(),
-        $debug = false
-    ) {
-        $this->debug = $debug;
-    }
+        private $debug = false
+    ) {}
 
     public function render(\Throwable $exception): FlattenException
     {
@@ -55,6 +48,9 @@ final class TwigErrorRenderer implements ErrorRendererInterface
         ]));
     }
 
+    /**
+     * @return \Closure():bool
+     */
     public static function isDebug(RequestStack $requestStack, bool $debug): \Closure
     {
         return static function () use ($requestStack, $debug): bool {

@@ -19,14 +19,10 @@ if (interface_exists(SymfonyCastsResetPasswordRequestInterface::class)) {
     /**
      * @psalm-suppress UnrecognizedStatement
      */
-    interface ResetPasswordRequestInterface extends SymfonyCastsResetPasswordRequestInterface
-    {
-    }
+    interface ResetPasswordRequestInterface extends SymfonyCastsResetPasswordRequestInterface {}
 } else {
     /**
      * @psalm-suppress UnrecognizedStatement
      */
-    interface ResetPasswordRequestInterface
-    {
-    }
+    interface ResetPasswordRequestInterface {}
 }

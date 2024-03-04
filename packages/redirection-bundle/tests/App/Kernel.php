@@ -70,6 +70,7 @@ final class Kernel extends BaseKernel
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
@@ -88,11 +89,15 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
-                    'redirection' => [
+                    'entity' => [
                         'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\RedirectionBundle\Tests\App\Entity',

@@ -11,26 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.1', '8.2']
+        php: ['8.1', '8.2', '8.3']
         dependencies: [highest]
         symfony-require: [highest]
         include:
           - php: '8.1'
             dependencies: lowest
             symfony-require: highest
-          - php: '8.2'
+          - php: '8.3'
             dependencies: highest
             symfony-require: 5.4.*
-          - php: '8.2'
+          - php: '8.3'
             dependencies: highest
-            symfony-require: 6.2.*
-          - php: '8.2'
-            dependencies: highest
-            symfony-require: 6.3.*
+            symfony-require: 6.4.*
     env:
       SYMFONY_REQUIRE: ${{matrix.symfony-require}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}

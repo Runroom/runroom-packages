@@ -28,9 +28,7 @@ final class CookiesRuntime implements RuntimeExtensionInterface
     /**
      * @phpstan-param CookiesData $cookies
      */
-    public function __construct(private readonly array $cookies)
-    {
-    }
+    public function __construct(private readonly array $cookies) {}
 
     public function buildCookies(): CookiesViewModel
     {
