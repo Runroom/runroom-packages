@@ -150,7 +150,7 @@ final class Kernel extends BaseKernel
                         'lifetime' => 2_629_746,
                         'path' => '/',
                     ],
-                ]
+                ],
             ],
         ];
 
@@ -233,7 +233,7 @@ final class Kernel extends BaseKernel
                 'local' => [
                     'directory' => '%kernel.project_dir%/uploads',
                     'create' => true,
-                ]
+                ],
             ],
         ]);
 
@@ -243,19 +243,19 @@ final class Kernel extends BaseKernel
                     [
                         'name' => 'test',
                         'cookies' => [['name' => 'test']],
-                    ]
+                    ],
                 ],
                 'performance_cookies' => [
                     [
                         'name' => 'test',
                         'cookies' => [['name' => 'test']],
-                    ]
+                    ],
                 ],
                 'targeting_cookies' => [
                     [
                         'name' => 'test',
                         'cookies' => [['name' => 'test']],
-                    ]
+                    ],
                 ],
             ],
         ]);

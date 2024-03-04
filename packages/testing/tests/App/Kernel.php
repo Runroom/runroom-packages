@@ -97,7 +97,7 @@ final class Kernel extends BaseKernel
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
-                    'redirection' => [
+                    'entity' => [
                         'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\Testing\Tests\App\Entity',
