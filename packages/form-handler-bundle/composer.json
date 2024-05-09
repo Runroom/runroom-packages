@@ -30,7 +30,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
         "runroom-packages/render-event-bundle": "^0.18",
-        "symfony/phpunit-bridge": "^6.3"
+        "symfony/phpunit-bridge": "^7.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
