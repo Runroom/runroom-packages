@@ -27,7 +27,6 @@
         "symfony/http-kernel": "^5.4 || ^6.4"
     },
     "require-dev": {
-        "doctrine/data-fixtures": "^1.6",
         "doctrine/dbal": "^3.4",
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/orm": "^2.14",
@@ -36,8 +35,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "^4.3",
         "symfony/phpunit-bridge": "^7.0",
         "symfony/security-bundle": "^5.4 || ^6.4",
-        "symfony/twig-bundle": "^5.4 || ^6.4",
-        "theofidry/alice-data-fixtures": "^1.4"
+        "symfony/twig-bundle": "^5.4 || ^6.4"
     },
     "autoload": {
         "psr-4": {

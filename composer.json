@@ -50,7 +50,6 @@
         "a2lix/auto-form-bundle": "^0.4",
         "a2lix/translation-form-bundle": "^3.2",
         "dama/doctrine-test-bundle": "^8.0",
-        "doctrine/data-fixtures": "^1.6",
         "doctrine/dbal": "^3.4",
         "ergebnis/composer-normalize": "^2.6",
         "friendsofphp/php-cs-fixer": "^3.14",
@@ -79,7 +78,6 @@
         "symfony/phpunit-bridge": "^7.0",
         "symfonycasts/reset-password-bundle": "^1.9",
         "symplify/monorepo-builder": "^11.0 <11.1",
-        "theofidry/alice-data-fixtures": "^1.4",
         "vimeo/psalm": "^5.1",
         "weirdan/doctrine-psalm-plugin": "^2.6",
         "zenstruck/foundry": "^1.34"

@@ -16,12 +16,15 @@ namespace Runroom\Testing\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @phpstan-template T of object
  */
 abstract class SonataAdminTestCase extends KernelTestCase
 {
+    use ResetDatabase;
+
     /**
      * @var AdminInterface<T>
      */
@@ -80,14 +83,14 @@ abstract class SonataAdminTestCase extends KernelTestCase
     {
         $exportFields = $this->admin->getExportFields();
 
-        static::assertCount(1, array_filter($exportFields, static fn (string $exportField): bool => $exportField === $field), 'It does not contain export field: ' . $field);
+        static::assertCount(1, array_filter($exportFields, static fn(string $exportField): bool => $exportField === $field), 'It does not contain export field: ' . $field);
     }
 
     final protected function assertAdminExportDoesNotContainField(string $field): void
     {
         $exportFields = $this->admin->getExportFields();
 
-        static::assertCount(0, array_filter($exportFields, static fn (string $exportField): bool => $exportField === $field), 'It does contain export field: ' . $field);
+        static::assertCount(0, array_filter($exportFields, static fn(string $exportField): bool => $exportField === $field), 'It does contain export field: ' . $field);
     }
 
     /**
