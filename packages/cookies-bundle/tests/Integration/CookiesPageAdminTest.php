@@ -15,12 +15,15 @@ namespace Runroom\CookiesBundle\Tests\Integration;
 
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<CookiesPage>
  */
 final class CookiesPageAdminTest extends SonataAdminTestCase
 {
+    use ResetDatabase;
+
     public function testItHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('translations');

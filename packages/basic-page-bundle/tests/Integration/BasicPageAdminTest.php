@@ -16,12 +16,15 @@ namespace Runroom\BasicPageBundle\Tests\Integration;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<BasicPage>
  */
 final class BasicPageAdminTest extends SonataAdminTestCase
 {
+    use ResetDatabase;
+
     public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('title');

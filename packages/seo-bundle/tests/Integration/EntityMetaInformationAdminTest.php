@@ -15,12 +15,15 @@ namespace Runroom\SeoBundle\Tests\Integration;
 
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<EntityMetaInformation>
  */
 final class EntityMetaInformationAdminTest extends SonataAdminTestCase
 {
+    use ResetDatabase;
+
     public function testItHasAllFormFields(): void
     {
         $this->assertAdminFormContainsField('translations');

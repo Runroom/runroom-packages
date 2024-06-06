@@ -17,6 +17,7 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<UserInterface>
@@ -24,6 +25,7 @@ use Zenstruck\Foundry\Test\Factories;
 final class UserAdminTest extends SonataAdminTestCase
 {
     use Factories;
+    use ResetDatabase;
 
     public function testItHasAllListFields(): void
     {

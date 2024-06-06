@@ -15,12 +15,14 @@ namespace Runroom\SeoBundle\Tests\Integration;
 
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<MetaInformation>
  */
 final class MetaInformationAdminTest extends SonataAdminTestCase
 {
+    use ResetDatabase;
     public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('routeName');
