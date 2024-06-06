@@ -16,15 +16,12 @@ namespace Runroom\Testing\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @phpstan-template T of object
  */
 abstract class SonataAdminTestCase extends KernelTestCase
 {
-    use ResetDatabase;
-
     /**
      * @var AdminInterface<T>
      */
