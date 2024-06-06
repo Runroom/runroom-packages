@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Runroom\Testing\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -37,10 +35,8 @@ final class Kernel extends BaseKernel
     {
         return [
             new DoctrineBundle(),
-            new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
-            new NelmioAliceBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
             new SonataDoctrineORMAdminBundle(),
@@ -109,7 +105,9 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void {}
+    protected function configureRoutes(RoutingConfigurator $routes): void
+    {
+    }
 
     private function getBaseDir(): string
     {
