@@ -17,11 +17,9 @@ use A2lix\AutoFormBundle\A2lixAutoFormBundle;
 use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
-use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
@@ -69,11 +67,9 @@ final class Kernel extends BaseKernel
             new DAMADoctrineTestBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
-            new FidryAliceDataFixturesBundle(),
             new FOSCKEditorBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
-            new NelmioAliceBundle(),
             new SecurityBundle(),
             new TwigBundle(),
             new SonataAdminBundle(),
