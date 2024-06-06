@@ -23,6 +23,7 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 final class MetaInformationAdminTest extends SonataAdminTestCase
 {
     use ResetDatabase;
+
     public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('routeName');
