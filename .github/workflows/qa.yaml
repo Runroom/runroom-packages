@@ -24,7 +24,7 @@ jobs:
       - run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
       - run: vendor/bin/phpunit
       - run: composer phpstan
-      - run: composer psalm -- --php-version=${{ matrix.php }} --threads=$(nproc) --output-format=github --shepherd
+      - run: composer psalm -- --php-version=8.1 --threads=$(nproc) --output-format=github --shepherd
       - run: composer normalize-run -- --dry-run --diff
       - run: composer validate --strict
       - run: composer rector -- --dry-run
