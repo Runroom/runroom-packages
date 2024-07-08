@@ -21,6 +21,7 @@ use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 use function Zenstruck\Foundry\Persistence\refresh;
+use function Zenstruck\Foundry\Persistence\proxy;
 
 final class DeactivateUserCommandTest extends KernelTestCase
 {
@@ -56,7 +57,7 @@ final class DeactivateUserCommandTest extends KernelTestCase
         if (\function_exists('Zenstruck\Foundry\Persistence\refresh')) {
             refresh($user);
         } else {
-            $user = UserFactory::find($user->getId());
+            $user = proxy($user)->_refresh()->_real();
         }
 
         static::assertFalse($user->getEnabled());
@@ -75,7 +76,7 @@ final class DeactivateUserCommandTest extends KernelTestCase
         if (\function_exists('Zenstruck\Foundry\Persistence\refresh')) {
             refresh($user);
         } else {
-            $user = UserFactory::find($user->getId());
+            $user = proxy($user)->_refresh()->_real();
         }
 
         static::assertFalse($user->getEnabled());
