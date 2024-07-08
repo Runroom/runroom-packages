@@ -39,7 +39,7 @@ return static function (MBConfig $mBConfig): void {
             'phpstan/phpstan-strict-rules' => '^1.0',
             'psalm/plugin-phpunit' => '^0.18',
             'psalm/plugin-symfony' => '^5.0',
-            'rector/rector' => '^0.19',
+            'rector/rector' => '^1.0',
             'symplify/monorepo-builder' => '^11.0 <11.1',
             'vimeo/psalm' => '^5.1',
             'weirdan/doctrine-psalm-plugin' => '^2.6',

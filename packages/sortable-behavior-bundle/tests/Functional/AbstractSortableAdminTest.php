@@ -86,10 +86,18 @@ final class AbstractSortableAdminTest extends WebTestCase
 
         $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity1->getId() . '/move/3');
 
-        refresh($sortableEntity1);
-        refresh($sortableEntity2);
-        refresh($sortableEntity3);
-        refresh($sortableEntity4);
+        // @TODO: Remove else when dropping support for zenstruct/foundry 1
+        if (function_exists('refresh')) {
+            refresh($sortableEntity1);
+            refresh($sortableEntity2);
+            refresh($sortableEntity3);
+            refresh($sortableEntity4);
+        } else {
+            $sortableEntity1 = $factory::find($sortableEntity1->getId());
+            $sortableEntity2 = $factory::find($sortableEntity2->getId());
+            $sortableEntity3 = $factory::find($sortableEntity3->getId());
+            $sortableEntity4 = $factory::find($sortableEntity4->getId());
+        }
 
         static::assertSame(3, $sortableEntity1->getPosition());
         static::assertSame(0, $sortableEntity2->getPosition());
