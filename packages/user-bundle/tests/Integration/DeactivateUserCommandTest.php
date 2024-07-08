@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Tests\Integration;
 
 use Runroom\UserBundle\Factory\UserFactory;
-use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+
+use function Zenstruck\Foundry\Persistence\refresh;
 
 final class DeactivateUserCommandTest extends KernelTestCase
 {
@@ -45,30 +45,28 @@ final class DeactivateUserCommandTest extends KernelTestCase
 
     public function testItDoesNothingToAnAlreadyInactiveUser(): void
     {
-        /**
-         * @phpstan-var Proxy<UserInterface>
-         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => false,
-        ])->enableAutoRefresh();
+        ]);
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
+
+        refresh($user);
 
         static::assertFalse($user->getEnabled());
     }
 
     public function testItDeactivatesUser(): void
     {
-        /**
-         * @phpstan-var Proxy<UserInterface>
-         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
-        ])->enableAutoRefresh();
+        ]);
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
+
+        refresh($user);
 
         static::assertFalse($user->getEnabled());
         static::assertStringContainsString('User "email@localhost" has been deactivated.', $this->commandTester->getDisplay());

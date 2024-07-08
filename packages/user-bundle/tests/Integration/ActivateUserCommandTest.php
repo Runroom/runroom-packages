@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Tests\Integration;
 
 use Runroom\UserBundle\Factory\UserFactory;
-use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+
+use function Zenstruck\Foundry\Persistence\refresh;
 
 final class ActivateUserCommandTest extends KernelTestCase
 {
@@ -45,30 +45,28 @@ final class ActivateUserCommandTest extends KernelTestCase
 
     public function testItDoesNothingToAnAlreadyActiveUser(): void
     {
-        /**
-         * @phpstan-var Proxy<UserInterface>
-         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
-        ])->enableAutoRefresh();
+        ]);
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
+
+        refresh($user);
 
         static::assertTrue($user->getEnabled());
     }
 
     public function testItActivatesUser(): void
     {
-        /**
-         * @phpstan-var Proxy<UserInterface>
-         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => false,
-        ])->enableAutoRefresh();
+        ]);
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
+
+        refresh($user);
 
         static::assertTrue($user->getEnabled());
         static::assertStringContainsString('User "email@localhost" has been activated.', $this->commandTester->getDisplay());

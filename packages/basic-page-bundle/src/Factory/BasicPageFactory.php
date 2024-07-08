@@ -15,16 +15,12 @@ namespace Runroom\BasicPageBundle\Factory;
 
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\SeoBundle\Factory\EntityMetaInformationFactory;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<BasicPage>
- *
- * @method        BasicPageFactory addState(array|callable $attributes = [])
- * @method static Proxy<BasicPage> createOne(array $attributes = [])
+ * @extends PersistentObjectFactory<BasicPage>
  */
-final class BasicPageFactory extends ModelFactory
+final class BasicPageFactory extends PersistentObjectFactory
 {
     /**
      * @param string[]             $locales
@@ -32,17 +28,22 @@ final class BasicPageFactory extends ModelFactory
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
-        return $this->addState([
+        return $this->with([
             'translations' => BasicPageTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return [...$defaultAttributes, 'locale' => array_pop($locales)];
             })->many(\count($locales)),
         ]);
     }
 
+    public static function class(): string
+    {
+        return BasicPage::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'location' => self::faker()->randomElement([
@@ -52,10 +53,5 @@ final class BasicPageFactory extends ModelFactory
             'publish' => self::faker()->boolean(),
             'metaInformation' => EntityMetaInformationFactory::new(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return BasicPage::class;
     }
 }

@@ -80,7 +80,7 @@
         "symplify/monorepo-builder": "^11.0 <11.1",
         "vimeo/psalm": "^5.1",
         "weirdan/doctrine-psalm-plugin": "^2.6",
-        "zenstruck/foundry": "^1.34"
+        "zenstruck/foundry": "^1.38 || ^2.0"
     },
     "replace": {
         "runroom-packages/basic-page-bundle": "0.17.2",

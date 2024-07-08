@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Tests\Integration;
 
 use Runroom\UserBundle\Factory\UserFactory;
-use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+
+use function Zenstruck\Foundry\Persistence\refresh;
 
 final class ChangePasswordCommandTest extends KernelTestCase
 {
@@ -48,13 +48,10 @@ final class ChangePasswordCommandTest extends KernelTestCase
 
     public function testItChangesUserPassword(): void
     {
-        /**
-         * @phpstan-var Proxy<UserInterface>
-         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'password' => 'old_password',
-        ])->enableAutoRefresh();
+        ]);
 
         static::assertSame($user->getPassword(), 'old_password');
 
@@ -62,6 +59,8 @@ final class ChangePasswordCommandTest extends KernelTestCase
             'identifier' => 'email@localhost',
             'password' => 'new_password',
         ]);
+
+        refresh($user);
 
         static::assertSame($user->getPassword(), 'new_password');
     }

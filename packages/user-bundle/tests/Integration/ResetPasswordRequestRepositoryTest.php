@@ -35,7 +35,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItCreatesResetPasswordRequest(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $date = new \DateTimeImmutable();
         $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
 
@@ -47,7 +47,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItGetsUserIdentifier(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $identifier = $this->repository->getUserIdentifier($user);
 
         static::assertSame('1', $identifier);
@@ -55,7 +55,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItPersistsResetPasswordRequest(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $date = new \DateTimeImmutable();
         $userPasswordRequest = $this->repository->createResetPasswordRequest($user, $date, 'selector', 'token');
 
@@ -82,7 +82,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItGetsNullWhenThereIsNoMostRecentExpiredRequestPassword(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
 
         static::assertNull($requestDate);
@@ -90,7 +90,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItGetsNullWhenThereIsAExpiredMostRecentRequestPassword(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         ResetPasswordRequestFactory::createOne(['user' => $user]);
 
         $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
@@ -100,7 +100,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItGetsTheMostNonExpiredRequestDate(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $date = new \DateTimeImmutable();
 
         ResetPasswordRequestFactory::createOne([
@@ -115,7 +115,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItGetsTheMostNonExpiredRequestDateWithTwoResetPasswords(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $date = new \DateTimeImmutable();
         $oneHour = $date->add(new \DateInterval('PT1H'));
 
@@ -129,7 +129,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
         $secondResetPasswordRequest = ResetPasswordRequestFactory::createOne([
             'user' => $user,
             'expiresAt' => $oneHour,
-        ])->object();
+        ]);
 
         $requestDate = $this->repository->getMostRecentNonExpiredRequestDate($user);
 
@@ -139,11 +139,11 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItCanRemoveExpiredResetPasswordByObject(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $resetPasswordRequest = ResetPasswordRequestFactory::createOne([
             'user' => $user,
             'selector' => 'newSelector',
-        ])->object();
+        ]);
 
         $this->repository->removeResetPasswordRequest($resetPasswordRequest);
         $resetPasswordRequestResult = $this->repository->findResetPasswordRequest('newSelector');
@@ -153,7 +153,7 @@ final class ResetPasswordRequestRepositoryTest extends KernelTestCase
 
     public function testItCanRemoveExpiredResetPasswords(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
 
         ResetPasswordRequestFactory::createOne([
             'user' => $user,

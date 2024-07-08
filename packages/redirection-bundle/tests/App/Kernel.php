@@ -112,10 +112,6 @@ final class Kernel extends BaseKernel
             'strict_variables' => '%kernel.debug%',
         ]);
 
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
-        ]);
-
         $container->loadFromExtension('runroom_redirection', [
             'enable_automatic_redirections' => true,
             'automatic_redirections' => [

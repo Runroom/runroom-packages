@@ -157,10 +157,6 @@ final class Kernel extends BaseKernel
 
         $container->loadFromExtension('security', $securityConfig);
 
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
-        ]);
-
         $container->loadFromExtension('doctrine', [
             'dbal' => [
                 'url' => 'sqlite:///%kernel.cache_dir%/app.db',

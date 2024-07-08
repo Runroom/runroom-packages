@@ -68,7 +68,7 @@ final class UserAdminTest extends SonataAdminTestCase
     {
         $user = UserFactory::createOne([
             'plainPassword' => 'new_password',
-        ])->object();
+        ]);
 
         $createdUser = $this->admin->create($user);
 
@@ -78,7 +78,7 @@ final class UserAdminTest extends SonataAdminTestCase
 
     public function testItDoesNotChangePasswordIfNoNewPasswordIsProvided(): void
     {
-        $user = UserFactory::createOne(['password' => 'testing'])->object();
+        $user = UserFactory::createOne(['password' => 'testing']);
 
         $createdUser = $this->admin->update($user);
 

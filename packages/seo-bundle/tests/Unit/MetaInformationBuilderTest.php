@@ -55,7 +55,7 @@ final class MetaInformationBuilderTest extends TestCase
         ])->withTranslations(['en'], [
             'title' => '[model.placeholder] title',
             'description' => '[model.missing] description',
-        ])->create()->object();
+        ])->create();
 
         $this->repository->method('findOneBy')->willReturn($metaInformation);
 

@@ -117,10 +117,6 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('a2lix_translation_form', [
             'locales' => ['es', 'en', 'ca'],
         ]);
-
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
-        ]);
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void {}

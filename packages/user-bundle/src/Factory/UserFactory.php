@@ -14,21 +14,23 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Factory;
 
 use Runroom\UserBundle\Entity\User;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
+use Runroom\UserBundle\Model\UserInterface;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<User>
- *
- * @method static Proxy<User> createOne(array $attributes = [])
- * @method static Proxy<User> find($criteria)
+ * @extends PersistentObjectFactory<UserInterface>
  */
-final class UserFactory extends ModelFactory
+final class UserFactory extends PersistentObjectFactory
 {
+    public static function class(): string
+    {
+        return User::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'email' => static::faker()->unique()->email(),
@@ -37,10 +39,5 @@ final class UserFactory extends ModelFactory
             'roles' => [],
             'createdAt' => static::faker()->dateTime(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return User::class;
     }
 }

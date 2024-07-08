@@ -15,30 +15,26 @@ namespace Runroom\SortableBehaviorBundle\Tests\Functional;
 
 use Runroom\SortableBehaviorBundle\Tests\App\Entity\SortableEntity;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-use function Zenstruck\Foundry\anonymous;
+use function Zenstruck\Foundry\Persistence\persistent_factory;
+use function Zenstruck\Foundry\Persistence\refresh;
 
 final class AbstractSortableAdminTest extends WebTestCase
 {
     use Factories;
     use ResetDatabase;
 
-    public function testItUpdatesPosition(): void
+    public function testItMovesItemUpAndDown(): void
     {
         $client = static::createClient();
 
-        $sortableEntities = anonymous(SortableEntity::class)->many(4)->create();
+        $sortableEntities = persistent_factory(SortableEntity::class)->many(4)->create();
 
-        /** @var Proxy<SortableEntity> */
         $sortableEntity1 = $sortableEntities[0];
-        /** @var Proxy<SortableEntity> */
         $sortableEntity2 = $sortableEntities[1];
-        /** @var Proxy<SortableEntity> */
         $sortableEntity3 = $sortableEntities[2];
-        /** @var Proxy<SortableEntity> */
         $sortableEntity4 = $sortableEntities[3];
 
         static::assertSame(0, $sortableEntity1->getPosition());
@@ -51,26 +47,43 @@ final class AbstractSortableAdminTest extends WebTestCase
         $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity3->getId() . '/move/up');
         $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity4->getId() . '/move/top');
 
-        $sortableEntity1->refresh();
-        $sortableEntity2->refresh();
-        $sortableEntity3->refresh();
-        $sortableEntity4->refresh();
+        refresh($sortableEntity1);
+        refresh($sortableEntity2);
+        refresh($sortableEntity3);
+        refresh($sortableEntity4);
 
         static::assertSame(2, $sortableEntity1->getPosition());
         static::assertSame(3, $sortableEntity2->getPosition());
         static::assertSame(1, $sortableEntity3->getPosition());
         static::assertSame(0, $sortableEntity4->getPosition());
+    }
 
-        $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity3->getId() . '/move/3');
+    public function testItMovesItemsToSpecificPositions(): void
+    {
+        $client = static::createClient();
 
-        $sortableEntity1->refresh();
-        $sortableEntity2->refresh();
-        $sortableEntity3->refresh();
-        $sortableEntity4->refresh();
+        $sortableEntities = persistent_factory(SortableEntity::class)->many(4)->create();
 
-        static::assertSame(1, $sortableEntity1->getPosition());
-        static::assertSame(2, $sortableEntity2->getPosition());
-        static::assertSame(3, $sortableEntity3->getPosition());
-        static::assertSame(0, $sortableEntity4->getPosition());
+        $sortableEntity1 = $sortableEntities[0];
+        $sortableEntity2 = $sortableEntities[1];
+        $sortableEntity3 = $sortableEntities[2];
+        $sortableEntity4 = $sortableEntities[3];
+
+        static::assertSame(0, $sortableEntity1->getPosition());
+        static::assertSame(1, $sortableEntity2->getPosition());
+        static::assertSame(2, $sortableEntity3->getPosition());
+        static::assertSame(3, $sortableEntity4->getPosition());
+
+        $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity1->getId() . '/move/3');
+
+        refresh($sortableEntity1);
+        refresh($sortableEntity2);
+        refresh($sortableEntity3);
+        refresh($sortableEntity4);
+
+        static::assertSame(3, $sortableEntity1->getPosition());
+        static::assertSame(0, $sortableEntity2->getPosition());
+        static::assertSame(1, $sortableEntity3->getPosition());
+        static::assertSame(2, $sortableEntity4->getPosition());
     }
 }

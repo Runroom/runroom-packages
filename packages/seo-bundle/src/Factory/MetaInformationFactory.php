@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Factory;
 
 use Runroom\SeoBundle\Entity\MetaInformation;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<MetaInformation>
+ * @extends PersistentObjectFactory<MetaInformation>
  *
- * @method MetaInformationFactory addState(array|callable $attributes = [])
+ * @method MetaInformationFactory with(array|callable $attributes = [])
  */
-final class MetaInformationFactory extends ModelFactory
+final class MetaInformationFactory extends PersistentObjectFactory
 {
     /**
      * @param string[]             $locales
@@ -29,26 +29,26 @@ final class MetaInformationFactory extends ModelFactory
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
-        return $this->addState([
+        return $this->with([
             'translations' => MetaInformationTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return [...$defaultAttributes, 'locale' => array_pop($locales)];
             })->many(\count($locales)),
         ]);
     }
 
+    public static function class(): string
+    {
+        return MetaInformation::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'route' => self::faker()->unique()->word(),
             'routeName' => self::faker()->words(3, true),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return MetaInformation::class;
     }
 }

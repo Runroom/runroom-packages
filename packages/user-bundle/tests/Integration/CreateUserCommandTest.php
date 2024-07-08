@@ -48,7 +48,7 @@ final class CreateUserCommandTest extends KernelTestCase
         $createdUser = UserFactory::find(['email' => 'email@localhost']);
 
         static::assertSame('email@localhost', $createdUser->getEmail());
-        static::assertTrue($passwordHasher->isPasswordValid($createdUser->object(), 'password'));
+        static::assertTrue($passwordHasher->isPasswordValid($createdUser, 'password'));
         static::assertTrue($createdUser->getEnabled());
         static::assertNotNull($createdUser->getCreatedAt());
     }

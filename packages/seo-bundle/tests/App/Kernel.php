@@ -130,10 +130,6 @@ final class Kernel extends BaseKernel
             'locales' => ['es', 'en', 'ca'],
         ]);
 
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
-        ]);
-
         $container->loadFromExtension('sonata_media', [
             'default_context' => 'default',
             'contexts' => ['default' => []],

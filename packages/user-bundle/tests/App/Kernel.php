@@ -145,10 +145,6 @@ final class Kernel extends BaseKernel
             'strict_variables' => '%kernel.debug%',
         ]);
 
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
-        ]);
-
         $container->loadFromExtension('symfonycasts_reset_password', [
             'request_password_repository' => 'symfonycasts.reset_password.fake_request_repository',
         ]);

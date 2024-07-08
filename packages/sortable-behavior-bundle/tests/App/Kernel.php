@@ -114,10 +114,6 @@ final class Kernel extends BaseKernel
             'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
-
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
-        ]);
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void

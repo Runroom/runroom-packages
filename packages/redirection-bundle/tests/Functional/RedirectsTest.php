@@ -36,7 +36,7 @@ final class RedirectsTest extends WebTestCase
             'destination' => '/destination',
             'publish' => true,
             'httpCode' => Redirect::PERMANENT,
-        ])->create()->object();
+        ])->create();
 
         $client->request('GET', '/redirects');
         self::assertResponseRedirects('/destination', Redirect::PERMANENT);
