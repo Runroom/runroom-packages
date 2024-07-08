@@ -49,7 +49,7 @@ final class AbstractSortableAdminTest extends WebTestCase
         $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity4->getId() . '/move/top');
 
         // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (\function_exists('refresh')) {
+        if (\function_exists('Zenstruck\Foundry\Persistence\refresh')) {
             refresh($sortableEntity1);
             refresh($sortableEntity2);
             refresh($sortableEntity3);
@@ -87,7 +87,7 @@ final class AbstractSortableAdminTest extends WebTestCase
         $client->request('GET', '/tests/app/sortableentity/' . $sortableEntity1->getId() . '/move/3');
 
         // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (\function_exists('refresh')) {
+        if (\function_exists('Zenstruck\Foundry\Persistence\refresh')) {
             refresh($sortableEntity1);
             refresh($sortableEntity2);
             refresh($sortableEntity3);
