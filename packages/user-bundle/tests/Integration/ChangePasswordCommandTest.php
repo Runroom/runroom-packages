@@ -60,7 +60,13 @@ final class ChangePasswordCommandTest extends KernelTestCase
             'password' => 'new_password',
         ]);
 
-        refresh($user);
+        // @TODO: Remove else when dropping support for zenstruct/foundry 1
+        if (function_exists('refresh')) {
+            refresh($user);
+        } else {
+            dump($user->getId());
+            $user = UserFactory::find($user->getId());
+        }
 
         static::assertSame($user->getPassword(), 'new_password');
     }

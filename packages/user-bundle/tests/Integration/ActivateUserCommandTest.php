@@ -52,7 +52,12 @@ final class ActivateUserCommandTest extends KernelTestCase
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
-        refresh($user);
+        // @TODO: Remove else when dropping support for zenstruct/foundry 1
+        if (function_exists('refresh')) {
+            refresh($user);
+        } else {
+            $user = UserFactory::find($user->getId());
+        }
 
         static::assertTrue($user->getEnabled());
     }
@@ -66,7 +71,12 @@ final class ActivateUserCommandTest extends KernelTestCase
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
-        refresh($user);
+        // @TODO: Remove else when dropping support for zenstruct/foundry 1
+        if (function_exists('refresh')) {
+            refresh($user);
+        } else {
+            $user = UserFactory::find($user->getId());
+        }
 
         static::assertTrue($user->getEnabled());
         static::assertStringContainsString('User "email@localhost" has been activated.', $this->commandTester->getDisplay());

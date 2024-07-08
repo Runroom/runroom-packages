@@ -129,7 +129,12 @@ final class ResetPasswordRequestControllerTest extends WebTestCase
         ]);
         $client->followRedirect();
 
-        refresh($user);
+        // @TODO: Remove else when dropping support for zenstruct/foundry 1
+        if (function_exists('refresh')) {
+            refresh($user);
+        } else {
+            $user = UserFactory::find($user->getId());
+        }
 
         static::assertRouteSame('sonata_admin_dashboard');
         static::assertSame($user->getPassword(), 'new_password');
