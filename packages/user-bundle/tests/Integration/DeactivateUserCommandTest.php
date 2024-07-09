@@ -17,11 +17,11 @@ use Runroom\UserBundle\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
+use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 use function Zenstruck\Foundry\Persistence\refresh;
-use function Zenstruck\Foundry\Persistence\proxy;
 
 final class DeactivateUserCommandTest extends KernelTestCase
 {
@@ -54,10 +54,10 @@ final class DeactivateUserCommandTest extends KernelTestCase
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
         // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (\function_exists('Zenstruck\Foundry\Persistence\refresh')) {
+        if (!class_exists(Proxy::class)) {
             refresh($user);
         } else {
-            $user = proxy($user)->_refresh()->_real();
+            $user = Proxy::createFromPersisted($user)->_refresh()->_real();
         }
 
         static::assertFalse($user->getEnabled());
@@ -73,10 +73,10 @@ final class DeactivateUserCommandTest extends KernelTestCase
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
         // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (\function_exists('Zenstruck\Foundry\Persistence\refresh')) {
+        if (!class_exists(Proxy::class)) {
             refresh($user);
         } else {
-            $user = proxy($user)->_refresh()->_real();
+            $user = Proxy::createFromPersisted($user)->_refresh()->_real();
         }
 
         static::assertFalse($user->getEnabled());

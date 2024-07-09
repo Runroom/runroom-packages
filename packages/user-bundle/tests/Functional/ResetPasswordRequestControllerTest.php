@@ -16,11 +16,11 @@ namespace Runroom\UserBundle\Tests\Functional;
 use Runroom\UserBundle\Factory\ResetPasswordRequestFactory;
 use Runroom\UserBundle\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 use function Zenstruck\Foundry\Persistence\refresh;
-use function Zenstruck\Foundry\Persistence\proxy;
 
 final class ResetPasswordRequestControllerTest extends WebTestCase
 {
@@ -131,10 +131,10 @@ final class ResetPasswordRequestControllerTest extends WebTestCase
         $client->followRedirect();
 
         // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (\function_exists('Zenstruck\Foundry\Persistence\refresh')) {
+        if (!class_exists(Proxy::class)) {
             refresh($user);
         } else {
-            $user = proxy($user)->_refresh()->_real();
+            $user = Proxy::createFromPersisted($user)->_refresh()->_real();
         }
 
         static::assertRouteSame('sonata_admin_dashboard');
