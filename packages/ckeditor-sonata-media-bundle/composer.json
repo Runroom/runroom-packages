@@ -45,7 +45,7 @@
         "symfony/phpunit-bridge": "^7.0",
         "symfony/security-bundle": "^5.4 || ^6.4",
         "symfony/twig-bundle": "^5.4 || ^6.4",
-        "zenstruck/foundry": "^1.38 || ^2.0"
+        "zenstruck/foundry": "^1.38.2 || ^2.0"
     },
     "conflict": {
         "symfony/doctrine-bridge": ">=7.0",
