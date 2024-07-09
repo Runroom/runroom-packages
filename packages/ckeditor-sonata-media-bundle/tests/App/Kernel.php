@@ -36,6 +36,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 final class Kernel extends BaseKernel
 {
@@ -57,6 +58,7 @@ final class Kernel extends BaseKernel
             new SonataFormBundle(),
             new SonataTwigBundle(),
             new TwigBundle(),
+            new ZenstruckFoundryBundle(),
 
             new RunroomCkeditorSonataMediaBundle(),
         ];
