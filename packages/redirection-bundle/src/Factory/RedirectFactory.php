@@ -14,17 +14,22 @@ declare(strict_types=1);
 namespace Runroom\RedirectionBundle\Factory;
 
 use Runroom\RedirectionBundle\Entity\Redirect;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<Redirect>
+ * @extends PersistentObjectFactory<Redirect>
  */
-final class RedirectFactory extends ModelFactory
+final class RedirectFactory extends PersistentObjectFactory
 {
+    public static function class(): string
+    {
+        return Redirect::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         $uniqueUrl = self::faker()->unique();
 
@@ -38,10 +43,5 @@ final class RedirectFactory extends ModelFactory
             'automatic' => self::faker()->boolean(),
             'publish' => self::faker()->boolean(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return Redirect::class;
     }
 }

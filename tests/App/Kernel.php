@@ -17,11 +17,9 @@ use A2lix\AutoFormBundle\A2lixAutoFormBundle;
 use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
-use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
@@ -69,11 +67,9 @@ final class Kernel extends BaseKernel
             new DAMADoctrineTestBundle(),
             new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
-            new FidryAliceDataFixturesBundle(),
             new FOSCKEditorBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
-            new NelmioAliceBundle(),
             new SecurityBundle(),
             new TwigBundle(),
             new SonataAdminBundle(),
@@ -111,6 +107,7 @@ final class Kernel extends BaseKernel
         $container->setParameter('kernel.default_locale', 'en');
 
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
@@ -133,22 +130,24 @@ final class Kernel extends BaseKernel
                 ],
             ],
             'password_hashers' => [User::class => ['algorithm' => 'plaintext']],
-            'firewalls' => ['main' => [
-                'lazy' => true,
-                'pattern' => '/(.*)',
-                'provider' => 'admin_user_provider',
-                'context' => 'user',
-                'custom_authenticator' => 'runroom.user.security.user_authenticator',
-                'logout' => [
-                    'path' => 'runroom_user_logout',
-                    'target' => 'runroom_user_login',
+            'firewalls' => [
+                'main' => [
+                    'lazy' => true,
+                    'pattern' => '/(.*)',
+                    'provider' => 'admin_user_provider',
+                    'context' => 'user',
+                    'custom_authenticator' => 'runroom.user.security.user_authenticator',
+                    'logout' => [
+                        'path' => 'runroom_user_logout',
+                        'target' => 'runroom_user_login',
+                    ],
+                    'remember_me' => [
+                        'secret' => 'secret',
+                        'lifetime' => 2_629_746,
+                        'path' => '/',
+                    ],
                 ],
-                'remember_me' => [
-                    'secret' => 'secret',
-                    'lifetime' => 2_629_746,
-                    'path' => '/',
-                ],
-            ]],
+            ],
         ];
 
         // @todo: Remove if when dropping support of Symfony 5.4
@@ -158,12 +157,12 @@ final class Kernel extends BaseKernel
 
         $container->loadFromExtension('security', $securityConfig);
 
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
-        ]);
-
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
@@ -222,26 +221,34 @@ final class Kernel extends BaseKernel
                 'gallery_item' => GalleryItem::class,
                 'gallery' => Gallery::class,
             ],
-            'filesystem' => ['local' => [
-                'directory' => '%kernel.project_dir%/uploads',
-                'create' => true,
-            ]],
+            'filesystem' => [
+                'local' => [
+                    'directory' => '%kernel.project_dir%/uploads',
+                    'create' => true,
+                ],
+            ],
         ]);
 
         $container->loadFromExtension('runroom_cookies', [
             'cookies' => [
-                'mandatory_cookies' => [[
-                    'name' => 'test',
-                    'cookies' => [['name' => 'test']],
-                ]],
-                'performance_cookies' => [[
-                    'name' => 'test',
-                    'cookies' => [['name' => 'test']],
-                ]],
-                'targeting_cookies' => [[
-                    'name' => 'test',
-                    'cookies' => [['name' => 'test']],
-                ]],
+                'mandatory_cookies' => [
+                    [
+                        'name' => 'test',
+                        'cookies' => [['name' => 'test']],
+                    ],
+                ],
+                'performance_cookies' => [
+                    [
+                        'name' => 'test',
+                        'cookies' => [['name' => 'test']],
+                    ],
+                ],
+                'targeting_cookies' => [
+                    [
+                        'name' => 'test',
+                        'cookies' => [['name' => 'test']],
+                    ],
+                ],
             ],
         ]);
 

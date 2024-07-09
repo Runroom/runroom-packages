@@ -15,12 +15,15 @@ namespace Runroom\TranslationBundle\Tests\Integration;
 
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Runroom\TranslationBundle\Entity\Translation;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<Translation>
  */
 final class TranslationAdminTest extends SonataAdminTestCase
 {
+    use ResetDatabase;
+
     public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('key');

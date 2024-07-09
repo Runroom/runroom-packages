@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Security\RolesBuilder;
 
-interface AdminRolesBuilderInterface extends RolesBuilderInterface, PermissionLabelsBuilderInterface
-{
-}
+interface AdminRolesBuilderInterface extends RolesBuilderInterface, PermissionLabelsBuilderInterface {}

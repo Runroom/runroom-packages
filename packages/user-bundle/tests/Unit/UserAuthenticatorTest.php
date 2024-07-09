@@ -17,16 +17,16 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Runroom\UserBundle\Entity\User;
 use Runroom\UserBundle\Security\UserAuthenticator;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Security as DeprecatedSecurity;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 
 final class UserAuthenticatorTest extends TestCase
 {
@@ -69,12 +69,12 @@ final class UserAuthenticatorTest extends TestCase
         /**
          * @psalm-suppress DeprecatedClass
          *
-         * @todo: Remove this conditional when dropping support for Symfony <5.4
+         * @todo: Remove this conditional when dropping support for Symfony <6.2
          */
         static::assertSame('username', $request->getSession()->get(
-            class_exists(Security::class) ?
-            Security::LAST_USERNAME :
-            DeprecatedSecurity::LAST_USERNAME
+            class_exists(SecurityRequestAttributes::class) ?
+            SecurityRequestAttributes::LAST_USERNAME :
+            Security::LAST_USERNAME
         ));
     }
 

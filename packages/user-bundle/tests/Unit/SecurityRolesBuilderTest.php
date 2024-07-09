@@ -83,24 +83,24 @@ final class SecurityRolesBuilderTest extends TestCase
 
         $expectedExpandedRoles = [
             'ROLE_SUPER_ADMIN' => [
-              'role' => 'ROLE_SUPER_ADMIN',
-              'role_translated' => 'ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH',
-              'is_granted' => true,
+                'role' => 'ROLE_SUPER_ADMIN',
+                'role_translated' => 'ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH',
+                'is_granted' => true,
             ],
             'ROLE_ALLOWED_TO_SWITCH' => [
-              'role' => 'ROLE_ALLOWED_TO_SWITCH',
-              'role_translated' => 'ROLE_ALLOWED_TO_SWITCH',
-              'is_granted' => false,
+                'role' => 'ROLE_ALLOWED_TO_SWITCH',
+                'role_translated' => 'ROLE_ALLOWED_TO_SWITCH',
+                'is_granted' => false,
             ],
             'ROLE_ADMIN' => [
-              'role' => 'ROLE_ADMIN',
-              'role_translated' => 'ROLE_ADMIN: ROLE_USER',
-              'is_granted' => true,
+                'role' => 'ROLE_ADMIN',
+                'role_translated' => 'ROLE_ADMIN: ROLE_USER',
+                'is_granted' => true,
             ],
             'ROLE_USER' => [
-              'role' => 'ROLE_USER',
-              'role_translated' => 'ROLE_USER',
-              'is_granted' => false,
+                'role' => 'ROLE_USER',
+                'role_translated' => 'ROLE_USER',
+                'is_granted' => false,
             ],
         ];
 

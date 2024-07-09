@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Factory;
 
 use Runroom\SeoBundle\Entity\EntityMetaInformation;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<EntityMetaInformation>
+ * @extends PersistentObjectFactory<EntityMetaInformation>
  *
- * @method EntityMetaInformationFactory addState(array|callable $attributes = [])
+ * @method EntityMetaInformationFactory with(array|callable $attributes = [])
  */
-final class EntityMetaInformationFactory extends ModelFactory
+final class EntityMetaInformationFactory extends PersistentObjectFactory
 {
     /**
      * @param string[]             $locales
@@ -29,23 +29,23 @@ final class EntityMetaInformationFactory extends ModelFactory
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
-        return $this->addState([
+        return $this->with([
             'translations' => EntityMetaInformationTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return [...$defaultAttributes, 'locale' => array_pop($locales)];
             })->many(\count($locales)),
         ]);
     }
 
+    public static function class(): string
+    {
+        return EntityMetaInformation::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [];
-    }
-
-    protected static function getClass(): string
-    {
-        return EntityMetaInformation::class;
     }
 }

@@ -31,7 +31,7 @@ final class BasicPageMetaInformationProviderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->basicPage = BasicPageFactory::createOne()->object();
+        $this->basicPage = BasicPageFactory::createOne();
         $this->provider = new BasicPageMetaInformationProvider();
         $this->model = new BasicPageViewModel($this->basicPage);
     }

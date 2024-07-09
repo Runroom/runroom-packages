@@ -15,6 +15,4 @@ namespace Runroom\TranslationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class RunroomTranslationBundle extends Bundle
-{
-}
+final class RunroomTranslationBundle extends Bundle {}

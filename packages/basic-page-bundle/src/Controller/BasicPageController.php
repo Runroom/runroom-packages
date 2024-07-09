@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class BasicPageController extends AbstractController
 {
-    public function __construct(private readonly BasicPageServiceInterface $service)
-    {
-    }
+    public function __construct(private readonly BasicPageServiceInterface $service) {}
 
     public function show(string $slug): Response
     {

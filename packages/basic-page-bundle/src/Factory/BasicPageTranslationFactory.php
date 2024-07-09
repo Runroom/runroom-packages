@@ -14,17 +14,22 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Factory;
 
 use Runroom\BasicPageBundle\Entity\BasicPageTranslation;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<BasicPageTranslation>
+ * @extends PersistentObjectFactory<BasicPageTranslation>
  */
-final class BasicPageTranslationFactory extends ModelFactory
+final class BasicPageTranslationFactory extends PersistentObjectFactory
 {
+    public static function class(): string
+    {
+        return BasicPageTranslation::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'title' => self::faker()->words(3, true),
@@ -32,10 +37,5 @@ final class BasicPageTranslationFactory extends ModelFactory
             'slug' => self::faker()->unique(true)->slug(),
             'locale' => self::faker()->unique(true)->languageCode(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return BasicPageTranslation::class;
     }
 }

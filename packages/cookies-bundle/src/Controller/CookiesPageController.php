@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CookiesPageController extends AbstractController
 {
-    public function __construct(private readonly CookiesPageServiceInterface $service)
-    {
-    }
+    public function __construct(private readonly CookiesPageServiceInterface $service) {}
 
     public function index(): Response
     {

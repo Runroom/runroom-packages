@@ -59,7 +59,7 @@ final class CookiesPageServiceTest extends TestCase
 
     public function testItGetsCookiesPage(): void
     {
-        $cookiesPage = CookiesPageFactory::createOne()->object();
+        $cookiesPage = CookiesPageFactory::createOne();
         $form = $this->createStub(FormInterface::class);
         $formView = $this->createStub(FormView::class);
 

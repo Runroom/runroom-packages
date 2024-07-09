@@ -32,7 +32,7 @@ final class BasicPageControllerTest extends WebTestCase
 
         BasicPageFactory::new(['publish' => true])->withTranslations(['en'], [
             'slug' => 'basic-page',
-        ])->create()->object();
+        ])->create();
 
         $client->request('GET', '/basic-page');
         self::assertResponseIsSuccessful();

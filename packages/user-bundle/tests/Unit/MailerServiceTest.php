@@ -55,7 +55,7 @@ final class MailerServiceTest extends TestCase
 
     public function testItCallsMailerWhenUserHasEmail(): void
     {
-        $user = UserFactory::createOne(['email' => 'user@email.com'])->object();
+        $user = UserFactory::createOne(['email' => 'user@email.com']);
         $resetPasswordToken = new ResetPasswordToken('token', new \DateTimeImmutable(), 0);
 
         $this->translator->method('trans')->with('email.subject')->willReturn('Subject');
@@ -66,7 +66,7 @@ final class MailerServiceTest extends TestCase
 
     public function testItDoesntCallMailerWhenUserDoesntHaveEmail(): void
     {
-        $user = UserFactory::createOne(['email' => null])->object();
+        $user = UserFactory::createOne(['email' => null]);
         $resetPasswordToken = new ResetPasswordToken('token', new \DateTimeImmutable(), 0);
 
         $this->mailer->expects(static::never())->method('send');

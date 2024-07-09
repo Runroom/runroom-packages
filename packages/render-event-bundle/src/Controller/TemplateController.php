@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TemplateController
 {
-    public function __construct(private readonly PageRendererInterface $renderer)
-    {
-    }
+    public function __construct(private readonly PageRendererInterface $renderer) {}
 
     /**
      * @param array<string, mixed>|null $context

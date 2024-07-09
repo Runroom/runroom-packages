@@ -14,20 +14,22 @@ declare(strict_types=1);
 namespace Runroom\UserBundle\Factory;
 
 use Runroom\UserBundle\Entity\ResetPasswordRequest;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<ResetPasswordRequest>
- *
- * @method static Proxy<ResetPasswordRequest> createOne(array $attributes = [])
+ * @extends PersistentObjectFactory<ResetPasswordRequest>
  */
-final class ResetPasswordRequestFactory extends ModelFactory
+final class ResetPasswordRequestFactory extends PersistentObjectFactory
 {
+    public static function class(): string
+    {
+        return ResetPasswordRequest::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'user' => UserFactory::new(),
@@ -35,10 +37,5 @@ final class ResetPasswordRequestFactory extends ModelFactory
             'selector' => static::faker()->unique()->slug(),
             'hashedToken' => static::faker()->uuid(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return ResetPasswordRequest::class;
     }
 }

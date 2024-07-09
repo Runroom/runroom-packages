@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Runroom\Testing\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -27,6 +25,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class Kernel extends BaseKernel
 {
@@ -36,10 +35,8 @@ final class Kernel extends BaseKernel
     {
         return [
             new DoctrineBundle(),
-            new FidryAliceDataFixturesBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
-            new NelmioAliceBundle(),
             new SecurityBundle(),
             new SonataAdminBundle(),
             new SonataDoctrineORMAdminBundle(),
@@ -67,6 +64,7 @@ final class Kernel extends BaseKernel
         $loader->load($this->getProjectDir() . '/services.php');
 
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
@@ -88,11 +86,15 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
-                    'redirection' => [
+                    'entity' => [
                         'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\Testing\Tests\App\Entity',
@@ -103,9 +105,7 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void
-    {
-    }
+    protected function configureRoutes(RoutingConfigurator $routes): void {}
 
     private function getBaseDir(): string
     {

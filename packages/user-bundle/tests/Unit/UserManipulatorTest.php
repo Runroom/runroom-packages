@@ -60,7 +60,7 @@ final class UserManipulatorTest extends TestCase
 
     public function testItCreatesUser(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
 
         $this->repository->expects(static::once())->method('create')->willReturn($user);
         $this->repository->expects(static::once())->method('save')->with($user);
@@ -96,7 +96,7 @@ final class UserManipulatorTest extends TestCase
 
     public function testItActivatesUser(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
 
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
@@ -108,7 +108,7 @@ final class UserManipulatorTest extends TestCase
 
     public function testItDeactivatesUser(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
 
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');
@@ -120,7 +120,7 @@ final class UserManipulatorTest extends TestCase
 
     public function testItChangesPassword(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
 
         $this->repository->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
         $this->repository->expects(static::once())->method('save');

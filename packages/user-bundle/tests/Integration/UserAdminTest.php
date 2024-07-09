@@ -17,6 +17,7 @@ use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Runroom\UserBundle\Factory\UserFactory;
 use Runroom\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<UserInterface>
@@ -24,6 +25,7 @@ use Zenstruck\Foundry\Test\Factories;
 final class UserAdminTest extends SonataAdminTestCase
 {
     use Factories;
+    use ResetDatabase;
 
     public function testItHasAllListFields(): void
     {
@@ -66,7 +68,7 @@ final class UserAdminTest extends SonataAdminTestCase
     {
         $user = UserFactory::createOne([
             'plainPassword' => 'new_password',
-        ])->object();
+        ]);
 
         $createdUser = $this->admin->create($user);
 
@@ -76,7 +78,7 @@ final class UserAdminTest extends SonataAdminTestCase
 
     public function testItDoesNotChangePasswordIfNoNewPasswordIsProvided(): void
     {
-        $user = UserFactory::createOne(['password' => 'testing'])->object();
+        $user = UserFactory::createOne(['password' => 'testing']);
 
         $createdUser = $this->admin->update($user);
 

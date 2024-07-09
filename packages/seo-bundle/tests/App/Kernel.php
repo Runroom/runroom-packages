@@ -35,6 +35,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 final class Kernel extends BaseKernel
@@ -83,10 +84,10 @@ final class Kernel extends BaseKernel
         $container->setParameter('kernel.default_locale', 'en');
 
         $container->loadFromExtension('framework', [
+            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
-            'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
             'http_method_override' => false,
         ]);
 
@@ -102,11 +103,15 @@ final class Kernel extends BaseKernel
         $container->loadFromExtension('security', $securityConfig);
 
         $container->loadFromExtension('doctrine', [
-            'dbal' => ['url' => 'sqlite:///%kernel.cache_dir%/app.db', 'logging' => false],
+            'dbal' => [
+                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+                'logging' => false,
+                'use_savepoints' => true,
+            ],
             'orm' => [
                 'auto_mapping' => true,
                 'mappings' => [
-                    'redirection' => [
+                    'entity' => [
                         'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Runroom\SeoBundle\Tests\App\Entity',
@@ -123,10 +128,6 @@ final class Kernel extends BaseKernel
 
         $container->loadFromExtension('a2lix_translation_form', [
             'locales' => ['es', 'en', 'ca'],
-        ]);
-
-        $container->loadFromExtension('zenstruck_foundry', [
-            'auto_refresh_proxies' => false,
         ]);
 
         $container->loadFromExtension('sonata_media', [
@@ -149,9 +150,7 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void
-    {
-    }
+    protected function configureRoutes(RoutingConfigurator $routes): void {}
 
     private function getBaseDir(): string
     {

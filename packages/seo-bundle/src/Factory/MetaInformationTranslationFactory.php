@@ -14,27 +14,27 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Factory;
 
 use Runroom\SeoBundle\Entity\MetaInformationTranslation;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<MetaInformationTranslation>
+ * @extends PersistentObjectFactory<MetaInformationTranslation>
  */
-final class MetaInformationTranslationFactory extends ModelFactory
+final class MetaInformationTranslationFactory extends PersistentObjectFactory
 {
+    public static function class(): string
+    {
+        return MetaInformationTranslation::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'title' => self::faker()->words(3, true),
             'description' => self::faker()->paragraph(),
             'locale' => self::faker()->unique(true)->languageCode(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return MetaInformationTranslation::class;
     }
 }

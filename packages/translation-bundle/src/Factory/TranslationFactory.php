@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Factory;
 
 use Runroom\TranslationBundle\Entity\Translation;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<Translation>
+ * @extends PersistentObjectFactory<Translation>
  *
- * @method TranslationFactory addState(array|callable $attributes = [])
+ * @method TranslationFactory with(array|callable $attributes = [])
  */
-final class TranslationFactory extends ModelFactory
+final class TranslationFactory extends PersistentObjectFactory
 {
     /**
      * @param string[]             $locales
@@ -29,25 +29,25 @@ final class TranslationFactory extends ModelFactory
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
-        return $this->addState([
+        return $this->with([
             'translations' => TranslationTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return [...$defaultAttributes, 'locale' => array_pop($locales)];
             })->many(\count($locales)),
         ]);
     }
 
+    public static function class(): string
+    {
+        return Translation::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'key' => self::faker()->unique()->word(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return Translation::class;
     }
 }

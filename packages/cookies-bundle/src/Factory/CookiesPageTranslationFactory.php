@@ -14,27 +14,27 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\Factory;
 
 use Runroom\CookiesBundle\Entity\CookiesPageTranslation;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<CookiesPageTranslation>
+ * @extends PersistentObjectFactory<CookiesPageTranslation>
  */
-final class CookiesPageTranslationFactory extends ModelFactory
+final class CookiesPageTranslationFactory extends PersistentObjectFactory
 {
+    public static function class(): string
+    {
+        return CookiesPageTranslation::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'title' => self::faker()->words(3, true),
             'content' => self::faker()->paragraph(),
             'locale' => self::faker()->unique(true)->languageCode(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return CookiesPageTranslation::class;
     }
 }

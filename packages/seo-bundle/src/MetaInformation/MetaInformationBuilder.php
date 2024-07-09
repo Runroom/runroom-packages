@@ -30,8 +30,7 @@ final class MetaInformationBuilder implements MetaInformationBuilderInterface
     public function __construct(
         private readonly ObjectRepository $repository,
         private readonly PropertyAccessorInterface $propertyAccessor
-    ) {
-    }
+    ) {}
 
     public function build(
         MetaInformationProviderInterface $provider,

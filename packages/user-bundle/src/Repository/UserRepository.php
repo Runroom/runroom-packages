@@ -25,8 +25,7 @@ final class UserRepository implements UserRepositoryInterface
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly string $class
-    ) {
-    }
+    ) {}
 
     public function loadUserByIdentifier(string $identifier): ?UserInterface
     {

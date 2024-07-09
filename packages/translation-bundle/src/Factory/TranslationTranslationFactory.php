@@ -14,26 +14,26 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Factory;
 
 use Runroom\TranslationBundle\Entity\TranslationTranslation;
-use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<TranslationTranslation>
+ * @extends PersistentObjectFactory<TranslationTranslation>
  */
-final class TranslationTranslationFactory extends ModelFactory
+final class TranslationTranslationFactory extends PersistentObjectFactory
 {
+    public static function class(): string
+    {
+        return TranslationTranslation::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'value' => self::faker()->words(3, true),
             'locale' => self::faker()->unique(true)->languageCode(),
         ];
-    }
-
-    protected static function getClass(): string
-    {
-        return TranslationTranslation::class;
     }
 }

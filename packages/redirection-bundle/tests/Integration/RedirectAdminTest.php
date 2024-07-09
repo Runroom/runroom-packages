@@ -16,12 +16,15 @@ namespace Runroom\RedirectionBundle\Tests\Integration;
 use Runroom\RedirectionBundle\Entity\Redirect;
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 /**
  * @extends SonataAdminTestCase<Redirect>
  */
 final class RedirectAdminTest extends SonataAdminTestCase
 {
+    use ResetDatabase;
+
     public function testItHasAllListFields(): void
     {
         $this->assertAdminListContainsField('source');

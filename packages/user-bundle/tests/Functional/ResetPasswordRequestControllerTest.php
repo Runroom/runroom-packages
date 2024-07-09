@@ -15,11 +15,12 @@ namespace Runroom\UserBundle\Tests\Functional;
 
 use Runroom\UserBundle\Factory\ResetPasswordRequestFactory;
 use Runroom\UserBundle\Factory\UserFactory;
-use Runroom\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
+
+use function Zenstruck\Foundry\Persistence\refresh;
 
 final class ResetPasswordRequestControllerTest extends WebTestCase
 {
@@ -100,20 +101,17 @@ final class ResetPasswordRequestControllerTest extends WebTestCase
 
         $tokenGenerator = static::getContainer()->get('symfonycasts.reset_password.token_generator');
 
-        /**
-         * @phpstan-var Proxy<UserInterface>
-         */
         $user = UserFactory::createOne([
             'email' => 'email@localhost',
             'enabled' => true,
             'password' => '1234',
-        ])->enableAutoRefresh();
+        ]);
 
         $expiresAt = new \DateTimeImmutable(sprintf('+%d seconds', 3600));
         $tokenComponents = $tokenGenerator->createToken($expiresAt, (string) $user->getId());
 
         ResetPasswordRequestFactory::createOne([
-            'user' => $user->object(),
+            'user' => $user,
             'expiresAt' => $expiresAt,
             'selector' => $tokenComponents->getSelector(),
             'hashedToken' => $tokenComponents->getHashedToken(),
@@ -131,6 +129,13 @@ final class ResetPasswordRequestControllerTest extends WebTestCase
             'change_password_form[plainPassword][second]' => 'new_password',
         ]);
         $client->followRedirect();
+
+        // @TODO: Remove else when dropping support for zenstruct/foundry 1
+        if (!class_exists(Proxy::class)) {
+            refresh($user);
+        } else {
+            $user = Proxy::createFromPersisted($user)->_refresh()->_real();
+        }
 
         static::assertRouteSame('sonata_admin_dashboard');
         static::assertSame($user->getPassword(), 'new_password');

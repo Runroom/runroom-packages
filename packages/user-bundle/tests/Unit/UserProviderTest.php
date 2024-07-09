@@ -42,7 +42,7 @@ final class UserProviderTest extends TestCase
         $this->expectedUser = UserFactory::createOne([
             'email' => 'user@localhost',
             'enabled' => true,
-        ])->object();
+        ]);
 
         $this->repository = $this->createMock(UserRepositoryInterface::class);
 
@@ -92,7 +92,7 @@ final class UserProviderTest extends TestCase
 
     public function testItRefreshesUser(): void
     {
-        $user = UserFactory::createOne()->object();
+        $user = UserFactory::createOne();
         $this->repository->expects(static::once())->method('loadUserByIdentifier')->with('user@localhost')->willReturn($user);
 
         $refreshedUser = $this->userProvider->refreshUser($this->expectedUser);

@@ -14,16 +14,12 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\Factory;
 
 use Runroom\CookiesBundle\Entity\CookiesPage;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<CookiesPage>
- *
- * @method        CookiesPageFactory addState(array|callable $attributes = [])
- * @method static Proxy<CookiesPage> createOne(array $attributes = [])
+ * @extends PersistentObjectFactory<CookiesPage>
  */
-final class CookiesPageFactory extends ModelFactory
+final class CookiesPageFactory extends PersistentObjectFactory
 {
     /**
      * @param string[]             $locales
@@ -31,23 +27,23 @@ final class CookiesPageFactory extends ModelFactory
      */
     public function withTranslations(array $locales, array $defaultAttributes = []): self
     {
-        return $this->addState([
+        return $this->with([
             'translations' => CookiesPageTranslationFactory::new(static function () use (&$locales, $defaultAttributes): array {
                 return [...$defaultAttributes, 'locale' => array_pop($locales)];
             })->many(\count($locales)),
         ]);
     }
 
+    public static function class(): string
+    {
+        return CookiesPage::class;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [];
-    }
-
-    protected static function getClass(): string
-    {
-        return CookiesPage::class;
     }
 }

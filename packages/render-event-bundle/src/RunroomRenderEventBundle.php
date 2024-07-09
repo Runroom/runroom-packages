@@ -15,6 +15,4 @@ namespace Runroom\RenderEventBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class RunroomRenderEventBundle extends Bundle
-{
-}
+final class RunroomRenderEventBundle extends Bundle {}

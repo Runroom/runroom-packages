@@ -32,8 +32,7 @@ final class AutomaticRedirectListener
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly PropertyAccessorInterface $propertyAccessor,
         private array $configuration
-    ) {
-    }
+    ) {}
 
     public function onFlush(OnFlushEventArgs $args): void
     {
@@ -82,7 +81,7 @@ final class AutomaticRedirectListener
                 $redirectConfiguration['route'],
                 array_map(
                     /**
-                     * @return mixed
+                     * @psalm-return mixed
                      */
                     fn (string $field) => $changeset[$field][$state] ?? $this->propertyAccessor->getValue($entity, $field),
                     $redirectConfiguration['routeParameters']

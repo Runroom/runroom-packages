@@ -32,7 +32,7 @@ final class BasicPageAlternateLinksProviderTest extends TestCase
 
     public function testItCanGenerateAlternateLinksIfValidContext(): void
     {
-        $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
+        $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create();
         $context = ['model' => new BasicPageViewModel($basicPage)];
 
         static::assertTrue($this->provider->canGenerateAlternateLink($context, 'es'));
@@ -43,7 +43,7 @@ final class BasicPageAlternateLinksProviderTest extends TestCase
 
     public function testItReturnsRouteParameters(): void
     {
-        $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create()->object();
+        $basicPage = BasicPageFactory::new()->withTranslations(['en', 'es'])->create();
         $context = ['model' => new BasicPageViewModel($basicPage)];
 
         foreach (['en', 'es'] as $locale) {
