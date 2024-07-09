@@ -15,12 +15,12 @@ namespace Runroom\SortableBehaviorBundle\Tests\Functional;
 
 use Runroom\SortableBehaviorBundle\Tests\App\Entity\SortableEntity;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 use function Zenstruck\Foundry\Persistence\persistent_factory;
 use function Zenstruck\Foundry\Persistence\refresh;
-use function Zenstruck\Foundry\Persistence\proxy;
 
 final class AbstractSortableAdminTest extends WebTestCase
 {
@@ -56,10 +56,10 @@ final class AbstractSortableAdminTest extends WebTestCase
             refresh($sortableEntity3);
             refresh($sortableEntity4);
         } else {
-            $sortableEntity1 = proxy($sortableEntity1)->_refresh()->_real();
-            $sortableEntity2 = proxy($sortableEntity2)->_refresh()->_real();
-            $sortableEntity3 = proxy($sortableEntity3)->_refresh()->_real();
-            $sortableEntity4 = proxy($sortableEntity4)->_refresh()->_real();
+            $sortableEntity1 = Proxy::createFromPersisted($sortableEntity1)->_refresh()->_real();
+            $sortableEntity2 = Proxy::createFromPersisted($sortableEntity2)->_refresh()->_real();
+            $sortableEntity3 = Proxy::createFromPersisted($sortableEntity3)->_refresh()->_real();
+            $sortableEntity4 = Proxy::createFromPersisted($sortableEntity4)->_refresh()->_real();
         }
 
         static::assertSame(2, $sortableEntity1->getPosition());
@@ -94,10 +94,10 @@ final class AbstractSortableAdminTest extends WebTestCase
             refresh($sortableEntity3);
             refresh($sortableEntity4);
         } else {
-            $sortableEntity1 = proxy($sortableEntity1)->_refresh()->_real();
-            $sortableEntity2 = proxy($sortableEntity2)->_refresh()->_real();
-            $sortableEntity3 = proxy($sortableEntity3)->_refresh()->_real();
-            $sortableEntity4 = proxy($sortableEntity4)->_refresh()->_real();
+            $sortableEntity1 = Proxy::createFromPersisted($sortableEntity1)->_refresh()->_real();
+            $sortableEntity2 = Proxy::createFromPersisted($sortableEntity2)->_refresh()->_real();
+            $sortableEntity3 = Proxy::createFromPersisted($sortableEntity3)->_refresh()->_real();
+            $sortableEntity4 = Proxy::createFromPersisted($sortableEntity4)->_refresh()->_real();
         }
 
         static::assertSame(3, $sortableEntity1->getPosition());
