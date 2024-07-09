@@ -83,17 +83,17 @@
         "zenstruck/foundry": "^1.38.2 || ^2.0"
     },
     "replace": {
-        "runroom-packages/basic-page-bundle": "0.17.2",
-        "runroom-packages/ckeditor-sonata-media-bundle": "0.17.2",
-        "runroom-packages/cookies-bundle": "0.17.2",
-        "runroom-packages/form-handler-bundle": "0.17.2",
-        "runroom-packages/redirection-bundle": "0.17.2",
-        "runroom-packages/render-event-bundle": "0.17.2",
-        "runroom-packages/seo-bundle": "0.17.2",
-        "runroom-packages/sortable-behavior-bundle": "0.17.2",
-        "runroom-packages/testing": "0.17.2",
-        "runroom-packages/translation-bundle": "0.17.2",
-        "runroom-packages/user-bundle": "0.17.2"
+        "runroom-packages/basic-page-bundle": "0.18.0",
+        "runroom-packages/ckeditor-sonata-media-bundle": "0.18.0",
+        "runroom-packages/cookies-bundle": "0.18.0",
+        "runroom-packages/form-handler-bundle": "0.18.0",
+        "runroom-packages/redirection-bundle": "0.18.0",
+        "runroom-packages/render-event-bundle": "0.18.0",
+        "runroom-packages/seo-bundle": "0.18.0",
+        "runroom-packages/sortable-behavior-bundle": "0.18.0",
+        "runroom-packages/testing": "0.18.0",
+        "runroom-packages/translation-bundle": "0.18.0",
+        "runroom-packages/user-bundle": "0.18.0"
     },
     "conflict": {
         "a2lix/translation-form-bundle": "<3.0.4",
