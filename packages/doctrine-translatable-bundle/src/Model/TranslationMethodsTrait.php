@@ -60,7 +60,7 @@ trait TranslationMethodsTrait
                 return false;
             }
 
-            if (null !== $value) {
+            if (null !== $value && '' !== $value) {
                 return false;
             }
         }
