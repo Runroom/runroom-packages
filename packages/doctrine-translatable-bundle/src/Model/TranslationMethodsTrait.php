@@ -56,15 +56,20 @@ trait TranslationMethodsTrait
                 continue;
             }
 
-            if (\is_string($value) && '' !== trim($value)) {
-                return false;
-            }
-
-            if (null !== $value && '' !== $value) {
+            if (!$this->isEmptyValue($value)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private function isEmptyValue(mixed $value): bool
+    {
+        if (\is_string($value)) {
+            return '' === trim($value);
+        }
+
+        return null === $value;
     }
 }
