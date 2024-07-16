@@ -23,6 +23,7 @@ use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
+use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
 use Runroom\FormHandlerBundle\RunroomFormHandlerBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
@@ -85,6 +86,7 @@ final class Kernel extends BaseKernel
             new RunroomBasicPageBundle(),
             new RunroomCkeditorSonataMediaBundle(),
             new RunroomCookiesBundle(),
+            new RunroomDoctrineTranslatableBundle(),
             new RunroomFormHandlerBundle(),
             new RunroomRedirectionBundle(),
             new RunroomRenderEventBundle(),
@@ -164,6 +166,7 @@ final class Kernel extends BaseKernel
                 'use_savepoints' => true,
             ],
             'orm' => [
+                'auto_mapping' => true,
                 'mappings' => [
                     'entity' => [
                         'type' => 'attribute',
