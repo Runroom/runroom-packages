@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Runroom\RunroomDoctrineTranslatableBundle\Tests\Integration;
+namespace Runroom\DoctrineTranslatableBundle\Tests\Integration;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Runroom\DoctrineTranslatableBundle\DependencyInjection\RunroomDoctrineTranslatableExtension;
