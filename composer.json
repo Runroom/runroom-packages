@@ -12,7 +12,7 @@
     "require": {
         "php": "^8.1",
         "doctrine/doctrine-bundle": "^2.8",
-        "doctrine/orm": "^2.14",
+        "doctrine/orm": "^2.16",
         "doctrine/persistence": "^3.1",
         "gedmo/doctrine-extensions": "^3.11",
         "knplabs/doctrine-behaviors": "^2.6",
@@ -58,7 +58,6 @@
         "knplabs/knp-menu-bundle": "^3.1",
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "nelmio/alice": "^3.8",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-doctrine": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",

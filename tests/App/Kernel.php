@@ -164,7 +164,6 @@ final class Kernel extends BaseKernel
                 'use_savepoints' => true,
             ],
             'orm' => [
-                'auto_mapping' => true,
                 'mappings' => [
                     'entity' => [
                         'type' => 'attribute',

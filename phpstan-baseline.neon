@@ -4,6 +4,10 @@ parameters:
             message: "#^Call to an undefined method Knp\\\\DoctrineBehaviors\\\\Contract\\\\Entity\\\\TranslationInterface\\:\\:#"
             path: .
 
+        - # Runroom doctrine translatable not supported by PHPStan correctly
+            message: "#^Call to an undefined method Runroom\\\\DoctrineTranslatableBundle\\\\Entity\\\\TranslationInterface\\:\\:#"
+            path: .
+
         - # https://github.com/phpstan/phpstan-strict-rules/issues/130
             message: '#^Call to static method PHPUnit\\Framework\\Assert::.* will always evaluate to true\.$#'
             path: .
