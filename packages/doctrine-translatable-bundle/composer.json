@@ -1,5 +1,5 @@
 {
-    "name": "runroom-packages/doctrine-translatable",
+    "name": "runroom-packages/doctrine-translatable-bundle",
     "description": "Manage doctrine translatable entities with Symfony",
     "license": "MIT",
     "type": "symfony-bundle",
