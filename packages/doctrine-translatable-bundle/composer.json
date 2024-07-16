@@ -22,7 +22,7 @@
         "doctrine/persistence": "^3.1",
         "doctrine/dbal": "^3.4",
         "doctrine/orm": "^2.16",
-        "doctrine/doctrine-bundle": "^2.8",
+        "doctrine/doctrine-bundle": "^2.10",
         "symfony/dependency-injection": "^5.4 || ^6.4",
         "symfony/http-kernel": "^5.4 || ^6.4",
         "symfony/framework-bundle": "^5.4 || ^6.4",
