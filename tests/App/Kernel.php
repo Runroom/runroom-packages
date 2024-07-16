@@ -171,6 +171,12 @@ final class Kernel extends BaseKernel
                         'prefix' => 'Tests\App\Entity',
                         'is_bundle' => false,
                     ],
+                    'doctrine_translatable' => [
+                        'type' => 'attribute',
+                        'dir' => '%kernel.project_dir%/../../packages/doctrine-translatable-bundle/tests/App/Entity',
+                        'prefix' => 'Runroom\DoctrineTranslatableBundle\Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
                     'redirection' => [
                         'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/../../packages/redirection-bundle/tests/App/Entity',
