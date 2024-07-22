@@ -36,13 +36,13 @@
     </UndefinedInterfaceMethod>
   </file>
   <file src="packages/doctrine-translatable-bundle/tests/Integration/TranslatableTest.php">
-    <UndefinedInterfaceMethod occurrences="2">
+    <UndefinedInterfaceMethod occurrences="57">
       <code>setTitle</code>
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="packages/doctrine-translatable-bundle/tests/Integration/TranslatableJoinTableInheritanceTest.php">
-    <UndefinedInterfaceMethod occurrences="2">
+    <UndefinedInterfaceMethod occurrences="6">
       <code>setTitle</code>
       <code>getTitle</code>
     </UndefinedInterfaceMethod>
