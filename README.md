@@ -41,6 +41,12 @@ However you should not install this package but install the following ones depen
 [![Monthly Downloads](https://poser.pugx.org/runroom-packages/cookies-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/cookies-bundle)
 [![Daily Downloads](https://poser.pugx.org/runroom-packages/cookies-bundle/d/daily)](https://packagist.org/packages/runroom-packages/cookies-bundle)
 
+## [RunroomDoctrineTranslatableBundle](https://github.com/Runroom/RunroomDoctrineTranslatableBundle)
+
+[![Total Downloads](https://poser.pugx.org/runroom-packages/doctrine-translatable-bundle/downloads)](https://packagist.org/packages/runroom-packages/doctrine-translatable-bundle)
+[![Monthly Downloads](https://poser.pugx.org/runroom-packages/doctrine-translatable-bundle/d/monthly)](https://packagist.org/packages/runroom-packages/doctrine-translatable-bundle)
+[![Daily Downloads](https://poser.pugx.org/runroom-packages/doctrine-translatable-bundle/d/daily)](https://packagist.org/packages/runroom-packages/doctrine-translatable-bundle)
+
 ## [RunroomFormHandlerBundle](https://github.com/Runroom/RunroomFormHandlerBundle)
 
 [![Total Downloads](https://poser.pugx.org/runroom-packages/form-handler-bundle/downloads)](https://packagist.org/packages/runroom-packages/form-handler-bundle)

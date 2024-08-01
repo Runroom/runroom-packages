@@ -17,6 +17,7 @@ jobs:
           - { folder: basic-page-bundle, repository: RunroomBasicPageBundle }
           - { folder: ckeditor-sonata-media-bundle, repository: RunroomCkeditorSonataMediaBundle }
           - { folder: cookies-bundle, repository: RunroomCookiesBundle }
+          - { folder: doctrine-translatable-bundle, repository: RunroomDoctrineTranslatableBundle }
           - { folder: form-handler-bundle, repository: RunroomFormHandlerBundle }
           - { folder: redirection-bundle, repository: RunroomRedirectionBundle }
           - { folder: render-event-bundle, repository: RunroomRenderEventBundle }
