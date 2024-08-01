@@ -61,7 +61,7 @@ final class Kernel extends BaseKernel
 
         $container->loadFromExtension('framework', [
             'annotations' => false,
-            'handle_all_throwables' => true,
+            // 'handle_all_throwables' => true,
             'test' => true,
             'translator' => true,
             'router' => ['utf8' => true],
