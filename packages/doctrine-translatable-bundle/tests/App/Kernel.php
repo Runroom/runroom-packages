@@ -16,12 +16,15 @@ namespace Runroom\DoctrineTranslatableBundle\Tests\App;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
+use Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\AddExpressionLanguageProvidersPass;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\FrameworkBundle\Routing\AnnotatedRouteControllerLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 final class Kernel extends BaseKernel
@@ -59,9 +62,8 @@ final class Kernel extends BaseKernel
     {
         $container->setParameter('kernel.default_locale', 'en');
 
-        $container->loadFromExtension('framework', [
+        $frameworkConfig = [
             'annotations' => false,
-            // 'handle_all_throwables' => true,
             'test' => true,
             'translator' => true,
             'router' => ['utf8' => true],
@@ -76,7 +78,18 @@ final class Kernel extends BaseKernel
             ],
             'secret' => 'secret',
             'http_method_override' => false,
-        ]);
+        ];
+
+        /**
+         * @psalm-suppress DeprecatedClass
+         *
+         * @todo: Join configs when dropping support for Symfony 5.4
+         */
+        if (!class_exists(AnnotatedRouteControllerLoader::class)) {
+            $frameworkConfig['handle_all_throwables'] = true;
+        }
+
+        $container->loadFromExtension('framework', $frameworkConfig);
 
         $container->loadFromExtension('doctrine', [
             'dbal' => [
@@ -113,7 +126,9 @@ final class Kernel extends BaseKernel
         ]);
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void {}
+    protected function configureRoutes(RoutingConfigurator $routes): void
+    {
+    }
 
     private function getBaseDir(): string
     {
