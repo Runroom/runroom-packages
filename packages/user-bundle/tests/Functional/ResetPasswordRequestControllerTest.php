@@ -107,7 +107,7 @@ final class ResetPasswordRequestControllerTest extends WebTestCase
             'password' => '1234',
         ]);
 
-        $expiresAt = new \DateTimeImmutable(sprintf('+%d seconds', 3600));
+        $expiresAt = new \DateTimeImmutable(\sprintf('+%d seconds', 3600));
         $tokenComponents = $tokenGenerator->createToken($expiresAt, (string) $user->getId());
 
         ResetPasswordRequestFactory::createOne([
@@ -119,7 +119,7 @@ final class ResetPasswordRequestControllerTest extends WebTestCase
 
         static::assertSame($user->getPassword(), '1234');
 
-        $client->request('GET', sprintf('/reset-password/reset/%s', $tokenComponents->getPublicToken()));
+        $client->request('GET', \sprintf('/reset-password/reset/%s', $tokenComponents->getPublicToken()));
         $client->followRedirect();
 
         static::assertRouteSame('runroom_user_reset_password');

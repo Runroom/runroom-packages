@@ -39,7 +39,7 @@ final class AdminRolesBuilder implements AdminRolesBuilderInterface
             $baseRole = $admin->getSecurityHandler()->getBaseRole($admin);
 
             foreach (array_keys($admin->getSecurityInformation()) as $key) {
-                $role = sprintf($baseRole, $key);
+                $role = \sprintf($baseRole, $key);
                 $adminRoles[$role] = [
                     'role' => $role,
                     'label' => $key,

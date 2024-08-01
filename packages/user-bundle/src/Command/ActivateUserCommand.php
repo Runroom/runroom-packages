@@ -47,7 +47,7 @@ EOT
 
         $this->userManipulator->activate($identifier);
 
-        $output->writeln(sprintf('User "%s" has been activated.', $identifier));
+        $output->writeln(\sprintf('User "%s" has been activated.', $identifier));
 
         return 0;
     }

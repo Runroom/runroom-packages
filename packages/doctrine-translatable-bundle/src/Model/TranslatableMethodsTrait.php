@@ -191,7 +191,7 @@ trait TranslatableMethodsTrait
 
         if (!\is_callable($callable)) {
             throw new TranslatableException(
-                sprintf('Method "%s" is not callable in translation entity "%s"', $method, $translation::class)
+                \sprintf('Method "%s" is not callable in translation entity "%s"', $method, $translation::class)
             );
         }
 
@@ -239,7 +239,7 @@ trait TranslatableMethodsTrait
         }
 
         throw new TranslatableException(
-            sprintf('$translations parameter must be iterable or %s', Collection::class)
+            \sprintf('$translations parameter must be iterable or %s', Collection::class)
         );
     }
 

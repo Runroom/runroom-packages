@@ -56,7 +56,7 @@ EOT
 
         $this->userManipulator->create($identifier, $password, !$inactive);
 
-        $output->writeln(sprintf('Created user <comment>%s</comment>', $identifier));
+        $output->writeln(\sprintf('Created user <comment>%s</comment>', $identifier));
 
         return 0;
     }

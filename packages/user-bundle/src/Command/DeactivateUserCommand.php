@@ -47,7 +47,7 @@ EOT
 
         $this->userManipulator->deactivate($identifier);
 
-        $output->writeln(sprintf('User "%s" has been deactivated.', $identifier));
+        $output->writeln(\sprintf('User "%s" has been deactivated.', $identifier));
 
         return 0;
     }
