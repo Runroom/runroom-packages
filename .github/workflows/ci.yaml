@@ -43,4 +43,6 @@ jobs:
         with:
           dependency-versions: ${{ matrix.dependencies }}
       - run: vendor/bin/phpunit --coverage-clover=clover.xml
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
