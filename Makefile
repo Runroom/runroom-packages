@@ -1,6 +1,6 @@
 UID = $(shell id -u)
 GID = $(shell id -g)
-PHP_VERSION="8.3"
+PHP_VERSION="8.1"
 CONTAINER_NAME = runroom_packages
 DOCKER_RUN = docker run --rm --volume $(PWD):/usr/app -w /usr/app $(CONTAINER_NAME)
 

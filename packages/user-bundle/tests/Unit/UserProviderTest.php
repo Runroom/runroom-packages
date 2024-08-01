@@ -116,7 +116,7 @@ final class UserProviderTest extends TestCase
         $user = $this->createStub(SymfonyUserInterface::class);
 
         $this->expectException(UnsupportedUserException::class);
-        $this->expectExceptionMessage(sprintf('Instances of "%s" are not supported.', $user::class));
+        $this->expectExceptionMessage(\sprintf('Instances of "%s" are not supported.', $user::class));
 
         $this->userProvider->refreshUser($user);
     }
@@ -135,7 +135,7 @@ final class UserProviderTest extends TestCase
         $user = $this->createStub(SymfonyUserInterface::class);
 
         $this->expectException(UnsupportedUserException::class);
-        $this->expectExceptionMessage(sprintf('Instances of "%s" are not supported.', $user::class));
+        $this->expectExceptionMessage(\sprintf('Instances of "%s" are not supported.', $user::class));
 
         $this->userProvider->upgradePassword($user, 'new_password');
     }

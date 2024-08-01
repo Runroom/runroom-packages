@@ -85,7 +85,7 @@ final class ResetPasswordController extends AbstractController
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
             \assert($user instanceof UserInterface);
         } catch (ResetPasswordExceptionInterface $e) {
-            $this->addFlash('reset_password_error', sprintf(
+            $this->addFlash('reset_password_error', \sprintf(
                 'There was a problem validating your reset request - %s',
                 $e->getReason()
             ));

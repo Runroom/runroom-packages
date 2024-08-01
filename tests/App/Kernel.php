@@ -23,6 +23,7 @@ use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
+use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
 use Runroom\FormHandlerBundle\RunroomFormHandlerBundle;
 use Runroom\RedirectionBundle\RunroomRedirectionBundle;
 use Runroom\RedirectionBundle\Tests\App\Entity\Entity;
@@ -85,6 +86,7 @@ final class Kernel extends BaseKernel
             new RunroomBasicPageBundle(),
             new RunroomCkeditorSonataMediaBundle(),
             new RunroomCookiesBundle(),
+            new RunroomDoctrineTranslatableBundle(),
             new RunroomFormHandlerBundle(),
             new RunroomRedirectionBundle(),
             new RunroomRenderEventBundle(),
@@ -170,6 +172,12 @@ final class Kernel extends BaseKernel
                         'type' => 'attribute',
                         'dir' => '%kernel.project_dir%/Entity',
                         'prefix' => 'Tests\App\Entity',
+                        'is_bundle' => false,
+                    ],
+                    'doctrine_translatable' => [
+                        'type' => 'attribute',
+                        'dir' => '%kernel.project_dir%/../../packages/doctrine-translatable-bundle/tests/App/Entity',
+                        'prefix' => 'Runroom\DoctrineTranslatableBundle\Tests\App\Entity',
                         'is_bundle' => false,
                     ],
                     'redirection' => [

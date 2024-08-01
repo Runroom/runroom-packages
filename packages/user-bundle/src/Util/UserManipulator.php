@@ -74,7 +74,7 @@ final class UserManipulator
         $user = $this->userRepository->loadUserByIdentifier($identifier);
 
         if (null === $user) {
-            throw new \InvalidArgumentException(sprintf('User identified by "%s" username does not exist.', $identifier));
+            throw new \InvalidArgumentException(\sprintf('User identified by "%s" username does not exist.', $identifier));
         }
 
         return $user;

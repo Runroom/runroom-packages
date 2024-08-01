@@ -42,7 +42,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $user = $this->userRepository->loadUserByIdentifier($identifier);
 
         if (null === $user || !$user->getEnabled()) {
-            throw new UserNotFoundException(sprintf('User "%s" not found.', $identifier));
+            throw new UserNotFoundException(\sprintf('User "%s" not found.', $identifier));
         }
 
         return $user;
@@ -51,7 +51,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     public function refreshUser(SymfonyUserInterface $user): SymfonyUserInterface
     {
         if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
+            throw new UnsupportedUserException(\sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
         $userIdentifier = $user->getUserIdentifier();
@@ -59,7 +59,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
         $refreshedUser = $this->userRepository->loadUserByIdentifier($userIdentifier);
 
         if (null === $refreshedUser) {
-            throw new UserNotFoundException(sprintf('User with identifier "%s" not found.', $userIdentifier));
+            throw new UserNotFoundException(\sprintf('User with identifier "%s" not found.', $userIdentifier));
         }
 
         return $refreshedUser;
@@ -79,7 +79,7 @@ final class UserProvider implements UserProviderInterface, PasswordUpgraderInter
     public function upgradePassword(object $user, string $newHashedPassword): void
     {
         if (!$user instanceof UserInterface) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
+            throw new UnsupportedUserException(\sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
         $user->setPassword($newHashedPassword);
