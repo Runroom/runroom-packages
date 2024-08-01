@@ -125,9 +125,18 @@ trait TranslatableMethodsTrait
         return $this->defaultLocale;
     }
 
+    /**
+     * @return class-string
+     */
     public static function getTranslationEntityClass(): string
     {
-        return static::class . 'Translation';
+        $class = static::class . 'Translation';
+
+        if (!class_exists($class)) {
+            throw new TranslatableException(\sprintf('Translation class "%s" not found', $class));
+        }
+
+        return $class;
     }
 
     /**

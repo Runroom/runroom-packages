@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\DoctrineTranslatableBundle\Model;
 
 use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
+use Runroom\DoctrineTranslatableBundle\Exception\TranslatableException;
 
 trait TranslationMethodsTrait
 {
@@ -36,6 +37,10 @@ trait TranslationMethodsTrait
      */
     public function getTranslatable(): TranslatableInterface
     {
+        if (null === $this->translatable) {
+            throw new TranslatableException('Translatable is not set.');
+        }
+
         return $this->translatable;
     }
 
@@ -46,6 +51,10 @@ trait TranslationMethodsTrait
 
     public function getLocale(): string
     {
+        if (null === $this->locale) {
+            throw new TranslatableException('Locale is not set.');
+        }
+
         return $this->locale;
     }
 

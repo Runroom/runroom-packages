@@ -18,14 +18,14 @@ use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
 trait TranslationPropertiesTrait
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $locale;
 
     /**
      * Will be mapped to translatable entity by TranslatableSubscriber.
      *
-     * @var TranslatableInterface
+     * @var TranslatableInterface|null
      */
     protected $translatable;
 }

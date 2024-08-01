@@ -121,7 +121,7 @@ final class TranslatableEventSubscriber
     private function mapTranslation(ClassMetadataInfo $classMetadataInfo, ObjectManager $objectManager): void
     {
         if (!$classMetadataInfo->hasAssociation('translatable')) {
-            /** @var class-string<object> $targetEntity */
+            /** @var class-string $targetEntity */
             $targetEntity = $classMetadataInfo->getReflectionClass()
                 ->getMethod('getTranslatableEntityClass')
                 ->invoke(null);

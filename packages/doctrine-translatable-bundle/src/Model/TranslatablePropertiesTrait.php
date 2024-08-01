@@ -19,14 +19,14 @@ use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
 trait TranslatablePropertiesTrait
 {
     /**
-     * @var Collection<string, TranslationInterface>
+     * @var Collection<string, TranslationInterface>|null
      */
     protected $translations;
 
     /**
      * @see mergeNewTranslations
      *
-     * @var Collection<string, TranslationInterface>
+     * @var Collection<string, TranslationInterface>|null
      */
     protected $newTranslations;
 

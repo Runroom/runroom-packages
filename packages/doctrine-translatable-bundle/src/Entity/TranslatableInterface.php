@@ -53,5 +53,8 @@ interface TranslatableInterface
 
     public function getDefaultLocale(): string;
 
+    /**
+     * @return class-string
+     */
     public static function getTranslationEntityClass(): string;
 }
