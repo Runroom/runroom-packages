@@ -28,7 +28,7 @@ final class UploadAction extends AbstractController
     public function __construct(
         private readonly AdminFetcherInterface $adminFetcher,
         private readonly MediaManagerInterface $mediaManager,
-        private readonly Pool $mediaPool
+        private readonly Pool $mediaPool,
     ) {}
 
     public function __invoke(Request $request): Response

@@ -24,14 +24,14 @@ final class AlternateLinksBuilder implements AlternateLinksBuilderInterface
      */
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly array $locales
+        private readonly array $locales,
     ) {}
 
     public function build(
         AlternateLinksProviderInterface $provider,
         array $context,
         string $route,
-        array $routeParameters = []
+        array $routeParameters = [],
     ): array {
         $alternateLinks = [];
 

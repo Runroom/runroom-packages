@@ -35,7 +35,7 @@ final class ResetPasswordController extends AbstractController
         private readonly ResetPasswordHelperInterface $resetPasswordHelper,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly MailerServiceInterface $mailerService,
-        private readonly UserProvider $userProvider
+        private readonly UserProvider $userProvider,
     ) {}
 
     public function request(Request $request): Response

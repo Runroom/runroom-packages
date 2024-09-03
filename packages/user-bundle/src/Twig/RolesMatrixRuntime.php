@@ -22,7 +22,7 @@ final class RolesMatrixRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
         private readonly Environment $twig,
-        private readonly MatrixRolesBuilderInterface $rolesBuilder
+        private readonly MatrixRolesBuilderInterface $rolesBuilder,
     ) {}
 
     public function renderRolesList(FormView $form): string

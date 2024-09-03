@@ -35,7 +35,7 @@ final class CookiesPageService implements CookiesPageServiceInterface
     public function __construct(
         private readonly ObjectRepository $repository,
         private readonly FormFactoryInterface $formFactory,
-        private readonly array $cookies
+        private readonly array $cookies,
     ) {}
 
     public function getCookiesPageViewModel(): CookiesPageViewModel

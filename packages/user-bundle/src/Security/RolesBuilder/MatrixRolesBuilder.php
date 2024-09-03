@@ -20,7 +20,7 @@ final class MatrixRolesBuilder implements MatrixRolesBuilderInterface
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
         private readonly AdminRolesBuilderInterface $adminRolesBuilder,
-        private readonly ExpandableRolesBuilderInterface $securityRolesBuilder
+        private readonly ExpandableRolesBuilderInterface $securityRolesBuilder,
     ) {}
 
     public function getRoles(?string $domain = null): array

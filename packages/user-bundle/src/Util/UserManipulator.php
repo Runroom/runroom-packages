@@ -21,7 +21,7 @@ final class UserManipulator
 {
     public function __construct(
         private readonly UserRepositoryInterface $userRepository,
-        private readonly UserPasswordHasherInterface $passwordHasher
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {}
 
     public function create(string $identifier, string $password, bool $active): void

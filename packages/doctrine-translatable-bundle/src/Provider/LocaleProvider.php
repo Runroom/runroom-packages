@@ -25,7 +25,7 @@ final class LocaleProvider implements LocaleProviderInterface
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly ParameterBagInterface $parameterBag,
-        private readonly ?TranslatorInterface $translator
+        private readonly ?TranslatorInterface $translator,
     ) {}
 
     public function provideCurrentLocale(): ?string

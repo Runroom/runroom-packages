@@ -25,7 +25,7 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly iterable $providers,
-        private readonly AlternateLinksBuilderInterface $builder
+        private readonly AlternateLinksBuilderInterface $builder,
     ) {}
 
     public function build(array $context): array

@@ -29,7 +29,7 @@ final class TwigErrorRenderer implements ErrorRendererInterface
         private readonly Environment $twig,
         private readonly PageRendererInterface $renderer,
         private readonly HtmlErrorRenderer $fallbackErrorRenderer = new HtmlErrorRenderer(),
-        private $debug = false
+        private $debug = false,
     ) {}
 
     public function render(\Throwable $exception): FlattenException
