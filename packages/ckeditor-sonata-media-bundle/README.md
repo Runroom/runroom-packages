@@ -28,7 +28,7 @@ Then, enable the bundle by adding it to the list of registered bundles in `confi
 
 return [
     // ...
-    Runroom\RenderEventBundle\RunroomCkeditorSonataMediaBundle::class => ['all' => true],
+    Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle::class => ['all' => true],
 ];
 ```
 
