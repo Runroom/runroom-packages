@@ -28,7 +28,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly string $class
+        private readonly string $class,
     ) {}
 
     public function createResetPasswordRequest(object $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken): ResetPasswordRequestInterface

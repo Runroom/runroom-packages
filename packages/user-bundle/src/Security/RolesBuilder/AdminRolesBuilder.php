@@ -25,7 +25,7 @@ final class AdminRolesBuilder implements AdminRolesBuilderInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly Pool $pool,
         private readonly SonataConfiguration $configuration,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
     ) {}
 
     public function getRoles(?string $domain = null): array

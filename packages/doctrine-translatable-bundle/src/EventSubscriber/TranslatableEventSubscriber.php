@@ -38,7 +38,7 @@ final class TranslatableEventSubscriber
     public function __construct(
         private readonly LocaleProviderInterface $localeProvider,
         string $translatableFetchMode,
-        string $translationFetchMode
+        string $translationFetchMode,
     ) {
         $this->translatableFetchMode = $this->convertFetchString($translatableFetchMode);
         $this->translationFetchMode = $this->convertFetchString($translationFetchMode);

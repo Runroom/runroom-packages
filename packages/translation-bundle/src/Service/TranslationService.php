@@ -24,7 +24,7 @@ final class TranslationService implements TranslationServiceInterface
      */
     public function __construct(
         private readonly ObjectRepository $repository,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
     ) {}
 
     public function translate(string $key, array $parameters = [], ?string $locale = null): string

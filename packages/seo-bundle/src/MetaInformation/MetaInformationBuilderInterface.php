@@ -25,6 +25,6 @@ interface MetaInformationBuilderInterface
     public function build(
         MetaInformationProviderInterface $provider,
         array $context,
-        string $route
+        string $route,
     ): MetaInformationViewModel;
 }

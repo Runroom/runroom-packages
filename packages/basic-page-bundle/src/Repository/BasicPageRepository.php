@@ -26,7 +26,7 @@ final class BasicPageRepository extends ServiceEntityRepository implements Basic
 {
     public function __construct(
         ManagerRegistry $registry,
-        private readonly RequestStack $requestStack
+        private readonly RequestStack $requestStack,
     ) {
         parent::__construct($registry, BasicPage::class);
     }

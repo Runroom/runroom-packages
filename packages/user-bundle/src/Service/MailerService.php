@@ -28,7 +28,7 @@ final class MailerService implements MailerServiceInterface
         private readonly TranslatorInterface $translator,
         private readonly Environment $twig,
         private readonly string $fromEmail,
-        private readonly string $fromName
+        private readonly string $fromName,
     ) {}
 
     public function sendResetPasswordEmail(UserInterface $user, ResetPasswordToken $resetToken): void

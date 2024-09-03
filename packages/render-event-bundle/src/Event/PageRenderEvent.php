@@ -24,7 +24,7 @@ final class PageRenderEvent extends Event
     public function __construct(
         private string $view,
         private PageViewModelInterface $pageViewModel,
-        private ?Response $response = null
+        private ?Response $response = null,
     ) {}
 
     public function setView(string $view): self

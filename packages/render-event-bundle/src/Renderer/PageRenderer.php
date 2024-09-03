@@ -25,7 +25,7 @@ final class PageRenderer implements PageRendererInterface
     public function __construct(
         private readonly Environment $twig,
         private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly PageViewModelInterface $pageViewModel
+        private readonly PageViewModelInterface $pageViewModel,
     ) {}
 
     public function render(string $view, mixed $model = null): string

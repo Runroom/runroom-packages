@@ -29,13 +29,13 @@ final class MetaInformationBuilder implements MetaInformationBuilderInterface
      */
     public function __construct(
         private readonly ObjectRepository $repository,
-        private readonly PropertyAccessorInterface $propertyAccessor
+        private readonly PropertyAccessorInterface $propertyAccessor,
     ) {}
 
     public function build(
         MetaInformationProviderInterface $provider,
         array $context,
-        string $route
+        string $route,
     ): MetaInformationViewModel {
         $routeMetas = $this->getMetasForRoute($provider, $route);
         $modelMetas = $provider->getEntityMetaInformation($context);

@@ -20,7 +20,7 @@ final class GlobalVariables
 {
     public function __construct(
         private readonly Pool $pool,
-        private readonly bool $hasRequestPasswordEnabled
+        private readonly bool $hasRequestPasswordEnabled,
     ) {}
 
     /**

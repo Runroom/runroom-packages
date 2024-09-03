@@ -38,7 +38,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
         #[ORM\Column(type: Types::STRING, length: 20)]
         private readonly string $selector,
         #[ORM\Column(type: Types::STRING, length: 100)]
-        private readonly string $hashedToken
+        private readonly string $hashedToken,
     ) {
         $this->requestedAt = new \DateTimeImmutable('now');
     }

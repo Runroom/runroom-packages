@@ -29,7 +29,7 @@ final class SecurityRolesBuilder implements ExpandableRolesBuilderInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly SonataConfiguration $configuration,
         private readonly TranslatorInterface $translator,
-        private readonly array $rolesHierarchy = []
+        private readonly array $rolesHierarchy = [],
     ) {}
 
     public function getExpandedRoles(?string $domain = null): array

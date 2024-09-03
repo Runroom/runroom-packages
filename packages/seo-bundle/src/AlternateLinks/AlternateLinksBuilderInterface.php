@@ -25,6 +25,6 @@ interface AlternateLinksBuilderInterface
         AlternateLinksProviderInterface $provider,
         array $context,
         string $route,
-        array $routeParameters = []
+        array $routeParameters = [],
     ): array;
 }

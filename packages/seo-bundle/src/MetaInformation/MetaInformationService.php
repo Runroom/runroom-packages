@@ -24,7 +24,7 @@ final class MetaInformationService implements MetaInformationServiceInterface
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly iterable $providers,
-        private readonly MetaInformationBuilderInterface $builder
+        private readonly MetaInformationBuilderInterface $builder,
     ) {}
 
     public function build(array $context): MetaInformationViewModel
