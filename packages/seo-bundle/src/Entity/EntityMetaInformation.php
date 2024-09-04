@@ -15,8 +15,8 @@ namespace Runroom\SeoBundle\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
+use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
+use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 
 #[ORM\Entity]
 class EntityMetaInformation implements TranslatableInterface, \Stringable

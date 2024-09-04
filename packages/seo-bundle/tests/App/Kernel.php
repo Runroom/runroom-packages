@@ -18,7 +18,7 @@ use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
+use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Runroom\SeoBundle\Tests\App\Entity\Gallery;
 use Runroom\SeoBundle\Tests\App\Entity\GalleryItem;
@@ -48,7 +48,6 @@ final class Kernel extends BaseKernel
             new A2lixAutoFormBundle(),
             new A2lixTranslationFormBundle(),
             new DAMADoctrineTestBundle(),
-            new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
@@ -60,6 +59,7 @@ final class Kernel extends BaseKernel
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
 
+            new RunroomDoctrineTranslatableBundle(),
             new RunroomSeoBundle(),
         ];
     }
