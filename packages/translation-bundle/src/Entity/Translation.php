@@ -15,8 +15,8 @@ namespace Runroom\TranslationBundle\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
+use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
+use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 

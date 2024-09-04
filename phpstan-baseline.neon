@@ -1,9 +1,5 @@
 parameters:
     ignoreErrors:
-        - # Knp doctrine behaviors not supported by PHPStan correctly
-            message: "#^Call to an undefined method Knp\\\\DoctrineBehaviors\\\\Contract\\\\Entity\\\\TranslationInterface\\:\\:#"
-            path: .
-
         - # Runroom doctrine translatable not supported by PHPStan correctly
             message: "#^Call to an undefined method Runroom\\\\DoctrineTranslatableBundle\\\\Entity\\\\TranslationInterface\\:\\:#"
             path: .

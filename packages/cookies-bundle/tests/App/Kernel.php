@@ -20,6 +20,7 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
+use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -32,8 +33,6 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
-use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
-
 
 final class Kernel extends BaseKernel
 {
