@@ -19,7 +19,6 @@ use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
@@ -33,6 +32,8 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
+use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
+
 
 final class Kernel extends BaseKernel
 {
@@ -44,7 +45,6 @@ final class Kernel extends BaseKernel
             new A2lixAutoFormBundle(),
             new A2lixTranslationFormBundle(),
             new DAMADoctrineTestBundle(),
-            new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new KnpMenuBundle(),
             new FOSCKEditorBundle(),
@@ -55,6 +55,7 @@ final class Kernel extends BaseKernel
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
 
+            new RunroomDoctrineTranslatableBundle(),
             new RunroomCookiesBundle(),
         ];
     }
