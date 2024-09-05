@@ -15,10 +15,10 @@ namespace Runroom\Testing\Tests\Integration;
 
 use Runroom\Testing\TestCase\SonataAdminTestCase;
 use Runroom\Testing\Tests\App\Admin\TestAdmin;
-use Runroom\Testing\Tests\App\Entity\Test;
+use Runroom\Testing\Tests\App\Entity\TestingEntity;
 
 /**
- * @extends SonataAdminTestCase<Test>
+ * @extends SonataAdminTestCase<TestingEntity>
  */
 final class TestAdminTest extends SonataAdminTestCase
 {

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Runroom\Testing\Tests\App\Admin\TestAdmin;
-use Runroom\Testing\Tests\App\Entity\Test;
+use Runroom\Testing\Tests\App\Entity\TestingEntity;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
@@ -22,7 +22,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(TestAdmin::class)
         ->public()
         ->tag('sonata.admin', [
-            'model_class' => Test::class,
+            'model_class' => TestingEntity::class,
             'manager_type' => 'orm',
             'label' => 'Test Entity',
         ]);

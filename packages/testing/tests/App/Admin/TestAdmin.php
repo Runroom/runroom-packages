@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\Testing\Tests\App\Admin;
 
-use Runroom\Testing\Tests\App\Entity\Test;
+use Runroom\Testing\Tests\App\Entity\TestingEntity;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -22,7 +22,7 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * @extends AbstractAdmin<Test>
+ * @extends AbstractAdmin<TestingEntity>
  */
 final class TestAdmin extends AbstractAdmin
 {
