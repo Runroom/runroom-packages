@@ -27,7 +27,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * @psalm-suppress PossiblyNullReference, UndefinedInterfaceMethod
+     * @psalm-suppress UndefinedInterfaceMethod
      *
      * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
      */
@@ -49,7 +49,7 @@ final class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @psalm-suppress PossiblyNullReference, UndefinedInterfaceMethod
+     * @psalm-suppress UndefinedInterfaceMethod
      *
      * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
      */

@@ -79,8 +79,6 @@ final class Kernel extends BaseKernel
         ];
 
         /**
-         * @psalm-suppress DeprecatedClass
-         *
          * @todo: Join configs when dropping support for Symfony 5.4
          */
         if (!class_exists(AnnotatedRouteControllerLoader::class)) {
