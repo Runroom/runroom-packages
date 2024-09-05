@@ -16,7 +16,14 @@ namespace Runroom\FormHandlerBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+
+/**
+ * @TODO: Remove this if when Symfony 6 support is dropped
+ */
+if (!class_exists(Extension::class)) {
+    class_alias(\Symfony\Component\HttpKernel\DependencyInjection\Extension::class, Extension::class);
+}
 
 final class RunroomFormHandlerExtension extends Extension
 {
