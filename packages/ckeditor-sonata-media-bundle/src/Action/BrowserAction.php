@@ -39,7 +39,7 @@ final class BrowserAction extends AbstractController
         $datagrid = $admin->getDatagrid();
         $filters = $request->query->all('filter');
 
-        if (!\is_array($filters) || !\array_key_exists('context', $filters)) {
+        if (!\array_key_exists('context', $filters)) {
             $context = $admin->getPersistentParameter('context');
         } else {
             $context = $filters['context']['value'];
