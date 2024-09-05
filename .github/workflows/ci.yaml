@@ -29,7 +29,6 @@ jobs:
             symfony-require: 7.1.*
     env:
       SYMFONY_REQUIRE: ${{ matrix.symfony-require }}
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -46,5 +45,7 @@ jobs:
       - uses: ramsey/composer-install@v3
         with:
           dependency-versions: ${{ matrix.dependencies }}
-      - run: vendor/bin/phpunit --coverage-clover=coverage.xml
+      - run: vendor/bin/phpunit --coverage-clover=clover.xml
       - uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
