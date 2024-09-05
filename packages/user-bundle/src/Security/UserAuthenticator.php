@@ -45,6 +45,9 @@ final class UserAuthenticator extends AbstractLoginFormAuthenticator
          * @todo: Remove this conditional when dropping support for Symfony <6.2
          */
         $request->getSession()->set(
+            /**
+             * @phpstan-ignore-next-line
+             */
             class_exists(SecurityRequestAttributes::class) ? SecurityRequestAttributes::LAST_USERNAME : Security::LAST_USERNAME,
             $identifier
         );

@@ -74,6 +74,9 @@ final class UserAuthenticatorTest extends TestCase
         static::assertSame('username', $request->getSession()->get(
             class_exists(SecurityRequestAttributes::class) ?
             SecurityRequestAttributes::LAST_USERNAME :
+            /**
+             * @phpstan-ignore-next-line
+             */
             Security::LAST_USERNAME
         ));
     }
