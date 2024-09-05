@@ -19,7 +19,6 @@ use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\CkeditorSonataMediaBundle\RunroomCkeditorSonataMediaBundle;
 use Runroom\CookiesBundle\RunroomCookiesBundle;
@@ -66,7 +65,6 @@ final class Kernel extends BaseKernel
             new A2lixAutoFormBundle(),
             new A2lixTranslationFormBundle(),
             new DAMADoctrineTestBundle(),
-            new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FOSCKEditorBundle(),
             new FrameworkBundle(),

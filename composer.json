@@ -15,7 +15,6 @@
         "doctrine/orm": "^2.16",
         "doctrine/persistence": "^3.1",
         "gedmo/doctrine-extensions": "^3.11",
-        "knplabs/doctrine-behaviors": "^2.6",
         "phpunit/phpunit": "^9.6",
         "psr/container": "^1.1 || ^2.0",
         "sonata-project/admin-bundle": "^4.20",
