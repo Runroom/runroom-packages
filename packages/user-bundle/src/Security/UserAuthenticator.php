@@ -41,6 +41,8 @@ final class UserAuthenticator extends AbstractLoginFormAuthenticator
 
         /**
          * @todo: Remove this conditional when dropping support for Symfony <6.2
+         *
+         * @psalm-suppress UndefinedClass
          */
         $request->getSession()->set(
             /**
