@@ -20,7 +20,7 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^2.16",
         "doctrine/persistence": "^3.1",
-        "knplabs/doctrine-behaviors": "^2.6",
+        "runroom-packages/doctrine-translatable-bundle": "^0.19",
         "sonata-project/doctrine-extensions": "^2.0",
         "sonata-project/media-bundle": "^4.5",
         "symfony/config": "^5.4 || ^6.4",

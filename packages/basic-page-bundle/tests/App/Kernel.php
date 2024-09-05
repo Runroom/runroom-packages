@@ -19,9 +19,9 @@ use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
-use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Runroom\BasicPageBundle\RunroomBasicPageBundle;
 use Runroom\BasicPageBundle\Tests\App\Entity\Media;
+use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
 use Runroom\SeoBundle\RunroomSeoBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
@@ -46,7 +46,6 @@ final class Kernel extends BaseKernel
             new A2lixAutoFormBundle(),
             new A2lixTranslationFormBundle(),
             new DAMADoctrineTestBundle(),
-            new DoctrineBehaviorsBundle(),
             new DoctrineBundle(),
             new FOSCKEditorBundle(),
             new FrameworkBundle(),
@@ -57,8 +56,9 @@ final class Kernel extends BaseKernel
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
 
-            new RunroomBasicPageBundle(),
+            new RunroomDoctrineTranslatableBundle(),
             new RunroomSeoBundle(),
+            new RunroomBasicPageBundle(),
         ];
     }
 

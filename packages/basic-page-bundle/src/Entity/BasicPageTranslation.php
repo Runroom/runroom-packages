@@ -16,8 +16,8 @@ namespace Runroom\BasicPageBundle\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
-use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
+use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
+use Runroom\DoctrineTranslatableBundle\Model\TranslationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
