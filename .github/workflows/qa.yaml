@@ -20,7 +20,7 @@ jobs:
           extensions: zip, pdo_sqlite, gd
           coverage: none
           tools: cs2pr
-      - uses: ramsey/composer-install@v2
+      - uses: ramsey/composer-install@v3
       - run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
       - run: vendor/bin/phpunit
       - run: composer phpstan
