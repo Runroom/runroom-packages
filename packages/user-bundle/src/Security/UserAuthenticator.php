@@ -40,8 +40,6 @@ final class UserAuthenticator extends AbstractLoginFormAuthenticator
         \assert(\is_string($password));
 
         /**
-         * @psalm-suppress DeprecatedClass
-         *
          * @todo: Remove this conditional when dropping support for Symfony <6.2
          */
         $request->getSession()->set(

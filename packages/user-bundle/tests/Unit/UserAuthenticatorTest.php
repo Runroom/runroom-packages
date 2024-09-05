@@ -67,8 +67,6 @@ final class UserAuthenticatorTest extends TestCase
         static::assertSame('username', $userBadge->getUserIdentifier());
         static::assertSame('password', $passwordCredential->getPassword());
         /**
-         * @psalm-suppress DeprecatedClass
-         *
          * @todo: Remove this conditional when dropping support for Symfony <6.2
          */
         static::assertSame('username', $request->getSession()->get(
