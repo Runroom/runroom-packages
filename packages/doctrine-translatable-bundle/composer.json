@@ -33,7 +33,7 @@
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
-        "symfony/phpunit-bridge": "^7.0",
+        "symfony/phpunit-bridge": "^7.1",
         "symfony/translation": "^5.4 || ^6.4 || ^7.1",
         "zenstruck/foundry": "^1.38.2 || ^2.0"
     },
