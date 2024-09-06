@@ -48,7 +48,7 @@ final class UserAdmin extends AbstractAdmin
     {
         $this->updatePassword($object);
 
-        $object->setCreatedAt(new \DateTimeImmutable());
+        $object->setCreatedAt(new \DateTime());
     }
 
     /**

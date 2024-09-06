@@ -75,7 +75,7 @@ final class UserManipulatorTest extends TestCase
         static::assertSame('user@localhost', $user->getUserIdentifier());
         static::assertSame('hashed_password', $user->getPassword());
         static::assertTrue($user->getEnabled());
-        static::assertInstanceOf(\DateTimeImmutable::class, $user->getCreatedAt());
+        static::assertInstanceOf(\DateTime::class, $user->getCreatedAt());
     }
 
     public function testItThrowsWhenActivatingANonExistentUser(): void
