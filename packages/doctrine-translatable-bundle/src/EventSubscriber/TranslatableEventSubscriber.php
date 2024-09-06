@@ -50,9 +50,14 @@ final class TranslatableEventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $loadClassMetadataEventArgs): void
     {
         $classMetadata = $loadClassMetadataEventArgs->getClassMetadata();
-        $reflClass = $classMetadata->reflClass;
-        if (!$reflClass instanceof \ReflectionClass) {
-            // Class has not yet been fully built, ignore this event
+        \assert($classMetadata instanceof ClassMetadata);
+
+        $reflectionClass = $classMetadata->getReflectionClass();
+
+        /**
+         * @psalm-suppress TypeDoesNotContainNull This could be null if the class has not yet fully built
+         */
+        if (null === $reflectionClass) {
             return;
         }
 
@@ -60,12 +65,12 @@ final class TranslatableEventSubscriber
             return;
         }
 
-        if (is_a($reflClass->getName(), TranslatableInterface::class, true)) {
-            $this->mapTranslatable($classMetadata);
+        if (is_a($reflectionClass->getName(), TranslatableInterface::class, true)) {
+            $this->mapTranslatable($reflectionClass, $classMetadata);
         }
 
-        if (is_a($reflClass->getName(), TranslationInterface::class, true)) {
-            $this->mapTranslation($classMetadata, $loadClassMetadataEventArgs->getObjectManager());
+        if (is_a($reflectionClass->getName(), TranslationInterface::class, true)) {
+            $this->mapTranslation($reflectionClass, $classMetadata, $loadClassMetadataEventArgs->getObjectManager());
         }
     }
 
@@ -99,7 +104,10 @@ final class TranslatableEventSubscriber
         return ClassMetadata::FETCH_LAZY;
     }
 
-    private function mapTranslatable(ClassMetadata $classMetadata): void
+    /**
+     * @param \ReflectionClass<object> $reflectionClass
+     */
+    private function mapTranslatable(\ReflectionClass $reflectionClass, ClassMetadata $classMetadata): void
     {
         if ($classMetadata->hasAssociation('translations')) {
             return;
@@ -111,23 +119,30 @@ final class TranslatableEventSubscriber
             'indexBy' => self::LOCALE,
             'cascade' => ['persist', 'remove'],
             'fetch' => $this->translatableFetchMode,
-            'targetEntity' => $classMetadata->getReflectionClass()
+            'targetEntity' => $reflectionClass
                 ->getMethod('getTranslationEntityClass')
                 ->invoke(null),
             'orphanRemoval' => true,
         ]);
     }
 
-    private function mapTranslation(ClassMetadata $classMetadata, ObjectManager $objectManager): void
-    {
+    /**
+     * @param \ReflectionClass<object> $reflectionClass
+     */
+    private function mapTranslation(
+        \ReflectionClass $reflectionClass,
+        ClassMetadata $classMetadata,
+        ObjectManager $objectManager,
+    ): void {
         if (!$classMetadata->hasAssociation('translatable')) {
             /** @var class-string $targetEntity */
-            $targetEntity = $classMetadata->getReflectionClass()
+            $targetEntity = $reflectionClass
                 ->getMethod('getTranslatableEntityClass')
                 ->invoke(null);
 
-            /** @var ClassMetadata $classMetadata */
             $targetClassMetadata = $objectManager->getClassMetadata($targetEntity);
+            \assert($targetClassMetadata instanceof ClassMetadata);
+
             $singleIdentifierFieldName = $targetClassMetadata->getSingleIdentifierFieldName();
 
             $classMetadata->mapManyToOne([
