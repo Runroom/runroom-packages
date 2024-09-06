@@ -108,6 +108,7 @@ final class Kernel extends BaseKernel
             ],
             'orm' => [
                 'auto_mapping' => true,
+                'controller_resolver' => ['auto_mapping' => false],
             ],
         ]);
 

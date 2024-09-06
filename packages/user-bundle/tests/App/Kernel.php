@@ -137,6 +137,7 @@ final class Kernel extends BaseKernel
             ],
             'orm' => [
                 'auto_mapping' => true,
+                'controller_resolver' => ['auto_mapping' => false],
             ],
         ]);
 
@@ -147,10 +148,6 @@ final class Kernel extends BaseKernel
 
         $container->loadFromExtension('symfonycasts_reset_password', [
             'request_password_repository' => 'symfonycasts.reset_password.fake_request_repository',
-        ]);
-
-        $container->loadFromExtension('sonata_block', [
-            'http_cache' => false,
         ]);
 
         $container->loadFromExtension('runroom_user', [

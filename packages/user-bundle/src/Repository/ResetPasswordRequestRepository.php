@@ -79,16 +79,7 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
 
     public function removeResetPasswordRequest(ResetPasswordRequestInterface $resetPasswordRequest): void
     {
-        $user = $resetPasswordRequest->getUser();
-
-        \assert($user instanceof UserInterface);
-
-        $this->getRepository()->createQueryBuilder('t')
-            ->delete()
-            ->where('t.user = :user')
-            ->setParameter('user', $user->getId())
-            ->getQuery()
-            ->execute();
+        $this->removeRequests($resetPasswordRequest->getUser());
     }
 
     public function removeExpiredResetPasswordRequests(): int
@@ -100,6 +91,18 @@ final class ResetPasswordRequestRepository implements ResetPasswordRequestReposi
             ->getQuery();
 
         return $query->execute();
+    }
+
+    public function removeRequests(object $user): void
+    {
+        \assert($user instanceof UserInterface);
+
+        $this->getRepository()->createQueryBuilder('t')
+            ->delete()
+            ->where('t.user = :user')
+            ->setParameter('user', $user->getId())
+            ->getQuery()
+            ->execute();
     }
 
     /**
