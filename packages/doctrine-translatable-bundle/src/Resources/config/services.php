@@ -29,9 +29,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$localeProvider', service('runroom.doctrine_translatable.provider.locale'))
         ->arg('$translatableFetchMode', param('runroom_doctrine_translatable_fetch_mode'))
         ->arg('$translationFetchMode', param('runroom_doctrine_translation_fetch_mode'))
-        ->tag('doctrine.event_listener', ['event' => 'loadClassMetadata'])
-        ->tag('doctrine.event_listener', ['event' => 'postLoad'])
-        ->tag('doctrine.event_listener', ['event' => 'prePersist']);
+        ->tag('doctrine.event_listener', ['event' => 'loadClassMetadata', 'priority' => 10])
+        ->tag('doctrine.event_listener', ['event' => 'postLoad', 'priority' => 10])
+        ->tag('doctrine.event_listener', ['event' => 'prePersist', 'priority' => 10]);
 
     $services->set('runroom.doctrine_translatable.provider.locale', LocaleProvider::class)
         ->public()
