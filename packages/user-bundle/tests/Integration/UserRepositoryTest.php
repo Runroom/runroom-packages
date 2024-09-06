@@ -66,7 +66,7 @@ final class UserRepositoryTest extends KernelTestCase
         $user = $this->repository->create();
         $user->setEmail('email@localhost');
         $user->setPassword('password');
-        $user->setCreatedAt(new \DateTimeImmutable());
+        $user->setCreatedAt(new \DateTime());
 
         $this->repository->save($user);
 

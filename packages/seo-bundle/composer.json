@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.1",
         "doctrine/doctrine-bundle": "^2.10",
-        "doctrine/orm": "^2.16",
+        "doctrine/orm": "^2.19 || ^3.2",
         "doctrine/persistence": "^3.1",
         "runroom-packages/doctrine-translatable-bundle": "^0.19",
         "sonata-project/doctrine-extensions": "^2.0",

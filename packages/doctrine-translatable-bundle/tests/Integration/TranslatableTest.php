@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Runroom\DoctrineTranslatableBundle\Tests\ORM\Translatable;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ObjectRepository;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
@@ -424,7 +424,7 @@ final class TranslatableTest extends KernelTestCase
         static::assertTrue($translatableClassMetadata->isAssociationInverseSide('translations'));
 
         static::assertSame(
-            ClassMetadataInfo::ONE_TO_MANY,
+            ClassMetadata::ONE_TO_MANY,
             $translatableClassMetadata->getAssociationMapping('translations')['type']
         );
     }
