@@ -29,7 +29,7 @@
     "require-dev": {
         "doctrine/dbal": "^3.4",
         "doctrine/doctrine-bundle": "^2.10",
-        "doctrine/orm": "^2.16 || ^3.2",
+        "doctrine/orm": "^2.19 || ^3.2",
         "knplabs/knp-menu-bundle": "^3.1",
         "sonata-project/admin-bundle": "^4.20",
         "sonata-project/doctrine-orm-admin-bundle": "^4.3",
