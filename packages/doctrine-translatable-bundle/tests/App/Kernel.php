@@ -95,9 +95,7 @@ final class Kernel extends BaseKernel
             ],
             'orm' => [
                 'report_fields_where_declared' => true,
-                'controller_resolver' => [
-                    'auto_mapping' => false,
-                ],
+                'controller_resolver' => ['auto_mapping' => false],
                 'mappings' => [
                     'entity' => [
                         'type' => 'attribute',
