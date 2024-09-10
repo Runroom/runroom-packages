@@ -41,14 +41,7 @@ final class UserManipulatorTest extends TestCase
 
     protected function setUp(): void
     {
-        /**
-         * @todo: Simplify this when dropping support for Symfony 5
-         *
-         * @phpstan-ignore-next-line
-         */
-        $this->passwordHasher = !method_exists(UserPasswordHasherInterface::class, 'hashPassword') ?
-            $this->getMockBuilder(UserPasswordHasherInterface::class)->addMethods(['hashPassword'])->getMock() :
-            $this->createMock(UserPasswordHasherInterface::class);
+        $this->passwordHasher = $this->createMock(UserPasswordHasherInterface::class);
         $this->repository = $this->createMock(UserRepositoryInterface::class);
         $this->identifier = 'user@localhost';
 

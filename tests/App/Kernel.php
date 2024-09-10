@@ -48,7 +48,6 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Tests\App\Entity\Gallery;
 use Tests\App\Entity\GalleryItem;
@@ -119,7 +118,7 @@ final class Kernel extends BaseKernel
             ],
         ]);
 
-        $securityConfig = [
+        $container->loadFromExtension('security', [
             'access_decision_manager' => ['strategy' => 'unanimous'],
             'access_control' => [
                 ['path' => '^/dashboard$', 'role' => 'ROLE_USER'],
@@ -148,14 +147,7 @@ final class Kernel extends BaseKernel
                     ],
                 ],
             ],
-        ];
-
-        // @todo: Remove if when dropping support of Symfony 5.4
-        if (!class_exists(IsGranted::class)) {
-            $securityConfig['enable_authenticator_manager'] = true;
-        }
-
-        $container->loadFromExtension('security', $securityConfig);
+        ]);
 
         $container->loadFromExtension('doctrine', [
             'dbal' => [

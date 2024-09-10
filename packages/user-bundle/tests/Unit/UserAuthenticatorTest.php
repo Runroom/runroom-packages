@@ -23,7 +23,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
@@ -66,18 +65,8 @@ final class UserAuthenticatorTest extends TestCase
         static::assertInstanceOf(PasswordCredentials::class, $passwordCredential);
         static::assertSame('username', $userBadge->getUserIdentifier());
         static::assertSame('password', $passwordCredential->getPassword());
-        /**
-         * @todo: Remove this conditional when dropping support for Symfony <6.2
-         *
-         * @psalm-suppress UndefinedClass
-         */
         static::assertSame('username', $request->getSession()->get(
-            class_exists(SecurityRequestAttributes::class) ?
-            SecurityRequestAttributes::LAST_USERNAME :
-            /**
-             * @phpstan-ignore-next-line
-             */
-            Security::LAST_USERNAME
+            SecurityRequestAttributes::LAST_USERNAME
         ));
     }
 

@@ -36,11 +36,6 @@ interface UserInterface extends SymfonyUserInterface, PasswordAuthenticatedUserI
      */
     public function setRoles(array $roles): self;
 
-    /**
-     * @todo: Remove this when dropping support for Symfony 5.4
-     */
-    public function getPassword(): ?string;
-
     public function setPassword(?string $password): self;
 
     public function getPlainPassword(): ?string;

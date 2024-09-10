@@ -18,7 +18,6 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Bundle\FrameworkBundle\Routing\AnnotatedRouteControllerLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -60,8 +59,9 @@ final class Kernel extends BaseKernel
     {
         $container->setParameter('kernel.default_locale', 'en');
 
-        $frameworkConfig = [
+        $container->loadFromExtension('framework', [
             'annotations' => false,
+            'handle_all_throwables' => true,
             'test' => true,
             'translator' => true,
             'router' => ['utf8' => true],
@@ -76,16 +76,7 @@ final class Kernel extends BaseKernel
             ],
             'secret' => 'secret',
             'http_method_override' => false,
-        ];
-
-        /**
-         * @todo: Join configs when dropping support for Symfony 5.4
-         */
-        if (!class_exists(AnnotatedRouteControllerLoader::class)) {
-            $frameworkConfig['handle_all_throwables'] = true;
-        }
-
-        $container->loadFromExtension('framework', $frameworkConfig);
+        ]);
 
         $container->loadFromExtension('doctrine', [
             'dbal' => [

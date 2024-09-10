@@ -17,7 +17,6 @@ use Runroom\UserBundle\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -53,12 +52,7 @@ final class ActivateUserCommandTest extends KernelTestCase
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
-        // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (!class_exists(Proxy::class)) {
-            refresh($user);
-        } else {
-            $user = Proxy::createFromPersisted($user)->_refresh()->_real();
-        }
+        refresh($user);
 
         static::assertTrue($user->getEnabled());
     }
@@ -72,12 +66,7 @@ final class ActivateUserCommandTest extends KernelTestCase
 
         $this->commandTester->execute(['identifier' => 'email@localhost']);
 
-        // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (!class_exists(Proxy::class)) {
-            refresh($user);
-        } else {
-            $user = Proxy::createFromPersisted($user)->_refresh()->_real();
-        }
+        refresh($user);
 
         static::assertTrue($user->getEnabled());
         static::assertStringContainsString('User "email@localhost" has been activated.', $this->commandTester->getDisplay());

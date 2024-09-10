@@ -32,7 +32,6 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -93,7 +92,7 @@ final class Kernel extends BaseKernel
             ],
         ]);
 
-        $securityConfig = [
+        $container->loadFromExtension('security', [
             'password_hashers' => [User::class => ['algorithm' => 'plaintext']],
             'access_decision_manager' => ['strategy' => 'unanimous'],
             'access_control' => [
@@ -120,14 +119,7 @@ final class Kernel extends BaseKernel
                     'path' => '/',
                 ],
             ]],
-        ];
-
-        // @todo: Remove if when dropping support of Symfony 5.4
-        if (!class_exists(IsGranted::class)) {
-            $securityConfig['enable_authenticator_manager'] = true;
-        }
-
-        $container->loadFromExtension('security', $securityConfig);
+        ]);
 
         $container->loadFromExtension('doctrine', [
             'dbal' => [

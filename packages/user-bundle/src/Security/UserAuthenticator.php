@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
@@ -39,16 +38,8 @@ final class UserAuthenticator extends AbstractLoginFormAuthenticator
         $password = $request->request->get('_password', '');
         \assert(\is_string($password));
 
-        /**
-         * @todo: Remove this conditional when dropping support for Symfony <6.2
-         *
-         * @psalm-suppress UndefinedClass
-         */
         $request->getSession()->set(
-            /**
-             * @phpstan-ignore-next-line
-             */
-            class_exists(SecurityRequestAttributes::class) ? SecurityRequestAttributes::LAST_USERNAME : Security::LAST_USERNAME,
+            SecurityRequestAttributes::LAST_USERNAME,
             $identifier
         );
 
