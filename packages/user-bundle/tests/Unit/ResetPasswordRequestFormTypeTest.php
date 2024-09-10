@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Runroom\UserBundle\Form\ResetPasswordRequestFormType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormExtensionInterface;
@@ -31,9 +32,7 @@ final class ResetPasswordRequestFormTypeTest extends TypeTestCase
         $this->form = $this->factory->create(ResetPasswordRequestFormType::class);
     }
 
-    /**
-     * @dataProvider submitValuesProvider
-     */
+    #[DataProvider('submitValuesProvider')]
     public function testItSubmitsWithDifferentValues(string $email, bool $isValid): void
     {
         $this->form->submit(['identifier' => $email]);

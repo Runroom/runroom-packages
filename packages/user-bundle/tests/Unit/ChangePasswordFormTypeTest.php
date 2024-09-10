@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Runroom\UserBundle\Form\ChangePasswordFormType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormExtensionInterface;
@@ -31,9 +32,7 @@ final class ChangePasswordFormTypeTest extends TypeTestCase
         $this->form = $this->factory->create(ChangePasswordFormType::class);
     }
 
-    /**
-     * @dataProvider submitValuesProvider
-     */
+    #[DataProvider('submitValuesProvider')]
     public function testItSubmitsWithDifferentValues(string $fistPassword, string $secondPassword, bool $isValid, ?string $expectedData): void
     {
         $this->form->submit(['plainPassword' => [
