@@ -34,7 +34,7 @@
         "symfony/string": "^5.4 || ^6.4 || ^7.1",
         "symfony/validator": "^5.4 || ^6.4 || ^7.1",
         "twig/string-extra": "^3.0",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.14"
     },
     "require-dev": {
         "a2lix/auto-form-bundle": "^0.4",

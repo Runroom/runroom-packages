@@ -11,7 +11,7 @@
     processIsolation="false"
     stopOnFailure="false"
     bootstrap="tests/bootstrap.php"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
 >
     <testsuite name="all">
         <directory>packages/*/tests</directory>

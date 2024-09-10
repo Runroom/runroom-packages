@@ -151,15 +151,8 @@ final class BrowserActionTest extends TestCase
         $twigRenderer->expects(static::once())->method('setTheme')->with($formView, $formTheme);
     }
 
-    /**
-     * @todo: Simplify when dropping support for sonata-project/admin-bundle 3
-     */
     private function configureRender(string $template, string $rendered): void
     {
-        // $this->admin->method('getPersistentParameters')->willReturn([
-        //     'param' => 'param',
-        //     'context' => 'another_context',
-        // ]);
         $this->twig->expects(static::once())->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 

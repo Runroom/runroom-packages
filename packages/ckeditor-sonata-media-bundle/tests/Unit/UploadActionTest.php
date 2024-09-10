@@ -72,7 +72,9 @@ final class UploadActionTest extends TestCase
         $media = $this->createStub(MediaInterface::class);
         $provider = $this->createStub(MediaProviderInterface::class);
 
-        $this->configureRender('@RunroomCkeditorSonataMedia/upload.html.twig', 'renderResponse');
+        $this->twig->method('render')
+            ->with('@RunroomCkeditorSonataMedia/upload.html.twig', static::isType('array'))
+            ->willReturn('renderResponse');
 
         $this->mediaPool->addProvider('provider', $provider);
 
@@ -109,18 +111,6 @@ final class UploadActionTest extends TestCase
         $this->request->query->set('provider', 'provider');
         $this->request->files->set('upload', $upload);
         $this->request->setMethod('POST');
-    }
-
-    /**
-     * @todo: Simplify when dropping support for sonata-project/admin-bundle 3
-     */
-    private function configureRender(string $template, string $rendered): void
-    {
-        // $this->admin->method('getPersistentParameters')->willReturn([
-        //     'param' => 'param',
-        //     'context' => 'another_context',
-        // ]);
-        $this->twig->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 
     private function configureContainer(): void

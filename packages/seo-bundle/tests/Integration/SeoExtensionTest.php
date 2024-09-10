@@ -23,7 +23,7 @@ use Twig\Test\IntegrationTestCase;
 
 final class SeoExtensionTest extends IntegrationTestCase
 {
-    public function getFixturesDir(): string
+    public static function getFixturesDirectory(): string
     {
         return __DIR__ . '/../Fixtures/Twig/';
     }
