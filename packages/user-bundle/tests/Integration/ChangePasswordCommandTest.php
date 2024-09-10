@@ -17,7 +17,6 @@ use Runroom\UserBundle\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -61,12 +60,7 @@ final class ChangePasswordCommandTest extends KernelTestCase
             'password' => 'new_password',
         ]);
 
-        // @TODO: Remove else when dropping support for zenstruct/foundry 1
-        if (!class_exists(Proxy::class)) {
-            refresh($user);
-        } else {
-            $user = Proxy::createFromPersisted($user)->_refresh()->_real();
-        }
+        refresh($user);
 
         static::assertSame($user->getPassword(), 'new_password');
     }

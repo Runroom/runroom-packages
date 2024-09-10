@@ -19,6 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
 final class FormHandler implements FormHandlerInterface
 {
@@ -48,13 +49,11 @@ final class FormHandler implements FormHandlerInterface
                 'form.' . $form->getName() . '.event.success'
             );
 
-            /**
-             * @todo: Use instanceof FlashBagAwareSessionInterface when dropping Symfony 5 support.
-             *
-             * @phpstan-ignore-next-line
-             * @psalm-suppress UndefinedInterfaceMethod
-             */
-            $request->getSession()->getFlashBag()->add($form->getName(), 'success');
+            $session = $request->getSession();
+
+            if ($session instanceof FlashBagAwareSessionInterface) {
+                $session->getFlashBag()->add($form->getName(), 'success');
+            }
         }
 
         return $model;

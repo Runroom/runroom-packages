@@ -2,6 +2,7 @@
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 $header = <<<'HEADER'
 This file is part of the Runroom package.
@@ -18,6 +19,7 @@ $finder = Finder::create()
 
 $config = new Config();
 
+$config->setParallelConfig(ParallelConfigFactory::detect());
 $config->setRules([
     '@PSR12' => true,
     '@PSR12:risky' => true,

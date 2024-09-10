@@ -23,9 +23,9 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^2.19 || ^3.2",
         "doctrine/persistence": "^3.1",
-        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.1",
-        "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.1",
-        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.1",
+        "symfony/dependency-injection": "^6.4 || ^7.1",
+        "symfony/framework-bundle": "^6.4 || ^7.1",
+        "symfony/http-kernel": "^6.4 || ^7.1",
         "symfony/translation-contracts": "^2.4 || ^3.0"
     },
     "require-dev": {
@@ -34,8 +34,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
         "symfony/phpunit-bridge": "^7.1",
-        "symfony/translation": "^5.4 || ^6.4 || ^7.1",
-        "zenstruck/foundry": "^1.38.2 || ^2.0"
+        "symfony/translation": "^6.4 || ^7.1",
+        "zenstruck/foundry": "^2.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
