@@ -42,7 +42,7 @@
         "symfony/translation": "^5.4 || ^6.4 || ^7.1",
         "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.1",
         "symfony/validator": "^5.4 || ^6.4 || ^7.1",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.14"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.0",

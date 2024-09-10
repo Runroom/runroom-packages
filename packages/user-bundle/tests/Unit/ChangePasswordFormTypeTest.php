@@ -49,7 +49,7 @@ final class ChangePasswordFormTypeTest extends TypeTestCase
     /**
      * @return iterable<array{string, string, bool, string|null}>
      */
-    public function submitValuesProvider(): iterable
+    public static function submitValuesProvider(): iterable
     {
         yield ['newPassword', 'oldPassword', false, null];
         yield ['newPassword', 'newPassword', true, 'newPassword'];

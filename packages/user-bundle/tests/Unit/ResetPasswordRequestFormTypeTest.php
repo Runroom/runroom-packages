@@ -45,7 +45,7 @@ final class ResetPasswordRequestFormTypeTest extends TypeTestCase
     /**
      * @return iterable<array{string, bool}>
      */
-    public function submitValuesProvider(): iterable
+    public static function submitValuesProvider(): iterable
     {
         yield ['', false];
         yield ['emailNotValid', true];
