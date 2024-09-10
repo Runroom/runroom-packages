@@ -26,7 +26,7 @@ final class BasicPageExtensionTest extends IntegrationTestCase
 {
     use Factories;
 
-    public function getFixturesDir(): string
+    public static function getFixturesDirectory(): string
     {
         return __DIR__ . '/../Fixtures/Twig/';
     }
