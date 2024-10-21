@@ -50,7 +50,7 @@
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
-        "runroom-packages/testing": "^0.20",
+        "runroom-packages/testing": "^0.21",
         "sonata-project/block-bundle": "^5.0",
         "sonata-project/doctrine-extensions": "^2.0",
         "sonata-project/doctrine-orm-admin-bundle": "^4.13",
@@ -85,7 +85,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.20-dev"
+            "dev-master": "0.21-dev"
         }
     }
 }
