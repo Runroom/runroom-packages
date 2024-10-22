@@ -64,6 +64,9 @@
         "symfonycasts/reset-password-bundle": "^1.10",
         "zenstruck/foundry": "^2.0"
     },
+    "conflict": {
+        "zenstruck/foundry": "<2.0"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
