@@ -50,7 +50,7 @@
         "symfony/phpunit-bridge": "^7.1",
         "symfony/security-bundle": "^6.4 || ^7.1",
         "symfony/twig-bundle": "^6.4 || ^7.1",
-        "zenstruck/foundry": "^2.0"
+        "zenstruck/foundry": "^3.0"
     },
     "conflict": {
         "a2lix/translation-form-bundle": "<3.2",
