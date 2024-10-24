@@ -61,7 +61,8 @@
     "conflict": {
         "a2lix/translation-form-bundle": "<3.2",
         "friendsofsymfony/ckeditor-bundle": "<2.3",
-        "sonata-project/admin-bundle": "<4.25"
+        "sonata-project/admin-bundle": "<4.25",
+        "zenstruck/foundry": "<2.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
