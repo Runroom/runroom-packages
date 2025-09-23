@@ -37,8 +37,8 @@ final class SeoExtensionTest extends IntegrationTestCase
 
     protected function getRuntimeLoaders(): array
     {
-        $alternateLinksService = $this->createStub(AlternateLinksServiceInterface::class);
-        $metaInformationService = $this->createStub(MetaInformationServiceInterface::class);
+        $alternateLinksService = static::createStub(AlternateLinksServiceInterface::class);
+        $metaInformationService = static::createStub(MetaInformationServiceInterface::class);
 
         $metaInformation = new MetaInformationViewModel();
         $metaInformation->setTitle('seo title');

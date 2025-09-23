@@ -26,11 +26,10 @@
         "symfony/http-kernel": "^6.4 || ^7.1"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpunit/phpunit": "^9.6",
-        "runroom-packages/render-event-bundle": "^0.21",
-        "symfony/phpunit-bridge": "^7.1"
+        "matthiasnoback/symfony-config-test": "^6.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.1",
+        "phpunit/phpunit": "^12.3",
+        "runroom-packages/render-event-bundle": "^0.21"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

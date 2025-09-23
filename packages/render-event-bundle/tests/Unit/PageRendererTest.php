@@ -45,7 +45,7 @@ final class PageRendererTest extends TestCase
 
     public function testItDispatchEventsOnRender(): void
     {
-        $this->twig->method('render')->with('test.html.twig', static::isType('array'))
+        $this->twig->method('render')->with('test.html.twig', static::isArray())
             ->willReturn('Rendered test');
 
         $result = $this->service->render('test.html.twig', []);
@@ -57,7 +57,7 @@ final class PageRendererTest extends TestCase
     {
         $response = new Response();
 
-        $this->twig->method('render')->with('different.html.twig', static::isType('array'))
+        $this->twig->method('render')->with('different.html.twig', static::isArray())
             ->willReturn('Rendered test');
 
         $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, static function (PageRenderEvent $event): void {
@@ -77,7 +77,7 @@ final class PageRendererTest extends TestCase
     {
         $response = new Response();
 
-        $this->twig->method('render')->with('test.html.twig', static::isType('array'), null)
+        $this->twig->method('render')->with('test.html.twig', static::isArray(), null)
             ->willReturn('Rendered test');
 
         $this->eventDispatcher->addListener(PageRenderEvent::EVENT_NAME, static function (PageRenderEvent $event): void {

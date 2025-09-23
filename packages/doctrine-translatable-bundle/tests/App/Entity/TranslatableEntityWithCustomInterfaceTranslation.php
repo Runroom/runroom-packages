@@ -19,6 +19,9 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Runroom\DoctrineTranslatableBundle\Tests\App\Entity\Translatable\AbstractTranslatableEntityTranslation;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 #[Entity]
 class TranslatableEntityWithCustomInterfaceTranslation extends AbstractTranslatableEntityTranslation
 {

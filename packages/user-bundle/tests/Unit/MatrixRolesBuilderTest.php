@@ -52,9 +52,9 @@ final class MatrixRolesBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->tokenStorage = $this->createStub(TokenStorageInterface::class);
-        $this->adminRolesBuilder = $this->createStub(AdminRolesBuilderInterface::class);
-        $this->expandableRolesBuilder = $this->createStub(ExpandableRolesBuilderInterface::class);
+        $this->tokenStorage = static::createStub(TokenStorageInterface::class);
+        $this->adminRolesBuilder = static::createStub(AdminRolesBuilderInterface::class);
+        $this->expandableRolesBuilder = static::createStub(ExpandableRolesBuilderInterface::class);
 
         $this->adminRole = ['ROLE_SONATA_FOO_ADMIN' => [
             'role' => 'ROLE_SONATA_FOO_ADMIN',
@@ -88,7 +88,7 @@ final class MatrixRolesBuilderTest extends TestCase
 
     public function testItGetsArrayRoles(): void
     {
-        $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
+        $this->tokenStorage->method('getToken')->willReturn(static::createStub(TokenInterface::class));
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
         $this->expandableRolesBuilder->method('getRoles')->willReturn($this->guestRole);
         $result = $this->matrixRolesBuilder->getRoles('domain');
@@ -107,7 +107,7 @@ final class MatrixRolesBuilderTest extends TestCase
 
     public function testItGetsExpandedArrayRoles(): void
     {
-        $this->tokenStorage->method('getToken')->willReturn($this->createStub(TokenInterface::class));
+        $this->tokenStorage->method('getToken')->willReturn(static::createStub(TokenInterface::class));
         $this->adminRolesBuilder->method('getRoles')->willReturn($this->adminRole);
         $this->expandableRolesBuilder->method('getExpandedRoles')->willReturn($this->guestRole);
         $result = $this->matrixRolesBuilder->getExpandedRoles('domain');

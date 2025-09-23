@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * @psalm-suppress MissingTemplateParam
+ * @extends AbstractType<object>
  */
 final class ResetPasswordRequestFormType extends AbstractType
 {

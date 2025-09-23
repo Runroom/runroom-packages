@@ -54,9 +54,6 @@ final class TranslatableEventSubscriber
 
         $reflectionClass = $classMetadata->getReflectionClass();
 
-        /**
-         * @psalm-suppress TypeDoesNotContainNull This could be null if the class has not yet fully built
-         */
         if (null === $reflectionClass) {
             return;
         }

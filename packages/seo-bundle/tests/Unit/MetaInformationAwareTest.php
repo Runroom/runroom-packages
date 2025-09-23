@@ -21,7 +21,7 @@ final class MetaInformationAwareTest extends TestCase
 {
     public function testItSetsAndGetsMetaInformation(): void
     {
-        $entityMetaInformation = $this->createStub(EntityMetaInformation::class);
+        $entityMetaInformation = static::createStub(EntityMetaInformation::class);
         $metaInformationAware = new MetaInformationAwareEntity();
 
         $metaInformationAware = $metaInformationAware->setMetaInformation($entityMetaInformation);

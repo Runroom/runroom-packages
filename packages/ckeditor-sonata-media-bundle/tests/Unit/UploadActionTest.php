@@ -69,11 +69,11 @@ final class UploadActionTest extends TestCase
 
     public function testUploadAction(): void
     {
-        $media = $this->createStub(MediaInterface::class);
-        $provider = $this->createStub(MediaProviderInterface::class);
+        $media = static::createStub(MediaInterface::class);
+        $provider = static::createStub(MediaProviderInterface::class);
 
         $this->twig->method('render')
-            ->with('@RunroomCkeditorSonataMedia/upload.html.twig', static::isType('array'))
+            ->with('@RunroomCkeditorSonataMedia/upload.html.twig', static::isArray())
             ->willReturn('renderResponse');
 
         $this->mediaPool->addProvider('provider', $provider);
@@ -105,7 +105,7 @@ final class UploadActionTest extends TestCase
 
     private function configureRequest(): void
     {
-        $upload = $this->createStub(UploadedFile::class);
+        $upload = static::createStub(UploadedFile::class);
 
         $this->request->query->set('_sonata_admin', 'admin_code');
         $this->request->query->set('provider', 'provider');

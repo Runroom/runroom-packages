@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @psalm-suppress MissingTemplateParam
+ * @extends AbstractType<object>
  */
 final class CookiesFormType extends AbstractType
 {

@@ -18,6 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
 use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 
+/**
+ * @api
+ */
 #[ORM\Entity]
 class EntityMetaInformation implements TranslatableInterface, \Stringable
 {

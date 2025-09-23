@@ -38,7 +38,7 @@ final class RolesMatrixRuntimeTest extends TestCase
     protected function setUp(): void
     {
         $this->twig = $this->createMock(Environment::class);
-        $this->rolesBuilder = $this->createStub(MatrixRolesBuilderInterface::class);
+        $this->rolesBuilder = static::createStub(MatrixRolesBuilderInterface::class);
 
         $this->runtime = new RolesMatrixRuntime($this->twig, $this->rolesBuilder);
     }

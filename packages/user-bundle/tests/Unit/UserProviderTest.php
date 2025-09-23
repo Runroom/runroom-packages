@@ -113,7 +113,7 @@ final class UserProviderTest extends TestCase
 
     public function testItDoesntRefreshesWrongUserInstance(): void
     {
-        $user = $this->createStub(SymfonyUserInterface::class);
+        $user = static::createStub(SymfonyUserInterface::class);
 
         $this->expectException(UnsupportedUserException::class);
         $this->expectExceptionMessage(\sprintf('Instances of "%s" are not supported.', $user::class));
@@ -132,7 +132,7 @@ final class UserProviderTest extends TestCase
 
     public function testItDoesntUpgradePasswordForWrongUserInstance(): void
     {
-        $user = $this->createStub(SymfonyUserInterface::class);
+        $user = static::createStub(SymfonyUserInterface::class);
 
         $this->expectException(UnsupportedUserException::class);
         $this->expectExceptionMessage(\sprintf('Instances of "%s" are not supported.', $user::class));

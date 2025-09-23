@@ -21,6 +21,9 @@ if (class_exists(Deprecation::class)) {
     Deprecation::enableWithTriggerError();
 }
 
-$kernel = new Kernel($_SERVER['APP_ENV'] ?? 'test', (bool) ($_SERVER['APP_DEBUG'] ?? false));
+$env = $_SERVER['APP_ENV'];
+\assert(\is_string($env) && $env === null);
+
+$kernel = new Kernel($env ?? 'test', (bool) ($_SERVER['APP_DEBUG'] ?? false));
 
 (new Filesystem())->remove([$kernel->getCacheDir()]);

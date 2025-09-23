@@ -20,6 +20,9 @@ use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 use Runroom\TranslationBundle\Repository\TranslationRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @api
+ */
 #[ORM\Entity(repositoryClass: TranslationRepository::class)]
 class Translation implements TranslatableInterface, \Stringable
 {

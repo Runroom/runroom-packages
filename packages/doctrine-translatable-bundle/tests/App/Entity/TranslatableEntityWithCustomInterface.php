@@ -19,6 +19,9 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 #[Entity]
 class TranslatableEntityWithCustomInterface implements ExtendedTranslatableInterface
 {

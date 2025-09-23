@@ -37,10 +37,10 @@ final class TwigErrorRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->twig = $this->createStub(Environment::class);
+        $this->twig = static::createStub(Environment::class);
         $this->fallbackErrorRenderer = $this->createMock(HtmlErrorRenderer::class);
         $this->renderer = $this->createMock(PageRendererInterface::class);
-        $this->exception = $this->createStub(\Throwable::class);
+        $this->exception = static::createStub(\Throwable::class);
         $this->flattenException = $this->createMock(FlattenException::class);
         $this->twigLoader = $this->createMock(LoaderInterface::class);
 

@@ -73,7 +73,7 @@ final class AdminRolesBuilderTest extends TestCase
         $container->set('runroom.user.admin.user', $this->admin);
 
         $this->rolesBuilder = new AdminRolesBuilder(
-            $this->createStub(AuthorizationCheckerInterface::class),
+            static::createStub(AuthorizationCheckerInterface::class),
             new Pool($container, ['runroom.user.admin.user']),
             $sonataConfiguration,
             new Translator('en')

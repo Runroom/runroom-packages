@@ -54,12 +54,20 @@ final class GedmoPositionHandler extends AbstractPositionHandler
         $groups = [];
         if (isset($config['groups'])) {
             foreach ($config['groups'] as $groupName) {
-                $reflectionProperty = $meta->getReflectionProperty($groupName);
+                /**
+                 * @psalm-suppress DeprecatedMethod
+                 */
+                $reflectionProperty = method_exists($meta, 'getPropertyAccessor') ?
+                    $meta->getPropertyAccessor($groupName) :
+                    $meta->getReflectionProperty($groupName);
 
                 if (null === $reflectionProperty) {
                     continue;
                 }
 
+                /**
+                 * @psalm-suppress InternalMethod
+                 */
                 $groups[$groupName] = $reflectionProperty->getValue($entity);
             }
         }

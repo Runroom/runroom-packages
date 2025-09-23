@@ -15,5 +15,8 @@ namespace Runroom\DoctrineTranslatableBundle\Tests\App\Entity\Translatable;
 
 use Doctrine\ORM\Mapping\Entity;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 #[Entity]
 class ExtendedTranslatableEntityWithJoinTableInheritanceTranslation extends TranslatableEntityWithJoinTableInheritanceTranslation {}

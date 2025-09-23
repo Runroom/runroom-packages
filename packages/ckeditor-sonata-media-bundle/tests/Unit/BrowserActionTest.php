@@ -153,7 +153,7 @@ final class BrowserActionTest extends TestCase
 
     private function configureRender(string $template, string $rendered): void
     {
-        $this->twig->expects(static::once())->method('render')->with($template, static::isType('array'))->willReturn($rendered);
+        $this->twig->expects(static::once())->method('render')->with($template, static::isArray())->willReturn($rendered);
     }
 
     private function configureContainer(): void

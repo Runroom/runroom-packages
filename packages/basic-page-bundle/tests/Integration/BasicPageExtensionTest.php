@@ -45,7 +45,7 @@ final class BasicPageExtensionTest extends IntegrationTestCase
             'location' => BasicPage::LOCATION_FOOTER,
         ]);
 
-        $basicPageRepository = $this->createStub(BasicPageRepositoryInterface::class);
+        $basicPageRepository = static::createStub(BasicPageRepositoryInterface::class);
         $basicPageRepository->method('findPublished')->willReturn($basicPages);
 
         $basicPageRuntime = new BasicPageRuntime($basicPageRepository);

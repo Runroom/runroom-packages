@@ -19,6 +19,9 @@ use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
 use Runroom\DoctrineTranslatableBundle\Model\TranslationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @api
+ */
 #[ORM\Entity]
 class CookiesPageTranslation implements TranslationInterface
 {

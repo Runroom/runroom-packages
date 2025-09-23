@@ -18,8 +18,6 @@ use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
  * @extends PersistentObjectFactory<MetaInformation>
- *
- * @method MetaInformationFactory with(array|callable $attributes = [])
  */
 final class MetaInformationFactory extends PersistentObjectFactory
 {

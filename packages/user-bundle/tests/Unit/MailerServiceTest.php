@@ -47,7 +47,7 @@ final class MailerServiceTest extends TestCase
         $this->service = new MailerService(
             $this->mailer,
             $this->translator,
-            $this->createStub(Environment::class),
+            static::createStub(Environment::class),
             'user@email.com',
             'userName'
         );

@@ -22,7 +22,7 @@
         "doctrine/dbal": "^3.6 || ^4.0",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^2.19 || ^3.2",
-        "doctrine/persistence": "^3.1",
+        "doctrine/persistence": "^3.1 || ^4.0",
         "symfony/dependency-injection": "^6.4 || ^7.1",
         "symfony/framework-bundle": "^6.4 || ^7.1",
         "symfony/http-kernel": "^6.4 || ^7.1",
@@ -30,10 +30,9 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.0",
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpunit/phpunit": "^9.6",
-        "symfony/phpunit-bridge": "^7.1",
+        "matthiasnoback/symfony-config-test": "^6.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.1",
+        "phpunit/phpunit": "^12.3",
         "symfony/translation": "^6.4 || ^7.1",
         "zenstruck/foundry": "^2.0"
     },

@@ -16,14 +16,12 @@ parameters:
         - */vendor/*
         - tests/App/var/*
     symfony:
-        container_xml_path: '%rootDir%/../../../tests/App/var/cache/test/Tests_App_KernelTestDebugContainer.xml'
-        console_application_loader: ./phpstan-console-application.php
+        containerXmlPath: '%rootDir%/../../../tests/App/var/cache/test/Tests_App_KernelTestDebugContainer.xml'
+        consoleApplicationLoader: ./phpstan-console-application.php
     doctrine:
         objectManagerLoader: ./object-manager.php
     treatPhpDocTypesAsCertain: false
-    checkGenericClassInNonGenericObjectType: true
     checkInternalClassCaseSensitivity: true
-    checkMissingIterableValueType: true
     checkMissingVarTagTypehint: true
     checkMissingTypehints: true
     checkUninitializedProperties: true
