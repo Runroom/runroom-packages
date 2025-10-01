@@ -22,7 +22,7 @@ if (class_exists(Deprecation::class)) {
 }
 
 $env = $_SERVER['APP_ENV'];
-\assert(\is_string($env) && $env === null);
+assert(is_string($env) && null === $env);
 
 $kernel = new Kernel($env ?? 'test', (bool) ($_SERVER['APP_DEBUG'] ?? false));
 
