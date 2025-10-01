@@ -48,6 +48,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\UX\StimulusBundle\StimulusBundle;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Tests\App\Entity\Gallery;
 use Tests\App\Entity\GalleryItem;
@@ -79,6 +80,7 @@ final class Kernel extends BaseKernel
             new SonataTwigBundle(),
             new SymfonyCastsResetPasswordBundle(),
             new ZenstruckFoundryBundle(),
+            new StimulusBundle(),
 
             new RunroomBasicPageBundle(),
             new RunroomCkeditorSonataMediaBundle(),

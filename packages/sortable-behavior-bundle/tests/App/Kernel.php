@@ -27,6 +27,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\UX\StimulusBundle\StimulusBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 final class Kernel extends BaseKernel
@@ -45,6 +46,7 @@ final class Kernel extends BaseKernel
             new SonataDoctrineORMAdminBundle(),
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
+            new StimulusBundle(),
 
             new RunroomSortableBehaviorBundle(),
         ];

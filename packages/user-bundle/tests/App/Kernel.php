@@ -32,6 +32,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\UX\StimulusBundle\StimulusBundle;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -56,6 +57,7 @@ final class Kernel extends BaseKernel
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
             new SymfonyCastsResetPasswordBundle(),
+            new StimulusBundle(),
 
             new RunroomUserBundle(),
         ];

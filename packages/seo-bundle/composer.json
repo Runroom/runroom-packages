@@ -48,6 +48,7 @@
         "sonata-project/admin-bundle": "^4.25",
         "sonata-project/doctrine-orm-admin-bundle": "^4.13",
         "symfony/security-bundle": "^6.4 || ^7.1",
+        "symfony/stimulus-bundle": "^2.30",
         "symfony/twig-bundle": "^6.4 || ^7.1",
         "zenstruck/foundry": "^2.0"
     },
