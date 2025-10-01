@@ -40,7 +40,6 @@ final class CookiesExtensionTest extends IntegrationTestCase
         parent::testLegacyIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
     }
 
-
     protected function getExtensions(): array
     {
         return [
