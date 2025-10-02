@@ -73,7 +73,7 @@ final class UploadActionTest extends TestCase
         $provider = static::createStub(MediaProviderInterface::class);
 
         $this->twig->method('render')
-            ->with('@RunroomCkeditorSonataMedia/upload.html.twig', static::isArray())
+            ->with('@RunroomCkeditorSonataMedia/upload.html.twig', static::isType('array'))
             ->willReturn('renderResponse');
 
         $this->mediaPool->addProvider('provider', $provider);
