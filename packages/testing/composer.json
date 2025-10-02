@@ -20,7 +20,7 @@
     "homepage": "https://github.com/runroom/testing",
     "require": {
         "php": "^8.3",
-        "phpunit/phpunit": "^9.6",
+        "phpunit/phpunit": "^10.5",
         "symfony/dependency-injection": "^6.4 || ^7.1",
         "symfony/framework-bundle": "^6.4 || ^7.1",
         "symfony/http-foundation": "^6.4 || ^7.1",
