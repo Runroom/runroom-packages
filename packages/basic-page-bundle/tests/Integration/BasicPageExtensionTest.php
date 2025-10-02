@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\BasicPageBundle\Tests\Integration;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Factory\BasicPageFactory;
 use Runroom\BasicPageBundle\Repository\BasicPageRepositoryInterface;
@@ -31,21 +29,6 @@ final class BasicPageExtensionTest extends IntegrationTestCase
     public static function getFixturesDirectory(): string
     {
         return __DIR__ . '/../Fixtures/Twig/';
-    }
-
-    #[DataProvider('getTests')]
-    #[\Override]
-    public function testIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation = '')
-    {
-        parent::testIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
-    }
-
-    #[DataProvider('getLegacyTests')]
-    #[Group('legacy')]
-    #[\Override]
-    public function testLegacyIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation = '')
-    {
-        parent::testLegacyIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
     }
 
     #[\Override]

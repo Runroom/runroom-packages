@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Runroom\CookiesBundle\Tests\Integration;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use Runroom\CookiesBundle\Twig\CookiesExtension;
 use Runroom\CookiesBundle\Twig\CookiesRuntime;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
@@ -25,21 +23,6 @@ final class CookiesExtensionTest extends IntegrationTestCase
     public static function getFixturesDirectory(): string
     {
         return __DIR__ . '/../Fixtures/Twig/';
-    }
-
-    #[DataProvider('getTests')]
-    #[\Override]
-    public function testIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation = '')
-    {
-        parent::testIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
-    }
-
-    #[DataProvider('getLegacyTests')]
-    #[Group('legacy')]
-    #[\Override]
-    public function testLegacyIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation = '')
-    {
-        parent::testLegacyIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
     }
 
     #[\Override]
