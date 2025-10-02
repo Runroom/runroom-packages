@@ -49,7 +49,7 @@
         "dama/doctrine-test-bundle": "^8.0",
         "matthiasnoback/symfony-config-test": "^6.1",
         "matthiasnoback/symfony-dependency-injection-test": "^6.1",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^10.5",
         "runroom-packages/testing": "^0.21",
         "sonata-project/block-bundle": "^5.0",
         "sonata-project/doctrine-extensions": "^2.0",
