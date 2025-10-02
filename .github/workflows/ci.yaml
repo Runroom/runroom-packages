@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.2', '8.3', '8.4']
+        php: ['8.3', '8.4']
         dependencies: [highest]
         symfony-require: [highest]
         include:
-          - php: '8.2'
+          - php: '8.3'
             dependencies: lowest
             symfony-require: highest
           - php: '8.4'
