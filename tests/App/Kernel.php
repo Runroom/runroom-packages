@@ -115,6 +115,7 @@ final class Kernel extends BaseKernel
             'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
             'secret' => 'secret',
             'http_method_override' => false,
+            'profiler' => ['collect' => true],
             'mailer' => [
                 'enabled' => true,
                 'dsn' => 'null://null',
