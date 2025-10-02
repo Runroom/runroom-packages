@@ -18,11 +18,11 @@ use Symfony\Component\Form\FormView;
 use Twig\Environment;
 use Twig\Extension\RuntimeExtensionInterface;
 
-final class RolesMatrixRuntime implements RuntimeExtensionInterface
+final readonly class RolesMatrixRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private readonly Environment $twig,
-        private readonly MatrixRolesBuilderInterface $rolesBuilder,
+        private Environment $twig,
+        private MatrixRolesBuilderInterface $rolesBuilder,
     ) {}
 
     public function renderRolesList(FormView $form): string

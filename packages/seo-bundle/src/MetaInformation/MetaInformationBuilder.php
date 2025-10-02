@@ -22,14 +22,14 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 use function Symfony\Component\String\s;
 
-final class MetaInformationBuilder implements MetaInformationBuilderInterface
+final readonly class MetaInformationBuilder implements MetaInformationBuilderInterface
 {
     /**
      * @param ObjectRepository<MetaInformation> $repository
      */
     public function __construct(
-        private readonly ObjectRepository $repository,
-        private readonly PropertyAccessorInterface $propertyAccessor,
+        private ObjectRepository $repository,
+        private PropertyAccessorInterface $propertyAccessor,
     ) {}
 
     public function build(

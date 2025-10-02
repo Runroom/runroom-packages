@@ -15,7 +15,7 @@ namespace Runroom\SeoBundle\AlternateLinks;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class AlternateLinksService implements AlternateLinksServiceInterface
+final readonly class AlternateLinksService implements AlternateLinksServiceInterface
 {
     private const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
 
@@ -23,9 +23,9 @@ final class AlternateLinksService implements AlternateLinksServiceInterface
      * @param iterable<AlternateLinksProviderInterface> $providers
      */
     public function __construct(
-        private readonly RequestStack $requestStack,
-        private readonly iterable $providers,
-        private readonly AlternateLinksBuilderInterface $builder,
+        private RequestStack $requestStack,
+        private iterable $providers,
+        private AlternateLinksBuilderInterface $builder,
     ) {}
 
     public function build(array $context): array

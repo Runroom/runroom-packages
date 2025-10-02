@@ -21,12 +21,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
-final class FormHandler implements FormHandlerInterface
+final readonly class FormHandler implements FormHandlerInterface
 {
     public function __construct(
-        private readonly FormFactoryInterface $formFactory,
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly RequestStack $requestStack,
+        private FormFactoryInterface $formFactory,
+        private EventDispatcherInterface $eventDispatcher,
+        private RequestStack $requestStack,
     ) {}
 
     public function handleForm(string $type, array $options = [], ?FormAwareInterface $model = null): FormAwareInterface

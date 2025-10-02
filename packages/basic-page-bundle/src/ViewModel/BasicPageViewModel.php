@@ -16,9 +16,9 @@ namespace Runroom\BasicPageBundle\ViewModel;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\SeoBundle\Model\SeoModelInterface;
 
-final class BasicPageViewModel implements SeoModelInterface
+final readonly class BasicPageViewModel implements SeoModelInterface
 {
-    public function __construct(private readonly BasicPage $basicPage) {}
+    public function __construct(private BasicPage $basicPage) {}
 
     public function getBasicPage(): BasicPage
     {

@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @phpstan-import-type CookiesData from Configuration
  */
-final class CookiesPageService implements CookiesPageServiceInterface
+final readonly class CookiesPageService implements CookiesPageServiceInterface
 {
     private const COOKIES_PAGE_ID = 1;
 
@@ -33,9 +33,9 @@ final class CookiesPageService implements CookiesPageServiceInterface
      * @phpstan-param CookiesData $cookies
      */
     public function __construct(
-        private readonly ObjectRepository $repository,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly array $cookies,
+        private ObjectRepository $repository,
+        private FormFactoryInterface $formFactory,
+        private array $cookies,
     ) {}
 
     public function getCookiesPageViewModel(): CookiesPageViewModel

@@ -25,9 +25,9 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 /**
  * @phpstan-implements UserProviderInterface<UserInterface>
  */
-final class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
+final readonly class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
-    public function __construct(private readonly UserRepositoryInterface $userRepository) {}
+    public function __construct(private UserRepositoryInterface $userRepository) {}
 
     /**
      * @param string $username
