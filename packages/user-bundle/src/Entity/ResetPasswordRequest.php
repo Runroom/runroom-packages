@@ -30,14 +30,14 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-    private readonly \DateTimeImmutable $requestedAt;
+    private \DateTimeImmutable $requestedAt;
 
     public function __construct(
         #[ORM\ManyToOne(targetEntity: User::class)]
         #[ORM\JoinColumn(nullable: false)]
         private readonly UserInterface $user,
         #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-        private readonly \DateTimeInterface $expiresAt,
+        private \DateTimeInterface $expiresAt,
         #[ORM\Column(type: Types::STRING, length: 20)]
         private readonly string $selector,
         #[ORM\Column(type: Types::STRING, length: 100)]
