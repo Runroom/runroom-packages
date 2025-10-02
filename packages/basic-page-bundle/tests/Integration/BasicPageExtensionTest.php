@@ -34,6 +34,7 @@ final class BasicPageExtensionTest extends IntegrationTestCase
     }
 
     #[DataProvider('getTests')]
+    #[\Override]
     public function testIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation = '')
     {
         parent::testIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
@@ -41,11 +42,13 @@ final class BasicPageExtensionTest extends IntegrationTestCase
 
     #[DataProvider('getLegacyTests')]
     #[Group('legacy')]
+    #[\Override]
     public function testLegacyIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation = '')
     {
         parent::testLegacyIntegration($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
     }
 
+    #[\Override]
     protected function getExtensions(): array
     {
         return [
@@ -53,6 +56,7 @@ final class BasicPageExtensionTest extends IntegrationTestCase
         ];
     }
 
+    #[\Override]
     protected function getRuntimeLoaders(): array
     {
         $basicPages = BasicPageFactory::createMany(2, [

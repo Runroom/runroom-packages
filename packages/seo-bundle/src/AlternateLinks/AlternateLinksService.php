@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final readonly class AlternateLinksService implements AlternateLinksServiceInterface
 {
-    private const EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
+    private const array EXCLUDED_PARAMETERS = ['_locale', '_fragment'];
 
     /**
      * @param iterable<AlternateLinksProviderInterface> $providers

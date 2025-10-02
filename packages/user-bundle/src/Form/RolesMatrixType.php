@@ -68,11 +68,13 @@ final class RolesMatrixType extends AbstractType
         ]);
     }
 
+    #[\Override]
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'sonata_roles_matrix';

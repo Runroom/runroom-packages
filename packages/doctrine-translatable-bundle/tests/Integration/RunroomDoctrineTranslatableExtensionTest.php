@@ -20,6 +20,7 @@ use Runroom\DoctrineTranslatableBundle\Provider\LocaleProvider;
 
 final class RunroomDoctrineTranslatableExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

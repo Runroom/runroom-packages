@@ -29,7 +29,7 @@ final readonly class TranslatableEventSubscriber
     /**
      * @var string
      */
-    public const LOCALE = 'locale';
+    public const string LOCALE = 'locale';
 
     private int $translatableFetchMode;
 

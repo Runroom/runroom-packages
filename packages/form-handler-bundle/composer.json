@@ -17,7 +17,7 @@
     ],
     "homepage": "https://github.com/runroom/RunroomFormHandlerBundle",
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "symfony/config": "^6.4 || ^7.1",
         "symfony/dependency-injection": "^6.4 || ^7.1",
         "symfony/event-dispatcher": "^6.4 || ^7.1",
@@ -28,7 +28,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^6.1",
         "matthiasnoback/symfony-dependency-injection-test": "^6.1",
-        "phpunit/phpunit": "^11.5 || ^12.3",
+        "phpunit/phpunit": "^12.3",
         "runroom-packages/render-event-bundle": "^0.21"
     },
     "minimum-stability": "dev",

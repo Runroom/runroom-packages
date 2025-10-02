@@ -20,6 +20,7 @@ use Runroom\FormHandlerBundle\FormHandler;
 
 final class RunroomFormHandlerExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

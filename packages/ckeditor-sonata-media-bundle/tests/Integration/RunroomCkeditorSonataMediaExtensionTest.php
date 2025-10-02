@@ -21,6 +21,7 @@ use Runroom\CkeditorSonataMediaBundle\DependencyInjection\RunroomCkeditorSonataM
 
 final class RunroomCkeditorSonataMediaExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

@@ -30,6 +30,7 @@ use Runroom\SeoBundle\Twig\SeoRuntime;
 
 final class RunroomSeoExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

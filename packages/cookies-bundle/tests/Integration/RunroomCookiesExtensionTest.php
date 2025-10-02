@@ -24,6 +24,7 @@ use Runroom\CookiesBundle\Twig\CookiesRuntime;
 
 final class RunroomCookiesExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

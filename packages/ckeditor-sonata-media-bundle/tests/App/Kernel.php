@@ -65,16 +65,19 @@ final class Kernel extends BaseKernel
         ];
     }
 
+    #[\Override]
     public function getCacheDir(): string
     {
         return $this->getBaseDir() . '/cache';
     }
 
+    #[\Override]
     public function getLogDir(): string
     {
         return $this->getBaseDir() . '/log';
     }
 
+    #[\Override]
     public function getProjectDir(): string
     {
         return __DIR__;

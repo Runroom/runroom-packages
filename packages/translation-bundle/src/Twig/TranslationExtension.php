@@ -21,6 +21,7 @@ final class TranslationExtension extends AbstractExtension
 {
     public function __construct(private readonly TranslationServiceInterface $service) {}
 
+    #[\Override]
     public function getFilters(): array
     {
         return [

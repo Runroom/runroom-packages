@@ -22,6 +22,7 @@ final class TestMetaInformationProvider extends AbstractMetaInformationProvider
         return ['test'];
     }
 
+    #[\Override]
     protected function getRouteAliases(): array
     {
         return [

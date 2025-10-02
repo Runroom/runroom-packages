@@ -26,8 +26,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[DoctrineAssert\UniqueEntity('source')]
 class Redirect implements \Stringable
 {
-    final public const PERMANENT = 301;
-    final public const TEMPORAL = 302;
+    final public const int PERMANENT = 301;
+    final public const int TEMPORAL = 302;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

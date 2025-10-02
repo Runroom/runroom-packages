@@ -17,7 +17,7 @@
     ],
     "homepage": "https://github.com/runroom/RunroomCookiesBundle",
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "doctrine/dbal": "^3.6 || ^4.0",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^2.19 || ^3.2",
@@ -43,7 +43,7 @@
         "knplabs/knp-menu-bundle": "^3.1",
         "matthiasnoback/symfony-config-test": "^6.1",
         "matthiasnoback/symfony-dependency-injection-test": "^6.1",
-        "phpunit/phpunit": "^11.5 || ^12.3",
+        "phpunit/phpunit": "^12.3",
         "runroom-packages/testing": "^0.21",
         "sonata-project/admin-bundle": "^4.25",
         "sonata-project/doctrine-orm-admin-bundle": "^4.13",

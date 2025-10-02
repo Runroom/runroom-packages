@@ -22,8 +22,8 @@ use Twig\Extension\RuntimeExtensionInterface;
  */
 final readonly class CookiesRuntime implements RuntimeExtensionInterface
 {
-    private const TYPE_PERFORMANCE = 'performance_cookies';
-    private const TYPE_TARGETING = 'targeting_cookies';
+    private const string TYPE_PERFORMANCE = 'performance_cookies';
+    private const string TYPE_TARGETING = 'targeting_cookies';
 
     /**
      * @phpstan-param CookiesData $cookies

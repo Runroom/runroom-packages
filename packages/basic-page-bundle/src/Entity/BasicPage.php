@@ -31,8 +31,8 @@ class BasicPage implements TranslatableInterface, \Stringable
     use MetaInformationAware;
     use TranslatableTrait;
 
-    final public const LOCATION_NONE = 'none';
-    final public const LOCATION_FOOTER = 'footer';
+    final public const string LOCATION_NONE = 'none';
+    final public const string LOCATION_FOOTER = 'footer';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

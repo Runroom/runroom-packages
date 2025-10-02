@@ -33,6 +33,7 @@ final class UserAdmin extends AbstractAdmin
         parent::__construct();
     }
 
+    #[\Override]
     public function configureExportFields(): array
     {
         return array_filter(

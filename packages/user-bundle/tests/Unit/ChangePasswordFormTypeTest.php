@@ -27,6 +27,7 @@ final class ChangePasswordFormTypeTest extends TypeTestCase
      */
     private FormInterface $form;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -68,6 +69,7 @@ final class ChangePasswordFormTypeTest extends TypeTestCase
     /**
      * @return FormExtensionInterface[]
      */
+    #[\Override]
     protected function getExtensions(): array
     {
         return [new ValidatorExtension(Validation::createValidator())];

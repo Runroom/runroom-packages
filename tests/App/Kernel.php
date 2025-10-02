@@ -96,6 +96,7 @@ final class Kernel extends BaseKernel
         ];
     }
 
+    #[\Override]
     public function getProjectDir(): string
     {
         return __DIR__;

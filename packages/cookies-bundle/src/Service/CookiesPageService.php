@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 final readonly class CookiesPageService implements CookiesPageServiceInterface
 {
-    private const COOKIES_PAGE_ID = 1;
+    private const int COOKIES_PAGE_ID = 1;
 
     /**
      * @param ObjectRepository<CookiesPage> $repository
