@@ -54,10 +54,6 @@ final class TranslatableEventSubscriber
 
         $reflectionClass = $classMetadata->getReflectionClass();
 
-        if (null === $reflectionClass) {
-            return;
-        }
-
         if ($classMetadata->isMappedSuperclass) {
             return;
         }

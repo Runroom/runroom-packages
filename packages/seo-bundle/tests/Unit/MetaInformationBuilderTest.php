@@ -38,9 +38,6 @@ final class MetaInformationBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        /**
-         * @var Stub&ObjectRepository<MetaInformation>
-         */
         $this->repository = static::createStub(ObjectRepository::class);
 
         $this->builder = new MetaInformationBuilder(

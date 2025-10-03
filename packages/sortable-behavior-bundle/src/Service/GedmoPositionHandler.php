@@ -115,12 +115,19 @@ final class GedmoPositionHandler extends AbstractPositionHandler
     {
         $data = $config['useObjectClass'];
         foreach ($groups as $groupName => $value) {
+            $stringValue = '';
+
             if ($value instanceof \DateTime) {
-                $value = $value->format('c');
+                $stringValue = $value->format('c');
             } elseif (\is_object($value)) {
-                $value = spl_object_hash($value);
+                $stringValue = spl_object_hash($value);
+            } elseif (is_string($value)) {
+                $stringValue = $value;
+            } elseif (is_scalar($value) || null === $value) {
+                $stringValue = strval($value);
             }
-            $data .= $groupName . $value;
+
+            $data .= $groupName . $stringValue;
         }
 
         return md5($data);

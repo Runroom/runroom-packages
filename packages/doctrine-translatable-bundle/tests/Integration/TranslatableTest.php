@@ -82,12 +82,11 @@ final class TranslatableTest extends KernelTestCase
         $idColumn = $translatableEntity->getIdColumn();
         $this->entityManager->clear();
 
-        /** @var TranslatableEntity $translatableEntity */
         $translatableEntity = $this->entityManager->getRepository(TranslatableCustomIdentifierEntity::class)->find(
             $idColumn
         );
 
-        static::assertSame('awesome', $translatableEntity->translate('en')->getTitle());
+        static::assertSame('awesome', $translatableEntity?->translate('en')?->getTitle());
     }
 
     public function testShouldFallbackCountryLocaleToLanguageOnlyTranslation(): void
