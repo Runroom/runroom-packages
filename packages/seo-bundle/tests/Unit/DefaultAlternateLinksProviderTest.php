@@ -49,7 +49,6 @@ final class DefaultAlternateLinksProviderTest extends TestCase
     public function testItDoesNotDefineAssociatedRoutes(): void
     {
         $method = new \ReflectionMethod($this->provider, 'getRoutes');
-        $method->setAccessible(true);
 
         static::assertEmpty($method->invoke($this->provider));
     }
