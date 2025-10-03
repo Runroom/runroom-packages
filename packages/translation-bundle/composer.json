@@ -24,7 +24,7 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/orm": "^2.19 || ^3.2",
         "doctrine/persistence": "^3.1 || ^4.0",
-        "runroom-packages/doctrine-translatable-bundle": "^0.21",
+        "runroom-packages/doctrine-translatable-bundle": "^0.22",
         "symfony/asset": "^6.4 || ^7.1",
         "symfony/config": "^6.4 || ^7.1",
         "symfony/dependency-injection": "^6.4 || ^7.1",
@@ -44,7 +44,7 @@
         "matthiasnoback/symfony-config-test": "^6.1",
         "matthiasnoback/symfony-dependency-injection-test": "^6.1",
         "phpunit/phpunit": "^10.5",
-        "runroom-packages/testing": "^0.21",
+        "runroom-packages/testing": "^0.22",
         "sonata-project/admin-bundle": "^4.25",
         "sonata-project/doctrine-orm-admin-bundle": "^4.13",
         "symfony/framework-bundle": "^6.4 || ^7.1",
@@ -80,7 +80,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.21-dev"
+            "dev-master": "0.22-dev"
         }
     }
 }
