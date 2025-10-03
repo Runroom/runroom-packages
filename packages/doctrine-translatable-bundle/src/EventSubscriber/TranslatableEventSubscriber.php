@@ -99,6 +99,7 @@ final class TranslatableEventSubscriber
 
     /**
      * @param \ReflectionClass<object> $reflectionClass
+     * @param ClassMetadata<object>    $classMetadata
      */
     private function mapTranslatable(\ReflectionClass $reflectionClass, ClassMetadata $classMetadata): void
     {
@@ -121,6 +122,7 @@ final class TranslatableEventSubscriber
 
     /**
      * @param \ReflectionClass<object> $reflectionClass
+     * @param ClassMetadata<object>    $classMetadata
      */
     private function mapTranslation(
         \ReflectionClass $reflectionClass,
@@ -192,6 +194,9 @@ final class TranslatableEventSubscriber
         }
     }
 
+    /**
+     * @param ClassMetadata<object> $classMetadata
+     */
     private function hasUniqueTranslationConstraint(ClassMetadata $classMetadata, string $name): bool
     {
         return isset($classMetadata->table['uniqueConstraints'][$name]);

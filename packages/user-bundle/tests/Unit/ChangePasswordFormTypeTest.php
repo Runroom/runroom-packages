@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Validation;
 final class ChangePasswordFormTypeTest extends TypeTestCase
 {
     /**
-     * @var FormInterface<object | null>
+     * @var FormInterface<object|null>
      */
     private FormInterface $form;
 

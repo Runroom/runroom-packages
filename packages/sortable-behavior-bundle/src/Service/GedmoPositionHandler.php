@@ -121,10 +121,10 @@ final class GedmoPositionHandler extends AbstractPositionHandler
                 $stringValue = $value->format('c');
             } elseif (\is_object($value)) {
                 $stringValue = spl_object_hash($value);
-            } elseif (is_string($value)) {
+            } elseif (\is_string($value)) {
                 $stringValue = $value;
-            } elseif (is_scalar($value) || null === $value) {
-                $stringValue = strval($value);
+            } elseif (\is_scalar($value) || null === $value) {
+                $stringValue = (string) $value;
             }
 
             $data .= $groupName . $stringValue;

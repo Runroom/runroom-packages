@@ -19,8 +19,8 @@ use Symfony\Component\Form\FormTypeInterface;
 interface FormHandlerInterface
 {
     /**
-     * @param class-string<FormTypeInterface> $type
-     * @param array<string, mixed>            $options
+     * @param class-string<FormTypeInterface<object|null>> $type
+     * @param array<string, mixed>                         $options
      */
     public function handleForm(string $type, array $options = [], ?FormAwareInterface $model = null): FormAwareInterface;
 }

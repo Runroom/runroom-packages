@@ -18,8 +18,14 @@ use Symfony\Component\Form\FormView;
 
 interface FormAwareInterface
 {
+    /**
+     * @param FormInterface<object|null> $form
+     */
     public function setForm(FormInterface $form): void;
 
+    /**
+     * @return FormInterface<object|null>|null
+     */
     public function getForm(): ?FormInterface;
 
     public function getFormView(): ?FormView;

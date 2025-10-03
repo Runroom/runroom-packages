@@ -97,7 +97,7 @@ final class FormHandlerTest extends TestCase
     }
 
     /**
-     * @return MockObject&FormInterface
+     * @return MockObject&FormInterface<object|null>
      */
     private function configureForm(bool $submitted = true, bool $valid = true): MockObject
     {
