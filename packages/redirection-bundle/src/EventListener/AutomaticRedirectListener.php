@@ -22,8 +22,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class AutomaticRedirectListener
 {
-    private const int PREVIOUS_VALUE = 0;
-    private const int NEXT_VALUE = 1;
+    private const PREVIOUS_VALUE = 0;
+    private const NEXT_VALUE = 1;
 
     /**
      * @param array<class-string, array{ route: string, routeParameters: array<string, string> }> $configuration

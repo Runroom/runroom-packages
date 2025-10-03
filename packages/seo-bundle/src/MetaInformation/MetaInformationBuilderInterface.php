@@ -17,7 +17,7 @@ use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 
 interface MetaInformationBuilderInterface
 {
-    final public const DEFAULT_ROUTE = 'default';
+    public const DEFAULT_ROUTE = 'default';
 
     /**
      * @param array<string, mixed> $context

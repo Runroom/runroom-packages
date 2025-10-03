@@ -21,14 +21,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use Twig\Environment;
 
-final readonly class MailerService implements MailerServiceInterface
+final class MailerService implements MailerServiceInterface
 {
     public function __construct(
-        private MailerInterface $mailer,
-        private TranslatorInterface $translator,
-        private Environment $twig,
-        private string $fromEmail,
-        private string $fromName,
+        private readonly MailerInterface $mailer,
+        private readonly TranslatorInterface $translator,
+        private readonly Environment $twig,
+        private readonly string $fromEmail,
+        private readonly string $fromName,
     ) {}
 
     public function sendResetPasswordEmail(UserInterface $user, ResetPasswordToken $resetToken): void

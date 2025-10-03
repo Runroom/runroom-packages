@@ -17,14 +17,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Runroom\UserBundle\Model\UserInterface;
 
-final readonly class UserRepository implements UserRepositoryInterface
+final class UserRepository implements UserRepositoryInterface
 {
     /**
      * @phpstan-param class-string<UserInterface> $class
      */
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private string $class,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly string $class,
     ) {}
 
     public function loadUserByIdentifier(string $identifier): ?UserInterface

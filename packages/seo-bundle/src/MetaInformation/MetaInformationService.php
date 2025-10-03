@@ -16,15 +16,15 @@ namespace Runroom\SeoBundle\MetaInformation;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final readonly class MetaInformationService implements MetaInformationServiceInterface
+final class MetaInformationService implements MetaInformationServiceInterface
 {
     /**
      * @param iterable<MetaInformationProviderInterface> $providers
      */
     public function __construct(
-        private RequestStack $requestStack,
-        private iterable $providers,
-        private MetaInformationBuilderInterface $builder,
+        private readonly RequestStack $requestStack,
+        private readonly iterable $providers,
+        private readonly MetaInformationBuilderInterface $builder,
     ) {}
 
     public function build(array $context): MetaInformationViewModel

@@ -19,13 +19,13 @@ use Sonata\AdminBundle\SonataConfiguration;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final readonly class AdminRolesBuilder implements AdminRolesBuilderInterface
+final class AdminRolesBuilder implements AdminRolesBuilderInterface
 {
     public function __construct(
-        private AuthorizationCheckerInterface $authorizationChecker,
-        private Pool $pool,
-        private SonataConfiguration $configuration,
-        private TranslatorInterface $translator,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly Pool $pool,
+        private readonly SonataConfiguration $configuration,
+        private readonly TranslatorInterface $translator,
     ) {}
 
     public function getRoles(?string $domain = null): array

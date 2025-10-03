@@ -24,19 +24,19 @@ use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
 use Runroom\DoctrineTranslatableBundle\Provider\LocaleProviderInterface;
 
-final readonly class TranslatableEventSubscriber
+final class TranslatableEventSubscriber
 {
     /**
      * @var string
      */
-    public const string LOCALE = 'locale';
+    public const LOCALE = 'locale';
 
-    private int $translatableFetchMode;
+    private readonly int $translatableFetchMode;
 
-    private int $translationFetchMode;
+    private readonly int $translationFetchMode;
 
     public function __construct(
-        private LocaleProviderInterface $localeProvider,
+        private readonly LocaleProviderInterface $localeProvider,
         string $translatableFetchMode,
         string $translationFetchMode,
     ) {

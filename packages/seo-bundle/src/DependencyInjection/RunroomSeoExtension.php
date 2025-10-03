@@ -39,7 +39,7 @@ if (!class_exists(Extension::class)) {
  */
 final class RunroomSeoExtension extends Extension
 {
-    public const string XDEFAULT_LOCALE = 'runroom_seo.xdefault_locale';
+    public const XDEFAULT_LOCALE = 'runroom_seo.xdefault_locale';
 
     public function load(array $configs, ContainerBuilder $container): void
     {

@@ -20,16 +20,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @phpstan-import-type Role from RolesBuilderInterface
  */
-final readonly class SecurityRolesBuilder implements ExpandableRolesBuilderInterface
+final class SecurityRolesBuilder implements ExpandableRolesBuilderInterface
 {
     /**
      * @param array<string, string[]> $rolesHierarchy
      */
     public function __construct(
-        private AuthorizationCheckerInterface $authorizationChecker,
-        private SonataConfiguration $configuration,
-        private TranslatorInterface $translator,
-        private array $rolesHierarchy = [],
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly SonataConfiguration $configuration,
+        private readonly TranslatorInterface $translator,
+        private readonly array $rolesHierarchy = [],
     ) {}
 
     public function getExpandedRoles(?string $domain = null): array

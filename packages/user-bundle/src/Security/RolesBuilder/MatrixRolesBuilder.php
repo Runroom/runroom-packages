@@ -15,12 +15,12 @@ namespace Runroom\UserBundle\Security\RolesBuilder;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final readonly class MatrixRolesBuilder implements MatrixRolesBuilderInterface
+final class MatrixRolesBuilder implements MatrixRolesBuilderInterface
 {
     public function __construct(
-        private TokenStorageInterface $tokenStorage,
-        private AdminRolesBuilderInterface $adminRolesBuilder,
-        private ExpandableRolesBuilderInterface $securityRolesBuilder,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly AdminRolesBuilderInterface $adminRolesBuilder,
+        private readonly ExpandableRolesBuilderInterface $securityRolesBuilder,
     ) {}
 
     public function getRoles(?string $domain = null): array

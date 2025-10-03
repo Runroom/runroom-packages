@@ -20,12 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final readonly class LocaleProvider implements LocaleProviderInterface
+final class LocaleProvider implements LocaleProviderInterface
 {
     public function __construct(
-        private RequestStack $requestStack,
-        private ParameterBagInterface $parameterBag,
-        private ?TranslatorInterface $translator,
+        private readonly RequestStack $requestStack,
+        private readonly ParameterBagInterface $parameterBag,
+        private readonly ?TranslatorInterface $translator,
     ) {}
 
     public function provideCurrentLocale(): ?string
@@ -66,7 +66,7 @@ final readonly class LocaleProvider implements LocaleProviderInterface
             }
 
             return $this->parameterBag->get('kernel.default_locale');
-        } catch (ParameterNotFoundException|InvalidArgumentException) {
+        } catch (ParameterNotFoundException | InvalidArgumentException) {
             return null;
         }
     }

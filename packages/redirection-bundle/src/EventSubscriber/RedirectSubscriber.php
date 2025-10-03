@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final readonly class RedirectSubscriber implements EventSubscriberInterface
+final class RedirectSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private RedirectRepositoryInterface $repository) {}
+    public function __construct(private readonly RedirectRepositoryInterface $repository) {}
 
     public function onKernelRequest(RequestEvent $event): void
     {

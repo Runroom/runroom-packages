@@ -17,11 +17,11 @@ use Runroom\UserBundle\Model\UserInterface;
 use Runroom\UserBundle\Repository\UserRepositoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final readonly class UserManipulator
+final class UserManipulator
 {
     public function __construct(
-        private UserRepositoryInterface $userRepository,
-        private UserPasswordHasherInterface $passwordHasher,
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {}
 
     public function create(string $identifier, string $password, bool $active): void

@@ -16,9 +16,9 @@ namespace Runroom\RenderEventBundle\Controller;
 use Runroom\RenderEventBundle\Renderer\PageRendererInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-final readonly class TemplateController
+final class TemplateController
 {
-    public function __construct(private PageRendererInterface $renderer) {}
+    public function __construct(private readonly PageRendererInterface $renderer) {}
 
     /**
      * @param array<string, mixed>|null $context

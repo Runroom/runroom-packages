@@ -18,11 +18,11 @@ use Runroom\SeoBundle\MetaInformation\MetaInformationServiceInterface;
 use Runroom\SeoBundle\ViewModel\MetaInformationViewModel;
 use Twig\Extension\RuntimeExtensionInterface;
 
-final readonly class SeoRuntime implements RuntimeExtensionInterface
+final class SeoRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private AlternateLinksServiceInterface $alternateLinks,
-        private MetaInformationServiceInterface $metaInformation,
+        private readonly AlternateLinksServiceInterface $alternateLinks,
+        private readonly MetaInformationServiceInterface $metaInformation,
     ) {}
 
     /**

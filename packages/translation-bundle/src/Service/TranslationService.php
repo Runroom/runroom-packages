@@ -17,14 +17,14 @@ use Doctrine\Persistence\ObjectRepository;
 use Runroom\TranslationBundle\Entity\Translation;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final readonly class TranslationService implements TranslationServiceInterface
+final class TranslationService implements TranslationServiceInterface
 {
     /**
      * @param ObjectRepository<Translation> $repository
      */
     public function __construct(
-        private ObjectRepository $repository,
-        private TranslatorInterface $translator,
+        private readonly ObjectRepository $repository,
+        private readonly TranslatorInterface $translator,
     ) {}
 
     public function translate(string $key, array $parameters = [], ?string $locale = null): string

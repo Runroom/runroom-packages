@@ -17,9 +17,9 @@ use Runroom\BasicPageBundle\Entity\BasicPage;
 use Runroom\BasicPageBundle\Repository\BasicPageRepositoryInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
-final readonly class BasicPageRuntime implements RuntimeExtensionInterface
+final class BasicPageRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private BasicPageRepositoryInterface $repository) {}
+    public function __construct(private readonly BasicPageRepositoryInterface $repository) {}
 
     /**
      * @return BasicPage[]

@@ -19,7 +19,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 final class PageRenderEvent extends Event
 {
-    final public const string EVENT_NAME = 'runroom.event.page.render';
+    final public const EVENT_NAME = 'runroom.event.page.render';
 
     public function __construct(
         private string $view,

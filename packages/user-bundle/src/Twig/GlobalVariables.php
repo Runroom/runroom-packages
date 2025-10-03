@@ -16,11 +16,11 @@ namespace Runroom\UserBundle\Twig;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 
-final readonly class GlobalVariables
+final class GlobalVariables
 {
     public function __construct(
-        private Pool $pool,
-        private bool $hasRequestPasswordEnabled,
+        private readonly Pool $pool,
+        private readonly bool $hasRequestPasswordEnabled,
     ) {}
 
     /**

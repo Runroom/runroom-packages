@@ -21,14 +21,14 @@ use Runroom\UserBundle\Model\UserInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use SymfonyCasts\Bundle\ResetPassword\Persistence\ResetPasswordRequestRepositoryInterface;
 
-final readonly class ResetPasswordRequestRepository implements ResetPasswordRequestRepositoryInterface
+final class ResetPasswordRequestRepository implements ResetPasswordRequestRepositoryInterface
 {
     /**
      * @phpstan-param class-string<ResetPasswordRequest> $class
      */
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private string $class,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly string $class,
     ) {}
 
     public function createResetPasswordRequest(object $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken): ResetPasswordRequestInterface

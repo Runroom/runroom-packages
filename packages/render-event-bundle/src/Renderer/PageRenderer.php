@@ -20,12 +20,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 
-final readonly class PageRenderer implements PageRendererInterface
+final class PageRenderer implements PageRendererInterface
 {
     public function __construct(
-        private Environment $twig,
-        private EventDispatcherInterface $eventDispatcher,
-        private PageViewModelInterface $pageViewModel,
+        private readonly Environment $twig,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly PageViewModelInterface $pageViewModel,
     ) {}
 
     public function render(string $view, mixed $model = null): string
