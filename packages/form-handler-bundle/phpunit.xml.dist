@@ -24,6 +24,5 @@
     <php>
         <ini name="precision" value="8"/>
         <server name="SHELL_VERBOSITY" value="-1"/>
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0"/>
     </php>
 </phpunit>
