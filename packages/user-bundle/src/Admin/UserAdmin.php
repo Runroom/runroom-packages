@@ -99,22 +99,22 @@ final class UserAdmin extends AbstractAdmin
                 'class' => 'col-md-4',
                 'box_class' => 'box box-solid box-primary',
             ])
-            ->add('email')
-            ->add('plainPassword', TextType::class, [
-                'required' => $this->isCurrentRoute('create'),
-            ])
-            ->add('enabled')
+                ->add('email')
+                ->add('plainPassword', TextType::class, [
+                    'required' => $this->isCurrentRoute('create'),
+                ])
+                ->add('enabled')
             ->end()
             ->with('Roles', [
                 'class' => 'col-md-8',
                 'box_class' => 'box box-solid box-primary',
             ])
-            ->add('roles', RolesMatrixType::class, [
-                'label' => false,
-                'required' => false,
-                'expanded' => true,
-                'multiple' => true,
-            ])
+                ->add('roles', RolesMatrixType::class, [
+                    'label' => false,
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                ])
             ->end();
     }
 

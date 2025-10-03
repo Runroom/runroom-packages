@@ -55,7 +55,7 @@ $config->setRules([
     'strict_param' => true,
     'void_return' => false,
 ])
-    ->setRiskyAllowed(true)
-    ->setFinder($finder);
+->setRiskyAllowed(true)
+->setFinder($finder);
 
 return $config;
