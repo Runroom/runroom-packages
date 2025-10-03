@@ -44,7 +44,7 @@ final class AlternateLinksBuilder implements AlternateLinksBuilderInterface
                         UrlGeneratorInterface::ABSOLUTE_URL
                     );
                 }
-            } catch (RouteNotFoundException | InvalidParameterException) {
+            } catch (RouteNotFoundException|InvalidParameterException) {
             }
         }
 

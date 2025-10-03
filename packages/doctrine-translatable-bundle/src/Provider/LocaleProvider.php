@@ -66,7 +66,7 @@ final class LocaleProvider implements LocaleProviderInterface
             }
 
             return $this->parameterBag->get('kernel.default_locale');
-        } catch (ParameterNotFoundException | InvalidArgumentException) {
+        } catch (ParameterNotFoundException|InvalidArgumentException) {
             return null;
         }
     }
