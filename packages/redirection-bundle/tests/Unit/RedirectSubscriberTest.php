@@ -83,6 +83,6 @@ final class RedirectSubscriberTest extends TestCase
 
     private function getResponseEvent(int $requestType = HttpKernelInterface::MAIN_REQUEST): RequestEvent
     {
-        return new RequestEvent($this->createStub(Kernel::class), new Request(), $requestType);
+        return new RequestEvent(static::createStub(Kernel::class), new Request(), $requestType);
     }
 }

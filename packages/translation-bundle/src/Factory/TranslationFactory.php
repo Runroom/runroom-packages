@@ -18,8 +18,6 @@ use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
  * @extends PersistentObjectFactory<Translation>
- *
- * @method TranslationFactory with(array|callable $attributes = [])
  */
 final class TranslationFactory extends PersistentObjectFactory
 {

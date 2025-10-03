@@ -29,11 +29,16 @@ final class RolesMatrixTypeTest extends TypeTestCase
     private Stub $rolesBuilder;
 
     private RolesMatrixType $rolesMatrixType;
+
+    /**
+     * @var FormInterface<string[] | null>
+     */
     private FormInterface $form;
 
+    #[\Override]
     protected function setUp(): void
     {
-        $this->rolesBuilder = $this->createStub(MatrixRolesBuilderInterface::class);
+        $this->rolesBuilder = static::createStub(MatrixRolesBuilderInterface::class);
         $this->rolesBuilder->method('getRoles')->willReturn([
             'ROLE' => [
                 'role' => 'ROLE',
@@ -87,8 +92,9 @@ final class RolesMatrixTypeTest extends TypeTestCase
     }
 
     /**
-     * @return FormTypeInterface[]
+     * @return FormTypeInterface<string[]>[]
      */
+    #[\Override]
     protected function getTypes(): array
     {
         return [$this->rolesMatrixType];

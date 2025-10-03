@@ -20,6 +20,9 @@ use Doctrine\ORM\Mapping\Id;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
 use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 #[Entity]
 class TranslatableCustomIdentifierEntity implements TranslatableInterface
 {

@@ -30,7 +30,7 @@ final class FormRenderSubscriberTest extends TestCase
 
     public function testItSets422OnResponseIfFormIsInvalidSubmitted(): void
     {
-        $form = $this->createStub(FormInterface::class);
+        $form = static::createStub(FormInterface::class);
         $form->method('isSubmitted')->willReturn(true);
         $form->method('isValid')->willReturn(false);
 

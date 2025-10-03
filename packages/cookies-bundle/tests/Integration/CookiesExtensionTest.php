@@ -25,6 +25,7 @@ final class CookiesExtensionTest extends IntegrationTestCase
         return __DIR__ . '/../Fixtures/Twig/';
     }
 
+    #[\Override]
     protected function getExtensions(): array
     {
         return [
@@ -32,6 +33,7 @@ final class CookiesExtensionTest extends IntegrationTestCase
         ];
     }
 
+    #[\Override]
     protected function getRuntimeLoaders(): array
     {
         $cookies = [

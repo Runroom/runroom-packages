@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Runroom\UserBundle\Form\ResetPasswordRequestFormType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormExtensionInterface;
@@ -22,8 +23,12 @@ use Symfony\Component\Validator\Validation;
 
 final class ResetPasswordRequestFormTypeTest extends TypeTestCase
 {
+    /**
+     * @var FormInterface<object|null>
+     */
     private FormInterface $form;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -31,9 +36,7 @@ final class ResetPasswordRequestFormTypeTest extends TypeTestCase
         $this->form = $this->factory->create(ResetPasswordRequestFormType::class);
     }
 
-    /**
-     * @dataProvider submitValuesProvider
-     */
+    #[DataProvider('submitValuesProvider')]
     public function testItSubmitsWithDifferentValues(string $email, bool $isValid): void
     {
         $this->form->submit(['identifier' => $email]);
@@ -60,6 +63,7 @@ final class ResetPasswordRequestFormTypeTest extends TypeTestCase
     /**
      * @return FormExtensionInterface[]
      */
+    #[\Override]
     protected function getExtensions(): array
     {
         return [new ValidatorExtension(Validation::createValidator())];

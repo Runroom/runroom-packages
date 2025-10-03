@@ -21,6 +21,9 @@ use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 use Runroom\SeoBundle\Behaviors\MetaInformationAware;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @api
+ */
 #[ORM\Entity(repositoryClass: BasicPageRepository::class)]
 #[ORM\Index(columns: ['publish'])]
 class BasicPage implements TranslatableInterface, \Stringable

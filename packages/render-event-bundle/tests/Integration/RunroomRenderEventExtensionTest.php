@@ -21,6 +21,7 @@ use Runroom\RenderEventBundle\Renderer\PageRenderer;
 
 final class RunroomRenderEventExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

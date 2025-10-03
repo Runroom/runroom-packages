@@ -18,6 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
 use Runroom\DoctrineTranslatableBundle\Model\TranslationTrait;
 
+/**
+ * @api
+ */
 #[ORM\Entity]
 class TranslationTranslation implements TranslationInterface
 {

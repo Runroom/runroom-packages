@@ -18,8 +18,6 @@ use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
  * @extends PersistentObjectFactory<EntityMetaInformation>
- *
- * @method EntityMetaInformationFactory with(array|callable $attributes = [])
  */
 final class EntityMetaInformationFactory extends PersistentObjectFactory
 {

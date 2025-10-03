@@ -15,6 +15,7 @@ namespace Runroom\SeoBundle\AlternateLinks;
 
 final class DefaultAlternateLinksProvider extends AbstractAlternateLinksProvider
 {
+    #[\Override]
     public function providesAlternateLinks(string $route): bool
     {
         return true;

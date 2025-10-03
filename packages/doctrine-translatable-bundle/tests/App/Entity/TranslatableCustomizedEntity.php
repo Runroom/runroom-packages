@@ -23,6 +23,8 @@ use Runroom\DoctrineTranslatableBundle\Tests\App\Entity\Translation\Translatable
 
 /**
  * Used to test translation classes which declare custom translatable classes.
+ *
+ * @psalm-suppress ClassMustBeFinal
  */
 #[Entity]
 class TranslatableCustomizedEntity implements TranslatableInterface

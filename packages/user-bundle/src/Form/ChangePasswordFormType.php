@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * @psalm-suppress MissingTemplateParam
+ * @extends AbstractType<object>
  */
 final class ChangePasswordFormType extends AbstractType
 {

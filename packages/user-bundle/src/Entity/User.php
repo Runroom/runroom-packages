@@ -20,6 +20,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @see https://github.com/doctrine/dbal/issues/1222
+ *
+ * @api
  */
 #[ORM\Table(name: '`user`')]
 #[ORM\Entity]
@@ -74,7 +76,9 @@ class User implements UserInterface, \Stringable
 
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        \assert(null !== $this->email && '' !== $this->email);
+
+        return $this->email;
     }
 
     public function getUsername(): string
@@ -150,8 +154,5 @@ class User implements UserInterface, \Stringable
         return null;
     }
 
-    public function eraseCredentials(): void
-    {
-        $this->setPlainPassword(null);
-    }
+    public function eraseCredentials(): void {}
 }

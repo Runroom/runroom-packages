@@ -19,6 +19,9 @@ use Runroom\CookiesBundle\Repository\CookiesPageRepository;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
 use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 
+/**
+ * @api
+ */
 #[ORM\Entity(repositoryClass: CookiesPageRepository::class)]
 class CookiesPage implements TranslatableInterface, \Stringable
 {

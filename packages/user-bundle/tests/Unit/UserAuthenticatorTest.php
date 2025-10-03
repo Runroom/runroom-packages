@@ -85,7 +85,6 @@ final class UserAuthenticatorTest extends TestCase
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
 
-        static::assertNotNull($response);
         static::assertInstanceOf(RedirectResponse::class, $response);
     }
 
@@ -103,7 +102,6 @@ final class UserAuthenticatorTest extends TestCase
 
         $response = $this->userAuthenticator->onAuthenticationSuccess($request, $token, $this->firewallName);
 
-        static::assertNotNull($response);
         static::assertInstanceOf(RedirectResponse::class, $response);
         static::assertSame('targetValue', $response->getTargetUrl());
     }

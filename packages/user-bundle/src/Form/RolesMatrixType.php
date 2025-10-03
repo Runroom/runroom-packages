@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @psalm-suppress MissingTemplateParam
+ * @extends AbstractType<string[]>
  */
 final class RolesMatrixType extends AbstractType
 {
@@ -68,11 +68,13 @@ final class RolesMatrixType extends AbstractType
         ]);
     }
 
+    #[\Override]
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'sonata_roles_matrix';

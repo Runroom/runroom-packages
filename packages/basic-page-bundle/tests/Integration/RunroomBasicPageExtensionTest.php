@@ -26,6 +26,7 @@ use Runroom\BasicPageBundle\Twig\BasicPageRuntime;
 
 final class RunroomBasicPageExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

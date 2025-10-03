@@ -18,6 +18,9 @@ use Symfony\Component\Form\FormView;
 
 trait FormAware
 {
+    /**
+     * @var FormInterface<object|null>|null
+     */
     private ?FormInterface $form = null;
     private ?FormView $formView = null;
 
@@ -26,6 +29,9 @@ trait FormAware
         $this->form = $form;
     }
 
+    /**
+     * @return FormInterface<object|null>|null
+     */
     public function getForm(): ?FormInterface
     {
         return $this->form;

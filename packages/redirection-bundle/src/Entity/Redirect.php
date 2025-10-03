@@ -19,6 +19,9 @@ use Runroom\RedirectionBundle\Repository\RedirectRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @api
+ */
 #[ORM\Entity(repositoryClass: RedirectRepository::class)]
 #[DoctrineAssert\UniqueEntity('source')]
 class Redirect implements \Stringable

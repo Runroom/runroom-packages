@@ -17,6 +17,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseGalleryItem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 #[ORM\Entity]
 class GalleryItem extends BaseGalleryItem
 {
@@ -24,6 +27,13 @@ class GalleryItem extends BaseGalleryItem
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
+
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {

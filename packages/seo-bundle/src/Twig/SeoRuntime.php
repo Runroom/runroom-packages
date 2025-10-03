@@ -28,9 +28,9 @@ final class SeoRuntime implements RuntimeExtensionInterface
     /**
      * @param array<string, mixed> $context
      *
-     * @return array<string, string>|null
+     * @return array<string, string>
      */
-    public function buildAlternateLinks(array $context): ?array
+    public function buildAlternateLinks(array $context): array
     {
         return $this->alternateLinks->build($context);
     }
@@ -38,7 +38,7 @@ final class SeoRuntime implements RuntimeExtensionInterface
     /**
      * @param array<string, mixed> $context
      */
-    public function buildMetaInformation(array $context): ?MetaInformationViewModel
+    public function buildMetaInformation(array $context): MetaInformationViewModel
     {
         return $this->metaInformation->build($context);
     }

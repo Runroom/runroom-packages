@@ -22,6 +22,7 @@ use Runroom\TranslationBundle\Twig\TranslationExtension;
 
 final class RunroomTranslationExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

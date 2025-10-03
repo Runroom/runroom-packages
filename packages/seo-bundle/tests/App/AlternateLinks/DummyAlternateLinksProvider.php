@@ -22,7 +22,12 @@ final class DummyAlternateLinksProvider extends AbstractAlternateLinksProvider
         return true;
     }
 
-    public function getParameters(array $context, string $locale): ?array
+    /**
+     * @param array<array-key, mixed> $context
+     *
+     * @return array<string, string>
+     */
+    public function getParameters(array $context, string $locale): array
     {
         return [
             'dummy_param' => 'dummy_value',

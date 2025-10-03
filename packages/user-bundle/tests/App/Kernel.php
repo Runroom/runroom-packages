@@ -32,6 +32,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\UX\StimulusBundle\StimulusBundle;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
@@ -56,21 +57,25 @@ final class Kernel extends BaseKernel
             new TwigBundle(),
             new ZenstruckFoundryBundle(),
             new SymfonyCastsResetPasswordBundle(),
+            new StimulusBundle(),
 
             new RunroomUserBundle(),
         ];
     }
 
+    #[\Override]
     public function getCacheDir(): string
     {
         return $this->getBaseDir() . '/cache';
     }
 
+    #[\Override]
     public function getLogDir(): string
     {
         return $this->getBaseDir() . '/log';
     }
 
+    #[\Override]
     public function getProjectDir(): string
     {
         return __DIR__;
@@ -86,6 +91,7 @@ final class Kernel extends BaseKernel
             'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
             'http_method_override' => false,
             'assets' => ['enabled' => true],
+            'profiler' => ['collect' => true],
             'mailer' => [
                 'enabled' => true,
                 'dsn' => 'null://null',

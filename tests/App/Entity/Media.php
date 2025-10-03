@@ -17,6 +17,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseMedia;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 #[ORM\Entity]
 class Media extends BaseMedia
 {

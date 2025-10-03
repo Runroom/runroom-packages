@@ -21,6 +21,9 @@ use Runroom\SeoBundle\Repository\MetaInformationRepository;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @api
+ */
 #[ORM\Entity(repositoryClass: MetaInformationRepository::class)]
 class MetaInformation implements TranslatableInterface, \Stringable
 {

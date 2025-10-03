@@ -18,6 +18,7 @@ use Twig\TwigFunction;
 
 final class BasicPageExtension extends AbstractExtension
 {
+    #[\Override]
     public function getFunctions(): array
     {
         return [

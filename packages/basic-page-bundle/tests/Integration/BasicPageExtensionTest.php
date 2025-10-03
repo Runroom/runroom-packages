@@ -31,6 +31,7 @@ final class BasicPageExtensionTest extends IntegrationTestCase
         return __DIR__ . '/../Fixtures/Twig/';
     }
 
+    #[\Override]
     protected function getExtensions(): array
     {
         return [
@@ -38,6 +39,7 @@ final class BasicPageExtensionTest extends IntegrationTestCase
         ];
     }
 
+    #[\Override]
     protected function getRuntimeLoaders(): array
     {
         $basicPages = BasicPageFactory::createMany(2, [
@@ -45,7 +47,7 @@ final class BasicPageExtensionTest extends IntegrationTestCase
             'location' => BasicPage::LOCATION_FOOTER,
         ]);
 
-        $basicPageRepository = $this->createStub(BasicPageRepositoryInterface::class);
+        $basicPageRepository = static::createStub(BasicPageRepositoryInterface::class);
         $basicPageRepository->method('findPublished')->willReturn($basicPages);
 
         $basicPageRuntime = new BasicPageRuntime($basicPageRepository);

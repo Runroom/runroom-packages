@@ -16,8 +16,6 @@ namespace Runroom\DoctrineTranslatableBundle\Tests\ORM\Translatable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ObjectRepository;
-use Runroom\DoctrineTranslatableBundle\Entity\TranslatableInterface;
-use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
 use Runroom\DoctrineTranslatableBundle\Tests\App\Entity\TranslatableCustomIdentifierEntity;
 use Runroom\DoctrineTranslatableBundle\Tests\App\Entity\TranslatableCustomizedEntity;
 use Runroom\DoctrineTranslatableBundle\Tests\App\Entity\TranslatableEntity;
@@ -82,12 +80,11 @@ final class TranslatableTest extends KernelTestCase
         $idColumn = $translatableEntity->getIdColumn();
         $this->entityManager->clear();
 
-        /** @var TranslatableEntity $translatableEntity */
         $translatableEntity = $this->entityManager->getRepository(TranslatableCustomIdentifierEntity::class)->find(
             $idColumn
         );
 
-        static::assertSame('awesome', $translatableEntity->translate('en')->getTitle());
+        static::assertSame('awesome', $translatableEntity?->translate('en')?->getTitle());
     }
 
     public function testShouldFallbackCountryLocaleToLanguageOnlyTranslation(): void
@@ -361,11 +358,9 @@ final class TranslatableTest extends KernelTestCase
 
     public function testPhpStanExtensionOnInterfaces(): void
     {
-        /** @var TranslationInterface $translatableEntityTranslation */
         $translatableEntityTranslation = new TranslatableEntityTranslation();
         $translatableEntityTranslation->setLocale('fr');
 
-        /** @var TranslatableInterface $translatableEntity */
         $translatableEntity = new TranslatableEntity();
         $translatableEntity->addTranslation($translatableEntityTranslation);
 

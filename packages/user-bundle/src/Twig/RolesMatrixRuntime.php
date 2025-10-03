@@ -36,6 +36,9 @@ final class RolesMatrixRuntime implements RuntimeExtensionInterface
 
             $roles[$role] = $attributes;
             foreach ($form->getIterator() as $child) {
+                /**
+                 * @psalm-suppress PossiblyNullArrayAccess, PossiblyNullPropertyFetch
+                 */
                 if ($child->vars['value'] === $role) {
                     $roles[$role]['form'] = $child;
                 }
@@ -57,6 +60,9 @@ final class RolesMatrixRuntime implements RuntimeExtensionInterface
 
             $groupedRoles[$attributes['admin_label']][$role] = $attributes;
             foreach ($form->getIterator() as $child) {
+                /**
+                 * @psalm-suppress PossiblyNullArrayAccess, PossiblyNullPropertyFetch
+                 */
                 if ($child->vars['value'] === $role) {
                     $groupedRoles[$attributes['admin_label']][$role]['form'] = $child;
                 }

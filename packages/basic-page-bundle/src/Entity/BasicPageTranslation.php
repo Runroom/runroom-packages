@@ -20,6 +20,9 @@ use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
 use Runroom\DoctrineTranslatableBundle\Model\TranslationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @api
+ */
 #[ORM\Entity]
 #[ORM\Index(columns: ['slug'])]
 class BasicPageTranslation implements TranslationInterface

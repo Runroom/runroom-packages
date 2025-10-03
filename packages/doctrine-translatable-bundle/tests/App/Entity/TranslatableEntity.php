@@ -23,6 +23,8 @@ use Runroom\DoctrineTranslatableBundle\Model\TranslatableTrait;
 /**
  * @method string|null getTitle()
  * @method void        setTitle(string $title)
+ *
+ * @psalm-suppress ClassMustBeFinal
  */
 #[Entity]
 class TranslatableEntity implements TranslatableInterface

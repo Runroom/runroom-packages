@@ -15,6 +15,7 @@ namespace Runroom\SeoBundle\MetaInformation;
 
 final class DefaultMetaInformationProvider extends AbstractMetaInformationProvider
 {
+    #[\Override]
     public function providesMetas(string $route): bool
     {
         return true;

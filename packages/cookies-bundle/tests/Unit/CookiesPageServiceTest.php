@@ -60,8 +60,8 @@ final class CookiesPageServiceTest extends TestCase
     public function testItGetsCookiesPage(): void
     {
         $cookiesPage = CookiesPageFactory::createOne();
-        $form = $this->createStub(FormInterface::class);
-        $formView = $this->createStub(FormView::class);
+        $form = static::createStub(FormInterface::class);
+        $formView = static::createStub(FormView::class);
 
         $form->method('createView')->willReturn($formView);
 

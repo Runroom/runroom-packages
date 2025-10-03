@@ -19,6 +19,8 @@ use Sonata\MediaBundle\Entity\BaseGallery;
 
 /**
  * @phpstan-extends BaseGallery<GalleryItem>
+ *
+ * @psalm-suppress ClassMustBeFinal
  */
 #[ORM\Entity]
 class Gallery extends BaseGallery

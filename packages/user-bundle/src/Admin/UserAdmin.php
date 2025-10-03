@@ -33,6 +33,7 @@ final class UserAdmin extends AbstractAdmin
         parent::__construct();
     }
 
+    #[\Override]
     public function configureExportFields(): array
     {
         return array_filter(
@@ -127,7 +128,7 @@ final class UserAdmin extends AbstractAdmin
 
         $password = $this->passwordHasher->hashPassword($user, $plainPassword);
 
-        $user->eraseCredentials();
+        $user->setPlainPassword(null);
         $user->setPassword($password);
     }
 }

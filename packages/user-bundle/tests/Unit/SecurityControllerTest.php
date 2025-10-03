@@ -25,7 +25,7 @@ final class SecurityControllerTest extends TestCase
      */
     public function testItThrowsOnLogoutBecauseItShouldNotBeExecuted(): never
     {
-        $controller = new SecurityController($this->createStub(AuthenticationUtils::class));
+        $controller = new SecurityController(static::createStub(AuthenticationUtils::class));
 
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('This method can be blank. It will be intercepted by the logout key on your firewall.');

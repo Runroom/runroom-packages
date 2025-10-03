@@ -25,6 +25,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\UX\StimulusBundle\StimulusBundle;
 
 final class Kernel extends BaseKernel
 {
@@ -40,19 +41,23 @@ final class Kernel extends BaseKernel
             new SonataAdminBundle(),
             new SonataDoctrineORMAdminBundle(),
             new TwigBundle(),
+            new StimulusBundle(),
         ];
     }
 
+    #[\Override]
     public function getCacheDir(): string
     {
         return $this->getBaseDir() . '/cache';
     }
 
+    #[\Override]
     public function getLogDir(): string
     {
         return $this->getBaseDir() . '/log';
     }
 
+    #[\Override]
     public function getProjectDir(): string
     {
         return __DIR__;

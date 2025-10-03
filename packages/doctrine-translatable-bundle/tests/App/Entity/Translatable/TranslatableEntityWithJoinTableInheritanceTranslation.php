@@ -22,6 +22,9 @@ use Doctrine\ORM\Mapping\InheritanceType;
 use Runroom\DoctrineTranslatableBundle\Entity\TranslationInterface;
 use Runroom\DoctrineTranslatableBundle\Model\TranslationTrait;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 #[Entity]
 #[InheritanceType(value: 'JOINED')]
 #[DiscriminatorColumn(name: 'handle', type: 'string')]

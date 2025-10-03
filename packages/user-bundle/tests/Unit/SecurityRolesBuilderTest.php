@@ -31,7 +31,7 @@ final class SecurityRolesBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->authorizationChecker = $this->createStub(AuthorizationCheckerInterface::class);
+        $this->authorizationChecker = static::createStub(AuthorizationCheckerInterface::class);
 
         $sonataConfiguration = new SonataConfiguration('title', 'logo', [
             'confirm_exit' => true,

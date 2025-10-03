@@ -22,6 +22,7 @@ use Runroom\RedirectionBundle\Repository\RedirectRepository;
 
 final class RunroomRedirectionExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

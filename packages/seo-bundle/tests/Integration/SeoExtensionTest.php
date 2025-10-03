@@ -28,6 +28,7 @@ final class SeoExtensionTest extends IntegrationTestCase
         return __DIR__ . '/../Fixtures/Twig/';
     }
 
+    #[\Override]
     protected function getExtensions(): array
     {
         return [
@@ -35,10 +36,11 @@ final class SeoExtensionTest extends IntegrationTestCase
         ];
     }
 
+    #[\Override]
     protected function getRuntimeLoaders(): array
     {
-        $alternateLinksService = $this->createStub(AlternateLinksServiceInterface::class);
-        $metaInformationService = $this->createStub(MetaInformationServiceInterface::class);
+        $alternateLinksService = static::createStub(AlternateLinksServiceInterface::class);
+        $metaInformationService = static::createStub(MetaInformationServiceInterface::class);
 
         $metaInformation = new MetaInformationViewModel();
         $metaInformation->setTitle('seo title');
