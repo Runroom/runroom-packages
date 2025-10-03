@@ -17,7 +17,7 @@
     ],
     "homepage": "https://github.com/runroom/RunroomCkeditorSonataMediaBundle",
     "require": {
-        "php": "^8.3",
+        "php": "^8.1",
         "sonata-project/admin-bundle": "^4.25",
         "sonata-project/doctrine-extensions": "^2.0",
         "sonata-project/media-bundle": "^4.9",

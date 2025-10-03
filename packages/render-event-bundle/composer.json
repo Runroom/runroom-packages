@@ -18,7 +18,7 @@
     ],
     "homepage": "https://github.com/runroom/RunroomRenderEventBundle",
     "require": {
-        "php": "^8.3",
+        "php": "^8.1",
         "symfony/config": "^6.4 || ^7.1",
         "symfony/dependency-injection": "^6.4 || ^7.1",
         "symfony/error-handler": "^6.4 || ^7.1",
