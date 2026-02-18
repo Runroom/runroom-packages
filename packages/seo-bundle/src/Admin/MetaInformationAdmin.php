@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\SeoBundle\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Composer\InstalledVersions;
 use Runroom\SeoBundle\Entity\MetaInformation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -81,14 +82,17 @@ final class MetaInformationAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
+        $newVersion = version_compare((string) InstalledVersions::getVersion('a2lix/translation-form-bundle'), '4.0.0', '>=');
+
         $form
             ->with('Translations', [
                 'box_class' => 'box box-solid box-primary',
             ])
                 ->add('translations', TranslationsType::class, [
+                    ...($newVersion ? ['translatable_class' => MetaInformation::class] : []),
                     'label' => false,
                     'default_locale' => null,
-                    'fields' => [
+                    ($newVersion ? 'children' : 'fields') => [
                         'title' => [
                             'label' => 'Title*',
                         ],

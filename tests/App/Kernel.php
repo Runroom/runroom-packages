@@ -15,6 +15,7 @@ namespace Tests\App;
 
 use A2lix\AutoFormBundle\A2lixAutoFormBundle;
 use A2lix\TranslationFormBundle\A2lixTranslationFormBundle;
+use Composer\InstalledVersions;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
@@ -109,7 +110,6 @@ final class Kernel extends BaseKernel
         $container->setParameter('kernel.default_locale', 'en');
 
         $container->loadFromExtension('framework', [
-            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'session' => ['storage_factory_id' => 'session.storage.factory.mock_file'],
@@ -157,7 +157,7 @@ final class Kernel extends BaseKernel
             'dbal' => [
                 'url' => 'sqlite:///%kernel.cache_dir%/app.db',
                 'logging' => false,
-                'use_savepoints' => true,
+                ...(version_compare((string) InstalledVersions::getVersion('doctrine/doctrine-bundle'), '3.0.0', '<') ? ['use_savepoints' => true] : []),
             ],
             'orm' => [
                 'auto_mapping' => true,
@@ -198,12 +198,17 @@ final class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('twig', [
-            'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
 
+        if (version_compare((string) InstalledVersions::getVersion('a2lix/translation-form-bundle'), '4.0.0', '<')) {
+            $key = 'locales';
+        } else {
+            $key = 'enabled_locales';
+        }
+
         $container->loadFromExtension('a2lix_translation_form', [
-            'locales' => ['es', 'en', 'ca'],
+            $key => ['es', 'en', 'ca'],
         ]);
 
         $container->loadFromExtension('symfonycasts_reset_password', [
@@ -280,6 +285,12 @@ final class Kernel extends BaseKernel
     {
         $routes->import($this->getProjectDir() . '/routing.yaml');
 
+        $newVersion = version_compare((string) InstalledVersions::getVersion('sonata-project/admin-bundle'), '4.39.0', '>=');
+        if ($newVersion) {
+            $routes->import($this->getProjectDir() . '/routing-sonata.yaml');
+        } else {
+            $routes->import($this->getProjectDir() . '/routing-sonata-legacy.yaml');
+        }
         $routes->add('route.entity', '/entity/{slug}')
             ->controller('controller');
     }

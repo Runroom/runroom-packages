@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\BasicPageBundle\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Composer\InstalledVersions;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Runroom\BasicPageBundle\Entity\BasicPage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -81,6 +82,7 @@ final class BasicPageAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
+        $newVersion = version_compare((string) InstalledVersions::getVersion('a2lix/translation-form-bundle'), '4.0.0', '>=');
         $form
             ->with('Basic', [
                 'box_class' => 'box box-solid box-primary',
@@ -88,16 +90,17 @@ final class BasicPageAdmin extends AbstractAdmin
                 ->add('translations', TranslationsType::class, [
                     'label' => false,
                     'default_locale' => null,
-                    'fields' => [
+                    ...($newVersion ? ['translatable_class' => BasicPage::class] : []),
+                    ($newVersion ? 'children' : 'fields') => [
                         'title' => [
                             'label' => 'Title*',
                         ],
                         'content' => [
                             'label' => 'Content*',
-                            'field_type' => CKEditorType::class,
+                            ($newVersion ? 'child_type' : 'field_type') => CKEditorType::class,
                         ],
                         'slug' => [
-                            'field_type' => HiddenType::class,
+                            ($newVersion ? 'child_type' : 'field_type') => HiddenType::class,
                         ],
                     ],
                     'constraints' => [

@@ -38,7 +38,7 @@ final class ChangePasswordFormType extends AbstractType
                     'attr' => ['autocomplete' => 'new-password'],
                     'constraints' => [
                         new NotBlank(),
-                        new Length(['min' => 6, 'max' => 4096]),
+                        new Length(min: 6, max: 4096),
                     ],
                 ],
                 'second_options' => [

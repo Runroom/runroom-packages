@@ -36,6 +36,7 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('runroom_cookies');
         $rootNode = $treeBuilder->getRootNode();
 
+        /** @psalm-suppress PossiblyNullReference */
         $rootNode->children()
             ->arrayNode('cookies')
                 ->isRequired()
@@ -48,11 +49,6 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @psalm-suppress UndefinedInterfaceMethod
-     *
-     * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
-     */
     private function addCookiesSection(string $name): NodeDefinition
     {
         $treeBuilder = new TreeBuilder($name);

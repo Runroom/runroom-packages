@@ -20,12 +20,12 @@
         "php": "^8.1",
         "doctrine/collections": "^2.0",
         "doctrine/dbal": "^3.6 || ^4.0",
-        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/doctrine-bundle": "^2.10 || ^3.0",
         "doctrine/orm": "^2.19 || ^3.2",
         "doctrine/persistence": "^3.1 || ^4.0",
-        "symfony/dependency-injection": "^6.4 || ^7.1",
-        "symfony/framework-bundle": "^6.4 || ^7.1",
-        "symfony/http-kernel": "^6.4 || ^7.1",
+        "symfony/dependency-injection": "^6.4 || ^7.1 || ^8.0",
+        "symfony/framework-bundle": "^6.4 || ^7.1 || ^8.0",
+        "symfony/http-kernel": "^6.4 || ^7.1 || ^8.0",
         "symfony/translation-contracts": "^2.4 || ^3.0"
     },
     "require-dev": {
@@ -33,8 +33,12 @@
         "matthiasnoback/symfony-config-test": "^6.1",
         "matthiasnoback/symfony-dependency-injection-test": "^6.1",
         "phpunit/phpunit": "^10.5",
-        "symfony/translation": "^6.4 || ^7.1",
+        "symfony/translation": "^6.4 || ^7.1 || ^8.0",
+        "symfony/var-exporter": "^6.4 || ^7.1",
         "zenstruck/foundry": "^2.0"
+    },
+    "conflict": {
+        "zenstruck/foundry": "<2.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -52,6 +56,9 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "ergebnis/composer-normalize": true
+        },
+        "audit": {
+            "block-insecure": false
         },
         "sort-packages": true
     },

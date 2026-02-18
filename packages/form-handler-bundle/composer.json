@@ -18,12 +18,12 @@
     "homepage": "https://github.com/runroom/RunroomFormHandlerBundle",
     "require": {
         "php": "^8.1",
-        "symfony/config": "^6.4 || ^7.1",
-        "symfony/dependency-injection": "^6.4 || ^7.1",
-        "symfony/event-dispatcher": "^6.4 || ^7.1",
-        "symfony/form": "^6.4 || ^7.1",
-        "symfony/http-foundation": "^6.4 || ^7.1",
-        "symfony/http-kernel": "^6.4 || ^7.1"
+        "symfony/config": "^6.4 || ^7.1 || ^8.0",
+        "symfony/dependency-injection": "^6.4 || ^7.1 || ^8.0",
+        "symfony/event-dispatcher": "^6.4 || ^7.1 || ^8.0",
+        "symfony/form": "^6.4 || ^7.1 || ^8.0",
+        "symfony/http-foundation": "^6.4 || ^7.1 || ^8.0",
+        "symfony/http-kernel": "^6.4 || ^7.1 || ^8.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^6.1",
@@ -47,6 +47,9 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "ergebnis/composer-normalize": true
+        },
+        "audit": {
+            "block-insecure": false
         },
         "sort-packages": true
     },

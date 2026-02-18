@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\Testing\Tests\App;
 
+use Composer\InstalledVersions;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
@@ -68,7 +69,6 @@ final class Kernel extends BaseKernel
         $loader->load($this->getProjectDir() . '/services.php');
 
         $container->loadFromExtension('framework', [
-            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
@@ -86,7 +86,7 @@ final class Kernel extends BaseKernel
             'dbal' => [
                 'url' => 'sqlite:///%kernel.cache_dir%/app.db',
                 'logging' => false,
-                'use_savepoints' => true,
+                ...(version_compare((string) InstalledVersions::getVersion('doctrine/doctrine-bundle'), '3.0.0', '<') ? ['use_savepoints' => true] : []),
             ],
             'orm' => [
                 'auto_mapping' => true,

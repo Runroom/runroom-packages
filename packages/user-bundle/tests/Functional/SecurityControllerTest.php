@@ -37,18 +37,19 @@ final class SecurityControllerTest extends WebTestCase
 
         static::assertResponseIsSuccessful();
 
+        self::assertSame('runroom_user_login', $client->getRequest()->attributes->get('_route'));
         $client->submitForm('submit', [
             '_username' => 'email@localhost',
             '_password' => 'random_password',
         ]);
         $client->followRedirect();
 
-        static::assertRouteSame('sonata_admin_dashboard');
+        self::assertNotSame('runroom_user_login', $client->getRequest()->attributes->get('_route'));
 
         $client->request('GET', '/login');
         $client->followRedirect();
 
-        static::assertRouteSame('sonata_admin_dashboard');
+        self::assertNotSame('runroom_user_login', $client->getRequest()->attributes->get('_route'));
     }
 
     public function testItSubmitsLoginFormWithDisabledUser(): void

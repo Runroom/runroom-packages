@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\CookiesBundle\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Composer\InstalledVersions;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Runroom\CookiesBundle\Entity\CookiesPage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -38,16 +39,19 @@ final class CookiesPageAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
+        $newVersion = version_compare((string) InstalledVersions::getVersion('a2lix/translation-form-bundle'), '4.0.0', '>=');
+
         $form
             ->add('translations', TranslationsType::class, [
+                ...($newVersion ? ['translatable_class' => CookiesPage::class] : []),
                 'label' => false,
                 'default_locale' => null,
-                'fields' => [
+                ($newVersion ? 'children' : 'fields') => [
                     'title' => [
                         'label' => 'Title*',
                     ],
                     'content' => [
-                        'field_type' => CKEditorType::class,
+                        ($newVersion ? 'child_type' : 'field_type') => CKEditorType::class,
                     ],
                 ],
                 'constraints' => [

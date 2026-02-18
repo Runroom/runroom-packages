@@ -3,4 +3,4 @@ sonata_admin:
     type: sonata_admin
 
 admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.php'

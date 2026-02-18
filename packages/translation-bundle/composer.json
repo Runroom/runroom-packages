@@ -21,23 +21,23 @@
     "require": {
         "php": "^8.1",
         "doctrine/dbal": "^3.6 || ^4.0",
-        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/doctrine-bundle": "^2.10 || ^3.0",
         "doctrine/orm": "^2.19 || ^3.2",
         "doctrine/persistence": "^3.1 || ^4.0",
         "runroom-packages/doctrine-translatable-bundle": "^0.22",
-        "symfony/asset": "^6.4 || ^7.1",
-        "symfony/config": "^6.4 || ^7.1",
-        "symfony/dependency-injection": "^6.4 || ^7.1",
-        "symfony/form": "^6.4 || ^7.1",
-        "symfony/http-kernel": "^6.4 || ^7.1",
-        "symfony/translation": "^6.4 || ^7.1",
-        "symfony/validator": "^6.4 || ^7.1",
-        "symfony/yaml": "^6.4 || ^7.1",
+        "symfony/asset": "^6.4 || ^7.1 || ^8.0",
+        "symfony/config": "^6.4 || ^7.1 || ^8.0",
+        "symfony/dependency-injection": "^6.4 || ^7.1 || ^8.0",
+        "symfony/form": "^6.4 || ^7.1 || ^8.0",
+        "symfony/http-kernel": "^6.4 || ^7.1 || ^8.0",
+        "symfony/translation": "^6.4 || ^7.1 || ^8.0",
+        "symfony/validator": "^6.4 || ^7.1 || ^8.0",
+        "symfony/yaml": "^6.4 || ^7.1 || ^8.0",
         "twig/twig": "^3.14"
     },
     "require-dev": {
-        "a2lix/auto-form-bundle": "^0.4",
-        "a2lix/translation-form-bundle": "^3.2",
+        "a2lix/auto-form-bundle": "^0.4 || ^1.0",
+        "a2lix/translation-form-bundle": "^3.2 || ^4.0",
         "dama/doctrine-test-bundle": "^8.0",
         "friendsofsymfony/ckeditor-bundle": "^2.3",
         "knplabs/knp-menu-bundle": "^3.1",
@@ -47,10 +47,11 @@
         "runroom-packages/testing": "^0.22",
         "sonata-project/admin-bundle": "^4.25",
         "sonata-project/doctrine-orm-admin-bundle": "^4.13",
-        "symfony/framework-bundle": "^6.4 || ^7.1",
-        "symfony/security-bundle": "^6.4 || ^7.1",
+        "symfony/framework-bundle": "^6.4 || ^7.1 || ^8.0",
+        "symfony/security-bundle": "^6.4 || ^7.1 || ^8.0",
         "symfony/stimulus-bundle": "^2.30",
-        "symfony/twig-bundle": "^6.4 || ^7.1",
+        "symfony/twig-bundle": "^6.4 || ^7.1 || ^8.0",
+        "symfony/var-exporter": "^6.4 || ^7.1",
         "zenstruck/foundry": "^2.0"
     },
     "conflict": {
@@ -75,6 +76,9 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "ergebnis/composer-normalize": true
+        },
+        "audit": {
+            "block-insecure": false
         },
         "sort-packages": true
     },

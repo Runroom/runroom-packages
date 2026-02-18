@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\UserBundle\Tests\App;
 
+use Composer\InstalledVersions;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
@@ -84,7 +85,6 @@ final class Kernel extends BaseKernel
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->loadFromExtension('framework', [
-            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
@@ -131,7 +131,7 @@ final class Kernel extends BaseKernel
             'dbal' => [
                 'url' => 'sqlite:///%kernel.cache_dir%/app.db',
                 'logging' => false,
-                'use_savepoints' => true,
+                ...(version_compare((string) InstalledVersions::getVersion('doctrine/doctrine-bundle'), '3.0.0', '<') ? ['use_savepoints' => true] : []),
             ],
             'orm' => [
                 'auto_mapping' => true,
@@ -140,7 +140,6 @@ final class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('twig', [
-            'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
 
@@ -156,6 +155,12 @@ final class Kernel extends BaseKernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $routes->import($this->getProjectDir() . '/routing.yaml');
+        $newVersion = version_compare((string) InstalledVersions::getVersion('sonata-project/admin-bundle'), '4.39.0', '>=');
+        if ($newVersion) {
+            $routes->import($this->getProjectDir() . '/sonata.yaml');
+        } else {
+            $routes->import($this->getProjectDir() . '/sonata-legacy.yaml');
+        }
     }
 
     private function getBaseDir(): string

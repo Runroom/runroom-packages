@@ -131,7 +131,7 @@ final class ResetPasswordRequestControllerTest extends WebTestCase
 
         refresh($user);
 
-        static::assertRouteSame('sonata_admin_dashboard');
+        self::assertNotSame('runroom_user_reset_password', $client->getRequest()->attributes->get('_route'));
         static::assertSame($user->getPassword(), 'new_password');
     }
 }

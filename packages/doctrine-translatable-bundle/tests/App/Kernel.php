@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\DoctrineTranslatableBundle\Tests\App;
 
+use Composer\InstalledVersions;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Runroom\DoctrineTranslatableBundle\RunroomDoctrineTranslatableBundle;
@@ -63,7 +64,6 @@ final class Kernel extends BaseKernel
         $container->setParameter('kernel.default_locale', 'en');
 
         $container->loadFromExtension('framework', [
-            'annotations' => false,
             'handle_all_throwables' => true,
             'test' => true,
             'translator' => true,
@@ -85,10 +85,9 @@ final class Kernel extends BaseKernel
             'dbal' => [
                 'url' => 'sqlite:///%kernel.cache_dir%/app.db',
                 'logging' => false,
-                'use_savepoints' => true,
+                ...(version_compare((string) InstalledVersions::getVersion('doctrine/doctrine-bundle'), '3.0.0', '<') ? ['use_savepoints' => true] : []),
             ],
             'orm' => [
-                'report_fields_where_declared' => true,
                 'controller_resolver' => ['auto_mapping' => false],
                 'mappings' => [
                     'entity' => [

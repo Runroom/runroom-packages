@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Runroom\TranslationBundle\Admin;
 
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Composer\InstalledVersions;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Runroom\TranslationBundle\Entity\Translation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -70,14 +71,17 @@ final class TranslationAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
+        $newVersion = version_compare((string) InstalledVersions::getVersion('a2lix/translation-form-bundle'), '4.0.0', '>=');
+
         $form
             ->add('key')
             ->add('translations', TranslationsType::class, [
+                ...($newVersion ? ['translatable_class' => Translation::class] : []),
                 'label' => false,
                 'default_locale' => null,
-                'fields' => [
+                ($newVersion ? 'children' : 'fields') => [
                     'value' => [
-                        'field_type' => CKEditorType::class,
+                        ($newVersion ? 'child_type' : 'field_type') => CKEditorType::class,
                         'config' => [
                             'entities' => false,
                             'enterMode' => 'CKEDITOR.ENTER_BR',

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\RedirectionBundle\Tests\App;
 
+use Composer\InstalledVersions;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
@@ -75,7 +76,6 @@ final class Kernel extends BaseKernel
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->loadFromExtension('framework', [
-            'annotations' => false,
             'test' => true,
             'router' => ['utf8' => true],
             'secret' => 'secret',
@@ -90,7 +90,7 @@ final class Kernel extends BaseKernel
             'dbal' => [
                 'url' => 'sqlite:///%kernel.cache_dir%/app.db',
                 'logging' => false,
-                'use_savepoints' => true,
+                ...(version_compare((string) InstalledVersions::getVersion('doctrine/doctrine-bundle'), '3.0.0', '<') ? ['use_savepoints' => true] : []),
             ],
             'orm' => [
                 'auto_mapping' => true,
@@ -107,7 +107,6 @@ final class Kernel extends BaseKernel
         ]);
 
         $container->loadFromExtension('twig', [
-            'exception_controller' => null,
             'strict_variables' => '%kernel.debug%',
         ]);
 

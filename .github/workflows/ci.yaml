@@ -30,6 +30,9 @@ jobs:
           - php: '8.4'
             dependencies: highest
             symfony-require: 7.3.*
+          - php: '8.5'
+            dependencies: highest
+            symfony-require: 8.0.*
     env:
       SYMFONY_REQUIRE: ${{ matrix.symfony-require }}
     steps:
