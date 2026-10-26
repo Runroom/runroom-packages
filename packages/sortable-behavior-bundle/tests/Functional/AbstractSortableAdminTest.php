@@ -88,4 +88,24 @@ final class AbstractSortableAdminTest extends WebTestCase
         static::assertSame(1, $sortableEntity3->getPosition());
         static::assertSame(2, $sortableEntity4->getPosition());
     }
+
+    public function testAjaxMovePreservesOtherGroups(): void
+    {
+        $client = static::createClient();
+        $factory = persistent_factory(SortableEntity::class);
+        $first = $factory->many(3)->create(['simpleGroup' => 1]);
+        $second = $factory->many(2)->create(['simpleGroup' => 2]);
+
+        $client->request('GET', '/tests/app/sortableentity/' . $first[0]->getId() . '/move/2', [], [], ['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest']);
+        static::assertResponseIsSuccessful();
+        static::assertJsonStringEqualsJsonString(
+            json_encode(['result' => 'ok', 'objectId' => (string) $first[0]->getId()], \JSON_THROW_ON_ERROR),
+            (string) $client->getResponse()->getContent()
+        );
+        foreach ([...$first, ...$second] as $entity) {
+            refresh($entity);
+        }
+        static::assertSame([2, 0, 1], array_map(static fn (SortableEntity $entity): int => $entity->getPosition(), $first));
+        static::assertSame([0, 1], array_map(static fn (SortableEntity $entity): int => $entity->getPosition(), $second));
+    }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Runroom\SortableBehaviorBundle\Tests\App;
 
+use Composer\InstalledVersions;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
@@ -88,12 +89,16 @@ final class Kernel extends BaseKernel
             'firewalls' => ['main' => []],
         ]);
 
+        $dbal = [
+            'url' => 'sqlite:///%kernel.cache_dir%/app.db',
+            'logging' => false,
+        ];
+        if (version_compare(InstalledVersions::getVersion('doctrine/dbal') ?? '4.0', '4.0', '<')) {
+            $dbal['use_savepoints'] = true;
+        }
+
         $container->loadFromExtension('doctrine', [
-            'dbal' => [
-                'url' => 'sqlite:///%kernel.cache_dir%/app.db',
-                'logging' => false,
-                'use_savepoints' => true,
-            ],
+            'dbal' => $dbal,
             'orm' => [
                 'auto_mapping' => true,
                 'controller_resolver' => ['auto_mapping' => false],
@@ -117,6 +122,8 @@ final class Kernel extends BaseKernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $routes->import($this->getProjectDir() . '/routing.yaml');
+        $adminRoutes = $this->getBundle('SonataAdminBundle')->getPath() . '/Resources/config/routing/sonata_admin';
+        $routes->import(is_file($adminRoutes . '.php') ? $adminRoutes . '.php' : $adminRoutes . '.xml');
     }
 
     private function getBaseDir(): string
